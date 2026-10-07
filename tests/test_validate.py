@@ -49,3 +49,31 @@ def test_valence_range(minimal):
 def test_id_pattern(minimal):
     minimal["phases"][0]["id"] = "Phase 1"
     assert not is_valid(minimal)
+
+
+def test_publication_channel_and_case_records_kind(minimal):
+    minimal["phases"][0]["steps"][0]["channel"] = "publication"
+    minimal["sources"][0]["kind"] = "case_records"
+    assert is_valid(minimal)
+
+
+def test_performed_by(minimal):
+    step = minimal["phases"][0]["steps"][0]
+    step["performed_by"] = {
+        "kind": "intermediary",
+        "role": "Installationsfirma",
+        "mandate": "formal",
+    }
+    assert is_valid(minimal)
+    step["performed_by"] = {"kind": "persona"}
+    assert is_valid(minimal)
+
+
+def test_performed_by_requires_role_and_mandate_for_third_parties(minimal):
+    step = minimal["phases"][0]["steps"][0]
+    step["performed_by"] = {"kind": "shared", "role": "Nachbarin"}
+    assert not is_valid(minimal)
+    step["performed_by"] = {"kind": "persona", "role": "Persona selbst"}
+    assert not is_valid(minimal)
+    step["performed_by"] = {"kind": "authority", "role": "Bauamt", "mandate": "formal"}
+    assert not is_valid(minimal)

@@ -62,7 +62,7 @@ Siehe `docs/konzept.md`, Abschnitt «Roadmap». Kurz:
 3. Variante B: MCP-Server, der Journeys als Datenbestand hält (SQLite oder Notion), Versionen und Evidenz verwaltet – siehe ADR-0004.
 4. Viewer: Vergleichsansicht zweier Versionen (Diff visuell), Kommentarfunktion, Export der Heatmap.
 5. Extraktions-Qualität: Testsatz «Input → erwartete Atome» für die Prompt-Schablone in `skill/user-journey/references/evidenz.md`.
-6. ~~Zweites Beispiel~~ – `examples/baubewilligung/` (Bauherrschaft + Nachbarschaft). Offene Befunde als Issues: `step.performed_by` (H1, #6, Entscheid über ADR-0005), Kanal `publication` (H7, #7), Quellenart `case_records` (#8), Viewer-Hinweis bei Phasen ohne Overlay (H3, #9). H2, H4, H5 nur im Beispiel-README dokumentiert, bewusst ohne Issue.
+6. ~~Zweites Beispiel~~ – `examples/baubewilligung/` (Bauherrschaft + Nachbarschaft). Offene Befunde als Issues: ~~`step.performed_by` (H1, #6)~~ umgesetzt mit ADR-0005, ~~Kanal `publication` (H7, #7)~~ und ~~Quellenart `case_records` (#8)~~ umgesetzt; offen: Viewer-Hinweis bei Phasen ohne Overlay (H3, #9). H2, H4, H5 nur im Beispiel-README dokumentiert, bewusst ohne Issue.
 7. Französische UI-Texte im Viewer (`L`-Objekt ist dafür vorbereitet).
 
 ## Was nicht tun

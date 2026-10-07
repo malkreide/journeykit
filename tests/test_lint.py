@@ -19,6 +19,18 @@ def test_minimal_fixture_is_clean(minimal):
     assert codes(findings, WARN) == set(), [str(f) for f in findings if f.level == WARN]
 
 
+def test_no_user_source_is_warn(minimal):
+    for src in minimal["sources"]:
+        src["kind"] = "internal_document"
+    assert "L011" in codes(lint_journey(minimal, today=TODAY), WARN)
+
+
+def test_case_records_count_as_user_source(minimal):
+    minimal["sources"][0]["kind"] = "case_records"
+    minimal["sources"][1]["kind"] = "internal_document"
+    assert "L011" not in codes(lint_journey(minimal, today=TODAY))
+
+
 def test_dangling_reference_is_error(minimal):
     minimal["phases"][0]["steps"][0]["thinking"][0]["evidence_refs"] = ["gibt-es-nicht"]
     findings = lint_journey(minimal, today=TODAY)
@@ -95,6 +107,32 @@ def test_blueprint_smell(minimal):
     minimal["phases"][0]["steps"][0]["backstage_notes"] = ["a", "b", "c"]
     f = lint_journey(minimal, today=TODAY)
     assert {"L070", "L071"} <= codes(f, WARN)
+
+
+def _all_steps(journey):
+    return [s for p in journey["phases"] for s in p["steps"]]
+
+
+def test_mostly_delegated_steps_are_info(minimal):
+    actor = {"kind": "intermediary", "role": "Installationsfirma", "mandate": "formal"}
+    for s in _all_steps(minimal):
+        s["performed_by"] = dict(actor)
+    assert "L073" in codes(lint_journey(minimal, today=TODAY), INFO)
+
+
+def test_half_delegated_steps_are_not_flagged(minimal):
+    first = minimal["phases"][0]["steps"][0]
+    second = {"id": "zweiter-schritt", "name": "Zweiter Schritt", "action": "Die Persona wartet."}
+    minimal["phases"][0]["steps"].append(second)
+    first["performed_by"] = {
+        "kind": "intermediary",
+        "role": "Installationsfirma",
+        "mandate": "formal",
+    }
+    second["performed_by"] = {"kind": "shared", "role": "Nachbarin", "mandate": "informal"}
+    assert "L073" not in codes(
+        lint_journey(minimal, today=TODAY), INFO
+    )  # 1 von 2 ist nicht mehr als die Hälfte
 
 
 def test_pii(minimal):

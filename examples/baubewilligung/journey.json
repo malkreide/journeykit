@@ -241,6 +241,11 @@
           "channel": "web",
           "touchpoint": "Unterlagenliste im Portal",
           "counterpart": "Installationsfirma",
+          "performed_by": {
+            "kind": "shared",
+            "role": "Installationsfirma",
+            "mandate": "formal"
+          },
           "thinking": [
             {
               "text": "Wer macht einen Lärmschutznachweis – und woran sehe ich, ob er stimmt?",
@@ -289,7 +294,10 @@
               ]
             }
           ],
-          "evidence_refs": []
+          "evidence_refs": [
+            "b1-09",
+            "stat-03"
+          ]
         },
         {
           "id": "gesuch-einreichen",
@@ -433,7 +441,7 @@
           "id": "publikation",
           "name": "Von der Publikation erfahren",
           "action": "Das Gesuch wird amtlich publiziert und liegt auf; die Persona erfährt davon über die Nachbarschaft.",
-          "channel": "other",
+          "channel": "publication",
           "touchpoint": "Amtliche Publikation (Amtsblatt)",
           "counterpart": "Nachbarschaft",
           "is_transition": true,
@@ -757,6 +765,11 @@
           "channel": "in_person",
           "touchpoint": "Montage",
           "counterpart": "Installationsfirma",
+          "performed_by": {
+            "kind": "intermediary",
+            "role": "Installationsfirma",
+            "mandate": "formal"
+          },
           "is_transition": true,
           "feeling": {
             "valence": 1,
@@ -773,7 +786,9 @@
               ]
             }
           ],
-          "evidence_refs": []
+          "evidence_refs": [
+            "b1-23"
+          ]
         },
         {
           "id": "betrieb",
@@ -1031,14 +1046,14 @@
     {
       "id": "statistik",
       "title": "Gesuchsstatistik Wärmepumpen 2025 (Geschäftskontrolle)",
-      "kind": "other",
+      "kind": "case_records",
       "default_class": "observed",
       "date": "2025",
       "n": 84,
       "participants": "alle ordentlichen Verfahren für Wärmepumpen an Ein- und Zweifamilienhäusern",
       "pii_status": "none",
       "location": "input/gesuchsstatistik.csv",
-      "notes": "Aggregierte Auswertung aus der Geschäftskontrolle. Das Schema kennt dafür keinen eigenen kind-Wert, deshalb «other» (siehe README, Übertragbarkeitsbefunde)."
+      "notes": "Aggregierte Auswertung aus der Geschäftskontrolle."
     },
     {
       "id": "analytics",

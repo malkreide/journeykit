@@ -1,6 +1,6 @@
 # ADR-0005: Handelnde Dritte im Schritt (`step.performed_by`)
 
-Datum: 2026-10-07 · Status: vorgeschlagen · Issue: [#6](https://github.com/malkreide/journeykit/issues/6)
+Datum: 2026-10-07 · Status: angenommen (2026-10-07) · Issue: [#6](https://github.com/malkreide/journeykit/issues/6)
 
 ## Kontext
 
@@ -69,25 +69,35 @@ Nach den Konventionen in `CLAUDE.md` für Schemaänderungen:
 - **`model.py`**: keine Änderung, das Feld ist weder Aussage noch Referenz.
 - **Viewer**: Chip «durch Installationsfirma» bzw. «mit Nachbarin» in der Zeile
   «Macht»; im Prozess-Layer Kennzeichnung der Knoten.
-- **Lint** (vorgeschlagen, Stufe INFO, Code am Ende des Blocks L070–L072, also
-  `L073`): Mehr als die Hälfte der Schritte `intermediary` → Hinweis, die
+- **Lint** (Stufe INFO, Code am Ende des Blocks L070–L072, also `L073`): Mehr als die Hälfte der Schritte `intermediary` → Hinweis, die
   Diagnose zu prüfen (Journey der Persona oder der Vermittlung?). Kein WARN,
   weil delegierte Journeys legitim sind.
-- **Beispiele**: Baubewilligung (`unterlagen-zusammenstellen`, `einbau`:
-  `intermediary`/`formal`), Kindergarteneintritt (Brief lesen mit Nachbarin:
-  `shared`/`informal`) – nur wo Atome das belegen.
+- **Beispiele**: Baubewilligung – `unterlagen-zusammenstellen` als
+  `shared`/`formal` (Eigentümerschaft und Installationsfirma), `einbau` als
+  `intermediary`/`formal`. Im Kindergarteneintritt bewusst **nicht** gesetzt:
+  Die übersetzende Nachbarin kommt nur in einem von drei Interviews vor, ein
+  Feld am Schritt würde für die ganze Persona gelten und überverallgemeinern.
+  Sie bleibt Edge Case und Fliesstext.
 - **Skill**: In `references/evidenz.md` und `SKILL.md` (Synthese) nach
   Vermittlung fragen: «Wer hat das gemacht – Sie selbst oder jemand für Sie?»
 - **Tests**, **`docs/konzept.md`**, beide READMEs.
 
-## Offene Fragen
+## Entscheid
 
-- Braucht es `mandate`, oder genügt `kind` plus `role`? Das Mandat entscheidet
-  in der Verwaltung über Auskunftsrechte (vgl. `b2-13`); deshalb vorerst drin.
-- Sollen Interessen der Vermittlung (`b2-12`) strukturiert erfasst werden?
-  Vorschlag: nein, bis ein drittes Beispiel es verlangt (Option D bleibt offen).
-- Kann `performed_by` auch an Pain Points sinnvoll sein («entsteht durch die
-  Vermittlung»)? Vorerst nur am Schritt.
+Angenommen am 2026-10-07 wie vorgeschlagen (Option B). Die offenen Fragen
+des Entwurfs sind so entschieden:
+
+- **`mandate` bleibt.** Das Mandat entscheidet in der Verwaltung über
+  Auskunftsrechte (vgl. `b2-13`). Das Schema verlangt `role` und `mandate`,
+  sobald `kind` nicht `persona` ist, und verbietet beide bei `persona`.
+- **Interessen der Vermittlung werden nicht strukturiert erfasst** (`b2-12`
+  bleibt Edge Case), bis ein drittes Beispiel es verlangt; Option D bleibt
+  offen.
+- **`performed_by` nur am Schritt**, nicht an Pain Points.
+
+Eine Bedeutung des Feldes, die beim Umsetzen klar wurde: `performed_by`
+beschreibt den **typischen** Fall der Persona, nicht jeden Einzelfall. Wo nur
+ein Teil der Persona so handelt, gehört das in einen Edge Case.
 
 ## Voraussetzung
 

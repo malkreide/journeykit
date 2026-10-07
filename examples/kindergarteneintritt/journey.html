@@ -110,6 +110,7 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
 .step .meta { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
 .chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px; font-size: 11.5px; background: var(--surface-2); color: var(--ink-2); border: 1px solid transparent; }
 .chip.transition { border-color: var(--friction); color: var(--friction); background: var(--friction-soft); }
+.chip.actor { border-color: var(--line); border-style: dashed; }
 .claim { display: block; width: 100%; text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 8px 6px 10px; margin: 0 0 6px; cursor: pointer; position: relative; font-size: 13px; line-height: 1.35; }
 .claim:hover { border-color: var(--accent); }
 .claim::before { content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 3px; border-radius: 2px; background: var(--line-strong); }
@@ -275,8 +276,8 @@ const DATA = {"generator": "journeykit 0.1.0", "generated": "2026-10-07", "title
 const L = {
   classes: { observed: "beobachtet", reported: "berichtet", assumed: "angenommen" },
   kinds: { quote: "Zitat", observation: "Beobachtung", metric: "Messwert", document_excerpt: "Dokumentstelle", workshop_statement: "Workshop-Aussage" },
-  srcKinds: { interview: "Interview", survey: "Befragung", diary_study: "Tagebuchstudie", observation: "Beobachtung", ticket_export: "Ticket-Export", inquiry_log: "Anfragen", analytics: "Analytics", workshop: "Workshop", internal_document: "Internes Dokument", form: "Formular", complaint: "Beschwerde", other: "Andere" },
-  channels: { web: "Website", app: "App", email: "E-Mail", phone: "Telefon", letter: "Brief", paper_form: "Papierformular", counter: "Schalter", in_person: "Vor Ort", event: "Veranstaltung", chat: "Chat", sms: "SMS", other: "Anderer Kanal" },
+  srcKinds: { interview: "Interview", survey: "Befragung", diary_study: "Tagebuchstudie", observation: "Beobachtung", ticket_export: "Ticket-Export", inquiry_log: "Anfragen", analytics: "Analytics", case_records: "Geschäftskontrolle", workshop: "Workshop", internal_document: "Internes Dokument", form: "Formular", complaint: "Beschwerde", other: "Andere" },
+  channels: { web: "Website", app: "App", email: "E-Mail", phone: "Telefon", letter: "Brief", paper_form: "Papierformular", counter: "Schalter", in_person: "Vor Ort", event: "Veranstaltung", chat: "Chat", sms: "SMS", publication: "Publikation", other: "Anderer Kanal" },
   status: { hypothesis: "Hypothese", draft: "Entwurf", validated: "Validiert", in_review: "In Review", archived: "Archiviert" },
   mapType: { user_journey: "User Journey", customer_journey: "Customer Journey", experience_map: "Experience Map", service_blueprint: "Service Blueprint", user_flow: "User Flow" },
   ppStatus: { open: "offen", in_progress: "in Arbeit", resolved: "gelöst", wontfix: "nicht geplant", monitoring: "beobachtet" },
@@ -285,9 +286,13 @@ const L = {
   antipatterns: { integrity: "Referenzen und IDs", inside_out: "Inside-Out Bias", happy_path: "Happy Path Bias", static_map: "Static Map Trap", empathy_vacuum: "Empathie-Vakuum", overcomplexity: "Überkomplexität", micro_disconnect: "Micro-Level Disconnect", blueprint: "Blueprint statt Journey", privacy: "Personendaten", kpi: "Kennzahlen", evidence: "Evidenzqualität" },
   kpiCat: { perception: "Wahrnehmung", outcome: "Ergebnis", public_value: "Public Value" },
   pii: { none: "keine", anonymised: "anonymisiert", pseudonymised: "pseudonymisiert", contains_pii: "enthält Personendaten" },
+  performedBy: { shared: "mit", intermediary: "durch" },
+  mandate: { formal: "mit Vollmacht oder Auftrag", informal: "informell" },
 };
 const PRIMARY = new Set(["observed", "reported"]);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+// ADR-0005: wer den Schritt ausführt, wenn nicht die Persona allein
+const actorChip = s => { const p = s.performed_by; if (!p || p.kind === "persona") return ""; return '<span class="chip actor" title="' + esc((p.kind === "shared" ? "Persona mit Hilfe Dritter" : "Dritte handeln anstelle der Persona") + (p.mandate ? " · " + (L.mandate[p.mandate] || p.mandate) : "")) + '">' + L.performedBy[p.kind] + ' ' + esc(p.role) + '</span>'; };
 const $ = (sel, root = document) => root.querySelector(sel);
 
 // ---------------------------------------------------------------- Modell
@@ -364,7 +369,7 @@ function renderJourney(idx) {
   let cells = "";
   idx.steps.forEach(e => { const s = e.step, last = e.si === e.phase.steps.length - 1;
     cells += '<div class="step' + (last ? ' phase-end' : '') + '"><h4>' + esc(s.name) + '</h4><div class="action">' + esc(s.action) + '</div><div class="meta">'
-      + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.touchpoint ? '<span class="chip" title="Touchpoint">' + esc(s.touchpoint) + '</span>' : '') + (s.counterpart ? '<span class="chip" title="Gegenüber">' + esc(s.counterpart) + '</span>' : '') + (s.is_transition ? '<span class="chip transition">Übergang</span>' : '')
+      + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.touchpoint ? '<span class="chip" title="Touchpoint">' + esc(s.touchpoint) + '</span>' : '') + (s.counterpart ? '<span class="chip" title="Gegenüber">' + esc(s.counterpart) + '</span>' : '') + actorChip(s) + (s.is_transition ? '<span class="chip transition">Übergang</span>' : '')
       + '</div>' + ((s.evidence_refs || []).length ? '<div style="margin-top:6px">' + claimBtn(idx, "Beleg für den Schritt", s.evidence_refs, "", s.name) + '</div>' : '') + '</div>'; });
   row("Macht", "Aktion · Kanal · Touchpoint", cells);
   // Denkt
@@ -431,7 +436,7 @@ function renderProcess(idx) {
   let h = '<div class="panel"><h2>Prozess- und Fehlerpfade</h2><p class="muted" style="margin:0">Links der Pfad der Persona, rechts wo er bricht: Breakdowns mit Workaround und Recovery-Pfad (gestrichelt = Soll-Pfad, heute nicht vorhanden), Reibungen und Edge Cases.</p></div><div class="flow">';
   idx.j.phases.forEach(p => { h += '<div class="phase-h">' + esc(p.name) + '</div>';
     p.steps.forEach(s => { const bds = (s.pain_points || []).filter(x => x.type === "breakdown"), frs = (s.pain_points || []).filter(x => x.type !== "breakdown");
-      h += '<div class="node-row"><div class="node' + (bds.length ? ' has-breakdown' : '') + '"><h4>' + esc(s.name) + '</h4><div class="act">' + esc(s.action) + '</div><div class="meta" style="margin-top:6px">' + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.counterpart ? '<span class="chip">' + esc(s.counterpart) + '</span>' : '') + (s.is_transition ? '<span class="chip transition">Übergang</span>' : '') + '</div>' + ((s.backstage_notes || []).length ? '<div class="muted" style="font-size:11.5px;margin-top:6px">Back-Stage: ' + s.backstage_notes.map(esc).join(" · ") + '</div>' : '') + '</div><div class="branches">';
+      h += '<div class="node-row"><div class="node' + (bds.length ? ' has-breakdown' : '') + '"><h4>' + esc(s.name) + '</h4><div class="act">' + esc(s.action) + '</div><div class="meta" style="margin-top:6px">' + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.counterpart ? '<span class="chip">' + esc(s.counterpart) + '</span>' : '') + actorChip(s) + (s.is_transition ? '<span class="chip transition">Übergang</span>' : '') + '</div>' + ((s.backstage_notes || []).length ? '<div class="muted" style="font-size:11.5px;margin-top:6px">Back-Stage: ' + s.backstage_notes.map(esc).join(" · ") + '</div>' : '') + '</div><div class="branches">';
       bds.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch bd"><b>Breakdown:</b> ' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">Ausweichen</span><span>' + esc(pp.workaround) + '</span></div>' : '') + '</div>'; });
       const rps = (s.recovery_paths || []).filter(r => visible(idx, r.evidence_refs));
       if (rps.length) { h += '<div class="branch" style="border-color:var(--positive)"><b>Zurück in die Journey</b>'; rps.forEach(r => { h += '<div class="arrow rec' + (r.exists === false ? ' soll' : '') + '"><span class="lab">' + (r.exists === false ? "Soll-Pfad" : "Recovery") + '</span><span><i class="muted">' + esc(r.trigger) + '</i> → ' + esc(r.path) + ' ' + claimInline(idx, r.evidence_refs, "Recovery", r.path) + '</span></div>'; }); h += '</div>'; }

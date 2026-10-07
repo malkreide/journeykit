@@ -90,12 +90,34 @@
     },
     "channel": {
       "type": "string",
-      "enum": ["web", "app", "email", "phone", "letter", "paper_form", "counter", "in_person", "event", "chat", "sms", "other"],
-      "description": "Kanal des Schritts. Verwaltungs-Journeys laufen oft über Brief, Telefon, Schalter und Veranstaltungen, nicht nur digital."
+      "enum": ["web", "app", "email", "phone", "letter", "paper_form", "counter", "in_person", "event", "chat", "sms", "publication", "other"],
+      "description": "Kanal des Schritts. Verwaltungs-Journeys laufen oft über Brief, Telefon, Schalter und Veranstaltungen, nicht nur digital. publication = amtliche Publikation, Amtsblatt, Aushang, Baugespann."
     },
     "status": {
       "type": "string",
       "enum": ["open", "in_progress", "resolved", "wontfix", "monitoring"]
+    },
+    "performed_by": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "description": "Wer den Schritt ausführt (ADR-0005). Fehlt das Feld, handelt die Persona selbst. Behörden erscheinen hier nicht – was die Verwaltung tut, ist counterpart oder Back-Stage.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["persona", "shared", "intermediary"],
+          "description": "persona = die Persona selbst; shared = die Persona mit Hilfe Dritter; intermediary = Dritte handeln anstelle der Persona."
+        },
+        "role": { "type": "string", "description": "Rolle der helfenden oder handelnden Dritten in Nutzerworten, keine Namen (z. B. «Installationsfirma», «Nachbarin»)." },
+        "mandate": {
+          "type": "string",
+          "enum": ["formal", "informal"],
+          "description": "formal = Vollmacht, Vertretung oder Auftrag; informal = Familie, Nachbarschaft, Bekannte. Entscheidet in der Verwaltung oft über Auskunftsrechte."
+        }
+      },
+      "if": { "properties": { "kind": { "const": "persona" } } },
+      "then": { "not": { "anyOf": [{ "required": ["role"] }, { "required": ["mandate"] }] } },
+      "else": { "required": ["role", "mandate"] }
     },
     "score_1_5": { "type": "integer", "minimum": 1, "maximum": 5 },
     "valence": {
@@ -242,6 +264,7 @@
         "touchpoint": { "type": "string", "description": "System, Ort oder Dokument, mit dem interagiert wird." },
         "counterpart": { "type": "string", "description": "Wer auf Verwaltungsseite beteiligt ist (Rolle)." },
         "is_transition": { "type": "boolean", "default": false, "description": "Kanal- oder Zuständigkeitswechsel; dort entstehen überdurchschnittlich viele Reibungen." },
+        "performed_by": { "$ref": "#/$defs/performed_by" },
         "thinking": { "type": "array", "items": { "$ref": "#/$defs/claim" } },
         "feeling": {
           "oneOf": [
@@ -374,7 +397,7 @@
         "title": { "type": "string" },
         "kind": {
           "type": "string",
-          "enum": ["interview", "survey", "diary_study", "observation", "ticket_export", "inquiry_log", "analytics", "workshop", "internal_document", "form", "complaint", "other"]
+          "enum": ["interview", "survey", "diary_study", "observation", "ticket_export", "inquiry_log", "analytics", "case_records", "workshop", "internal_document", "form", "complaint", "other"]
         },
         "default_class": { "$ref": "#/$defs/evidence_class" },
         "date": { "type": "string", "description": "Erhebungsdatum oder Zeitraum." },

@@ -73,10 +73,14 @@ def cmd_lint(args: argparse.Namespace) -> int:
             print(
                 f"{path}: {counts[ERROR]} Fehler · {counts[WARN]} Warnungen · {counts['INFO']} Hinweise"
             )
+            seen_codes: set[str] = set()
             for f in findings:
                 if f.level == "INFO" and args.quiet:
                     continue
-                print(f"  {f}")
+                # Hinweis nur beim ersten Befund eines Codes - bei elf Widersprüchen
+                # muss der Satz nicht elfmal stehen.
+                print(f"  {f.format(with_hint=f.code not in seen_codes)}")
+                seen_codes.add(f.code)
         if counts[ERROR]:
             worst = max(worst, 1)
         if args.strict and counts[WARN]:

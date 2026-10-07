@@ -85,10 +85,13 @@ class Finding:
     def as_dict(self) -> dict[str, str]:
         return asdict(self)
 
-    def __str__(self) -> str:
+    def format(self, with_hint: bool = True) -> str:
         where = f" @ {self.path}" if self.path else ""
-        hint = f"\n      → {self.hint}" if self.hint else ""
+        hint = f"\n      → {self.hint}" if self.hint and with_hint else ""
         return f"[{self.level}] {self.code}{where}: {self.message}{hint}"
+
+    def __str__(self) -> str:
+        return self.format()
 
 
 class _Collector:

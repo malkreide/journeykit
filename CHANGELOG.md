@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - `python -m journeykit` entry point for environments where the console script is not on PATH (Windows user installs)
 
+### Changed
+- `journeykit lint` text output prints each rule's hint only once per run
+
 ## [0.1.0] - 2026-10-05
 
 ### Added

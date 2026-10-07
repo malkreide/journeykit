@@ -140,3 +140,12 @@ def test_python_m_entrypoint():
         check=True,
     )
     assert out.stdout.startswith("journeykit ")
+
+
+def test_cli_lint_prints_each_hint_once(tmp_path, capsys, example_journey):
+    src = tmp_path / "j.json"
+    src.write_text(json.dumps(example_journey), encoding="utf-8")
+    main(["lint", str(src), "--today", "2026-10-05"])
+    out = capsys.readouterr().out
+    assert out.count("[INFO] L101") > 1
+    assert out.count("Widersprüche gehören in die Journey") == 1

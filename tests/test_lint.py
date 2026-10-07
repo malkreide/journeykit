@@ -19,6 +19,18 @@ def test_minimal_fixture_is_clean(minimal):
     assert codes(findings, WARN) == set(), [str(f) for f in findings if f.level == WARN]
 
 
+def test_no_user_source_is_warn(minimal):
+    for src in minimal["sources"]:
+        src["kind"] = "internal_document"
+    assert "L011" in codes(lint_journey(minimal, today=TODAY), WARN)
+
+
+def test_case_records_count_as_user_source(minimal):
+    minimal["sources"][0]["kind"] = "case_records"
+    minimal["sources"][1]["kind"] = "internal_document"
+    assert "L011" not in codes(lint_journey(minimal, today=TODAY))
+
+
 def test_dangling_reference_is_error(minimal):
     minimal["phases"][0]["steps"][0]["thinking"][0]["evidence_refs"] = ["gibt-es-nicht"]
     findings = lint_journey(minimal, today=TODAY)

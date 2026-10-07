@@ -80,6 +80,13 @@ zeigen. Zustimmungswerte unter 60 % sind Reibungskandidaten.
 Seite als `locator`. Analytics zeigt **wo**, nie **warum** – immer mit
 berichteter Evidenz paaren.
 
+**Geschäftskontrolle, Fachapplikation (`kind: case_records`).** Durchlaufzeiten,
+Rückweisungs- und Einsprachequoten, Anteil Vertretungen als `metric`, mit
+Zeitraum und Grundgesamtheit im `text`. Klasse `observed`. Nur Aggregate
+übernehmen: Falldaten enthalten fast immer Personendaten; Einzelfälle nur
+anonymisiert und `pii_status` entsprechend setzen. Wie Analytics zeigen sie
+**wo** und **wie oft**, nicht **warum**.
+
 **Prozessdokumente, Soll-Beschreibungen.** Klasse `assumed`. Wertvoll als
 Vergleichsfolie: Jede Soll-Aussage, der ein Interview widerspricht, ist ein
 Befund. `contradicts` setzen.

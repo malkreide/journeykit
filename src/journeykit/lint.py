@@ -47,6 +47,7 @@ PRIMARY_SOURCE_KINDS = frozenset(
         "ticket_export",
         "inquiry_log",
         "analytics",
+        "case_records",
         "complaint",
     }
 )

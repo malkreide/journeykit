@@ -101,7 +101,8 @@ Den gewählten Modus und die Diagnose in einem Satz zurückmelden, dann weiter.
 ### 2. Quellen registrieren
 
 Pro Datei oder Datensatz ein `sources`-Eintrag: `kind`, `default_class`
-(`observed` für Analytics, Ticket-/Anfragenexporte, Beobachtung; `reported`
+(`observed` für Analytics, Ticket-/Anfragenexporte, Auswertungen der
+Geschäftskontrolle (`case_records`), Beobachtung; `reported`
 für Interviews, Befragungen, Tagebuchstudien, Beschwerden; `assumed` für
 Prozessdokumente, Workshops ohne Nutzende), `n`, `date`, `participants` als
 Rolle, `pii_status`, `location` als Pfad.

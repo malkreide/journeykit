@@ -51,6 +51,12 @@ def test_id_pattern(minimal):
     assert not is_valid(minimal)
 
 
+def test_publication_channel_and_case_records_kind(minimal):
+    minimal["phases"][0]["steps"][0]["channel"] = "publication"
+    minimal["sources"][0]["kind"] = "case_records"
+    assert is_valid(minimal)
+
+
 def test_performed_by(minimal):
     step = minimal["phases"][0]["steps"][0]
     step["performed_by"] = {

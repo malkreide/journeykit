@@ -37,7 +37,7 @@ darauf. Daraus folgt:
 
 | Schicht | Inhalt | Umsetzung 0.1.0 |
 |---|---|---|
-| 1 Input | Interviews, Befragungen, Anfragen-/Ticketexporte, Analytics, Fotos von Workshop-Wänden, Prozessdokumente, bestehende Journeys | Quellenregister (`sources`) mit Art, Standard-Evidenzklasse, Stichprobe, Datenschutzstatus, Ablage |
+| 1 Input | Interviews, Befragungen, Anfragen-/Ticketexporte, Analytics, Auswertungen der Geschäftskontrolle, Fotos von Workshop-Wänden, Prozessdokumente, bestehende Journeys | Quellenregister (`sources`) mit Art, Standard-Evidenzklasse, Stichprobe, Datenschutzstatus, Ablage |
 | 2 Evidenz-Atome | Kleinste belegbare Einheit: Zitat, Beobachtung, Messwert, Dokumentstelle, mit Fundstelle, Klasse, Signal, Emotion (nur explizit), Widerspruch | `evidence[]` im Schema; Extraktionsregeln und Prompt-Schablone im Skill |
 | 3 Journey-Modell | Persona, Szenario, Phasen, Schritte (inkl. handelnde Dritte, ADR-0005), Denken/Fühlen, Pain Points (Reibung/Breakdown), Edge Cases, Recovery, KPIs, Chancen, offene Fragen, Owner, Review | JSON Schema 2020-12 |
 | 4 Synthese-Engine | Clustern, Kurve nur aus Evidenz, Widersprüche und Lücken ausweisen, Chancen und Scores vorschlagen | Claude-Skill (Modi Synthese / Workshop / Audit) + Lints als Rückkopplung |
@@ -70,7 +70,7 @@ ist ein Fehler, keine Warnung.
 
 Zusätzlich für die Verwaltung: KPI-Übersetzungsschicht (`kpi.category:
 public_value`, `commercial_equivalent`, L090–L092), Kanäle jenseits des Webs
-(`channel`-Enum), Personendaten (`pii_status`, L080–L081).
+(`channel`-Enum, inkl. amtlicher Publikation), Personendaten (`pii_status`, L080–L081).
 
 ## Was das Tool verspricht – und was nicht
 

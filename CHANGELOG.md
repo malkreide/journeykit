@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `tests/test_examples.py`: contract for every example under `examples/*/` – schema-valid, `meta.synthetic: true`, no lint errors, `journey.json` without warnings, every quote atom verbatim in its source file, no contact data in raw inputs. New examples are picked up without extra code
 - Second worked example `examples/baubewilligung/`: building permit for a heat pump, applicant and neighbour as two personas, synthetic raw inputs (3 interviews, 30 inquiries, case statistics, web analytics, process document, workshop notes); README documents seven transferability hypotheses and what the example showed
 - ADR-0005 (accepted): optional `step.performed_by` (`kind` persona/shared/intermediary, `role`, `mandate` formal/informal) for steps carried out by intermediaries on the persona's behalf – finding H1 from the building-permit example. Schema stays 1.0 (additive)
+- Schema: channel `publication` (official publication, notice board, building profile) and source kind `case_records` (case-management statistics, counted as a user source for L011) – findings H7 and «missing source kind» from the building-permit example
 - Lint L073 (INFO): more than half of the steps carried out by intermediaries – check the diagnosis
 - Viewer: chip «mit …» / «durch …» for steps with `performed_by`, in the journey and process layers
 

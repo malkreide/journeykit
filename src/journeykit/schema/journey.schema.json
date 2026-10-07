@@ -90,8 +90,8 @@
     },
     "channel": {
       "type": "string",
-      "enum": ["web", "app", "email", "phone", "letter", "paper_form", "counter", "in_person", "event", "chat", "sms", "other"],
-      "description": "Kanal des Schritts. Verwaltungs-Journeys laufen oft über Brief, Telefon, Schalter und Veranstaltungen, nicht nur digital."
+      "enum": ["web", "app", "email", "phone", "letter", "paper_form", "counter", "in_person", "event", "chat", "sms", "publication", "other"],
+      "description": "Kanal des Schritts. Verwaltungs-Journeys laufen oft über Brief, Telefon, Schalter und Veranstaltungen, nicht nur digital. publication = amtliche Publikation, Amtsblatt, Aushang, Baugespann."
     },
     "status": {
       "type": "string",
@@ -397,7 +397,7 @@
         "title": { "type": "string" },
         "kind": {
           "type": "string",
-          "enum": ["interview", "survey", "diary_study", "observation", "ticket_export", "inquiry_log", "analytics", "workshop", "internal_document", "form", "complaint", "other"]
+          "enum": ["interview", "survey", "diary_study", "observation", "ticket_export", "inquiry_log", "analytics", "case_records", "workshop", "internal_document", "form", "complaint", "other"]
         },
         "default_class": { "$ref": "#/$defs/evidence_class" },
         "date": { "type": "string", "description": "Erhebungsdatum oder Zeitraum." },

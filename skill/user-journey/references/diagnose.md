@@ -30,9 +30,18 @@ Back-Stage – und in `meta.diagnosis.backstage_documented_in` verweisen.
 Mischt die Anfrage Nutzergruppen mit grundverschiedener Ausgangslage (Eltern
 mit und ohne Deutschkenntnisse, Lehrperson und Schulleitung, Erstnutzende und
 Routinierte), dann **pro Gruppe eine Datei**. Faustregel: Wenn zwei Gruppen an
-derselben Stelle gegensätzlich fühlen würden, sind es zwei Personas.
+derselben Stelle gegensätzlich fühlen würden **oder gegensätzliche Ziele
+verfolgen**, sind es zwei Personas. Das zweite Kriterium ist das robustere:
+Im Baubewilligungs-Beispiel fühlen Bauherrschaft und Nachbarschaft in der
+Auflage beide negativ und bei der Einigung beide positiv – getrennt sind sie
+wegen ihrer Ziele (rasch bauen gegenüber Ruhe in der Nacht).
 
 Der Viewer legt mehrere Dateien übereinander (`journeykit render a.json b.json`).
+Überlagert werden nur Phasen mit **gleicher Phasen-ID**; die Punkte der anderen
+Persona verteilt er innerhalb der Phase nach Position, nicht nach Zeit. Phasen
+ohne Gegenstück kennzeichnet er («keine Daten in dieser Phase»). Wer überlagern
+will, übernimmt deshalb die Phasen-IDs der Hauptdatei, wo sich die Zeiträume
+decken.
 
 ## 3. Welcher Modus?
 

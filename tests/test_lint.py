@@ -120,20 +120,10 @@ def test_unused_and_contradicting_evidence_are_info(minimal):
     assert "L101" in codes(f, INFO)
 
 
-def test_example_journey_has_no_errors_or_warnings(example_journey):
-    f = lint_journey(example_journey, today=TODAY)
-    assert summarize(f)[ERROR] == 0
-    assert summarize(f)[WARN] == 0, [str(x) for x in f if x.level == WARN]
-
-
 def test_workshop_hypothesis_shows_inside_out_as_info(example_hypothesis):
     f = lint_journey(example_hypothesis, today=TODAY)
     assert summarize(f)[ERROR] == 0
     assert "L010" in codes(f, INFO)
-
-
-def test_second_persona_has_no_errors(example_second_persona):
-    assert summarize(lint_journey(example_second_persona, today=TODAY))[ERROR] == 0
 
 
 def test_worst_level():

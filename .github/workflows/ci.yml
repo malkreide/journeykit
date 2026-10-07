@@ -135,12 +135,17 @@ jobs:
       - name: Test
         run: pytest -q
 
-      # Das Beispiel ist Teil des Vertrags: schema-valide, 0 ERROR, 0 WARN.
-      - name: Example journey stays valid and lint-clean
+      # Jedes Beispiel ist Teil des Vertrags: schema-valide, journey.json mit 0 ERROR, 0 WARN.
+      # Weitere Prüfungen (synthetisch, Zitate wörtlich im Input) in tests/test_examples.py.
+      - name: Example journeys stay valid and lint-clean
         run: |
-          journeykit validate examples/kindergarteneintritt/*.json
-          # --today festgepinnt, damit der Review-Termin des Beispiels die CI nicht irgendwann rot macht
-          journeykit lint examples/kindergarteneintritt/journey.json --strict --quiet --today 2026-10-05
+          for dir in examples/*/; do
+            [ -f "${dir}journey.json" ] || continue
+            echo "→ $dir"
+            journeykit validate "$dir"*.json
+            # --today festgepinnt, damit Review-Termine der Beispiele die CI nicht irgendwann rot machen
+            journeykit lint "${dir}journey.json" --strict --quiet --today 2026-10-05
+          done
 
       # Struktur- und Dokumentationsprüfung (C-, B-, E-Regeln).
       - name: Validate repository structure

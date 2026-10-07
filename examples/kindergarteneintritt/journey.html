@@ -105,6 +105,12 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
 .map .phase .intent { font-size: 12px; color: var(--ink-2); margin-top: 3px; }
 .map .phase .dur { font-size: 11px; color: var(--ink-3); margin-top: 2px; }
 .map .phase-end { border-right: 2px solid var(--accent); }
+.dbar { position: relative; height: 14px; margin: 2px 0 6px; }
+.dbar .typ { position: absolute; left: 0; top: 2px; height: 10px; border-radius: 2px; background: var(--accent); min-width: 2px; }
+.dbar .rng { position: absolute; top: 6px; height: 2px; background: var(--ink-3); }
+.dbar .rng::before, .dbar .rng::after { content: ""; position: absolute; top: -4px; width: 2px; height: 10px; background: var(--ink-3); }
+.dbar .rng::before { left: 0; } .dbar .rng::after { right: 0; }
+.dbasis { font-size: 11.5px; color: var(--ink-3); }
 .step h4 { font-size: 13.5px; margin-bottom: 4px; }
 .step .action { color: var(--ink-2); font-size: 13px; }
 .step .meta { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
@@ -334,6 +340,7 @@ const journeys = DATA.journeys, findings = DATA.findings;
 
 function evDots(idx, refs) { const c = idx.classes(refs); let h = '<span class="evc" title="Evidenz: ' + c.observed + ' beobachtet, ' + c.reported + ' berichtet, ' + c.assumed + ' angenommen">'; h += '<i class="o"></i>'.repeat(Math.min(c.observed, 4)) + '<i class="r"></i>'.repeat(Math.min(c.reported, 4)) + '<i class="a"></i>'.repeat(Math.min(c.assumed, 4)); return h + '</span>'; }
 function claimBtn(idx, text, refs, extraCls, title) { const st = idx.evState(refs); return '<button class="claim ev-' + st + ' ' + (extraCls || "") + '" data-refs="' + esc((refs || []).join(",")) + '" data-title="' + esc(title || "") + '" data-text="' + esc(text) + '">' + esc(text) + (refs && refs.length ? evDots(idx, refs) : '<span class="evc muted" title="keine Evidenz">∅</span>') + '</button>'; }
+function days(n) { return n + (n === 1 ? " Tag" : " Tage") + (n >= 21 ? " (≈ " + Math.round(n / 7) + " Wochen)" : ""); }
 function visible(idx, refs) { return !state.primOnly || idx.hasPrimary(refs); }
 function renderClaims(idx, items, getText, getRefs, extra) { let h = "", hidden = 0; items.forEach(it => { const refs = getRefs(it); if (!visible(idx, refs)) { hidden++; return; } h += claimBtn(idx, getText(it), refs, extra ? extra(it) : "", getText(it)); }); if (hidden) h += '<div class="hidden-note">' + hidden + ' Annahme' + (hidden > 1 ? 'n' : '') + ' ausgeblendet</div>'; return h || (items.length ? "" : '<span class="empty">–</span>'); }
 
@@ -367,6 +374,20 @@ function renderJourney(idx) {
   // Phasen
   h += '<div class="rowlabel">Phase<small>' + esc(j.scenario.goal) + '</small></div>';
   j.phases.forEach(p => { h += '<div class="phase" style="grid-column: span ' + p.steps.length + '"><h3>' + esc(p.name) + '</h3>' + (p.user_intent ? '<div class="intent">' + esc(p.user_intent) + '</div>' : '') + (p.duration ? '<div class="dur">' + esc(p.duration) + '</div>' : '') + '</div>'; });
+  // Dauer: ein Massstab über alle Phasen, damit lange Wartezeiten nicht gleich kurz aussehen wie zwei Tage Einbau.
+  // Das Schrittraster bleibt gleich breit; nur die Balken folgen der belegten Dauer.
+  const timed = j.phases.filter(p => p.duration_days);
+  if (timed.length) {
+    const room = Math.min(...j.phases.map(p => p.steps.length)) * 270 - 24, top = Math.max(...timed.map(p => p.duration_days.max || p.duration_days.typical)), px = v => Math.round(v / top * room);
+    h += '<div class="rowlabel">Dauer<small>Kalendertage, ein Massstab für alle Phasen</small></div>';
+    j.phases.forEach(p => { const d = p.duration_days; let c;
+      if (!d) c = '<span class="empty">keine belegte Dauer</span>';
+      else if (!visible(idx, d.evidence_refs)) c = '<div class="hidden-note">Dauer ohne Primärevidenz ausgeblendet</div>';
+      else { const lo = d.min != null ? d.min : d.typical, hi = d.max != null ? d.max : d.typical, label = "typisch " + days(d.typical) + (d.min != null && d.max != null ? " · Spanne " + d.min + "–" + d.max + " Tage" : d.max != null ? " · bis " + d.max + " Tage" : d.min != null ? " · ab " + d.min + " Tagen" : "");
+        c = '<div class="dbar" title="' + esc(label) + '"><span class="typ" style="width:' + px(d.typical) + 'px"></span>' + (hi > lo ? '<span class="rng" style="left:' + px(lo) + 'px;width:' + (px(hi) - px(lo)) + 'px"></span>' : '') + '</div>'
+          + claimBtn(idx, label, d.evidence_refs, "", "Dauer: " + p.name) + (d.basis ? '<div class="dbasis">' + esc(d.basis) + '</div>' : ''); }
+      h += '<div class="phase-end" style="grid-column: span ' + p.steps.length + '">' + c + '</div>'; });
+  }
   // Schritte
   let cells = "";
   idx.steps.forEach(e => { const s = e.step, last = e.si === e.phase.steps.length - 1;
@@ -446,7 +467,7 @@ function drawCurve(idx) {
 // ---------------------------------------------------------------- Layer 2: Prozess
 function renderProcess(idx) {
   let h = '<div class="panel"><h2>Prozess- und Fehlerpfade</h2><p class="muted" style="margin:0">Links der Pfad der Persona, rechts wo er bricht: Breakdowns mit Workaround und Recovery-Pfad (gestrichelt = Soll-Pfad, heute nicht vorhanden), Reibungen und Edge Cases.</p></div><div class="flow">';
-  idx.j.phases.forEach(p => { h += '<div class="phase-h">' + esc(p.name) + '</div>';
+  idx.j.phases.forEach(p => { h += '<div class="phase-h">' + esc(p.name) + (p.duration_days && visible(idx, p.duration_days.evidence_refs) ? ' · typisch ' + days(p.duration_days.typical) : '') + '</div>';
     p.steps.forEach(s => { const bds = (s.pain_points || []).filter(x => x.type === "breakdown"), frs = (s.pain_points || []).filter(x => x.type !== "breakdown");
       h += '<div class="node-row"><div class="node' + (bds.length ? ' has-breakdown' : '') + '"><h4>' + esc(s.name) + '</h4><div class="act">' + esc(s.action) + '</div><div class="meta" style="margin-top:6px">' + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.counterpart ? '<span class="chip">' + esc(s.counterpart) + '</span>' : '') + actorChip(s) + (s.is_transition ? '<span class="chip transition">Übergang</span>' : '') + '</div>' + ((s.backstage_notes || []).length ? '<div class="muted" style="font-size:11.5px;margin-top:6px">Back-Stage: ' + s.backstage_notes.map(esc).join(" · ") + '</div>' : '') + '</div><div class="branches">';
       bds.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch bd"><b>Breakdown:</b> ' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">Ausweichen</span><span>' + esc(pp.workaround) + '</span></div>' : '') + '</div>'; });

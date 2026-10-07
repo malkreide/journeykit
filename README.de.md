@@ -18,7 +18,7 @@ Das Vokabular ist für die Verwaltung übersetzt, wo niemand «konvertiert» ode
 
 - **Journey-Modell** als JSON Schema (Draft 2020-12) mit Evidenz-Atomen, Quellenregister, Datenschutzstatus, Owner und Review-Rhythmus
 - **Methodische Lints** für die fünf Fallstricke – Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathie-Vakuum / Überkomplexität, Micro-Level Disconnect – plus Blueprint-Smell, Personendaten, KPI-Übersetzung und Evidenzqualität (L001–L102)
-- **Interaktiver Viewer**: eine eigenständige HTML-Datei mit fünf Layern – Journey Map mit emotionaler Kurve, Prozess- und Fehlerpfade, Evidenz-Heatmap und Quellenregister, Impact/Effort-Matrix mit User Stories, Prüfung – Evidenz-Drilldown bis zum O-Ton auf jeder Zelle, Filter «nur Primärevidenz», Persona-Überlagerung, hell/dunkel, Druck
+- **Interaktiver Viewer**: eine eigenständige HTML-Datei mit fünf Layern – Journey Map mit emotionaler Kurve und belegter Dauer je Phase auf einem gemeinsamen Massstab, Prozess- und Fehlerpfade, Evidenz-Heatmap und Quellenregister, Impact/Effort-Matrix mit User Stories, Prüfung – Evidenz-Drilldown bis zum O-Ton auf jeder Zelle, Filter «nur Primärevidenz», Persona-Überlagerung, hell/dunkel, Druck
 - **Exporte**: Story Map nach Patton (Markdown), Massnahmenliste (CSV), Chancenmatrix, Audit-Report
 - **Diff** zwischen zwei Versionen – was hat neue Evidenz verändert?
 - **Claude-Skill** `user-journey` mit drei Modi: *Synthese* (Rohmaterial → Journey), *Workshop* (Hypothesis-first mit Erhebungsplan), *Audit* (bestehende Journey prüfen)
@@ -88,7 +88,7 @@ journeykit new kita-anmeldung --title "Kita-Anmeldung" --persona "Eltern" --role
 
 | Bereich | Fallstrick | Beispiele |
 |---|---|---|
-| L001–L002 | Integrität | hängende Evidenz-Referenzen, doppelte IDs |
+| L001–L003 | Integrität | hängende Evidenz-Referenzen, doppelte IDs, widersprüchliche Phasendauer (min > typisch oder typisch > max) |
 | L010–L012 | Inside-Out Bias | Erlebnis-Aussagen ohne Primärevidenz; Persona auf weniger als 3 Primärbelegen |
 | L020–L023 | Happy Path Bias | keine Breakdowns; Phase ohne Reibung oder Edge Case; Breakdown ohne Recovery-Pfad |
 | L030–L034 | Static Map Trap | kein Owner, kein Review-Rhythmus, schwerer Pain Point ohne Owner |

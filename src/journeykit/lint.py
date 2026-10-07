@@ -190,6 +190,20 @@ def _rule_integrity(idx: JourneyIndex, c: _Collector) -> None:
                 f"Offene Frage verweist auf unbekannten Schritt «{q['step_ref']}».",
                 f"open_questions[{qi}]",
             )
+    for pi, phase in enumerate(j.get("phases", [])):
+        dd = phase.get("duration_days")
+        if not dd:
+            continue
+        lo, typ, hi = dd.get("min"), dd["typical"], dd.get("max")
+        if (lo is not None and lo > typ) or (hi is not None and hi < typ):
+            c.add(
+                "L003",
+                ERROR,
+                "integrity",
+                f"Dauer der Phase «{phase['id']}» ist widersprüchlich: min {lo}, typisch {typ}, max {hi}.",
+                f"phases[{pi}].duration_days",
+                hint="Es muss min ≤ typical ≤ max gelten; Grenzen weglassen, die die Belege nicht tragen.",
+            )
 
 
 def _rule_inside_out(idx: JourneyIndex, c: _Collector) -> None:

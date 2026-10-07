@@ -18,7 +18,7 @@ The vocabulary is translated for public administration, where nobody "converts" 
 
 - **Journey model** as JSON Schema (draft 2020-12) with evidence atoms, sources, PII status, owner and review cycle
 - **Methodological lints** for the five pitfalls — Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathy Vacuum / Overcomplexity, Micro-Level Disconnect — plus Blueprint smell, PII, KPI translation and evidence quality (L001–L102)
-- **Interactive viewer**: a self-contained HTML file with five layers — journey map with emotional curve, process and failure paths, evidence heatmap and source register, impact/effort matrix with user stories, audit — evidence drill-down to the original quote on every cell, a "primary evidence only" filter, multi-persona overlay, light/dark, print
+- **Interactive viewer**: a self-contained HTML file with five layers — journey map with emotional curve and evidence-backed phase durations on a common scale, process and failure paths, evidence heatmap and source register, impact/effort matrix with user stories, audit — evidence drill-down to the original quote on every cell, a "primary evidence only" filter, multi-persona overlay, light/dark, print
 - **Exports**: Patton story map (Markdown), action list (CSV), opportunity matrix, audit report
 - **Diff** between two versions of a journey — what did new evidence change?
 - **Claude skill** `user-journey` with three modes: *Synthesis* (raw material → journey), *Workshop* (hypothesis-first with research plan), *Audit* (review an existing journey)
@@ -88,7 +88,7 @@ journeykit new kita-anmeldung --title "Kita-Anmeldung" --persona "Eltern" --role
 
 | Range | Pitfall | Examples |
 |---|---|---|
-| L001–L002 | Integrity | dangling evidence references, duplicate IDs |
+| L001–L003 | Integrity | dangling evidence references, duplicate IDs, contradictory phase duration (min > typical or typical > max) |
 | L010–L012 | Inside-Out Bias | experience claims without primary evidence; persona on fewer than 3 primary sources |
 | L020–L023 | Happy Path Bias | no breakdowns; phase without friction or edge case; breakdown without recovery path |
 | L030–L034 | Static Map Trap | no owner, no review cycle, severe pain point without owner |

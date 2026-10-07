@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Schema: channel `publication` (official publication, notice board, building profile) and source kind `case_records` (case-management statistics, counted as a user source for L011) – findings H7 and «missing source kind» from the building-permit example
 - Lint L073 (INFO): more than half of the steps carried out by intermediaries – check the diagnosis
 - Viewer: chip «mit …» / «durch …» for steps with `performed_by`, in the journey and process layers
+- Schema: optional `phase.duration_days` (`typical`, `min`, `max` in calendar days, `basis`, required `evidence_refs`) next to the free-text `duration` – finding H2 from the building-permit example (#13). Schema stays 1.0 (additive); the evidence references are checked by L001
+- Lint L003 (ERROR): contradictory phase duration (min > typical or typical > max)
+- Viewer: row «Dauer» in the journey layer – one bar per phase on a common scale with the evidenced range, drill-down to the evidence; phases without a number say so. The step grid keeps equal widths. The process layer shows the typical duration next to the phase name
 
 ### Changed
 - Skill: pattern for costs and fees without a schema field – metric atom in CHF, linked from the step, pain point when costs come as a surprise; extraction rule for fee schedules, invoices and interview statements; KPI «share who knew the costs in advance» (#15, stage 1)

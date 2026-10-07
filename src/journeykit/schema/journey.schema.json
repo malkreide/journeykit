@@ -119,6 +119,19 @@
       "then": { "not": { "anyOf": [{ "required": ["role"] }, { "required": ["mandate"] }] } },
       "else": { "required": ["role", "mandate"] }
     },
+    "duration_days": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["typical", "evidence_refs"],
+      "description": "Belegte Dauer in Kalendertagen, damit Wartezeit sichtbar und vergleichbar wird (Issue #13). Ohne Beleg weglassen – eine Zahl ohne Quelle ist Pseudo-Präzision. Der Freitext duration bleibt daneben bestehen.",
+      "properties": {
+        "typical": { "type": "number", "exclusiveMinimum": 0, "description": "Typische Dauer, z. B. Median aus einer Statistik." },
+        "min": { "type": "number", "minimum": 0, "description": "Untere Grenze der belegten Spanne, keine Extremwerte." },
+        "max": { "type": "number", "exclusiveMinimum": 0, "description": "Obere Grenze der belegten Spanne, z. B. Median mit Einsprache." },
+        "basis": { "type": "string", "description": "Was die Zahl misst, wenn das nicht genau die Phase ist (z. B. «vollständiges Gesuch bis Entscheid»)." },
+        "evidence_refs": { "$ref": "#/$defs/evidence_refs", "minItems": 1 }
+      }
+    },
     "score_1_5": { "type": "integer", "minimum": 1, "maximum": 5 },
     "valence": {
       "type": "integer",
@@ -247,7 +260,8 @@
         "name": { "type": "string" },
         "description": { "type": "string" },
         "user_intent": { "type": "string", "description": "Was die Persona in dieser Phase will." },
-        "duration": { "type": "string" },
+        "duration": { "type": "string", "description": "Dauer in Worten, wie die Persona sie erlebt oder die Quellen sie nennen." },
+        "duration_days": { "$ref": "#/$defs/duration_days" },
         "steps": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/step" } },
         "kpis": { "type": "array", "items": { "$ref": "#/$defs/kpi" } }
       }

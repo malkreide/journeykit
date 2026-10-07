@@ -42,6 +42,29 @@ def test_duplicate_id_is_error(minimal):
     assert "L002" in codes(lint_journey(minimal, today=TODAY), ERROR)
 
 
+def test_dangling_duration_reference_is_error(minimal):
+    minimal["phases"][0]["duration_days"] = {"typical": 5, "evidence_refs": ["gibt-es-nicht"]}
+    assert "L001" in codes(lint_journey(minimal, today=TODAY), ERROR)
+
+
+def test_contradictory_duration_is_error(minimal):
+    minimal["phases"][0]["duration_days"] = {"typical": 38, "max": 20, "evidence_refs": ["ev-1"]}
+    assert "L003" in codes(lint_journey(minimal, today=TODAY), ERROR)
+    minimal["phases"][0]["duration_days"] = {"typical": 38, "min": 40, "evidence_refs": ["ev-1"]}
+    assert "L003" in codes(lint_journey(minimal, today=TODAY), ERROR)
+
+
+def test_consistent_duration_is_clean(minimal):
+    minimal["phases"][0]["duration_days"] = {
+        "typical": 38,
+        "min": 38,
+        "max": 112,
+        "evidence_refs": ["ev-1"],
+    }
+    findings = lint_journey(minimal, today=TODAY)
+    assert {"L001", "L003"}.isdisjoint(codes(findings))
+
+
 def test_all_assumed_with_validated_status_is_error(minimal):
     for atom in minimal["evidence"]:
         atom["class"] = "assumed"

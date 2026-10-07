@@ -161,6 +161,8 @@ class JourneyIndex:
             for ref in claim.evidence_refs:
                 yield claim.path, ref
         for pi, phase in enumerate(self.journey.get("phases", [])):
+            for ref in (phase.get("duration_days") or {}).get("evidence_refs", []):
+                yield f"phases[{pi}].duration_days", ref
             for ki, kpi in enumerate(phase.get("kpis", [])):
                 if kpi.get("source_ref"):
                     yield f"phases[{pi}].kpis[{ki}].source_ref", kpi["source_ref"]

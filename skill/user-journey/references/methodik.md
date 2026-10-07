@@ -82,3 +82,4 @@ startet, bekommt eine formvollendete Hypothesen-Map – und das Modell sagt es.
 - **Mehrsprachigkeit und Vorerfahrung** streuen stark – fast immer Grund für mehrere Personas.
 - **Personendaten** – Interviews mit Eltern, Kindern, Lehrpersonen; Anonymisierung vor der Synthese.
 - **Politische Lesart** – eine Journey kann als Kritik an einer Stelle gelesen werden. Owner als Rolle, Befunde als Evidenz, nicht als Urteil formulieren.
+- **Rechtsmittel sind kein Scheitern** – Einsprache, Einwendung, Rekurs: Für die Persona fühlt es sich oft wie ein Bruch an, für die Verwaltung ist es ein vorgesehener Weg, und für Dritte (Nachbarschaft) ein Recht. Als `friction` modellieren; den Breakdown dort suchen, wo Information fehlte oder zu spät kam. Wer Rechtsmittel als Breakdown behandelt, leitet Chancen ab, die Einsprachen verhindern sollen statt Verständigung zu ermöglichen (Beispiel: `examples/baubewilligung/`, H4).

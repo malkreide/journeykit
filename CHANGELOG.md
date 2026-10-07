@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Viewer: chip «mit …» / «durch …» for steps with `performed_by`, in the journey and process layers
 
 ### Changed
+- Skill: review question «breakdown or a legal remedy that works?» (Einsprache, Rekurs), with a note in the synthesis step and the public-administration context of `methodik.md` – finding H4 (#14)
 - `journeykit lint` text output prints each rule's hint only once per run
 - CI validates and lints every example directory instead of a hard-coded path
 

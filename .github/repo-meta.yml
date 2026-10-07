@@ -13,7 +13,9 @@ default_branch: main
 language: python
 version: 0.1.0
 confirmed: true          # am 2026-10-05 bestätigt (Name, Description, Topics, Lizenz, Copyright, public)
+erledigt:
+  - 2026-10-07 Repo angelegt und gepusht (gh repo create), CI #1 grün
+  - 2026-10-07 Topics gesetzt (gh repo edit)
+  - 2026-10-07 Commit-Identität auf GitHub-noreply umgestellt (GH007)
 offen:
-  - Repo auf GitHub anlegen (Session ohne gültiges gh-Token → Backend C)
-  - Topics setzen (Settings-UI oder später mit gh)
   - Secret Scanning + Push Protection aktivieren (9.6)

@@ -77,3 +77,27 @@ def test_performed_by_requires_role_and_mandate_for_third_parties(minimal):
     assert not is_valid(minimal)
     step["performed_by"] = {"kind": "authority", "role": "Bauamt", "mandate": "formal"}
     assert not is_valid(minimal)
+
+
+def test_duration_days(minimal):
+    phase = minimal["phases"][0]
+    phase["duration_days"] = {
+        "typical": 38,
+        "min": 14,
+        "max": 112,
+        "basis": "Median",
+        "evidence_refs": ["ev-1"],
+    }
+    assert is_valid(minimal)
+
+
+def test_duration_days_requires_evidence_and_positive_typical(minimal):
+    phase = minimal["phases"][0]
+    phase["duration_days"] = {"typical": 38}
+    assert not is_valid(minimal)
+    phase["duration_days"] = {"typical": 38, "evidence_refs": []}
+    assert not is_valid(minimal)
+    phase["duration_days"] = {"typical": 0, "evidence_refs": ["ev-1"]}
+    assert not is_valid(minimal)
+    phase["duration_days"] = {"typical": 3, "unit": "weeks", "evidence_refs": ["ev-1"]}
+    assert not is_valid(minimal)

@@ -39,9 +39,9 @@ darauf. Daraus folgt:
 |---|---|---|
 | 1 Input | Interviews, Befragungen, Anfragen-/Ticketexporte, Analytics, Auswertungen der Geschäftskontrolle, Fotos von Workshop-Wänden, Prozessdokumente, bestehende Journeys | Quellenregister (`sources`) mit Art, Standard-Evidenzklasse, Stichprobe, Datenschutzstatus, Ablage |
 | 2 Evidenz-Atome | Kleinste belegbare Einheit: Zitat, Beobachtung, Messwert, Dokumentstelle, mit Fundstelle, Klasse, Signal, Emotion (nur explizit), Widerspruch | `evidence[]` im Schema; Extraktionsregeln und Prompt-Schablone im Skill |
-| 3 Journey-Modell | Persona, Szenario, Phasen, Schritte (inkl. handelnde Dritte, ADR-0005), Denken/Fühlen, Pain Points (Reibung/Breakdown), Edge Cases, Recovery, KPIs, Chancen, offene Fragen, Owner, Review | JSON Schema 2020-12 |
+| 3 Journey-Modell | Persona, Szenario, Phasen (mit belegter Dauer in Kalendertagen), Schritte (inkl. handelnde Dritte, ADR-0005), Denken/Fühlen, Pain Points (Reibung/Breakdown), Edge Cases, Recovery, KPIs, Chancen, offene Fragen, Owner, Review | JSON Schema 2020-12 |
 | 4 Synthese-Engine | Clustern, Kurve nur aus Evidenz, Widersprüche und Lücken ausweisen, Chancen und Scores vorschlagen | Claude-Skill (Modi Synthese / Workshop / Audit) + Lints als Rückkopplung |
-| 5 Darstellung | Journey mit Kurve, Prozess/Fehlerpfade, Evidenz-Heatmap, Chancenmatrix, Prüfung; Drilldown bis zum O-Ton; Filter «nur Primärevidenz»; Persona-Überlagerung | Single-File-Viewer |
+| 5 Darstellung | Journey mit Kurve und Dauer je Phase (ein Massstab, damit Wartezeit nicht gleich kurz aussieht wie ein Termin), Prozess/Fehlerpfade, Evidenz-Heatmap, Chancenmatrix, Prüfung; Drilldown bis zum O-Ton; Filter «nur Primärevidenz»; Persona-Überlagerung | Single-File-Viewer |
 | 6 Betrieb | Owner, Review-Rhythmus, Status pro Pain Point und Chance, Versionen, Diff | Schema-Felder, Lints L030–L034, `journeykit diff` |
 
 ## Evidenzklassen als tragendes Prinzip
@@ -115,6 +115,6 @@ das die manuelle Journey übersehen hat. Erst dieser Vergleich sagt, was
 1. GitHub-Repo, CI grün, Secret Scanning (0.1.x)
 2. Evaluation gegen eine reale Ground-Truth-Journey (0.2)
 3. Testsatz für die Extraktion: Input → erwartete Atome (0.2)
-4. ~~Zweites Beispiel aus einem anderen Verwaltungsbereich (0.2)~~ – `examples/baubewilligung/`; Befunde zur Übertragbarkeit (Handelnde Dritte, Kanal «Publikation», Quellenart für Geschäftskontrolle u. a.) im Beispiel-README, Umsetzung offen
+4. ~~Zweites Beispiel aus einem anderen Verwaltungsbereich (0.2)~~ – `examples/baubewilligung/`; Befunde zur Übertragbarkeit (Handelnde Dritte, Kanal «Publikation», Quellenart für Geschäftskontrolle, Dauer von Wartephasen u. a.) im Beispiel-README, grösstenteils umgesetzt; offen ist ein Kostenfeld (#15)
 5. Viewer: visueller Versionsvergleich, Export der Heatmap, französische UI (0.3)
 6. Variante B: MCP-Server für Journeys als Datenbestand (0.4)

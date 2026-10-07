@@ -87,6 +87,14 @@ Zeitraum und Grundgesamtheit im `text`. Klasse `observed`. Nur Aggregate
 anonymisiert und `pii_status` entsprechend setzen. Wie Analytics zeigen sie
 **wo** und **wie oft**, nicht **warum**.
 
+**Dauern** (Durchlaufzeiten, Wartezeiten, Aussagen wie «nach drei Wochen»).
+Als `metric` mit `value` und `unit`, die Einheit genau wie in der Quelle
+(«Kalendertage», «Arbeitstage»); Kennwert (Median, Durchschnitt) und
+gemessenen Abschnitt in den `text`. Für `phase.duration_days` erst bei der
+Synthese in Kalendertage umrechnen und die Umrechnung in `basis` nennen.
+Fristen aus Reglementen und Prozessdokumenten («innert zwei Monaten») sind
+`document_excerpt` mit Klasse `assumed`, keine gemessene Dauer.
+
 **Kosten und Gebühren** (Gebührenordnung, Rechnungen, Statistik, Aussagen in
 Interviews). Beträge als `metric` mit `value` und `unit` «CHF»; aus der
 Gebührenordnung nur als `document_excerpt` mit Klasse `assumed`, denn sie sagt,

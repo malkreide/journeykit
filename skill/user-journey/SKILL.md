@@ -164,7 +164,21 @@ Atome zu Schritten clustern. Pro Schritt:
   (z. B. Ratenzahlung, Verzicht, Nachfrage). Mehrkosten, die Dritte
   verrechnen, beim Schritt der Vermittlung festhalten (`performed_by`).
   Zeitkosten (Arbeitsausfall, Wartezeit) sind keine Kosten in diesem Sinn,
-  sondern Dauer (Issue #13).
+  sondern Dauer (`duration_days`, siehe unten).
+
+Je Phase:
+
+- `duration` in Worten, wie die Persona oder die Quellen sie nennen.
+- `duration_days` nur mit Beleg: `typical` (z. B. Median), allenfalls `min`
+  und `max` als belegte Spanne, alles in **Kalendertagen**, `evidence_refs`
+  Pflicht. Misst die Quelle nicht genau die Phase (Statistik «vollständiges
+  Gesuch bis Entscheid»), steht das in `basis`. Eine Frist ist keine Dauer:
+  Sie ist ein Soll (`assumed`) und gehört als Widerspruch neben die
+  gemessene Dauer, nicht an ihre Stelle. Ohne Beleg weglassen – der Viewer
+  zeigt «keine belegte Dauer», und das ist ehrlicher als eine geschätzte
+  Zahl. Nur an der Phase: Schritte sind Erlebnisse, keine Zeitabschnitte.
+  Gerade Wartephasen ohne Kontaktpunkt brauchen die Zahl, weil sie im
+  Raster sonst so kurz aussehen wie ein Termin.
 
 Dann über die ganze Journey:
 

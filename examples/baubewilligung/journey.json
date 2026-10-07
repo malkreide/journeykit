@@ -413,6 +413,15 @@
       "description": "Publikation, Auflage und Prüfung. Für die Persona eine Phase fast ohne Kontaktpunkt – ausser der Statusseite und, bei einer Einsprache, einem eingeschriebenen Brief.",
       "user_intent": "Wissen, dass etwas passiert, und wann ich mit dem Einbau rechnen kann.",
       "duration": "Fünf Wochen bis vier Monate",
+      "duration_days": {
+        "typical": 38,
+        "max": 112,
+        "basis": "Median vom vollständigen Gesuch bis zum Entscheid, ohne bzw. mit Einsprache; schliesst die Phase «Einigung und Entscheid» ein.",
+        "evidence_refs": [
+          "stat-07",
+          "stat-08"
+        ]
+      },
       "kpis": [
         {
           "name": "Durchlaufzeit vom vollständigen Gesuch bis zum Entscheid, ohne Einsprache (Median)",
@@ -745,6 +754,13 @@
       "description": "Einbau durch die Installationsfirma, Umsetzung der Auflagen, erster Betrieb.",
       "user_intent": "Dass es warm ist und das Thema abgeschlossen ist.",
       "duration": "Wenige Tage bis Wochen",
+      "duration_days": {
+        "typical": 2,
+        "basis": "Nur der Einbau; der Betrieb danach ist offen. Eine einzelne Aussage.",
+        "evidence_refs": [
+          "b1-28"
+        ]
+      },
       "kpis": [
         {
           "name": "Lärmklagen nach Inbetriebnahme je 100 Anlagen",
@@ -1443,6 +1459,17 @@
       "locator": "Zeile 41",
       "signal": "need",
       "phase_hint": "orientierung",
+      "persona_hint": "erstbauherrschaft"
+    },
+    {
+      "id": "b1-28",
+      "source_ref": "int-b1",
+      "class": "reported",
+      "kind": "quote",
+      "text": "Mitte Februar, zwei Tage.",
+      "locator": "Zeile 39",
+      "signal": "neutral",
+      "phase_hint": "umsetzung",
       "persona_hint": "erstbauherrschaft"
     },
     {

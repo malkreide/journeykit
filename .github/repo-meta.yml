@@ -18,4 +18,5 @@ erledigt:
   - 2026-10-07 Topics gesetzt (gh repo edit)
   - 2026-10-07 Commit-Identität auf GitHub-noreply umgestellt (GH007)
   - 2026-10-07 Secret Scanning + Push Protection aktiviert (9.6, per gh api)
+  - 2026-10-07 Erster Dependabot-PR (#1, Action-SHAs auf checkout v7.0.1 / setup-python v7.0.0) gemergt, CI auf main grün
 offen: []

@@ -39,6 +39,7 @@ Mindestens ein Frühindikator pro Journey, sonst meldet Lint L092.
 | Retention | **Anteil, der beim nächsten Anlass denselben Kanal wählt** | Kanalstatistik über Zeit |
 | NPS | **Weiterempfehlung des Verfahrens** oder **Vertrauen in den Entscheid** (Zustimmung) | Befragung – nicht als Gesamtwert, sondern pro Phase |
 | First Contact Resolution | **Erledigung im Erstkontakt** | Auskunftsstatistik |
+| Price transparency, Checkout surprise | **Anteil, der die Kosten vorab kannte** (Gebühr, Auslagen) | Befragung («Ich wusste vorher, was es kostet»), Anfragen zur Gebühr pro 100 Fälle |
 | Customer Acquisition Cost | **Aufwand der Verwaltung pro erledigtem Fall** (Minuten Auskunft pro 100 Fälle) | Zeiterfassung, Anfragenvolumen |
 | Customer Lifetime Value | kein sinnvolles Pendant – weglassen | – |
 | Branded Search, CPC | kein Pendant – weglassen | – |

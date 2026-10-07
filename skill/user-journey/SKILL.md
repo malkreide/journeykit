@@ -156,6 +156,15 @@ Atome zu Schritten clustern. Pro Schritt:
   dass keiner existiert.
 - `backstage_notes` sparsam. Werden es mehr als Schritte, ist ein Service
   Blueprint fällig (Lint L071).
+- **Kosten** (Gebühren, Auslagen, Mehrkosten durch Verzögerung) haben kein
+  eigenes Feld. Muster: Betrag als `metric`-Atom mit `unit` «CHF» und Quelle;
+  im betroffenen Schritt verknüpfen (über `thinking`, einen Pain Point oder
+  die `evidence_refs` des Schritts); kommen die Kosten
+  überraschend oder hindern sie am Handeln, ein Pain Point mit `workaround`
+  (z. B. Ratenzahlung, Verzicht, Nachfrage). Mehrkosten, die Dritte
+  verrechnen, beim Schritt der Vermittlung festhalten (`performed_by`).
+  Zeitkosten (Arbeitsausfall, Wartezeit) sind keine Kosten in diesem Sinn,
+  sondern Dauer (Issue #13).
 
 Dann über die ganze Journey:
 

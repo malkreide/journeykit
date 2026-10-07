@@ -87,6 +87,13 @@ Zeitraum und Grundgesamtheit im `text`. Klasse `observed`. Nur Aggregate
 anonymisiert und `pii_status` entsprechend setzen. Wie Analytics zeigen sie
 **wo** und **wie oft**, nicht **warum**.
 
+**Kosten und Gebühren** (Gebührenordnung, Rechnungen, Statistik, Aussagen in
+Interviews). Beträge als `metric` mit `value` und `unit` «CHF»; aus der
+Gebührenordnung nur als `document_excerpt` mit Klasse `assumed`, denn sie sagt,
+was gelten soll, nicht was bezahlt wurde. Aus Interviews wörtlich, ob die
+Kosten **vorher bekannt** waren («Das stand nirgends vorher») – das ist die
+Aussage, die eine Journey braucht, nicht der Betrag allein.
+
 **Prozessdokumente, Soll-Beschreibungen.** Klasse `assumed`. Wertvoll als
 Vergleichsfolie: Jede Soll-Aussage, der ein Interview widerspricht, ist ein
 Befund. `contradicts` setzen.

@@ -1,0 +1,31 @@
+anfrage_id;datum;kanal;kategorie;kurztext
+A-001;2024-12-09;telefon;stichtag;Kind wird am 1. August vier – kommt es dieses Jahr oder nächstes Jahr in den Kindergarten?
+A-002;2024-12-12;e-mail;brief_nicht_erhalten;Nachbarn haben den Informationsbrief erhalten, wir nicht. Sind wir erfasst?
+A-003;2024-12-16;telefon;brief_nicht_erhalten;Im November zugezogen, kein Brief erhalten, unsicher ob Anmeldung nötig.
+A-004;2024-12-18;telefon;betreuung_frist;Bis wann muss die Hortanmeldung eingereicht sein? Im Brief steht kein Datum.
+A-005;2025-01-07;schalter;brief_nicht_verstanden;Brief mitgebracht, bittet um Erklärung, was zu tun ist (Erstsprache nicht Deutsch).
+A-006;2025-01-09;telefon;brief_nicht_erhalten;Brief ging an alte Adresse, Umzug innerhalb der Stadt im Oktober.
+A-007;2025-01-14;telefon;brief_nicht_erhalten;Zugezogen aus anderem Kanton, wartet seit Dezember auf Brief.
+A-008;2025-01-20;e-mail;betreuung_frist;Formular Betreuung nennt 28. Februar, Website nennt 31. März – welche Frist gilt?
+A-009;2025-01-22;telefon;betreuung_frist;Muss die Betreuung angemeldet werden, bevor der Kindergarten bekannt ist?
+A-010;2025-01-28;telefon;stichtag;Kind wird am 31. Juli vier – gilt der Stichtag inklusive?
+A-011;2025-02-03;e-mail;sonstiges;Kann man den Kindergarteneintritt um ein Jahr verschieben?
+A-012;2025-02-11;telefon;betreuung_frist;Formular per Post geschickt, keine Bestätigung erhalten – ist es angekommen?
+A-013;2025-02-18;schalter;brief_nicht_verstanden;Fragt, ob der Brief eine Rechnung ist und ob etwas zu zahlen sei.
+A-014;2025-02-25;telefon;betreuung_frist;Frist verpasst, weil im Brief nicht ersichtlich – gibt es noch Plätze?
+A-015;2025-03-05;e-mail;stichtag;Kind knapp vor dem Stichtag geboren – Möglichkeit einer Rückstellung um ein Jahr?
+A-016;2025-04-10;telefon;zuteilung_wunschkindergarten;Warum nicht der Kindergarten um die Ecke? Begründung «Kapazität» nicht nachvollziehbar.
+A-017;2025-04-11;e-mail;zuteilung_wunschkindergarten;Zugeteilter Kindergarten 15 Minuten entfernt, Schulweg über Hauptstrasse – Bitte um Überprüfung.
+A-018;2025-04-14;telefon;zuteilung_wunschkindergarten;Geschwisterkind besucht anderen Kindergarten – weshalb nicht derselbe Standort?
+A-019;2025-04-15;telefon;betreuung_frist;Zuteilungsentscheid erhalten, aber keine Information zur Betreuung – ist der Hortplatz bestätigt?
+A-020;2025-04-17;schalter;zuteilung_wunschkindergarten;Möchte Einsprache gegen die Zuteilung einreichen, fragt nach Vorgehen und Frist.
+A-021;2025-04-22;e-mail;schulweg;Schulweg führt über unübersichtliche Kreuzung – gibt es einen Lotsendienst?
+A-022;2025-04-24;telefon;zuteilung_wunschkindergarten;Freundin des Kindes im anderen Kindergarten – ist ein Tausch möglich?
+A-023;2025-04-29;telefon;schulweg;Wie lang darf der Kindergartenweg sein? Zugeteilt wurden 20 Minuten zu Fuss.
+A-024;2025-05-06;e-mail;zuteilung_wunschkindergarten;Bitte um schriftliche Begründung der Zuteilung für eine allfällige Einsprache.
+A-025;2025-05-13;telefon;sonstiges;Termin des Informationsanlasses nicht mehr auffindbar, Brief verlegt.
+A-026;2025-05-20;telefon;betreuung_frist;Wann kommt die Bestätigung des Hortplatzes? Arbeitgeber braucht Planungssicherheit.
+A-027;2025-06-03;e-mail;zuteilung_wunschkindergarten;Umzug innerhalb der Stadt im Juli – muss der Kindergarten neu zugeteilt werden?
+A-028;2025-06-17;schalter;schulweg;Fragt, ob das Kind den Weg allein gehen muss und ab wann.
+A-029;2025-08-12;telefon;sonstiges;Reduzierter Stundenplan in den ersten zwei Wochen – ist der Hort auch am Nachmittag offen?
+A-030;2025-09-02;e-mail;sonstiges;Kind weint morgens beim Abschied – an wen kann man sich wenden?

@@ -1,0 +1,430 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/malkreide/journeykit/blob/main/src/journeykit/schema/journey.schema.json",
+  "title": "JourneyKit Journey Model",
+  "description": "Evidenzbasiertes Datenmodell für eine User Journey: eine Persona, ein Szenario, Phasen und Schritte, deren Aussagen auf Evidenz-Atome verweisen. Modell vor Darstellung: HTML, Story Map und Audit-Report werden aus dieser Datei erzeugt.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "meta", "persona", "scenario", "phases", "sources", "evidence"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0",
+      "description": "Version des Journey-Modells (nicht der Journey selbst)."
+    },
+    "meta": { "$ref": "#/$defs/meta" },
+    "persona": { "$ref": "#/$defs/persona" },
+    "scenario": { "$ref": "#/$defs/scenario" },
+    "phases": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/phase" }
+    },
+    "opportunities": {
+      "type": "array",
+      "default": [],
+      "items": { "$ref": "#/$defs/opportunity" }
+    },
+    "sources": {
+      "type": "array",
+      "description": "Register aller Quellen, aus denen Evidenz stammt. Jede Quelle hat eine Standard-Evidenzklasse und einen Datenschutzstatus.",
+      "items": { "$ref": "#/$defs/source" }
+    },
+    "evidence": {
+      "type": "array",
+      "description": "Evidenz-Atome: die kleinste belegbare Einheit (Zitat, Beobachtung, Messwert, Dokumentstelle). Alles, was die Journey behauptet, zeigt per evidence_refs hierher.",
+      "items": { "$ref": "#/$defs/evidence_atom" }
+    },
+    "open_questions": {
+      "type": "array",
+      "default": [],
+      "description": "Offene Fragen und Forschungslücken, die der nächste Erhebungsschritt schliessen soll.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text"],
+        "properties": {
+          "text": { "type": "string" },
+          "phase_ref": { "type": "string" },
+          "step_ref": { "type": "string" },
+          "proposed_method": {
+            "type": "string",
+            "enum": ["interview", "survey", "diary_study", "observation", "analytics", "ticket_analysis", "workshop", "other"]
+          }
+        }
+      }
+    },
+    "changelog": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["version", "date", "summary"],
+        "properties": {
+          "version": { "type": "string" },
+          "date": { "type": "string", "format": "date" },
+          "summary": { "type": "string" },
+          "author": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{1,63}$",
+      "description": "Stabile Kennung in kebab- oder snake_case. Wird in Referenzen verwendet."
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" },
+      "uniqueItems": true,
+      "default": [],
+      "description": "IDs von Evidenz-Atomen, die diese Aussage stützen. Leer = Annahme."
+    },
+    "evidence_class": {
+      "type": "string",
+      "enum": ["observed", "reported", "assumed"],
+      "description": "observed = direkt beobachtet oder gemessen (Analytics, Beobachtung, Ticketdaten). reported = von Nutzenden berichtet (Interview, Befragung, Tagebuch). assumed = interne Annahme (Prozessdokument, Workshop ohne Nutzende, Erfahrungswissen)."
+    },
+    "channel": {
+      "type": "string",
+      "enum": ["web", "app", "email", "phone", "letter", "paper_form", "counter", "in_person", "event", "chat", "sms", "other"],
+      "description": "Kanal des Schritts. Verwaltungs-Journeys laufen oft über Brief, Telefon, Schalter und Veranstaltungen, nicht nur digital."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["open", "in_progress", "resolved", "wontfix", "monitoring"]
+    },
+    "score_1_5": { "type": "integer", "minimum": 1, "maximum": 5 },
+    "valence": {
+      "type": "integer",
+      "minimum": -2,
+      "maximum": 2,
+      "description": "Emotionale Lage: -2 stark negativ, -1 negativ, 0 neutral, 1 positiv, 2 stark positiv."
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "version", "status", "map_type", "language"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 3 },
+        "version": { "type": "string", "description": "Version der Journey, z. B. 0.1, 1.0, 1.1." },
+        "status": {
+          "type": "string",
+          "enum": ["hypothesis", "draft", "validated", "in_review", "archived"],
+          "description": "hypothesis = Workshop-Stand ohne Nutzerevidenz (Hypothesis-first). draft = in Synthese. validated = durch Primärevidenz gestützt und reviewt. archived = nicht mehr gepflegt."
+        },
+        "map_type": {
+          "type": "string",
+          "enum": ["user_journey", "customer_journey", "experience_map", "service_blueprint", "user_flow"],
+          "description": "Ergebnis der Eingangsdiagnose. Lints gelten vollständig nur für user_journey und customer_journey."
+        },
+        "diagnosis": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["rationale"],
+          "description": "Warum dieses Artefakt eine User Journey ist (und kein Service Blueprint oder User Flow).",
+          "properties": {
+            "rationale": { "type": "string" },
+            "alternatives_considered": { "type": "array", "items": { "type": "string" } },
+            "backstage_documented_in": { "type": "string", "description": "Verweis auf einen Service Blueprint, falls die Back-Stage separat dokumentiert ist." }
+          }
+        },
+        "language": { "type": "string", "enum": ["de", "fr", "it", "rm", "en"] },
+        "created": { "type": "string", "format": "date" },
+        "updated": { "type": "string", "format": "date" },
+        "owner": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["role"],
+          "description": "Verantwortung für die Pflege der Journey. Rolle statt Klarname, damit die Datei teilbar bleibt.",
+          "properties": {
+            "role": { "type": "string" },
+            "unit": { "type": "string" },
+            "contact": { "type": "string", "description": "Funktionsadresse, keine persönliche." }
+          }
+        },
+        "review_cycle_days": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Spätestens nach so vielen Tagen wird die Journey gegen neue Evidenz geprüft."
+        },
+        "next_review": { "type": "string", "format": "date" },
+        "context": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "organisation": { "type": "string" },
+            "domain": { "type": "string", "default": "public_administration" },
+            "service": { "type": "string", "description": "Die Leistung oder der Prozess, um den es geht." },
+            "legal_basis": { "type": "array", "items": { "type": "string" } },
+            "notes": { "type": "string" }
+          }
+        },
+        "synthetic": {
+          "type": "boolean",
+          "default": false,
+          "description": "true, wenn Quellen und Evidenz synthetisch sind (Beispiel, Schulung). Wird im Viewer angezeigt."
+        }
+      }
+    },
+    "persona": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "role"],
+      "description": "Genau eine Persona pro Journey. Für weitere Personas eine weitere Journey-Datei anlegen und im Viewer vergleichen.",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "description": "Archetypischer Name oder Kurzbezeichnung, keine reale Person." },
+        "role": { "type": "string", "description": "Rolle gegenüber der Leistung, z. B. Elternteil, Lehrperson, Schulleitung, Behördenmitglied." },
+        "description": { "type": "string" },
+        "goals": { "type": "array", "items": { "type": "string" } },
+        "frustrations": { "type": "array", "items": { "type": "string" } },
+        "context": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "language_situation": { "type": "string" },
+            "digital_access": { "type": "string" },
+            "time_budget": { "type": "string" },
+            "prior_experience": { "type": "string" },
+            "other": { "type": "string" }
+          }
+        },
+        "evidence_refs": { "$ref": "#/$defs/evidence_refs" },
+        "is_hypothesis": {
+          "type": "boolean",
+          "default": false,
+          "description": "true, wenn die Persona ohne Primärevidenz gebildet wurde."
+        }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "goal"],
+      "properties": {
+        "title": { "type": "string" },
+        "goal": { "type": "string", "description": "Was die Persona erreichen will, in ihren Worten." },
+        "trigger": { "type": "string", "description": "Was die Journey auslöst (Brief, Lebensereignis, Frist)." },
+        "end_state": { "type": "string", "description": "Woran die Persona erkennt, dass sie fertig ist." },
+        "timeframe": { "type": "string" },
+        "scope_exclusions": { "type": "array", "items": { "type": "string" }, "description": "Bewusst nicht abgedeckt (gegen Überkomplexität)." },
+        "evidence_refs": { "$ref": "#/$defs/evidence_refs" }
+      }
+    },
+    "phase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "steps"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "user_intent": { "type": "string", "description": "Was die Persona in dieser Phase will." },
+        "duration": { "type": "string" },
+        "steps": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/step" } },
+        "kpis": { "type": "array", "items": { "$ref": "#/$defs/kpi" } }
+      }
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "action"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "action": { "type": "string", "description": "Was die Persona tut." },
+        "channel": { "$ref": "#/$defs/channel" },
+        "touchpoint": { "type": "string", "description": "System, Ort oder Dokument, mit dem interagiert wird." },
+        "counterpart": { "type": "string", "description": "Wer auf Verwaltungsseite beteiligt ist (Rolle)." },
+        "is_transition": { "type": "boolean", "default": false, "description": "Kanal- oder Zuständigkeitswechsel; dort entstehen überdurchschnittlich viele Reibungen." },
+        "thinking": { "type": "array", "items": { "$ref": "#/$defs/claim" } },
+        "feeling": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["valence"],
+              "properties": {
+                "valence": { "$ref": "#/$defs/valence" },
+                "label": { "type": "string", "description": "Geäusserte Emotion in Nutzerworten." },
+                "evidence_refs": { "$ref": "#/$defs/evidence_refs" }
+              }
+            }
+          ],
+          "description": "null = keine Evidenz zur Gefühlslage. Nicht raten: ein leerer Punkt in der Kurve ist eine ehrliche Lücke."
+        },
+        "pain_points": { "type": "array", "items": { "$ref": "#/$defs/pain_point" } },
+        "edge_cases": { "type": "array", "items": { "$ref": "#/$defs/claim" } },
+        "recovery_paths": { "type": "array", "items": { "$ref": "#/$defs/recovery_path" } },
+        "backstage_notes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Was intern passieren muss. Viele Einträge sind ein Hinweis, dass ein Service Blueprint gebraucht wird."
+        },
+        "kpis": { "type": "array", "items": { "$ref": "#/$defs/kpi" } },
+        "evidence_refs": { "$ref": "#/$defs/evidence_refs" }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text"],
+      "properties": {
+        "text": { "type": "string" },
+        "evidence_refs": { "$ref": "#/$defs/evidence_refs" }
+      }
+    },
+    "pain_point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text", "type"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "text": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["friction", "breakdown"],
+          "description": "friction = behindert, stoppt aber nicht. breakdown = die Journey scheitert hier oder die Persona weicht aus (Anruf, Beschwerde, Nichthandeln)."
+        },
+        "severity": { "$ref": "#/$defs/score_1_5" },
+        "frequency": {
+          "type": "string",
+          "enum": ["rare", "occasional", "frequent", "systematic", "unknown"]
+        },
+        "workaround": { "type": "string", "description": "Wohin die Persona ausweicht (das Verwaltungs-Äquivalent zu Churn)." },
+        "owner": { "type": "string", "description": "Rolle oder Stelle, die für die Behebung verantwortlich ist." },
+        "status": { "$ref": "#/$defs/status" },
+        "evidence_refs": { "$ref": "#/$defs/evidence_refs" }
+      }
+    },
+    "recovery_path": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["trigger", "path"],
+      "properties": {
+        "trigger": { "type": "string", "description": "Welcher Breakdown oder Edge Case ausgelöst wird." },
+        "path": { "type": "string", "description": "Wie die Persona zurück in die Journey findet (oder finden sollte)." },
+        "exists": { "type": "boolean", "default": true, "description": "false = Soll-Pfad, heute nicht vorhanden." },
+        "evidence_refs": { "$ref": "#/$defs/evidence_refs" }
+      }
+    },
+    "kpi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "category", "indicator_type"],
+      "properties": {
+        "name": { "type": "string" },
+        "category": {
+          "type": "string",
+          "enum": ["perception", "outcome", "public_value"],
+          "description": "perception = wahrgenommene Qualität (Zufriedenheit, Aufwand). outcome = Verhalten und Effizienz (Erledigungsquote, Durchlaufzeit, Rückfragen). public_value = Wirkung für Gemeinwesen und Verwaltung (Entlastung, Chancengerechtigkeit, Rechtssicherheit) - das Verwaltungs-Pendant zu Business Impact."
+        },
+        "indicator_type": { "type": "string", "enum": ["leading", "lagging"] },
+        "definition": { "type": "string" },
+        "unit": { "type": "string" },
+        "current_value": { "type": ["number", "string", "null"] },
+        "target": { "type": ["number", "string", "null"] },
+        "source_ref": { "$ref": "#/$defs/id" },
+        "commercial_equivalent": { "type": "string", "description": "Optional: der kommerzielle Begriff, aus dem übersetzt wurde (z. B. Conversion Rate)." }
+      }
+    },
+    "opportunity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "hmw"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "hmw": { "type": "string", "description": "How-might-we-Frage." },
+        "description": { "type": "string" },
+        "linked_pain_points": { "type": "array", "items": { "$ref": "#/$defs/id" }, "uniqueItems": true },
+        "phase_ref": { "$ref": "#/$defs/id" },
+        "user_impact": { "$ref": "#/$defs/score_1_5" },
+        "public_value": { "$ref": "#/$defs/score_1_5" },
+        "effort": { "$ref": "#/$defs/score_1_5" },
+        "owner": { "type": "string" },
+        "status": { "$ref": "#/$defs/status" },
+        "stories": {
+          "type": "array",
+          "description": "User Stories für die Story Map, priorisiert (erste = wichtigste).",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["text"],
+            "properties": {
+              "text": { "type": "string" },
+              "mvp": { "type": "boolean", "default": false }
+            }
+          }
+        },
+        "evidence_refs": { "$ref": "#/$defs/evidence_refs" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "kind", "default_class", "pii_status"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string" },
+        "kind": {
+          "type": "string",
+          "enum": ["interview", "survey", "diary_study", "observation", "ticket_export", "inquiry_log", "analytics", "workshop", "internal_document", "form", "complaint", "other"]
+        },
+        "default_class": { "$ref": "#/$defs/evidence_class" },
+        "date": { "type": "string", "description": "Erhebungsdatum oder Zeitraum." },
+        "n": { "type": "integer", "minimum": 0, "description": "Stichprobe: Anzahl Personen, Tickets, Sessions." },
+        "participants": { "type": "string", "description": "Wer befragt oder beobachtet wurde, als Rolle." },
+        "pii_status": {
+          "type": "string",
+          "enum": ["none", "anonymised", "pseudonymised", "contains_pii"],
+          "description": "contains_pii darf nicht in geteilte Journey-Dateien gelangen (Lint L009)."
+        },
+        "location": { "type": "string", "description": "Wo das Rohmaterial liegt (Pfad oder Ablage), nicht das Material selbst." },
+        "notes": { "type": "string" }
+      }
+    },
+    "evidence_atom": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source_ref", "class", "kind", "text"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "source_ref": { "$ref": "#/$defs/id" },
+        "class": { "$ref": "#/$defs/evidence_class" },
+        "kind": {
+          "type": "string",
+          "enum": ["quote", "observation", "metric", "document_excerpt", "workshop_statement"]
+        },
+        "text": { "type": "string", "minLength": 1, "description": "O-Ton, Beobachtung oder Messwert. Nicht paraphrasieren, wenn ein Zitat möglich ist." },
+        "locator": { "type": "string", "description": "Fundstelle: Zeile, Zeitstempel, Seite, Ticket-ID, Zeile im Export." },
+        "value": { "type": ["number", "string", "null"], "description": "Bei Messwerten: der Wert." },
+        "unit": { "type": "string" },
+        "persona_hint": { "type": "string" },
+        "phase_hint": { "type": "string" },
+        "channel_hint": { "$ref": "#/$defs/channel" },
+        "emotion_hint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["valence"],
+          "properties": {
+            "valence": { "$ref": "#/$defs/valence" },
+            "label": { "type": "string" },
+            "explicit": { "type": "boolean", "description": "true nur, wenn die Emotion ausdrücklich geäussert wurde." }
+          }
+        },
+        "signal": {
+          "type": "string",
+          "enum": ["friction", "breakdown", "positive", "need", "workaround", "neutral"]
+        },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "contradicts": { "type": "array", "items": { "$ref": "#/$defs/id" }, "description": "IDs von Atomen, denen dieses widerspricht. Widersprüche werden ausgewiesen, nicht geglättet." }
+      }
+    }
+  }
+}

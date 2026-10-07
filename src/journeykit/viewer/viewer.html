@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JourneyKit Viewer</title>
+<meta name="description" content="Interaktive, evidenzbasierte User Journey: Journey-Layer, Prozess- und Fehlerpfade, Evidenz-Heatmap, Chancenmatrix und methodische Prüfung.">
+<style>
+:root {
+  --bg: #f6f5f1; --surface: #ffffff; --surface-2: #efede7; --line: #d9d6cd; --line-strong: #b9b5a9;
+  --ink: #1d1c1a; --ink-2: #5a5853; --ink-3: #8a877f;
+  --accent: #2f4f7f; --accent-ink: #ffffff; --accent-soft: #e3eaf4;
+  --observed: #1f7a8c; --observed-soft: #d9eef2; --reported: #6a4c93; --reported-soft: #e9e2f3; --assumed: #a07a2a; --assumed-soft: #f3ead6;
+  --friction: #c47f17; --friction-soft: #fbead0; --breakdown: #b3261e; --breakdown-soft: #f8dcd9; --positive: #2e7d4f; --positive-soft: #d8eee0;
+  --gap: #9c9a93; --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.08);
+  --radius: 10px; --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: "Inter", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15161a; --surface: #1e2026; --surface-2: #272a31; --line: #343842; --line-strong: #4a4f5b;
+    --ink: #ebebe6; --ink-2: #b4b4ad; --ink-3: #85857f;
+    --accent: #8fb0e0; --accent-ink: #0f1320; --accent-soft: #233044;
+    --observed: #5fc3d6; --observed-soft: #173a42; --reported: #b79be0; --reported-soft: #33284a; --assumed: #e0b25a; --assumed-soft: #3f3418;
+    --friction: #e5a24a; --friction-soft: #43301a; --breakdown: #ef7b73; --breakdown-soft: #4a1f1c; --positive: #6fcf93; --positive-soft: #1d3a29;
+    --gap: #6e6e68; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15161a; --surface: #1e2026; --surface-2: #272a31; --line: #343842; --line-strong: #4a4f5b;
+  --ink: #ebebe6; --ink-2: #b4b4ad; --ink-3: #85857f;
+  --accent: #8fb0e0; --accent-ink: #0f1320; --accent-soft: #233044;
+  --observed: #5fc3d6; --observed-soft: #173a42; --reported: #b79be0; --reported-soft: #33284a; --assumed: #e0b25a; --assumed-soft: #3f3418;
+  --friction: #e5a24a; --friction-soft: #43301a; --breakdown: #ef7b73; --breakdown-soft: #4a1f1c; --positive: #6fcf93; --positive-soft: #1d3a29;
+  --gap: #6e6e68; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.5);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); }
+button { font: inherit; color: inherit; }
+h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.01em; }
+small, .muted { color: var(--ink-2); }
+.mono { font-family: var(--mono); font-size: 12px; }
+
+/* Kopf */
+header.top { position: sticky; top: 0; z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line); }
+.top-inner { padding: 12px 16px 0; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: flex-start; }
+.title-block { flex: 1 1 320px; min-width: 0; }
+.title-block h1 { font-size: 20px; line-height: 1.2; }
+.title-block .sub { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; color: var(--ink-2); }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); font-size: 12px; white-space: nowrap; }
+.badge.status-validated { border-color: var(--positive); color: var(--positive); background: var(--positive-soft); }
+.badge.status-hypothesis, .badge.status-draft { border-color: var(--assumed); color: var(--assumed); background: var(--assumed-soft); }
+.badge.synthetic { border-style: dashed; }
+.badge.err { background: var(--breakdown-soft); color: var(--breakdown); border-color: var(--breakdown); }
+.badge.warn { background: var(--friction-soft); color: var(--friction); border-color: var(--friction); }
+.badge.ok { background: var(--positive-soft); color: var(--positive); border-color: var(--positive); }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.toggle { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); cursor: pointer; user-select: none; }
+.toggle input { accent-color: var(--accent); margin: 0; }
+.toggle.active { border-color: var(--accent); background: var(--accent-soft); }
+.btn { padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); cursor: pointer; }
+.btn:hover { border-color: var(--line-strong); }
+select.persona { padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); font: inherit; }
+nav.tabs { display: flex; gap: 2px; padding: 8px 16px 0; overflow-x: auto; scrollbar-width: none; }
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs button { border: 0; background: transparent; padding: 8px 12px 10px; border-bottom: 2px solid transparent; color: var(--ink-2); white-space: nowrap; cursor: pointer; border-radius: 6px 6px 0 0; }
+nav.tabs button:hover { color: var(--ink); background: var(--surface-2); }
+nav.tabs button.active { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+nav.tabs button .n { margin-left: 6px; font-size: 11px; color: var(--ink-3); }
+.evbar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; width: 160px; background: var(--surface-2); }
+.evbar span { display: block; height: 100%; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--ink-2); align-items: center; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; border: 2px solid currentColor; vertical-align: -1px; }
+.dot.fill { background: currentColor; }
+.c-observed { color: var(--observed); } .c-reported { color: var(--reported); } .c-assumed { color: var(--assumed); } .c-gap { color: var(--gap); }
+
+/* Layouts */
+main { padding: 16px; max-width: 100%; }
+section.layer { display: none; }
+section.layer.active { display: block; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.panel + .panel { margin-top: 14px; }
+.panel h2 { font-size: 15px; margin-bottom: 8px; }
+.panel h3 { font-size: 13px; color: var(--ink-2); text-transform: uppercase; letter-spacing: .04em; margin: 14px 0 6px; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.tile { background: var(--surface-2); border-radius: 8px; padding: 10px 12px; }
+.tile .v { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
+.tile .l { font-size: 12px; color: var(--ink-2); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
+
+/* Journey-Raster */
+.map-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.map { display: grid; min-width: max-content; }
+.map > div { border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); padding: 10px 12px; min-width: 0; }
+.map .rowlabel { position: sticky; left: 0; z-index: 3; background: var(--surface-2); font-size: 12px; font-weight: 600; color: var(--ink-2); text-transform: uppercase; letter-spacing: .04em; }
+.map .rowlabel small { display: block; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--ink-3); margin-top: 2px; }
+.map .phase { background: var(--accent-soft); border-right: 2px solid var(--accent); }
+.map .phase h3 { font-size: 14px; color: var(--ink); text-transform: none; letter-spacing: 0; margin: 0; }
+.map .phase .intent { font-size: 12px; color: var(--ink-2); margin-top: 3px; }
+.map .phase .dur { font-size: 11px; color: var(--ink-3); margin-top: 2px; }
+.map .phase-end { border-right: 2px solid var(--accent); }
+.step h4 { font-size: 13.5px; margin-bottom: 4px; }
+.step .action { color: var(--ink-2); font-size: 13px; }
+.step .meta { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px; font-size: 11.5px; background: var(--surface-2); color: var(--ink-2); border: 1px solid transparent; }
+.chip.transition { border-color: var(--friction); color: var(--friction); background: var(--friction-soft); }
+.claim { display: block; width: 100%; text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 8px 6px 10px; margin: 0 0 6px; cursor: pointer; position: relative; font-size: 13px; line-height: 1.35; }
+.claim:hover { border-color: var(--accent); }
+.claim::before { content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 3px; border-radius: 2px; background: var(--line-strong); }
+.claim.ev-primary::before { background: linear-gradient(var(--observed), var(--reported)); }
+.claim.ev-assumed { border-style: dashed; }
+.claim.ev-assumed::before { background: var(--assumed); }
+.claim.ev-none { border-style: dashed; color: var(--ink-2); }
+.claim.ev-none::before { background: transparent; border-left: 3px dotted var(--gap); }
+.claim .evc { display: inline-flex; gap: 3px; margin-left: 6px; vertical-align: middle; }
+.claim .evc i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
+.claim .evc i.o { background: var(--observed); } .claim .evc i.r { background: var(--reported); } .claim .evc i.a { background: var(--assumed); }
+.claim.pp { padding-left: 12px; }
+.claim.pp.friction::before { background: var(--friction); } .claim.pp.breakdown::before { background: var(--breakdown); }
+.claim.pp .pp-head { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-bottom: 3px; }
+.tag { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; font-weight: 700; padding: 1px 6px; border-radius: 4px; }
+.tag.friction { background: var(--friction-soft); color: var(--friction); } .tag.breakdown { background: var(--breakdown-soft); color: var(--breakdown); }
+.tag.status { background: var(--surface-2); color: var(--ink-2); font-weight: 600; text-transform: none; letter-spacing: 0; }
+.sev { display: inline-flex; gap: 2px; }
+.sev i { width: 6px; height: 6px; border-radius: 1px; background: var(--line-strong); display: inline-block; }
+.sev i.on { background: var(--ink-2); }
+.pp .wa { color: var(--ink-2); font-size: 12px; margin-top: 3px; }
+.hidden-note { font-size: 11.5px; color: var(--ink-3); font-style: italic; padding: 4px 0; }
+.empty { color: var(--ink-3); font-size: 12px; }
+.kpi { font-size: 12.5px; padding: 4px 0; border-bottom: 1px dashed var(--line); }
+.kpi:last-child { border-bottom: 0; }
+.kpi b { font-weight: 600; }
+.kpi .k { color: var(--ink-3); font-size: 11px; }
+
+/* Gefühlskurve */
+.curve { position: relative; height: 150px; padding: 0 !important; }
+.curve svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.curve .zero { position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dashed var(--line-strong); }
+.curve .pt { position: absolute; width: 14px; height: 14px; border-radius: 50%; transform: translate(-50%, -50%); border: 2.5px solid var(--ink); background: var(--ink); cursor: pointer; z-index: 2; }
+.curve .pt.hollow { background: var(--surface); border-style: solid; }
+.curve .pt.assumed { border-color: var(--assumed); background: var(--surface); border-style: dashed; }
+.curve .pt.gap { width: 18px; height: 18px; border: 2px dotted var(--gap); background: transparent; color: var(--gap); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+.curve .pt.other { width: 9px; height: 9px; border-width: 2px; opacity: .85; z-index: 1; }
+.curve .lbl { position: absolute; transform: translateX(-50%); font-size: 11px; color: var(--ink-2); max-width: 180px; text-align: center; line-height: 1.25; pointer-events: none; background: color-mix(in srgb, var(--surface) 85%, transparent); padding: 1px 4px; border-radius: 4px; }
+.curve .scale { position: absolute; left: 4px; font-size: 10px; color: var(--ink-3); }
+
+/* Prozess-Layer */
+.flow { display: flex; flex-direction: column; gap: 0; }
+.flow .phase-h { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-2); margin: 18px 0 8px; display: flex; align-items: center; gap: 10px; }
+.flow .phase-h::after { content: ""; flex: 1; border-top: 1px solid var(--line); }
+.node-row { display: grid; grid-template-columns: minmax(240px, 1.1fr) minmax(0, 2fr); gap: 14px; align-items: start; position: relative; padding-left: 22px; }
+.node-row::before { content: ""; position: absolute; left: 7px; top: 0; bottom: 0; border-left: 2px solid var(--line-strong); }
+.node-row:last-child::before { bottom: 50%; }
+.node { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; position: relative; }
+.node::before { content: ""; position: absolute; left: -19px; top: 16px; width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); }
+.node.has-breakdown { border-color: var(--breakdown); }
+.node.has-breakdown::before { border-color: var(--breakdown); background: var(--breakdown); }
+.node h4 { font-size: 13.5px; }
+.node .act { color: var(--ink-2); font-size: 12.5px; margin-top: 2px; }
+.branches { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.branch { border-radius: 10px; padding: 8px 10px 8px 12px; border: 1px solid var(--line); position: relative; font-size: 12.5px; background: var(--surface); }
+.branch.bd { border-color: var(--breakdown); background: var(--breakdown-soft); }
+.branch.fr { border-color: var(--friction); background: var(--friction-soft); }
+.branch.ec { border-left: 3px solid var(--assumed); }
+.branch .arrow { display: flex; gap: 8px; align-items: flex-start; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line-strong); }
+.branch .arrow .lab { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; font-weight: 700; white-space: nowrap; padding-top: 1px; }
+.branch .arrow.rec .lab { color: var(--positive); }
+.branch .arrow.rec.soll { opacity: .85; } .branch .arrow.rec.soll .lab { color: var(--assumed); }
+.branch .arrow.wa .lab { color: var(--breakdown); }
+
+/* Evidenz-Layer */
+.heat { overflow-x: auto; }
+.heat table { min-width: max-content; }
+.heat td.cell { text-align: center; padding: 0; }
+.heat .hc { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 64px; height: 44px; margin: 2px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid transparent; }
+.heat .hc small { font-weight: 400; font-size: 10px; opacity: .8; }
+.heat .hc.gap { border: 1px dashed var(--gap); color: var(--gap); font-weight: 400; }
+.heat .hc.na { background: transparent; color: var(--ink-3); cursor: default; }
+.heat th.step { font-weight: 500; color: var(--ink); max-width: 120px; white-space: normal; font-size: 11.5px; }
+.heat th.phase { background: var(--accent-soft); font-size: 11px; text-align: center; }
+.src-pii { font-size: 11px; }
+.atom { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; background: var(--surface); }
+.atom .meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 4px; font-size: 11.5px; color: var(--ink-2); }
+.atom .cls { font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: 10.5px; padding: 1px 6px; border-radius: 4px; }
+.atom .cls.observed { background: var(--observed-soft); color: var(--observed); } .atom .cls.reported { background: var(--reported-soft); color: var(--reported); } .atom .cls.assumed { background: var(--assumed-soft); color: var(--assumed); }
+.atom q { quotes: "«" "»"; font-style: italic; }
+.atom .txt { font-size: 13px; }
+.atom .loc { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+.atom .contra { margin-top: 4px; font-size: 12px; color: var(--breakdown); }
+
+/* Chancen-Layer */
+.matrix { position: relative; width: 100%; aspect-ratio: 1.3; max-height: 460px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); overflow: hidden; }
+.matrix .q { position: absolute; width: 50%; height: 50%; padding: 8px 10px; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-3); }
+.matrix .q.tl { left: 0; top: 0; width: 39.5%; border-right: 1px dashed var(--line-strong); border-bottom: 1px dashed var(--line-strong); }
+.matrix .q.tr { right: 0; top: 0; width: 60.5%; border-bottom: 1px dashed var(--line-strong); text-align: right; }
+.matrix .q.bl { left: 0; bottom: 0; width: 39.5%; border-right: 1px dashed var(--line-strong); display: flex; align-items: flex-end; }
+.matrix .q.br { right: 0; bottom: 0; width: 60.5%; display: flex; align-items: flex-end; justify-content: flex-end; }
+.matrix .ax { position: absolute; font-size: 11px; color: var(--ink-2); }
+.matrix .ax.x { bottom: 4px; left: 50%; transform: translateX(-50%); } .matrix .ax.y { top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--ink-3); font-size: 10px; }
+.matrix .opp { position: absolute; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid var(--surface); box-shadow: var(--shadow); }
+.matrix .opp:hover { transform: translate(-50%, -50%) scale(1.15); }
+.opp-card { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 10px; background: var(--surface); }
+.opp-card .h { display: flex; gap: 8px; align-items: flex-start; }
+.opp-card .num { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.opp-card .scores { display: flex; gap: 10px; font-size: 11.5px; color: var(--ink-2); margin: 6px 0; flex-wrap: wrap; }
+.opp-card ul { margin: 6px 0 0; padding-left: 18px; font-size: 12.5px; }
+.opp-card li.mvp::marker { content: "✓ "; color: var(--positive); }
+
+/* Prüfung */
+.finding { display: grid; grid-template-columns: 64px 1fr; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.finding:last-child { border-bottom: 0; }
+.finding .lvl { font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; text-align: center; align-self: start; }
+.finding .lvl.ERROR { background: var(--breakdown-soft); color: var(--breakdown); } .finding .lvl.WARN { background: var(--friction-soft); color: var(--friction); } .finding .lvl.INFO { background: var(--surface-2); color: var(--ink-2); }
+.finding .hint { color: var(--ink-2); font-size: 12.5px; margin-top: 2px; }
+.finding .path { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+
+/* Drawer */
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 100%); background: var(--surface); border-left: 1px solid var(--line); box-shadow: var(--shadow); transform: translateX(105%); transition: transform .22s ease; z-index: 40; display: flex; flex-direction: column; }
+.drawer.open { transform: none; }
+.drawer .dh { padding: 14px 16px; border-bottom: 1px solid var(--line); display: flex; gap: 10px; align-items: flex-start; }
+.drawer .dh h2 { font-size: 14px; flex: 1; }
+.drawer .db { padding: 14px 16px; overflow: auto; }
+.drawer .close { border: 0; background: var(--surface-2); border-radius: 6px; width: 30px; height: 30px; cursor: pointer; }
+.scrim { position: fixed; inset: 0; background: rgba(0,0,0,.25); z-index: 30; display: none; }
+.scrim.open { display: block; }
+.claim-txt { font-size: 14px; margin-bottom: 10px; }
+.verdict { font-size: 12.5px; padding: 8px 10px; border-radius: 8px; margin-bottom: 12px; }
+.verdict.p { background: var(--positive-soft); } .verdict.a { background: var(--assumed-soft); } .verdict.n { background: var(--surface-2); color: var(--ink-2); }
+
+footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
+@media print {
+  header.top { position: static; } nav.tabs, .controls, .drawer, .scrim { display: none !important; }
+  section.layer { display: block !important; page-break-before: always; } section.layer:first-of-type { page-break-before: auto; }
+  .map-wrap { overflow: visible; } body { font-size: 11px; }
+}
+@media (max-width: 640px) {
+  main { padding: 10px; } .title-block h1 { font-size: 17px; } .node-row { grid-template-columns: 1fr; padding-left: 18px; }
+  .drawer { width: 100%; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="title-block">
+      <h1 id="title"></h1>
+      <div class="sub" id="subline"></div>
+    </div>
+    <div class="controls">
+      <select class="persona" id="personaSel" hidden aria-label="Persona wählen"></select>
+      <label class="toggle" id="primToggle"><input type="checkbox" id="primOnly"> Nur Primärevidenz</label>
+      <button class="btn" id="themeBtn" title="Hell/Dunkel umschalten">Hell/Dunkel</button>
+      <button class="btn" onclick="window.print()" title="Drucken / PDF">Drucken</button>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs"></nav>
+</header>
+<main id="main"></main>
+<footer id="footer"></footer>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-live="polite">
+  <div class="dh"><h2 id="dTitle"></h2><button class="close" id="dClose" aria-label="Schliessen">✕</button></div>
+  <div class="db" id="dBody"></div>
+</aside>
+
+<script>
+const DATA = /*__JOURNEYKIT_DATA__*/null;
+
+const L = {
+  classes: { observed: "beobachtet", reported: "berichtet", assumed: "angenommen" },
+  kinds: { quote: "Zitat", observation: "Beobachtung", metric: "Messwert", document_excerpt: "Dokumentstelle", workshop_statement: "Workshop-Aussage" },
+  srcKinds: { interview: "Interview", survey: "Befragung", diary_study: "Tagebuchstudie", observation: "Beobachtung", ticket_export: "Ticket-Export", inquiry_log: "Anfragen", analytics: "Analytics", workshop: "Workshop", internal_document: "Internes Dokument", form: "Formular", complaint: "Beschwerde", other: "Andere" },
+  channels: { web: "Website", app: "App", email: "E-Mail", phone: "Telefon", letter: "Brief", paper_form: "Papierformular", counter: "Schalter", in_person: "Vor Ort", event: "Veranstaltung", chat: "Chat", sms: "SMS", other: "Anderer Kanal" },
+  status: { hypothesis: "Hypothese", draft: "Entwurf", validated: "Validiert", in_review: "In Review", archived: "Archiviert" },
+  mapType: { user_journey: "User Journey", customer_journey: "Customer Journey", experience_map: "Experience Map", service_blueprint: "Service Blueprint", user_flow: "User Flow" },
+  ppStatus: { open: "offen", in_progress: "in Arbeit", resolved: "gelöst", wontfix: "nicht geplant", monitoring: "beobachtet" },
+  freq: { rare: "selten", occasional: "gelegentlich", frequent: "häufig", systematic: "systematisch", unknown: "unbekannt" },
+  quadrant: { quick_win: "Quick Win", big_bet: "Big Bet", fill_in: "Nebenbei", skip: "Zurückstellen" },
+  antipatterns: { integrity: "Referenzen und IDs", inside_out: "Inside-Out Bias", happy_path: "Happy Path Bias", static_map: "Static Map Trap", empathy_vacuum: "Empathie-Vakuum", overcomplexity: "Überkomplexität", micro_disconnect: "Micro-Level Disconnect", blueprint: "Blueprint statt Journey", privacy: "Personendaten", kpi: "Kennzahlen", evidence: "Evidenzqualität" },
+  kpiCat: { perception: "Wahrnehmung", outcome: "Ergebnis", public_value: "Public Value" },
+  pii: { none: "keine", anonymised: "anonymisiert", pseudonymised: "pseudonymisiert", contains_pii: "enthält Personendaten" },
+};
+const PRIMARY = new Set(["observed", "reported"]);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const $ = (sel, root = document) => root.querySelector(sel);
+
+// ---------------------------------------------------------------- Modell
+class Idx {
+  constructor(j) {
+    this.j = j; this.ev = new Map(); this.src = new Map(); this.steps = []; this.pp = new Map(); this.ppStep = new Map(); this.opps = j.opportunities || [];
+    (j.evidence || []).forEach(a => this.ev.set(a.id, a));
+    (j.sources || []).forEach(s => this.src.set(s.id, s));
+    j.phases.forEach((p, pi) => p.steps.forEach((s, si) => {
+      this.steps.push({ step: s, phase: p, pi, si, gi: this.steps.length });
+      (s.pain_points || []).forEach(pp => { this.pp.set(pp.id, pp); this.ppStep.set(pp.id, s.id); });
+    }));
+  }
+  classes(refs) { const out = { observed: 0, reported: 0, assumed: 0, missing: 0 }; (refs || []).forEach(r => { const a = this.ev.get(r); if (a) out[a.class]++; else out.missing++; }); return out; }
+  hasPrimary(refs) { return (refs || []).some(r => PRIMARY.has(this.ev.get(r)?.class)); }
+  evState(refs) { if (!refs || !refs.length) return "none"; return this.hasPrimary(refs) ? "primary" : "assumed"; }
+  summary() { const s = { observed: 0, reported: 0, assumed: 0, total: 0 }; this.ev.forEach(a => { s[a.class]++; s.total++; }); return s; }
+  oppsFor(ppId) { return this.opps.filter(o => (o.linked_pain_points || []).includes(ppId)); }
+  oppsForPhase(phaseId) { return this.opps.filter(o => { if (o.phase_ref) return o.phase_ref === phaseId; const st = this.ppStep.get((o.linked_pain_points || [])[0]); const e = this.steps.find(x => x.step.id === st); return e && e.phase.id === phaseId; }); }
+  claims() { // für Heatmap und Quoten
+    const out = [];
+    this.steps.forEach(e => { const s = e.step; out.push({ kind: "step", refs: s.evidence_refs || [], e });
+      (s.thinking || []).forEach(t => out.push({ kind: "thinking", refs: t.evidence_refs || [], e }));
+      if (s.feeling) out.push({ kind: "feeling", refs: s.feeling.evidence_refs || [], e });
+      (s.pain_points || []).forEach(p => out.push({ kind: "pain_point", refs: p.evidence_refs || [], e }));
+      (s.edge_cases || []).forEach(p => out.push({ kind: "edge_case", refs: p.evidence_refs || [], e }));
+      (s.recovery_paths || []).forEach(p => out.push({ kind: "recovery", refs: p.evidence_refs || [], e })); });
+    return out;
+  }
+}
+function quadrant(o) { if (o.user_impact == null || o.effort == null) return null; const v = o.user_impact + (o.public_value ?? o.user_impact); const hv = v >= 6, le = o.effort <= 2; return hv && le ? "quick_win" : hv ? "big_bet" : le ? "fill_in" : "skip"; }
+
+// ---------------------------------------------------------------- Zustand
+const state = { j: 0, primOnly: false, tab: "journey" };
+let IDX;
+const journeys = DATA.journeys, findings = DATA.findings;
+
+function evDots(idx, refs) { const c = idx.classes(refs); let h = '<span class="evc" title="Evidenz: ' + c.observed + ' beobachtet, ' + c.reported + ' berichtet, ' + c.assumed + ' angenommen">'; h += '<i class="o"></i>'.repeat(Math.min(c.observed, 4)) + '<i class="r"></i>'.repeat(Math.min(c.reported, 4)) + '<i class="a"></i>'.repeat(Math.min(c.assumed, 4)); return h + '</span>'; }
+function claimBtn(idx, text, refs, extraCls, title) { const st = idx.evState(refs); return '<button class="claim ev-' + st + ' ' + (extraCls || "") + '" data-refs="' + esc((refs || []).join(",")) + '" data-title="' + esc(title || "") + '" data-text="' + esc(text) + '">' + esc(text) + (refs && refs.length ? evDots(idx, refs) : '<span class="evc muted" title="keine Evidenz">∅</span>') + '</button>'; }
+function visible(idx, refs) { return !state.primOnly || idx.hasPrimary(refs); }
+function renderClaims(idx, items, getText, getRefs, extra) { let h = "", hidden = 0; items.forEach(it => { const refs = getRefs(it); if (!visible(idx, refs)) { hidden++; return; } h += claimBtn(idx, getText(it), refs, extra ? extra(it) : "", getText(it)); }); if (hidden) h += '<div class="hidden-note">' + hidden + ' Annahme' + (hidden > 1 ? 'n' : '') + ' ausgeblendet</div>'; return h || (items.length ? "" : '<span class="empty">–</span>'); }
+
+// ---------------------------------------------------------------- Kopf
+function renderHeader() {
+  const j = journeys[state.j], m = j.meta, idx = IDX, s = idx.summary();
+  $("#title").textContent = DATA.title;
+  const f = findings[state.j] || [], ne = f.filter(x => x.level === "ERROR").length, nw = f.filter(x => x.level === "WARN").length;
+  const lintBadge = ne ? '<span class="badge err">' + ne + ' Fehler</span>' : nw ? '<span class="badge warn">' + nw + ' Warnungen</span>' : '<span class="badge ok">Prüfung ohne Warnungen</span>';
+  const pct = s.total ? [s.observed, s.reported, s.assumed].map(v => Math.round(v / s.total * 100)) : [0, 0, 0];
+  $("#subline").innerHTML = '<span class="badge"><b>' + esc(j.persona.name) + '</b>&nbsp;· ' + esc(j.persona.role) + '</span>'
+    + '<span class="badge status-' + esc(m.status) + '">' + (L.status[m.status] || m.status) + ' · v' + esc(m.version) + '</span>'
+    + '<span class="badge">' + (L.mapType[m.map_type] || m.map_type) + '</span>'
+    + (m.synthetic ? '<span class="badge synthetic">synthetisches Beispiel</span>' : '')
+    + lintBadge
+    + '<span class="legend" title="Evidenz-Atome nach Klasse"><span class="evbar"><span style="width:' + pct[0] + '%;background:var(--observed)"></span><span style="width:' + pct[1] + '%;background:var(--reported)"></span><span style="width:' + pct[2] + '%;background:var(--assumed)"></span></span>'
+    + '<span class="c-observed"><i class="dot fill"></i> ' + s.observed + ' beobachtet</span><span class="c-reported"><i class="dot fill"></i> ' + s.reported + ' berichtet</span><span class="c-assumed"><i class="dot"></i> ' + s.assumed + ' angenommen</span></span>';
+  const sel = $("#personaSel");
+  if (journeys.length > 1) { sel.hidden = false; sel.innerHTML = journeys.map((x, i) => '<option value="' + i + '"' + (i === state.j ? ' selected' : '') + '>' + esc(x.persona.name) + '</option>').join(""); }
+  const tabs = [["journey", "Journey"], ["process", "Prozess & Fehlerpfade"], ["evidence", "Evidenz", s.total], ["opps", "Chancen", idx.opps.length], ["audit", "Prüfung", f.length]];
+  $("#tabs").innerHTML = tabs.map(t => '<button data-tab="' + t[0] + '" class="' + (state.tab === t[0] ? "active" : "") + '">' + t[1] + (t[2] != null ? '<span class="n">' + t[2] + '</span>' : '') + '</button>').join("");
+  $("#primToggle").classList.toggle("active", state.primOnly);
+}
+
+// ---------------------------------------------------------------- Layer 1: Journey
+function renderJourney(idx) {
+  const j = idx.j, n = idx.steps.length;
+  const cols = 'grid-template-columns: 170px repeat(' + n + ', 270px);';
+  let h = '<div class="map-wrap"><div class="map" style="' + cols + '">';
+  const row = (label, sub, cells, cls) => { h += '<div class="rowlabel">' + label + (sub ? '<small>' + sub + '</small>' : '') + '</div>'; h += cells; };
+  // Phasen
+  h += '<div class="rowlabel">Phase<small>' + esc(j.scenario.goal) + '</small></div>';
+  j.phases.forEach(p => { h += '<div class="phase" style="grid-column: span ' + p.steps.length + '"><h3>' + esc(p.name) + '</h3>' + (p.user_intent ? '<div class="intent">' + esc(p.user_intent) + '</div>' : '') + (p.duration ? '<div class="dur">' + esc(p.duration) + '</div>' : '') + '</div>'; });
+  // Schritte
+  let cells = "";
+  idx.steps.forEach(e => { const s = e.step, last = e.si === e.phase.steps.length - 1;
+    cells += '<div class="step' + (last ? ' phase-end' : '') + '"><h4>' + esc(s.name) + '</h4><div class="action">' + esc(s.action) + '</div><div class="meta">'
+      + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.touchpoint ? '<span class="chip" title="Touchpoint">' + esc(s.touchpoint) + '</span>' : '') + (s.counterpart ? '<span class="chip" title="Gegenüber">' + esc(s.counterpart) + '</span>' : '') + (s.is_transition ? '<span class="chip transition">Übergang</span>' : '')
+      + '</div>' + ((s.evidence_refs || []).length ? '<div style="margin-top:6px">' + claimBtn(idx, "Beleg für den Schritt", s.evidence_refs, "", s.name) + '</div>' : '') + '</div>'; });
+  row("Macht", "Aktion · Kanal · Touchpoint", cells);
+  // Denkt
+  cells = ""; idx.steps.forEach(e => { cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + renderClaims(idx, e.step.thinking || [], t => t.text, t => t.evidence_refs) + '</div>'; });
+  row("Denkt", "Fragen, Zweifel, Erwartungen", cells);
+  // Fühlt
+  h += '<div class="rowlabel">Fühlt<small>' + (journeys.length > 1 ? 'dicke Punkte: diese Persona, kleine: andere' : 'hohl = ohne Primärevidenz · ? = keine Evidenz') + '</small></div>';
+  h += '<div class="curve" style="grid-column: 2 / -1" id="curve"></div>';
+  // Pain Points
+  cells = ""; idx.steps.forEach(e => { const pps = e.step.pain_points || []; let c = "", hidden = 0; pps.forEach(pp => { if (!visible(idx, pp.evidence_refs)) { hidden++; return; }
+      const sev = pp.severity ? '<span class="sev" title="Schwere ' + pp.severity + '/5">' + [1, 2, 3, 4, 5].map(i => '<i class="' + (i <= pp.severity ? 'on' : '') + '"></i>').join("") + '</span>' : '';
+      c += '<button class="claim pp ' + pp.type + ' ev-' + idx.evState(pp.evidence_refs) + '" data-refs="' + esc((pp.evidence_refs || []).join(",")) + '" data-title="' + esc(pp.id) + '" data-text="' + esc(pp.text) + '" data-pp="' + esc(pp.id) + '"><div class="pp-head"><span class="tag ' + pp.type + '">' + (pp.type === "breakdown" ? "Breakdown" : "Reibung") + '</span>' + sev + (pp.status ? '<span class="tag status">' + (L.ppStatus[pp.status] || pp.status) + '</span>' : '') + '</div>' + esc(pp.text) + evDots(idx, pp.evidence_refs) + (pp.workaround ? '<div class="wa">↪ ' + esc(pp.workaround) + '</div>' : '') + (pp.owner ? '<div class="wa">Owner: ' + esc(pp.owner) + '</div>' : '') + '</button>'; });
+    if (hidden) c += '<div class="hidden-note">' + hidden + ' ohne Primärevidenz ausgeblendet</div>'; cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + (c || '<span class="empty">–</span>') + '</div>'; });
+  row("Pain Points", "Reibung vs. Breakdown · Workaround · Owner", cells);
+  // Edge Cases & Recovery
+  cells = ""; idx.steps.forEach(e => { const s = e.step; let c = renderClaims(idx, s.edge_cases || [], t => "Edge Case: " + t.text, t => t.evidence_refs); (s.recovery_paths || []).forEach(r => { if (!visible(idx, r.evidence_refs)) return; c += claimBtn(idx, (r.exists === false ? "Soll-Pfad: " : "Recovery: ") + r.path, r.evidence_refs, r.exists === false ? "ev-assumed" : "", "Auslöser: " + r.trigger); }); cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + (c || '<span class="empty">–</span>') + '</div>'; });
+  row("Edge Cases & Recovery", "Was, wenn es nicht nach Plan läuft", cells);
+  // Chancen (phasenweise)
+  h += '<div class="rowlabel">Chancen<small>How might we …</small></div>';
+  j.phases.forEach(p => { const os = idx.oppsForPhase(p.id); h += '<div class="phase-end" style="grid-column: span ' + p.steps.length + '">' + (os.length ? os.map(o => { const q = quadrant(o); return claimBtn(idx, o.hmw + (q ? " · " + L.quadrant[q] : ""), o.evidence_refs, "", o.id); }).join("") : '<span class="empty">–</span>') + '</div>'; });
+  // KPIs (phasenweise)
+  h += '<div class="rowlabel">Kennzahlen<small>Wahrnehmung · Ergebnis · Public Value</small></div>';
+  j.phases.forEach(p => { const ks = p.kpis || []; h += '<div class="phase-end" style="grid-column: span ' + p.steps.length + '">' + (ks.length ? ks.map(k => '<div class="kpi"><b>' + esc(k.name) + '</b>' + (k.current_value != null ? ' · <span>' + esc(k.current_value) + (k.unit ? ' ' + esc(k.unit) : '') + '</span>' : '') + (k.target != null ? ' → Ziel ' + esc(k.target) : '') + '<div class="k">' + (L.kpiCat[k.category] || k.category) + ' · ' + (k.indicator_type === "leading" ? "Frühindikator" : "Spätindikator") + (k.commercial_equivalent ? ' · übersetzt aus ' + esc(k.commercial_equivalent) : '') + '</div></div>').join("") : '<span class="empty">–</span>') + '</div>'; });
+  h += '</div></div>';
+  // Persona & Szenario
+  const per = j.persona, sc = j.scenario;
+  h += '<div class="grid-2" style="margin-top:14px"><div class="panel"><h2>Persona: ' + esc(per.name) + (per.is_hypothesis ? ' <span class="badge status-hypothesis">Hypothese</span>' : '') + '</h2>' + (per.description ? '<p class="muted" style="margin:4px 0 8px">' + esc(per.description) + '</p>' : '')
+    + (per.goals?.length ? '<h3>Ziele</h3><ul>' + per.goals.map(g => '<li>' + esc(g) + '</li>').join("") + '</ul>' : '') + (per.frustrations?.length ? '<h3>Frustrationen</h3><ul>' + per.frustrations.map(g => '<li>' + esc(g) + '</li>').join("") + '</ul>' : '')
+    + (per.context ? '<h3>Kontext</h3><table>' + Object.entries(per.context).map(([k, v]) => '<tr><th>' + esc({ language_situation: "Sprache", digital_access: "Digitaler Zugang", time_budget: "Zeitbudget", prior_experience: "Vorerfahrung", other: "Weiteres" }[k] || k) + '</th><td>' + esc(v) + '</td></tr>').join("") + '</table>' : '')
+    + '<div style="margin-top:10px">' + claimBtn(idx, "Evidenz zur Persona", per.evidence_refs, "", per.name) + '</div></div>'
+    + '<div class="panel"><h2>Szenario: ' + esc(sc.title) + '</h2><table>' + [["Ziel", sc.goal], ["Auslöser", sc.trigger], ["Endzustand", sc.end_state], ["Zeitraum", sc.timeframe]].filter(x => x[1]).map(x => '<tr><th>' + x[0] + '</th><td>' + esc(x[1]) + '</td></tr>').join("") + '</table>'
+    + (sc.scope_exclusions?.length ? '<h3>Bewusst nicht abgedeckt</h3><ul>' + sc.scope_exclusions.map(g => '<li>' + esc(g) + '</li>').join("") + '</ul>' : '') + (j.meta.diagnosis ? '<h3>Diagnose</h3><p class="muted" style="margin:0">' + esc(j.meta.diagnosis.rationale) + (j.meta.diagnosis.backstage_documented_in ? '<br>Back-Stage: ' + esc(j.meta.diagnosis.backstage_documented_in) : '') + '</p>' : '') + '</div></div>';
+  return h;
+}
+function drawCurve(idx) {
+  const el = $("#curve"); if (!el) return;
+  const n = idx.steps.length, W = el.clientWidth || n * 230, H = el.clientHeight || 150;
+  const x = i => (i + 0.5) / n * W, y = v => H * (0.5 - v * 0.19);
+  let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">';
+  let html = '<div class="zero"></div><span class="scale" style="top:' + (y(2) - 6) + 'px">++</span><span class="scale" style="top:' + (y(-2) - 6) + 'px">−−</span>';
+  // andere Personas: Punkte je Phase gleichmässig verteilt
+  journeys.forEach((other, oi) => { if (oi === state.j) return; const col = ["var(--observed)", "var(--reported)", "var(--friction)", "var(--positive)"][oi % 4]; const pts = [];
+    other.phases.forEach(op => { const mine = idx.j.phases.find(p => p.id === op.id); if (!mine) return; const start = idx.steps.find(e => e.phase.id === mine.id).gi, span = mine.steps.length; op.steps.forEach((s, k) => { const gx = start + (k + 0.5) / op.steps.length * span - 0.5; pts.push({ gx, v: s.feeling ? s.feeling.valence : null, label: s.name, name: other.persona.name }); }); });
+    let d = "", pen = false; pts.forEach(p => { if (p.v == null) { pen = false; return; } d += (pen ? " L" : " M") + x(p.gx) + " " + y(p.v); pen = true; });
+    svg += '<path d="' + d + '" fill="none" stroke="' + col + '" stroke-width="1.5" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" opacity=".8"/>';
+    pts.forEach(p => { if (p.v == null) return; html += '<span class="pt other" style="left:' + x(p.gx) + 'px;top:' + y(p.v) + 'px;border-color:' + col + ';background:' + col + '" title="' + esc(p.name + ": " + p.label) + '"></span>'; }); });
+  // diese Persona
+  let d = "", pen = false, lastPt = null;
+  idx.steps.forEach(e => { const f = e.step.feeling; const px = x(e.gi); if (!f) { pen = false; return; }
+    if (pen) d += " L" + px + " " + y(f.valence);
+    else { if (lastPt) svg += '<path d="M' + lastPt.x + ' ' + lastPt.y + ' L' + px + ' ' + y(f.valence) + '" fill="none" stroke="var(--gap)" stroke-width="1.5" stroke-dasharray="3 4" vector-effect="non-scaling-stroke"/>'; d += " M" + px + " " + y(f.valence); }
+    pen = true; lastPt = { x: px, y: y(f.valence) }; });
+  svg += '<path d="' + d + '" fill="none" stroke="var(--ink)" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>';
+  idx.steps.forEach(e => { const f = e.step.feeling, px = x(e.gi);
+    if (!f) { html += '<span class="pt gap" style="left:' + px + 'px;top:' + (H / 2) + 'px" title="keine Evidenz zur Gefühlslage">?</span><span class="lbl" style="left:' + px + 'px;top:' + (H / 2 + 14) + 'px">keine Evidenz</span>'; return; }
+    const st = idx.evState(f.evidence_refs), cls = st === "primary" ? "" : st === "assumed" ? " assumed" : " hollow";
+    html += '<span class="pt' + cls + '" style="left:' + px + 'px;top:' + y(f.valence) + 'px" data-refs="' + esc((f.evidence_refs || []).join(",")) + '" data-title="Gefühlslage: ' + esc(e.step.name) + '" data-text="' + esc(f.label || "") + ' (' + (f.valence > 0 ? "+" : "") + f.valence + ')" title="' + esc(f.label || "") + '"></span>';
+    if (f.label) html += '<span class="lbl" style="left:' + px + 'px;top:' + (f.valence >= 0 ? y(f.valence) + 12 : y(f.valence) - 34) + 'px">' + esc(f.label.length > 44 ? f.label.slice(0, 42) + "…" : f.label) + '</span>'; });
+  el.innerHTML = svg + html;
+}
+
+// ---------------------------------------------------------------- Layer 2: Prozess
+function renderProcess(idx) {
+  let h = '<div class="panel"><h2>Prozess- und Fehlerpfade</h2><p class="muted" style="margin:0">Links der Pfad der Persona, rechts wo er bricht: Breakdowns mit Workaround und Recovery-Pfad (gestrichelt = Soll-Pfad, heute nicht vorhanden), Reibungen und Edge Cases.</p></div><div class="flow">';
+  idx.j.phases.forEach(p => { h += '<div class="phase-h">' + esc(p.name) + '</div>';
+    p.steps.forEach(s => { const bds = (s.pain_points || []).filter(x => x.type === "breakdown"), frs = (s.pain_points || []).filter(x => x.type !== "breakdown");
+      h += '<div class="node-row"><div class="node' + (bds.length ? ' has-breakdown' : '') + '"><h4>' + esc(s.name) + '</h4><div class="act">' + esc(s.action) + '</div><div class="meta" style="margin-top:6px">' + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.counterpart ? '<span class="chip">' + esc(s.counterpart) + '</span>' : '') + (s.is_transition ? '<span class="chip transition">Übergang</span>' : '') + '</div>' + ((s.backstage_notes || []).length ? '<div class="muted" style="font-size:11.5px;margin-top:6px">Back-Stage: ' + s.backstage_notes.map(esc).join(" · ") + '</div>' : '') + '</div><div class="branches">';
+      bds.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch bd"><b>Breakdown:</b> ' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">Ausweichen</span><span>' + esc(pp.workaround) + '</span></div>' : '') + '</div>'; });
+      const rps = (s.recovery_paths || []).filter(r => visible(idx, r.evidence_refs));
+      if (rps.length) { h += '<div class="branch" style="border-color:var(--positive)"><b>Zurück in die Journey</b>'; rps.forEach(r => { h += '<div class="arrow rec' + (r.exists === false ? ' soll' : '') + '"><span class="lab">' + (r.exists === false ? "Soll-Pfad" : "Recovery") + '</span><span><i class="muted">' + esc(r.trigger) + '</i> → ' + esc(r.path) + ' ' + claimInline(idx, r.evidence_refs, "Recovery", r.path) + '</span></div>'; }); h += '</div>'; }
+      frs.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch fr"><b>Reibung:</b> ' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">Ausweichen</span><span>' + esc(pp.workaround) + '</span></div>' : '') + '</div>'; });
+      (s.edge_cases || []).forEach(ec => { if (!visible(idx, ec.evidence_refs)) return; h += '<div class="branch ec"><b>Edge Case:</b> ' + esc(ec.text) + ' ' + claimInline(idx, ec.evidence_refs, "Edge Case", ec.text) + '</div>'; });
+      if (!bds.length && !(s.recovery_paths || []).length && !frs.length && !(s.edge_cases || []).length) h += '<div class="muted" style="font-size:12px;padding:8px 0">Kein dokumentierter Fehlerpfad – Happy Path oder Lücke?</div>';
+      h += '</div></div>'; }); });
+  return h + '</div>';
+}
+function claimInline(idx, refs, title, text) { if (!refs || !refs.length) return '<button class="claim" style="display:inline;width:auto;padding:0 4px;margin:0;border:0;background:none" data-refs="" data-title="' + esc(title) + '" data-text="' + esc(text) + '"><span class="evc muted" title="keine Evidenz">∅</span></button>'; return '<button class="claim" style="display:inline;width:auto;padding:0 4px;margin:0;border:0;background:none" data-refs="' + esc(refs.join(",")) + '" data-title="' + esc(title) + '" data-text="' + esc(text) + '">' + evDots(idx, refs) + '</button>'; }
+
+// ---------------------------------------------------------------- Layer 3: Evidenz
+function renderEvidence(idx) {
+  const s = idx.summary(), cl = idx.claims(), exp = cl.filter(c => ["thinking", "feeling", "pain_point"].includes(c.kind)), backed = exp.filter(c => idx.hasPrimary(c.refs)).length;
+  let h = '<div class="tiles"><div class="tile"><div class="v">' + idx.src.size + '</div><div class="l">Quellen</div></div><div class="tile"><div class="v">' + s.total + '</div><div class="l">Evidenz-Atome</div></div><div class="tile"><div class="v c-observed">' + s.observed + '</div><div class="l">beobachtet</div></div><div class="tile"><div class="v c-reported">' + s.reported + '</div><div class="l">berichtet</div></div><div class="tile"><div class="v c-assumed">' + s.assumed + '</div><div class="l">angenommen</div></div><div class="tile"><div class="v">' + (exp.length ? Math.round(backed / exp.length * 100) : 0) + '%</div><div class="l">Erlebnis-Aussagen mit Primärevidenz (' + backed + '/' + exp.length + ')</div></div></div>';
+  // Heatmap
+  const dims = [["step", "Schritt"], ["thinking", "Denkt"], ["feeling", "Fühlt"], ["pain_point", "Pain Points"], ["edge_case", "Edge Cases"], ["recovery", "Recovery"]];
+  h += '<div class="panel" style="margin-top:14px"><h2>Evidenz-Heatmap</h2><p class="muted" style="margin:0 0 8px">Zahl = Primärbelege (beobachtet + berichtet), klein = angenommen. Gestrichelt = Aussage vorhanden, aber kein Beleg. Wo die Map dünn ist, ist sie Innensicht.</p><div class="heat"><table><thead><tr><th></th>' + idx.j.phases.map(p => '<th class="phase" colspan="' + p.steps.length + '">' + esc(p.name) + '</th>').join("") + '</tr><tr><th></th>' + idx.steps.map(e => '<th class="step">' + esc(e.step.name) + '</th>').join("") + '</tr></thead><tbody>';
+  dims.forEach(([k, label]) => { h += '<tr><th>' + label + '</th>'; idx.steps.forEach(e => { const cs = cl.filter(c => c.kind === k && c.e === e); if (!cs.length) { h += '<td class="cell"><div class="hc na">·</div></td>'; return; } let prim = 0, ass = 0; const refs = []; cs.forEach(c => { const cc = idx.classes(c.refs); prim += cc.observed + cc.reported; ass += cc.assumed; refs.push(...c.refs); });
+      const bg = prim === 0 ? "" : 'background: color-mix(in srgb, var(--observed) ' + Math.min(15 + prim * 18, 85) + '%, var(--surface));color:' + (prim >= 3 ? 'var(--accent-ink)' : 'var(--ink)');
+      h += '<td class="cell"><div class="hc' + (prim === 0 ? ' gap' : '') + '" style="' + bg + '" data-refs="' + esc([...new Set(refs)].join(",")) + '" data-title="' + esc(label + ": " + e.step.name) + '" data-text="' + cs.length + ' Aussage' + (cs.length > 1 ? 'n' : '') + '">' + (prim || "–") + (ass ? '<small>+' + ass + ' angen.</small>' : '') + '</div></td>'; }); h += '</tr>'; });
+  h += '</tbody></table></div></div>';
+  // Quellen
+  h += '<div class="panel"><h2>Quellenregister</h2><table><thead><tr><th>ID</th><th>Quelle</th><th>Art</th><th>Klasse</th><th>n</th><th>Datum</th><th>Personendaten</th><th>Ablage</th></tr></thead><tbody>' + [...idx.src.values()].map(x => '<tr><td class="mono">' + esc(x.id) + '</td><td>' + esc(x.title) + (x.participants ? '<br><small>' + esc(x.participants) + '</small>' : '') + '</td><td>' + (L.srcKinds[x.kind] || x.kind) + '</td><td class="c-' + x.default_class + '">' + L.classes[x.default_class] + '</td><td>' + (x.n ?? '–') + '</td><td>' + esc(x.date || '–') + '</td><td class="src-pii' + (x.pii_status === "contains_pii" ? ' c-breakdown' : '') + '">' + (L.pii[x.pii_status] || x.pii_status) + '</td><td class="mono">' + esc(x.location || '–') + '</td></tr>').join("") + '</tbody></table></div>';
+  // Widersprüche & unbenutzt
+  const contra = [...idx.ev.values()].filter(a => a.contradicts?.length), used = new Set(); cl.forEach(c => c.refs.forEach(r => used.add(r))); (idx.j.persona.evidence_refs || []).forEach(r => used.add(r)); (idx.j.scenario.evidence_refs || []).forEach(r => used.add(r)); idx.opps.forEach(o => (o.evidence_refs || []).forEach(r => used.add(r)));
+  const unused = [...idx.ev.values()].filter(a => !used.has(a.id));
+  h += '<div class="grid-2"><div class="panel"><h2>Widersprüche zwischen Quellen (' + contra.length + ')</h2>' + (contra.length ? contra.map(a => atomHtml(idx, a) + '<div style="margin:-4px 0 12px 14px">' + a.contradicts.map(c => idx.ev.get(c) ? atomHtml(idx, idx.ev.get(c)) : '').join("") + '</div>').join("") : '<p class="muted">Keine ausgewiesen.</p>') + '</div><div class="panel"><h2>Nicht eingeordnete Evidenz (' + unused.length + ')</h2>' + (unused.length ? unused.map(a => atomHtml(idx, a)).join("") : '<p class="muted">Alles synthetisiert.</p>') + '</div></div>';
+  return h;
+}
+function atomHtml(idx, a) { const src = idx.src.get(a.source_ref); const txt = a.kind === "quote" ? '<q>' + esc(a.text) + '</q>' : esc(a.text); return '<div class="atom"><div class="meta"><span class="cls ' + a.class + '">' + L.classes[a.class] + '</span><span>' + (L.kinds[a.kind] || a.kind) + '</span><span>·</span><span>' + esc(src ? src.title : a.source_ref) + '</span>' + (a.locator ? '<span class="loc">' + esc(a.locator) + '</span>' : '') + '<span class="loc">' + esc(a.id) + '</span></div><div class="txt">' + txt + (a.value != null && a.kind === "metric" ? ' <b>' + esc(a.value) + (a.unit ? ' ' + esc(a.unit) : '') + '</b>' : '') + '</div>' + (a.emotion_hint ? '<div class="muted" style="font-size:12px;margin-top:3px">Emotion: ' + esc(a.emotion_hint.label || "") + ' (' + (a.emotion_hint.valence > 0 ? "+" : "") + a.emotion_hint.valence + ')' + (a.emotion_hint.explicit ? ', ausdrücklich geäussert' : ', abgeleitet') + '</div>' : '') + (a.contradicts?.length ? '<div class="contra">widerspricht ' + a.contradicts.map(esc).join(", ") + '</div>' : '') + '</div>'; }
+
+// ---------------------------------------------------------------- Layer 4: Chancen
+function renderOpps(idx) {
+  const os = idx.opps; if (!os.length) return '<div class="panel"><h2>Chancen</h2><p class="muted">Keine Chancen abgeleitet – die Map hat noch keine Handlungsableitung.</p></div>';
+  let h = '<div class="grid-2"><div class="panel"><h2>Impact / Effort</h2><div class="matrix"><div class="q tl">Quick Wins</div><div class="q tr">Big Bets</div><div class="q bl">Nebenbei</div><div class="q br">Zurückstellen</div><span class="ax x">Aufwand 1 → 5</span><span class="ax y">↑ Nutzen (Mittel aus Impact und Public Value)</span>';
+  os.forEach((o, i) => { if (o.user_impact == null || o.effort == null) return; const v = (o.user_impact + (o.public_value ?? o.user_impact)) / 2; const left = 8 + (o.effort - 1) / 4 * 84, top = 92 - (v - 1) / 4 * 84; h += '<span class="opp" style="left:' + left + '%;top:' + top + '%" title="' + esc(o.hmw) + '" data-opp="' + i + '">' + (i + 1) + '</span>'; });
+  h += '</div><p class="muted" style="font-size:12px;margin:8px 0 0">Chancen ohne Scores erscheinen nur in der Liste.</p></div><div class="panel"><h2>Chancen und Stories</h2>';
+  os.forEach((o, i) => { const q = quadrant(o); h += '<div class="opp-card" id="opp-' + i + '"><div class="h"><span class="num">' + (i + 1) + '</span><div style="flex:1"><b>' + esc(o.hmw) + '</b>' + (o.description ? '<div class="muted" style="font-size:12.5px">' + esc(o.description) + '</div>' : '') + '</div></div><div class="scores">' + (q ? '<span class="badge">' + L.quadrant[q] + '</span>' : '') + '<span>Impact ' + (o.user_impact ?? '–') + '</span><span>Public Value ' + (o.public_value ?? '–') + '</span><span>Aufwand ' + (o.effort ?? '–') + '</span>' + (o.owner ? '<span>Owner: ' + esc(o.owner) + '</span>' : '') + (o.status ? '<span class="tag status">' + (L.ppStatus[o.status] || o.status) + '</span>' : '') + '</div>'
+    + ((o.linked_pain_points || []).length ? '<div style="font-size:12px">Pain Points: ' + o.linked_pain_points.map(p => '<button class="claim" style="display:inline;width:auto;padding:1px 6px;margin:0 2px" data-refs="' + esc((idx.pp.get(p)?.evidence_refs || []).join(",")) + '" data-title="' + esc(p) + '" data-text="' + esc(idx.pp.get(p)?.text || p) + '">' + esc(p) + '</button>').join("") + '</div>' : '')
+    + ((o.stories || []).length ? '<ul>' + o.stories.map(st => '<li class="' + (st.mvp ? 'mvp' : '') + '">' + esc(st.text) + (st.mvp ? ' <small class="c-positive">MVP</small>' : '') + '</li>').join("") + '</ul>' : '<div class="muted" style="font-size:12px;margin-top:4px">Noch keine Stories.</div>') + '</div>'; });
+  return h + '</div></div>';
+}
+
+// ---------------------------------------------------------------- Layer 5: Prüfung
+function renderAudit(idx) {
+  const f = findings[state.j] || [], by = {}; f.forEach(x => (by[x.antipattern] = by[x.antipattern] || []).push(x));
+  const ne = f.filter(x => x.level === "ERROR").length, nw = f.filter(x => x.level === "WARN").length, ni = f.length - ne - nw;
+  let h = '<div class="tiles"><div class="tile"><div class="v c-breakdown">' + ne + '</div><div class="l">Fehler</div></div><div class="tile"><div class="v" style="color:var(--friction)">' + nw + '</div><div class="l">Warnungen</div></div><div class="tile"><div class="v">' + ni + '</div><div class="l">Hinweise</div></div><div class="tile"><div class="v">' + esc(idx.j.meta.owner?.role || "–") + '</div><div class="l">Owner' + (idx.j.meta.owner?.unit ? ' · ' + esc(idx.j.meta.owner.unit) : '') + '</div></div><div class="tile"><div class="v">' + esc(idx.j.meta.next_review || "–") + '</div><div class="l">Nächster Review' + (idx.j.meta.review_cycle_days ? ' · alle ' + idx.j.meta.review_cycle_days + ' Tage' : '') + '</div></div></div>';
+  h += '<div class="panel" style="margin-top:14px"><h2>Methodische Prüfung</h2><p class="muted" style="margin:0 0 6px">Erzeugt von ' + esc(DATA.generator) + ' am ' + esc(DATA.generated) + '. Die Regeln prüfen das Modell gegen die bekannten Fallstricke – sie ersetzen kein Review, sie bereiten es vor.</p>';
+  if (!f.length) h += '<p>Keine Befunde.</p>';
+  Object.keys(L.antipatterns).forEach(ap => { const items = by[ap]; if (!items) return; h += '<h3>' + L.antipatterns[ap] + ' <span class="muted" style="font-weight:400">(' + items.length + ')</span></h3>' + items.map(x => '<div class="finding"><span class="lvl ' + x.level + '">' + x.level + '</span><div><b class="mono">' + esc(x.code) + '</b> ' + esc(x.message) + (x.path ? ' <span class="path">' + esc(x.path) + '</span>' : '') + (x.hint ? '<div class="hint">→ ' + esc(x.hint) + '</div>' : '') + '</div></div>').join(""); });
+  h += '</div>';
+  const oq = idx.j.open_questions || [];
+  h += '<div class="grid-2"><div class="panel"><h2>Offene Fragen (' + oq.length + ')</h2>' + (oq.length ? '<ul style="margin:0;padding-left:18px">' + oq.map(q => '<li>' + esc(q.text) + (q.proposed_method ? ' <span class="badge">' + esc(q.proposed_method) + '</span>' : '') + '</li>').join("") + '</ul>' : '<p class="muted">Keine.</p>') + '</div>';
+  const chl = idx.j.changelog || [];
+  h += '<div class="panel"><h2>Versionen</h2>' + (chl.length ? '<table>' + chl.map(c => '<tr><th>v' + esc(c.version) + '</th><td>' + esc(c.date) + '</td><td>' + esc(c.summary) + '</td></tr>').join("") + '</table>' : '<p class="muted">Kein Changelog.</p>') + '</div></div>';
+  return h;
+}
+
+// ---------------------------------------------------------------- Drawer
+function openDrawer(title, text, refs) {
+  const idx = IDX, atoms = (refs || "").split(",").filter(Boolean).map(r => idx.ev.get(r) || { id: r, missing: true });
+  $("#dTitle").textContent = title || "Evidenz";
+  const c = idx.classes(atoms.filter(a => !a.missing).map(a => a.id));
+  let v;
+  if (!atoms.length) v = '<div class="verdict n">Keine Evidenz hinterlegt – diese Aussage ist eine Annahme.</div>';
+  else if (c.observed + c.reported > 0) v = '<div class="verdict p">Gestützt durch ' + (c.observed ? c.observed + ' beobachtete' : '') + (c.observed && c.reported ? ' und ' : '') + (c.reported ? c.reported + ' berichtete' : '') + ' Evidenz' + (c.assumed ? ' sowie ' + c.assumed + ' Annahme(n)' : '') + '.</div>';
+  else v = '<div class="verdict a">Nur Annahmen (' + c.assumed + ') – aus Innensicht, nicht von Nutzenden.</div>';
+  $("#dBody").innerHTML = '<div class="claim-txt">' + esc(text) + '</div>' + v + atoms.map(a => a.missing ? '<div class="atom c-breakdown">Unbekannte Referenz «' + esc(a.id) + '»</div>' : atomHtml(idx, a)).join("");
+  $("#drawer").classList.add("open"); $("#scrim").classList.add("open");
+}
+function closeDrawer() { $("#drawer").classList.remove("open"); $("#scrim").classList.remove("open"); }
+
+// ---------------------------------------------------------------- Render
+function render() {
+  IDX = new Idx(journeys[state.j]); renderHeader();
+  const m = $("#main");
+  m.innerHTML = '<section class="layer' + (state.tab === "journey" ? " active" : "") + '" data-l="journey">' + renderJourney(IDX) + '</section>'
+    + '<section class="layer' + (state.tab === "process" ? " active" : "") + '" data-l="process">' + renderProcess(IDX) + '</section>'
+    + '<section class="layer' + (state.tab === "evidence" ? " active" : "") + '" data-l="evidence">' + renderEvidence(IDX) + '</section>'
+    + '<section class="layer' + (state.tab === "opps" ? " active" : "") + '" data-l="opps">' + renderOpps(IDX) + '</section>'
+    + '<section class="layer' + (state.tab === "audit" ? " active" : "") + '" data-l="audit">' + renderAudit(IDX) + '</section>';
+  const meta = journeys[state.j].meta;
+  $("#footer").textContent = (meta.context?.organisation ? meta.context.organisation + " · " : "") + (meta.context?.service || "") + (meta.updated ? " · Stand " + meta.updated : "") + " · " + DATA.generator;
+  requestAnimationFrame(() => drawCurve(IDX));
+}
+function showTab(t) { state.tab = t; document.querySelectorAll("section.layer").forEach(s => s.classList.toggle("active", s.dataset.l === t)); document.querySelectorAll("nav.tabs button").forEach(b => b.classList.toggle("active", b.dataset.tab === t)); if (t === "journey") requestAnimationFrame(() => drawCurve(IDX)); }
+
+document.addEventListener("click", ev => {
+  const tab = ev.target.closest("nav.tabs button"); if (tab) return showTab(tab.dataset.tab);
+  const cl = ev.target.closest("[data-refs]"); if (cl) return openDrawer(cl.dataset.title, cl.dataset.text, cl.dataset.refs);
+  const op = ev.target.closest(".matrix .opp"); if (op) { const card = $("#opp-" + op.dataset.opp); card?.scrollIntoView({ behavior: "smooth", block: "center" }); card.style.borderColor = "var(--accent)"; setTimeout(() => card.style.borderColor = "", 1500); return; }
+  if (ev.target.closest("#dClose") || ev.target.closest("#scrim")) closeDrawer();
+});
+document.addEventListener("keydown", ev => { if (ev.key === "Escape") closeDrawer(); });
+$("#primOnly").addEventListener("change", ev => { state.primOnly = ev.target.checked; render(); });
+$("#personaSel").addEventListener("change", ev => { state.j = +ev.target.value; render(); });
+$("#themeBtn").addEventListener("click", () => { const r = document.documentElement, cur = r.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); r.dataset.theme = cur === "dark" ? "light" : "dark"; });
+window.addEventListener("resize", () => drawCurve(IDX));
+
+if (!DATA || !DATA.journeys?.length) { $("#main").innerHTML = '<div class="panel"><h2>Keine Daten</h2><p>Diese Datei wurde ohne Journey erzeugt. <code>journeykit render journey.json</code> injiziert die Daten.</p></div>'; }
+else render();
+</script>
+</body>
+</html>

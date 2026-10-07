@@ -1,0 +1,19 @@
+# .github/repo-meta.yml — von der github-repo Skill gepflegt
+repo_name: journeykit
+title: JourneyKit
+description: Evidence-based User Journeys for public administration — schema, lints, renderer, Claude skill
+topics: [user-journey, service-design, public-administration, claude, anthropic, prompt-engineering, python, swiss-gov]
+project_type: claude-skill
+visibility: public
+license: MIT
+author_legal_name: Hayal Özkan
+author_label: Autor
+github_user: malkreide
+default_branch: main
+language: python
+version: 0.1.0
+confirmed: true          # am 2026-10-05 bestätigt (Name, Description, Topics, Lizenz, Copyright, public)
+offen:
+  - Repo auf GitHub anlegen (Session ohne gültiges gh-Token → Backend C)
+  - Topics setzen (Settings-UI oder später mit gh)
+  - Secret Scanning + Push Protection aktivieren (9.6)

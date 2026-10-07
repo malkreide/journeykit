@@ -22,3 +22,6 @@ venv/
 node_modules/
 # gerenderte Ausgaben im Repo-Root (journeykit render -o journey.html)
 /*.html
+# Evaluationsmaterial (Rohmaterial, Ground Truth, Pipeline-Ausgaben) bleibt lokal.
+# Nur der Vergleichsbericht wird committet – unter docs/evaluation/, nicht hier.
+/eval/

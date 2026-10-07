@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - `journeykit lint` text output prints each rule's hint only once per run
 
+### Security
+- `/eval/` is git-ignored: raw material and ground truth for the evaluation stay local; only the comparison report (under `docs/evaluation/`) is committed
+
 ## [0.1.0] - 2026-10-05
 
 ### Added

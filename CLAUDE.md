@@ -33,6 +33,9 @@ journeykit lint examples/kindergarteneintritt/journey.json
 journeykit render examples/kindergarteneintritt/journey.json examples/kindergarteneintritt/journey-berufstaetig.json -o /tmp/j.html
 ```
 
+`journeykit` nicht im PATH (Windows-Nutzerinstallation)? `python -m journeykit …` ist
+gleichwertig.
+
 `ruff --version` muss dem Pin entsprechen – ein älteres ruff weiter vorne im
 PATH ist schon vorgekommen (`which -a ruff`).
 

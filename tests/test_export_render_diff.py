@@ -127,3 +127,16 @@ def test_cli_new_produces_valid_file(tmp_path):
         == 0
     )
     assert main(["validate", str(out)]) == 0
+
+
+def test_python_m_entrypoint():
+    import subprocess
+    import sys
+
+    out = subprocess.run(
+        [sys.executable, "-m", "journeykit", "--version"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert out.stdout.startswith("journeykit ")

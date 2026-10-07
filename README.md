@@ -44,6 +44,8 @@ cd journeykit
 pip install -e ".[dev]"
 ```
 
+If `journeykit` is not found afterwards (typical for Windows user installations, where pip puts scripts into `%APPDATA%\Python\Python3xx\Scripts`), use `python -m journeykit …` instead — every command below works that way too.
+
 ## Usage / Quickstart
 
 ```bash

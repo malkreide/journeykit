@@ -1,0 +1,31 @@
+anfrage_id;datum;kanal;rolle;kategorie;kurztext
+B-001;2025-01-08;telefon;eigentuemerschaft;bewilligungspflicht;Braucht der Ersatz der Ölheizung durch eine Wärmepumpe eine Bewilligung? Website sagt «kommt darauf an».
+B-002;2025-01-15;e-mail;eigentuemerschaft;bewilligungspflicht;Installateur sagt, Aussengerät sei bewilligungspflichtig, Nachbar hat keine Bewilligung gebraucht. Was gilt?
+B-003;2025-01-22;telefon;installationsfirma;laermnachweis;Welches Formular gilt für den Lärmschutznachweis? In der Nachbargemeinde wurde ein anderes akzeptiert.
+B-004;2025-02-03;telefon;eigentuemerschaft;status;Gesuch vor fünf Wochen eingereicht, Status im Portal seit drei Wochen «in Prüfung». Wann kommt der Entscheid?
+B-005;2025-02-11;schalter;nachbarschaft;einsprache;Möchte Pläne der Wärmepumpe nebenan einsehen. Versteht die Lärmwerte nicht, fragt, ob das zulässig ist.
+B-006;2025-02-19;telefon;eigentuemerschaft;unterlagen;Brief erhalten, Gesuch unvollständig. Welche Unterlagen fehlen genau? Installateur nicht erreichbar.
+B-007;2025-03-04;e-mail;eigentuemerschaft;bewilligungspflicht;Heizung ausgefallen, Wärmepumpe soll sofort eingebaut werden. Gibt es ein schnelleres Verfahren?
+B-008;2025-03-12;telefon;eigentuemerschaft;vertretung;Firma hat Gesuch eingereicht, Eigentümer möchte Stand wissen. Keine Auskunft ohne Vollmacht möglich.
+B-009;2025-03-20;telefon;eigentuemerschaft;status;Wie lange dauert es nach der Publikation noch bis zum Entscheid?
+B-010;2025-04-02;e-mail;installationsfirma;laermnachweis;Gesuch zurückgewiesen wegen Lärmschutznachweis. Bitte Vorlage mit Beispiel zusenden.
+B-011;2025-04-09;telefon;eigentuemerschaft;gebuehr;Was kostet die Bewilligung für eine Wärmepumpe ungefähr? Muss es der Bank für die Finanzierung angeben.
+B-012;2025-04-23;schalter;nachbarschaft;einsprache;Wie formuliert man eine Einsprache? Möchte nur wissen, ob das Gerät nachts leiser läuft.
+B-013;2025-05-06;telefon;eigentuemerschaft;bewilligungspflicht;Muss eine Wärmepumpe im Keller mit Luftkanälen auch bewilligt werden?
+B-014;2025-05-14;telefon;eigentuemerschaft;status;Status im Portal unverändert seit sechs Wochen. Ist das Gesuch verloren gegangen?
+B-015;2025-05-27;e-mail;eigentuemerschaft;unterlagen;Situationsplan aus dem Grundbuch ist veraltet. Reicht eine Handskizze mit Massen?
+B-016;2025-06-10;telefon;nachbarschaft;einsprache;Hat erst nach Ablauf der Auflagefrist von der Wärmepumpe erfahren. Kann sie noch etwas tun?
+B-017;2025-06-24;telefon;eigentuemerschaft;status;Installateur hat Termin im August reserviert. Kommt der Entscheid bis dann?
+B-018;2025-07-08;e-mail;eigentuemerschaft;vertretung;Eigentümerin erhält keine Kopien der Schreiben, alles geht an die Firma. Möchte informiert werden.
+B-019;2025-07-22;telefon;eigentuemerschaft;bewilligungspflicht;Gilt das Merkblatt Wärmepumpen auch für Reihenhäuser?
+B-020;2025-08-05;telefon;installationsfirma;laermnachweis;Welcher Standort muss im Lärmschutznachweis angegeben werden, wenn noch nicht entschieden?
+B-021;2025-08-19;telefon;eigentuemerschaft;status;Was bedeutet der Status «Stellungnahme Fachstelle»?
+B-022;2025-09-02;e-mail;eigentuemerschaft;gebuehr;Gebühr im Entscheid höher als erwartet. Wie setzt sie sich zusammen?
+B-023;2025-09-16;telefon;eigentuemerschaft;bewilligungspflicht;Heizung soll vor dem Winter ersetzt werden. Lohnt es sich überhaupt, jetzt ein Gesuch einzureichen?
+B-024;2025-09-30;schalter;nachbarschaft;einsprache;Nachbar baut Wärmepumpe direkt an der Grenze. Wer prüft den Lärm nach dem Einbau?
+B-025;2025-10-14;telefon;eigentuemerschaft;status;Einsprache erhalten. Was passiert jetzt, und wie lange verzögert sich alles?
+B-026;2025-10-21;telefon;eigentuemerschaft;unterlagen;Portal akzeptiert das Datenblatt im PDF nicht, Upload bricht ab.
+B-027;2025-11-04;e-mail;installationsfirma;laermnachweis;Bitte um Vorprüfung des Lärmschutznachweises vor dem Einreichen.
+B-028;2025-11-18;telefon;eigentuemerschaft;bewilligungspflicht;Muss ich die Nachbarn vor dem Einreichen informieren?
+B-029;2025-12-02;telefon;eigentuemerschaft;status;Gesuch seit Oktober hängig, Haus wird mit Elektroöfen geheizt. Gibt es eine Möglichkeit zur Beschleunigung?
+B-030;2025-12-09;e-mail;eigentuemerschaft;sonstiges;Wie melde ich die Fertigstellung der Anlage?

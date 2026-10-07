@@ -1,0 +1,13 @@
+kennzahl;wert;einheit;zeitraum;bemerkung
+gesuche_waermepumpe;84;Anzahl;2025;ordentliches Verfahren, Ein- und Zweifamilienhäuser
+anteil_ersatz_nach_ausfall;37;%;2025;Vermerk «Ersatz nach Ausfall» im Gesuch
+anteil_vertretung_installationsfirma;58;%;2025;Gesuch durch Installationsfirma als Vertreterin eingereicht
+anteil_rueckweisung_unvollstaendig;41;%;2025;mindestens eine Rückweisung wegen Unvollständigkeit
+anteil_laermnachweis_an_rueckweisungen;63;%;2025;Lärmschutznachweis fehlend oder fehlerhaft, Anteil an allen Rückweisungen
+vollstaendigkeitspruefung_median;17;Arbeitstage;2025;Eingang bis Mitteilung «vollständig» oder «unvollständig»
+durchlaufzeit_ohne_einsprache_median;38;Kalendertage;2025;vollständiges Gesuch bis Entscheid
+durchlaufzeit_mit_einsprache_median;112;Kalendertage;2025;vollständiges Gesuch bis Entscheid
+anteil_mit_einsprache;14;%;2025;mindestens eine Einsprache
+anteil_einsprachen_erledigt_durch_einigung;67;%;2025;Rückzug nach Einigungsverhandlung
+gebuehr_median;720;CHF;2025;Bewilligungsgebühr inkl. Publikation, ohne Fachgutachten
+laermklagen_nach_inbetriebnahme;3;Anzahl;2025;bei 71 in Betrieb genommenen Anlagen

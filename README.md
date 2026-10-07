@@ -22,7 +22,7 @@ The vocabulary is translated for public administration, where nobody "converts" 
 - **Exports**: Patton story map (Markdown), action list (CSV), opportunity matrix, audit report
 - **Diff** between two versions of a journey — what did new evidence change?
 - **Claude skill** `user-journey` with three modes: *Synthesis* (raw material → journey), *Workshop* (hypothesis-first with research plan), *Audit* (review an existing journey)
-- **Worked example**: kindergarten entry from the parents' perspective, built from a synthetic input mix (3 interviews, 30 inquiries, a survey, web analytics, an internal process document, workshop notes)
+- **Worked examples**: kindergarten entry from the parents' perspective, built from a synthetic input mix (3 interviews, 30 inquiries, a survey, web analytics, an internal process document, workshop notes); and a building permit for a heat pump (applicant and neighbour as two personas) that tests transferability to another domain and documents where the model reaches its limits
 
 ### Demo
 
@@ -124,6 +124,7 @@ journeykit/
 │   └── viewer/viewer.html           # self-contained interactive viewer
 ├── skill/user-journey/              # Claude skill: SKILL.md + references/
 ├── examples/kindergarteneintritt/   # worked, synthetic example incl. raw inputs
+├── examples/baubewilligung/        # second domain: transferability check and findings
 ├── docs/                            # concept, architecture decisions, demo image
 ├── tests/                           # pytest
 └── CLAUDE.md                        # entry point for working on this repo with Claude Code

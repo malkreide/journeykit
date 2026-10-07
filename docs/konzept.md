@@ -115,6 +115,6 @@ das die manuelle Journey übersehen hat. Erst dieser Vergleich sagt, was
 1. GitHub-Repo, CI grün, Secret Scanning (0.1.x)
 2. Evaluation gegen eine reale Ground-Truth-Journey (0.2)
 3. Testsatz für die Extraktion: Input → erwartete Atome (0.2)
-4. Zweites Beispiel aus einem anderen Verwaltungsbereich (0.2)
+4. ~~Zweites Beispiel aus einem anderen Verwaltungsbereich (0.2)~~ – `examples/baubewilligung/`; Befunde zur Übertragbarkeit (Handelnde Dritte, Kanal «Publikation», Quellenart für Geschäftskontrolle u. a.) im Beispiel-README, Umsetzung offen
 5. Viewer: visueller Versionsvergleich, Export der Heatmap, französische UI (0.3)
 6. Variante B: MCP-Server für Journeys als Datenbestand (0.4)

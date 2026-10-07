@@ -62,7 +62,7 @@ Siehe `docs/konzept.md`, Abschnitt «Roadmap». Kurz:
 3. Variante B: MCP-Server, der Journeys als Datenbestand hält (SQLite oder Notion), Versionen und Evidenz verwaltet – siehe ADR-0004.
 4. Viewer: Vergleichsansicht zweier Versionen (Diff visuell), Kommentarfunktion, Export der Heatmap.
 5. Extraktions-Qualität: Testsatz «Input → erwartete Atome» für die Prompt-Schablone in `skill/user-journey/references/evidenz.md`.
-6. Zweites Beispiel aus einem anderen Verwaltungsbereich (z. B. Baubewilligung, Steuererklärung) zur Prüfung der Übertragbarkeit.
+6. ~~Zweites Beispiel~~ – `examples/baubewilligung/` (Bauherrschaft + Nachbarschaft). Offen sind die Befunde im Abschnitt «Übertragbarkeitsbefunde» des Beispiel-READMEs: `step.performed_by` (H1), Kanal `publication` (H7), Quellenart für Geschäftskontrolle, Viewer-Hinweis bei Phasen ohne Overlay (H3). Je Befund Issue oder ADR, dann umsetzen.
 7. Französische UI-Texte im Viewer (`L`-Objekt ist dafür vorbereitet).
 
 ## Was nicht tun

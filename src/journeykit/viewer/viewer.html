@@ -53,6 +53,7 @@ header.top { position: sticky; top: 0; z-index: 20; background: var(--surface); 
 .badge.status-validated { border-color: var(--positive); color: var(--positive); background: var(--positive-soft); }
 .badge.status-hypothesis, .badge.status-draft { border-color: var(--assumed); color: var(--assumed); background: var(--assumed-soft); }
 .badge.synthetic { border-style: dashed; }
+.badge.wrap { white-space: normal; max-width: 100%; border-radius: 10px; }
 .badge.err { background: var(--breakdown-soft); color: var(--breakdown); border-color: var(--breakdown); }
 .badge.warn { background: var(--friction-soft); color: var(--friction); border-color: var(--friction); }
 .badge.ok { background: var(--positive-soft); color: var(--positive); border-color: var(--positive); }
@@ -336,7 +337,7 @@ function renderHeader() {
   const f = findings[state.j] || [], ne = f.filter(x => x.level === "ERROR").length, nw = f.filter(x => x.level === "WARN").length;
   const lintBadge = ne ? '<span class="badge err">' + ne + ' Fehler</span>' : nw ? '<span class="badge warn">' + nw + ' Warnungen</span>' : '<span class="badge ok">Prüfung ohne Warnungen</span>';
   const pct = s.total ? [s.observed, s.reported, s.assumed].map(v => Math.round(v / s.total * 100)) : [0, 0, 0];
-  $("#subline").innerHTML = '<span class="badge"><b>' + esc(j.persona.name) + '</b>&nbsp;· ' + esc(j.persona.role) + '</span>'
+  $("#subline").innerHTML = '<span class="badge wrap"><b>' + esc(j.persona.name) + '</b>&nbsp;· ' + esc(j.persona.role) + '</span>'
     + '<span class="badge status-' + esc(m.status) + '">' + (L.status[m.status] || m.status) + ' · v' + esc(m.version) + '</span>'
     + '<span class="badge">' + (L.mapType[m.map_type] || m.map_type) + '</span>'
     + (m.synthetic ? '<span class="badge synthetic">synthetisches Beispiel</span>' : '')

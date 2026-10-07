@@ -148,6 +148,9 @@ Atome zu Schritten clustern. Pro Schritt:
 - `feeling`: `valence` −2…+2 und `label` in Nutzerworten – oder `null`.
 - `pain_points`: `type` friction oder breakdown, `severity`, `frequency`,
   `workaround` (wohin ausgewichen wird), `owner` als Rolle, `status`.
+  Ein Rechtsmittel (Einsprache, Rekurs) ist kein Breakdown, sondern Reibung;
+  das Versagen liegt meist davor (siehe `references/review-fragen.md`,
+  Happy Path).
 - `edge_cases` und `recovery_paths` (`exists: false` für Soll-Pfade, die heute
   fehlen). Jeder Breakdown braucht einen Recovery-Pfad oder die Feststellung,
   dass keiner existiert.

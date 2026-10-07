@@ -22,7 +22,7 @@ Das Vokabular ist für die Verwaltung übersetzt, wo niemand «konvertiert» ode
 - **Exporte**: Story Map nach Patton (Markdown), Massnahmenliste (CSV), Chancenmatrix, Audit-Report
 - **Diff** zwischen zwei Versionen – was hat neue Evidenz verändert?
 - **Claude-Skill** `user-journey` mit drei Modi: *Synthese* (Rohmaterial → Journey), *Workshop* (Hypothesis-first mit Erhebungsplan), *Audit* (bestehende Journey prüfen)
-- **Durchgerechnetes Beispiel**: Kindergarteneintritt aus Elternsicht, aus einem synthetischen Inputmix (3 Interviews, 30 Anfragen, Befragung, Webanalytics, internes Prozessdokument, Workshop-Notizen)
+- **Durchgerechnete Beispiele**: Kindergarteneintritt aus Elternsicht, aus einem synthetischen Inputmix (3 Interviews, 30 Anfragen, Befragung, Webanalytics, internes Prozessdokument, Workshop-Notizen); dazu eine Baubewilligung für eine Wärmepumpe (Bauherrschaft und Nachbarschaft als zwei Personas), die die Übertragbarkeit auf einen anderen Bereich prüft und festhält, wo das Modell an Grenzen stösst
 
 ### Demo
 
@@ -124,6 +124,7 @@ journeykit/
 │   └── viewer/viewer.html           # eigenständiger interaktiver Viewer
 ├── skill/user-journey/              # Claude-Skill: SKILL.md + references/
 ├── examples/kindergarteneintritt/   # durchgerechnetes, synthetisches Beispiel inkl. Rohmaterial
+├── examples/baubewilligung/        # zweiter Bereich: Übertragbarkeitsprüfung und Befunde
 ├── docs/                            # Konzept, Architekturentscheide, Demo-Bild
 ├── tests/                           # pytest
 └── CLAUDE.md                        # Einstieg für die Arbeit an diesem Repo mit Claude Code

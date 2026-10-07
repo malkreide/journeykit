@@ -9,9 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - `python -m journeykit` entry point for environments where the console script is not on PATH (Windows user installs)
+- `tests/test_examples.py`: contract for every example under `examples/*/` – schema-valid, `meta.synthetic: true`, no lint errors, `journey.json` without warnings, every quote atom verbatim in its source file, no contact data in raw inputs. New examples are picked up without extra code
 
 ### Changed
 - `journeykit lint` text output prints each rule's hint only once per run
+- CI validates and lints every example directory instead of a hard-coded path
 
 ### Security
 - `/eval/` is git-ignored: raw material and ground truth for the evaluation stay local; only the comparison report (under `docs/evaluation/`) is committed

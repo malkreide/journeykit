@@ -17,5 +17,5 @@ erledigt:
   - 2026-10-07 Repo angelegt und gepusht (gh repo create), CI #1 grün
   - 2026-10-07 Topics gesetzt (gh repo edit)
   - 2026-10-07 Commit-Identität auf GitHub-noreply umgestellt (GH007)
-offen:
-  - Secret Scanning + Push Protection aktivieren (9.6)
+  - 2026-10-07 Secret Scanning + Push Protection aktiviert (9.6, per gh api)
+offen: []

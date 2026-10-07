@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI validates and lints every example directory instead of a hard-coded path
 
 ### Fixed
+- Viewer: the persona overlay in the emotion curve no longer drops data silently – phases without data or without emotion evidence of the other persona are labelled, phases without a matching ID are listed, and the legend notes that positions within a phase are approximate (#9)
 - Viewer: the persona badge in the header wraps instead of overflowing; long persona names pushed the page to 481 px at a 390 px viewport
 
 ### Security

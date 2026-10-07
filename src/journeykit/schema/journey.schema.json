@@ -97,6 +97,28 @@
       "type": "string",
       "enum": ["open", "in_progress", "resolved", "wontfix", "monitoring"]
     },
+    "performed_by": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "description": "Wer den Schritt ausführt (ADR-0005). Fehlt das Feld, handelt die Persona selbst. Behörden erscheinen hier nicht – was die Verwaltung tut, ist counterpart oder Back-Stage.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["persona", "shared", "intermediary"],
+          "description": "persona = die Persona selbst; shared = die Persona mit Hilfe Dritter; intermediary = Dritte handeln anstelle der Persona."
+        },
+        "role": { "type": "string", "description": "Rolle der helfenden oder handelnden Dritten in Nutzerworten, keine Namen (z. B. «Installationsfirma», «Nachbarin»)." },
+        "mandate": {
+          "type": "string",
+          "enum": ["formal", "informal"],
+          "description": "formal = Vollmacht, Vertretung oder Auftrag; informal = Familie, Nachbarschaft, Bekannte. Entscheidet in der Verwaltung oft über Auskunftsrechte."
+        }
+      },
+      "if": { "properties": { "kind": { "const": "persona" } } },
+      "then": { "not": { "anyOf": [{ "required": ["role"] }, { "required": ["mandate"] }] } },
+      "else": { "required": ["role", "mandate"] }
+    },
     "score_1_5": { "type": "integer", "minimum": 1, "maximum": 5 },
     "valence": {
       "type": "integer",
@@ -242,6 +264,7 @@
         "touchpoint": { "type": "string", "description": "System, Ort oder Dokument, mit dem interagiert wird." },
         "counterpart": { "type": "string", "description": "Wer auf Verwaltungsseite beteiligt ist (Rolle)." },
         "is_transition": { "type": "boolean", "default": false, "description": "Kanal- oder Zuständigkeitswechsel; dort entstehen überdurchschnittlich viele Reibungen." },
+        "performed_by": { "$ref": "#/$defs/performed_by" },
         "thinking": { "type": "array", "items": { "$ref": "#/$defs/claim" } },
         "feeling": {
           "oneOf": [

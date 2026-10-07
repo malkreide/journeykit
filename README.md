@@ -95,7 +95,7 @@ journeykit new kita-anmeldung --title "Kita-Anmeldung" --persona "Eltern" --role
 | L040–L043 | Empathy Vacuum | steps without feelings or thoughts; emotions without evidence |
 | L050–L052 | Overcomplexity | too many phases/steps; no scope exclusions |
 | L060–L063 | Micro-Level Disconnect | no opportunities; severe pain point without linked opportunity; no stories |
-| L070–L072 | Blueprint smell | no diagnosis; more back-stage notes than steps |
+| L070–L073 | Blueprint smell | no diagnosis; more back-stage notes than steps; most steps carried out by intermediaries instead of the persona |
 | L080–L081 | Privacy | source contains PII; e-mail/phone patterns in evidence text |
 | L090–L092 | KPIs | none; commercial naming; no leading indicator |
 | L100–L102 | Evidence quality | unused atoms; contradictions; primary evidence without locator |

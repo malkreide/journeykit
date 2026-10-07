@@ -97,6 +97,32 @@ def test_blueprint_smell(minimal):
     assert {"L070", "L071"} <= codes(f, WARN)
 
 
+def _all_steps(journey):
+    return [s for p in journey["phases"] for s in p["steps"]]
+
+
+def test_mostly_delegated_steps_are_info(minimal):
+    actor = {"kind": "intermediary", "role": "Installationsfirma", "mandate": "formal"}
+    for s in _all_steps(minimal):
+        s["performed_by"] = dict(actor)
+    assert "L073" in codes(lint_journey(minimal, today=TODAY), INFO)
+
+
+def test_half_delegated_steps_are_not_flagged(minimal):
+    first = minimal["phases"][0]["steps"][0]
+    second = {"id": "zweiter-schritt", "name": "Zweiter Schritt", "action": "Die Persona wartet."}
+    minimal["phases"][0]["steps"].append(second)
+    first["performed_by"] = {
+        "kind": "intermediary",
+        "role": "Installationsfirma",
+        "mandate": "formal",
+    }
+    second["performed_by"] = {"kind": "shared", "role": "Nachbarin", "mandate": "informal"}
+    assert "L073" not in codes(
+        lint_journey(minimal, today=TODAY), INFO
+    )  # 1 von 2 ist nicht mehr als die Hälfte
+
+
 def test_pii(minimal):
     minimal["sources"][0]["pii_status"] = "contains_pii"
     minimal["evidence"][1]["text"] = "Rufen Sie mich an: 044 123 45 67"

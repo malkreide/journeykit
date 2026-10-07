@@ -241,6 +241,11 @@
           "channel": "web",
           "touchpoint": "Unterlagenliste im Portal",
           "counterpart": "Installationsfirma",
+          "performed_by": {
+            "kind": "shared",
+            "role": "Installationsfirma",
+            "mandate": "formal"
+          },
           "thinking": [
             {
               "text": "Wer macht einen Lärmschutznachweis – und woran sehe ich, ob er stimmt?",
@@ -289,7 +294,10 @@
               ]
             }
           ],
-          "evidence_refs": []
+          "evidence_refs": [
+            "b1-09",
+            "stat-03"
+          ]
         },
         {
           "id": "gesuch-einreichen",
@@ -757,6 +765,11 @@
           "channel": "in_person",
           "touchpoint": "Montage",
           "counterpart": "Installationsfirma",
+          "performed_by": {
+            "kind": "intermediary",
+            "role": "Installationsfirma",
+            "mandate": "formal"
+          },
           "is_transition": true,
           "feeling": {
             "valence": 1,
@@ -773,7 +786,9 @@
               ]
             }
           ],
-          "evidence_refs": []
+          "evidence_refs": [
+            "b1-23"
+          ]
         },
         {
           "id": "betrieb",

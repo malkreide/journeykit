@@ -504,6 +504,18 @@ def _rule_blueprint(idx: JourneyIndex, c: _Collector) -> None:
             f"map_type = {meta.get('map_type')}: Erlebnis-Lints gelten nur eingeschränkt.",
             "meta.map_type",
         )
+    delegated = [
+        s for s in idx.steps.values() if (s.get("performed_by") or {}).get("kind") == "intermediary"
+    ]
+    if idx.step_count() and len(delegated) / idx.step_count() > 0.5:
+        c.add(
+            "L073",
+            INFO,
+            "blueprint",
+            f"{len(delegated)} von {idx.step_count()} Schritten führen Dritte anstelle der Persona aus (performed_by.kind = intermediary).",
+            "phases",
+            hint="Ist das noch die Journey der Persona – oder die der Vermittlung? Diagnose prüfen; die Vermittlung allenfalls als eigene Persona erheben.",
+        )
 
 
 def _rule_privacy(idx: JourneyIndex, c: _Collector) -> None:

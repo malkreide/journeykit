@@ -59,7 +59,12 @@ Grenzfälle:
 **Interview-Transkripte.** Durchgang pro Transkript. Ein Atom pro belegbarer
 Aussage, nicht pro Satz. Zitate wörtlich. Emotionen nur mit Beleg im Text.
 Typisch 12–25 Atome pro 45-Minuten-Interview. Fragen der interviewenden Person
-sind keine Evidenz.
+sind keine Evidenz. Auf **Vermittlung** achten: Wer hat einen Schritt
+tatsächlich gemacht – die Person selbst, mit Hilfe (Nachbarin übersetzt) oder
+jemand an ihrer Stelle (Firma mit Vollmacht)? Solche Stellen als eigenes Atom
+erfassen; sie begründen `performed_by` (ADR-0005). Fehlt die Angabe im
+Transkript, im Leitfaden nachfragen: «Wer hat das gemacht – Sie selbst oder
+jemand für Sie?»
 
 **Anfragen-, Ticket-, Beschwerdeexporte.** Erst kategorisieren (Kategorie ×
 Kanal × Zeitraum), dann **Metriken** als Atome («17 von 30 Anfragen per

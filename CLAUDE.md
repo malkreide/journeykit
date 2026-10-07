@@ -57,7 +57,7 @@ Modell durch Intake → Diagnose → Quellen → Evidenz → Synthese → Lint �
 
 Siehe `docs/konzept.md`, Abschnitt «Roadmap». Kurz:
 
-1. ~~GitHub-Setup~~ – erledigt am 2026-10-07: Repo public, Topics, Secret Scanning + Push Protection, CI grün. Offen bleibt der erste Dependabot-PR (Action-SHAs): mergen, wenn seine CI grün ist.
+1. ~~GitHub-Setup~~ – erledigt am 2026-10-07: Repo public, Topics, Secret Scanning + Push Protection, CI grün. Erster Dependabot-PR (checkout v7.0.1, setup-python v7.0.0) gemergt, CI auf `main` grün.
 2. Evaluation: eine manuell erstellte, reale Journey als Ground Truth gegen die Pipeline laufen lassen.
 3. Variante B: MCP-Server, der Journeys als Datenbestand hält (SQLite oder Notion), Versionen und Evidenz verwaltet – siehe ADR-0004.
 4. Viewer: Vergleichsansicht zweier Versionen (Diff visuell), Kommentarfunktion, Export der Heatmap.

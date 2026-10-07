@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `python -m journeykit` entry point for environments where the console script is not on PATH (Windows user installs)
 - `tests/test_examples.py`: contract for every example under `examples/*/` – schema-valid, `meta.synthetic: true`, no lint errors, `journey.json` without warnings, every quote atom verbatim in its source file, no contact data in raw inputs. New examples are picked up without extra code
 - Second worked example `examples/baubewilligung/`: building permit for a heat pump, applicant and neighbour as two personas, synthetic raw inputs (3 interviews, 30 inquiries, case statistics, web analytics, process document, workshop notes); README documents seven transferability hypotheses and what the example showed
+- ADR-0005 (proposed): `step.performed_by` for steps carried out by intermediaries on the persona's behalf – finding H1 from the building-permit example
 
 ### Changed
 - `journeykit lint` text output prints each rule's hint only once per run

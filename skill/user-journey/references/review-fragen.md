@@ -18,7 +18,6 @@ Kern trifft – das prüft ein Mensch. Diese Fragen stellt der Skill vor der
 - Was passiert, wenn der Brief nicht ankommt, die Frist verpasst ist, die Sprache nicht reicht, das System die Person nicht findet? Steht es drin?
 - Für jeden Breakdown: Gibt es heute einen Rückweg? Wenn nein, ist das als `exists: false` festgehalten – oder haben wir einen Soll-Pfad als Ist-Pfad geschrieben?
 - Welcher Übergang (Kanal- oder Zuständigkeitswechsel) ist am wenigsten belegt?
-- Für jeden Breakdown: Ist das ein **Versagen der Leistung** – oder ein **Rechtsweg, der funktioniert** (Einsprache, Einwendung, Rekurs, begründete Rückweisung)? Wenn Rechtsweg: Wo liegt das eigentliche Versagen davor (Information, Verständlichkeit, Zeitpunkt)? Dort gehört der Breakdown hin; der Rechtsweg selbst ist Reibung, und die Chance zielt auf bessere Information, nicht auf weniger Einsprachen.
 
 ## Static Map
 

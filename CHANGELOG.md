@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Viewer: row «Dauer» in the journey layer – one bar per phase on a common scale with the evidenced range, drill-down to the evidence; phases without a number say so. The step grid keeps equal widths. The process layer shows the typical duration next to the phase name
 
 ### Changed
+- `CLAUDE.md`: conventions for the four text catalogues (viewer, lint, exports, CLI) in one table; open items reordered by priority, completed items condensed into one line
 - Skill: pattern for costs and fees without a schema field – metric atom in CHF, linked from the step, pain point when costs come as a surprise; extraction rule for fee schedules, invoices and interview statements; KPI «share who knew the costs in advance» (#15, stage 1)
 - Skill: review question «breakdown or a legal remedy that works?» (Einsprache, Rekurs), with a note in the synthesis step and the public-administration context of `methodik.md` – finding H4 (#14)
 - `journeykit lint` text output prints each rule's hint only once per run

@@ -18,7 +18,7 @@ The vocabulary is translated for public administration, where nobody "converts" 
 
 - **Journey model** as JSON Schema (draft 2020-12) with evidence atoms, sources, PII status, owner and review cycle
 - **Methodological lints** for the five pitfalls — Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathy Vacuum / Overcomplexity, Micro-Level Disconnect — plus Blueprint smell, PII, KPI translation and evidence quality (L001–L102)
-- **Interactive viewer**: a self-contained HTML file with five layers — journey map with emotional curve and evidence-backed phase durations on a common scale, process and failure paths, evidence heatmap and source register, impact/effort matrix with user stories, audit — evidence drill-down to the original quote on every cell, a "primary evidence only" filter, multi-persona overlay, light/dark, print
+- **Interactive viewer**: a self-contained HTML file with five layers — journey map with emotional curve and evidence-backed phase durations on a common scale, process and failure paths, evidence heatmap and source register, impact/effort matrix with user stories, audit — evidence drill-down to the original quote on every cell, a "primary evidence only" filter, multi-persona overlay, light/dark, print, interface in German or French
 - **Exports**: Patton story map (Markdown), action list (CSV), opportunity matrix, audit report
 - **Diff** between two versions of a journey — what did new evidence change?
 - **Claude skill** `user-journey` with three modes: *Synthesis* (raw material → journey), *Workshop* (hypothesis-first with research plan), *Audit* (review an existing journey)
@@ -78,7 +78,7 @@ journeykit new kita-anmeldung --title "Kita-Anmeldung" --persona "Eltern" --role
 |---|---|
 | `journeykit validate FILE...` | JSON Schema validation (exit 2 on errors) |
 | `journeykit lint FILE... [--strict] [--quiet] [--format json] [--today DATE]` | Pitfall lints; `--strict` makes warnings fail |
-| `journeykit render FILE... [-o OUT] [--title T]` | Self-contained interactive HTML; multiple files overlay personas |
+| `journeykit render FILE... [-o OUT] [--title T] [--lang de\|fr]` | Self-contained interactive HTML; multiple files overlay personas. Interface in German or French (default: `meta.language` of the first file); journey content and lint messages stay as they are |
 | `journeykit export FILE --format storymap\|actions\|opportunities\|audit [-o OUT]` | Markdown / CSV exports |
 | `journeykit diff OLD NEW` | Model changes between versions (exit 1 when there are changes) |
 | `journeykit new ID --title --persona --role --goal` | Scaffold a valid journey in status `hypothesis` |

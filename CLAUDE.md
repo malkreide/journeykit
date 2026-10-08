@@ -13,6 +13,7 @@ Jede Aussage verweist auf Evidenz-Atome mit Klasse `observed` / `reported` /
 ## Konventionen
 
 - **Sprache**: Inhalte, Kommentare, Docstrings, Lint-Meldungen, UI-Texte des Viewers auf Deutsch in **Schweizer Rechtschreibung (kein ß → ss)**. Code-Bezeichner, Schema-Feldnamen und Enum-Werte englisch. README bilingual (EN Hauptdatei, DE Zweitdatei, gleiche Struktur).
+- **Viewer-Texte** stehen im JSON-Block `jk-i18n` von `viewer.html`, je Sprache (`de`, `fr`) mit denselben Schlüsseln; im Code nur über `t()`, `tn()` (Plural) oder `lbl()` (mit Doppelpunkt). Neue Texte immer in beiden Sprachen, neue Enum-Werte des Schemas brauchen eine Beschriftung – `tests/test_viewer_i18n.py` prüft beides. Französisch nach Schweizer Usanz (geschütztes Leerzeichen vor «:» und «?», «\u202f» in Guillemets).
 - **Python** 3.10+, einzige Laufzeitabhängigkeit `jsonschema`. Keine weiteren Dependencies ohne ADR.
 - **Viewer** ist eine einzige HTML-Datei ohne externe Ressourcen (keine CDNs, keine Fonts von aussen, keine Netzwerkanfragen) – er muss in geschlossenen Verwaltungsnetzen laufen und darf keine Daten senden. Farben als Tokens in `:root`, Dark Mode über `prefers-color-scheme` und `data-theme`.
 - **Schema-Änderungen**: `additionalProperties: false` bleibt überall. Neue Felder → Schema, `model.py` (falls Aussage/Referenz), Viewer, Beispiel-Journeys, Tests, `docs/konzept.md`. `schema_version` nur bei Breaking Changes erhöhen, dann Migrationshinweis in `CHANGELOG.md`.
@@ -63,7 +64,7 @@ Siehe `docs/konzept.md`, Abschnitt «Roadmap». Kurz:
 4. Viewer: Vergleichsansicht zweier Versionen (Diff visuell), Kommentarfunktion, Export der Heatmap.
 5. Extraktions-Qualität: Testsatz «Input → erwartete Atome» für die Prompt-Schablone in `skill/user-journey/references/evidenz.md`.
 6. ~~Zweites Beispiel~~ – `examples/baubewilligung/` (Bauherrschaft + Nachbarschaft). Offene Befunde als Issues: ~~`step.performed_by` (H1, #6)~~ umgesetzt mit ADR-0005, ~~Kanal `publication` (H7, #7)~~ und ~~Quellenart `case_records` (#8)~~ umgesetzt; ~~Viewer-Hinweis bei Phasen ohne Overlay (H3, #9)~~ umgesetzt. ~~Review-Frage Rechtsweg statt Breakdown (H4, #14)~~ umgesetzt. ~~Dauer von Phasen (H2, #13)~~ umgesetzt (`phase.duration_days`, L003). Offen: Kosten (H5, #15: Muster im Skill umgesetzt, Schemafeld erst mit drittem Beispiel).
-7. Französische UI-Texte im Viewer (`L`-Objekt ist dafür vorbereitet).
+7. ~~Französische UI-Texte im Viewer~~ – umgesetzt (`render --lang fr`, Block `jk-i18n`). Offen: Lint-Meldungen und Hinweise auf Französisch (kommen aus `lint.py`).
 
 ## Was nicht tun
 

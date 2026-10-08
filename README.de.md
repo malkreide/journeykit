@@ -18,7 +18,7 @@ Das Vokabular ist für die Verwaltung übersetzt, wo niemand «konvertiert» ode
 
 - **Journey-Modell** als JSON Schema (Draft 2020-12) mit Evidenz-Atomen, Quellenregister, Datenschutzstatus, Owner und Review-Rhythmus
 - **Methodische Lints** für die fünf Fallstricke – Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathie-Vakuum / Überkomplexität, Micro-Level Disconnect – plus Blueprint-Smell, Personendaten, KPI-Übersetzung und Evidenzqualität (L001–L102)
-- **Interaktiver Viewer**: eine eigenständige HTML-Datei mit fünf Layern – Journey Map mit emotionaler Kurve und belegter Dauer je Phase auf einem gemeinsamen Massstab, Prozess- und Fehlerpfade, Evidenz-Heatmap und Quellenregister, Impact/Effort-Matrix mit User Stories, Prüfung – Evidenz-Drilldown bis zum O-Ton auf jeder Zelle, Filter «nur Primärevidenz», Persona-Überlagerung, hell/dunkel, Druck
+- **Interaktiver Viewer**: eine eigenständige HTML-Datei mit fünf Layern – Journey Map mit emotionaler Kurve und belegter Dauer je Phase auf einem gemeinsamen Massstab, Prozess- und Fehlerpfade, Evidenz-Heatmap und Quellenregister, Impact/Effort-Matrix mit User Stories, Prüfung – Evidenz-Drilldown bis zum O-Ton auf jeder Zelle, Filter «nur Primärevidenz», Persona-Überlagerung, hell/dunkel, Druck, Oberfläche deutsch oder französisch
 - **Exporte**: Story Map nach Patton (Markdown), Massnahmenliste (CSV), Chancenmatrix, Audit-Report
 - **Diff** zwischen zwei Versionen – was hat neue Evidenz verändert?
 - **Claude-Skill** `user-journey` mit drei Modi: *Synthese* (Rohmaterial → Journey), *Workshop* (Hypothesis-first mit Erhebungsplan), *Audit* (bestehende Journey prüfen)
@@ -78,7 +78,7 @@ journeykit new kita-anmeldung --title "Kita-Anmeldung" --persona "Eltern" --role
 |---|---|
 | `journeykit validate DATEI...` | JSON-Schema-Validierung (Exit 2 bei Fehlern) |
 | `journeykit lint DATEI... [--strict] [--quiet] [--format json] [--today DATUM]` | Fallstrick-Lints; `--strict` lässt Warnungen scheitern |
-| `journeykit render DATEI... [-o OUT] [--title T]` | Eigenständiges interaktives HTML; mehrere Dateien überlagern Personas |
+| `journeykit render DATEI... [-o OUT] [--title T] [--lang de\|fr]` | Eigenständiges interaktives HTML; mehrere Dateien überlagern Personas. Oberfläche deutsch oder französisch (Standard: `meta.language` der ersten Datei); Inhalte der Journey und Lint-Meldungen bleiben, wie sie sind |
 | `journeykit export DATEI --format storymap\|actions\|opportunities\|audit [-o OUT]` | Markdown- / CSV-Exporte |
 | `journeykit diff ALT NEU` | Modelländerungen zwischen Versionen (Exit 1, wenn es Änderungen gibt) |
 | `journeykit new ID --title --persona --role --goal` | Gerüst einer validen Journey im Status `hypothesis` |

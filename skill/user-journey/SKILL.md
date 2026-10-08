@@ -33,7 +33,7 @@ journeykit validate journey.json                               # Schema
 journeykit lint journey.json [--strict] [--quiet] [--lang fr]  # Fallstricke
 journeykit render journey.json [weitere.json] -o out.html      # Viewer, mehrere = Persona-Vergleich
 journeykit export journey.json --format storymap|actions|opportunities|audit
-journeykit diff alt.json neu.json                              # Was hat neue Evidenz verändert?
+journeykit diff alt.json neu.json [--lang fr]                 # Was hat neue Evidenz verändert?
 ```
 
 Steht keine Code-Ausführung zur Verfügung: die JSON-Datei trotzdem vollständig
@@ -207,7 +207,7 @@ kein Ersatz für ein Review.
 
 ```
 journeykit render journey.json -o journey.html            # --lang fr für die französische Oberfläche
-journeykit export journey.json --format audit -o audit.md
+journeykit export journey.json --format audit -o audit.md       # --lang fr für französische Reports
 journeykit export journey.json --format storymap -o storymap.md
 journeykit export journey.json --format actions -o massnahmen.csv
 ```

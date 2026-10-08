@@ -20,25 +20,13 @@ from dataclasses import asdict, dataclass
 from datetime import date
 from typing import Any
 
-from .lint_messages import PII_LABELS, check_language, render_message
+from .lint_messages import ANTIPATTERN_LABELS, PII_LABELS, check_language, render_message
 from .model import PRIMARY_CLASSES, JourneyIndex
 
 ERROR, WARN, INFO = "ERROR", "WARN", "INFO"
 LEVEL_ORDER = {ERROR: 0, WARN: 1, INFO: 2}
 
-ANTIPATTERNS = {
-    "integrity": "Referenzen und IDs",
-    "inside_out": "Inside-Out Bias (Annahmen statt Nutzerevidenz)",
-    "happy_path": "Happy Path Bias (keine Breakdowns, keine Recovery)",
-    "static_map": "Static Map Trap (keine Verantwortung, kein Review)",
-    "empathy_vacuum": "Empathie-Vakuum (Klicks ohne Gedanken und Gefühle)",
-    "overcomplexity": "Überkomplexität (zu viele Phasen, kein Scope)",
-    "micro_disconnect": "Micro-Level Disconnect (keine Übersetzung in Massnahmen)",
-    "blueprint": "Service Blueprint statt User Journey",
-    "privacy": "Personendaten",
-    "kpi": "Kennzahlen",
-    "evidence": "Evidenzqualität",
-}
+ANTIPATTERNS = ANTIPATTERN_LABELS["de"]
 
 PRIMARY_SOURCE_KINDS = frozenset(
     {

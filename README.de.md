@@ -76,13 +76,15 @@ journeykit new kita-anmeldung --title "Kita-Anmeldung" --persona "Eltern" --role
 
 | Befehl | Beschreibung |
 |---|---|
-| `journeykit validate DATEI...` | JSON-Schema-Validierung (Exit 2 bei Fehlern) |
+| `journeykit validate DATEI... [--lang de\|fr]` | JSON-Schema-Validierung (Exit 2 bei Fehlern) |
 | `journeykit lint DATEI... [--strict] [--quiet] [--format json] [--today DATUM] [--lang de\|fr]` | Fallstrick-Lints; `--strict` lässt Warnungen scheitern. Meldungen deutsch oder französisch (Standard: `meta.language` der Datei) |
 | `journeykit render DATEI... [-o OUT] [--title T] [--lang de\|fr]` | Eigenständiges interaktives HTML; mehrere Dateien überlagern Personas. Oberfläche und Lint-Meldungen deutsch oder französisch (Standard: `meta.language` der ersten Datei); Inhalte der Journey bleiben, wie sie sind |
-| `journeykit export DATEI --format storymap\|actions\|opportunities\|audit [-o OUT]` | Markdown- / CSV-Exporte |
-| `journeykit diff ALT NEU` | Modelländerungen zwischen Versionen (Exit 1, wenn es Änderungen gibt) |
-| `journeykit new ID --title --persona --role --goal` | Gerüst einer validen Journey im Status `hypothesis` |
+| `journeykit export DATEI --format storymap\|actions\|opportunities\|audit [-o OUT] [--lang de\|fr]` | Markdown- / CSV-Exporte; Markdown deutsch oder französisch (Standard: `meta.language`), das CSV hat technische Spaltennamen |
+| `journeykit diff ALT NEU [-o OUT] [--lang de\|fr]` | Modelländerungen zwischen Versionen (Exit 1, wenn es Änderungen gibt); Report deutsch oder französisch (Standard: `meta.language` der neuen Version) |
+| `journeykit new ID --title --persona --role --goal [--lang de\|fr]` | Gerüst einer validen Journey im Status `hypothesis`; `--lang` setzt `meta.language` und die Sprache der Platzhalter |
 | `journeykit schema` | JSON Schema ausgeben |
+
+Sprache aller Ausgaben: `--lang` je Befehl, sonst `meta.language` der Journey, sonst die Umgebungsvariable `JOURNEYKIT_LANG` (`de` oder `fr`), sonst Deutsch. Texte, die argparse selbst erzeugt («usage:», «options:»), und die Details der Schemafehler bleiben wie bisher englisch.
 
 ### Lint-Regeln
 
@@ -120,8 +122,10 @@ journeykit/
 │   ├── lint_messages.py             # Meldungen und Hinweise, deutsch und französisch
 │   ├── render.py                    # injiziert Daten in den Viewer
 │   ├── export.py                    # Story Map, Massnahmen-CSV, Chancen, Audit
+│   ├── export_texts.py              # Texte der Exporte und des Diffs, deutsch und französisch
 │   ├── diff.py                      # Versionsvergleich
 │   ├── cli.py                       # Befehl journeykit
+│   ├── cli_texts.py                 # Meldungen und Hilfe der CLI, deutsch und französisch
 │   └── viewer/viewer.html           # eigenständiger interaktiver Viewer
 ├── skill/user-journey/              # Claude-Skill: SKILL.md + references/
 ├── examples/kindergarteneintritt/   # durchgerechnetes, synthetisches Beispiel inkl. Rohmaterial

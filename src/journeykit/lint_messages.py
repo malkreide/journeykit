@@ -8,7 +8,7 @@ Sprachen dieselben sein – ``tests/test_lint_messages.py`` prüft das.
 
 Französisch wird hier mit normalen Leerzeichen geschrieben; die Typografie
 (geschütztes Leerzeichen vor «:», «;», «?», «!» und in Guillemets) setzt
-``_typo_fr`` beim Laden.
+``typo_fr`` beim Laden (auch für die Exporte, ``export_texts.py``).
 """
 
 from __future__ import annotations
@@ -333,10 +333,10 @@ _SUMMARY = {
     "fr": "{path} : {errors} erreur(s) · {warnings} avertissement(s) · {infos} remarque(s)",
 }
 
-_NBSP, _NNBSP = " ", " "
+_NBSP, _NNBSP = "\u00a0", "\u202f"
 
 
-def _typo_fr(text: str) -> str:
+def typo_fr(text: str) -> str:
     """Französische Typografie: geschützte Leerzeichen vor Doppelpunkt & Co. und in Guillemets."""
     for mark in (":", ";", "?", "!"):
         text = text.replace(f" {mark}", f"{_NBSP}{mark}")
@@ -345,10 +345,41 @@ def _typo_fr(text: str) -> str:
 
 MESSAGES: dict[str, dict[str, tuple[str, str]]] = {
     "de": _DE,
-    "fr": {k: (_typo_fr(m), _typo_fr(h)) for k, (m, h) in _FR.items()},
+    "fr": {k: (typo_fr(m), typo_fr(h)) for k, (m, h) in _FR.items()},
 }
 PII_LABELS = _PII_LABELS
-SUMMARY = {"de": _SUMMARY["de"], "fr": _typo_fr(_SUMMARY["fr"])}
+SUMMARY = {"de": _SUMMARY["de"], "fr": typo_fr(_SUMMARY["fr"])}
+
+
+# Anti-Patterns, nach denen der Audit-Report gliedert (der Viewer hat eigene Kurzformen)
+ANTIPATTERN_LABELS: dict[str, dict[str, str]] = {
+    "de": {
+        "integrity": "Referenzen und IDs",
+        "inside_out": "Inside-Out Bias (Annahmen statt Nutzerevidenz)",
+        "happy_path": "Happy Path Bias (keine Breakdowns, keine Recovery)",
+        "static_map": "Static Map Trap (keine Verantwortung, kein Review)",
+        "empathy_vacuum": "Empathie-Vakuum (Klicks ohne Gedanken und Gefühle)",
+        "overcomplexity": "Überkomplexität (zu viele Phasen, kein Scope)",
+        "micro_disconnect": "Micro-Level Disconnect (keine Übersetzung in Massnahmen)",
+        "blueprint": "Service Blueprint statt User Journey",
+        "privacy": "Personendaten",
+        "kpi": "Kennzahlen",
+        "evidence": "Evidenzqualität",
+    },
+    "fr": {
+        "integrity": "Références et ID",
+        "inside_out": "Biais de la vue interne (suppositions au lieu de preuves issues des usagers)",
+        "happy_path": "Biais du parcours idéal (ni ruptures, ni rattrapage)",
+        "static_map": "Piège de la carte figée (ni responsabilité, ni révision)",
+        "empathy_vacuum": "Vide d'empathie (des clics sans pensées ni ressenti)",
+        "overcomplexity": "Surcomplexité (trop de phases, pas de périmètre)",
+        "micro_disconnect": "Déconnexion du niveau micro (pas de traduction en mesures)",
+        "blueprint": "Service blueprint au lieu de parcours usager",
+        "privacy": "Données personnelles",
+        "kpi": "Indicateurs",
+        "evidence": "Qualité des preuves",
+    },
+}
 
 
 def check_language(lang: str) -> str:

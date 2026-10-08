@@ -80,7 +80,7 @@ journeykit new kita-anmeldung --title "Kita-Anmeldung" --persona "Eltern" --role
 | `journeykit lint FILE... [--strict] [--quiet] [--format json] [--today DATE] [--lang de\|fr]` | Pitfall lints; `--strict` makes warnings fail. Messages in German or French (default: `meta.language` of the file) |
 | `journeykit render FILE... [-o OUT] [--title T] [--lang de\|fr]` | Self-contained interactive HTML; multiple files overlay personas. Interface and lint messages in German or French (default: `meta.language` of the first file); journey content stays as it is |
 | `journeykit export FILE --format storymap\|actions\|opportunities\|audit [-o OUT] [--lang de\|fr]` | Markdown / CSV exports; Markdown in German or French (default: `meta.language`), the CSV has technical column names |
-| `journeykit diff OLD NEW` | Model changes between versions (exit 1 when there are changes) |
+| `journeykit diff OLD NEW [-o OUT] [--lang de\|fr]` | Model changes between versions (exit 1 when there are changes); report in German or French (default: `meta.language` of the new version) |
 | `journeykit new ID --title --persona --role --goal` | Scaffold a valid journey in status `hypothesis` |
 | `journeykit schema` | Print the JSON Schema |
 
@@ -120,7 +120,7 @@ journeykit/
 │   ├── lint_messages.py             # messages and hints, German and French
 │   ├── render.py                    # injects data into the viewer
 │   ├── export.py                    # story map, actions CSV, opportunities, audit
-│   ├── export_texts.py              # export texts, German and French
+│   ├── export_texts.py              # export and diff texts, German and French
 │   ├── diff.py                      # version diff
 │   ├── cli.py                       # journeykit command
 │   └── viewer/viewer.html           # self-contained interactive viewer

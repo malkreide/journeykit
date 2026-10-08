@@ -116,5 +116,5 @@ das die manuelle Journey übersehen hat. Erst dieser Vergleich sagt, was
 2. Evaluation gegen eine reale Ground-Truth-Journey (0.2)
 3. Testsatz für die Extraktion: Input → erwartete Atome (0.2)
 4. ~~Zweites Beispiel aus einem anderen Verwaltungsbereich (0.2)~~ – `examples/baubewilligung/`; Befunde zur Übertragbarkeit (Handelnde Dritte, Kanal «Publikation», Quellenart für Geschäftskontrolle, Dauer von Wartephasen u. a.) im Beispiel-README, grösstenteils umgesetzt; offen ist ein Kostenfeld (#15)
-5. Viewer: visueller Versionsvergleich, Export der Heatmap (0.3); ~~französische UI, Lint-Meldungen und Exporte~~ – umgesetzt (`render`, `lint`, `export` mit `--lang fr`); `diff`-Report noch deutsch
+5. Viewer: visueller Versionsvergleich, Export der Heatmap (0.3); ~~französische UI, Lint-Meldungen, Exporte und Diff~~ – umgesetzt (`render`, `lint`, `export`, `diff` mit `--lang fr`)
 6. Variante B: MCP-Server für Journeys als Datenbestand (0.4)

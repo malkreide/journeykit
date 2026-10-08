@@ -120,8 +120,9 @@ def cmd_export(args: argparse.Namespace) -> int:
 
 
 def cmd_diff(args: argparse.Namespace) -> int:
-    d = diff_journeys(_load_valid(args.old), _load_valid(args.new))
-    _write(diff_markdown(d), args.output)
+    old, new = _load_valid(args.old), _load_valid(args.new)
+    d = diff_journeys(old, new)
+    _write(diff_markdown(d, lang=resolve_language(new, args.lang)), args.output)
     return 0 if d.is_empty() else 1
 
 
@@ -258,6 +259,11 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("old")
     s.add_argument("new")
     s.add_argument("-o", "--output")
+    s.add_argument(
+        "--lang",
+        choices=LANGUAGES,
+        help="Sprache des Reports (Standard: meta.language der neuen Version, sonst de)",
+    )
     s.set_defaults(func=cmd_diff)
 
     s = sub.add_parser("schema", help="JSON Schema ausgeben")

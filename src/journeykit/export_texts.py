@@ -1,4 +1,4 @@
-"""Texte der Exporte (Story Map, Chancenmatrix, Audit-Report), je Sprache.
+"""Texte der Exporte (Story Map, Chancenmatrix, Audit-Report) und des Diff-Reports, je Sprache.
 
 Wie ``lint_messages.py``: je Schlüssel ein Text mit Platzhaltern in ``{}``,
 in allen Sprachen dieselben Schlüssel und Platzhalter – ``tests/test_export_texts.py``
@@ -40,6 +40,22 @@ _DE: dict[str, str] = {
     "audit.no_findings": "Keine Befunde.",
     "audit.open_questions": "## Offene Fragen",
     "audit.method": " _(Methode: {method})_",
+    # Diff-Report
+    "diff.title": "# Änderungen {old} → {new}",
+    "diff.none": "Keine Modelländerungen.",
+    "diff.evidence": "Evidenz",
+    "diff.evidence_delta": "- gesamt {total} · beobachtet {observed} · berichtet {reported} · angenommen {assumed}",
+    "diff.added_sources": "Neue Quellen",
+    "diff.added_steps": "Neue Schritte",
+    "diff.removed_steps": "Entfernte Schritte",
+    "diff.added_pain_points": "Neue Pain Points",
+    "diff.removed_pain_points": "Entfernte Pain Points",
+    "diff.pain_point_status": "Pain-Point-Status",
+    "diff.added_opps": "Neue Chancen",
+    "diff.removed_opps": "Entfernte Chancen",
+    "diff.opp_status": "Chancen-Status",
+    "diff.feeling": "Emotionale Kurve",
+    "diff.change": "{id}: {old} → {new}",
 }
 
 _FR: dict[str, str] = {
@@ -69,6 +85,22 @@ _FR: dict[str, str] = {
     "audit.no_findings": "Aucun constat.",
     "audit.open_questions": "## Questions ouvertes",
     "audit.method": " _(méthode : {method})_",
+    # Rapport de différences
+    "diff.title": "# Modifications {old} → {new}",
+    "diff.none": "Aucune modification du modèle.",
+    "diff.evidence": "Preuves",
+    "diff.evidence_delta": "- total {total} · observées {observed} · rapportées {reported} · supposées {assumed}",
+    "diff.added_sources": "Nouvelles sources",
+    "diff.added_steps": "Nouvelles étapes",
+    "diff.removed_steps": "Étapes supprimées",
+    "diff.added_pain_points": "Nouveaux irritants",
+    "diff.removed_pain_points": "Irritants supprimés",
+    "diff.pain_point_status": "Statut des irritants",
+    "diff.added_opps": "Nouvelles opportunités",
+    "diff.removed_opps": "Opportunités supprimées",
+    "diff.opp_status": "Statut des opportunités",
+    "diff.feeling": "Courbe émotionnelle",
+    "diff.change": "{id} : {old} → {new}",
 }
 
 TEXTS: dict[str, dict[str, str]] = {

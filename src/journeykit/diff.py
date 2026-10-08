@@ -2,6 +2,7 @@
 
 Gegen die Static Map Trap: Neue Evidenz soll die Journey verändern, und die
 Veränderung soll sichtbar sein - nicht als neue Datei, sondern als Delta.
+Die Texte des Reports stehen je Sprache in ``export_texts.py``.
 """
 
 from __future__ import annotations
@@ -9,6 +10,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
+from .export_texts import text
+from .lint_messages import check_language
 from .model import JourneyIndex
 
 
@@ -80,10 +83,23 @@ def diff_journeys(old: dict[str, Any], new: dict[str, Any]) -> JourneyDiff:
     return d
 
 
-def diff_markdown(d: JourneyDiff) -> str:
-    lines = [f"# Änderungen {d.old_version} → {d.new_version}", ""]
+def diff_markdown(d: JourneyDiff, lang: str = "de") -> str:
+    check_language(lang)
+
+    def t(key: str, **params: Any) -> str:
+        return text(lang, key, **params)
+
+    def change(id_: str, old: Any, new: Any) -> str:
+        return t(
+            "diff.change",
+            id=id_,
+            old="–" if old is None or old == "" else old,
+            new="–" if new is None or new == "" else new,
+        )
+
+    lines = [t("diff.title", old=d.old_version, new=d.new_version), ""]
     if d.is_empty():
-        lines.append("Keine Modelländerungen.")
+        lines.append(t("diff.none"))
         return "\n".join(lines)
 
     def section(title: str, items: list[str]) -> None:
@@ -94,30 +110,28 @@ def diff_markdown(d: JourneyDiff) -> str:
 
     ev = d.evidence_delta
     if any(ev.values()):
-        lines.append("## Evidenz")
-        lines.append(
-            f"- gesamt {ev['total']:+d} · beobachtet {ev['observed']:+d} · berichtet {ev['reported']:+d} · angenommen {ev['assumed']:+d}"
-        )
+        lines.append(f"## {t('diff.evidence')}")
+        lines.append(t("diff.evidence_delta", **{k: f"{v:+d}" for k, v in ev.items()}))
         lines.append("")
-    section("Neue Quellen", d.added_sources)
-    section("Neue Schritte", d.added_steps)
-    section("Entfernte Schritte", d.removed_steps)
-    section("Neue Pain Points", d.added_pain_points)
-    section("Entfernte Pain Points", d.removed_pain_points)
+    section(t("diff.added_sources"), d.added_sources)
+    section(t("diff.added_steps"), d.added_steps)
+    section(t("diff.removed_steps"), d.removed_steps)
+    section(t("diff.added_pain_points"), d.added_pain_points)
+    section(t("diff.removed_pain_points"), d.removed_pain_points)
+    section(t("diff.pain_point_status"), [change(*c) for c in d.changed_pain_point_status])
+    section(t("diff.added_opps"), d.added_opportunities)
+    section(t("diff.removed_opps"), d.removed_opportunities)
+    section(t("diff.opp_status"), [change(*c) for c in d.changed_opportunity_status])
+    # Valenz 0 ist ein Wert, kein «fehlt»
     section(
-        "Pain-Point-Status",
-        [f"{p}: {o or '–'} → {n or '–'}" for p, o, n in d.changed_pain_point_status],
-    )
-    section("Neue Chancen", d.added_opportunities)
-    section("Entfernte Chancen", d.removed_opportunities)
-    section(
-        "Chancen-Status",
-        [f"{p}: {o or '–'} → {n or '–'}" for p, o, n in d.changed_opportunity_status],
-    )
-    section(
-        "Emotionale Kurve",
+        t("diff.feeling"),
         [
-            f"{s}: {o if o is not None else '–'} → {n if n is not None else '–'}"
+            t(
+                "diff.change",
+                id=s,
+                old="–" if o is None else o,
+                new="–" if n is None else n,
+            )
             for s, o, n in d.feeling_changes
         ],
     )

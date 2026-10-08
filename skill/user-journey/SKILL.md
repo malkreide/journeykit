@@ -33,7 +33,7 @@ journeykit validate journey.json                               # Schema
 journeykit lint journey.json [--strict] [--quiet] [--lang fr]  # Fallstricke
 journeykit render journey.json [weitere.json] -o out.html      # Viewer, mehrere = Persona-Vergleich
 journeykit export journey.json --format storymap|actions|opportunities|audit
-journeykit diff alt.json neu.json                              # Was hat neue Evidenz verändert?
+journeykit diff alt.json neu.json [--lang fr]                 # Was hat neue Evidenz verändert?
 ```
 
 Steht keine Code-Ausführung zur Verfügung: die JSON-Datei trotzdem vollständig

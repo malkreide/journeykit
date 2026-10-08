@@ -77,8 +77,8 @@ journeykit new kita-anmeldung --title "Kita-Anmeldung" --persona "Eltern" --role
 | Befehl | Beschreibung |
 |---|---|
 | `journeykit validate DATEI...` | JSON-Schema-Validierung (Exit 2 bei Fehlern) |
-| `journeykit lint DATEI... [--strict] [--quiet] [--format json] [--today DATUM]` | Fallstrick-Lints; `--strict` lässt Warnungen scheitern |
-| `journeykit render DATEI... [-o OUT] [--title T] [--lang de\|fr]` | Eigenständiges interaktives HTML; mehrere Dateien überlagern Personas. Oberfläche deutsch oder französisch (Standard: `meta.language` der ersten Datei); Inhalte der Journey und Lint-Meldungen bleiben, wie sie sind |
+| `journeykit lint DATEI... [--strict] [--quiet] [--format json] [--today DATUM] [--lang de\|fr]` | Fallstrick-Lints; `--strict` lässt Warnungen scheitern. Meldungen deutsch oder französisch (Standard: `meta.language` der Datei) |
+| `journeykit render DATEI... [-o OUT] [--title T] [--lang de\|fr]` | Eigenständiges interaktives HTML; mehrere Dateien überlagern Personas. Oberfläche und Lint-Meldungen deutsch oder französisch (Standard: `meta.language` der ersten Datei); Inhalte der Journey bleiben, wie sie sind |
 | `journeykit export DATEI --format storymap\|actions\|opportunities\|audit [-o OUT]` | Markdown- / CSV-Exporte |
 | `journeykit diff ALT NEU` | Modelländerungen zwischen Versionen (Exit 1, wenn es Änderungen gibt) |
 | `journeykit new ID --title --persona --role --goal` | Gerüst einer validen Journey im Status `hypothesis` |
@@ -117,6 +117,7 @@ journeykit/
 │   ├── model.py                     # Index und Aussagen-Iterator über eine Journey
 │   ├── validate.py                  # JSON-Schema-Validierung
 │   ├── lint.py                      # Fallstrick-Regeln L001–L102
+│   ├── lint_messages.py             # Meldungen und Hinweise, deutsch und französisch
 │   ├── render.py                    # injiziert Daten in den Viewer
 │   ├── export.py                    # Story Map, Massnahmen-CSV, Chancen, Audit
 │   ├── diff.py                      # Versionsvergleich

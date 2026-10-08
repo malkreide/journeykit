@@ -30,7 +30,7 @@ CLI (im Repo: `pip install -e .`):
 ```
 journeykit new <id> --title … --persona … --role … --goal …   # Gerüst (Status hypothesis)
 journeykit validate journey.json                               # Schema
-journeykit lint journey.json [--strict] [--quiet]              # Fallstricke
+journeykit lint journey.json [--strict] [--quiet] [--lang fr]  # Fallstricke
 journeykit render journey.json [weitere.json] -o out.html      # Viewer, mehrere = Persona-Vergleich
 journeykit export journey.json --format storymap|actions|opportunities|audit
 journeykit diff alt.json neu.json                              # Was hat neue Evidenz verändert?

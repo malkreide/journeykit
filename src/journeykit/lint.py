@@ -1,7 +1,8 @@
 """Methodische Lints: die fünf Fallstricke als prüfbare Regeln.
 
 Jede Regel trägt einen Code, eine Stufe (ERROR, WARN, INFO), das Anti-Pattern,
-das sie adressiert, und einen Hinweis, was zu tun ist. Die Regeln urteilen
+das sie adressiert, und einen Hinweis, was zu tun ist. Meldung und Hinweis
+stehen je Sprache in ``lint_messages.py``. Die Regeln urteilen
 über das Modell, nicht über den Text - sie können nicht erkennen, ob ein Zitat
 gut gewählt ist, aber sie erkennen, ob es fehlt.
 
@@ -19,6 +20,7 @@ from dataclasses import asdict, dataclass
 from datetime import date
 from typing import Any
 
+from .lint_messages import PII_LABELS, check_language, render_message
 from .model import PRIMARY_CLASSES, JourneyIndex
 
 ERROR, WARN, INFO = "ERROR", "WARN", "INFO"
@@ -67,10 +69,11 @@ COMMERCIAL_KPI_TERMS = (
     "arpu",
 )
 
+# Schlüssel → PII_LABELS in lint_messages.py
 _PII_PATTERNS = (
-    ("E-Mail-Adresse", re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")),
-    ("Telefonnummer", re.compile(r"(?<!\d)(\+41|0041|0)\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}(?!\d)")),
-    ("AHV-Nummer", re.compile(r"756\.\d{4}\.\d{4}\.\d{2}")),
+    ("email", re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")),
+    ("phone", re.compile(r"(?<!\d)(\+41|0041|0)\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}(?!\d)")),
+    ("ahv", re.compile(r"756\.\d{4}\.\d{4}\.\d{2}")),
 )
 
 
@@ -96,13 +99,26 @@ class Finding:
 
 
 class _Collector:
-    def __init__(self) -> None:
+    def __init__(self, lang: str = "de") -> None:
+        self.lang = lang
         self.findings: list[Finding] = []
 
     def add(
-        self, code: str, level: str, antipattern: str, message: str, path: str = "", hint: str = ""
+        self,
+        code: str,
+        level: str,
+        antipattern: str,
+        path: str = "",
+        msg: str | None = None,
+        **params: Any,
     ) -> None:
+        """Befund mit Meldung ``msg`` (Standard: der Code) aus lint_messages.py."""
+        message, hint = render_message(self.lang, msg or code, **params)
         self.findings.append(Finding(code, level, antipattern, message, path, hint))
+
+
+def _shortlist(ids: list[str], limit: int) -> str:
+    return ", ".join(ids[:limit]) + ("…" if len(ids) > limit else "")
 
 
 # ---------------------------------------------------------------------------
@@ -124,27 +140,21 @@ def _rule_integrity(idx: JourneyIndex, c: _Collector) -> None:
         seen.update(item["id"] for item in j.get(key, []))
     for dup, n in seen.items():
         if n > 1:
-            c.add(
-                "L002",
-                ERROR,
-                "integrity",
-                f"ID «{dup}» wird {n}-mal vergeben.",
-                hint="IDs eindeutig machen; sie sind Referenzziele.",
-            )
+            c.add("L002", ERROR, "integrity", id=dup, n=n)
 
     for path, ref in idx.all_refs():
         if ref not in idx.evidence and ref not in idx.sources:
-            c.add(
-                "L001", ERROR, "integrity", f"Referenz «{ref}» zeigt auf kein Evidenz-Atom.", path
-            )
+            c.add("L001", ERROR, "integrity", path, msg="L001.ref", ref=ref)
     for atom in idx.evidence.values():
         if atom["source_ref"] not in idx.sources:
             c.add(
                 "L001",
                 ERROR,
                 "integrity",
-                f"Evidenz «{atom['id']}» verweist auf unbekannte Quelle «{atom['source_ref']}».",
                 f"evidence[{atom['id']}]",
+                msg="L001.source",
+                atom=atom["id"],
+                source=atom["source_ref"],
             )
         for other in atom.get("contradicts", []):
             if other not in idx.evidence:
@@ -152,8 +162,10 @@ def _rule_integrity(idx: JourneyIndex, c: _Collector) -> None:
                     "L001",
                     ERROR,
                     "integrity",
-                    f"Evidenz «{atom['id']}» widerspricht unbekanntem Atom «{other}».",
                     f"evidence[{atom['id']}]",
+                    msg="L001.contradicts",
+                    atom=atom["id"],
+                    other=other,
                 )
     for oi, opp in enumerate(j.get("opportunities", [])):
         for pp in opp.get("linked_pain_points", []):
@@ -162,16 +174,20 @@ def _rule_integrity(idx: JourneyIndex, c: _Collector) -> None:
                     "L001",
                     ERROR,
                     "integrity",
-                    f"Chance «{opp['id']}» verweist auf unbekannten Pain Point «{pp}».",
                     f"opportunities[{oi}]",
+                    msg="L001.opp_pain_point",
+                    opp=opp["id"],
+                    pp=pp,
                 )
         if opp.get("phase_ref") and opp["phase_ref"] not in idx.phases:
             c.add(
                 "L001",
                 ERROR,
                 "integrity",
-                f"Chance «{opp['id']}» verweist auf unbekannte Phase «{opp['phase_ref']}».",
                 f"opportunities[{oi}]",
+                msg="L001.opp_phase",
+                opp=opp["id"],
+                phase=opp["phase_ref"],
             )
     for qi, q in enumerate(j.get("open_questions", [])):
         if q.get("phase_ref") and q["phase_ref"] not in idx.phases:
@@ -179,16 +195,18 @@ def _rule_integrity(idx: JourneyIndex, c: _Collector) -> None:
                 "L001",
                 ERROR,
                 "integrity",
-                f"Offene Frage verweist auf unbekannte Phase «{q['phase_ref']}».",
                 f"open_questions[{qi}]",
+                msg="L001.question_phase",
+                phase=q["phase_ref"],
             )
         if q.get("step_ref") and q["step_ref"] not in idx.steps:
             c.add(
                 "L001",
                 ERROR,
                 "integrity",
-                f"Offene Frage verweist auf unbekannten Schritt «{q['step_ref']}».",
                 f"open_questions[{qi}]",
+                msg="L001.question_step",
+                step=q["step_ref"],
             )
     for pi, phase in enumerate(j.get("phases", [])):
         dd = phase.get("duration_days")
@@ -200,9 +218,11 @@ def _rule_integrity(idx: JourneyIndex, c: _Collector) -> None:
                 "L003",
                 ERROR,
                 "integrity",
-                f"Dauer der Phase «{phase['id']}» ist widersprüchlich: min {lo}, typisch {typ}, max {hi}.",
                 f"phases[{pi}].duration_days",
-                hint="Es muss min ≤ typical ≤ max gelten; Grenzen weglassen, die die Belege nicht tragen.",
+                phase=phase["id"],
+                min=lo,
+                typical=typ,
+                max=hi,
             )
 
 
@@ -218,8 +238,8 @@ def _rule_inside_out(idx: JourneyIndex, c: _Collector) -> None:
                 "L010",
                 ERROR,
                 "inside_out",
-                f"Keine der {len(experience)} Erlebnis-Aussagen (Denken, Fühlen, Pain Points) stützt sich auf Nutzerevidenz.",
-                hint="meta.status auf «hypothesis» setzen und einen Erhebungsplan unter open_questions festhalten - oder Interviews, Befragungen, Anfragen auswerten.",
+                msg="L010.none",
+                n=len(experience),
             )
         elif ratio >= 0.5:
             level = INFO if status == "hypothesis" else WARN
@@ -227,8 +247,10 @@ def _rule_inside_out(idx: JourneyIndex, c: _Collector) -> None:
                 "L010",
                 level,
                 "inside_out",
-                f"{len(unsupported)} von {len(experience)} Erlebnis-Aussagen ({ratio:.0%}) ohne Primärevidenz (beobachtet/berichtet).",
-                hint="Im Viewer den Filter «nur Primärevidenz» einschalten: Was dann übrig bleibt, ist die belegte Journey.",
+                msg="L010.most",
+                unsupported=len(unsupported),
+                n=len(experience),
+                pct=f"{ratio * 100:.0f}",
             )
     kinds = {s["kind"] for s in idx.sources.values()}
     if idx.sources and not (kinds & PRIMARY_SOURCE_KINDS):
@@ -236,9 +258,7 @@ def _rule_inside_out(idx: JourneyIndex, c: _Collector) -> None:
             "L011",
             INFO if status == "hypothesis" else WARN,
             "inside_out",
-            "Quellenregister enthält keine Nutzerquelle (Interview, Befragung, Anfragen, Analytics, Beobachtung).",
             "sources",
-            hint="Mindestens eine Quelle, in der Nutzende selbst zu Wort kommen oder gemessen werden.",
         )
     persona = j["persona"]
     primary_refs = [
@@ -251,9 +271,9 @@ def _rule_inside_out(idx: JourneyIndex, c: _Collector) -> None:
             "L012",
             WARN,
             "inside_out",
-            f"Persona «{persona['name']}» stützt sich auf {len(primary_refs)} Primärevidenz(en).",
             "persona",
-            hint="Weniger als drei unabhängige Belege: persona.is_hypothesis = true setzen oder Evidenz nachreichen.",
+            name=persona["name"],
+            n=len(primary_refs),
         )
 
 
@@ -264,8 +284,6 @@ def _rule_happy_path(idx: JourneyIndex, c: _Collector) -> None:
             "L020",
             WARN if status == "hypothesis" else ERROR,
             "happy_path",
-            "Kein einziger Pain Point vom Typ «breakdown»: Die Journey kennt keinen Punkt, an dem sie scheitert.",
-            hint="Wo weichen Nutzende aus - Anruf, Beschwerde, Nichthandeln? Das ist der Breakdown. Anfragen- und Beschwerdedaten zeigen ihn.",
         )
     for pi, phase in enumerate(idx.journey["phases"]):
         pains = sum(len(s.get("pain_points", [])) for s in phase["steps"])
@@ -275,9 +293,8 @@ def _rule_happy_path(idx: JourneyIndex, c: _Collector) -> None:
                 "L021",
                 WARN,
                 "happy_path",
-                f"Phase «{phase['name']}»: keine Reibung, kein Edge Case.",
                 f"phases[{pi}]",
-                hint="Entweder ist die Phase wirklich reibungslos (dann Evidenz dafür anfügen) oder sie wurde aus Innensicht beschrieben.",
+                phase=phase["name"],
             )
         for si, step in enumerate(phase["steps"]):
             has_breakdown = any(pp.get("type") == "breakdown" for pp in step.get("pain_points", []))
@@ -286,9 +303,8 @@ def _rule_happy_path(idx: JourneyIndex, c: _Collector) -> None:
                     "L022",
                     WARN,
                     "happy_path",
-                    f"Schritt «{step['name']}» hat einen Breakdown, aber keinen Recovery-Pfad.",
                     f"phases[{pi}].steps[{si}]",
-                    hint="Wie kommt die Persona zurück in die Journey? Falls heute gar nicht: recovery_paths mit exists=false als Soll-Pfad festhalten.",
+                    step=step["name"],
                 )
     # Kanalwechsel ohne Markierung als Übergang
     prev_channel: str | None = None
@@ -300,9 +316,10 @@ def _rule_happy_path(idx: JourneyIndex, c: _Collector) -> None:
                     "L023",
                     INFO,
                     "happy_path",
-                    f"Kanalwechsel {prev_channel} → {ch} bei «{step['name']}» ist nicht als Übergang markiert.",
                     f"phases[{pi}].steps[{si}]",
-                    hint="Übergangspunkte sind die häufigsten Reibungsstellen; is_transition = true und gezielt nach Evidenz suchen.",
+                    from_channel=prev_channel,
+                    to_channel=ch,
+                    step=step["name"],
                 )
             if ch:
                 prev_channel = ch
@@ -313,34 +330,14 @@ def _rule_static_map(idx: JourneyIndex, c: _Collector, today: date) -> None:
     if meta.get("status") == "archived":
         return
     if not meta.get("owner"):
-        c.add(
-            "L030",
-            WARN,
-            "static_map",
-            "Keine verantwortliche Rolle (meta.owner).",
-            "meta",
-            hint="Ohne Owner wird die Journey zum Poster. Rolle und Funktionsadresse eintragen.",
-        )
+        c.add("L030", WARN, "static_map", "meta")
     if not meta.get("review_cycle_days"):
-        c.add(
-            "L031",
-            WARN,
-            "static_map",
-            "Kein Review-Rhythmus (meta.review_cycle_days).",
-            "meta",
-            hint="Zum Beispiel 180 Tage, gekoppelt an die nächste Erhebung oder den Jahreszyklus.",
-        )
+        c.add("L031", WARN, "static_map", "meta")
     nxt = meta.get("next_review")
     if nxt:
         try:
             if date.fromisoformat(nxt) < today:
-                c.add(
-                    "L032",
-                    WARN,
-                    "static_map",
-                    f"Review-Termin {nxt} ist überschritten.",
-                    "meta.next_review",
-                )
+                c.add("L032", WARN, "static_map", "meta.next_review", date=nxt)
         except ValueError:
             pass
     for pid, pp in idx.pain_points.items():
@@ -349,8 +346,9 @@ def _rule_static_map(idx: JourneyIndex, c: _Collector, today: date) -> None:
                 "L033",
                 WARN,
                 "static_map",
-                f"Schwerer Pain Point «{pid}» (Severity {pp['severity']}) ohne Owner.",
                 f"pain_points[{pid}]",
+                pp=pid,
+                severity=pp["severity"],
             )
     no_status = [o["id"] for o in idx.opportunities.values() if not o.get("status")]
     if no_status:
@@ -358,8 +356,9 @@ def _rule_static_map(idx: JourneyIndex, c: _Collector, today: date) -> None:
             "L034",
             INFO,
             "static_map",
-            f"{len(no_status)} Chance(n) ohne Status: {', '.join(no_status[:5])}{'…' if len(no_status) > 5 else ''}.",
             "opportunities",
+            n=len(no_status),
+            ids=_shortlist(no_status, 5),
         )
 
 
@@ -374,15 +373,16 @@ def _rule_empathy(idx: JourneyIndex, c: _Collector) -> None:
             "L040",
             WARN,
             "empathy_vacuum",
-            f"{len(no_feeling)} von {len(steps)} Schritten ohne Gefühlslage.",
-            hint="Lücken sind ehrlich - aber wenn mehr als die Hälfte fehlt, fehlt die Nutzerperspektive. Interviews nach Emotionen pro Schritt auswerten.",
+            missing=len(no_feeling),
+            n=len(steps),
         )
     if len(no_thinking) / len(steps) >= 0.5:
         c.add(
             "L041",
             WARN,
             "empathy_vacuum",
-            f"{len(no_thinking)} von {len(steps)} Schritten ohne Gedanken/Fragen der Persona.",
+            missing=len(no_thinking),
+            n=len(steps),
         )
     unbacked = 0
     derived = 0
@@ -400,51 +400,19 @@ def _rule_empathy(idx: JourneyIndex, c: _Collector) -> None:
         if not explicit:
             derived += 1
     if unbacked:
-        c.add(
-            "L042",
-            INFO,
-            "empathy_vacuum",
-            f"{unbacked} Emotionspunkt(e) ohne Beleg - werden im Viewer als Annahme gezeichnet.",
-            hint="Emoji-Kurven aus Workshop-Bauchgefühl sind Pseudo-Präzision. Belegen oder als Hypothese stehen lassen.",
-        )
+        c.add("L042", INFO, "empathy_vacuum", n=unbacked)
     if derived:
-        c.add(
-            "L043",
-            INFO,
-            "evidence",
-            f"{derived} Emotionspunkt(e) sind aus Evidenz abgeleitet, nicht ausdrücklich geäussert (emotion_hint.explicit fehlt).",
-        )
+        c.add("L043", INFO, "evidence", n=derived)
 
 
 def _rule_overcomplexity(idx: JourneyIndex, c: _Collector) -> None:
     phases = idx.journey["phases"]
     if len(phases) > 8:
-        c.add(
-            "L050",
-            WARN,
-            "overcomplexity",
-            f"{len(phases)} Phasen - mehr als acht lassen sich kaum noch lesen.",
-            "phases",
-            hint="Szenario enger fassen oder in zwei Journeys teilen.",
-        )
+        c.add("L050", WARN, "overcomplexity", "phases", n=len(phases))
     if idx.step_count() > 30:
-        c.add(
-            "L051",
-            WARN,
-            "overcomplexity",
-            f"{idx.step_count()} Schritte - das ist ein User Flow, keine Journey.",
-            "phases",
-            hint="Schritte auf Erlebnis-Ebene zusammenfassen; UI-Pfade gehören in einen User Flow.",
-        )
+        c.add("L051", WARN, "overcomplexity", "phases", n=idx.step_count())
     if not idx.journey["scenario"].get("scope_exclusions"):
-        c.add(
-            "L052",
-            INFO,
-            "overcomplexity",
-            "Kein expliziter Scope-Ausschluss (scenario.scope_exclusions).",
-            "scenario",
-            hint="Was bewusst nicht abgedeckt ist, schützt die Journey vor dem Stammbaum-Effekt.",
-        )
+        c.add("L052", INFO, "overcomplexity", "scenario")
 
 
 def _rule_micro_disconnect(idx: JourneyIndex, c: _Collector) -> None:
@@ -454,71 +422,32 @@ def _rule_micro_disconnect(idx: JourneyIndex, c: _Collector) -> None:
             "L060",
             INFO if status == "hypothesis" else WARN,
             "micro_disconnect",
-            "Keine Chancen (opportunities) abgeleitet.",
-            hint="Eine Map ohne Handlungsableitung ist ein Poster. Pro Frustrationstal mindestens eine How-might-we-Frage.",
         )
         return
     for pid, pp in idx.pain_points.items():
         if (pp.get("severity") or 0) >= 4 and not idx.opportunity_for_pain_point(pid):
-            c.add(
-                "L061",
-                WARN,
-                "micro_disconnect",
-                f"Schwerer Pain Point «{pid}» ohne verknüpfte Chance.",
-                f"pain_points[{pid}]",
-            )
+            c.add("L061", WARN, "micro_disconnect", f"pain_points[{pid}]", pp=pid)
     unscored = [
         o["id"]
         for o in idx.opportunities.values()
         if o.get("user_impact") is None or o.get("effort") is None
     ]
     if unscored:
-        c.add(
-            "L062",
-            INFO,
-            "micro_disconnect",
-            f"{len(unscored)} Chance(n) ohne Impact/Effort-Score - keine Priorisierung möglich.",
-            "opportunities",
-        )
+        c.add("L062", INFO, "micro_disconnect", "opportunities", n=len(unscored))
     no_stories = [o["id"] for o in idx.opportunities.values() if not o.get("stories")]
     if no_stories and len(no_stories) == len(idx.opportunities):
-        c.add(
-            "L063",
-            INFO,
-            "micro_disconnect",
-            "Keine Chance hat User Stories - die Story Map bleibt leer.",
-            "opportunities",
-            hint="journeykit export --format storymap zeigt, was ankommt.",
-        )
+        c.add("L063", INFO, "micro_disconnect", "opportunities")
 
 
 def _rule_blueprint(idx: JourneyIndex, c: _Collector) -> None:
     meta = idx.journey["meta"]
     if not meta.get("diagnosis"):
-        c.add(
-            "L070",
-            WARN,
-            "blueprint",
-            "Keine Eingangsdiagnose (meta.diagnosis): Warum ist das eine User Journey und kein Service Blueprint?",
-            "meta",
-        )
+        c.add("L070", WARN, "blueprint", "meta")
     backstage = sum(len(s.get("backstage_notes", [])) for s in idx.steps.values())
     if idx.step_count() and backstage > idx.step_count():
-        c.add(
-            "L071",
-            WARN,
-            "blueprint",
-            f"{backstage} Back-Stage-Notizen bei {idx.step_count()} Schritten.",
-            hint="Das Interesse liegt offenbar hinter der Sichtbarkeitslinie. Service Blueprint anlegen und in meta.diagnosis.backstage_documented_in verweisen.",
-        )
+        c.add("L071", WARN, "blueprint", notes=backstage, n=idx.step_count())
     if meta.get("map_type") not in {"user_journey", "customer_journey"}:
-        c.add(
-            "L072",
-            INFO,
-            "blueprint",
-            f"map_type = {meta.get('map_type')}: Erlebnis-Lints gelten nur eingeschränkt.",
-            "meta.map_type",
-        )
+        c.add("L072", INFO, "blueprint", "meta.map_type", map_type=meta.get("map_type"))
     delegated = [
         s for s in idx.steps.values() if (s.get("performed_by") or {}).get("kind") == "intermediary"
     ]
@@ -527,32 +456,26 @@ def _rule_blueprint(idx: JourneyIndex, c: _Collector) -> None:
             "L073",
             INFO,
             "blueprint",
-            f"{len(delegated)} von {idx.step_count()} Schritten führen Dritte anstelle der Persona aus (performed_by.kind = intermediary).",
             "phases",
-            hint="Ist das noch die Journey der Persona – oder die der Vermittlung? Diagnose prüfen; die Vermittlung allenfalls als eigene Persona erheben.",
+            delegated=len(delegated),
+            n=idx.step_count(),
         )
 
 
 def _rule_privacy(idx: JourneyIndex, c: _Collector) -> None:
     for sid, src in idx.sources.items():
         if src.get("pii_status") == "contains_pii":
-            c.add(
-                "L080",
-                ERROR,
-                "privacy",
-                f"Quelle «{sid}» enthält Personendaten (pii_status = contains_pii).",
-                f"sources[{sid}]",
-                hint="Vor dem Teilen anonymisieren oder pseudonymisieren; nur die Ablage referenzieren, nicht das Material.",
-            )
+            c.add("L080", ERROR, "privacy", f"sources[{sid}]", source=sid)
     for aid, atom in idx.evidence.items():
-        for label, pattern in _PII_PATTERNS:
+        for key, pattern in _PII_PATTERNS:
             if pattern.search(atom.get("text", "")):
                 c.add(
                     "L081",
                     WARN,
                     "privacy",
-                    f"Evidenz «{aid}» enthält möglicherweise eine {label}.",
                     f"evidence[{aid}]",
+                    atom=aid,
+                    what=PII_LABELS[c.lang][key],
                 )
                 break
 
@@ -564,34 +487,15 @@ def _rule_kpi(idx: JourneyIndex, c: _Collector) -> None:
         for si, step in enumerate(phase["steps"]):
             kpis += [(f"phases[{pi}].steps[{si}].kpis", k) for k in step.get("kpis", [])]
     if not kpis:
-        c.add(
-            "L090",
-            INFO,
-            "kpi",
-            "Keine Kennzahlen hinterlegt.",
-            hint="Pro Phase mindestens eine Outcome-Kennzahl (Erledigungsquote, Rückfragen, Durchlaufzeit) - sonst lässt sich Wirkung nicht zeigen.",
-        )
+        c.add("L090", INFO, "kpi")
         return
     for path, k in kpis:
         name = k.get("name", "").lower()
         if any(term in name for term in COMMERCIAL_KPI_TERMS):
-            c.add(
-                "L091",
-                INFO,
-                "kpi",
-                f"Kennzahl «{k['name']}» ist kommerziell geprägt.",
-                path,
-                hint="In Verwaltungsbegriffe übersetzen (Conversion → Anteil erledigter Anliegen, Churn → Ausweichen in Workarounds oder Beschwerden); Original in commercial_equivalent festhalten.",
-            )
+            c.add("L091", INFO, "kpi", path, name=k["name"])
     leading = [k for _, k in kpis if k.get("indicator_type") == "leading"]
     if not leading:
-        c.add(
-            "L092",
-            INFO,
-            "kpi",
-            "Nur Spätindikatoren (lagging) - kein Frühwarnsignal.",
-            hint="Aufwand pro Anliegen oder Rückfragequote pro Schritt sind Frühindikatoren.",
-        )
+        c.add("L092", INFO, "kpi")
 
 
 def _rule_evidence_quality(idx: JourneyIndex, c: _Collector) -> None:
@@ -602,9 +506,9 @@ def _rule_evidence_quality(idx: JourneyIndex, c: _Collector) -> None:
             "L100",
             INFO,
             "evidence",
-            f"{len(unused)} Evidenz-Atom(e) werden nirgends referenziert: {', '.join(unused[:6])}{'…' if len(unused) > 6 else ''}.",
             "evidence",
-            hint="Nicht synthetisiertes Material - entweder einordnen oder bewusst als «ausserhalb Scope» markieren.",
+            n=len(unused),
+            ids=_shortlist(unused, 6),
         )
     contradictions = [a for a in idx.evidence.values() if a.get("contradicts")]
     for a in contradictions:
@@ -612,9 +516,9 @@ def _rule_evidence_quality(idx: JourneyIndex, c: _Collector) -> None:
             "L101",
             INFO,
             "evidence",
-            f"Evidenz «{a['id']}» widerspricht {', '.join(a['contradicts'])}.",
             f"evidence[{a['id']}]",
-            hint="Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet.",
+            atom=a["id"],
+            others=", ".join(a["contradicts"]),
         )
     no_locator = [
         a["id"] for a in idx.evidence.values() if a["class"] != "assumed" and not a.get("locator")
@@ -624,9 +528,8 @@ def _rule_evidence_quality(idx: JourneyIndex, c: _Collector) -> None:
             "L102",
             INFO,
             "evidence",
-            f"{len(no_locator)} Primärevidenz(en) ohne Fundstelle (locator).",
             "evidence",
-            hint="Ohne Fundstelle lässt sich ein Zitat nicht nachprüfen.",
+            n=len(no_locator),
         )
 
 
@@ -635,11 +538,16 @@ def _rule_evidence_quality(idx: JourneyIndex, c: _Collector) -> None:
 # ---------------------------------------------------------------------------
 
 
-def lint_journey(journey: dict[str, Any], today: date | None = None) -> list[Finding]:
-    """Alle Befunde, sortiert nach Stufe und Code. Setzt eine schema-valide Journey voraus."""
+def lint_journey(
+    journey: dict[str, Any], today: date | None = None, lang: str = "de"
+) -> list[Finding]:
+    """Alle Befunde, sortiert nach Stufe und Code. Setzt eine schema-valide Journey voraus.
+
+    ``lang`` wählt die Sprache von Meldung und Hinweis (``lint_messages.LANGUAGES``).
+    """
     today = today or date.today()
     idx = JourneyIndex.build(journey)
-    c = _Collector()
+    c = _Collector(check_language(lang))
     _rule_integrity(idx, c)
     _rule_inside_out(idx, c)
     _rule_happy_path(idx, c)

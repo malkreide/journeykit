@@ -11,7 +11,8 @@ from pathlib import Path
 from . import SCHEMA_VERSION, __version__, load_journey, load_schema
 from .diff import diff_journeys, diff_markdown
 from .export import actions_csv, audit_markdown, opportunities_markdown, story_map_markdown
-from .lint import ERROR, WARN, lint_journey, summarize
+from .lint import ERROR, INFO, WARN, lint_journey, summarize
+from .lint_messages import LANGUAGES, SUMMARY, resolve_language
 from .render import UI_LANGUAGES, render_html
 from .validate import validate_journey
 
@@ -59,7 +60,8 @@ def cmd_lint(args: argparse.Namespace) -> int:
     worst = 0
     for path in args.files:
         journey = _load_valid(path)
-        findings = lint_journey(journey, today=today)
+        lang = resolve_language(journey, args.lang)
+        findings = lint_journey(journey, today=today, lang=lang)
         counts = summarize(findings)
         if args.format == "json":
             print(
@@ -71,7 +73,9 @@ def cmd_lint(args: argparse.Namespace) -> int:
             )
         else:
             print(
-                f"{path}: {counts[ERROR]} Fehler · {counts[WARN]} Warnungen · {counts['INFO']} Hinweise"
+                SUMMARY[lang].format(
+                    path=path, errors=counts[ERROR], warnings=counts[WARN], infos=counts[INFO]
+                )
             )
             seen_codes: set[str] = set()
             for f in findings:
@@ -216,6 +220,11 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("--quiet", action="store_true", help="Hinweise (INFO) unterdrücken")
     s.add_argument("--format", choices=["text", "json"], default="text")
     s.add_argument("--today", help="Stichtag für Review-Prüfungen (YYYY-MM-DD)")
+    s.add_argument(
+        "--lang",
+        choices=LANGUAGES,
+        help="Sprache der Meldungen (Standard: meta.language der Journey, sonst de)",
+    )
     s.set_defaults(func=cmd_lint)
 
     s = sub.add_parser(

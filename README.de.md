@@ -79,7 +79,7 @@ journeykit new kita-anmeldung --title "Kita-Anmeldung" --persona "Eltern" --role
 | `journeykit validate DATEI...` | JSON-Schema-Validierung (Exit 2 bei Fehlern) |
 | `journeykit lint DATEI... [--strict] [--quiet] [--format json] [--today DATUM] [--lang de\|fr]` | Fallstrick-Lints; `--strict` lässt Warnungen scheitern. Meldungen deutsch oder französisch (Standard: `meta.language` der Datei) |
 | `journeykit render DATEI... [-o OUT] [--title T] [--lang de\|fr]` | Eigenständiges interaktives HTML; mehrere Dateien überlagern Personas. Oberfläche und Lint-Meldungen deutsch oder französisch (Standard: `meta.language` der ersten Datei); Inhalte der Journey bleiben, wie sie sind |
-| `journeykit export DATEI --format storymap\|actions\|opportunities\|audit [-o OUT]` | Markdown- / CSV-Exporte |
+| `journeykit export DATEI --format storymap\|actions\|opportunities\|audit [-o OUT] [--lang de\|fr]` | Markdown- / CSV-Exporte; Markdown deutsch oder französisch (Standard: `meta.language`), das CSV hat technische Spaltennamen |
 | `journeykit diff ALT NEU` | Modelländerungen zwischen Versionen (Exit 1, wenn es Änderungen gibt) |
 | `journeykit new ID --title --persona --role --goal` | Gerüst einer validen Journey im Status `hypothesis` |
 | `journeykit schema` | JSON Schema ausgeben |
@@ -120,6 +120,7 @@ journeykit/
 │   ├── lint_messages.py             # Meldungen und Hinweise, deutsch und französisch
 │   ├── render.py                    # injiziert Daten in den Viewer
 │   ├── export.py                    # Story Map, Massnahmen-CSV, Chancen, Audit
+│   ├── export_texts.py              # Texte der Exporte, deutsch und französisch
 │   ├── diff.py                      # Versionsvergleich
 │   ├── cli.py                       # Befehl journeykit
 │   └── viewer/viewer.html           # eigenständiger interaktiver Viewer

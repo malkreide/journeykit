@@ -2,6 +2,7 @@
 
 Alle Exporte sind Text (Markdown oder CSV), damit sie in Tickets, Notion,
 Wikis oder Protokolle wandern können - dort, wo Massnahmen tatsächlich leben.
+Die Texte stehen je Sprache in ``export_texts.py`` (``lang`` = "de" oder "fr").
 """
 
 from __future__ import annotations
@@ -10,15 +11,15 @@ import csv
 import io
 from typing import Any
 
-from .lint import ANTIPATTERNS, Finding, summarize
+from .export_texts import QUADRANT_LABELS, text
+from .lint import Finding, summarize
+from .lint_messages import ANTIPATTERN_LABELS, check_language
 from .model import JourneyIndex, priority_quadrant
 
-QUADRANT_LABELS = {
-    "quick_win": "Quick Win",
-    "big_bet": "Big Bet",
-    "fill_in": "Nebenbei",
-    "skip": "Zurückstellen",
-}
+
+def _texts(lang: str):
+    check_language(lang)
+    return lambda key, **params: text(lang, key, **params)
 
 
 def _opps_by_phase(idx: JourneyIndex) -> dict[str | None, list[dict[str, Any]]]:
@@ -37,16 +38,23 @@ def _rank(opp: dict[str, Any]) -> tuple[int, int]:
     return order[priority_quadrant(opp)], -(opp.get("user_impact") or 0)
 
 
-def story_map_markdown(journey: dict[str, Any]) -> str:
+def story_map_markdown(journey: dict[str, Any], lang: str = "de") -> str:
     """Patton-Story-Map: Phasen horizontal (Backbone), Stories vertikal priorisiert, MVP-Linie."""
+    t = _texts(lang)
     idx = JourneyIndex.build(journey)
     by_phase = _opps_by_phase(idx)
-    lines = [f"# Story Map: {journey['meta']['title']}", ""]
+    lines = [t("storymap.title", title=journey["meta"]["title"]), ""]
+    persona = journey["persona"]
     lines.append(
-        f"Persona: **{journey['persona']['name']}** ({journey['persona']['role']}) · Ziel: {journey['scenario']['goal']}"
+        t(
+            "storymap.persona",
+            name=persona["name"],
+            role=persona["role"],
+            goal=journey["scenario"]["goal"],
+        )
     )
     lines.append("")
-    lines.append("## Backbone (Nutzeraktivitäten)")
+    lines.append(t("storymap.backbone"))
     lines.append("")
     lines.append("| " + " | ".join(p["name"] for p in journey["phases"]) + " |")
     lines.append("|" + "---|" * len(journey["phases"]))
@@ -56,28 +64,28 @@ def story_map_markdown(journey: dict[str, Any]) -> str:
         + " |"
     )
     lines.append("")
-    lines.append("## Stories je Phase (oben = wichtigste; ✅ = MVP-Schnitt)")
+    lines.append(t("storymap.stories"))
     lines.append("")
     for phase in journey["phases"]:
         opps = sorted(by_phase.get(phase["id"], []), key=_rank)
         lines.append(f"### {phase['name']}")
         if not opps:
-            lines.append("_Keine Chancen abgeleitet._")
+            lines.append(t("storymap.no_opps"))
             lines.append("")
             continue
         for opp in opps:
             q = priority_quadrant(opp)
-            tag = f" `{QUADRANT_LABELS[q]}`" if q else ""
+            tag = f" `{QUADRANT_LABELS[lang][q]}`" if q else ""
             lines.append(f"**{opp['hmw']}**{tag}")
             for story in opp.get("stories", []):
                 mark = "✅" if story.get("mvp") else "◻️"
                 lines.append(f"- {mark} {story['text']}")
             if not opp.get("stories"):
-                lines.append("- _(noch keine Stories)_")
+                lines.append(t("storymap.no_stories"))
             lines.append("")
     unassigned = by_phase.get(None, [])
     if unassigned:
-        lines.append("### Ohne Phasenbezug")
+        lines.append(t("storymap.no_phase"))
         for opp in unassigned:
             lines.append(f"- {opp['hmw']}")
         lines.append("")
@@ -137,66 +145,82 @@ def actions_csv(journey: dict[str, Any]) -> str:
     return buf.getvalue()
 
 
-def opportunities_markdown(journey: dict[str, Any]) -> str:
+def opportunities_markdown(journey: dict[str, Any], lang: str = "de") -> str:
     """Priorisierungsmatrix: Chancen nach Quadrant."""
+    t = _texts(lang)
     idx = JourneyIndex.build(journey)
-    lines = [f"# Chancen und Priorisierung: {journey['meta']['title']}", ""]
-    lines.append(
-        "| Quadrant | Chance | Impact | Public Value | Aufwand | Pain Points | Owner | Status |"
-    )
+    lines = [t("opps.title", title=journey["meta"]["title"]), ""]
+    lines.append(t("opps.header"))
     lines.append("|---|---|---|---|---|---|---|---|")
     for opp in sorted(idx.opportunities.values(), key=_rank):
         q = priority_quadrant(opp)
         lines.append(
-            f"| {QUADRANT_LABELS.get(q, '–')} | {opp['hmw']} | {opp.get('user_impact', '–')} | {opp.get('public_value', '–')} | {opp.get('effort', '–')} | {', '.join(opp.get('linked_pain_points', [])) or '–'} | {opp.get('owner', '–')} | {opp.get('status', '–')} |"
+            f"| {QUADRANT_LABELS[lang].get(q, '–')} | {opp['hmw']} | {opp.get('user_impact', '–')} | {opp.get('public_value', '–')} | {opp.get('effort', '–')} | {', '.join(opp.get('linked_pain_points', [])) or '–'} | {opp.get('owner', '–')} | {opp.get('status', '–')} |"
         )
     lines.append("")
-    lines.append(
-        "Quadranten: Quick Win = hoher Wert, Aufwand ≤ 2 · Big Bet = hoher Wert, Aufwand ≥ 3 · Nebenbei = geringer Wert, geringer Aufwand · Zurückstellen = geringer Wert, hoher Aufwand."
-    )
+    lines.append(t("opps.legend"))
     return "\n".join(lines)
 
 
-def audit_markdown(journey: dict[str, Any], findings: list[Finding]) -> str:
-    """Audit-Report: Evidenzlage, Befunde je Anti-Pattern, nächste Schritte."""
+def audit_markdown(journey: dict[str, Any], findings: list[Finding], lang: str = "de") -> str:
+    """Audit-Report: Evidenzlage, Befunde je Anti-Pattern, nächste Schritte.
+
+    Die Befunde kommen fertig formuliert; für einen französischen Report
+    ``lint_journey(journey, lang="fr")`` übergeben.
+    """
+    t = _texts(lang)
     idx = JourneyIndex.build(journey)
     meta = journey["meta"]
     ev = idx.evidence_summary()
     counts = summarize(findings)
-    lines = [f"# Audit: {meta['title']}", ""]
+    lines = [t("audit.title", title=meta["title"]), ""]
     lines.append(
-        f"Version {meta['version']} · Status `{meta['status']}` · Typ `{meta['map_type']}`"
+        t("audit.meta", version=meta["version"], status=meta["status"], map_type=meta["map_type"])
     )
     if meta.get("synthetic"):
         lines.append("")
-        lines.append("> Synthetisches Beispiel: Quellen und Evidenz sind erfunden.")
+        lines.append(t("audit.synthetic"))
     lines.append("")
-    lines.append("## Evidenzlage")
+    lines.append(t("audit.evidence"))
     lines.append("")
+    kinds = ", ".join(sorted({s["kind"] for s in idx.sources.values()})) or "–"
+    lines.append(t("audit.sources", n=len(idx.sources), kinds=kinds))
     lines.append(
-        f"- Quellen: {len(idx.sources)} ({', '.join(sorted({s['kind'] for s in idx.sources.values()})) or '–'})"
-    )
-    lines.append(
-        f"- Evidenz-Atome: {ev['total']} · beobachtet {ev['observed']} · berichtet {ev['reported']} · angenommen {ev['assumed']}"
+        t(
+            "audit.atoms",
+            total=ev["total"],
+            observed=ev["observed"],
+            reported=ev["reported"],
+            assumed=ev["assumed"],
+        )
     )
     experience = [c for c in idx.claims() if c.kind in {"thinking", "feeling", "pain_point"}]
     backed = sum(1 for c in experience if idx.has_primary(c.evidence_refs))
     if experience:
-        lines.append(
-            f"- Erlebnis-Aussagen mit Primärevidenz: {backed}/{len(experience)} ({backed / len(experience):.0%})"
-        )
+        pct = f"{backed / len(experience) * 100:.0f}"
+        lines.append(t("audit.experience", backed=backed, n=len(experience), pct=pct))
     lines.append(
-        f"- Breakdowns: {len(idx.breakdowns())} · Pain Points gesamt: {len(idx.pain_points)} · Chancen: {len(idx.opportunities)}"
+        t(
+            "audit.counts",
+            breakdowns=len(idx.breakdowns()),
+            pain_points=len(idx.pain_points),
+            opps=len(idx.opportunities),
+        )
     )
     lines.append("")
     lines.append(
-        f"## Befunde: {counts['ERROR']} Fehler · {counts['WARN']} Warnungen · {counts['INFO']} Hinweise"
+        t(
+            "audit.findings",
+            errors=counts["ERROR"],
+            warnings=counts["WARN"],
+            infos=counts["INFO"],
+        )
     )
     lines.append("")
     by_ap: dict[str, list[Finding]] = {}
     for f in findings:
         by_ap.setdefault(f.antipattern, []).append(f)
-    for ap, label in ANTIPATTERNS.items():
+    for ap, label in ANTIPATTERN_LABELS[lang].items():
         items = by_ap.get(ap)
         if not items:
             continue
@@ -204,19 +228,23 @@ def audit_markdown(journey: dict[str, Any], findings: list[Finding]) -> str:
         lines.append("")
         for f in items:
             where = f" (`{f.path}`)" if f.path else ""
-            lines.append(f"- **{f.level}** {f.code}{where}: {f.message}")
+            lines.append(
+                t("audit.finding", level=f.level, code=f.code, where=where, message=f.message)
+            )
             if f.hint:
                 lines.append(f"  - → {f.hint}")
         lines.append("")
     if not findings:
-        lines.append("Keine Befunde.")
+        lines.append(t("audit.no_findings"))
         lines.append("")
     oq = journey.get("open_questions", [])
     if oq:
-        lines.append("## Offene Fragen")
+        lines.append(t("audit.open_questions"))
         lines.append("")
         for q in oq:
-            method = f" _(Methode: {q['proposed_method']})_" if q.get("proposed_method") else ""
+            method = (
+                t("audit.method", method=q["proposed_method"]) if q.get("proposed_method") else ""
+            )
             lines.append(f"- {q['text']}{method}")
         lines.append("")
     return "\n".join(lines)

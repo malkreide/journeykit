@@ -207,7 +207,7 @@ kein Ersatz für ein Review.
 
 ```
 journeykit render journey.json -o journey.html            # --lang fr für die französische Oberfläche
-journeykit export journey.json --format audit -o audit.md
+journeykit export journey.json --format audit -o audit.md       # --lang fr für französische Reports
 journeykit export journey.json --format storymap -o storymap.md
 journeykit export journey.json --format actions -o massnahmen.csv
 ```

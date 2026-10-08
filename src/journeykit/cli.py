@@ -104,14 +104,15 @@ def cmd_render(args: argparse.Namespace) -> int:
 
 def cmd_export(args: argparse.Namespace) -> int:
     journey = _load_valid(args.file)
+    lang = resolve_language(journey, args.lang)
     if args.format == "storymap":
-        text = story_map_markdown(journey)
+        text = story_map_markdown(journey, lang=lang)
     elif args.format == "actions":
         text = actions_csv(journey)
     elif args.format == "opportunities":
-        text = opportunities_markdown(journey)
+        text = opportunities_markdown(journey, lang=lang)
     elif args.format == "audit":
-        text = audit_markdown(journey, lint_journey(journey))
+        text = audit_markdown(journey, lint_journey(journey, lang=lang), lang=lang)
     else:  # pragma: no cover - argparse schützt
         raise SystemExit(f"unbekanntes Format {args.format}")
     _write(text, args.output)
@@ -246,6 +247,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--format", choices=["storymap", "actions", "opportunities", "audit"], required=True
     )
     s.add_argument("-o", "--output")
+    s.add_argument(
+        "--lang",
+        choices=LANGUAGES,
+        help="Sprache der Texte (Standard: meta.language der Journey, sonst de; CSV ist sprachneutral)",
+    )
     s.set_defaults(func=cmd_export)
 
     s = sub.add_parser("diff", help="Modelländerungen zwischen zwei Versionen")

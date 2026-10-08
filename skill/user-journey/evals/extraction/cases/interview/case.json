@@ -1,0 +1,44 @@
+{
+  "title": "Interview U1 – Wohnsitzanmeldung nach Umzug",
+  "kind": "interview",
+  "class": "reported",
+  "source_id": "int-u1",
+  "prefix": "u1",
+  "input": "input.md",
+  "phases": [
+    "vorbereitung",
+    "anmeldung",
+    "nachweise",
+    "bestaetigung"
+  ],
+  "persona": "zugezogen",
+  "known_atoms": [],
+  "tests": "Wörtliche Zitate mit Zeitstempel; Fragen der interviewenden Person sind keine Evidenz; ausdrückliche vs. abgeleitete Emotion; Breakdown (aufgeben, an den Schalter ausweichen) vs. Reibung; Vermittlung durch die Nachbarin als eigenes Atom; erfundener Name wird ersetzt. Ein Atom pro Aussage, nicht pro Satz; eine Dauer nicht doppelt als Zitat und Messwert.",
+  "rules": {
+    "atoms_min": 7,
+    "atoms_max": 14,
+    "kinds": [
+      "quote",
+      "metric"
+    ],
+    "locator_required": true,
+    "pii_terms": [
+      "Roth"
+    ],
+    "forbidden": [
+      {
+        "text": "Erzählen Sie, wie Sie",
+        "why": "Frage der interviewenden Person"
+      },
+      {
+        "text": "Wie sind Sie dann vorgegangen",
+        "why": "Frage der interviewenden Person"
+      },
+      {
+        "text": "Gab es jemanden, der Ihnen geholfen hat",
+        "why": "Frage der interviewenden Person"
+      }
+    ],
+    "one_atom_per_locator": true
+  }
+}

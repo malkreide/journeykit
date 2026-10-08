@@ -1,0 +1,76 @@
+{
+  "atoms": [
+    {
+      "key": "meiste-online",
+      "required": true,
+      "match": [
+        "meisten Zuziehenden"
+      ],
+      "kind": [
+        "workshop_statement"
+      ],
+      "class": [
+        "assumed"
+      ],
+      "contradicts": [
+        "stat-02"
+      ],
+      "why": "Annahme widerspricht dem Messwert 38 %."
+    },
+    {
+      "key": "genervt",
+      "required": true,
+      "match": [
+        "genervt"
+      ],
+      "kind": [
+        "workshop_statement"
+      ],
+      "emotion": "not_explicit",
+      "why": "Das Team vermutet ein Gefühl – keine ausdrücklich geäusserte Emotion von Nutzenden."
+    },
+    {
+      "key": "upload-browser",
+      "required": true,
+      "match": [
+        "alte Browser"
+      ],
+      "kind": [
+        "workshop_statement"
+      ],
+      "contradicts": [
+        "anf-07"
+      ]
+    },
+    {
+      "key": "idee-checkliste",
+      "required": true,
+      "match": [
+        "Checkliste"
+      ],
+      "kind": [
+        "workshop_statement"
+      ]
+    },
+    {
+      "key": "idee-erinnerung",
+      "required": true,
+      "match": [
+        "Erinnerungsmail"
+      ],
+      "kind": [
+        "workshop_statement"
+      ]
+    },
+    {
+      "key": "frist-unbekannt",
+      "required": true,
+      "match": [
+        "Frist"
+      ],
+      "kind": [
+        "workshop_statement"
+      ]
+    }
+  ]
+}

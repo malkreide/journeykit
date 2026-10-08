@@ -1,0 +1,86 @@
+[
+  {
+    "id": "stat-01",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "412 Zuzüge mit Wohnsitzanmeldung im Jahr 2025.",
+    "locator": "anmeldungen_total",
+    "value": 412,
+    "unit": "Anzahl",
+    "signal": "neutral"
+  },
+  {
+    "id": "stat-02",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "38 % der Anmeldungen 2025 vollständig über das Online-Formular.",
+    "locator": "anteil_online",
+    "value": 38,
+    "unit": "%",
+    "signal": "neutral",
+    "channel_hint": "web"
+  },
+  {
+    "id": "stat-03",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "21 % der online begonnenen Anmeldungen 2025 wurden nicht abgeschlossen.",
+    "locator": "anteil_online_abgebrochen",
+    "value": 21,
+    "unit": "%",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "channel_hint": "web"
+  },
+  {
+    "id": "stat-04",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "17 % der Anmeldungen 2025 erfolgten später als 14 Tage nach dem Umzug.",
+    "locator": "anteil_verspaetet",
+    "value": 17,
+    "unit": "%",
+    "signal": "friction",
+    "phase_hint": "anmeldung"
+  },
+  {
+    "id": "stat-05",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Bearbeitungsdauer 2025 im Median 6 Arbeitstage, vom Eingang bis zum Versand der Bestätigung.",
+    "locator": "bearbeitungsdauer_median",
+    "value": 6,
+    "unit": "Arbeitstage",
+    "signal": "neutral",
+    "phase_hint": "bestaetigung"
+  },
+  {
+    "id": "stat-06",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "90 % der Fälle 2025 schneller als 14 Arbeitstage vom Eingang bis zum Versand der Bestätigung (90. Perzentil).",
+    "locator": "bearbeitungsdauer_p90",
+    "value": 14,
+    "unit": "Arbeitstage",
+    "signal": "neutral",
+    "phase_hint": "bestaetigung"
+  },
+  {
+    "id": "stat-07",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "29 % der Anmeldungen 2025 mit mindestens einer Rückfrage wegen fehlender Unterlagen.",
+    "locator": "anteil_rueckfragen",
+    "value": 29,
+    "unit": "%",
+    "signal": "friction",
+    "phase_hint": "nachweise"
+  }
+]

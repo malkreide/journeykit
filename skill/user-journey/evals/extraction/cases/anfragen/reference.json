@@ -1,0 +1,93 @@
+[
+  {
+    "id": "anf-01",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "12 von 20 Anfragen im August 2026 kamen per Telefon, 5 per E-Mail, 3 am Schalter.",
+    "locator": "Spalte kanal, A-01 bis A-20",
+    "value": 12,
+    "unit": "Anfragen",
+    "signal": "friction",
+    "channel_hint": "phone"
+  },
+  {
+    "id": "anf-02",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "8 von 20 Anfragen betreffen die Unterlagen (welche, Original oder Kopie, Heimatschein).",
+    "locator": "Spalte kategorie",
+    "value": 8,
+    "unit": "Anfragen",
+    "signal": "friction",
+    "phase_hint": "nachweise"
+  },
+  {
+    "id": "anf-03",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "6 von 20 Anfragen betreffen das Online-Formular, meist Abbrüche beim Upload.",
+    "locator": "Spalte kategorie",
+    "value": 6,
+    "unit": "Anfragen",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "channel_hint": "web"
+  },
+  {
+    "id": "anf-04",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "4 von 20 Anfragen betreffen die Frist oder die Dauer bis zur Bestätigung.",
+    "locator": "Spalte kategorie",
+    "value": 4,
+    "unit": "Anfragen",
+    "signal": "friction"
+  },
+  {
+    "id": "anf-05",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Online angefangen, Upload ging nicht; die Person meldet sich am Schalter an.",
+    "locator": "A-05",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "channel_hint": "counter"
+  },
+  {
+    "id": "anf-06",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Formular akzeptiert keine Fotos vom Handy.",
+    "locator": "A-07",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "channel_hint": "web"
+  },
+  {
+    "id": "anf-07",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Liste der Unterlagen auf der Website nicht gefunden.",
+    "locator": "A-12",
+    "signal": "friction",
+    "phase_hint": "vorbereitung",
+    "channel_hint": "web"
+  },
+  {
+    "id": "anf-08",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Bestätigung nach drei Wochen noch nicht erhalten.",
+    "locator": "A-17",
+    "signal": "friction",
+    "phase_hint": "bestaetigung"
+  }
+]

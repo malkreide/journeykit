@@ -1,0 +1,108 @@
+[
+  {
+    "id": "ws-01",
+    "source_ref": "ws",
+    "class": "assumed",
+    "kind": "workshop_statement",
+    "text": "Die meisten Zuziehenden melden sich inzwischen online an, der Schalter wird kaum noch gebraucht.",
+    "locator": "Zeile 5",
+    "signal": "positive",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "kanalwahl",
+      "online-anteil"
+    ],
+    "contradicts": [
+      "stat-02"
+    ]
+  },
+  {
+    "id": "ws-02",
+    "source_ref": "ws",
+    "class": "assumed",
+    "kind": "workshop_statement",
+    "text": "Die Leute sind sicher genervt, weil sie den Heimatschein selbst besorgen müssen.",
+    "locator": "Zeile 6",
+    "signal": "friction",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "genervt",
+      "explicit": false
+    },
+    "tags": [
+      "heimatschein",
+      "unterlagen"
+    ]
+  },
+  {
+    "id": "ws-03",
+    "source_ref": "ws",
+    "class": "assumed",
+    "kind": "workshop_statement",
+    "text": "Das Upload-Problem betrifft nur alte Browser.",
+    "locator": "Zeile 7",
+    "signal": "friction",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "upload"
+    ],
+    "contradicts": [
+      "anf-07"
+    ]
+  },
+  {
+    "id": "ws-04",
+    "source_ref": "ws",
+    "class": "assumed",
+    "kind": "workshop_statement",
+    "text": "Idee: Checkliste der Unterlagen als PDF zum Herunterladen.",
+    "locator": "Zeile 8",
+    "signal": "need",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "idee",
+      "unterlagen",
+      "checkliste"
+    ]
+  },
+  {
+    "id": "ws-05",
+    "source_ref": "ws",
+    "class": "assumed",
+    "kind": "workshop_statement",
+    "text": "Idee: Erinnerungsmail nach 10 Tagen, wenn die Anmeldung noch fehlt.",
+    "locator": "Zeile 9",
+    "signal": "need",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "email",
+    "tags": [
+      "idee",
+      "frist",
+      "erinnerung"
+    ]
+  },
+  {
+    "id": "ws-06",
+    "source_ref": "ws",
+    "class": "assumed",
+    "kind": "workshop_statement",
+    "text": "Wir vermuten, dass viele die Frist von 14 Tagen gar nicht kennen.",
+    "locator": "Zeile 10",
+    "signal": "friction",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "orientierung"
+    ]
+  }
+]

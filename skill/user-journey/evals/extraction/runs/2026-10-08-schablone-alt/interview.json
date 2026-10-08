@@ -1,0 +1,269 @@
+[
+  {
+    "id": "u1-01",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das hat mir die Vermieterin bei der Schlüsselübergabe gesagt.",
+    "locator": "00:52",
+    "signal": "neutral",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "vermittlung",
+      "anstoss",
+      "information"
+    ]
+  },
+  {
+    "id": "u1-02",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Vorher wusste ich nicht, dass man nur vierzehn Tage Zeit hat.",
+    "locator": "00:52",
+    "signal": "friction",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "information"
+    ]
+  },
+  {
+    "id": "u1-03",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich wollte es online machen, auf der Website der Gemeinde.",
+    "locator": "01:41",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "kanalwahl",
+      "online"
+    ]
+  },
+  {
+    "id": "u1-04",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Dort stand, ich brauche den Heimatschein. Ich hatte keine Ahnung, was das ist.",
+    "locator": "01:41",
+    "signal": "friction",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "heimatschein",
+      "fachbegriff",
+      "verstaendlichkeit"
+    ]
+  },
+  {
+    "id": "u1-05",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ehrlich gesagt hatte ich richtig Angst, dass ich eine Busse bekomme, weil die vierzehn Tage schon fast vorbei waren.",
+    "locator": "02:20",
+    "signal": "friction",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "Angst",
+      "explicit": true
+    },
+    "tags": [
+      "frist",
+      "busse"
+    ]
+  },
+  {
+    "id": "u1-06",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Den Heimatschein musste ich bei meiner alten Gemeinde bestellen. Das ging per Post und hat neun Tage gedauert.",
+    "locator": "03:05",
+    "signal": "friction",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "channel_hint": "mail",
+    "tags": [
+      "heimatschein",
+      "fremde-stelle",
+      "wartezeit"
+    ]
+  },
+  {
+    "id": "u1-07",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Dauer Bestellung Heimatschein bei der früheren Wohngemeinde per Post bis Eingang, Einzelaussage einer befragten Person: neun Tage.",
+    "value": 9,
+    "unit": "Tage",
+    "locator": "03:05",
+    "signal": "friction",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "heimatschein",
+      "dauer"
+    ]
+  },
+  {
+    "id": "u1-08",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das Online-Formular hat dann beim Hochladen immer abgebrochen. Nach dem dritten Versuch habe ich aufgegeben und bin an den Schalter gegangen.",
+    "locator": "03:48",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "resigniert",
+      "explicit": false
+    },
+    "tags": [
+      "upload",
+      "technischer-fehler",
+      "kanalwechsel"
+    ]
+  },
+  {
+    "id": "u1-09",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Am Schalter war die Frau sehr freundlich, in zehn Minuten war alles erledigt.",
+    "locator": "04:30",
+    "signal": "positive",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "counter",
+    "tags": [
+      "schalter",
+      "freundlichkeit"
+    ]
+  },
+  {
+    "id": "u1-10",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Dauer der Erledigung am Schalter, Einzelaussage einer befragten Person: zehn Minuten.",
+    "value": 10,
+    "unit": "Minuten",
+    "locator": "04:30",
+    "signal": "positive",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "counter",
+    "tags": [
+      "schalter",
+      "dauer"
+    ]
+  },
+  {
+    "id": "u1-11",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Meine Nachbarin, [Name], hat mir gezeigt, welche Unterlagen ich kopieren muss.",
+    "locator": "05:10",
+    "signal": "workaround",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "vermittlung",
+      "hilfe-durch-dritte",
+      "unterlagen"
+    ]
+  },
+  {
+    "id": "u1-12",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ohne sie hätte ich nicht gewusst, dass es auch den Mietvertrag braucht.",
+    "locator": "05:10",
+    "signal": "friction",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "mietvertrag",
+      "unterlagen",
+      "information"
+    ]
+  },
+  {
+    "id": "u1-13",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Dauer von der Anmeldung bis zum Eingang der Bestätigung per Post, Einzelaussage einer befragten Person: zwei Wochen.",
+    "value": 2,
+    "unit": "Wochen",
+    "locator": "05:55",
+    "signal": "friction",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "mail",
+    "tags": [
+      "bestaetigung",
+      "dauer"
+    ]
+  },
+  {
+    "id": "u1-14",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Die Bestätigung kam dann zwei Wochen später per Post. Ich weiss bis heute nicht, ob das normal ist.",
+    "locator": "05:55",
+    "signal": "friction",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "mail",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "verunsichert",
+      "explicit": false
+    },
+    "tags": [
+      "bestaetigung",
+      "erwartung",
+      "transparenz"
+    ]
+  },
+  {
+    "id": "u1-15",
+    "source_ref": "int-u1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Was ich mir wünschen würde: eine Liste am Anfang, was man alles braucht. Dann wäre ich viel ruhiger gewesen.",
+    "locator": "06:30",
+    "signal": "need",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "zugezogen",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "unruhig",
+      "explicit": false
+    },
+    "tags": [
+      "checkliste",
+      "unterlagen",
+      "information"
+    ]
+  }
+]

@@ -1,0 +1,92 @@
+{
+  "atoms": [
+    {
+      "key": "kanal-telefon",
+      "required": true,
+      "match": [
+        "Telefon",
+        "telefonisch"
+      ],
+      "value_any": [
+        12,
+        60
+      ],
+      "kind": [
+        "metric"
+      ],
+      "class": [
+        "observed"
+      ],
+      "why": "12 von 20 Anfragen per Telefon – wo angerufen wird, hat ein anderer Kanal versagt."
+    },
+    {
+      "key": "kategorie-unterlagen",
+      "required": true,
+      "match": [
+        "Unterlagen"
+      ],
+      "value_any": [
+        8,
+        40
+      ],
+      "kind": [
+        "metric"
+      ]
+    },
+    {
+      "key": "kategorie-formular",
+      "required": true,
+      "match": [
+        "Online-Formular",
+        "Formular",
+        "Upload"
+      ],
+      "value_any": [
+        6,
+        30
+      ],
+      "kind": [
+        "metric"
+      ]
+    },
+    {
+      "key": "ausweichen-schalter",
+      "required": true,
+      "match": [
+        [
+          "Schalter",
+          "online"
+        ],
+        [
+          "Schalter",
+          "Online"
+        ],
+        "A-05",
+        "A-18"
+      ],
+      "kind": [
+        "metric",
+        "observation"
+      ],
+      "signal": [
+        "breakdown",
+        "workaround"
+      ],
+      "why": "Online gescheitert, am Schalter erledigt: Ausweichen."
+    },
+    {
+      "key": "kategorie-frist",
+      "required": false,
+      "match": [
+        "Frist"
+      ],
+      "value_any": [
+        4,
+        20
+      ],
+      "kind": [
+        "metric"
+      ]
+    }
+  ]
+}

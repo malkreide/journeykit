@@ -1,0 +1,41 @@
+{
+  "title": "Workshop «Umzug digital», Notizen",
+  "kind": "workshop",
+  "class": "assumed",
+  "source_id": "workshop",
+  "prefix": "ws",
+  "input": "input.md",
+  "phases": [
+    "vorbereitung",
+    "anmeldung",
+    "nachweise",
+    "bestaetigung"
+  ],
+  "persona": "zugezogen",
+  "known_atoms": [
+    {
+      "id": "stat-02",
+      "text": "38 % der Anmeldungen 2025 vollständig über das Online-Formular."
+    },
+    {
+      "id": "anf-07",
+      "text": "Formular akzeptiert keine Fotos vom Handy."
+    }
+  ],
+  "tests": "Workshop ohne Nutzende: workshop_statement mit Klasse assumed; Vermutungen des Teams über Gefühle der Nutzenden sind keine ausdrücklich geäusserte Emotion; contradicts gegen Messwert und Anfrage.",
+  "rules": {
+    "atoms_min": 5,
+    "atoms_max": 7,
+    "kinds": [
+      "workshop_statement"
+    ],
+    "locator_required": false,
+    "no_explicit_emotion": true,
+    "forbidden": [
+      {
+        "text": "Teilnehmende: Einwohnerdienste",
+        "why": "Kopfzeile, keine Aussage"
+      }
+    ]
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "atoms": [
+    {
+      "key": "frist-unbekannt",
+      "required": true,
+      "match": [
+        "vierzehn Tage Zeit"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "need",
+        "neutral"
+      ],
+      "locator": [
+        "00:52"
+      ],
+      "emotion": "none",
+      "why": "Frist erst bei der Schlüsselübergabe erfahren – Orientierungslücke."
+    },
+    {
+      "key": "heimatschein-unbekannt",
+      "required": true,
+      "match": [
+        "keine Ahnung, was das ist"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "01:41"
+      ],
+      "emotion": "not_explicit",
+      "why": "Unbekannter Begriff behindert, ohne dass die Person scheitert."
+    },
+    {
+      "key": "angst-busse",
+      "required": true,
+      "match": [
+        "richtig Angst"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "02:20"
+      ],
+      "emotion": "explicit_negative",
+      "why": "Ausdrücklich geäusserte Emotion – explicit true."
+    },
+    {
+      "key": "heimatschein-dauer",
+      "required": true,
+      "match": [
+        "neun Tage"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "03:05"
+      ],
+      "emotion": "none",
+      "why": "Dauer aus dem Interview; als Zitat oder als metric (9 Tage) zulässig."
+    },
+    {
+      "key": "upload-aufgegeben",
+      "required": true,
+      "match": [
+        "aufgegeben",
+        "dritten Versuch"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "breakdown"
+      ],
+      "locator": [
+        "03:48"
+      ],
+      "emotion": "not_explicit",
+      "why": "Aufgeben und an den Schalter ausweichen ist ein Breakdown, keine Reibung."
+    },
+    {
+      "key": "schalter-positiv",
+      "required": true,
+      "match": [
+        "zehn Minuten"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "04:30"
+      ],
+      "emotion": "any"
+    },
+    {
+      "key": "nachbarin-hilft",
+      "required": true,
+      "match": [
+        "gezeigt, welche Unterlagen",
+        "Nachbarin"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "positive",
+        "workaround",
+        "neutral",
+        "need"
+      ],
+      "locator": [
+        "05:10"
+      ],
+      "emotion": "none",
+      "why": "Vermittlung (ADR-0005) als eigenes Atom; der erfundene Name muss ersetzt sein."
+    },
+    {
+      "key": "bestaetigung-unsicher",
+      "required": true,
+      "match": [
+        "zwei Wochen später"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "05:55"
+      ],
+      "emotion": "not_explicit"
+    },
+    {
+      "key": "wunsch-liste",
+      "required": true,
+      "match": [
+        "Liste am Anfang"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "06:30"
+      ],
+      "emotion": "any"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "doc-01",
+    "source_ref": "prozess",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Zuziehende melden sich innert 14 Tagen nach dem Umzug an, online oder am Schalter.",
+    "locator": "Ziffer 1",
+    "phase_hint": "anmeldung"
+  },
+  {
+    "id": "doc-02",
+    "source_ref": "prozess",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Für die Anmeldung sind Heimatschein, Mietvertrag und ein amtlicher Ausweis nötig.",
+    "locator": "Ziffer 2",
+    "phase_hint": "nachweise"
+  },
+  {
+    "id": "doc-03",
+    "source_ref": "prozess",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Das Online-Formular nimmt PDF-Dateien und Fotos bis 10 MB entgegen.",
+    "locator": "Ziffer 3",
+    "phase_hint": "anmeldung",
+    "contradicts": [
+      "anf-07"
+    ]
+  },
+  {
+    "id": "doc-04",
+    "source_ref": "prozess",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Die Einwohnerdienste prüfen die Anmeldung innert 5 Arbeitstagen.",
+    "locator": "Ziffer 4",
+    "phase_hint": "bestaetigung"
+  },
+  {
+    "id": "doc-05",
+    "source_ref": "prozess",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Die Anmeldebestätigung wird innert 10 Arbeitstagen nach Eingang per Post verschickt.",
+    "locator": "Ziffer 5",
+    "phase_hint": "bestaetigung",
+    "contradicts": [
+      "anf-17"
+    ]
+  },
+  {
+    "id": "doc-06",
+    "source_ref": "prozess",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Die Liste der Unterlagen ist auf der Website unter «Umzug» aufgeführt.",
+    "locator": "Ziffer 6",
+    "phase_hint": "vorbereitung",
+    "contradicts": [
+      "anf-12"
+    ]
+  },
+  {
+    "id": "doc-07",
+    "source_ref": "prozess",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Bei verspäteter Anmeldung kann eine Ordnungsbusse erhoben werden; in der Praxis wird bei der ersten Anmeldung darauf verzichtet.",
+    "locator": "Ziffer 7",
+    "phase_hint": "anmeldung"
+  }
+]

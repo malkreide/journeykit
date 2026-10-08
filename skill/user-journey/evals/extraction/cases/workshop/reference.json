@@ -1,0 +1,69 @@
+[
+  {
+    "id": "ws-01",
+    "source_ref": "workshop",
+    "class": "assumed",
+    "kind": "workshop_statement",
+    "text": "Die meisten Zuziehenden melden sich inzwischen online an, der Schalter wird kaum noch gebraucht.",
+    "locator": "Punkt 1",
+    "phase_hint": "anmeldung",
+    "contradicts": [
+      "stat-02"
+    ]
+  },
+  {
+    "id": "ws-02",
+    "source_ref": "workshop",
+    "class": "assumed",
+    "kind": "workshop_statement",
+    "text": "Die Leute sind sicher genervt, weil sie den Heimatschein selbst besorgen müssen.",
+    "locator": "Punkt 2",
+    "phase_hint": "nachweise",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "genervt (Vermutung des Teams)",
+      "explicit": false
+    }
+  },
+  {
+    "id": "ws-03",
+    "source_ref": "workshop",
+    "class": "assumed",
+    "kind": "workshop_statement",
+    "text": "Das Upload-Problem betrifft nur alte Browser.",
+    "locator": "Punkt 3",
+    "phase_hint": "anmeldung",
+    "contradicts": [
+      "anf-07"
+    ]
+  },
+  {
+    "id": "ws-04",
+    "source_ref": "workshop",
+    "class": "assumed",
+    "kind": "workshop_statement",
+    "text": "Idee: Checkliste der Unterlagen als PDF zum Herunterladen.",
+    "locator": "Punkt 4",
+    "signal": "need",
+    "phase_hint": "vorbereitung"
+  },
+  {
+    "id": "ws-05",
+    "source_ref": "workshop",
+    "class": "assumed",
+    "kind": "workshop_statement",
+    "text": "Idee: Erinnerungsmail nach 10 Tagen, wenn die Anmeldung noch fehlt.",
+    "locator": "Punkt 5",
+    "signal": "need",
+    "phase_hint": "anmeldung"
+  },
+  {
+    "id": "ws-06",
+    "source_ref": "workshop",
+    "class": "assumed",
+    "kind": "workshop_statement",
+    "text": "Wir vermuten, dass viele die Frist von 14 Tagen gar nicht kennen.",
+    "locator": "Punkt 6",
+    "phase_hint": "vorbereitung"
+  }
+]

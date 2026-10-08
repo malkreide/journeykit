@@ -1,0 +1,157 @@
+{
+  "atoms": [
+    {
+      "key": "anteil-online",
+      "required": true,
+      "match": [
+        "online",
+        "Online"
+      ],
+      "value": 38,
+      "value_any": [
+        38
+      ],
+      "unit": "%",
+      "kind": [
+        "metric"
+      ],
+      "class": [
+        "observed"
+      ],
+      "locator": [
+        "anteil_online",
+        "Zeile 3",
+        "3"
+      ]
+    },
+    {
+      "key": "abgebrochen",
+      "required": true,
+      "match": [
+        "abgeschlossen",
+        "abgebrochen"
+      ],
+      "value_any": [
+        21
+      ],
+      "value": 21,
+      "unit": "%",
+      "kind": [
+        "metric"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "anteil_online_abgebrochen",
+        "Zeile 4",
+        "4"
+      ]
+    },
+    {
+      "key": "verspaetet",
+      "required": true,
+      "match": [
+        "14 Tage",
+        "später",
+        "verspätet"
+      ],
+      "value_any": [
+        17
+      ],
+      "value": 17,
+      "unit": "%",
+      "kind": [
+        "metric"
+      ],
+      "locator": [
+        "anteil_verspaetet",
+        "Zeile 5",
+        "5"
+      ]
+    },
+    {
+      "key": "dauer-median",
+      "required": true,
+      "match": [
+        "Median",
+        "median"
+      ],
+      "value_any": [
+        6
+      ],
+      "value": 6,
+      "unit": "Arbeitstage",
+      "kind": [
+        "metric"
+      ],
+      "locator": [
+        "bearbeitungsdauer_median",
+        "Zeile 6",
+        "6"
+      ],
+      "why": "Einheit wie in der Quelle – Arbeitstage, nicht Kalendertage."
+    },
+    {
+      "key": "dauer-p90",
+      "required": true,
+      "match": [
+        "90"
+      ],
+      "value_any": [
+        14
+      ],
+      "value": 14,
+      "unit": "Arbeitstage",
+      "kind": [
+        "metric"
+      ],
+      "locator": [
+        "bearbeitungsdauer_p90",
+        "Zeile 7",
+        "7"
+      ]
+    },
+    {
+      "key": "rueckfragen",
+      "required": true,
+      "match": [
+        "Rückfrage"
+      ],
+      "value_any": [
+        29
+      ],
+      "value": 29,
+      "unit": "%",
+      "kind": [
+        "metric"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "anteil_rueckfragen",
+        "Zeile 8",
+        "8"
+      ]
+    },
+    {
+      "key": "total",
+      "required": false,
+      "match": [
+        "412",
+        "Zuzüge",
+        "Anmeldungen"
+      ],
+      "value_any": [
+        412
+      ],
+      "value": 412,
+      "kind": [
+        "metric"
+      ]
+    }
+  ]
+}

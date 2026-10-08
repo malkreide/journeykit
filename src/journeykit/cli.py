@@ -12,7 +12,7 @@ from . import SCHEMA_VERSION, __version__, load_journey, load_schema
 from .diff import diff_journeys, diff_markdown
 from .export import actions_csv, audit_markdown, opportunities_markdown, story_map_markdown
 from .lint import ERROR, WARN, lint_journey, summarize
-from .render import render_html
+from .render import UI_LANGUAGES, render_html
 from .validate import validate_journey
 
 
@@ -90,7 +90,7 @@ def cmd_lint(args: argparse.Namespace) -> int:
 
 def cmd_render(args: argparse.Namespace) -> int:
     journeys = [_load_valid(p) for p in args.files]
-    html = render_html(journeys, title=args.title)
+    html = render_html(journeys, title=args.title, lang=args.lang)
     out = args.output or (
         Path(args.files[0]).with_suffix(".html").name if len(args.files) == 1 else "journeys.html"
     )
@@ -224,6 +224,11 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("files", nargs="+")
     s.add_argument("-o", "--output")
     s.add_argument("--title")
+    s.add_argument(
+        "--lang",
+        choices=UI_LANGUAGES,
+        help="Sprache der Oberfläche (Standard: meta.language der ersten Journey, sonst de)",
+    )
     s.set_defaults(func=cmd_render)
 
     s = sub.add_parser("export", help="Story Map, Massnahmenliste, Chancenmatrix, Audit-Report")

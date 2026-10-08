@@ -206,7 +206,7 @@ kein Ersatz für ein Review.
 ### 6. Ausgeben und übergeben
 
 ```
-journeykit render journey.json -o journey.html
+journeykit render journey.json -o journey.html            # --lang fr für die französische Oberfläche
 journeykit export journey.json --format audit -o audit.md
 journeykit export journey.json --format storymap -o storymap.md
 journeykit export journey.json --format actions -o massnahmen.csv

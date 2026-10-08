@@ -262,10 +262,10 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
       <div class="sub" id="subline"></div>
     </div>
     <div class="controls">
-      <select class="persona" id="personaSel" hidden aria-label="Persona wählen"></select>
-      <label class="toggle" id="primToggle"><input type="checkbox" id="primOnly"> Nur Primärevidenz</label>
-      <button class="btn" id="themeBtn" title="Hell/Dunkel umschalten">Hell/Dunkel</button>
-      <button class="btn" onclick="window.print()" title="Drucken / PDF">Drucken</button>
+      <select class="persona" id="personaSel" hidden data-i18n-aria="selectPersona"></select>
+      <label class="toggle" id="primToggle"><input type="checkbox" id="primOnly"> <span data-i18n="primOnly"></span></label>
+      <button class="btn" id="themeBtn" data-i18n="theme" data-i18n-title="themeTitle"></button>
+      <button class="btn" onclick="window.print()" data-i18n="print" data-i18n-title="printTitle"></button>
     </div>
   </div>
   <nav class="tabs" id="tabs"></nav>
@@ -274,33 +274,386 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
 <footer id="footer"></footer>
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-live="polite">
-  <div class="dh"><h2 id="dTitle"></h2><button class="close" id="dClose" aria-label="Schliessen">✕</button></div>
+  <div class="dh"><h2 id="dTitle"></h2><button class="close" id="dClose" data-i18n-aria="close">✕</button></div>
   <div class="db" id="dBody"></div>
 </aside>
 
+<script type="application/json" id="jk-i18n">
+{
+ "de": {
+  "classes": {"observed": "beobachtet", "reported": "berichtet", "assumed": "angenommen"},
+  "classesPl": {"observed": "beobachtet", "reported": "berichtet", "assumed": "angenommen"},
+  "kinds": {"quote": "Zitat", "observation": "Beobachtung", "metric": "Messwert", "document_excerpt": "Dokumentstelle", "workshop_statement": "Workshop-Aussage"},
+  "srcKinds": {"interview": "Interview", "survey": "Befragung", "diary_study": "Tagebuchstudie", "observation": "Beobachtung", "ticket_export": "Ticket-Export", "inquiry_log": "Anfragen", "analytics": "Analytics", "case_records": "Geschäftskontrolle", "workshop": "Workshop", "internal_document": "Internes Dokument", "form": "Formular", "complaint": "Beschwerde", "other": "Andere"},
+  "channels": {"web": "Website", "app": "App", "email": "E-Mail", "phone": "Telefon", "letter": "Brief", "paper_form": "Papierformular", "counter": "Schalter", "in_person": "Vor Ort", "event": "Veranstaltung", "chat": "Chat", "sms": "SMS", "publication": "Publikation", "other": "Anderer Kanal"},
+  "status": {"hypothesis": "Hypothese", "draft": "Entwurf", "validated": "Validiert", "in_review": "In Review", "archived": "Archiviert"},
+  "mapType": {"user_journey": "User Journey", "customer_journey": "Customer Journey", "experience_map": "Experience Map", "service_blueprint": "Service Blueprint", "user_flow": "User Flow"},
+  "ppStatus": {"open": "offen", "in_progress": "in Arbeit", "resolved": "gelöst", "wontfix": "nicht geplant", "monitoring": "beobachtet"},
+  "freq": {"rare": "selten", "occasional": "gelegentlich", "frequent": "häufig", "systematic": "systematisch", "unknown": "unbekannt"},
+  "quadrant": {"quick_win": "Quick Win", "big_bet": "Big Bet", "fill_in": "Nebenbei", "skip": "Zurückstellen"},
+  "quadrantPl": {"quick_win": "Quick Wins", "big_bet": "Big Bets", "fill_in": "Nebenbei", "skip": "Zurückstellen"},
+  "antipatterns": {"integrity": "Referenzen und IDs", "inside_out": "Inside-Out Bias", "happy_path": "Happy Path Bias", "static_map": "Static Map Trap", "empathy_vacuum": "Empathie-Vakuum", "overcomplexity": "Überkomplexität", "micro_disconnect": "Micro-Level Disconnect", "blueprint": "Blueprint statt Journey", "privacy": "Personendaten", "kpi": "Kennzahlen", "evidence": "Evidenzqualität"},
+  "kpiCat": {"perception": "Wahrnehmung", "outcome": "Ergebnis", "public_value": "Public Value"},
+  "pii": {"none": "keine", "anonymised": "anonymisiert", "pseudonymised": "pseudonymisiert", "contains_pii": "enthält Personendaten"},
+  "performedBy": {"shared": "mit", "intermediary": "durch"},
+  "performedByTitle": {"shared": "Persona mit Hilfe Dritter", "intermediary": "Dritte handeln anstelle der Persona"},
+  "mandate": {"formal": "mit Vollmacht oder Auftrag", "informal": "informell"},
+  "context": {"language_situation": "Sprache", "digital_access": "Digitaler Zugang", "time_budget": "Zeitbudget", "prior_experience": "Vorerfahrung", "other": "Weiteres"},
+  "ui": {
+   "colon": ": ",
+   "quoted": "«{t}»",
+   "and": " und ",
+   "selectPersona": "Persona wählen",
+   "primOnly": "Nur Primärevidenz",
+   "theme": "Hell/Dunkel",
+   "themeTitle": "Hell/Dunkel umschalten",
+   "print": "Drucken",
+   "printTitle": "Drucken / PDF",
+   "close": "Schliessen",
+   "evDots": "Evidenz: {o} beobachtet, {r} berichtet, {a} angenommen",
+   "noEvidence": "keine Evidenz",
+   "day_one": "{n} Tag",
+   "day_other": "{n} Tage",
+   "weeksApprox": " (≈ {w} Wochen)",
+   "assumptionsHidden_one": "{n} Annahme ausgeblendet",
+   "assumptionsHidden_other": "{n} Annahmen ausgeblendet",
+   "errors_one": "{n} Fehler",
+   "errors_other": "{n} Fehler",
+   "warnings_one": "{n} Warnung",
+   "warnings_other": "{n} Warnungen",
+   "auditClean": "Prüfung ohne Warnungen",
+   "synthetic": "synthetisches Beispiel",
+   "legendTitle": "Evidenz-Atome nach Klasse",
+   "tabJourney": "Journey",
+   "tabProcess": "Prozess & Fehlerpfade",
+   "tabEvidence": "Evidenz",
+   "tabOpps": "Chancen",
+   "tabAudit": "Prüfung",
+   "rowPhase": "Phase",
+   "rowDuration": "Dauer",
+   "rowDurationSub": "Kalendertage, ein Massstab für alle Phasen",
+   "noDuration": "keine belegte Dauer",
+   "durationHidden": "Dauer ohne Primärevidenz ausgeblendet",
+   "durTypical": "typisch {d}",
+   "durRange": " · Spanne {min}–{max} Tage",
+   "durUpTo": " · bis {max} Tage",
+   "durFrom": " · ab {min} Tagen",
+   "durTitle": "Dauer: {p}",
+   "touchpoint": "Touchpoint",
+   "counterpart": "Gegenüber",
+   "transition": "Übergang",
+   "stepEvidence": "Beleg für den Schritt",
+   "rowDoes": "Macht",
+   "rowDoesSub": "Aktion · Kanal · Touchpoint",
+   "rowThinks": "Denkt",
+   "rowThinksSub": "Fragen, Zweifel, Erwartungen",
+   "rowFeels": "Fühlt",
+   "rowFeelsSubMulti": "dicke Punkte: diese Persona, kleine: andere (Lage innerhalb der Phase ungefähr)",
+   "rowFeelsSub": "hohl = ohne Primärevidenz · ? = keine Evidenz",
+   "severity": "Schwere {n}/5",
+   "breakdown": "Breakdown",
+   "friction": "Reibung",
+   "owner": "Owner",
+   "noPrimaryHidden_one": "{n} ohne Primärevidenz ausgeblendet",
+   "noPrimaryHidden_other": "{n} ohne Primärevidenz ausgeblendet",
+   "rowPain": "Pain Points",
+   "rowPainSub": "Reibung vs. Breakdown · Workaround · Owner",
+   "edgeCase": "Edge Case",
+   "edgeCases": "Edge Cases",
+   "targetPath": "Soll-Pfad",
+   "recovery": "Recovery",
+   "trigger": "Auslöser",
+   "rowEdge": "Edge Cases & Recovery",
+   "rowEdgeSub": "Was, wenn es nicht nach Plan läuft",
+   "rowOpps": "Chancen",
+   "rowOppsSub": "How might we …",
+   "rowKpi": "Kennzahlen",
+   "rowKpiSub": "Wahrnehmung · Ergebnis · Public Value",
+   "kpiTarget": "→ Ziel {t}",
+   "leading": "Frühindikator",
+   "lagging": "Spätindikator",
+   "translatedFrom": "übersetzt aus {c}",
+   "persona": "Persona",
+   "goals": "Ziele",
+   "frustrations": "Frustrationen",
+   "contextH": "Kontext",
+   "personaEvidence": "Evidenz zur Persona",
+   "scenario": "Szenario",
+   "goal": "Ziel",
+   "triggerScenario": "Auslöser",
+   "endState": "Endzustand",
+   "timeframe": "Zeitraum",
+   "scopeExclusions": "Bewusst nicht abgedeckt",
+   "diagnosis": "Diagnose",
+   "backstage": "Back-Stage",
+   "noDataPhase": "keine Daten in dieser Phase",
+   "noFeelingPhase": "keine Gefühlsevidenz in dieser Phase",
+   "noFeelingTitle": "keine Evidenz zur Gefühlslage",
+   "feelingTitle": "Gefühlslage: {s}",
+   "droppedTitle": "Phasen anderer Personas ohne gleiche Phasen-ID werden nicht überlagert",
+   "dropped": "Nicht überlagert (keine gleiche Phasen-ID): {l}",
+   "processTitle": "Prozess- und Fehlerpfade",
+   "processIntro": "Links der Pfad der Persona, rechts wo er bricht: Breakdowns mit Workaround und Recovery-Pfad (gestrichelt = Soll-Pfad, heute nicht vorhanden), Reibungen und Edge Cases.",
+   "workaround": "Ausweichen",
+   "backToJourney": "Zurück in die Journey",
+   "noFailurePath": "Kein dokumentierter Fehlerpfad – Happy Path oder Lücke?",
+   "sources": "Quellen",
+   "atoms": "Evidenz-Atome",
+   "experienceShare": "Erlebnis-Aussagen mit Primärevidenz ({b}/{n})",
+   "step": "Schritt",
+   "heatmap": "Evidenz-Heatmap",
+   "heatIntro": "Zahl = Primärbelege (beobachtet + berichtet), klein = angenommen. Gestrichelt = Aussage vorhanden, aber kein Beleg. Wo die Map dünn ist, ist sie Innensicht.",
+   "statements_one": "{n} Aussage",
+   "statements_other": "{n} Aussagen",
+   "assumedShort": "+{n} angen.",
+   "sourceRegister": "Quellenregister",
+   "colId": "ID",
+   "colSource": "Quelle",
+   "colKind": "Art",
+   "colClass": "Klasse",
+   "colN": "n",
+   "colDate": "Datum",
+   "colPii": "Personendaten",
+   "colLocation": "Ablage",
+   "contradictions": "Widersprüche zwischen Quellen ({n})",
+   "noneShown": "Keine ausgewiesen.",
+   "unused": "Nicht eingeordnete Evidenz ({n})",
+   "allSynthesised": "Alles synthetisiert.",
+   "emotion": "Emotion",
+   "explicit": ", ausdrücklich geäussert",
+   "derived": ", abgeleitet",
+   "contradicts": "widerspricht {l}",
+   "noOpps": "Keine Chancen abgeleitet – die Map hat noch keine Handlungsableitung.",
+   "matrix": "Impact / Effort",
+   "axisX": "Aufwand 1 → 5",
+   "axisY": "↑ Nutzen (Mittel aus Impact und Public Value)",
+   "unscored": "Chancen ohne Scores erscheinen nur in der Liste.",
+   "oppsStories": "Chancen und Stories",
+   "impact": "Impact",
+   "publicValue": "Public Value",
+   "effort": "Aufwand",
+   "noStories": "Noch keine Stories.",
+   "errorsLbl": "Fehler",
+   "warningsLbl": "Warnungen",
+   "infosLbl": "Hinweise",
+   "nextReview": "Nächster Review",
+   "everyDays": " · alle {n} Tage",
+   "methodAudit": "Methodische Prüfung",
+   "generatedBy": "Erzeugt von {g} am {d}. Die Regeln prüfen das Modell gegen die bekannten Fallstricke – sie ersetzen kein Review, sie bereiten es vor.",
+   "auditLangNote": "",
+   "noFindings": "Keine Befunde.",
+   "openQuestions": "Offene Fragen ({n})",
+   "none": "Keine.",
+   "versions": "Versionen",
+   "noChangelog": "Kein Changelog.",
+   "evidence": "Evidenz",
+   "verdictNone": "Keine Evidenz hinterlegt – diese Aussage ist eine Annahme.",
+   "verdictObs": "{n} beobachtete",
+   "verdictRep": "{n} berichtete",
+   "verdictPrimary": "Gestützt durch {list} Evidenz{extra}.",
+   "verdictExtra": " sowie {n} Annahme(n)",
+   "verdictAssumed": "Nur Annahmen ({n}) – aus Innensicht, nicht von Nutzenden.",
+   "unknownRef": "Unbekannte Referenz «{id}»",
+   "asOf": "Stand {d}",
+   "noData": "Keine Daten",
+   "noDataText": "Diese Datei wurde ohne Journey erzeugt. {cmd} injiziert die Daten."
+  }
+ },
+ "fr": {
+  "classes": {"observed": "observé", "reported": "rapporté", "assumed": "supposé"},
+  "classesPl": {"observed": "observés", "reported": "rapportés", "assumed": "supposés"},
+  "kinds": {"quote": "Citation", "observation": "Observation", "metric": "Mesure", "document_excerpt": "Extrait de document", "workshop_statement": "Énoncé d'atelier"},
+  "srcKinds": {"interview": "Entretien", "survey": "Enquête", "diary_study": "Journal de bord", "observation": "Observation", "ticket_export": "Export de tickets", "inquiry_log": "Demandes", "analytics": "Analyse d'audience", "case_records": "Contrôle des affaires", "workshop": "Atelier", "internal_document": "Document interne", "form": "Formulaire", "complaint": "Réclamation", "other": "Autre"},
+  "channels": {"web": "Site web", "app": "Application", "email": "E-mail", "phone": "Téléphone", "letter": "Courrier", "paper_form": "Formulaire papier", "counter": "Guichet", "in_person": "Sur place", "event": "Manifestation", "chat": "Chat", "sms": "SMS", "publication": "Publication officielle", "other": "Autre canal"},
+  "status": {"hypothesis": "Hypothèse", "draft": "Projet", "validated": "Validé", "in_review": "En révision", "archived": "Archivé"},
+  "mapType": {"user_journey": "Parcours usager", "customer_journey": "Parcours client", "experience_map": "Carte d'expérience", "service_blueprint": "Service blueprint", "user_flow": "Flux utilisateur"},
+  "ppStatus": {"open": "ouvert", "in_progress": "en cours", "resolved": "résolu", "wontfix": "non prévu", "monitoring": "sous observation"},
+  "freq": {"rare": "rare", "occasional": "occasionnel", "frequent": "fréquent", "systematic": "systématique", "unknown": "inconnu"},
+  "quadrant": {"quick_win": "Gain rapide", "big_bet": "Grand chantier", "fill_in": "En passant", "skip": "À différer"},
+  "quadrantPl": {"quick_win": "Gains rapides", "big_bet": "Grands chantiers", "fill_in": "En passant", "skip": "À différer"},
+  "antipatterns": {"integrity": "Références et ID", "inside_out": "Biais de la vue interne (inside-out)", "happy_path": "Biais du parcours idéal (happy path)", "static_map": "Piège de la carte figée", "empathy_vacuum": "Vide d'empathie", "overcomplexity": "Surcomplexité", "micro_disconnect": "Déconnexion du niveau micro", "blueprint": "Blueprint au lieu de parcours", "privacy": "Données personnelles", "kpi": "Indicateurs", "evidence": "Qualité des preuves"},
+  "kpiCat": {"perception": "Perception", "outcome": "Résultat", "public_value": "Valeur publique"},
+  "pii": {"none": "aucune", "anonymised": "anonymisées", "pseudonymised": "pseudonymisées", "contains_pii": "contient des données personnelles"},
+  "performedBy": {"shared": "avec", "intermediary": "par"},
+  "performedByTitle": {"shared": "La persona, avec l'aide de tiers", "intermediary": "Des tiers agissent à la place de la persona"},
+  "mandate": {"formal": "avec procuration ou mandat", "informal": "informel"},
+  "context": {"language_situation": "Langue", "digital_access": "Accès numérique", "time_budget": "Temps disponible", "prior_experience": "Expérience préalable", "other": "Autres"},
+  "ui": {
+   "colon": "\u00a0: ",
+   "quoted": "«\u202f{t}\u202f»",
+   "and": " et ",
+   "selectPersona": "Choisir la persona",
+   "primOnly": "Preuves primaires seulement",
+   "theme": "Clair/sombre",
+   "themeTitle": "Basculer entre clair et sombre",
+   "print": "Imprimer",
+   "printTitle": "Imprimer / PDF",
+   "close": "Fermer",
+   "evDots": "Preuves\u00a0: {o} observées, {r} rapportées, {a} supposées",
+   "noEvidence": "aucune preuve",
+   "day_one": "{n} jour",
+   "day_other": "{n} jours",
+   "weeksApprox": " (≈ {w} semaines)",
+   "assumptionsHidden_one": "{n} supposition masquée",
+   "assumptionsHidden_other": "{n} suppositions masquées",
+   "errors_one": "{n} erreur",
+   "errors_other": "{n} erreurs",
+   "warnings_one": "{n} avertissement",
+   "warnings_other": "{n} avertissements",
+   "auditClean": "Contrôle sans avertissement",
+   "synthetic": "exemple synthétique",
+   "legendTitle": "Atomes de preuve par classe",
+   "tabJourney": "Parcours",
+   "tabProcess": "Processus et chemins d'erreur",
+   "tabEvidence": "Preuves",
+   "tabOpps": "Opportunités",
+   "tabAudit": "Contrôle",
+   "rowPhase": "Phase",
+   "rowDuration": "Durée",
+   "rowDurationSub": "Jours civils, une même échelle pour toutes les phases",
+   "noDuration": "aucune durée étayée",
+   "durationHidden": "Durée sans preuve primaire masquée",
+   "durTypical": "typiquement {d}",
+   "durRange": " · fourchette {min}–{max} jours",
+   "durUpTo": " · jusqu'à {max} jours",
+   "durFrom": " · dès {min} jours",
+   "durTitle": "Durée\u00a0: {p}",
+   "touchpoint": "Point de contact",
+   "counterpart": "Interlocuteur",
+   "transition": "Transition",
+   "stepEvidence": "Preuve pour l'étape",
+   "rowDoes": "Fait",
+   "rowDoesSub": "Action · canal · point de contact",
+   "rowThinks": "Pense",
+   "rowThinksSub": "Questions, doutes, attentes",
+   "rowFeels": "Ressent",
+   "rowFeelsSubMulti": "gros points\u00a0: cette persona, petits\u00a0: les autres (position approximative dans la phase)",
+   "rowFeelsSub": "creux = sans preuve primaire · ? = aucune preuve",
+   "severity": "Gravité {n}/5",
+   "breakdown": "Rupture",
+   "friction": "Friction",
+   "owner": "Responsable",
+   "noPrimaryHidden_one": "{n} élément sans preuve primaire masqué",
+   "noPrimaryHidden_other": "{n} éléments sans preuve primaire masqués",
+   "rowPain": "Irritants",
+   "rowPainSub": "Friction ou rupture · contournement · responsable",
+   "edgeCase": "Cas limite",
+   "edgeCases": "Cas limites",
+   "targetPath": "Parcours cible",
+   "recovery": "Rattrapage",
+   "trigger": "Déclencheur",
+   "rowEdge": "Cas limites et rattrapage",
+   "rowEdgeSub": "Quand tout ne se passe pas comme prévu",
+   "rowOpps": "Opportunités",
+   "rowOppsSub": "Comment pourrions-nous …",
+   "rowKpi": "Indicateurs",
+   "rowKpiSub": "Perception · résultat · valeur publique",
+   "kpiTarget": "→ objectif {t}",
+   "leading": "Indicateur avancé",
+   "lagging": "Indicateur retardé",
+   "translatedFrom": "traduit de {c}",
+   "persona": "Persona",
+   "goals": "Objectifs",
+   "frustrations": "Frustrations",
+   "contextH": "Contexte",
+   "personaEvidence": "Preuves sur la persona",
+   "scenario": "Scénario",
+   "goal": "Objectif",
+   "triggerScenario": "Déclencheur",
+   "endState": "État final",
+   "timeframe": "Période",
+   "scopeExclusions": "Volontairement non couvert",
+   "diagnosis": "Diagnostic",
+   "backstage": "Coulisses",
+   "noDataPhase": "aucune donnée dans cette phase",
+   "noFeelingPhase": "aucune preuve sur le ressenti dans cette phase",
+   "noFeelingTitle": "aucune preuve sur le ressenti",
+   "feelingTitle": "Ressenti\u00a0: {s}",
+   "droppedTitle": "Les phases des autres personas sans ID de phase identique ne sont pas superposées",
+   "dropped": "Non superposé (aucun ID de phase identique)\u00a0: {l}",
+   "processTitle": "Processus et chemins d'erreur",
+   "processIntro": "À gauche, le parcours de la persona, à droite, là où il se rompt\u00a0: ruptures avec contournement et voie de rattrapage (en pointillé = parcours cible, inexistant aujourd'hui), frictions et cas limites.",
+   "workaround": "Contournement",
+   "backToJourney": "Retour dans le parcours",
+   "noFailurePath": "Aucun chemin d'erreur documenté – parcours idéal ou lacune\u00a0?",
+   "sources": "Sources",
+   "atoms": "Atomes de preuve",
+   "experienceShare": "Énoncés d'expérience avec preuve primaire ({b}/{n})",
+   "step": "Étape",
+   "heatmap": "Carte de chaleur des preuves",
+   "heatIntro": "Chiffre = preuves primaires (observées + rapportées), petit = supposées. En pointillé = énoncé présent, mais sans preuve. Là où la carte est mince, elle reflète la vue interne.",
+   "statements_one": "{n} énoncé",
+   "statements_other": "{n} énoncés",
+   "assumedShort": "+{n} supp.",
+   "sourceRegister": "Registre des sources",
+   "colId": "ID",
+   "colSource": "Source",
+   "colKind": "Type",
+   "colClass": "Classe",
+   "colN": "n",
+   "colDate": "Date",
+   "colPii": "Données personnelles",
+   "colLocation": "Emplacement",
+   "contradictions": "Contradictions entre sources ({n})",
+   "noneShown": "Aucune signalée.",
+   "unused": "Preuves non intégrées ({n})",
+   "allSynthesised": "Tout est synthétisé.",
+   "emotion": "Émotion",
+   "explicit": ", exprimée explicitement",
+   "derived": ", déduite",
+   "contradicts": "contredit {l}",
+   "noOpps": "Aucune opportunité dégagée – la carte ne débouche pas encore sur des actions.",
+   "matrix": "Impact / effort",
+   "axisX": "Effort 1 → 5",
+   "axisY": "↑ Bénéfice (moyenne de l'impact et de la valeur publique)",
+   "unscored": "Les opportunités sans score n'apparaissent que dans la liste.",
+   "oppsStories": "Opportunités et stories",
+   "impact": "Impact",
+   "publicValue": "Valeur publique",
+   "effort": "Effort",
+   "noStories": "Pas encore de stories.",
+   "errorsLbl": "Erreurs",
+   "warningsLbl": "Avertissements",
+   "infosLbl": "Remarques",
+   "nextReview": "Prochaine révision",
+   "everyDays": " · tous les {n} jours",
+   "methodAudit": "Contrôle méthodologique",
+   "generatedBy": "Généré par {g} le {d}. Les règles vérifient le modèle au regard des pièges connus – elles ne remplacent pas une révision, elles la préparent.",
+   "auditLangNote": "Les messages des règles sont rédigés en allemand.",
+   "noFindings": "Aucun constat.",
+   "openQuestions": "Questions ouvertes ({n})",
+   "none": "Aucune.",
+   "versions": "Versions",
+   "noChangelog": "Aucun historique des versions.",
+   "evidence": "Preuves",
+   "verdictNone": "Aucune preuve enregistrée – cet énoncé est une supposition.",
+   "verdictObs": "{n} observée(s)",
+   "verdictRep": "{n} rapportée(s)",
+   "verdictPrimary": "Étayé par des preuves\u00a0: {list}{extra}.",
+   "verdictExtra": ", ainsi que {n} supposition(s)",
+   "verdictAssumed": "Uniquement des suppositions ({n}) – vue interne, pas celle des usagers.",
+   "unknownRef": "Référence inconnue «\u202f{id}\u202f»",
+   "asOf": "état au {d}",
+   "noData": "Aucune donnée",
+   "noDataText": "Ce fichier a été généré sans parcours. {cmd} injecte les données."
+  }
+ }
+}
+</script>
 <script>
 const DATA = /*__JOURNEYKIT_DATA__*/null;
 
-const L = {
-  classes: { observed: "beobachtet", reported: "berichtet", assumed: "angenommen" },
-  kinds: { quote: "Zitat", observation: "Beobachtung", metric: "Messwert", document_excerpt: "Dokumentstelle", workshop_statement: "Workshop-Aussage" },
-  srcKinds: { interview: "Interview", survey: "Befragung", diary_study: "Tagebuchstudie", observation: "Beobachtung", ticket_export: "Ticket-Export", inquiry_log: "Anfragen", analytics: "Analytics", case_records: "Geschäftskontrolle", workshop: "Workshop", internal_document: "Internes Dokument", form: "Formular", complaint: "Beschwerde", other: "Andere" },
-  channels: { web: "Website", app: "App", email: "E-Mail", phone: "Telefon", letter: "Brief", paper_form: "Papierformular", counter: "Schalter", in_person: "Vor Ort", event: "Veranstaltung", chat: "Chat", sms: "SMS", publication: "Publikation", other: "Anderer Kanal" },
-  status: { hypothesis: "Hypothese", draft: "Entwurf", validated: "Validiert", in_review: "In Review", archived: "Archiviert" },
-  mapType: { user_journey: "User Journey", customer_journey: "Customer Journey", experience_map: "Experience Map", service_blueprint: "Service Blueprint", user_flow: "User Flow" },
-  ppStatus: { open: "offen", in_progress: "in Arbeit", resolved: "gelöst", wontfix: "nicht geplant", monitoring: "beobachtet" },
-  freq: { rare: "selten", occasional: "gelegentlich", frequent: "häufig", systematic: "systematisch", unknown: "unbekannt" },
-  quadrant: { quick_win: "Quick Win", big_bet: "Big Bet", fill_in: "Nebenbei", skip: "Zurückstellen" },
-  antipatterns: { integrity: "Referenzen und IDs", inside_out: "Inside-Out Bias", happy_path: "Happy Path Bias", static_map: "Static Map Trap", empathy_vacuum: "Empathie-Vakuum", overcomplexity: "Überkomplexität", micro_disconnect: "Micro-Level Disconnect", blueprint: "Blueprint statt Journey", privacy: "Personendaten", kpi: "Kennzahlen", evidence: "Evidenzqualität" },
-  kpiCat: { perception: "Wahrnehmung", outcome: "Ergebnis", public_value: "Public Value" },
-  pii: { none: "keine", anonymised: "anonymisiert", pseudonymised: "pseudonymisiert", contains_pii: "enthält Personendaten" },
-  performedBy: { shared: "mit", intermediary: "durch" },
-  mandate: { formal: "mit Vollmacht oder Auftrag", informal: "informell" },
-};
+// UI-Texte stehen im JSON-Block «jk-i18n» (de, fr); der Renderer setzt DATA.lang.
+const I18N = JSON.parse(document.getElementById("jk-i18n").textContent);
+const LANG = DATA && I18N[DATA.lang] ? DATA.lang : "de", L = I18N[LANG];
+const t = (key, vars) => vars ? L.ui[key].replace(/\{(\w+)\}/g, (m, k) => vars[k] ?? m) : L.ui[key];
+// Plural: Französisch zählt 0 und 1 als Singular, Deutsch nur 1.
+const tn = (key, n, vars) => t(key + ((LANG === "fr" ? n > 1 : n !== 1) ? "_other" : "_one"), { n, ...vars });
+const lbl = key => t(key) + t("colon");
 const PRIMARY = new Set(["observed", "reported"]);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 // ADR-0005: wer den Schritt ausführt, wenn nicht die Persona allein
-const actorChip = s => { const p = s.performed_by; if (!p || p.kind === "persona") return ""; return '<span class="chip actor" title="' + esc((p.kind === "shared" ? "Persona mit Hilfe Dritter" : "Dritte handeln anstelle der Persona") + (p.mandate ? " · " + (L.mandate[p.mandate] || p.mandate) : "")) + '">' + L.performedBy[p.kind] + ' ' + esc(p.role) + '</span>'; };
+const actorChip = s => { const p = s.performed_by; if (!p || p.kind === "persona") return ""; return '<span class="chip actor" title="' + esc(L.performedByTitle[p.kind] + (p.mandate ? " · " + (L.mandate[p.mandate] || p.mandate) : "")) + '">' + L.performedBy[p.kind] + ' ' + esc(p.role) + '</span>'; };
 const $ = (sel, root = document) => root.querySelector(sel);
 
 // ---------------------------------------------------------------- Modell
@@ -338,29 +691,29 @@ const state = { j: 0, primOnly: false, tab: "journey" };
 let IDX;
 const journeys = DATA.journeys, findings = DATA.findings;
 
-function evDots(idx, refs) { const c = idx.classes(refs); let h = '<span class="evc" title="Evidenz: ' + c.observed + ' beobachtet, ' + c.reported + ' berichtet, ' + c.assumed + ' angenommen">'; h += '<i class="o"></i>'.repeat(Math.min(c.observed, 4)) + '<i class="r"></i>'.repeat(Math.min(c.reported, 4)) + '<i class="a"></i>'.repeat(Math.min(c.assumed, 4)); return h + '</span>'; }
-function claimBtn(idx, text, refs, extraCls, title) { const st = idx.evState(refs); return '<button class="claim ev-' + st + ' ' + (extraCls || "") + '" data-refs="' + esc((refs || []).join(",")) + '" data-title="' + esc(title || "") + '" data-text="' + esc(text) + '">' + esc(text) + (refs && refs.length ? evDots(idx, refs) : '<span class="evc muted" title="keine Evidenz">∅</span>') + '</button>'; }
-function days(n) { return n + (n === 1 ? " Tag" : " Tage") + (n >= 21 ? " (≈ " + Math.round(n / 7) + " Wochen)" : ""); }
+function evDots(idx, refs) { const c = idx.classes(refs); let h = '<span class="evc" title="' + esc(t("evDots", { o: c.observed, r: c.reported, a: c.assumed })) + '">'; h += '<i class="o"></i>'.repeat(Math.min(c.observed, 4)) + '<i class="r"></i>'.repeat(Math.min(c.reported, 4)) + '<i class="a"></i>'.repeat(Math.min(c.assumed, 4)); return h + '</span>'; }
+function claimBtn(idx, text, refs, extraCls, title) { const st = idx.evState(refs); return '<button class="claim ev-' + st + ' ' + (extraCls || "") + '" data-refs="' + esc((refs || []).join(",")) + '" data-title="' + esc(title || "") + '" data-text="' + esc(text) + '">' + esc(text) + (refs && refs.length ? evDots(idx, refs) : '<span class="evc muted" title="' + t("noEvidence") + '">∅</span>') + '</button>'; }
+function days(n) { return tn("day", n) + (n >= 21 ? t("weeksApprox", { w: Math.round(n / 7) }) : ""); }
 function visible(idx, refs) { return !state.primOnly || idx.hasPrimary(refs); }
-function renderClaims(idx, items, getText, getRefs, extra) { let h = "", hidden = 0; items.forEach(it => { const refs = getRefs(it); if (!visible(idx, refs)) { hidden++; return; } h += claimBtn(idx, getText(it), refs, extra ? extra(it) : "", getText(it)); }); if (hidden) h += '<div class="hidden-note">' + hidden + ' Annahme' + (hidden > 1 ? 'n' : '') + ' ausgeblendet</div>'; return h || (items.length ? "" : '<span class="empty">–</span>'); }
+function renderClaims(idx, items, getText, getRefs, extra) { let h = "", hidden = 0; items.forEach(it => { const refs = getRefs(it); if (!visible(idx, refs)) { hidden++; return; } h += claimBtn(idx, getText(it), refs, extra ? extra(it) : "", getText(it)); }); if (hidden) h += '<div class="hidden-note">' + tn("assumptionsHidden", hidden) + '</div>'; return h || (items.length ? "" : '<span class="empty">–</span>'); }
 
 // ---------------------------------------------------------------- Kopf
 function renderHeader() {
   const j = journeys[state.j], m = j.meta, idx = IDX, s = idx.summary();
   $("#title").textContent = DATA.title;
   const f = findings[state.j] || [], ne = f.filter(x => x.level === "ERROR").length, nw = f.filter(x => x.level === "WARN").length;
-  const lintBadge = ne ? '<span class="badge err">' + ne + ' Fehler</span>' : nw ? '<span class="badge warn">' + nw + ' Warnungen</span>' : '<span class="badge ok">Prüfung ohne Warnungen</span>';
+  const lintBadge = ne ? '<span class="badge err">' + tn("errors", ne) + '</span>' : nw ? '<span class="badge warn">' + tn("warnings", nw) + '</span>' : '<span class="badge ok">' + t("auditClean") + '</span>';
   const pct = s.total ? [s.observed, s.reported, s.assumed].map(v => Math.round(v / s.total * 100)) : [0, 0, 0];
   $("#subline").innerHTML = '<span class="badge wrap"><b>' + esc(j.persona.name) + '</b>&nbsp;· ' + esc(j.persona.role) + '</span>'
     + '<span class="badge status-' + esc(m.status) + '">' + (L.status[m.status] || m.status) + ' · v' + esc(m.version) + '</span>'
     + '<span class="badge">' + (L.mapType[m.map_type] || m.map_type) + '</span>'
-    + (m.synthetic ? '<span class="badge synthetic">synthetisches Beispiel</span>' : '')
+    + (m.synthetic ? '<span class="badge synthetic">' + t("synthetic") + '</span>' : '')
     + lintBadge
-    + '<span class="legend" title="Evidenz-Atome nach Klasse"><span class="evbar"><span style="width:' + pct[0] + '%;background:var(--observed)"></span><span style="width:' + pct[1] + '%;background:var(--reported)"></span><span style="width:' + pct[2] + '%;background:var(--assumed)"></span></span>'
-    + '<span class="c-observed"><i class="dot fill"></i> ' + s.observed + ' beobachtet</span><span class="c-reported"><i class="dot fill"></i> ' + s.reported + ' berichtet</span><span class="c-assumed"><i class="dot"></i> ' + s.assumed + ' angenommen</span></span>';
+    + '<span class="legend" title="' + t("legendTitle") + '"><span class="evbar"><span style="width:' + pct[0] + '%;background:var(--observed)"></span><span style="width:' + pct[1] + '%;background:var(--reported)"></span><span style="width:' + pct[2] + '%;background:var(--assumed)"></span></span>'
+    + '<span class="c-observed"><i class="dot fill"></i> ' + s.observed + ' ' + L.classesPl.observed + '</span><span class="c-reported"><i class="dot fill"></i> ' + s.reported + ' ' + L.classesPl.reported + '</span><span class="c-assumed"><i class="dot"></i> ' + s.assumed + ' ' + L.classesPl.assumed + '</span></span>';
   const sel = $("#personaSel");
   if (journeys.length > 1) { sel.hidden = false; sel.innerHTML = journeys.map((x, i) => '<option value="' + i + '"' + (i === state.j ? ' selected' : '') + '>' + esc(x.persona.name) + '</option>').join(""); }
-  const tabs = [["journey", "Journey"], ["process", "Prozess & Fehlerpfade"], ["evidence", "Evidenz", s.total], ["opps", "Chancen", idx.opps.length], ["audit", "Prüfung", f.length]];
+  const tabs = [["journey", t("tabJourney")], ["process", t("tabProcess")], ["evidence", t("tabEvidence"), s.total], ["opps", t("tabOpps"), idx.opps.length], ["audit", t("tabAudit"), f.length]];
   $("#tabs").innerHTML = tabs.map(t => '<button data-tab="' + t[0] + '" class="' + (state.tab === t[0] ? "active" : "") + '">' + t[1] + (t[2] != null ? '<span class="n">' + t[2] + '</span>' : '') + '</button>').join("");
   $("#primToggle").classList.toggle("active", state.primOnly);
 }
@@ -372,59 +725,59 @@ function renderJourney(idx) {
   let h = '<div class="map-wrap"><div class="map" style="' + cols + '">';
   const row = (label, sub, cells, cls) => { h += '<div class="rowlabel">' + label + (sub ? '<small>' + sub + '</small>' : '') + '</div>'; h += cells; };
   // Phasen
-  h += '<div class="rowlabel">Phase<small>' + esc(j.scenario.goal) + '</small></div>';
+  h += '<div class="rowlabel">' + t("rowPhase") + '<small>' + esc(j.scenario.goal) + '</small></div>';
   j.phases.forEach(p => { h += '<div class="phase" style="grid-column: span ' + p.steps.length + '"><h3>' + esc(p.name) + '</h3>' + (p.user_intent ? '<div class="intent">' + esc(p.user_intent) + '</div>' : '') + (p.duration ? '<div class="dur">' + esc(p.duration) + '</div>' : '') + '</div>'; });
   // Dauer: ein Massstab über alle Phasen, damit lange Wartezeiten nicht gleich kurz aussehen wie zwei Tage Einbau.
   // Das Schrittraster bleibt gleich breit; nur die Balken folgen der belegten Dauer.
   const timed = j.phases.filter(p => p.duration_days);
   if (timed.length) {
     const room = Math.min(...j.phases.map(p => p.steps.length)) * 270 - 24, top = Math.max(...timed.map(p => p.duration_days.max || p.duration_days.typical)), px = v => Math.round(v / top * room);
-    h += '<div class="rowlabel">Dauer<small>Kalendertage, ein Massstab für alle Phasen</small></div>';
+    h += '<div class="rowlabel">' + t("rowDuration") + '<small>' + t("rowDurationSub") + '</small></div>';
     j.phases.forEach(p => { const d = p.duration_days; let c;
-      if (!d) c = '<span class="empty">keine belegte Dauer</span>';
-      else if (!visible(idx, d.evidence_refs)) c = '<div class="hidden-note">Dauer ohne Primärevidenz ausgeblendet</div>';
-      else { const lo = d.min != null ? d.min : d.typical, hi = d.max != null ? d.max : d.typical, label = "typisch " + days(d.typical) + (d.min != null && d.max != null ? " · Spanne " + d.min + "–" + d.max + " Tage" : d.max != null ? " · bis " + d.max + " Tage" : d.min != null ? " · ab " + d.min + " Tagen" : "");
+      if (!d) c = '<span class="empty">' + t("noDuration") + '</span>';
+      else if (!visible(idx, d.evidence_refs)) c = '<div class="hidden-note">' + t("durationHidden") + '</div>';
+      else { const lo = d.min != null ? d.min : d.typical, hi = d.max != null ? d.max : d.typical, label = t("durTypical", { d: days(d.typical) }) + (d.min != null && d.max != null ? t("durRange", { min: d.min, max: d.max }) : d.max != null ? t("durUpTo", { max: d.max }) : d.min != null ? t("durFrom", { min: d.min }) : "");
         c = '<div class="dbar" title="' + esc(label) + '"><span class="typ" style="width:' + px(d.typical) + 'px"></span>' + (hi > lo ? '<span class="rng" style="left:' + px(lo) + 'px;width:' + (px(hi) - px(lo)) + 'px"></span>' : '') + '</div>'
-          + claimBtn(idx, label, d.evidence_refs, "", "Dauer: " + p.name) + (d.basis ? '<div class="dbasis">' + esc(d.basis) + '</div>' : ''); }
+          + claimBtn(idx, label, d.evidence_refs, "", t("durTitle", { p: p.name })) + (d.basis ? '<div class="dbasis">' + esc(d.basis) + '</div>' : ''); }
       h += '<div class="phase-end" style="grid-column: span ' + p.steps.length + '">' + c + '</div>'; });
   }
   // Schritte
   let cells = "";
   idx.steps.forEach(e => { const s = e.step, last = e.si === e.phase.steps.length - 1;
     cells += '<div class="step' + (last ? ' phase-end' : '') + '"><h4>' + esc(s.name) + '</h4><div class="action">' + esc(s.action) + '</div><div class="meta">'
-      + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.touchpoint ? '<span class="chip" title="Touchpoint">' + esc(s.touchpoint) + '</span>' : '') + (s.counterpart ? '<span class="chip" title="Gegenüber">' + esc(s.counterpart) + '</span>' : '') + actorChip(s) + (s.is_transition ? '<span class="chip transition">Übergang</span>' : '')
-      + '</div>' + ((s.evidence_refs || []).length ? '<div style="margin-top:6px">' + claimBtn(idx, "Beleg für den Schritt", s.evidence_refs, "", s.name) + '</div>' : '') + '</div>'; });
-  row("Macht", "Aktion · Kanal · Touchpoint", cells);
+      + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.touchpoint ? '<span class="chip" title="' + t("touchpoint") + '">' + esc(s.touchpoint) + '</span>' : '') + (s.counterpart ? '<span class="chip" title="' + t("counterpart") + '">' + esc(s.counterpart) + '</span>' : '') + actorChip(s) + (s.is_transition ? '<span class="chip transition">' + t("transition") + '</span>' : '')
+      + '</div>' + ((s.evidence_refs || []).length ? '<div style="margin-top:6px">' + claimBtn(idx, t("stepEvidence"), s.evidence_refs, "", s.name) + '</div>' : '') + '</div>'; });
+  row(t("rowDoes"), t("rowDoesSub"), cells);
   // Denkt
   cells = ""; idx.steps.forEach(e => { cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + renderClaims(idx, e.step.thinking || [], t => t.text, t => t.evidence_refs) + '</div>'; });
-  row("Denkt", "Fragen, Zweifel, Erwartungen", cells);
+  row(t("rowThinks"), t("rowThinksSub"), cells);
   // Fühlt
-  h += '<div class="rowlabel">Fühlt<small>' + (journeys.length > 1 ? 'dicke Punkte: diese Persona, kleine: andere (Lage innerhalb der Phase ungefähr)' : 'hohl = ohne Primärevidenz · ? = keine Evidenz') + '</small></div>';
+  h += '<div class="rowlabel">' + t("rowFeels") + '<small>' + (journeys.length > 1 ? t("rowFeelsSubMulti") : t("rowFeelsSub")) + '</small></div>';
   h += '<div class="curve" style="grid-column: 2 / -1" id="curve"></div>';
   // Pain Points
   cells = ""; idx.steps.forEach(e => { const pps = e.step.pain_points || []; let c = "", hidden = 0; pps.forEach(pp => { if (!visible(idx, pp.evidence_refs)) { hidden++; return; }
-      const sev = pp.severity ? '<span class="sev" title="Schwere ' + pp.severity + '/5">' + [1, 2, 3, 4, 5].map(i => '<i class="' + (i <= pp.severity ? 'on' : '') + '"></i>').join("") + '</span>' : '';
-      c += '<button class="claim pp ' + pp.type + ' ev-' + idx.evState(pp.evidence_refs) + '" data-refs="' + esc((pp.evidence_refs || []).join(",")) + '" data-title="' + esc(pp.id) + '" data-text="' + esc(pp.text) + '" data-pp="' + esc(pp.id) + '"><div class="pp-head"><span class="tag ' + pp.type + '">' + (pp.type === "breakdown" ? "Breakdown" : "Reibung") + '</span>' + sev + (pp.status ? '<span class="tag status">' + (L.ppStatus[pp.status] || pp.status) + '</span>' : '') + '</div>' + esc(pp.text) + evDots(idx, pp.evidence_refs) + (pp.workaround ? '<div class="wa">↪ ' + esc(pp.workaround) + '</div>' : '') + (pp.owner ? '<div class="wa">Owner: ' + esc(pp.owner) + '</div>' : '') + '</button>'; });
-    if (hidden) c += '<div class="hidden-note">' + hidden + ' ohne Primärevidenz ausgeblendet</div>'; cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + (c || '<span class="empty">–</span>') + '</div>'; });
-  row("Pain Points", "Reibung vs. Breakdown · Workaround · Owner", cells);
+      const sev = pp.severity ? '<span class="sev" title="' + t("severity", { n: pp.severity }) + '">' + [1, 2, 3, 4, 5].map(i => '<i class="' + (i <= pp.severity ? 'on' : '') + '"></i>').join("") + '</span>' : '';
+      c += '<button class="claim pp ' + pp.type + ' ev-' + idx.evState(pp.evidence_refs) + '" data-refs="' + esc((pp.evidence_refs || []).join(",")) + '" data-title="' + esc(pp.id) + '" data-text="' + esc(pp.text) + '" data-pp="' + esc(pp.id) + '"><div class="pp-head"><span class="tag ' + pp.type + '">' + (pp.type === "breakdown" ? t("breakdown") : t("friction")) + '</span>' + sev + (pp.status ? '<span class="tag status">' + (L.ppStatus[pp.status] || pp.status) + '</span>' : '') + '</div>' + esc(pp.text) + evDots(idx, pp.evidence_refs) + (pp.workaround ? '<div class="wa">↪ ' + esc(pp.workaround) + '</div>' : '') + (pp.owner ? '<div class="wa">' + lbl("owner") + esc(pp.owner) + '</div>' : '') + '</button>'; });
+    if (hidden) c += '<div class="hidden-note">' + tn("noPrimaryHidden", hidden) + '</div>'; cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + (c || '<span class="empty">–</span>') + '</div>'; });
+  row(t("rowPain"), t("rowPainSub"), cells);
   // Edge Cases & Recovery
-  cells = ""; idx.steps.forEach(e => { const s = e.step; let c = renderClaims(idx, s.edge_cases || [], t => "Edge Case: " + t.text, t => t.evidence_refs); (s.recovery_paths || []).forEach(r => { if (!visible(idx, r.evidence_refs)) return; c += claimBtn(idx, (r.exists === false ? "Soll-Pfad: " : "Recovery: ") + r.path, r.evidence_refs, r.exists === false ? "ev-assumed" : "", "Auslöser: " + r.trigger); }); cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + (c || '<span class="empty">–</span>') + '</div>'; });
-  row("Edge Cases & Recovery", "Was, wenn es nicht nach Plan läuft", cells);
+  cells = ""; idx.steps.forEach(e => { const s = e.step; let c = renderClaims(idx, s.edge_cases || [], x => lbl("edgeCase") + x.text, x => x.evidence_refs); (s.recovery_paths || []).forEach(r => { if (!visible(idx, r.evidence_refs)) return; c += claimBtn(idx, lbl(r.exists === false ? "targetPath" : "recovery") + r.path, r.evidence_refs, r.exists === false ? "ev-assumed" : "", lbl("trigger") + r.trigger); }); cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + (c || '<span class="empty">–</span>') + '</div>'; });
+  row(t("rowEdge"), t("rowEdgeSub"), cells);
   // Chancen (phasenweise)
-  h += '<div class="rowlabel">Chancen<small>How might we …</small></div>';
+  h += '<div class="rowlabel">' + t("rowOpps") + '<small>' + t("rowOppsSub") + '</small></div>';
   j.phases.forEach(p => { const os = idx.oppsForPhase(p.id); h += '<div class="phase-end" style="grid-column: span ' + p.steps.length + '">' + (os.length ? os.map(o => { const q = quadrant(o); return claimBtn(idx, o.hmw + (q ? " · " + L.quadrant[q] : ""), o.evidence_refs, "", o.id); }).join("") : '<span class="empty">–</span>') + '</div>'; });
   // KPIs (phasenweise)
-  h += '<div class="rowlabel">Kennzahlen<small>Wahrnehmung · Ergebnis · Public Value</small></div>';
-  j.phases.forEach(p => { const ks = p.kpis || []; h += '<div class="phase-end" style="grid-column: span ' + p.steps.length + '">' + (ks.length ? ks.map(k => '<div class="kpi"><b>' + esc(k.name) + '</b>' + (k.current_value != null ? ' · <span>' + esc(k.current_value) + (k.unit ? ' ' + esc(k.unit) : '') + '</span>' : '') + (k.target != null ? ' → Ziel ' + esc(k.target) : '') + '<div class="k">' + (L.kpiCat[k.category] || k.category) + ' · ' + (k.indicator_type === "leading" ? "Frühindikator" : "Spätindikator") + (k.commercial_equivalent ? ' · übersetzt aus ' + esc(k.commercial_equivalent) : '') + '</div></div>').join("") : '<span class="empty">–</span>') + '</div>'; });
+  h += '<div class="rowlabel">' + t("rowKpi") + '<small>' + t("rowKpiSub") + '</small></div>';
+  j.phases.forEach(p => { const ks = p.kpis || []; h += '<div class="phase-end" style="grid-column: span ' + p.steps.length + '">' + (ks.length ? ks.map(k => '<div class="kpi"><b>' + esc(k.name) + '</b>' + (k.current_value != null ? ' · <span>' + esc(k.current_value) + (k.unit ? ' ' + esc(k.unit) : '') + '</span>' : '') + (k.target != null ? ' ' + t("kpiTarget", { t: esc(k.target) }) : '') + '<div class="k">' + (L.kpiCat[k.category] || k.category) + ' · ' + (k.indicator_type === "leading" ? t("leading") : t("lagging")) + (k.commercial_equivalent ? ' · ' + t("translatedFrom", { c: esc(k.commercial_equivalent) }) : '') + '</div></div>').join("") : '<span class="empty">–</span>') + '</div>'; });
   h += '</div></div>';
   // Persona & Szenario
   const per = j.persona, sc = j.scenario;
-  h += '<div class="grid-2" style="margin-top:14px"><div class="panel"><h2>Persona: ' + esc(per.name) + (per.is_hypothesis ? ' <span class="badge status-hypothesis">Hypothese</span>' : '') + '</h2>' + (per.description ? '<p class="muted" style="margin:4px 0 8px">' + esc(per.description) + '</p>' : '')
-    + (per.goals?.length ? '<h3>Ziele</h3><ul>' + per.goals.map(g => '<li>' + esc(g) + '</li>').join("") + '</ul>' : '') + (per.frustrations?.length ? '<h3>Frustrationen</h3><ul>' + per.frustrations.map(g => '<li>' + esc(g) + '</li>').join("") + '</ul>' : '')
-    + (per.context ? '<h3>Kontext</h3><table>' + Object.entries(per.context).map(([k, v]) => '<tr><th>' + esc({ language_situation: "Sprache", digital_access: "Digitaler Zugang", time_budget: "Zeitbudget", prior_experience: "Vorerfahrung", other: "Weiteres" }[k] || k) + '</th><td>' + esc(v) + '</td></tr>').join("") + '</table>' : '')
-    + '<div style="margin-top:10px">' + claimBtn(idx, "Evidenz zur Persona", per.evidence_refs, "", per.name) + '</div></div>'
-    + '<div class="panel"><h2>Szenario: ' + esc(sc.title) + '</h2><table>' + [["Ziel", sc.goal], ["Auslöser", sc.trigger], ["Endzustand", sc.end_state], ["Zeitraum", sc.timeframe]].filter(x => x[1]).map(x => '<tr><th>' + x[0] + '</th><td>' + esc(x[1]) + '</td></tr>').join("") + '</table>'
-    + (sc.scope_exclusions?.length ? '<h3>Bewusst nicht abgedeckt</h3><ul>' + sc.scope_exclusions.map(g => '<li>' + esc(g) + '</li>').join("") + '</ul>' : '') + (j.meta.diagnosis ? '<h3>Diagnose</h3><p class="muted" style="margin:0">' + esc(j.meta.diagnosis.rationale) + (j.meta.diagnosis.backstage_documented_in ? '<br>Back-Stage: ' + esc(j.meta.diagnosis.backstage_documented_in) : '') + '</p>' : '') + '</div></div>';
+  h += '<div class="grid-2" style="margin-top:14px"><div class="panel"><h2>' + lbl("persona") + esc(per.name) + (per.is_hypothesis ? ' <span class="badge status-hypothesis">' + L.status.hypothesis + '</span>' : '') + '</h2>' + (per.description ? '<p class="muted" style="margin:4px 0 8px">' + esc(per.description) + '</p>' : '')
+    + (per.goals?.length ? '<h3>' + t("goals") + '</h3><ul>' + per.goals.map(g => '<li>' + esc(g) + '</li>').join("") + '</ul>' : '') + (per.frustrations?.length ? '<h3>' + t("frustrations") + '</h3><ul>' + per.frustrations.map(g => '<li>' + esc(g) + '</li>').join("") + '</ul>' : '')
+    + (per.context ? '<h3>' + t("contextH") + '</h3><table>' + Object.entries(per.context).map(([k, v]) => '<tr><th>' + esc(L.context[k] || k) + '</th><td>' + esc(v) + '</td></tr>').join("") + '</table>' : '')
+    + '<div style="margin-top:10px">' + claimBtn(idx, t("personaEvidence"), per.evidence_refs, "", per.name) + '</div></div>'
+    + '<div class="panel"><h2>' + lbl("scenario") + esc(sc.title) + '</h2><table>' + [[t("goal"), sc.goal], [t("triggerScenario"), sc.trigger], [t("endState"), sc.end_state], [t("timeframe"), sc.timeframe]].filter(x => x[1]).map(x => '<tr><th>' + x[0] + '</th><td>' + esc(x[1]) + '</td></tr>').join("") + '</table>'
+    + (sc.scope_exclusions?.length ? '<h3>' + t("scopeExclusions") + '</h3><ul>' + sc.scope_exclusions.map(g => '<li>' + esc(g) + '</li>').join("") + '</ul>' : '') + (j.meta.diagnosis ? '<h3>' + t("diagnosis") + '</h3><p class="muted" style="margin:0">' + esc(j.meta.diagnosis.rationale) + (j.meta.diagnosis.backstage_documented_in ? '<br>' + lbl("backstage") + esc(j.meta.diagnosis.backstage_documented_in) : '') + '</p>' : '') + '</div></div>';
   return h;
 }
 function drawCurve(idx) {
@@ -438,14 +791,14 @@ function drawCurve(idx) {
   const gaps = new Map(), dropped = [];
   journeys.forEach((other, oi) => { if (oi === state.j) return; const col = ["var(--observed)", "var(--reported)", "var(--friction)", "var(--positive)"][oi % 4]; const pts = [];
     idx.j.phases.forEach(p => { const op = other.phases.find(q => q.id === p.id);
-      const why = !op ? "keine Daten in dieser Phase" : op.steps.some(s => s.feeling) ? "" : "keine Gefühlsevidenz in dieser Phase";
-      if (why) { if (!gaps.has(p.id)) gaps.set(p.id, []); gaps.get(p.id).push(other.persona.name + ": " + why); } });
-    const lost = other.phases.filter(op => !idx.j.phases.some(p => p.id === op.id)).map(op => "«" + op.name + "»");
-    if (lost.length) dropped.push(other.persona.name + ": " + lost.join(", "));
+      const why = !op ? t("noDataPhase") : op.steps.some(s => s.feeling) ? "" : t("noFeelingPhase");
+      if (why) { if (!gaps.has(p.id)) gaps.set(p.id, []); gaps.get(p.id).push(other.persona.name + t("colon") + why); } });
+    const lost = other.phases.filter(op => !idx.j.phases.some(p => p.id === op.id)).map(op => t("quoted", { t: op.name }));
+    if (lost.length) dropped.push(other.persona.name + t("colon") + lost.join(", "));
     other.phases.forEach(op => { const mine = idx.j.phases.find(p => p.id === op.id); if (!mine) return; const start = idx.steps.find(e => e.phase.id === mine.id).gi, span = mine.steps.length; op.steps.forEach((s, k) => { const gx = start + (k + 0.5) / op.steps.length * span - 0.5; pts.push({ gx, v: s.feeling ? s.feeling.valence : null, label: s.name, name: other.persona.name }); }); });
     let d = "", pen = false; pts.forEach(p => { if (p.v == null) { pen = false; return; } d += (pen ? " L" : " M") + x(p.gx) + " " + y(p.v); pen = true; });
     svg += '<path d="' + d + '" fill="none" stroke="' + col + '" stroke-width="1.5" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" opacity=".8"/>';
-    pts.forEach(p => { if (p.v == null) return; html += '<span class="pt other" style="left:' + x(p.gx) + 'px;top:' + y(p.v) + 'px;border-color:' + col + ';background:' + col + '" title="' + esc(p.name + ": " + p.label) + '"></span>'; }); });
+    pts.forEach(p => { if (p.v == null) return; html += '<span class="pt other" style="left:' + x(p.gx) + 'px;top:' + y(p.v) + 'px;border-color:' + col + ';background:' + col + '" title="' + esc(p.name + t("colon") + p.label) + '"></span>'; }); });
   // diese Persona
   let d = "", pen = false, lastPt = null;
   idx.steps.forEach(e => { const f = e.step.feeling; const px = x(e.gi); if (!f) { pen = false; return; }
@@ -454,63 +807,63 @@ function drawCurve(idx) {
     pen = true; lastPt = { x: px, y: y(f.valence) }; });
   svg += '<path d="' + d + '" fill="none" stroke="var(--ink)" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>';
   idx.steps.forEach(e => { const f = e.step.feeling, px = x(e.gi);
-    if (!f) { html += '<span class="pt gap" style="left:' + px + 'px;top:' + (H / 2) + 'px" title="keine Evidenz zur Gefühlslage">?</span><span class="lbl" style="left:' + px + 'px;top:' + (H / 2 + 14) + 'px">keine Evidenz</span>'; return; }
+    if (!f) { html += '<span class="pt gap" style="left:' + px + 'px;top:' + (H / 2) + 'px" title="' + t("noFeelingTitle") + '">?</span><span class="lbl" style="left:' + px + 'px;top:' + (H / 2 + 14) + 'px">' + t("noEvidence") + '</span>'; return; }
     const st = idx.evState(f.evidence_refs), cls = st === "primary" ? "" : st === "assumed" ? " assumed" : " hollow";
-    html += '<span class="pt' + cls + '" style="left:' + px + 'px;top:' + y(f.valence) + 'px" data-refs="' + esc((f.evidence_refs || []).join(",")) + '" data-title="Gefühlslage: ' + esc(e.step.name) + '" data-text="' + esc(f.label || "") + ' (' + (f.valence > 0 ? "+" : "") + f.valence + ')" title="' + esc(f.label || "") + '"></span>';
+    html += '<span class="pt' + cls + '" style="left:' + px + 'px;top:' + y(f.valence) + 'px" data-refs="' + esc((f.evidence_refs || []).join(",")) + '" data-title="' + esc(t("feelingTitle", { s: e.step.name })) + '" data-text="' + esc(f.label || "") + ' (' + (f.valence > 0 ? "+" : "") + f.valence + ')" title="' + esc(f.label || "") + '"></span>';
     if (f.label) html += '<span class="lbl" style="left:' + px + 'px;top:' + (f.valence >= 0 ? y(f.valence) + 12 : y(f.valence) - 34) + 'px">' + esc(f.label.length > 44 ? f.label.slice(0, 42) + "…" : f.label) + '</span>'; });
   gaps.forEach((notes, pid) => { const first = idx.steps.find(e => e.phase.id === pid); if (!first) return; const span = first.phase.steps.length;
     html += '<span class="nodata" style="left:' + (first.gi / n * W) + 'px;width:' + (span / n * W) + 'px">' + notes.map(esc).join("<br>") + '</span>'; });
-  if (dropped.length) html += '<span class="dropped" title="Phasen anderer Personas ohne gleiche Phasen-ID werden nicht überlagert">Nicht überlagert (keine gleiche Phasen-ID): ' + dropped.map(esc).join("; ") + '</span>';
+  if (dropped.length) html += '<span class="dropped" title="' + t("droppedTitle") + '">' + esc(t("dropped", { l: dropped.join("; ") })) + '</span>';
   el.innerHTML = svg + html;
 }
 
 // ---------------------------------------------------------------- Layer 2: Prozess
 function renderProcess(idx) {
-  let h = '<div class="panel"><h2>Prozess- und Fehlerpfade</h2><p class="muted" style="margin:0">Links der Pfad der Persona, rechts wo er bricht: Breakdowns mit Workaround und Recovery-Pfad (gestrichelt = Soll-Pfad, heute nicht vorhanden), Reibungen und Edge Cases.</p></div><div class="flow">';
-  idx.j.phases.forEach(p => { h += '<div class="phase-h">' + esc(p.name) + (p.duration_days && visible(idx, p.duration_days.evidence_refs) ? ' · typisch ' + days(p.duration_days.typical) : '') + '</div>';
+  let h = '<div class="panel"><h2>' + t("processTitle") + '</h2><p class="muted" style="margin:0">' + t("processIntro") + '</p></div><div class="flow">';
+  idx.j.phases.forEach(p => { h += '<div class="phase-h">' + esc(p.name) + (p.duration_days && visible(idx, p.duration_days.evidence_refs) ? ' · ' + t("durTypical", { d: days(p.duration_days.typical) }) : '') + '</div>';
     p.steps.forEach(s => { const bds = (s.pain_points || []).filter(x => x.type === "breakdown"), frs = (s.pain_points || []).filter(x => x.type !== "breakdown");
-      h += '<div class="node-row"><div class="node' + (bds.length ? ' has-breakdown' : '') + '"><h4>' + esc(s.name) + '</h4><div class="act">' + esc(s.action) + '</div><div class="meta" style="margin-top:6px">' + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.counterpart ? '<span class="chip">' + esc(s.counterpart) + '</span>' : '') + actorChip(s) + (s.is_transition ? '<span class="chip transition">Übergang</span>' : '') + '</div>' + ((s.backstage_notes || []).length ? '<div class="muted" style="font-size:11.5px;margin-top:6px">Back-Stage: ' + s.backstage_notes.map(esc).join(" · ") + '</div>' : '') + '</div><div class="branches">';
-      bds.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch bd"><b>Breakdown:</b> ' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">Ausweichen</span><span>' + esc(pp.workaround) + '</span></div>' : '') + '</div>'; });
+      h += '<div class="node-row"><div class="node' + (bds.length ? ' has-breakdown' : '') + '"><h4>' + esc(s.name) + '</h4><div class="act">' + esc(s.action) + '</div><div class="meta" style="margin-top:6px">' + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.counterpart ? '<span class="chip">' + esc(s.counterpart) + '</span>' : '') + actorChip(s) + (s.is_transition ? '<span class="chip transition">' + t("transition") + '</span>' : '') + '</div>' + ((s.backstage_notes || []).length ? '<div class="muted" style="font-size:11.5px;margin-top:6px">' + lbl("backstage") + s.backstage_notes.map(esc).join(" · ") + '</div>' : '') + '</div><div class="branches">';
+      bds.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch bd"><b>' + lbl("breakdown") + '</b>' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">' + t("workaround") + '</span><span>' + esc(pp.workaround) + '</span></div>' : '') + '</div>'; });
       const rps = (s.recovery_paths || []).filter(r => visible(idx, r.evidence_refs));
-      if (rps.length) { h += '<div class="branch" style="border-color:var(--positive)"><b>Zurück in die Journey</b>'; rps.forEach(r => { h += '<div class="arrow rec' + (r.exists === false ? ' soll' : '') + '"><span class="lab">' + (r.exists === false ? "Soll-Pfad" : "Recovery") + '</span><span><i class="muted">' + esc(r.trigger) + '</i> → ' + esc(r.path) + ' ' + claimInline(idx, r.evidence_refs, "Recovery", r.path) + '</span></div>'; }); h += '</div>'; }
-      frs.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch fr"><b>Reibung:</b> ' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">Ausweichen</span><span>' + esc(pp.workaround) + '</span></div>' : '') + '</div>'; });
-      (s.edge_cases || []).forEach(ec => { if (!visible(idx, ec.evidence_refs)) return; h += '<div class="branch ec"><b>Edge Case:</b> ' + esc(ec.text) + ' ' + claimInline(idx, ec.evidence_refs, "Edge Case", ec.text) + '</div>'; });
-      if (!bds.length && !(s.recovery_paths || []).length && !frs.length && !(s.edge_cases || []).length) h += '<div class="muted" style="font-size:12px;padding:8px 0">Kein dokumentierter Fehlerpfad – Happy Path oder Lücke?</div>';
+      if (rps.length) { h += '<div class="branch" style="border-color:var(--positive)"><b>' + t("backToJourney") + '</b>'; rps.forEach(r => { h += '<div class="arrow rec' + (r.exists === false ? ' soll' : '') + '"><span class="lab">' + (r.exists === false ? t("targetPath") : t("recovery")) + '</span><span><i class="muted">' + esc(r.trigger) + '</i> → ' + esc(r.path) + ' ' + claimInline(idx, r.evidence_refs, t("recovery"), r.path) + '</span></div>'; }); h += '</div>'; }
+      frs.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch fr"><b>' + lbl("friction") + '</b>' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">' + t("workaround") + '</span><span>' + esc(pp.workaround) + '</span></div>' : '') + '</div>'; });
+      (s.edge_cases || []).forEach(ec => { if (!visible(idx, ec.evidence_refs)) return; h += '<div class="branch ec"><b>' + lbl("edgeCase") + '</b>' + esc(ec.text) + ' ' + claimInline(idx, ec.evidence_refs, t("edgeCase"), ec.text) + '</div>'; });
+      if (!bds.length && !(s.recovery_paths || []).length && !frs.length && !(s.edge_cases || []).length) h += '<div class="muted" style="font-size:12px;padding:8px 0">' + t("noFailurePath") + '</div>';
       h += '</div></div>'; }); });
   return h + '</div>';
 }
-function claimInline(idx, refs, title, text) { if (!refs || !refs.length) return '<button class="claim" style="display:inline;width:auto;padding:0 4px;margin:0;border:0;background:none" data-refs="" data-title="' + esc(title) + '" data-text="' + esc(text) + '"><span class="evc muted" title="keine Evidenz">∅</span></button>'; return '<button class="claim" style="display:inline;width:auto;padding:0 4px;margin:0;border:0;background:none" data-refs="' + esc(refs.join(",")) + '" data-title="' + esc(title) + '" data-text="' + esc(text) + '">' + evDots(idx, refs) + '</button>'; }
+function claimInline(idx, refs, title, text) { if (!refs || !refs.length) return '<button class="claim" style="display:inline;width:auto;padding:0 4px;margin:0;border:0;background:none" data-refs="" data-title="' + esc(title) + '" data-text="' + esc(text) + '"><span class="evc muted" title="' + t("noEvidence") + '">∅</span></button>'; return '<button class="claim" style="display:inline;width:auto;padding:0 4px;margin:0;border:0;background:none" data-refs="' + esc(refs.join(",")) + '" data-title="' + esc(title) + '" data-text="' + esc(text) + '">' + evDots(idx, refs) + '</button>'; }
 
 // ---------------------------------------------------------------- Layer 3: Evidenz
 function renderEvidence(idx) {
   const s = idx.summary(), cl = idx.claims(), exp = cl.filter(c => ["thinking", "feeling", "pain_point"].includes(c.kind)), backed = exp.filter(c => idx.hasPrimary(c.refs)).length;
-  let h = '<div class="tiles"><div class="tile"><div class="v">' + idx.src.size + '</div><div class="l">Quellen</div></div><div class="tile"><div class="v">' + s.total + '</div><div class="l">Evidenz-Atome</div></div><div class="tile"><div class="v c-observed">' + s.observed + '</div><div class="l">beobachtet</div></div><div class="tile"><div class="v c-reported">' + s.reported + '</div><div class="l">berichtet</div></div><div class="tile"><div class="v c-assumed">' + s.assumed + '</div><div class="l">angenommen</div></div><div class="tile"><div class="v">' + (exp.length ? Math.round(backed / exp.length * 100) : 0) + '%</div><div class="l">Erlebnis-Aussagen mit Primärevidenz (' + backed + '/' + exp.length + ')</div></div></div>';
+  let h = '<div class="tiles"><div class="tile"><div class="v">' + idx.src.size + '</div><div class="l">' + t("sources") + '</div></div><div class="tile"><div class="v">' + s.total + '</div><div class="l">' + t("atoms") + '</div></div><div class="tile"><div class="v c-observed">' + s.observed + '</div><div class="l">' + L.classesPl.observed + '</div></div><div class="tile"><div class="v c-reported">' + s.reported + '</div><div class="l">' + L.classesPl.reported + '</div></div><div class="tile"><div class="v c-assumed">' + s.assumed + '</div><div class="l">' + L.classesPl.assumed + '</div></div><div class="tile"><div class="v">' + (exp.length ? Math.round(backed / exp.length * 100) : 0) + '%</div><div class="l">' + t("experienceShare", { b: backed, n: exp.length }) + '</div></div></div>';
   // Heatmap
-  const dims = [["step", "Schritt"], ["thinking", "Denkt"], ["feeling", "Fühlt"], ["pain_point", "Pain Points"], ["edge_case", "Edge Cases"], ["recovery", "Recovery"]];
-  h += '<div class="panel" style="margin-top:14px"><h2>Evidenz-Heatmap</h2><p class="muted" style="margin:0 0 8px">Zahl = Primärbelege (beobachtet + berichtet), klein = angenommen. Gestrichelt = Aussage vorhanden, aber kein Beleg. Wo die Map dünn ist, ist sie Innensicht.</p><div class="heat"><table><thead><tr><th></th>' + idx.j.phases.map(p => '<th class="phase" colspan="' + p.steps.length + '">' + esc(p.name) + '</th>').join("") + '</tr><tr><th></th>' + idx.steps.map(e => '<th class="step">' + esc(e.step.name) + '</th>').join("") + '</tr></thead><tbody>';
+  const dims = [["step", t("step")], ["thinking", t("rowThinks")], ["feeling", t("rowFeels")], ["pain_point", t("rowPain")], ["edge_case", t("edgeCases")], ["recovery", t("recovery")]];
+  h += '<div class="panel" style="margin-top:14px"><h2>' + t("heatmap") + '</h2><p class="muted" style="margin:0 0 8px">' + t("heatIntro") + '</p><div class="heat"><table><thead><tr><th></th>' + idx.j.phases.map(p => '<th class="phase" colspan="' + p.steps.length + '">' + esc(p.name) + '</th>').join("") + '</tr><tr><th></th>' + idx.steps.map(e => '<th class="step">' + esc(e.step.name) + '</th>').join("") + '</tr></thead><tbody>';
   dims.forEach(([k, label]) => { h += '<tr><th>' + label + '</th>'; idx.steps.forEach(e => { const cs = cl.filter(c => c.kind === k && c.e === e); if (!cs.length) { h += '<td class="cell"><div class="hc na">·</div></td>'; return; } let prim = 0, ass = 0; const refs = []; cs.forEach(c => { const cc = idx.classes(c.refs); prim += cc.observed + cc.reported; ass += cc.assumed; refs.push(...c.refs); });
       const bg = prim === 0 ? "" : 'background: color-mix(in srgb, var(--observed) ' + Math.min(15 + prim * 18, 85) + '%, var(--surface));color:' + (prim >= 3 ? 'var(--accent-ink)' : 'var(--ink)');
-      h += '<td class="cell"><div class="hc' + (prim === 0 ? ' gap' : '') + '" style="' + bg + '" data-refs="' + esc([...new Set(refs)].join(",")) + '" data-title="' + esc(label + ": " + e.step.name) + '" data-text="' + cs.length + ' Aussage' + (cs.length > 1 ? 'n' : '') + '">' + (prim || "–") + (ass ? '<small>+' + ass + ' angen.</small>' : '') + '</div></td>'; }); h += '</tr>'; });
+      h += '<td class="cell"><div class="hc' + (prim === 0 ? ' gap' : '') + '" style="' + bg + '" data-refs="' + esc([...new Set(refs)].join(",")) + '" data-title="' + esc(label + t("colon") + e.step.name) + '" data-text="' + tn("statements", cs.length) + '">' + (prim || "–") + (ass ? '<small>' + t("assumedShort", { n: ass }) + '</small>' : '') + '</div></td>'; }); h += '</tr>'; });
   h += '</tbody></table></div></div>';
   // Quellen
-  h += '<div class="panel"><h2>Quellenregister</h2><table><thead><tr><th>ID</th><th>Quelle</th><th>Art</th><th>Klasse</th><th>n</th><th>Datum</th><th>Personendaten</th><th>Ablage</th></tr></thead><tbody>' + [...idx.src.values()].map(x => '<tr><td class="mono">' + esc(x.id) + '</td><td>' + esc(x.title) + (x.participants ? '<br><small>' + esc(x.participants) + '</small>' : '') + '</td><td>' + (L.srcKinds[x.kind] || x.kind) + '</td><td class="c-' + x.default_class + '">' + L.classes[x.default_class] + '</td><td>' + (x.n ?? '–') + '</td><td>' + esc(x.date || '–') + '</td><td class="src-pii' + (x.pii_status === "contains_pii" ? ' c-breakdown' : '') + '">' + (L.pii[x.pii_status] || x.pii_status) + '</td><td class="mono">' + esc(x.location || '–') + '</td></tr>').join("") + '</tbody></table></div>';
+  h += '<div class="panel"><h2>' + t("sourceRegister") + '</h2><table><thead><tr>' + ["colId", "colSource", "colKind", "colClass", "colN", "colDate", "colPii", "colLocation"].map(k => '<th>' + t(k) + '</th>').join("") + '</tr></thead><tbody>' + [...idx.src.values()].map(x => '<tr><td class="mono">' + esc(x.id) + '</td><td>' + esc(x.title) + (x.participants ? '<br><small>' + esc(x.participants) + '</small>' : '') + '</td><td>' + (L.srcKinds[x.kind] || x.kind) + '</td><td class="c-' + x.default_class + '">' + L.classes[x.default_class] + '</td><td>' + (x.n ?? '–') + '</td><td>' + esc(x.date || '–') + '</td><td class="src-pii' + (x.pii_status === "contains_pii" ? ' c-breakdown' : '') + '">' + (L.pii[x.pii_status] || x.pii_status) + '</td><td class="mono">' + esc(x.location || '–') + '</td></tr>').join("") + '</tbody></table></div>';
   // Widersprüche & unbenutzt
   const contra = [...idx.ev.values()].filter(a => a.contradicts?.length), used = new Set(); cl.forEach(c => c.refs.forEach(r => used.add(r))); (idx.j.persona.evidence_refs || []).forEach(r => used.add(r)); (idx.j.scenario.evidence_refs || []).forEach(r => used.add(r)); idx.opps.forEach(o => (o.evidence_refs || []).forEach(r => used.add(r)));
   const unused = [...idx.ev.values()].filter(a => !used.has(a.id));
-  h += '<div class="grid-2"><div class="panel"><h2>Widersprüche zwischen Quellen (' + contra.length + ')</h2>' + (contra.length ? contra.map(a => atomHtml(idx, a) + '<div style="margin:-4px 0 12px 14px">' + a.contradicts.map(c => idx.ev.get(c) ? atomHtml(idx, idx.ev.get(c)) : '').join("") + '</div>').join("") : '<p class="muted">Keine ausgewiesen.</p>') + '</div><div class="panel"><h2>Nicht eingeordnete Evidenz (' + unused.length + ')</h2>' + (unused.length ? unused.map(a => atomHtml(idx, a)).join("") : '<p class="muted">Alles synthetisiert.</p>') + '</div></div>';
+  h += '<div class="grid-2"><div class="panel"><h2>' + t("contradictions", { n: contra.length }) + '</h2>' + (contra.length ? contra.map(a => atomHtml(idx, a) + '<div style="margin:-4px 0 12px 14px">' + a.contradicts.map(c => idx.ev.get(c) ? atomHtml(idx, idx.ev.get(c)) : '').join("") + '</div>').join("") : '<p class="muted">' + t("noneShown") + '</p>') + '</div><div class="panel"><h2>' + t("unused", { n: unused.length }) + '</h2>' + (unused.length ? unused.map(a => atomHtml(idx, a)).join("") : '<p class="muted">' + t("allSynthesised") + '</p>') + '</div></div>';
   return h;
 }
-function atomHtml(idx, a) { const src = idx.src.get(a.source_ref); const txt = a.kind === "quote" ? '<q>' + esc(a.text) + '</q>' : esc(a.text); return '<div class="atom"><div class="meta"><span class="cls ' + a.class + '">' + L.classes[a.class] + '</span><span>' + (L.kinds[a.kind] || a.kind) + '</span><span>·</span><span>' + esc(src ? src.title : a.source_ref) + '</span>' + (a.locator ? '<span class="loc">' + esc(a.locator) + '</span>' : '') + '<span class="loc">' + esc(a.id) + '</span></div><div class="txt">' + txt + (a.value != null && a.kind === "metric" ? ' <b>' + esc(a.value) + (a.unit ? ' ' + esc(a.unit) : '') + '</b>' : '') + '</div>' + (a.emotion_hint ? '<div class="muted" style="font-size:12px;margin-top:3px">Emotion: ' + esc(a.emotion_hint.label || "") + ' (' + (a.emotion_hint.valence > 0 ? "+" : "") + a.emotion_hint.valence + ')' + (a.emotion_hint.explicit ? ', ausdrücklich geäussert' : ', abgeleitet') + '</div>' : '') + (a.contradicts?.length ? '<div class="contra">widerspricht ' + a.contradicts.map(esc).join(", ") + '</div>' : '') + '</div>'; }
+function atomHtml(idx, a) { const src = idx.src.get(a.source_ref); const txt = a.kind === "quote" ? '<q>' + esc(a.text) + '</q>' : esc(a.text); return '<div class="atom"><div class="meta"><span class="cls ' + a.class + '">' + L.classes[a.class] + '</span><span>' + (L.kinds[a.kind] || a.kind) + '</span><span>·</span><span>' + esc(src ? src.title : a.source_ref) + '</span>' + (a.locator ? '<span class="loc">' + esc(a.locator) + '</span>' : '') + '<span class="loc">' + esc(a.id) + '</span></div><div class="txt">' + txt + (a.value != null && a.kind === "metric" ? ' <b>' + esc(a.value) + (a.unit ? ' ' + esc(a.unit) : '') + '</b>' : '') + '</div>' + (a.emotion_hint ? '<div class="muted" style="font-size:12px;margin-top:3px">' + lbl("emotion") + esc(a.emotion_hint.label || "") + ' (' + (a.emotion_hint.valence > 0 ? "+" : "") + a.emotion_hint.valence + ')' + (a.emotion_hint.explicit ? t("explicit") : t("derived")) + '</div>' : '') + (a.contradicts?.length ? '<div class="contra">' + esc(t("contradicts", { l: a.contradicts.join(", ") })) + '</div>' : '') + '</div>'; }
 
 // ---------------------------------------------------------------- Layer 4: Chancen
 function renderOpps(idx) {
-  const os = idx.opps; if (!os.length) return '<div class="panel"><h2>Chancen</h2><p class="muted">Keine Chancen abgeleitet – die Map hat noch keine Handlungsableitung.</p></div>';
-  let h = '<div class="grid-2"><div class="panel"><h2>Impact / Effort</h2><div class="matrix"><div class="q tl">Quick Wins</div><div class="q tr">Big Bets</div><div class="q bl">Nebenbei</div><div class="q br">Zurückstellen</div><span class="ax x">Aufwand 1 → 5</span><span class="ax y">↑ Nutzen (Mittel aus Impact und Public Value)</span>';
+  const os = idx.opps; if (!os.length) return '<div class="panel"><h2>' + t("tabOpps") + '</h2><p class="muted">' + t("noOpps") + '</p></div>';
+  let h = '<div class="grid-2"><div class="panel"><h2>' + t("matrix") + '</h2><div class="matrix"><div class="q tl">' + L.quadrantPl.quick_win + '</div><div class="q tr">' + L.quadrantPl.big_bet + '</div><div class="q bl">' + L.quadrantPl.fill_in + '</div><div class="q br">' + L.quadrantPl.skip + '</div><span class="ax x">' + t("axisX") + '</span><span class="ax y">' + t("axisY") + '</span>';
   os.forEach((o, i) => { if (o.user_impact == null || o.effort == null) return; const v = (o.user_impact + (o.public_value ?? o.user_impact)) / 2; const left = 8 + (o.effort - 1) / 4 * 84, top = 92 - (v - 1) / 4 * 84; h += '<span class="opp" style="left:' + left + '%;top:' + top + '%" title="' + esc(o.hmw) + '" data-opp="' + i + '">' + (i + 1) + '</span>'; });
-  h += '</div><p class="muted" style="font-size:12px;margin:8px 0 0">Chancen ohne Scores erscheinen nur in der Liste.</p></div><div class="panel"><h2>Chancen und Stories</h2>';
-  os.forEach((o, i) => { const q = quadrant(o); h += '<div class="opp-card" id="opp-' + i + '"><div class="h"><span class="num">' + (i + 1) + '</span><div style="flex:1"><b>' + esc(o.hmw) + '</b>' + (o.description ? '<div class="muted" style="font-size:12.5px">' + esc(o.description) + '</div>' : '') + '</div></div><div class="scores">' + (q ? '<span class="badge">' + L.quadrant[q] + '</span>' : '') + '<span>Impact ' + (o.user_impact ?? '–') + '</span><span>Public Value ' + (o.public_value ?? '–') + '</span><span>Aufwand ' + (o.effort ?? '–') + '</span>' + (o.owner ? '<span>Owner: ' + esc(o.owner) + '</span>' : '') + (o.status ? '<span class="tag status">' + (L.ppStatus[o.status] || o.status) + '</span>' : '') + '</div>'
-    + ((o.linked_pain_points || []).length ? '<div style="font-size:12px">Pain Points: ' + o.linked_pain_points.map(p => '<button class="claim" style="display:inline;width:auto;padding:1px 6px;margin:0 2px" data-refs="' + esc((idx.pp.get(p)?.evidence_refs || []).join(",")) + '" data-title="' + esc(p) + '" data-text="' + esc(idx.pp.get(p)?.text || p) + '">' + esc(p) + '</button>').join("") + '</div>' : '')
-    + ((o.stories || []).length ? '<ul>' + o.stories.map(st => '<li class="' + (st.mvp ? 'mvp' : '') + '">' + esc(st.text) + (st.mvp ? ' <small class="c-positive">MVP</small>' : '') + '</li>').join("") + '</ul>' : '<div class="muted" style="font-size:12px;margin-top:4px">Noch keine Stories.</div>') + '</div>'; });
+  h += '</div><p class="muted" style="font-size:12px;margin:8px 0 0">' + t("unscored") + '</p></div><div class="panel"><h2>' + t("oppsStories") + '</h2>';
+  os.forEach((o, i) => { const q = quadrant(o); h += '<div class="opp-card" id="opp-' + i + '"><div class="h"><span class="num">' + (i + 1) + '</span><div style="flex:1"><b>' + esc(o.hmw) + '</b>' + (o.description ? '<div class="muted" style="font-size:12.5px">' + esc(o.description) + '</div>' : '') + '</div></div><div class="scores">' + (q ? '<span class="badge">' + L.quadrant[q] + '</span>' : '') + '<span>' + t("impact") + ' ' + (o.user_impact ?? '–') + '</span><span>' + t("publicValue") + ' ' + (o.public_value ?? '–') + '</span><span>' + t("effort") + ' ' + (o.effort ?? '–') + '</span>' + (o.owner ? '<span>' + lbl("owner") + esc(o.owner) + '</span>' : '') + (o.status ? '<span class="tag status">' + (L.ppStatus[o.status] || o.status) + '</span>' : '') + '</div>'
+    + ((o.linked_pain_points || []).length ? '<div style="font-size:12px">' + lbl("rowPain") + o.linked_pain_points.map(p => '<button class="claim" style="display:inline;width:auto;padding:1px 6px;margin:0 2px" data-refs="' + esc((idx.pp.get(p)?.evidence_refs || []).join(",")) + '" data-title="' + esc(p) + '" data-text="' + esc(idx.pp.get(p)?.text || p) + '">' + esc(p) + '</button>').join("") + '</div>' : '')
+    + ((o.stories || []).length ? '<ul>' + o.stories.map(st => '<li class="' + (st.mvp ? 'mvp' : '') + '">' + esc(st.text) + (st.mvp ? ' <small class="c-positive">MVP</small>' : '') + '</li>').join("") + '</ul>' : '<div class="muted" style="font-size:12px;margin-top:4px">' + t("noStories") + '</div>') + '</div>'; });
   return h + '</div></div>';
 }
 
@@ -518,28 +871,28 @@ function renderOpps(idx) {
 function renderAudit(idx) {
   const f = findings[state.j] || [], by = {}; f.forEach(x => (by[x.antipattern] = by[x.antipattern] || []).push(x));
   const ne = f.filter(x => x.level === "ERROR").length, nw = f.filter(x => x.level === "WARN").length, ni = f.length - ne - nw;
-  let h = '<div class="tiles"><div class="tile"><div class="v c-breakdown">' + ne + '</div><div class="l">Fehler</div></div><div class="tile"><div class="v" style="color:var(--friction)">' + nw + '</div><div class="l">Warnungen</div></div><div class="tile"><div class="v">' + ni + '</div><div class="l">Hinweise</div></div><div class="tile"><div class="v">' + esc(idx.j.meta.owner?.role || "–") + '</div><div class="l">Owner' + (idx.j.meta.owner?.unit ? ' · ' + esc(idx.j.meta.owner.unit) : '') + '</div></div><div class="tile"><div class="v">' + esc(idx.j.meta.next_review || "–") + '</div><div class="l">Nächster Review' + (idx.j.meta.review_cycle_days ? ' · alle ' + idx.j.meta.review_cycle_days + ' Tage' : '') + '</div></div></div>';
-  h += '<div class="panel" style="margin-top:14px"><h2>Methodische Prüfung</h2><p class="muted" style="margin:0 0 6px">Erzeugt von ' + esc(DATA.generator) + ' am ' + esc(DATA.generated) + '. Die Regeln prüfen das Modell gegen die bekannten Fallstricke – sie ersetzen kein Review, sie bereiten es vor.</p>';
-  if (!f.length) h += '<p>Keine Befunde.</p>';
+  let h = '<div class="tiles"><div class="tile"><div class="v c-breakdown">' + ne + '</div><div class="l">' + t("errorsLbl") + '</div></div><div class="tile"><div class="v" style="color:var(--friction)">' + nw + '</div><div class="l">' + t("warningsLbl") + '</div></div><div class="tile"><div class="v">' + ni + '</div><div class="l">' + t("infosLbl") + '</div></div><div class="tile"><div class="v">' + esc(idx.j.meta.owner?.role || "–") + '</div><div class="l">' + t("owner") + (idx.j.meta.owner?.unit ? ' · ' + esc(idx.j.meta.owner.unit) : '') + '</div></div><div class="tile"><div class="v">' + esc(idx.j.meta.next_review || "–") + '</div><div class="l">' + t("nextReview") + (idx.j.meta.review_cycle_days ? t("everyDays", { n: idx.j.meta.review_cycle_days }) : '') + '</div></div></div>';
+  h += '<div class="panel" style="margin-top:14px"><h2>' + t("methodAudit") + '</h2><p class="muted" style="margin:0 0 6px">' + esc(t("generatedBy", { g: DATA.generator, d: DATA.generated })) + (t("auditLangNote") ? ' ' + t("auditLangNote") : '') + '</p>';
+  if (!f.length) h += '<p>' + t("noFindings") + '</p>';
   Object.keys(L.antipatterns).forEach(ap => { const items = by[ap]; if (!items) return; h += '<h3>' + L.antipatterns[ap] + ' <span class="muted" style="font-weight:400">(' + items.length + ')</span></h3>' + items.map(x => '<div class="finding"><span class="lvl ' + x.level + '">' + x.level + '</span><div><b class="mono">' + esc(x.code) + '</b> ' + esc(x.message) + (x.path ? ' <span class="path">' + esc(x.path) + '</span>' : '') + (x.hint ? '<div class="hint">→ ' + esc(x.hint) + '</div>' : '') + '</div></div>').join(""); });
   h += '</div>';
   const oq = idx.j.open_questions || [];
-  h += '<div class="grid-2"><div class="panel"><h2>Offene Fragen (' + oq.length + ')</h2>' + (oq.length ? '<ul style="margin:0;padding-left:18px">' + oq.map(q => '<li>' + esc(q.text) + (q.proposed_method ? ' <span class="badge">' + esc(q.proposed_method) + '</span>' : '') + '</li>').join("") + '</ul>' : '<p class="muted">Keine.</p>') + '</div>';
+  h += '<div class="grid-2"><div class="panel"><h2>' + t("openQuestions", { n: oq.length }) + '</h2>' + (oq.length ? '<ul style="margin:0;padding-left:18px">' + oq.map(q => '<li>' + esc(q.text) + (q.proposed_method ? ' <span class="badge">' + esc(q.proposed_method) + '</span>' : '') + '</li>').join("") + '</ul>' : '<p class="muted">' + t("none") + '</p>') + '</div>';
   const chl = idx.j.changelog || [];
-  h += '<div class="panel"><h2>Versionen</h2>' + (chl.length ? '<table>' + chl.map(c => '<tr><th>v' + esc(c.version) + '</th><td>' + esc(c.date) + '</td><td>' + esc(c.summary) + '</td></tr>').join("") + '</table>' : '<p class="muted">Kein Changelog.</p>') + '</div></div>';
+  h += '<div class="panel"><h2>' + t("versions") + '</h2>' + (chl.length ? '<table>' + chl.map(c => '<tr><th>v' + esc(c.version) + '</th><td>' + esc(c.date) + '</td><td>' + esc(c.summary) + '</td></tr>').join("") + '</table>' : '<p class="muted">' + t("noChangelog") + '</p>') + '</div></div>';
   return h;
 }
 
 // ---------------------------------------------------------------- Drawer
 function openDrawer(title, text, refs) {
   const idx = IDX, atoms = (refs || "").split(",").filter(Boolean).map(r => idx.ev.get(r) || { id: r, missing: true });
-  $("#dTitle").textContent = title || "Evidenz";
+  $("#dTitle").textContent = title || t("evidence");
   const c = idx.classes(atoms.filter(a => !a.missing).map(a => a.id));
   let v;
-  if (!atoms.length) v = '<div class="verdict n">Keine Evidenz hinterlegt – diese Aussage ist eine Annahme.</div>';
-  else if (c.observed + c.reported > 0) v = '<div class="verdict p">Gestützt durch ' + (c.observed ? c.observed + ' beobachtete' : '') + (c.observed && c.reported ? ' und ' : '') + (c.reported ? c.reported + ' berichtete' : '') + ' Evidenz' + (c.assumed ? ' sowie ' + c.assumed + ' Annahme(n)' : '') + '.</div>';
-  else v = '<div class="verdict a">Nur Annahmen (' + c.assumed + ') – aus Innensicht, nicht von Nutzenden.</div>';
-  $("#dBody").innerHTML = '<div class="claim-txt">' + esc(text) + '</div>' + v + atoms.map(a => a.missing ? '<div class="atom c-breakdown">Unbekannte Referenz «' + esc(a.id) + '»</div>' : atomHtml(idx, a)).join("");
+  if (!atoms.length) v = '<div class="verdict n">' + t("verdictNone") + '</div>';
+  else if (c.observed + c.reported > 0) v = '<div class="verdict p">' + t("verdictPrimary", { list: [c.observed ? t("verdictObs", { n: c.observed }) : "", c.reported ? t("verdictRep", { n: c.reported }) : ""].filter(Boolean).join(t("and")), extra: c.assumed ? t("verdictExtra", { n: c.assumed }) : "" }) + '</div>';
+  else v = '<div class="verdict a">' + t("verdictAssumed", { n: c.assumed }) + '</div>';
+  $("#dBody").innerHTML = '<div class="claim-txt">' + esc(text) + '</div>' + v + atoms.map(a => a.missing ? '<div class="atom c-breakdown">' + esc(t("unknownRef", { id: a.id })) + '</div>' : atomHtml(idx, a)).join("");
   $("#drawer").classList.add("open"); $("#scrim").classList.add("open");
 }
 function closeDrawer() { $("#drawer").classList.remove("open"); $("#scrim").classList.remove("open"); }
@@ -554,7 +907,7 @@ function render() {
     + '<section class="layer' + (state.tab === "opps" ? " active" : "") + '" data-l="opps">' + renderOpps(IDX) + '</section>'
     + '<section class="layer' + (state.tab === "audit" ? " active" : "") + '" data-l="audit">' + renderAudit(IDX) + '</section>';
   const meta = journeys[state.j].meta;
-  $("#footer").textContent = (meta.context?.organisation ? meta.context.organisation + " · " : "") + (meta.context?.service || "") + (meta.updated ? " · Stand " + meta.updated : "") + " · " + DATA.generator;
+  $("#footer").textContent = (meta.context?.organisation ? meta.context.organisation + " · " : "") + (meta.context?.service || "") + (meta.updated ? " · " + t("asOf", { d: meta.updated }) : "") + " · " + DATA.generator;
   requestAnimationFrame(() => drawCurve(IDX));
 }
 function showTab(t) { state.tab = t; document.querySelectorAll("section.layer").forEach(s => s.classList.toggle("active", s.dataset.l === t)); document.querySelectorAll("nav.tabs button").forEach(b => b.classList.toggle("active", b.dataset.tab === t)); if (t === "journey") requestAnimationFrame(() => drawCurve(IDX)); }
@@ -570,8 +923,12 @@ $("#primOnly").addEventListener("change", ev => { state.primOnly = ev.target.che
 $("#personaSel").addEventListener("change", ev => { state.j = +ev.target.value; render(); });
 $("#themeBtn").addEventListener("click", () => { const r = document.documentElement, cur = r.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); r.dataset.theme = cur === "dark" ? "light" : "dark"; });
 window.addEventListener("resize", () => drawCurve(IDX));
+document.documentElement.lang = LANG;
+document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+document.querySelectorAll("[data-i18n-title]").forEach(el => { el.title = t(el.dataset.i18nTitle); });
+document.querySelectorAll("[data-i18n-aria]").forEach(el => { el.setAttribute("aria-label", t(el.dataset.i18nAria)); });
 
-if (!DATA || !DATA.journeys?.length) { $("#main").innerHTML = '<div class="panel"><h2>Keine Daten</h2><p>Diese Datei wurde ohne Journey erzeugt. <code>journeykit render journey.json</code> injiziert die Daten.</p></div>'; }
+if (!DATA || !DATA.journeys?.length) { $("#main").innerHTML = '<div class="panel"><h2>' + t("noData") + '</h2><p>' + t("noDataText", { cmd: "<code>journeykit render journey.json</code>" }) + '</p></div>'; }
 else render();
 </script>
 </body>

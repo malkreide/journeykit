@@ -112,7 +112,7 @@ das die manuelle Journey übersehen hat. Erst dieser Vergleich sagt, was
 
 ## Roadmap
 
-1. GitHub-Repo, CI grün, Secret Scanning (0.1.x)
+1. ~~GitHub-Repo, CI grün, Secret Scanning (0.1.x)~~ – erledigt am 2026-10-07
 2. Evaluation gegen eine reale Ground-Truth-Journey (0.2)
 3. Testsatz für die Extraktion: Input → erwartete Atome (0.2)
 4. ~~Zweites Beispiel aus einem anderen Verwaltungsbereich (0.2)~~ – `examples/baubewilligung/`; Befunde zur Übertragbarkeit (Handelnde Dritte, Kanal «Publikation», Quellenart für Geschäftskontrolle, Dauer von Wartephasen u. a.) im Beispiel-README, grösstenteils umgesetzt; offen ist ein Kostenfeld (#15)

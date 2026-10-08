@@ -12,12 +12,21 @@ Jede Aussage verweist auf Evidenz-Atome mit Klasse `observed` / `reported` /
 
 ## Konventionen
 
-- **Sprache**: Inhalte, Kommentare, Docstrings, Lint-Meldungen, UI-Texte des Viewers auf Deutsch in **Schweizer Rechtschreibung (kein ß → ss)**. Code-Bezeichner, Schema-Feldnamen und Enum-Werte englisch. README bilingual (EN Hauptdatei, DE Zweitdatei, gleiche Struktur).
-- **Viewer-Texte** stehen im JSON-Block `jk-i18n` von `viewer.html`, je Sprache (`de`, `fr`) mit denselben Schlüsseln; im Code nur über `t()`, `tn()` (Plural) oder `lbl()` (mit Doppelpunkt). Neue Texte immer in beiden Sprachen, neue Enum-Werte des Schemas brauchen eine Beschriftung – `tests/test_viewer_i18n.py` prüft beides. Französisch nach Schweizer Usanz (geschütztes Leerzeichen vor «:» und «?», «\u202f» in Guillemets).
+- **Sprache**: Inhalte, Kommentare und Docstrings auf Deutsch in **Schweizer Rechtschreibung (kein ß → ss)**. Code-Bezeichner, Schema-Feldnamen und Enum-Werte englisch. README bilingual (EN Hauptdatei, DE Zweitdatei, gleiche Struktur).
+- **Ausgaben zweisprachig (de, fr)**: Kein Text, den Nutzende sehen, steht im Code (Ausnahme: Meldungen zu Programmierfehlern wie einem unbekannten `lang`); alle stehen in einem von vier Katalogen mit gleichen Schlüsseln und Platzhaltern je Sprache – neue Texte immer in beiden Sprachen.
+
+  | Katalog | Zugriff | Test |
+  |---|---|---|
+  | `viewer.html`, JSON-Block `jk-i18n` | `t()`, `tn()` (Plural), `lbl()` (mit Doppelpunkt) | `test_viewer_i18n.py` (auch: jeder Enum-Wert des Schemas hat eine Beschriftung) |
+  | `lint_messages.py` | `c.add(code, stufe, anti_pattern, pfad, msg=…, **werte)` | `test_lint_messages.py` (prüft jeden `c.add`-Aufruf per AST) |
+  | `export_texts.py` (Exporte, Diff) | `t("schlüssel", …)` | `test_export_texts.py` |
+  | `cli_texts.py` (Meldungen, Hilfe, Gerüst von `new`) | `_text(lang, "schlüssel", …)`, `h()`, `t()` | `test_cli_texts.py` |
+
+  Sprache: `--lang` > `meta.language` der Journey > `JOURNEYKIT_LANG` > `de`. Französisch nach Schweizer Usanz (geschütztes Leerzeichen vor «:», «;», «?», «!», schmales in Guillemets); in den Python-Katalogen mit normalen Leerzeichen schreiben, `typo_fr()` setzt sie. Deutsche Ausgabe beim Umbau zeichengenau gegen `main` vergleichen. Bewusst englisch: Texte von argparse selbst und Details der Schemafehler aus `jsonschema`.
 - **Python** 3.10+, einzige Laufzeitabhängigkeit `jsonschema`. Keine weiteren Dependencies ohne ADR.
 - **Viewer** ist eine einzige HTML-Datei ohne externe Ressourcen (keine CDNs, keine Fonts von aussen, keine Netzwerkanfragen) – er muss in geschlossenen Verwaltungsnetzen laufen und darf keine Daten senden. Farben als Tokens in `:root`, Dark Mode über `prefers-color-scheme` und `data-theme`.
 - **Schema-Änderungen**: `additionalProperties: false` bleibt überall. Neue Felder → Schema, `model.py` (falls Aussage/Referenz), Viewer, Beispiel-Journeys, Tests, `docs/konzept.md`. `schema_version` nur bei Breaking Changes erhöhen, dann Migrationshinweis in `CHANGELOG.md`.
-- **Lints**: jede Regel hat Code (`Lxxx`), Stufe, Anti-Pattern, Hinweis (`hint`), einen Test in `tests/test_lint.py` und eine Zeile in beiden READMEs. Meldung und Hinweis stehen in `lint_messages.py` auf Deutsch und Französisch (gleiche IDs und Platzhalter); `lint.py` ruft `c.add(code, stufe, anti_pattern, pfad, msg=…, **werte)` – `tests/test_lint_messages.py` prüft Aufrufe und Katalog gegeneinander. Gleiches Muster für Exporte und Diff (`export_texts.py`) sowie die CLI (`cli_texts.py`, Sprache: `--lang` > `meta.language` > `JOURNEYKIT_LANG` > de). Regeln urteilen über das Modell, nicht über Textqualität. Neue Codes am Ende des jeweiligen Zehnerblocks.
+- **Lints**: jede Regel hat Code (`Lxxx`), Stufe, Anti-Pattern, Meldung und Hinweis (`hint`) in `lint_messages.py` (de und fr), einen Test in `tests/test_lint.py` und eine Zeile in beiden READMEs. Regeln urteilen über das Modell, nicht über Textqualität. Neue Codes am Ende des jeweiligen Zehnerblocks.
 - **Beispiel-Journeys** (`examples/*/`, je ein Verzeichnis mit `journey.json` und `input/`) sind synthetisch und müssen es bleiben: keine realen Personen, Adressen, Kontaktangaben, keine Zitate aus echten Interviews. `meta.synthetic: true`. Zitat-Atome müssen wörtlich in der Datei unter `sources[].location` stehen. Zielzustand `journey.json`: 0 ERROR, 0 WARN. `tests/test_examples.py` prüft das für jedes Beispiel automatisch; ein neues Beispiel braucht keinen Zusatzcode.
 - **Secrets und Personendaten**: nichts davon ins Repo – auch nicht in Fixtures, Commits oder Issues. Vor jedem Push `git grep -nEI '(api[_-]?key|secret|passwo?rd|token)'` und PII-Muster prüfen.
 - **Commits**: Conventional Commits (`feat`, `fix`, `docs`, `refactor`, `test`, `chore`). `CHANGELOG.md` unter `[Unreleased]` nachführen.
@@ -32,13 +41,15 @@ python scripts/validate_repo.py .             # Repo-Struktur, README-Regeln
 journeykit validate examples/kindergarteneintritt/*.json
 journeykit lint examples/kindergarteneintritt/journey.json
 journeykit render examples/kindergarteneintritt/journey.json examples/kindergarteneintritt/journey-berufstaetig.json -o /tmp/j.html
+journeykit lint examples/baubewilligung/journey.json --lang fr   # jede Ausgabe auch französisch
 ```
 
 `journeykit` nicht im PATH (Windows-Nutzerinstallation)? `python -m journeykit …` ist
 gleichwertig.
 
 `ruff --version` muss dem Pin entsprechen – ein älteres ruff weiter vorne im
-PATH ist schon vorgekommen (`which -a ruff`).
+PATH ist schon vorgekommen (`which -a ruff`); `python -m ruff` nimmt das
+ruff der aktiven Python-Umgebung (dort nach `requirements-lint.txt` installieren).
 
 Viewer visuell prüfen: Playwright ist in vielen Umgebungen vorhanden
 (`python -c "from playwright.sync_api import sync_playwright"`); Screenshot
@@ -51,20 +62,22 @@ aller fünf Tabs plus Drawer plus 390-px-Viewport, `pageerror` leer.
 `viewer/viewer.html` durch `{journeys, findings, …}`) oder `export.py` /
 `diff.py`. Der Viewer rendert client-seitig aus dem eingebetteten JSON; er hat
 eine eigene kleine Index-Klasse (`Idx`) mit denselben Begriffen wie
-`model.py`. Der Skill (`skill/user-journey/`) steuert den Menschen und das
+`model.py`. Alle Ausgabetexte kommen aus den vier Katalogen (siehe
+Konventionen). Der Skill (`skill/user-journey/`) steuert den Menschen und das
 Modell durch Intake → Diagnose → Quellen → Evidenz → Synthese → Lint → Render.
 
-## Offene Punkte (Stand 0.1.0)
+## Offene Punkte (Stand 0.1.0 + Unreleased)
 
 Siehe `docs/konzept.md`, Abschnitt «Roadmap». Kurz:
 
-1. ~~GitHub-Setup~~ – erledigt am 2026-10-07: Repo public, Topics, Secret Scanning + Push Protection, CI grün. Erster Dependabot-PR (checkout v7.0.1, setup-python v7.0.0) gemergt, CI auf `main` grün.
-2. Evaluation: eine manuell erstellte, reale Journey als Ground Truth gegen die Pipeline laufen lassen.
-3. Variante B: MCP-Server, der Journeys als Datenbestand hält (SQLite oder Notion), Versionen und Evidenz verwaltet – siehe ADR-0004.
-4. Viewer: Vergleichsansicht zweier Versionen (Diff visuell), Kommentarfunktion, Export der Heatmap.
-5. Extraktions-Qualität: Testsatz «Input → erwartete Atome» für die Prompt-Schablone in `skill/user-journey/references/evidenz.md`.
-6. ~~Zweites Beispiel~~ – `examples/baubewilligung/` (Bauherrschaft + Nachbarschaft). Offene Befunde als Issues: ~~`step.performed_by` (H1, #6)~~ umgesetzt mit ADR-0005, ~~Kanal `publication` (H7, #7)~~ und ~~Quellenart `case_records` (#8)~~ umgesetzt; ~~Viewer-Hinweis bei Phasen ohne Overlay (H3, #9)~~ umgesetzt. ~~Review-Frage Rechtsweg statt Breakdown (H4, #14)~~ umgesetzt. ~~Dauer von Phasen (H2, #13)~~ umgesetzt (`phase.duration_days`, L003). Offen: Kosten (H5, #15: Muster im Skill umgesetzt, Schemafeld erst mit drittem Beispiel).
-7. ~~Französische UI-Texte im Viewer~~ – umgesetzt (`render --lang fr`, Block `jk-i18n`); ~~Lint-Meldungen auf Französisch~~ – umgesetzt (`lint --lang fr`, `lint_messages.py`); ~~Exporte und `diff`-Report auf Französisch~~ – umgesetzt (`export`/`diff --lang fr`, `export_texts.py`); ~~übrige CLI-Ausgaben~~ – umgesetzt (`cli_texts.py`, `JOURNEYKIT_LANG`). Bewusst englisch: Texte von argparse selbst und Details der Schemafehler aus `jsonschema`.
+1. **Evaluation**: eine manuell erstellte, reale Journey als Ground Truth gegen die Pipeline laufen lassen (lokal, Material unter `/eval/`, nur der Vergleichsbericht kommt ins Repo). Dabei auch prüfen, ob die Pipeline handelnde Dritte (`performed_by`) und belegte Dauern erkennt – und Fristen nicht als Dauer übernimmt.
+2. **Französisch gegenlesen**: Begriffe und Formulierungen aus #20, #21, #22 durch eine französischsprachige Person aus der Verwaltung prüfen lassen; Korrekturen sind einzelne Zeilen in den vier Katalogen.
+3. **Kosten** (H5, #15): Muster im Skill umgesetzt; ein Schemafeld erst, wenn ein drittes Beispiel es braucht.
+4. **Extraktions-Qualität**: Testsatz «Input → erwartete Atome» für die Prompt-Schablone in `skill/user-journey/references/evidenz.md`.
+5. **Viewer**: Vergleichsansicht zweier Versionen (Diff visuell), Kommentarfunktion, Export der Heatmap.
+6. **Variante B**: MCP-Server, der Journeys als Datenbestand hält (SQLite oder Notion), Versionen und Evidenz verwaltet – siehe ADR-0004.
+
+Erledigt seit 0.1.0 (Details in `CHANGELOG.md`): GitHub-Setup mit CI, Secret Scanning und Dependabot; zweites Beispiel `examples/baubewilligung/` mit den Befunden H1–H4, H7 (u. a. `step.performed_by` nach ADR-0005, Kanal `publication`, Quellenart `case_records`, `phase.duration_days`); alle Ausgaben auf Französisch.
 
 ## Was nicht tun
 

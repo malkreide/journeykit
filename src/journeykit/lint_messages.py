@@ -333,7 +333,7 @@ _SUMMARY = {
     "fr": "{path} : {errors} erreur(s) · {warnings} avertissement(s) · {infos} remarque(s)",
 }
 
-_NBSP, _NNBSP = " ", " "
+_NBSP, _NNBSP = "\u00a0", "\u202f"
 
 
 def typo_fr(text: str) -> str:

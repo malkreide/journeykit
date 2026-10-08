@@ -16,8 +16,8 @@ from . import __version__
 from .lint import Finding, lint_journey
 
 PLACEHOLDER = "/*__JOURNEYKIT_DATA__*/null"
-# Sprachen der Viewer-Oberfläche (Block «jk-i18n» in viewer.html). Die Inhalte
-# der Journey bleiben, wie sie sind; übersetzt wird nur die Oberfläche.
+# Sprachen der Viewer-Oberfläche (Block «jk-i18n» in viewer.html); die Lint-Meldungen
+# im Tab «Prüfung» folgen derselben Sprache. Die Inhalte der Journey bleiben, wie sie sind.
 UI_LANGUAGES = ("de", "fr")
 
 
@@ -51,13 +51,14 @@ def render_html(
     """HTML für eine oder mehrere Journeys (mehrere = Multi-Persona-Vergleich)."""
     if not journeys:
         raise ValueError("Mindestens eine Journey nötig.")
+    ui_lang = ui_language(journeys, lang)
     if findings is None:
-        findings = [lint_journey(j) for j in journeys]
+        findings = [lint_journey(j, lang=ui_lang) for j in journeys]
     payload = {
         "generator": f"journeykit {__version__}",
         "generated": date.today().isoformat(),
         "title": title or journeys[0]["meta"]["title"],
-        "lang": ui_language(journeys, lang),
+        "lang": ui_lang,
         "journeys": journeys,
         "findings": [[f.as_dict() for f in fs] for fs in findings],
     }

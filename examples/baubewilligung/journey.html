@@ -440,7 +440,6 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "everyDays": " · alle {n} Tage",
    "methodAudit": "Methodische Prüfung",
    "generatedBy": "Erzeugt von {g} am {d}. Die Regeln prüfen das Modell gegen die bekannten Fallstricke – sie ersetzen kein Review, sie bereiten es vor.",
-   "auditLangNote": "",
    "noFindings": "Keine Befunde.",
    "openQuestions": "Offene Fragen ({n})",
    "none": "Keine.",
@@ -619,7 +618,6 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "everyDays": " · tous les {n} jours",
    "methodAudit": "Contrôle méthodologique",
    "generatedBy": "Généré par {g} le {d}. Les règles vérifient le modèle au regard des pièges connus – elles ne remplacent pas une révision, elles la préparent.",
-   "auditLangNote": "Les messages des règles sont rédigés en allemand.",
    "noFindings": "Aucun constat.",
    "openQuestions": "Questions ouvertes ({n})",
    "none": "Aucune.",
@@ -872,7 +870,7 @@ function renderAudit(idx) {
   const f = findings[state.j] || [], by = {}; f.forEach(x => (by[x.antipattern] = by[x.antipattern] || []).push(x));
   const ne = f.filter(x => x.level === "ERROR").length, nw = f.filter(x => x.level === "WARN").length, ni = f.length - ne - nw;
   let h = '<div class="tiles"><div class="tile"><div class="v c-breakdown">' + ne + '</div><div class="l">' + t("errorsLbl") + '</div></div><div class="tile"><div class="v" style="color:var(--friction)">' + nw + '</div><div class="l">' + t("warningsLbl") + '</div></div><div class="tile"><div class="v">' + ni + '</div><div class="l">' + t("infosLbl") + '</div></div><div class="tile"><div class="v">' + esc(idx.j.meta.owner?.role || "–") + '</div><div class="l">' + t("owner") + (idx.j.meta.owner?.unit ? ' · ' + esc(idx.j.meta.owner.unit) : '') + '</div></div><div class="tile"><div class="v">' + esc(idx.j.meta.next_review || "–") + '</div><div class="l">' + t("nextReview") + (idx.j.meta.review_cycle_days ? t("everyDays", { n: idx.j.meta.review_cycle_days }) : '') + '</div></div></div>';
-  h += '<div class="panel" style="margin-top:14px"><h2>' + t("methodAudit") + '</h2><p class="muted" style="margin:0 0 6px">' + esc(t("generatedBy", { g: DATA.generator, d: DATA.generated })) + (t("auditLangNote") ? ' ' + t("auditLangNote") : '') + '</p>';
+  h += '<div class="panel" style="margin-top:14px"><h2>' + t("methodAudit") + '</h2><p class="muted" style="margin:0 0 6px">' + esc(t("generatedBy", { g: DATA.generator, d: DATA.generated })) + '</p>';
   if (!f.length) h += '<p>' + t("noFindings") + '</p>';
   Object.keys(L.antipatterns).forEach(ap => { const items = by[ap]; if (!items) return; h += '<h3>' + L.antipatterns[ap] + ' <span class="muted" style="font-weight:400">(' + items.length + ')</span></h3>' + items.map(x => '<div class="finding"><span class="lvl ' + x.level + '">' + x.level + '</span><div><b class="mono">' + esc(x.code) + '</b> ' + esc(x.message) + (x.path ? ' <span class="path">' + esc(x.path) + '</span>' : '') + (x.hint ? '<div class="hint">→ ' + esc(x.hint) + '</div>' : '') + '</div></div>').join(""); });
   h += '</div>';

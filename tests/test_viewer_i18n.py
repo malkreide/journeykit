@@ -33,8 +33,6 @@ ENUM_LABELS = {
     ("evidence_atom", "properties", "kind"): "kinds",
     ("performed_by", "properties", "mandate"): "mandate",
 }
-# Bewusst leer in einer Sprache: der Hinweis, dass Lint-Meldungen deutsch sind
-MAY_BE_EMPTY = {("de", "ui.auditLangNote")}
 
 
 def _i18n() -> dict:
@@ -76,7 +74,7 @@ def test_same_keys_and_placeholders_as_german(lang):
 @pytest.mark.parametrize("lang", UI_LANGUAGES)
 def test_texts_are_filled_and_swiss_spelling(lang):
     flat = _flat(I18N[lang])
-    empty = [k for k, v in flat.items() if not v and (lang, k) not in MAY_BE_EMPTY]
+    empty = [k for k, v in flat.items() if not v]
     assert not empty, empty
     assert not [k for k, v in flat.items() if "ß" in v]
 

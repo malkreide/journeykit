@@ -1,0 +1,27 @@
+{
+  "title": "Geschäftskontrolle Einwohnerdienste 2025",
+  "kind": "case_records",
+  "class": "observed",
+  "source_id": "statistik",
+  "prefix": "stat",
+  "input": "input.csv",
+  "phases": [
+    "vorbereitung",
+    "anmeldung",
+    "nachweise",
+    "bestaetigung"
+  ],
+  "persona": "zugezogen",
+  "known_atoms": [],
+  "tests": "Kennzahlen als metric mit value und unit genau wie in der Quelle (Arbeitstage nicht in Kalendertage umrechnen); Zeitraum und gemessener Abschnitt im text; Fundstelle je Kennzahl.",
+  "rules": {
+    "atoms_min": 5,
+    "atoms_max": 8,
+    "kinds": [
+      "metric"
+    ],
+    "locator_required": true,
+    "no_emotion": true,
+    "forbidden": []
+  }
+}

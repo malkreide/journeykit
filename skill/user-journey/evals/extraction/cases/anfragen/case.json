@@ -1,0 +1,35 @@
+{
+  "title": "Anfragen Einwohnerdienste August 2026",
+  "kind": "inquiry_log",
+  "class": "observed",
+  "source_id": "anfragen",
+  "prefix": "anf",
+  "input": "input.csv",
+  "phases": [
+    "vorbereitung",
+    "anmeldung",
+    "nachweise",
+    "bestaetigung"
+  ],
+  "persona": "zugezogen",
+  "known_atoms": [],
+  "tests": "Erst kategorisieren, dann Metriken (Kanal, Kategorie); 3–6 typische Einzelfälle mit Ticket-ID; nicht jede Zeile ein Atom; Ausweichen an den Schalter als Breakdown/Workaround; erfundener Name im Freitext wird ersetzt. Umfang: eine Metrik je Kategorie (4) und je Kanal (3) plus 3–6 Einzelfälle ergibt 10–13 Atome; 6–14 lässt Spielraum für eine übergreifende Metrik.",
+  "rules": {
+    "atoms_min": 6,
+    "atoms_max": 14,
+    "kinds": [
+      "metric",
+      "observation"
+    ],
+    "locator_required": true,
+    "pii_terms": [
+      "Gerber"
+    ],
+    "observations": {
+      "min": 3,
+      "max": 6,
+      "locator_pattern": "A-\\d\\d"
+    },
+    "forbidden": []
+  }
+}

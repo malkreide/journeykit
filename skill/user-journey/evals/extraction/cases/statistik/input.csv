@@ -1,0 +1,8 @@
+kennzahl;wert;einheit;zeitraum;bemerkung
+anmeldungen_total;412;Anzahl;2025;Zuzüge mit Wohnsitzanmeldung
+anteil_online;38;%;2025;Anmeldung vollständig über das Online-Formular
+anteil_online_abgebrochen;21;%;2025;online begonnen und nicht abgeschlossen, Anteil an allen online begonnenen
+anteil_verspaetet;17;%;2025;Anmeldung später als 14 Tage nach dem Umzug
+bearbeitungsdauer_median;6;Arbeitstage;2025;Eingang bis Versand der Bestätigung
+bearbeitungsdauer_p90;14;Arbeitstage;2025;90 % der Fälle sind schneller
+anteil_rueckfragen;29;%;2025;mindestens eine Rückfrage wegen fehlender Unterlagen

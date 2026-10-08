@@ -114,7 +114,7 @@ das die manuelle Journey übersehen hat. Erst dieser Vergleich sagt, was
 
 1. ~~GitHub-Repo, CI grün, Secret Scanning (0.1.x)~~ – erledigt am 2026-10-07
 2. Evaluation gegen eine reale Ground-Truth-Journey (0.2)
-3. Testsatz für die Extraktion: Input → erwartete Atome (0.2)
+3. ~~Testsatz für die Extraktion: Input → erwartete Atome (0.2)~~ – `skill/user-journey/evals/extraction/`, fünf Fälle; Ausbau mit Material aus der Evaluation offen
 4. ~~Zweites Beispiel aus einem anderen Verwaltungsbereich (0.2)~~ – `examples/baubewilligung/`; Befunde zur Übertragbarkeit (Handelnde Dritte, Kanal «Publikation», Quellenart für Geschäftskontrolle, Dauer von Wartephasen u. a.) im Beispiel-README, grösstenteils umgesetzt; offen ist ein Kostenfeld (#15)
 5. Viewer: visueller Versionsvergleich, Export der Heatmap (0.3); ~~französische UI, Lint-Meldungen, Exporte, Diff und CLI~~ – umgesetzt (`--lang fr` je Befehl, `JOURNEYKIT_LANG`)
 6. Variante B: MCP-Server für Journeys als Datenbestand (0.4)

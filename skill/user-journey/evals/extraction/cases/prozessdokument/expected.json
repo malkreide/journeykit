@@ -1,0 +1,88 @@
+{
+  "atoms": [
+    {
+      "key": "frist-14-tage",
+      "required": true,
+      "match": [
+        "14 Tagen"
+      ],
+      "kind": [
+        "document_excerpt"
+      ],
+      "class": [
+        "assumed"
+      ]
+    },
+    {
+      "key": "unterlagen",
+      "required": true,
+      "match": [
+        "Heimatschein, Mietvertrag"
+      ],
+      "kind": [
+        "document_excerpt"
+      ]
+    },
+    {
+      "key": "formular-fotos",
+      "required": true,
+      "match": [
+        "10 MB"
+      ],
+      "kind": [
+        "document_excerpt"
+      ],
+      "contradicts": [
+        "anf-07"
+      ],
+      "why": "Soll: Fotos werden angenommen; Anfragen zeigen das Gegenteil."
+    },
+    {
+      "key": "pruefung-5",
+      "required": true,
+      "match": [
+        "5 Arbeitstagen"
+      ],
+      "kind": [
+        "document_excerpt"
+      ]
+    },
+    {
+      "key": "bestaetigung-10",
+      "required": true,
+      "match": [
+        "10 Arbeitstagen"
+      ],
+      "kind": [
+        "document_excerpt"
+      ],
+      "contradicts": [
+        "anf-17"
+      ],
+      "why": "Frist ist ein Soll, keine gemessene Dauer – kein metric."
+    },
+    {
+      "key": "liste-website",
+      "required": true,
+      "match": [
+        "Liste der Unterlagen"
+      ],
+      "kind": [
+        "document_excerpt"
+      ],
+      "contradicts_optional": [
+        "anf-12"
+      ]
+    },
+    {
+      "key": "busse",
+      "required": true,
+      "match": [
+        "Ordnungsbusse"
+      ],
+      "kind": [
+        "document_excerpt"
+      ]
+    }
+  ]
+}

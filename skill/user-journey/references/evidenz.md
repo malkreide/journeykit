@@ -47,7 +47,7 @@ Grenzfälle:
 |---|---|
 | `id` | sprechend und stabil: Quellkürzel plus Laufnummer (`e1-07`, `anf-12`, `bef-03`, `web-02`, `doc-01`, `ws-04`) |
 | `kind` | `quote` wörtlich · `observation` beschreibend (Export-Zeile, Beobachtung) · `metric` Zahl · `document_excerpt` Dokumentstelle · `workshop_statement` Team-Aussage |
-| `text` | Bei `quote` **wörtlich**, auch mit Füllwörtern. Kürzen mit «…» ist erlaubt, Umformulieren nicht. |
+| `text` | Bei `quote` **wörtlich**, auch mit Füllwörtern. Kürzen mit «…» ist erlaubt, Umformulieren nicht. Namen und andere Personendaten im Zitat durch eine Angabe in eckigen Klammern ersetzen («[Name]», «[Ort]») – so bleibt das Zitat nachprüfbar. |
 | `locator` | Pflicht bei Primärevidenz: Zeile, Zeitstempel, Seite, Ticket-ID, Zeile oder Spalte im Export |
 | `value`, `unit` | Bei `metric` |
 | `signal` | `friction` (behindert) · `breakdown` (scheitert oder weicht aus) · `positive` · `need` · `workaround` · `neutral` |
@@ -69,6 +69,8 @@ jemand für Sie?»
 **Anfragen-, Ticket-, Beschwerdeexporte.** Erst kategorisieren (Kategorie ×
 Kanal × Zeitraum), dann **Metriken** als Atome («17 von 30 Anfragen per
 Telefon»), dazu 3–6 typische Einzelfälle als `observation` mit Ticket-ID.
+Eine Metrik je Kategorie und je Kanal; weiter unterteilen nur, wenn die
+Unterteilung einen eigenen Befund zeigt.
 Nicht jede Zeile ein Atom. Häufungen sind Breakdown-Kandidaten: Wo Menschen
 anrufen, hat ein anderer Kanal versagt.
 
@@ -89,7 +91,9 @@ anonymisiert und `pii_status` entsprechend setzen. Wie Analytics zeigen sie
 
 **Dauern** (Durchlaufzeiten, Wartezeiten, Aussagen wie «nach drei Wochen»).
 Als `metric` mit `value` und `unit`, die Einheit genau wie in der Quelle
-(«Kalendertage», «Arbeitstage»); Kennwert (Median, Durchschnitt) und
+(«Kalendertage», «Arbeitstage»). Nennt ein Interview eine Dauer («hat neun Tage
+gedauert»), bleibt das Atom ein `quote` mit `value` und `unit` – kein zweites
+Atom für dieselbe Aussage; Kennwert (Median, Durchschnitt) und
 gemessenen Abschnitt in den `text`. Für `phase.duration_days` erst bei der
 Synthese in Kalendertage umrechnen und die Umrechnung in `basis` nennen.
 Fristen aus Reglementen und Prozessdokumenten («innert zwei Monaten») sind
@@ -117,19 +121,26 @@ Autorenschaft klären (Team oder Nutzende?), dann wie oben.
 Für einen Durchgang pro Quelle, mit der Datei im Kontext:
 
 ```
-Du extrahierst Evidenz-Atome aus der Quelle «{title}» ({kind}, Klasse {class}).
+Du extrahierst Evidenz-Atome aus der Quelle «{title}» (source_ref «{source_id}», {kind}, Klasse {class}).
 Regeln:
-- Ein Atom pro belegbarer Aussage. Zitate wörtlich, mit Fundstelle (Zeile/Zeitstempel/ID).
+- Ein Atom pro belegbarer Aussage, nicht pro Satz: Sätze desselben Redebeitrags, die zusammen eine Aussage machen, bleiben ein Atom. Dieselbe Aussage nie doppelt erfassen (nicht als Zitat und zusätzlich als Messwert).
+- Zitate wörtlich, mit Fundstelle (Zeile/Zeitstempel/ID). Kürzen mit «…» ist erlaubt; Namen und andere Personendaten im Zitat durch «[Name]», «[Ort]» ersetzen.
+- Nennt ein Zitat eine Zahl oder Dauer, value und unit im selben Atom ergänzen.
 - emotion_hint nur, wenn die Emotion im Text steht; explicit true nur bei ausdrücklicher Nennung.
-- signal setzen; breakdown nur, wenn die Person scheitert oder ausweicht (Anruf, Schalter, Aufgeben).
+- signal setzen (friction, breakdown, positive, need, workaround, neutral); breakdown nur, wenn die Person scheitert oder ausweicht (Anruf, Schalter, Aufgeben).
+- channel_hint nur mit diesen Werten: web, app, email, phone, letter, paper_form, counter, in_person, event, chat, sms, publication, other.
 - phase_hint aus dieser Liste: {phasen}. persona_hint: {persona}.
 - Keine Personendaten im text (Namen, Orte, Kontaktangaben ersetzen).
 - Widerspricht eine Aussage einer bekannten Soll-Aussage, contradicts setzen: {bekannte_atome}.
-Gib ausschliesslich ein JSON-Array von Atomen nach journeykit-Schema aus, IDs mit Präfix «{prefix}-».
+Gib ausschliesslich ein JSON-Array von Atomen nach journeykit-Schema aus, IDs mit Präfix «{prefix}-», source_ref «{source_id}».
 ```
 
 Nach jedem Durchgang: Atome zählen, Signale zählen, Phasenverteilung
 anschauen. Phasen ohne Atome sind Lücken, keine ruhigen Phasen.
+
+Wer die Schablone ändert, prüft sie gegen den Testsatz unter
+`evals/extraction/` (Ablauf dort im README): Er misst, ob eine Extraktion die
+Pflicht-Atome findet, die Felder richtig setzt und die Regeln oben einhält.
 
 ## Synthese-Regeln
 

@@ -1,0 +1,40 @@
+{
+  "title": "Prozessbeschreibung Wohnsitzanmeldung, Version 2.1",
+  "kind": "internal_document",
+  "class": "assumed",
+  "source_id": "prozess",
+  "prefix": "doc",
+  "input": "input.md",
+  "phases": [
+    "vorbereitung",
+    "anmeldung",
+    "nachweise",
+    "bestaetigung"
+  ],
+  "persona": "zugezogen",
+  "known_atoms": [
+    {
+      "id": "anf-17",
+      "text": "Bestätigung nach drei Wochen noch nicht erhalten."
+    },
+    {
+      "id": "anf-07",
+      "text": "Formular akzeptiert keine Fotos vom Handy."
+    },
+    {
+      "id": "anf-12",
+      "text": "Liste der Unterlagen auf der Website nicht gefunden."
+    }
+  ],
+  "tests": "Soll-Aussagen als document_excerpt mit Klasse assumed; Fristen sind keine gemessene Dauer (kein metric); contradicts gegen bekannte Atome; keine Emotionen.",
+  "rules": {
+    "atoms_min": 5,
+    "atoms_max": 9,
+    "kinds": [
+      "document_excerpt"
+    ],
+    "locator_required": false,
+    "no_emotion": true,
+    "forbidden": []
+  }
+}

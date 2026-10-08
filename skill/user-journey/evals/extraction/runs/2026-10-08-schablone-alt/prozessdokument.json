@@ -1,0 +1,129 @@
+[
+  {
+    "id": "doc-01",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Zuziehende melden sich innert 14 Tagen nach dem Umzug an, online oder am Schalter.",
+    "locator": "Abschnitt 1, Punkt 1 (Zeile 7)",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "kanalwahl"
+    ]
+  },
+  {
+    "id": "doc-02",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Für die Anmeldung sind Heimatschein, Mietvertrag und ein amtlicher Ausweis nötig.",
+    "locator": "Abschnitt 1, Punkt 2 (Zeile 8)",
+    "signal": "neutral",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "unterlagen"
+    ]
+  },
+  {
+    "id": "doc-03",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Das Online-Formular nimmt PDF-Dateien und Fotos bis 10 MB entgegen.",
+    "locator": "Abschnitt 1, Punkt 3 (Zeile 9)",
+    "signal": "neutral",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "upload",
+      "online-formular"
+    ],
+    "contradicts": [
+      "anf-07"
+    ]
+  },
+  {
+    "id": "doc-04",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Die Einwohnerdienste prüfen die Anmeldung innert 5 Arbeitstagen.",
+    "locator": "Abschnitt 1, Punkt 4 (Zeile 10)",
+    "signal": "neutral",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "bearbeitungszeit"
+    ]
+  },
+  {
+    "id": "doc-05",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Die Anmeldebestätigung wird innert 10 Arbeitstagen nach Eingang per Post verschickt.",
+    "locator": "Abschnitt 1, Punkt 5 (Zeile 11)",
+    "signal": "neutral",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "bestaetigung"
+    ],
+    "contradicts": [
+      "anf-17"
+    ]
+  },
+  {
+    "id": "doc-06",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Die Liste der Unterlagen ist auf der Website unter «Umzug» aufgeführt.",
+    "locator": "Abschnitt 2, Punkt 6 (Zeile 15)",
+    "signal": "neutral",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "unterlagen",
+      "orientierung"
+    ],
+    "contradicts": [
+      "anf-12"
+    ]
+  },
+  {
+    "id": "doc-07",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Bei verspäteter Anmeldung kann eine Ordnungsbusse erhoben werden; in der Praxis wird bei der ersten Anmeldung darauf verzichtet.",
+    "locator": "Abschnitt 2, Punkt 7 (Zeile 16)",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "kosten"
+    ]
+  },
+  {
+    "id": "doc-08",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Fachverantwortung: Leitung Einwohnerdienste.",
+    "locator": "Abschnitt 3, Punkt 8 (Zeile 20)",
+    "signal": "neutral",
+    "tags": [
+      "verantwortung"
+    ]
+  }
+]

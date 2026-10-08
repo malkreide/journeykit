@@ -1,0 +1,122 @@
+[
+  {
+    "id": "stat-01",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "412 Zuzüge mit Wohnsitzanmeldung im Zeitraum 2025 (Grundgesamtheit aller Anmeldungen).",
+    "locator": "input.csv, Zeile 2 (anmeldungen_total)",
+    "value": 412,
+    "unit": "Anzahl",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "volumen"
+    ]
+  },
+  {
+    "id": "stat-02",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "38 % der 412 Anmeldungen 2025 erfolgten vollständig über das Online-Formular.",
+    "locator": "input.csv, Zeile 3 (anteil_online)",
+    "value": 38,
+    "unit": "%",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "kanalwahl",
+      "online-formular"
+    ]
+  },
+  {
+    "id": "stat-03",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "21 % der online begonnenen Anmeldungen wurden 2025 nicht abgeschlossen (Anteil an allen online begonnenen).",
+    "locator": "input.csv, Zeile 4 (anteil_online_abgebrochen)",
+    "value": 21,
+    "unit": "%",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "abbruch",
+      "online-formular"
+    ]
+  },
+  {
+    "id": "stat-04",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "17 % der Anmeldungen 2025 erfolgten später als 14 Tage nach dem Umzug.",
+    "locator": "input.csv, Zeile 5 (anteil_verspaetet)",
+    "value": 17,
+    "unit": "%",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "verspaetung"
+    ]
+  },
+  {
+    "id": "stat-05",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Bearbeitungsdauer 2025, Median: 6 Arbeitstage vom Eingang bis zum Versand der Bestätigung.",
+    "locator": "input.csv, Zeile 6 (bearbeitungsdauer_median)",
+    "value": 6,
+    "unit": "Arbeitstage",
+    "signal": "neutral",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "dauer",
+      "bearbeitung"
+    ]
+  },
+  {
+    "id": "stat-06",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Bearbeitungsdauer 2025, 90. Perzentil: 14 Arbeitstage vom Eingang bis zum Versand der Bestätigung (90 % der Fälle sind schneller).",
+    "locator": "input.csv, Zeile 7 (bearbeitungsdauer_p90)",
+    "value": 14,
+    "unit": "Arbeitstage",
+    "signal": "friction",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "dauer",
+      "bearbeitung"
+    ]
+  },
+  {
+    "id": "stat-07",
+    "source_ref": "statistik",
+    "class": "observed",
+    "kind": "metric",
+    "text": "29 % der Anmeldungen 2025 lösten mindestens eine Rückfrage wegen fehlender Unterlagen aus.",
+    "locator": "input.csv, Zeile 8 (anteil_rueckfragen)",
+    "value": 29,
+    "unit": "%",
+    "signal": "friction",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "rueckfrage",
+      "unterlagen"
+    ]
+  }
+]

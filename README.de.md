@@ -127,10 +127,11 @@ journeykit/
 │   ├── cli.py                       # Befehl journeykit
 │   ├── cli_texts.py                 # Meldungen und Hilfe der CLI, deutsch und französisch
 │   └── viewer/viewer.html           # eigenständiger interaktiver Viewer
-├── skill/user-journey/              # Claude-Skill: SKILL.md + references/
+├── skill/user-journey/              # Claude-Skill: SKILL.md + references/ + evals/ (Testsatz Extraktion)
 ├── examples/kindergarteneintritt/   # durchgerechnetes, synthetisches Beispiel inkl. Rohmaterial
 ├── examples/baubewilligung/        # zweiter Bereich: Übertragbarkeitsprüfung und Befunde
 ├── docs/                            # Konzept, Architekturentscheide, Demo-Bild
+├── scripts/                         # Repo-Prüfungen, Scorer für den Testsatz Extraktion
 ├── tests/                           # pytest
 └── CLAUDE.md                        # Einstieg für die Arbeit an diesem Repo mit Claude Code
 ```

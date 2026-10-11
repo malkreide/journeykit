@@ -12,7 +12,7 @@ from journeykit.export import (
     story_map_markdown,
 )
 from journeykit.lint import lint_journey
-from journeykit.model import priority_quadrant
+from journeykit.model import JourneyIndex, priority_quadrant, propose_verdict
 from journeykit.render import PLACEHOLDER, render_html
 
 
@@ -43,6 +43,62 @@ def test_audit_markdown(example_journey):
     assert "## Evidenzlage" in md
     assert "Synthetisches Beispiel" in md
     assert "## Offene Fragen" in md
+
+
+def test_audit_markdown_has_diagnosis_verdict_and_next_steps(example_journey):
+    md = audit_markdown(example_journey, lint_journey(example_journey))
+    head = md[: md.index("## Evidenzlage")]
+    assert "## Diagnose" in head and example_journey["meta"]["diagnosis"]["rationale"] in head
+    assert "## Urteil (Vorschlag)" in head and "**Belastbar**" in head
+    assert "## Nächste Schritte" in head
+
+
+def test_verdict_poster_names_what_is_missing(minimal):
+    assert propose_verdict(JourneyIndex.build(minimal)).kind == "robust"
+    del minimal["meta"]["owner"]
+    minimal["opportunities"][0].pop("linked_pain_points")
+    minimal["opportunities"][0].pop("phase_ref")
+    v = propose_verdict(JourneyIndex.build(minimal))
+    assert (v.kind, v.missing) == ("poster", ("owner", "anchored_opportunity"))
+    md = audit_markdown(minimal, lint_journey(minimal))
+    assert "**Poster**" in md and "meta.owner" in md
+
+
+def test_verdict_hypothesis_names_failed_conditions(minimal):
+    minimal["meta"]["status"] = "hypothesis"
+    for atom in minimal["evidence"]:
+        atom["class"] = "assumed"
+    minimal["phases"][0]["steps"][0]["recovery_paths"] = []
+    v = propose_verdict(JourneyIndex.build(minimal))
+    assert v.kind == "hypothesis"
+    assert v.reasons == ("low_primary", "status_hypothesis", "breakdown_without_recovery")
+    assert v.primary_pct == 0 and v.breakdowns_without_recovery == 1
+
+
+def test_next_steps_put_research_plan_first_and_stop_at_three(minimal):
+    minimal["meta"]["status"] = "hypothesis"
+    for atom in minimal["evidence"]:
+        atom["class"] = "assumed"
+    minimal["open_questions"] = []
+    del minimal["meta"]["diagnosis"]
+    minimal["phases"][0]["steps"][0]["feeling"] = None
+    findings = lint_journey(minimal)
+    md = audit_markdown(minimal, findings)
+    steps = md[md.index("## Nächste Schritte") : md.index("## Evidenzlage")]
+    numbered = [line for line in steps.splitlines() if line[:2] in {"1.", "2.", "3.", "4."}]
+    assert len(numbered) == 3
+    assert numbered[0].startswith("1. Erhebungsplan festhalten")
+    codes = [line.split("**")[1] for line in numbered[1:]]
+    antipatterns = [next(f.antipattern for f in findings if f.code == c) for c in codes]
+    assert len(set(antipatterns)) == len(antipatterns)
+
+
+def test_next_steps_rank_errors_first(minimal):
+    del minimal["meta"]["owner"]
+    minimal["phases"][0]["steps"][0]["pain_points"][0]["type"] = "friction"
+    md = audit_markdown(minimal, lint_journey(minimal))
+    steps = md[md.index("## Nächste Schritte") : md.index("## Evidenzlage")]
+    assert steps.index("**L020**") < steps.index("**L030**")
 
 
 def test_priority_quadrant():

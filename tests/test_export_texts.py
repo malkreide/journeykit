@@ -87,6 +87,7 @@ def test_french_export_has_no_german_template_text(example_journey, example_hypo
             leftovers.append(f"antipattern {ap}")
     assert not leftovers, leftovers
     assert "## État des preuves" in out and "## Constats" in out
+    assert "## Appréciation (proposition)" in out and "## Prochaines étapes" in out
     assert "# Modifications" in out and "## Nouveaux irritants" in out
 
 

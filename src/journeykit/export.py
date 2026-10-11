@@ -12,9 +12,9 @@ import io
 from typing import Any
 
 from .export_texts import QUADRANT_LABELS, text
-from .lint import Finding, summarize
+from .lint import ERROR, INFO, WARN, Finding, summarize
 from .lint_messages import ANTIPATTERN_LABELS, check_language
-from .model import JourneyIndex, priority_quadrant
+from .model import JourneyIndex, Verdict, priority_quadrant, propose_verdict
 
 
 def _texts(lang: str):
@@ -162,8 +162,68 @@ def opportunities_markdown(journey: dict[str, Any], lang: str = "de") -> str:
     return "\n".join(lines)
 
 
+def _audit_diagnosis(meta: dict[str, Any], t) -> list[str]:
+    lines = [t("audit.diagnosis"), ""]
+    diagnosis = meta.get("diagnosis")
+    if not diagnosis:
+        return lines + [t("audit.diagnosis_missing", map_type=meta["map_type"]), ""]
+    lines += [diagnosis["rationale"], ""]
+    extra = [
+        t("audit.diagnosis_alternative", alternative=alt)
+        for alt in diagnosis.get("alternatives_considered", [])
+    ]
+    if diagnosis.get("backstage_documented_in"):
+        extra.append(t("audit.diagnosis_backstage", ref=diagnosis["backstage_documented_in"]))
+    return lines + (extra + [""] if extra else [])
+
+
+def _audit_verdict(v: Verdict, t) -> list[str]:
+    lines = [t("audit.verdict"), ""]
+    if v.kind == "poster":
+        labels = {
+            "owner": t("audit.missing_owner"),
+            "review": t("audit.missing_review"),
+            "anchored_opportunity": t("audit.missing_anchored_opportunity"),
+        }
+        lines.append(t("audit.verdict_poster", missing=", ".join(labels[m] for m in v.missing)))
+    elif v.kind == "hypothesis":
+        labels = {
+            "low_primary": t("audit.reason_low_primary", pct=v.primary_pct),
+            "status_hypothesis": t("audit.reason_status_hypothesis"),
+            "breakdown_without_recovery": t(
+                "audit.reason_breakdown_without_recovery", n=v.breakdowns_without_recovery
+            ),
+        }
+        lines.append(t("audit.verdict_hypothesis", reasons=", ".join(labels[r] for r in v.reasons)))
+    else:
+        lines.append(t("audit.verdict_robust", pct=v.primary_pct))
+    return lines + ["", t("audit.verdict_note"), ""]
+
+
+def _audit_next_steps(v: Verdict, findings: list[Finding], t, limit: int = 3) -> list[str]:
+    """Die schwersten Befunde, je Anti-Pattern einer; bei einer Hypothese ohne Plan zuerst der Plan."""
+    lines: list[str] = []
+    n = 0
+    if v.kind == "hypothesis" and not v.has_research_plan:
+        n += 1
+        lines.append(t("audit.step_plan", n=n))
+    rank = {ERROR: 0, WARN: 1, INFO: 2}
+    seen: set[str] = set()
+    for f in sorted(findings, key=lambda f: rank.get(f.level, 3)):
+        if n >= limit:
+            break
+        if f.antipattern in seen:
+            continue
+        seen.add(f.antipattern)
+        n += 1
+        lines.append(t("audit.step", n=n, code=f.code, message=f.message))
+        if f.hint:
+            lines.append(f"   - → {f.hint}")
+    return [t("audit.next_steps"), ""] + (lines or [t("audit.no_steps")]) + [""]
+
+
 def audit_markdown(journey: dict[str, Any], findings: list[Finding], lang: str = "de") -> str:
-    """Audit-Report: Evidenzlage, Befunde je Anti-Pattern, nächste Schritte.
+    """Audit-Report: Diagnose, Urteilsvorschlag, nächste Schritte, Evidenzlage, Befunde je Anti-Pattern.
 
     Die Befunde kommen fertig formuliert; für einen französischen Report
     ``lint_journey(journey, lang="fr")`` übergeben.
@@ -181,6 +241,10 @@ def audit_markdown(journey: dict[str, Any], findings: list[Finding], lang: str =
         lines.append("")
         lines.append(t("audit.synthetic"))
     lines.append("")
+    lines += _audit_diagnosis(meta, t)
+    verdict = propose_verdict(idx)
+    lines += _audit_verdict(verdict, t)
+    lines += _audit_next_steps(verdict, findings, t)
     lines.append(t("audit.evidence"))
     lines.append("")
     kinds = ", ".join(sorted({s["kind"] for s in idx.sources.values()})) or "–"

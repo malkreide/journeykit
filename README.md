@@ -19,7 +19,7 @@ The vocabulary is translated for public administration, where nobody "converts" 
 - **Journey model** as JSON Schema (draft 2020-12) with evidence atoms, sources, PII status, owner and review cycle
 - **Methodological lints** for the five pitfalls — Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathy Vacuum / Overcomplexity, Micro-Level Disconnect — plus Blueprint smell, PII, KPI translation and evidence quality (L001–L102)
 - **Interactive viewer**: a self-contained HTML file with five layers — journey map with emotional curve and evidence-backed phase durations on a common scale, process and failure paths, evidence heatmap and source register, impact/effort matrix with user stories, audit — evidence drill-down to the original quote on every cell, a "primary evidence only" filter, multi-persona overlay, light/dark, print, interface in German or French
-- **Exports**: Patton story map (Markdown), action list (CSV), opportunity matrix, audit report
+- **Exports**: Patton story map (Markdown), action list (CSV), opportunity matrix, audit report (diagnosis, proposed verdict, next steps, findings)
 - **Diff** between two versions of a journey — what did new evidence change?
 - **Claude skill** `user-journey` with three modes: *Synthesis* (raw material → journey), *Workshop* (hypothesis-first with research plan), *Audit* (review an existing journey)
 - **Worked examples**: kindergarten entry from the parents' perspective, built from a synthetic input mix (3 interviews, 30 inquiries, a survey, web analytics, an internal process document, workshop notes); and a building permit for a heat pump (applicant and neighbour as two personas) that tests transferability to another domain and documents where the model reaches its limits

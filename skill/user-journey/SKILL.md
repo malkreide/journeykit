@@ -235,7 +235,7 @@ Bestehende Journey entgegennehmen (Bild, PDF, Export, Text). Vorgehen:
 1. Diagnose: Journey, Blueprint, Flow, Experience Map? Eine Persona oder mehrere vermischt?
 2. Soweit möglich ins Schema übertragen, so dass sich jede Aussage auf der Vorlage wiederfinden lässt (siehe unten).
 3. `journeykit lint` plus die Fragen aus `references/review-fragen.md`.
-4. Audit-Report (`export --format audit`) mit: Evidenzlage, Befunde je Fallstrick, drei wichtigste nächste Schritte. Urteil in einem Satz nach den Kriterien in `references/review-fragen.md`, «Übergabe-Satz»: Poster, belastbar oder Hypothese.
+4. Audit-Report (`export --format audit`). Er enthält Diagnose, einen Urteilsvorschlag aus dem Modell nach den Kriterien in `references/review-fragen.md` («Übergabe-Satz»), die drei wichtigsten nächsten Schritte, Evidenzlage und Befunde je Fallstrick. Den Vorschlag prüfen und das Urteil in einem Satz übergeben: Poster, belastbar oder Hypothese – weicht es ab, mit Begründung. Die Diagnose aus Schritt 1 gehört nicht in `meta.diagnosis`, wenn die Vorlage keine hat: Der Report meldet dann zu Recht, dass sie fehlt, und die Diagnose des Audits steht im Übergabe-Satz.
 
 ### Übertrag: Herkunft ausweisen
 

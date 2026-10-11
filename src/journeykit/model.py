@@ -187,6 +187,66 @@ class JourneyIndex:
         ]
 
 
+@dataclass(frozen=True)
+class Verdict:
+    """Urteil nach den Kriterien in ``skill/user-journey/references/review-fragen.md``.
+
+    ``kind`` ist ``poster``, ``robust`` oder ``hypothesis``. ``missing`` nennt beim
+    Poster, was fehlt (``owner``, ``review``, ``anchored_opportunity``);
+    ``reasons`` bei der Hypothese, welche Bedingung für «belastbar» nicht erfüllt
+    ist (``low_primary``, ``status_hypothesis``, ``breakdown_without_recovery``).
+    """
+
+    kind: str
+    primary_pct: int
+    missing: tuple[str, ...] = ()
+    reasons: tuple[str, ...] = ()
+    breakdowns_without_recovery: int = 0
+    has_research_plan: bool = False
+
+
+def propose_verdict(idx: JourneyIndex) -> Verdict:
+    """Poster, belastbar oder Hypothese – in dieser Reihenfolge geprüft, nur am Modell."""
+    j = idx.journey
+    meta = j["meta"]
+    experience = [c for c in idx.claims() if c.kind in {"thinking", "feeling", "pain_point"}]
+    backed = sum(1 for c in experience if idx.has_primary(c.evidence_refs))
+    share = backed / len(experience) if experience else 0.0
+    unrecovered = sum(
+        1
+        for step in idx.steps.values()
+        if any(pp.get("type") == "breakdown" for pp in step.get("pain_points", []))
+        and not step.get("recovery_paths")
+    )
+    plan = any(q.get("proposed_method") for q in j.get("open_questions", []))
+    common = dict(
+        primary_pct=round(share * 100),
+        breakdowns_without_recovery=unrecovered,
+        has_research_plan=plan,
+    )
+    missing = []
+    if not meta.get("owner"):
+        missing.append("owner")
+    if not meta.get("review_cycle_days"):
+        missing.append("review")
+    if not any(
+        o.get("linked_pain_points") or o.get("phase_ref") for o in idx.opportunities.values()
+    ):
+        missing.append("anchored_opportunity")
+    if missing:
+        return Verdict("poster", missing=tuple(missing), **common)
+    reasons = []
+    if share < 0.5:
+        reasons.append("low_primary")
+    if meta.get("status") == "hypothesis":
+        reasons.append("status_hypothesis")
+    if unrecovered:
+        reasons.append("breakdown_without_recovery")
+    if reasons:
+        return Verdict("hypothesis", reasons=tuple(reasons), **common)
+    return Verdict("robust", **common)
+
+
 def priority_quadrant(opp: dict[str, Any]) -> str | None:
     """Impact/Effort-Quadrant einer Chance; None, wenn Scores fehlen."""
     impact = opp.get("user_impact")

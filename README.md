@@ -96,7 +96,7 @@ Language of all output: `--lang` per command, otherwise `meta.language` of the j
 | L030–L034 | Static Map Trap | no owner, no review cycle, severe pain point without owner |
 | L040–L043 | Empathy Vacuum | steps without feelings or thoughts; emotions without evidence |
 | L050–L052 | Overcomplexity | too many phases/steps; no scope exclusions |
-| L060–L063 | Micro-Level Disconnect | no opportunities; severe pain point without linked opportunity; no stories |
+| L060–L064 | Micro-Level Disconnect | no opportunities; severe pain point without linked opportunity; no stories; opportunity linked to neither a pain point nor a phase |
 | L070–L073 | Blueprint smell | no diagnosis; more back-stage notes than steps; most steps carried out by intermediaries instead of the persona |
 | L080–L081 | Privacy | source contains PII; e-mail/phone patterns in evidence text |
 | L090–L092 | KPIs | none; commercial naming; no leading indicator |

@@ -118,6 +118,10 @@ _DE: dict[str, tuple[str, str]] = {
         "Keine Chance hat User Stories - die Story Map bleibt leer.",
         "journeykit export --format storymap zeigt, was ankommt.",
     ),
+    "L064": (
+        "{n} Chance(n) ohne Bezug zu Pain Point oder Phase: {ids}.",
+        "Ohne Bezug lässt sich nicht prüfen, welches Problem die Chance löst. linked_pain_points oder phase_ref setzen.",
+    ),
     # Blueprint statt Journey
     "L070": (
         "Keine Eingangsdiagnose (meta.diagnosis): Warum ist das eine User Journey und kein Service Blueprint?",
@@ -266,6 +270,10 @@ _FR: dict[str, tuple[str, str]] = {
     "L063": (
         "Aucune opportunité n'a de user stories – la story map reste vide.",
         "journeykit export --format storymap montre ce qui en ressort.",
+    ),
+    "L064": (
+        "{n} opportunité(s) sans lien avec un irritant ou une phase : {ids}.",
+        "Sans lien, impossible de vérifier quel problème l'opportunité résout. Renseigner linked_pain_points ou phase_ref.",
     ),
     # Blueprint au lieu de parcours
     "L070": (

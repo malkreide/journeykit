@@ -72,7 +72,7 @@ ergänzt hat (Skill, «Modus Audit»).
 | Happy Path Bias | Pflichtfelder für Edge Cases, Breakdowns, Recovery; aktives Nachfragen | `pain_points.type`, `workaround`, `edge_cases`, `recovery_paths.exists`, L020–L023, Prozess-Layer |
 | Static Map Trap | Datenbestand mit Versionen, Owner, Status; neuer Input erzeugt Diff | `meta.owner`, `review_cycle_days`, `next_review`, `status` an Pain Points und Chancen, `changelog`, `journeykit diff`, L030–L034 |
 | Empathie-Vakuum / Überkomplexität | Drilldown bis zum O-Ton; eine Persona, ein Szenario; Scope-Ausschlüsse | Drawer im Viewer, Schema erzwingt eine Persona, `scope_exclusions`, L040–L052 |
-| Micro-Level Disconnect | Export als Story Map und Backlog; Diagnose Journey vs. Blueprint | `opportunities.stories`, `export --format storymap/actions`, `meta.diagnosis`, L060–L063, L070–L072 |
+| Micro-Level Disconnect | Export als Story Map und Backlog; Diagnose Journey vs. Blueprint | `opportunities.stories`, `export --format storymap/actions`, `meta.diagnosis`, L060–L064, L070–L072 |
 
 Zusätzlich für die Verwaltung: KPI-Übersetzungsschicht (`kpi.category:
 public_value`, `commercial_equivalent`, L090–L092), Kanäle jenseits des Webs

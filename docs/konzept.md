@@ -42,7 +42,7 @@ darauf. Daraus folgt:
 | 3 Journey-Modell | Persona, Szenario, Phasen (mit belegter Dauer in Kalendertagen), Schritte (inkl. handelnde Dritte, ADR-0005), Denken/Fühlen, Pain Points (Reibung/Breakdown), Edge Cases, Recovery, KPIs, Chancen, offene Fragen, Owner, Review | JSON Schema 2020-12 |
 | 4 Synthese-Engine | Clustern, Kurve nur aus Evidenz, Widersprüche und Lücken ausweisen, Chancen und Scores vorschlagen | Claude-Skill (Modi Synthese / Workshop / Audit) + Lints als Rückkopplung |
 | 5 Darstellung | Journey mit Kurve und Dauer je Phase (ein Massstab, damit Wartezeit nicht gleich kurz aussieht wie ein Termin), Prozess/Fehlerpfade, Evidenz-Heatmap, Chancenmatrix, Prüfung; Drilldown bis zum O-Ton; Filter «nur Primärevidenz»; Persona-Überlagerung | Single-File-Viewer |
-| 6 Betrieb | Owner, Review-Rhythmus, Status pro Pain Point und Chance, Versionen, Diff | Schema-Felder, Lints L030–L034, `journeykit diff` |
+| 6 Betrieb | Owner, Review-Rhythmus, Status pro Pain Point und Chance, Versionen, Diff | Schema-Felder, Lints L030–L035, `journeykit diff` |
 
 ## Evidenzklassen als tragendes Prinzip
 
@@ -70,7 +70,7 @@ ergänzt hat (Skill, «Modus Audit»).
 |---|---|---|
 | Inside-Out Bias | Evidenzklasse und Quelle an jeder Aussage; Hypothesen als solche kennzeichnen | `evidence_refs`, `meta.status: hypothesis`, `persona.is_hypothesis`, L010–L012, Filter im Viewer |
 | Happy Path Bias | Pflichtfelder für Edge Cases, Breakdowns, Recovery; aktives Nachfragen | `pain_points.type`, `workaround`, `edge_cases`, `recovery_paths.exists`, L020–L023, Prozess-Layer |
-| Static Map Trap | Datenbestand mit Versionen, Owner, Status; neuer Input erzeugt Diff | `meta.owner`, `review_cycle_days`, `next_review`, `status` an Pain Points und Chancen, `changelog`, `journeykit diff`, L030–L034 |
+| Static Map Trap | Datenbestand mit Versionen, Owner, Status; neuer Input erzeugt Diff | `meta.owner`, `review_cycle_days`, `next_review`, `status` an Pain Points und Chancen, `changelog`, `journeykit diff`, L030–L035 |
 | Empathie-Vakuum / Überkomplexität | Drilldown bis zum O-Ton; eine Persona, ein Szenario; Scope-Ausschlüsse | Drawer im Viewer, Schema erzwingt eine Persona, `scope_exclusions`, `end_state`, L040–L053 |
 | Micro-Level Disconnect | Export als Story Map und Backlog; Diagnose Journey vs. Blueprint | `opportunities.stories`, `export --format storymap/actions`, `meta.diagnosis`, L060–L064, L070–L072 |
 

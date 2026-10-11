@@ -348,6 +348,8 @@ def _rule_static_map(idx: JourneyIndex, c: _Collector, today: date) -> None:
             n=len(no_status),
             ids=_shortlist(no_status, 5),
         )
+    if not (meta.get("created") or meta.get("updated")):
+        c.add("L035", INFO, "static_map", "meta")
 
 
 def _rule_empathy(idx: JourneyIndex, c: _Collector) -> None:

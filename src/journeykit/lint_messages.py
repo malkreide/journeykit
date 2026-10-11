@@ -80,6 +80,10 @@ _DE: dict[str, tuple[str, str]] = {
     "L032": ("Review-Termin {date} ist überschritten.", ""),
     "L033": ("Schwerer Pain Point «{pp}» (Severity {severity}) ohne Owner.", ""),
     "L034": ("{n} Chance(n) ohne Status: {ids}.", ""),
+    "L035": (
+        "Kein Datum (meta.created, meta.updated): Das Alter der Journey ist unbekannt.",
+        "Datum der letzten Erhebung oder Überarbeitung eintragen – bei einer fremden Map zuerst fragen, ob sie den heutigen Ablauf zeigt.",
+    ),
     # Empathie-Vakuum
     "L040": (
         "{missing} von {n} Schritten ohne Gefühlslage.",
@@ -237,6 +241,10 @@ _FR: dict[str, tuple[str, str]] = {
     "L032": ("L'échéance de révision {date} est dépassée.", ""),
     "L033": ("Irritant grave « {pp} » (gravité {severity}) sans responsable.", ""),
     "L034": ("{n} opportunité(s) sans statut : {ids}.", ""),
+    "L035": (
+        "Aucune date (meta.created, meta.updated) : l'âge du parcours est inconnu.",
+        "Indiquer la date de la dernière enquête ou révision – pour une carte reprise d'ailleurs, vérifier d'abord qu'elle montre le déroulement actuel.",
+    ),
     # Vide d'empathie
     "L040": (
         "{missing} des {n} étapes sans ressenti.",

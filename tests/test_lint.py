@@ -143,6 +143,14 @@ def test_static_map_rules(minimal):
     assert {"L030", "L031", "L032"} <= codes(f, WARN)
 
 
+def test_missing_date_is_info(minimal):
+    assert "L035" not in codes(lint_journey(minimal, today=TODAY))
+    del minimal["meta"]["created"]
+    assert "L035" not in codes(lint_journey(minimal, today=TODAY))  # updated genügt
+    del minimal["meta"]["updated"]
+    assert "L035" in codes(lint_journey(minimal, today=TODAY), INFO)
+
+
 def test_severe_pain_point_without_owner_or_opportunity(minimal):
     pp = minimal["phases"][0]["steps"][0]["pain_points"][0]
     del pp["owner"]

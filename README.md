@@ -93,7 +93,7 @@ Language of all output: `--lang` per command, otherwise `meta.language` of the j
 | L001–L003 | Integrity | dangling evidence references, duplicate IDs, contradictory phase duration (min > typical or typical > max) |
 | L010–L012 | Inside-Out Bias | experience claims without primary evidence; persona on fewer than 3 primary sources |
 | L020–L023 | Happy Path Bias | no breakdowns; phase without friction or edge case; breakdown without recovery path |
-| L030–L034 | Static Map Trap | no owner, no review cycle, severe pain point without owner |
+| L030–L035 | Static Map Trap | no owner, no review cycle, severe pain point without owner; no date |
 | L040–L043 | Empathy Vacuum | steps without feelings or thoughts; emotions without evidence |
 | L050–L053 | Overcomplexity | too many phases/steps; no scope exclusions; no end state |
 | L060–L064 | Micro-Level Disconnect | no opportunities; severe pain point without linked opportunity; no stories; opportunity linked to neither a pain point nor a phase |

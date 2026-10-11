@@ -52,8 +52,21 @@ Kern trifft – das prüft ein Mensch. Diese Fragen stellt der Skill vor der
 
 ## Übergabe-Satz
 
-Vor der Übergabe in einem Satz sagen, was die Journey ist:
+Vor der Übergabe in einem Satz sagen, was die Journey ist. Die drei Urteile
+schliessen sich aus und werden in dieser Reihenfolge geprüft; das erste, das
+zutrifft, gilt:
 
-- **Belastbar**: Primärevidenz an den meisten Erlebnis-Aussagen, Breakdowns mit Recovery, Owner und Review gesetzt.
-- **Hypothese**: strukturiert, aber aus Innensicht; der Wert liegt im Erhebungsplan.
-- **Poster**: ohne Owner, ohne Chancen, ohne Review – wird nichts bewirken, so wie sie ist.
+1. **Poster**, wenn eines davon fehlt: verantwortliche Rolle (`meta.owner`),
+   Review-Rhythmus (`meta.review_cycle_days`), mindestens eine Chance mit Bezug
+   zu einem Pain Point (`linked_pain_points`) oder einer Phase (`phase_ref`).
+   So, wie sie ist, wird sie nichts bewirken – auch wenn sie viele Ideen enthält.
+2. **Belastbar**, wenn Primärevidenz (`observed`, `reported`) an mindestens der
+   Hälfte der Erlebnis-Aussagen (Denken, Fühlen, Pain Points) steht, `meta.status`
+   nicht `hypothesis` ist und jeder Breakdown einen Recovery-Pfad hat (auch
+   `exists: false`).
+3. **Hypothese** in allen übrigen Fällen: strukturiert und gepflegt, aber noch
+   nicht belegt. Der Wert liegt im Erhebungsplan; fehlt er (`open_questions` mit
+   `proposed_method`), ist er der erste nächste Schritt.
+
+Die Kriterien prüfen nur das Modell, nicht die Qualität der Texte. Ein Urteil,
+das ihnen widerspricht, ist möglich, braucht aber eine Begründung im Satz.

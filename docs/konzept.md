@@ -58,6 +58,12 @@ sichtbar: gestrichelte Kurvenpunkte, Heatmap, Filter. Die Lints machen es
 hörbar: Eine validierte Journey ohne Primärevidenz an den Erlebnis-Aussagen
 ist ein Fehler, keine Warnung.
 
+Dasselbe gilt für eine bestehende Journey Map im Audit: Sie ist eine Quelle
+der Klasse `assumed`, auch wenn sie sich auf Interviews beruft. Jede
+übertragene Stelle wird ein Atom mit Fundstelle auf der Vorlage; so bleibt
+nachprüfbar, was auf der Vorlage stand, was das Audit erschlossen und was es
+ergänzt hat (Skill, «Modus Audit»).
+
 ## Fallstricke → Anforderungen → Umsetzung
 
 | Fallstrick | Anforderung | Umsetzung |

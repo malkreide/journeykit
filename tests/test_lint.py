@@ -82,6 +82,46 @@ def test_all_assumed_with_hypothesis_status_is_info(minimal):
     assert "L010" not in codes(findings, ERROR)
 
 
+def test_audit_transfer_is_not_primary_evidence(minimal):
+    # Audit-Übertrag nach SKILL.md: Die Vorlage ist eine Quelle «assumed»,
+    # jede übertragene Stelle ein Atom mit Fundstelle. Das darf keine
+    # Primärevidenz vortäuschen, auch wenn sich die Vorlage auf Interviews beruft.
+    minimal["sources"] = [
+        {
+            "id": "vorlage",
+            "title": "Bestehende Journey Map (Bild)",
+            "kind": "internal_document",
+            "default_class": "assumed",
+            "pii_status": "none",
+            "notes": "Nennt zwölf Interviews, legt sie nicht bei.",
+        }
+    ]
+    minimal["evidence"] = [
+        {
+            "id": f"map-{i}",
+            "source_ref": "vorlage",
+            "class": "assumed",
+            "kind": "document_excerpt",
+            "text": text,
+            "locator": f"Phase 1, Spalte 1, Zeile {row}",
+        }
+        for i, (text, row) in enumerate(
+            [("Muss ich etwas tun?", "Gedanken"), ("unsicher", "Gefühle"), ("Anruf", "Aktivität")]
+        )
+    ]
+    minimal["persona"]["evidence_refs"] = []
+    step = minimal["phases"][0]["steps"][0]
+    step["thinking"][0]["evidence_refs"] = ["map-0"]
+    step["feeling"]["evidence_refs"] = ["map-1"]
+    step["pain_points"][0]["evidence_refs"] = ["map-2"]
+    step["recovery_paths"][0]["evidence_refs"] = ["map-2"]
+    assert is_valid(minimal)
+    findings = lint_journey(minimal, today=TODAY)
+    assert "L001" not in codes(findings)
+    assert "L010" in codes(findings, ERROR)
+    assert {"L011", "L012"} <= codes(findings, WARN)
+
+
 def test_no_breakdown_is_error_unless_hypothesis(minimal):
     minimal["phases"][0]["steps"][0]["pain_points"][0]["type"] = "friction"
     minimal["opportunities"][0]["linked_pain_points"] = ["pp-1"]

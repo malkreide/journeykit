@@ -49,7 +49,8 @@
           "step_ref": { "type": "string" },
           "proposed_method": {
             "type": "string",
-            "enum": ["interview", "survey", "diary_study", "observation", "analytics", "ticket_analysis", "workshop", "other"]
+            "enum": ["interview", "survey", "diary_study", "observation", "analytics", "ticket_analysis", "workshop", "source_request", "other"],
+            "description": "Methode, mit der die Frage geklärt werden soll. source_request: Quellen oder Rohmaterial bei der Autorschaft oder der verantwortlichen Stelle anfordern (Audit einer bestehenden Map)."
           }
         }
       }

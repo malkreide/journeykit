@@ -107,6 +107,10 @@ _DE: dict[str, tuple[str, str]] = {
         "Kein expliziter Scope-Ausschluss (scenario.scope_exclusions).",
         "Was bewusst nicht abgedeckt ist, schützt die Journey vor dem Stammbaum-Effekt.",
     ),
+    "L053": (
+        "Kein Endzustand (scenario.end_state).",
+        "Woran erkennt die Persona, dass ihr Anliegen erledigt ist? Endet die Journey vorher, ist das ein Breakdown oder ein Scope-Ausschluss.",
+    ),
     # Micro-Level Disconnect
     "L060": (
         "Keine Chancen (opportunities) abgeleitet.",
@@ -259,6 +263,10 @@ _FR: dict[str, tuple[str, str]] = {
     "L052": (
         "Aucune exclusion de périmètre explicite (scenario.scope_exclusions).",
         "Ce qui n'est volontairement pas couvert protège le parcours de l'effet arbre généalogique.",
+    ),
+    "L053": (
+        "Aucun état final (scenario.end_state).",
+        "À quoi la persona reconnaît-elle que sa démarche est terminée ? Si le parcours s'arrête avant, c'est une rupture ou une exclusion de périmètre.",
     ),
     # Déconnexion du niveau micro
     "L060": (

@@ -152,6 +152,15 @@ def test_severe_pain_point_without_owner_or_opportunity(minimal):
     assert "L060" in codes(f, WARN)
 
 
+def test_missing_end_state_is_info(minimal):
+    minimal["scenario"]["end_state"] = "Das Kind ist angemeldet."
+    assert "L053" not in codes(lint_journey(minimal, today=TODAY))
+    minimal["scenario"]["end_state"] = "  "
+    assert "L053" in codes(lint_journey(minimal, today=TODAY), INFO)
+    del minimal["scenario"]["end_state"]
+    assert "L053" in codes(lint_journey(minimal, today=TODAY), INFO)
+
+
 def test_opportunity_without_anchor(minimal):
     opp = minimal["opportunities"][0]
     del opp["linked_pain_points"]

@@ -95,7 +95,7 @@ Sprache aller Ausgaben: `--lang` je Befehl, sonst `meta.language` der Journey, s
 | L020–L023 | Happy Path Bias | keine Breakdowns; Phase ohne Reibung oder Edge Case; Breakdown ohne Recovery-Pfad |
 | L030–L034 | Static Map Trap | kein Owner, kein Review-Rhythmus, schwerer Pain Point ohne Owner |
 | L040–L043 | Empathie-Vakuum | Schritte ohne Gefühle oder Gedanken; Emotionen ohne Beleg |
-| L050–L052 | Überkomplexität | zu viele Phasen/Schritte; kein Scope-Ausschluss |
+| L050–L053 | Überkomplexität | zu viele Phasen/Schritte; kein Scope-Ausschluss; kein Endzustand |
 | L060–L064 | Micro-Level Disconnect | keine Chancen; schwerer Pain Point ohne Chance; keine Stories; Chance ohne Bezug zu Pain Point oder Phase |
 | L070–L073 | Blueprint-Smell | keine Diagnose; mehr Back-Stage-Notizen als Schritte; mehrheitlich Schritte, die Dritte anstelle der Persona ausführen |
 | L080–L081 | Personendaten | Quelle enthält Personendaten; E-Mail-/Telefonmuster im Evidenztext |

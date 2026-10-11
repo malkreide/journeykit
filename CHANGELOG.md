@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Lint L053 (INFO): no end state (`scenario.end_state`) – a journey that stops before the persona's goal is reached hides either a breakdown or a scope boundary; matching review question under «Happy Path» (#29)
 - Lint L064 (WARN, INFO for `status: hypothesis`): opportunities linked to neither a pain point (`linked_pain_points`) nor a phase (`phase_ref`) – typical for an idea band at the foot of a workshop map; without the link nobody can check which problem an opportunity solves (#27)
 - Audit report: sections «Diagnose» (`meta.diagnosis` with alternatives and back-stage reference, or a note that it is missing), «Urteil (Vorschlag)» and «Nächste Schritte» before the evidence (#26). The verdict is proposed from the model by `model.propose_verdict` along the criteria in `review-fragen.md` – poster names what is missing, hypothesis names the failed conditions – and is marked as a proposal for the review to confirm. Next steps are the three most severe findings, one per anti-pattern, with their hint; a hypothesis without a research plan gets the plan as first step. German and French texts in `export_texts.py`
 - Schema: `open_questions.proposed_method` accepts `source_request` (ask the authors or the responsible office for sources or raw material – the first question of most audits). Schema stays 1.0 (additive)

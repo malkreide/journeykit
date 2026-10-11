@@ -233,9 +233,41 @@ an das Team, dass Hypothesis-first laut NN/g **keine** Zeit spart
 Bestehende Journey entgegennehmen (Bild, PDF, Export, Text). Vorgehen:
 
 1. Diagnose: Journey, Blueprint, Flow, Experience Map? Eine Persona oder mehrere vermischt?
-2. Soweit möglich ins Schema übertragen; fehlende Belege sind leere `evidence_refs`, Quellen ohne Angaben sind `assumed`.
+2. Soweit möglich ins Schema übertragen, so dass sich jede Aussage auf der Vorlage wiederfinden lässt (siehe unten).
 3. `journeykit lint` plus die Fragen aus `references/review-fragen.md`.
-4. Audit-Report (`export --format audit`) mit: Evidenzlage, Befunde je Fallstrick, drei wichtigste nächste Schritte. Urteil in einem Satz: belastbar, Hypothese oder Poster.
+4. Audit-Report (`export --format audit`) mit: Evidenzlage, Befunde je Fallstrick, drei wichtigste nächste Schritte. Urteil in einem Satz nach den Kriterien in `references/review-fragen.md`, «Übergabe-Satz»: Poster, belastbar oder Hypothese.
+
+### Übertrag: Herkunft ausweisen
+
+Im Übertrag stehen drei Arten von Aussagen. Sie müssen sich unterscheiden lassen,
+sonst kann niemand Übertrag und Vorlage nebeneinanderlegen und prüfen.
+
+| Art | Beispiel | Wie im Modell |
+|---|---|---|
+| **Steht auf der Vorlage** | Text einer Aktivität, Gefühlslabel, Idee im Chancenband | Atom `kind: document_excerpt`, wörtlich, mit `locator`; die Aussage verweist darauf |
+| **Vom Audit erschlossen** | Rolle der Persona aus den Schritten, Valenz aus der Kurve gerundet, eine Zeile in Gefühl und Bedürfnis geteilt | ohne eigenes Atom; Verweis auf das Atom der Stelle, aus der erschlossen wurde, und ein Satz im `changelog` |
+| **Vom Audit ergänzt** | Erhebungsplan, Rückfragen | nur `open_questions`, nie als Aussage der Journey |
+
+Vorgehen:
+
+- **Die Vorlage ist eine Quelle**: `kind: internal_document`, `default_class: assumed`,
+  `location` = Ablage der Datei, `notes` mit dem, was die Vorlage über ihre Herkunft
+  sagt (Autorschaft, Datum, genannte Erhebungen). Studien, die die Vorlage nur
+  nennt, aber nicht beilegen, sind keine eigenen Quellen – sonst schweigt L011,
+  obwohl niemand das Material gesehen hat.
+- **Pro übertragene Stelle ein Atom**, Klasse `assumed`, Text wörtlich wie auf der
+  Vorlage. `locator` nach dem Raster der Vorlage, etwa «Phase 2, Spalte 3, Zeile
+  Feelings» oder «Chancenband, Punkt 4». Die Klasse bleibt `assumed`, auch wenn die
+  Vorlage sich auf Interviews beruft: Die Klasse hängt an der Quelle, und die Quelle
+  ist hier die Map. L010 zählt diese Atome deshalb nicht als Primärevidenz.
+- **Verluste festhalten**: Ein `changelog`-Eintrag zum Übertrag ist Pflicht und
+  nennt, was dabei verloren ging oder gedeutet wurde – gerundete Kurve, geteilte
+  Zeilen, unleserliche Stellen, nicht übernommene Bilder.
+- **Was die Vorlage nicht hat, bleibt leer**: keine Pain Points, Owner, Scores
+  oder Phasenbezüge ergänzen, die nicht dastehen. Was fehlt, zeigen die Lints;
+  ergänzt wird erst in der Synthese, mit Material.
+- **Erste offene Frage** ist fast immer die Rückfrage nach den Quellen bei der
+  Autorschaft: `proposed_method: source_request`.
 
 ## Typische Fehler, die der Skill selbst vermeidet
 

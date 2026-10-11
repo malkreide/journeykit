@@ -266,6 +266,10 @@ Vorgehen:
 - **Was die Vorlage nicht hat, bleibt leer**: keine Pain Points, Owner, Scores
   oder Phasenbezüge ergänzen, die nicht dastehen. Was fehlt, zeigen die Lints;
   ergänzt wird erst in der Synthese, mit Material.
+- **Verdeckte Breakdowns** – ein Scheitern, das nur im Aktivitätstext steht, oder
+  ein Gefühlswert, der der Handlung widerspricht – nicht selbst als Pain Point
+  modellieren, sondern als offene Frage mit `step_ref` festhalten. So erscheinen
+  sie im Audit-Report, und die Treue zur Vorlage bleibt gewahrt.
 - **Erste offene Frage** ist fast immer die Rückfrage nach den Quellen bei der
   Autorschaft: `proposed_method: source_request`.
 

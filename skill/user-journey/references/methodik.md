@@ -36,7 +36,7 @@ In der Verwaltung sind viele «Journey»-Anfragen Blueprint-Anfragen.
 | **Inside-Out Bias** | Map aus dem Sitzungszimmer, ohne Nutzende | Evidenzklassen, `evidence_refs` an jeder Aussage, Status `hypothesis`, Filter «nur Primärevidenz» | L010–L012 |
 | **Happy Path Bias** | Nur der Idealpfad, keine Fehlschläge | Pflichtfelder `pain_points` (friction/breakdown), `edge_cases`, `recovery_paths`, `workaround` | L020–L023 |
 | **Überkomplexität vs. Empathie-Vakuum** | Stammbaum-Chaos oder Klickliste ohne Gefühl | Eine Persona pro Datei, `scope_exclusions`, `thinking`/`feeling` pro Schritt, `null` als ehrliche Lücke | L040–L052 |
-| **Micro-Level Disconnect** | Makro-Erkenntnis erreicht nie das Backlog | `opportunities` mit Scores und `stories`, Story-Map-Export, Massnahmen-CSV | L060–L063 |
+| **Micro-Level Disconnect** | Makro-Erkenntnis erreicht nie das Backlog | `opportunities` mit Scores und `stories`, Story-Map-Export, Massnahmen-CSV | L060–L064 |
 
 Dazu: Blueprint-Smell (L070–L072), Personendaten (L080–L081), Kennzahlen
 (L090–L092), Evidenzqualität (L100–L102).

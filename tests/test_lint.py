@@ -152,6 +152,18 @@ def test_severe_pain_point_without_owner_or_opportunity(minimal):
     assert "L060" in codes(f, WARN)
 
 
+def test_opportunity_without_anchor(minimal):
+    opp = minimal["opportunities"][0]
+    del opp["linked_pain_points"]
+    assert "L064" not in codes(lint_journey(minimal, today=TODAY))  # phase_ref genügt
+    del opp["phase_ref"]
+    f = lint_journey(minimal, today=TODAY)
+    assert "L064" in codes(f, WARN)
+    assert next(x for x in f if x.code == "L064").message.endswith("opp-1.")
+    minimal["meta"]["status"] = "hypothesis"
+    assert "L064" in codes(lint_journey(minimal, today=TODAY), INFO)
+
+
 def test_empathy_vacuum(minimal):
     step = minimal["phases"][0]["steps"][0]
     step["feeling"] = None

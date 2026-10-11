@@ -415,6 +415,20 @@ def _rule_micro_disconnect(idx: JourneyIndex, c: _Collector) -> None:
     for pid, pp in idx.pain_points.items():
         if (pp.get("severity") or 0) >= 4 and not idx.opportunity_for_pain_point(pid):
             c.add("L061", WARN, "micro_disconnect", f"pain_points[{pid}]", pp=pid)
+    unanchored = [
+        o["id"]
+        for o in idx.opportunities.values()
+        if not (o.get("linked_pain_points") or o.get("phase_ref"))
+    ]
+    if unanchored:
+        c.add(
+            "L064",
+            INFO if status == "hypothesis" else WARN,
+            "micro_disconnect",
+            "opportunities",
+            n=len(unanchored),
+            ids=_shortlist(unanchored, 5),
+        )
     unscored = [
         o["id"]
         for o in idx.opportunities.values()

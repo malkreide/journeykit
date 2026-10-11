@@ -68,6 +68,10 @@ _DE: dict[str, tuple[str, str]] = {
         "Kanalwechsel {from_channel} → {to_channel} bei «{step}» ist nicht als Übergang markiert.",
         "Übergangspunkte sind die häufigsten Reibungsstellen; is_transition = true und gezielt nach Evidenz suchen.",
     ),
+    "L023.counterpart": (
+        "Zuständigkeitswechsel «{from_counterpart}» → «{to_counterpart}» bei «{step}» ist nicht als Übergang markiert.",
+        "Auch im selben Kanal ist der Wechsel der Stelle eine Übergabe: is_transition = true und gezielt nach Evidenz suchen.",
+    ),
     # Static Map Trap
     "L030": (
         "Keine verantwortliche Rolle (meta.owner).",
@@ -228,6 +232,10 @@ _FR: dict[str, tuple[str, str]] = {
     "L023": (
         "Le changement de canal {from_channel} → {to_channel} à « {step} » n'est pas marqué comme transition.",
         "Les transitions sont les points de friction les plus fréquents ; mettre is_transition = true et chercher des preuves de manière ciblée.",
+    ),
+    "L023.counterpart": (
+        "Le changement d'interlocuteur « {from_counterpart} » → « {to_counterpart} » à « {step} » n'est pas marqué comme transition.",
+        "Même sur le même canal, changer d'interlocuteur est un passage de relais : mettre is_transition = true et chercher des preuves de manière ciblée.",
     ),
     # Piège de la carte figée
     "L030": (

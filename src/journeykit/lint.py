@@ -294,12 +294,15 @@ def _rule_happy_path(idx: JourneyIndex, c: _Collector) -> None:
                     f"phases[{pi}].steps[{si}]",
                     step=step["name"],
                 )
-    # Kanalwechsel ohne Markierung als Übergang
+    # Kanal- oder Zuständigkeitswechsel ohne Markierung als Übergang
     prev_channel: str | None = None
+    prev_counterpart: str | None = None
     for pi, phase in enumerate(idx.journey["phases"]):
         for si, step in enumerate(phase["steps"]):
             ch = step.get("channel")
-            if prev_channel and ch and ch != prev_channel and not step.get("is_transition"):
+            cp = (step.get("counterpart") or "").strip()
+            marked = step.get("is_transition")
+            if prev_channel and ch and ch != prev_channel and not marked:
                 c.add(
                     "L023",
                     INFO,
@@ -309,8 +312,26 @@ def _rule_happy_path(idx: JourneyIndex, c: _Collector) -> None:
                     to_channel=ch,
                     step=step["name"],
                 )
+            elif (
+                prev_counterpart
+                and cp
+                and cp.casefold() != prev_counterpart.casefold()
+                and not marked
+            ):
+                c.add(
+                    "L023",
+                    INFO,
+                    "happy_path",
+                    f"phases[{pi}].steps[{si}]",
+                    msg="L023.counterpart",
+                    from_counterpart=prev_counterpart,
+                    to_counterpart=cp,
+                    step=step["name"],
+                )
             if ch:
                 prev_channel = ch
+            if cp:
+                prev_counterpart = cp
 
 
 def _rule_static_map(idx: JourneyIndex, c: _Collector, today: date) -> None:

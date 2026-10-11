@@ -137,7 +137,10 @@ zeigt es) oder wird bewusst als ausserhalb des Scopes markiert.
 Atome zu Schritten clustern. Pro Schritt:
 
 - `action` (was die Persona tut), `channel`, `touchpoint`, `counterpart`,
-  `is_transition` bei Kanal- oder Zuständigkeitswechsel.
+  `is_transition` bei Kanal- oder Zuständigkeitswechsel. Wechselt die Stelle,
+  steht in `counterpart` die neue Stelle, und der Schritt, in dem sie zum ersten
+  Mal auftritt, trägt `is_transition: true` – kein «A → B» im `counterpart`.
+  L023 meldet beide Arten von Wechsel, wenn die Markierung fehlt.
 - `performed_by`, wenn typischerweise nicht die Persona allein handelt:
   `shared` (mit Hilfe) oder `intermediary` (Dritte anstelle der Persona), mit
   `role` und `mandate` (`formal` = Vollmacht, Vertretung, Auftrag; `informal`

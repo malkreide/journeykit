@@ -135,6 +135,34 @@ def test_breakdown_without_recovery_warns(minimal):
     assert "L022" in codes(lint_journey(minimal, today=TODAY), WARN)
 
 
+def test_counterpart_change_without_transition_is_info(minimal):
+    first = minimal["phases"][0]["steps"][0]
+    first["channel"] = "web"
+    first["counterpart"] = "Gemeinde"
+    second = {
+        "id": "step-1-2",
+        "name": "Link zum Kanton",
+        "action": "Die Persona folgt dem Link zur kantonalen Website.",
+        "channel": "web",
+        "counterpart": "Kanton",
+        "feeling": None,
+    }
+    minimal["phases"][0]["steps"].append(second)
+    f = lint_journey(minimal, today=TODAY)
+    hit = [x for x in f if x.code == "L023"]
+    assert len(hit) == 1 and hit[0].level == INFO
+    assert "«Gemeinde» → «Kanton»" in hit[0].message
+    second["counterpart"] = " gemeinde "  # gleiche Stelle, nur anders geschrieben
+    assert "L023" not in codes(lint_journey(minimal, today=TODAY))
+    second["counterpart"] = "Kanton"
+    second["is_transition"] = True
+    assert "L023" not in codes(lint_journey(minimal, today=TODAY))
+    second["is_transition"] = False
+    second["channel"] = "phone"  # Kanal- und Stellenwechsel: eine Meldung, nicht zwei
+    hit = [x for x in lint_journey(minimal, today=TODAY) if x.code == "L023"]
+    assert len(hit) == 1 and "web → phone" in hit[0].message
+
+
 def test_static_map_rules(minimal):
     del minimal["meta"]["owner"]
     del minimal["meta"]["review_cycle_days"]

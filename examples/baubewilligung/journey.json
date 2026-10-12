@@ -241,6 +241,7 @@
           "channel": "web",
           "touchpoint": "Unterlagenliste im Portal",
           "counterpart": "Installationsfirma",
+          "is_transition": true,
           "performed_by": {
             "kind": "shared",
             "role": "Installationsfirma",

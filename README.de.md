@@ -92,7 +92,7 @@ Sprache aller Ausgaben: `--lang` je Befehl, sonst `meta.language` der Journey, s
 |---|---|---|
 | L001–L003 | Integrität | hängende Evidenz-Referenzen, doppelte IDs, widersprüchliche Phasendauer (min > typisch oder typisch > max) |
 | L010–L012 | Inside-Out Bias | Erlebnis-Aussagen ohne Primärevidenz; Persona auf weniger als 3 Primärbelegen |
-| L020–L023 | Happy Path Bias | keine Breakdowns; Phase ohne Reibung oder Edge Case; Breakdown ohne Recovery-Pfad |
+| L020–L023 | Happy Path Bias | keine Breakdowns; Phase ohne Reibung oder Edge Case; Breakdown ohne Recovery-Pfad; Kanal- oder Zuständigkeitswechsel nicht als Übergang markiert |
 | L030–L035 | Static Map Trap | kein Owner, kein Review-Rhythmus, schwerer Pain Point ohne Owner; kein Datum |
 | L040–L043 | Empathie-Vakuum | Schritte ohne Gefühle oder Gedanken; Emotionen ohne Beleg |
 | L050–L053 | Überkomplexität | zu viele Phasen/Schritte; kein Scope-Ausschluss; kein Endzustand |

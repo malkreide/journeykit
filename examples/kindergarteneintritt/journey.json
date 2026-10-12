@@ -837,7 +837,7 @@
           "channel": "in_person",
           "touchpoint": "Stundenplan-Blatt für die ersten zwei Wochen",
           "counterpart": "Kindergarten-Lehrperson, Betreuung (Hort)",
-          "is_transition": false,
+          "is_transition": true,
           "thinking": [
             {
               "text": "Wer betreut das Kind am Nachmittag, wenn der Kindergarten nur halbtags ist?",
@@ -936,7 +936,7 @@
           "channel": "in_person",
           "touchpoint": "Quartalsheft mit Terminen, Kindergarten-Alltag",
           "counterpart": "Kindergarten-Lehrperson",
-          "is_transition": false,
+          "is_transition": true,
           "thinking": [
             {
               "text": "Jetzt wissen wir immer, was läuft – warum nicht schon vorher so?",

@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Viewer: row «Dauer» in the journey layer – one bar per phase on a common scale with the evidenced range, drill-down to the evidence; phases without a number say so. The step grid keeps equal widths. The process layer shows the typical duration next to the phase name
 
 ### Changed
+- Example `kindergarteneintritt`: steps «Eingewöhnung mit reduziertem Stundenplan» (the after-school care joins) and «Alltag und Informationsfluss finden» (it drops out again) marked `is_transition` – the changes of counterpart L023 reports since #28
 - Example `baubewilligung`: step «Unterlagen zusammenstellen» marked `is_transition` – the hand-over from the building advice service to the installer that L023 now reports (#28)
 - Lint L023 also reports a change of `counterpart` within the same channel that is not marked `is_transition` (message variant `L023.counterpart`, INFO) – e.g. a link from one authority's website to another's; a step with both a channel and a counterpart change gets one finding. Skill: when the responsible body changes, `counterpart` names the new body and the step where it first appears carries `is_transition: true`, no «A → B» (#28)
 - Skill: two review questions – a feeling value that contradicts what happens in the step, and a failure that only the activity text mentions; in audit mode such hidden breakdowns become open questions with `step_ref` instead of pain points the original never had (#30)

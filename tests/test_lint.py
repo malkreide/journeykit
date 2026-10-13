@@ -228,6 +228,15 @@ def test_missing_end_state_is_info(minimal):
     assert "L053" in codes(lint_journey(minimal, today=TODAY), INFO)
 
 
+def test_missing_trigger_is_info(minimal):
+    minimal["scenario"]["trigger"] = "Ein Hinweis aus dem Bekanntenkreis."
+    assert "L054" not in codes(lint_journey(minimal, today=TODAY))
+    minimal["scenario"]["trigger"] = " "
+    assert "L054" in codes(lint_journey(minimal, today=TODAY), INFO)
+    del minimal["scenario"]["trigger"]
+    assert "L054" in codes(lint_journey(minimal, today=TODAY), INFO)
+
+
 def test_opportunity_without_anchor(minimal):
     opp = minimal["opportunities"][0]
     del opp["linked_pain_points"]

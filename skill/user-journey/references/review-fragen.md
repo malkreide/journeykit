@@ -18,6 +18,7 @@ Kern trifft – das prüft ein Mensch. Diese Fragen stellt der Skill vor der
 - Was passiert, wenn der Brief nicht ankommt, die Frist verpasst ist, die Sprache nicht reicht, das System die Person nicht findet? Steht es drin?
 - Für jeden Breakdown: Gibt es heute einen Rückweg? Wenn nein, ist das als `exists: false` festgehalten – oder haben wir einen Soll-Pfad als Ist-Pfad geschrieben?
 - Welcher Übergang (Kanal- oder Zuständigkeitswechsel) ist am wenigsten belegt?
+- Beschreibt die Journey, wie der Weg heute ist – oder wie er sein soll? Wenn Soll: Ist `scenario.perspective: to_be` gesetzt, und wo steht die Ist-Journey, die das Konzept begründet?
 - Welche Aktivität beschreibt ein Scheitern (nicht verstanden, kein Anspruch, abgebrochen, zurück zum Start), das nicht als Pain Point geführt ist? Im Audit-Modus besonders: Bestehende Maps verstecken Breakdowns oft im Aktivitätstext.
 - Erreicht die Persona im letzten Schritt ihr Ziel (`scenario.end_state`)? Wenn nein: Ist das offene Ende ein Breakdown, der fehlt, oder eine Scope-Grenze, die in `scope_exclusions` gehört?
 - Für jeden Breakdown: Ist das ein **Versagen der Leistung** – oder ein **Rechtsweg, der funktioniert** (Einsprache, Einwendung, Rekurs, begründete Rückweisung)? Wenn Rechtsweg: Wo liegt das eigentliche Versagen davor (Information, Verständlichkeit, Zeitpunkt)? Dort gehört der Breakdown hin; der Rechtsweg selbst ist Reibung, und die Chance zielt auf bessere Information, nicht auf weniger Einsprachen.
@@ -65,8 +66,10 @@ zutrifft, gilt:
    So, wie sie ist, wird sie nichts bewirken – auch wenn sie viele Ideen enthält.
 2. **Belastbar**, wenn Primärevidenz (`observed`, `reported`) an mindestens der
    Hälfte der Erlebnis-Aussagen (Denken, Fühlen, Pain Points) steht, `meta.status`
-   nicht `hypothesis` ist und jeder Breakdown einen Recovery-Pfad hat (auch
-   `exists: false`).
+   nicht `hypothesis` ist, jeder Breakdown einen Recovery-Pfad hat (auch
+   `exists: false`) und die Journey kein Soll-Konzept ist
+   (`scenario.perspective: to_be`): Ein Soll-Konzept beschreibt, was sein soll,
+   und lässt sich deshalb nicht durch Nutzende belegen.
 3. **Hypothese** in allen übrigen Fällen: strukturiert und gepflegt, aber noch
    nicht belegt. Der Wert liegt im Erhebungsplan; fehlt er (`open_questions` mit
    `proposed_method`), ist er der erste nächste Schritt.

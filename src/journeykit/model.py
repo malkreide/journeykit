@@ -194,8 +194,9 @@ class Verdict:
     ``kind`` ist ``poster``, ``robust`` oder ``hypothesis``. ``missing`` nennt beim
     Poster, was fehlt (``owner``, ``review``, ``anchored_opportunity``);
     ``reasons`` bei der Hypothese, welche Bedingung für «belastbar» nicht erfüllt
-    ist (``no_experience``, ``low_primary``, ``status_hypothesis``,
-    ``breakdown_without_recovery``).
+    ist (``to_be``, ``no_experience``, ``low_primary``, ``status_hypothesis``,
+    ``breakdown_without_recovery``). Ein Soll-Konzept (``scenario.perspective:
+    to_be``) ist nie belastbar, wie gut es auch belegt ist (ADR-0006).
     """
 
     kind: str
@@ -237,6 +238,8 @@ def propose_verdict(idx: JourneyIndex) -> Verdict:
     if missing:
         return Verdict("poster", missing=tuple(missing), **common)
     reasons = []
+    if j["scenario"].get("perspective") == "to_be":
+        reasons.append("to_be")
     if not experience:
         reasons.append("no_experience")
     elif share < 0.5:

@@ -162,8 +162,10 @@ def opportunities_markdown(journey: dict[str, Any], lang: str = "de") -> str:
     return "\n".join(lines)
 
 
-def _audit_diagnosis(meta: dict[str, Any], t) -> list[str]:
+def _audit_diagnosis(meta: dict[str, Any], scenario: dict[str, Any], t) -> list[str]:
     lines = [t("audit.diagnosis"), ""]
+    if scenario.get("perspective") == "to_be":
+        lines += [t("audit.diagnosis_to_be"), ""]
     diagnosis = meta.get("diagnosis")
     if not diagnosis:
         return lines + [t("audit.diagnosis_missing", map_type=meta["map_type"]), ""]
@@ -195,7 +197,13 @@ def _audit_verdict(v: Verdict, t) -> list[str]:
                 "audit.reason_breakdown_without_recovery", n=v.breakdowns_without_recovery
             ),
         }
-        lines.append(t("audit.verdict_hypothesis", reasons=", ".join(labels[r] for r in v.reasons)))
+        reasons = ", ".join(labels[r] for r in v.reasons if r != "to_be")
+        if "to_be" in v.reasons:
+            # Ein Soll-Konzept ist nicht «noch nicht belegt», sondern nicht belegbar.
+            also = " " + t("audit.verdict_also", reasons=reasons) if reasons else ""
+            lines.append(t("audit.verdict_to_be") + also)
+        else:
+            lines.append(t("audit.verdict_hypothesis", reasons=reasons))
     else:
         lines.append(t("audit.verdict_robust", pct=v.primary_pct))
     return lines + ["", t("audit.verdict_note"), ""]
@@ -242,7 +250,7 @@ def audit_markdown(journey: dict[str, Any], findings: list[Finding], lang: str =
         lines.append("")
         lines.append(t("audit.synthetic"))
     lines.append("")
-    lines += _audit_diagnosis(meta, t)
+    lines += _audit_diagnosis(meta, journey["scenario"], t)
     verdict = propose_verdict(idx)
     lines += _audit_verdict(verdict, t)
     lines += _audit_next_steps(verdict, findings, t)

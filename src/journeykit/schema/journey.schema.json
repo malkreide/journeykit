@@ -248,6 +248,7 @@
         "trigger": { "type": "string", "description": "Was die Journey auslöst (Brief, Lebensereignis, Frist)." },
         "end_state": { "type": "string", "description": "Woran die Persona erkennt, dass sie fertig ist." },
         "timeframe": { "type": "string" },
+        "perspective": { "type": "string", "enum": ["as_is", "to_be"], "default": "as_is", "description": "as_is: der Weg, wie Nutzende ihn heute erleben (Standard). to_be: Soll-Konzept – wie der Weg künftig gehen soll. Ein Soll-Konzept ist nie belastbar; L020 meldet fehlende Breakdowns nur als INFO (ADR-0006)." },
         "scope_exclusions": { "type": "array", "items": { "type": "string" }, "description": "Bewusst nicht abgedeckt (gegen Überkomplexität)." },
         "evidence_refs": { "$ref": "#/$defs/evidence_refs" }
       }

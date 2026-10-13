@@ -60,6 +60,10 @@ _DE: dict[str, tuple[str, str]] = {
         "Kein einziger Pain Point vom Typ «breakdown»: Die Journey kennt keinen Punkt, an dem sie scheitert.",
         "Wo weichen Nutzende aus - Anruf, Beschwerde, Nichthandeln? Das ist der Breakdown. Anfragen- und Beschwerdedaten zeigen ihn.",
     ),
+    "L020.to_be": (
+        "Soll-Konzept ohne Breakdown: Welche Breakdowns von heute es beheben soll, steht nicht im Modell.",
+        "Die Begründung eines Soll-Konzepts liegt in der Ist-Journey: sie als eigene Datei erheben (scenario.perspective = as_is) oder in open_questions festhalten, welche heutigen Breakdowns das Konzept beheben soll.",
+    ),
     "L021": (
         "Phase «{phase}»: keine Reibung, kein Edge Case.",
         "Entweder ist die Phase wirklich reibungslos (dann Evidenz dafür anfügen) oder sie wurde aus Innensicht beschrieben.",
@@ -228,6 +232,10 @@ _FR: dict[str, tuple[str, str]] = {
     "L020": (
         "Aucun irritant de type « breakdown » : le parcours ne connaît aucun point où il échoue.",
         "Où les usagers contournent-ils – appel, réclamation, renoncement ? C'est là la rupture. Les données de demandes et de réclamations la montrent.",
+    ),
+    "L020.to_be": (
+        "Concept cible sans rupture : le modèle ne dit pas quelles ruptures d'aujourd'hui il doit supprimer.",
+        "Un concept cible se justifie par le parcours actuel : le relever dans un fichier séparé (scenario.perspective = as_is) ou noter dans open_questions quelles ruptures d'aujourd'hui le concept doit supprimer.",
     ),
     "L021": (
         "Phase « {phase} » : ni friction, ni cas limite.",

@@ -235,7 +235,7 @@ an das Team, dass Hypothesis-first laut NN/g **keine** Zeit spart
 
 Bestehende Journey entgegennehmen (Bild, PDF, Export, Text). Vorgehen:
 
-1. Diagnose: Journey, Blueprint, Flow, Experience Map? Eine Persona oder mehrere vermischt?
+1. Diagnose: Journey, Blueprint, Flow, Experience Map? Eine Persona oder mehrere vermischt? Ist-Zustand oder Soll-Konzept (Warnsignale in `references/diagnose.md`)?
 2. Soweit möglich ins Schema übertragen, so dass sich jede Aussage auf der Vorlage wiederfinden lässt (siehe unten).
 3. `journeykit lint` plus die Fragen aus `references/review-fragen.md`.
 4. Audit-Report (`export --format audit`). Er enthält Diagnose, einen Urteilsvorschlag aus dem Modell nach den Kriterien in `references/review-fragen.md` («Übergabe-Satz»), die drei wichtigsten nächsten Schritte, Evidenzlage und Befunde je Fallstrick. Den Vorschlag prüfen und das Urteil in einem Satz übergeben: Poster, belastbar oder Hypothese – weicht es ab, mit Begründung. Die Diagnose aus Schritt 1 gehört nicht in `meta.diagnosis`, wenn die Vorlage keine hat: Der Report meldet dann zu Recht, dass sie fehlt, und die Diagnose des Audits steht im Übergabe-Satz.
@@ -281,6 +281,11 @@ Vorgehen:
   ein Gefühlswert, der der Handlung widerspricht – nicht selbst als Pain Point
   modellieren, sondern als offene Frage mit `step_ref` festhalten. So erscheinen
   sie im Audit-Report, und die Treue zur Vorlage bleibt gewahrt.
+- **Soll-Konzept**: Zeigt die Diagnose, dass die Vorlage beschreibt, wie der Weg
+  künftig gehen soll, kommt `scenario.perspective: to_be` in den Übertrag – als
+  vom Audit erschlossen, mit einem Satz im `changelog`. Ohne das Feld sähe der
+  Übertrag aus wie eine Ist-Journey ohne Reibung. Eine offene Frage hält fest,
+  welche heutigen Breakdowns das Konzept beheben soll.
 - **Erste offene Frage** ist fast immer die Rückfrage nach den Quellen bei der
   Autorschaft: `proposed_method: source_request`.
 

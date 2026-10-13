@@ -25,6 +25,28 @@ Was tun: Diagnose offen aussprechen. Entweder das Vorhaben umbenennen
 (Blueprint) oder beides anlegen – Journey für das Erleben, Blueprint für die
 Back-Stage – und in `meta.diagnosis.backstage_documented_in` verweisen.
 
+Warnsignale für «eigentlich ein Soll-Konzept» (besonders im Audit einer
+bestehenden Map):
+
+- Die Vorlage stellt Lösungen, Systeme oder Standards vor, nicht das, was
+  Nutzende heute erleben.
+- Der Nutzen für die Organisation steht gleichrangig neben dem für die
+  Nutzenden (Effizienz, Kosten, Fallzahlen).
+- Sie spricht in der Zukunftsform: «die Verwaltung plant», «soll künftig»,
+  «wird möglich».
+- Es gibt kein Scheitern, keine Wartezeit, keinen Umweg – der Weg gelingt,
+  weil das Konzept ihn so vorsieht.
+
+Was tun: Auch das offen aussprechen. Ein Soll-Konzept im Übertrag sähe aus wie
+eine Ist-Journey ohne Reibung – und genau so würde es gelesen. Deshalb
+`scenario.perspective: to_be` setzen: Der Viewer zeigt «Soll-Konzept», L020
+meldet das Fehlen von Breakdowns nur als INFO, und das Urteil ist nie
+«belastbar» (ADR-0006). Danach entweder die Ist-Journey erheben (eigene Datei,
+`as_is`, gleiche Phasen-IDs, wo sich die Wege decken) – sie liefert die
+Begründung, die das Konzept braucht – oder die Vorlage als Skizze eines Service
+Blueprints weiterführen, wenn sie vor allem Abläufe zwischen Stellen
+beschreibt.
+
 ## 2. Eine Persona oder mehrere?
 
 Mischt die Anfrage Nutzergruppen mit grundverschiedener Ausgangslage (Eltern

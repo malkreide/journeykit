@@ -150,6 +150,17 @@ def test_no_breakdown_is_error_unless_hypothesis(minimal):
     assert "L020" in codes(lint_journey(minimal, today=TODAY), WARN)
 
 
+def test_no_breakdown_in_to_be_concept_is_info(minimal):
+    minimal["phases"][0]["steps"][0]["pain_points"][0]["type"] = "friction"
+    minimal["opportunities"][0]["linked_pain_points"] = ["pp-1"]
+    minimal["scenario"]["perspective"] = "to_be"
+    hit = [f for f in lint_journey(minimal, today=TODAY) if f.code == "L020"]
+    assert [f.level for f in hit] == [INFO]
+    assert hit[0].message.startswith("Soll-Konzept ohne Breakdown")
+    minimal["scenario"]["perspective"] = "as_is"
+    assert "L020" in codes(lint_journey(minimal, today=TODAY), ERROR)
+
+
 def test_breakdown_without_recovery_warns(minimal):
     minimal["phases"][0]["steps"][0]["recovery_paths"] = []
     assert "L022" in codes(lint_journey(minimal, today=TODAY), WARN)

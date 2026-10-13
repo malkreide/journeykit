@@ -234,6 +234,20 @@ def _rule_integrity(idx: JourneyIndex, c: _Collector) -> None:
                 typical=typ,
                 max=hi,
             )
+    for path, step, cost in idx.costs():
+        lo, amount, hi = cost.get("min"), cost["amount"], cost.get("max")
+        if (lo is not None and lo > amount) or (hi is not None and hi < amount):
+            c.add(
+                "L004",
+                ERROR,
+                "integrity",
+                path,
+                label=cost["label"],
+                step=step["name"],
+                min=lo,
+                amount=amount,
+                max=hi,
+            )
 
 
 def _rule_inside_out(idx: JourneyIndex, c: _Collector) -> None:
@@ -592,6 +606,21 @@ def _rule_evidence_quality(idx: JourneyIndex, c: _Collector) -> None:
             "evidence",
             "evidence",
             n=len(no_locator),
+        )
+    # Kosten nur aus Soll-Dokumenten: Tarif statt bezahlter Betrag (ADR-0007)
+    assumed_only = [
+        cost["label"]
+        for _, _, cost in idx.costs()
+        if idx.classes_of(cost.get("evidence_refs", [])) == {"assumed"}
+    ]
+    if assumed_only:
+        c.add(
+            "L103",
+            INFO,
+            "evidence",
+            "phases",
+            n=len(assumed_only),
+            labels=_shortlist(assumed_only, 4),
         )
 
 

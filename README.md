@@ -17,9 +17,9 @@ The vocabulary is translated for public administration, where nobody "converts" 
 ## Features
 
 - **Journey model** as JSON Schema (draft 2020-12) with evidence atoms, sources, PII status, owner and review cycle
-- **Methodological lints** for the five pitfalls — Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathy Vacuum / Overcomplexity, Micro-Level Disconnect — plus Blueprint smell, PII, KPI translation and evidence quality (L001–L102)
-- **Interactive viewer**: a self-contained HTML file with five layers — journey map with emotional curve and evidence-backed phase durations on a common scale, process and failure paths, evidence heatmap and source register, impact/effort matrix with user stories, audit — evidence drill-down to the original quote on every cell, a "primary evidence only" filter, multi-persona overlay, light/dark, print, interface in German or French
-- **Exports**: Patton story map (Markdown), action list (CSV), opportunity matrix, audit report (diagnosis, proposed verdict, next steps, findings)
+- **Methodological lints** for the five pitfalls — Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathy Vacuum / Overcomplexity, Micro-Level Disconnect — plus Blueprint smell, PII, KPI translation and evidence quality (L001–L103)
+- **Interactive viewer**: a self-contained HTML file with five layers — journey map with emotional curve, evidence-backed phase durations on a common scale and the costs due at each step, process and failure paths, evidence heatmap and source register, impact/effort matrix with user stories, audit — evidence drill-down to the original quote on every cell, a "primary evidence only" filter, multi-persona overlay, light/dark, print, interface in German or French
+- **Exports**: Patton story map (Markdown), action list (CSV), opportunity matrix, audit report (diagnosis, proposed verdict, next steps, costs, findings)
 - **Diff** between two versions of a journey — what did new evidence change?
 - **Claude skill** `user-journey` with three modes: *Synthesis* (raw material → journey), *Workshop* (hypothesis-first with research plan), *Audit* (review an existing journey)
 - **Worked examples**: kindergarten entry from the parents' perspective, built from a synthetic input mix (3 interviews, 30 inquiries, a survey, web analytics, an internal process document, workshop notes); a building permit for a heat pump (applicant and neighbour as two personas); and a music school enrolment (parents, waiting list, fee reduction, cancellation via the teacher). The last two test transferability to other domains and document where the model reaches its limits – costs, chains of causes, deadlines the persona must meet
@@ -90,7 +90,7 @@ Language of all output: `--lang` per command, otherwise `meta.language` of the j
 
 | Range | Pitfall | Examples |
 |---|---|---|
-| L001–L003 | Integrity | dangling evidence references, duplicate IDs, contradictory phase duration (min > typical or typical > max) |
+| L001–L004 | Integrity | dangling evidence references, duplicate IDs, contradictory phase duration (min > typical or typical > max), contradictory cost range (min > amount or amount > max) |
 | L010–L012 | Inside-Out Bias | experience claims without primary evidence, or none at all; persona on fewer than 3 primary sources |
 | L020–L023 | Happy Path Bias | no breakdowns; phase without friction or edge case; breakdown without recovery path; change of channel or counterpart not marked as transition |
 | L030–L035 | Static Map Trap | no owner, no review cycle, severe pain point without owner; no date |
@@ -100,7 +100,7 @@ Language of all output: `--lang` per command, otherwise `meta.language` of the j
 | L070–L073 | Blueprint smell | no diagnosis; more back-stage notes than steps; most steps carried out by intermediaries instead of the persona |
 | L080–L081 | Privacy | source contains PII; e-mail/phone patterns in evidence text |
 | L090–L092 | KPIs | none; commercial naming; no leading indicator |
-| L100–L102 | Evidence quality | unused atoms; contradictions; primary evidence without locator |
+| L100–L103 | Evidence quality | unused atoms; contradictions; primary evidence without locator; costs backed only by assumptions such as a fee schedule |
 
 ## Using the Claude skill
 
@@ -118,7 +118,7 @@ journeykit/
 │   ├── schema/journey.schema.json   # the journey model (single source of truth)
 │   ├── model.py                     # index and claim iterator over a journey
 │   ├── validate.py                  # JSON Schema validation
-│   ├── lint.py                      # pitfall rules L001–L102
+│   ├── lint.py                      # pitfall rules L001–L103
 │   ├── lint_messages.py             # messages and hints, German and French
 │   ├── render.py                    # injects data into the viewer
 │   ├── export.py                    # story map, actions CSV, opportunities, audit

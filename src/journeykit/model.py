@@ -172,6 +172,16 @@ class JourneyIndex:
                 for ki, kpi in enumerate(step.get("kpis", [])):
                     if kpi.get("source_ref"):
                         yield f"phases[{pi}].steps[{si}].kpis[{ki}].source_ref", kpi["source_ref"]
+                for ci, cost in enumerate(step.get("costs", [])):
+                    for ref in cost.get("evidence_refs", []):
+                        yield f"phases[{pi}].steps[{si}].costs[{ci}]", ref
+
+    def costs(self) -> Iterator[tuple[str, dict[str, Any], dict[str, Any]]]:
+        """(pfad, schritt, kosteneintrag) in der Reihenfolge der Journey (ADR-0007)."""
+        for pi, phase in enumerate(self.journey.get("phases", [])):
+            for si, step in enumerate(phase.get("steps", [])):
+                for ci, cost in enumerate(step.get("costs", [])):
+                    yield f"phases[{pi}].steps[{si}].costs[{ci}]", step, cost
 
     # -- Kennzahlen über die Journey ---------------------------------------
 

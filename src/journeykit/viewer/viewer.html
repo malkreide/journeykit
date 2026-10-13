@@ -112,6 +112,8 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
 .dbar .rng::before, .dbar .rng::after { content: ""; position: absolute; top: -4px; width: 2px; height: 10px; background: var(--ink-3); }
 .dbar .rng::before { left: 0; } .dbar .rng::after { right: 0; }
 .dbasis { font-size: 11.5px; color: var(--ink-3); }
+.cost + .cost { margin-top: 8px; }
+.cost .clabel { font-size: 12px; font-weight: 600; color: var(--ink-2); margin-bottom: 2px; }
 .step h4 { font-size: 13.5px; margin-bottom: 4px; }
 .step .action { color: var(--ink-2); font-size: 13px; }
 .step .meta { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
@@ -302,6 +304,7 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
   "performedBy": {"shared": "mit", "intermediary": "durch"},
   "performedByTitle": {"shared": "Persona mit Hilfe Dritter", "intermediary": "Dritte handeln anstelle der Persona"},
   "mandate": {"formal": "mit Vollmacht oder Auftrag", "informal": "informell"},
+  "costPeriod": {"once": "einmalig", "month": "pro Monat", "semester": "pro Semester", "year": "pro Jahr"},
   "context": {"language_situation": "Sprache", "digital_access": "Digitaler Zugang", "time_budget": "Zeitbudget", "prior_experience": "Vorerfahrung", "other": "Weiteres"},
   "ui": {
    "colon": ": ",
@@ -344,6 +347,11 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "durUpTo": " · bis {max} Tage",
    "durFrom": " · ab {min} Tagen",
    "durTitle": "Dauer: {p}",
+   "rowCosts": "Kosten",
+   "rowCostsSub": "fällig an diesem Schritt · keine Summe",
+   "costRange": " · Spanne {min}–{max}",
+   "costTo": " · an {to}",
+   "costTitle": "Kosten: {s}",
    "touchpoint": "Touchpoint",
    "counterpart": "Gegenüber",
    "transition": "Übergang",
@@ -484,6 +492,7 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
   "performedBy": {"shared": "avec", "intermediary": "par"},
   "performedByTitle": {"shared": "La persona, avec l'aide de tiers", "intermediary": "Des tiers agissent à la place de la persona"},
   "mandate": {"formal": "avec procuration ou mandat", "informal": "informel"},
+  "costPeriod": {"once": "unique", "month": "par mois", "semester": "par semestre", "year": "par an"},
   "context": {"language_situation": "Langue", "digital_access": "Accès numérique", "time_budget": "Temps disponible", "prior_experience": "Expérience préalable", "other": "Autres"},
   "ui": {
    "colon": "\u00a0: ",
@@ -526,6 +535,11 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "durUpTo": " · jusqu'à {max} jours",
    "durFrom": " · dès {min} jours",
    "durTitle": "Durée\u00a0: {p}",
+   "rowCosts": "Coûts",
+   "rowCostsSub": "exigibles à cette étape · sans total",
+   "costRange": " · fourchette {min}–{max}",
+   "costTo": " · à {to}",
+   "costTitle": "Coûts\u00a0: {s}",
    "touchpoint": "Point de contact",
    "counterpart": "Interlocuteur",
    "transition": "Transition",
@@ -764,6 +778,17 @@ function renderJourney(idx) {
       + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.touchpoint ? '<span class="chip" title="' + t("touchpoint") + '">' + esc(s.touchpoint) + '</span>' : '') + (s.counterpart ? '<span class="chip" title="' + t("counterpart") + '">' + esc(s.counterpart) + '</span>' : '') + actorChip(s) + (s.is_transition ? '<span class="chip transition">' + t("transition") + '</span>' : '')
       + '</div>' + ((s.evidence_refs || []).length ? '<div style="margin-top:6px">' + claimBtn(idx, t("stepEvidence"), s.evidence_refs, "", s.name) + '</div>' : '') + '</div>'; });
   row(t("rowDoes"), t("rowDoesSub"), cells);
+  // Kosten (ADR-0007): je Schritt, was dort fällig wird – ohne Summe, weil Kosten oft Alternativen oder bedingt sind.
+  if (idx.steps.some(e => (e.step.costs || []).length)) {
+    cells = ""; idx.steps.forEach(e => { let c = "", hidden = 0;
+      (e.step.costs || []).forEach(k => { if (!visible(idx, k.evidence_refs)) { hidden++; return; }
+        const lo = k.min != null ? k.min : k.amount, hi = k.max != null ? k.max : k.amount;
+        const label = k.amount + " " + (k.currency || "CHF") + " " + L.costPeriod[k.period] + (lo !== hi ? t("costRange", { min: lo, max: hi }) : "") + (k.paid_to ? t("costTo", { to: k.paid_to }) : "");
+        c += '<div class="cost"><div class="clabel">' + esc(k.label) + '</div>' + claimBtn(idx, label, k.evidence_refs, "", t("costTitle", { s: e.step.name })) + (k.basis ? '<div class="dbasis">' + esc(k.basis) + '</div>' : '') + '</div>'; });
+      if (hidden) c += '<div class="hidden-note">' + tn("assumptionsHidden", hidden) + '</div>';
+      cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + (c || '<span class="empty">–</span>') + '</div>'; });
+    row(t("rowCosts"), t("rowCostsSub"), cells);
+  }
   // Denkt
   cells = ""; idx.steps.forEach(e => { cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + renderClaims(idx, e.step.thinking || [], t => t.text, t => t.evidence_refs) + '</div>'; });
   row(t("rowThinks"), t("rowThinksSub"), cells);

@@ -745,6 +745,19 @@
               ]
             }
           ],
+          "costs": [
+            {
+              "label": "Bewilligungsgebühr",
+              "amount": 720,
+              "period": "once",
+              "paid_to": "Gemeinde (Bauamt)",
+              "basis": "Median 2025, inklusive Publikation, ohne Fachgutachten; im Interview 740 Franken",
+              "evidence_refs": [
+                "stat-11",
+                "b1-21"
+              ]
+            }
+          ],
           "evidence_refs": []
         }
       ]

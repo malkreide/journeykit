@@ -113,6 +113,33 @@ def test_relayed_quotes_are_counted_and_put_the_source_request_first(minimal):
     assert "**Demander les sources**" in fr and "dont 3 citation(s)" in fr
 
 
+def test_audit_lists_costs_without_total(minimal):
+    md = audit_markdown(minimal, lint_journey(minimal))
+    assert "## Kosten" not in md, "ohne Kosten kein Abschnitt"
+    minimal["phases"][0]["steps"][0]["costs"] = [
+        {
+            "label": "Schulgeld",
+            "amount": 820,
+            "min": 410,
+            "period": "semester",
+            "paid_to": "Musikschule",
+            "evidence_refs": ["ev-1", "ev-4"],
+        },
+        {"label": "Miete", "amount": 35.5, "period": "month", "evidence_refs": ["ev-2"]},
+    ]
+    md = audit_markdown(minimal, lint_journey(minimal))
+    costs = md[md.index("## Kosten") : md.index("## Befunde")]
+    assert (
+        "| Brief erhalten | Schulgeld | 820 CHF (410–820) | pro Semester | Musikschule | berichtet, angenommen |"
+        in costs
+    )
+    assert "| Brief erhalten | Miete | 35.5 CHF | pro Monat | – | berichtet |" in costs
+    assert "Keine Summe" in costs
+    fr = audit_markdown(minimal, lint_journey(minimal, lang="fr"), lang="fr")
+    assert "## Coûts" in fr and "par semestre" in fr and "rapporté, supposé" in fr
+    assert "pro Semester" not in fr
+
+
 def test_quotes_from_user_sources_are_not_relayed(minimal):
     for atom in minimal["evidence"]:
         atom["class"] = "assumed"  # Klasse gesetzt, die Quelle bleibt das Interview

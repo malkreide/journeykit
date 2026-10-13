@@ -1,6 +1,6 @@
 # ADR-0007: Kosten am Schritt (`step.costs[]`)
 
-Datum: 2026-10-13 · Status: vorgeschlagen · Issue: [#15](https://github.com/malkreide/journeykit/issues/15)
+Datum: 2026-10-13 · Status: angenommen (2026-10-13) · Issue: [#15](https://github.com/malkreide/journeykit/issues/15)
 
 ## Kontext
 
@@ -157,6 +157,24 @@ Nach den Konventionen in `CLAUDE.md` für Schemaänderungen:
     `docs/konzept.md` («Evaluation») die Zeile «Kosten und Gebühren».
 - **Tests**, **`docs/konzept.md`** (Schicht 3), **beide READMEs**,
   **`CHANGELOG.md`**.
+
+## Entscheid
+
+Angenommen am 2026-10-13 wie vorgeschlagen (Option B), zusammen mit ADR-0008,
+und gleich umgesetzt. Beim Umsetzen festgelegt:
+
+- **Ort im Viewer**: Die Zeile «Kosten» steht direkt unter «Macht», bei den
+  anderen Fakten zum Schritt, vor Denken und Fühlen. Unter dem Filter «nur
+  Primärevidenz» verschwinden Einträge, die nur Annahmen belegen.
+- **Darstellung**: Betrag, Währung und Periode als ein Beleg-Knopf
+  («820 CHF pro Semester · Spanne 410–820 · an Musikschule»), darüber die
+  Bezeichnung, darunter `basis`. Zahlen ohne Tausendertrennzeichen, wie im
+  Audit-Bericht.
+- **L103** fasst alle betroffenen Einträge in einem Befund zusammen, wie
+  L100, statt einen je Eintrag.
+- **Beispiele**: Die Musikschule hat fünf Einträge, die Baubewilligung einen;
+  keiner löst L103 aus. Alle drei Viewer-Dateien sind mit der neuen Vorlage
+  neu gerendert.
 
 ## Nicht entschieden
 

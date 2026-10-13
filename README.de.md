@@ -17,9 +17,9 @@ Das Vokabular ist für die Verwaltung übersetzt, wo niemand «konvertiert» ode
 ## Funktionen
 
 - **Journey-Modell** als JSON Schema (Draft 2020-12) mit Evidenz-Atomen, Quellenregister, Datenschutzstatus, Owner und Review-Rhythmus
-- **Methodische Lints** für die fünf Fallstricke – Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathie-Vakuum / Überkomplexität, Micro-Level Disconnect – plus Blueprint-Smell, Personendaten, KPI-Übersetzung und Evidenzqualität (L001–L102)
-- **Interaktiver Viewer**: eine eigenständige HTML-Datei mit fünf Layern – Journey Map mit emotionaler Kurve und belegter Dauer je Phase auf einem gemeinsamen Massstab, Prozess- und Fehlerpfade, Evidenz-Heatmap und Quellenregister, Impact/Effort-Matrix mit User Stories, Prüfung – Evidenz-Drilldown bis zum O-Ton auf jeder Zelle, Filter «nur Primärevidenz», Persona-Überlagerung, hell/dunkel, Druck, Oberfläche deutsch oder französisch
-- **Exporte**: Story Map nach Patton (Markdown), Massnahmenliste (CSV), Chancenmatrix, Audit-Report (Diagnose, Urteilsvorschlag, nächste Schritte, Befunde)
+- **Methodische Lints** für die fünf Fallstricke – Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathie-Vakuum / Überkomplexität, Micro-Level Disconnect – plus Blueprint-Smell, Personendaten, KPI-Übersetzung und Evidenzqualität (L001–L103)
+- **Interaktiver Viewer**: eine eigenständige HTML-Datei mit fünf Layern – Journey Map mit emotionaler Kurve, belegter Dauer je Phase auf einem gemeinsamen Massstab und den Kosten, die je Schritt fällig werden, Prozess- und Fehlerpfade, Evidenz-Heatmap und Quellenregister, Impact/Effort-Matrix mit User Stories, Prüfung – Evidenz-Drilldown bis zum O-Ton auf jeder Zelle, Filter «nur Primärevidenz», Persona-Überlagerung, hell/dunkel, Druck, Oberfläche deutsch oder französisch
+- **Exporte**: Story Map nach Patton (Markdown), Massnahmenliste (CSV), Chancenmatrix, Audit-Report (Diagnose, Urteilsvorschlag, nächste Schritte, Kosten, Befunde)
 - **Diff** zwischen zwei Versionen – was hat neue Evidenz verändert?
 - **Claude-Skill** `user-journey` mit drei Modi: *Synthese* (Rohmaterial → Journey), *Workshop* (Hypothesis-first mit Erhebungsplan), *Audit* (bestehende Journey prüfen)
 - **Durchgerechnete Beispiele**: Kindergarteneintritt aus Elternsicht, aus einem synthetischen Inputmix (3 Interviews, 30 Anfragen, Befragung, Webanalytics, internes Prozessdokument, Workshop-Notizen); dazu eine Baubewilligung für eine Wärmepumpe (Bauherrschaft und Nachbarschaft als zwei Personas) und die Anmeldung an einer Musikschule (Eltern, Warteliste, Tarifermässigung, Abmeldung über die Lehrperson). Die beiden prüfen die Übertragbarkeit auf andere Bereiche und halten fest, wo das Modell an Grenzen stösst – Kosten, Ursachenketten, Fristen der Persona
@@ -90,7 +90,7 @@ Sprache aller Ausgaben: `--lang` je Befehl, sonst `meta.language` der Journey, s
 
 | Bereich | Fallstrick | Beispiele |
 |---|---|---|
-| L001–L003 | Integrität | hängende Evidenz-Referenzen, doppelte IDs, widersprüchliche Phasendauer (min > typisch oder typisch > max) |
+| L001–L004 | Integrität | hängende Evidenz-Referenzen, doppelte IDs, widersprüchliche Phasendauer (min > typisch oder typisch > max), widersprüchliche Kostenspanne (min > Betrag oder Betrag > max) |
 | L010–L012 | Inside-Out Bias | Erlebnis-Aussagen ohne Primärevidenz oder gar keine; Persona auf weniger als 3 Primärbelegen |
 | L020–L023 | Happy Path Bias | keine Breakdowns; Phase ohne Reibung oder Edge Case; Breakdown ohne Recovery-Pfad; Kanal- oder Zuständigkeitswechsel nicht als Übergang markiert |
 | L030–L035 | Static Map Trap | kein Owner, kein Review-Rhythmus, schwerer Pain Point ohne Owner; kein Datum |
@@ -100,7 +100,7 @@ Sprache aller Ausgaben: `--lang` je Befehl, sonst `meta.language` der Journey, s
 | L070–L073 | Blueprint-Smell | keine Diagnose; mehr Back-Stage-Notizen als Schritte; mehrheitlich Schritte, die Dritte anstelle der Persona ausführen |
 | L080–L081 | Personendaten | Quelle enthält Personendaten; E-Mail-/Telefonmuster im Evidenztext |
 | L090–L092 | Kennzahlen | keine; kommerzielle Benennung; kein Frühindikator |
-| L100–L102 | Evidenzqualität | unbenutzte Atome; Widersprüche; Primärevidenz ohne Fundstelle |
+| L100–L103 | Evidenzqualität | unbenutzte Atome; Widersprüche; Primärevidenz ohne Fundstelle; Kosten, die nur Annahmen wie eine Gebührenordnung belegen |
 
 ## Den Claude-Skill verwenden
 
@@ -118,7 +118,7 @@ journeykit/
 │   ├── schema/journey.schema.json   # das Journey-Modell (einzige Quelle der Wahrheit)
 │   ├── model.py                     # Index und Aussagen-Iterator über eine Journey
 │   ├── validate.py                  # JSON-Schema-Validierung
-│   ├── lint.py                      # Fallstrick-Regeln L001–L102
+│   ├── lint.py                      # Fallstrick-Regeln L001–L103
 │   ├── lint_messages.py             # Meldungen und Hinweise, deutsch und französisch
 │   ├── render.py                    # injiziert Daten in den Viewer
 │   ├── export.py                    # Story Map, Massnahmen-CSV, Chancen, Audit

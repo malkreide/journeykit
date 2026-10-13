@@ -247,7 +247,7 @@ sonst kann niemand Übertrag und Vorlage nebeneinanderlegen und prüfen.
 
 | Art | Beispiel | Wie im Modell |
 |---|---|---|
-| **Steht auf der Vorlage** | Text einer Aktivität, Gefühlslabel, Idee im Chancenband | Atom `kind: document_excerpt`, wörtlich, mit `locator`; die Aussage verweist darauf |
+| **Steht auf der Vorlage** | Text einer Aktivität, Gefühlslabel, Idee im Chancenband | Atom `kind: document_excerpt`, wörtlich, mit `locator`; die Aussage verweist darauf. Ein Zitat, das die Vorlage Nutzenden zuschreibt: `kind: quote` |
 | **Vom Audit erschlossen** | Rolle der Persona aus den Schritten, Valenz aus der Kurve gerundet, eine Zeile in Gefühl und Bedürfnis geteilt | ohne eigenes Atom; Verweis auf das Atom der Stelle, aus der erschlossen wurde, und ein Satz im `changelog` |
 | **Vom Audit ergänzt** | Erhebungsplan, Rückfragen | nur `open_questions`, nie als Aussage der Journey |
 
@@ -271,15 +271,21 @@ Vorgehen:
   Feelings» oder «Chancenband, Punkt 4». Die Klasse bleibt `assumed`, auch wenn die
   Vorlage sich auf Interviews beruft: Die Klasse hängt an der Quelle, und die Quelle
   ist hier die Map. L010 zählt diese Atome deshalb nicht als Primärevidenz.
+- **Zitate aus zweiter Hand**: Schreibt die Vorlage ein Zitat Nutzenden zu, wird
+  das Atom `kind: quote` statt `document_excerpt` – Klasse `assumed` und Quelle
+  (die Map) bleiben. Der Audit-Bericht zählt diese Zitate und setzt die Rückfrage
+  nach dem Rohmaterial (`source_request`) an die erste Stelle der nächsten
+  Schritte: Mit den Gesprächen lassen sich die Zitate als Primärevidenz
+  übernehmen, ohne sie bleibt eine Zitat-Map so unbelegt wie eine Workshop-Map.
 - **Verluste festhalten**: Ein `changelog`-Eintrag zum Übertrag ist Pflicht und
   nennt, was dabei verloren ging oder gedeutet wurde – gerundete Kurve, geteilte
   Zeilen, unleserliche Stellen, nicht übernommene Bilder.
 - **Was die Vorlage nicht hat, bleibt leer**: keine Pain Points, Owner, Scores
   oder Phasenbezüge ergänzen, die nicht dastehen. Was fehlt, zeigen die Lints;
   ergänzt wird erst in der Synthese, mit Material.
-- **Verdeckte Breakdowns** – ein Scheitern, das nur im Aktivitätstext steht, oder
-  ein Gefühlswert, der der Handlung widerspricht – nicht selbst als Pain Point
-  modellieren, sondern als offene Frage mit `step_ref` festhalten. So erscheinen
+- **Verdeckte Breakdowns** – ein Scheitern, das nur im Aktivitätstext oder in einem
+  Zitat steht, oder ein Gefühlswert, der der Handlung widerspricht – nicht selbst
+  als Pain Point modellieren, sondern als offene Frage mit `step_ref` festhalten. So erscheinen
   sie im Audit-Report und im Viewer mit ihrem Schritt, und die Treue zur Vorlage
   bleibt gewahrt.
 - **Soll-Konzept**: Zeigt die Diagnose, dass die Vorlage beschreibt, wie der Weg

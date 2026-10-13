@@ -60,7 +60,9 @@ ist ein Fehler, keine Warnung.
 
 Dasselbe gilt für eine bestehende Journey Map im Audit: Sie ist eine Quelle
 der Klasse `assumed`, auch wenn sie sich auf Interviews beruft. Jede
-übertragene Stelle wird ein Atom mit Fundstelle auf der Vorlage; so bleibt
+übertragene Stelle wird ein Atom mit Fundstelle auf der Vorlage – ein Zitat, das
+die Vorlage Nutzenden zuschreibt, als `quote` aus zweiter Hand, das der
+Audit-Bericht zählt; so bleibt
 nachprüfbar, was auf der Vorlage stand, was das Audit erschlossen und was es
 ergänzt hat (Skill, «Modus Audit»).
 

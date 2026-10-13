@@ -255,9 +255,17 @@ Vorgehen:
 
 - **Die Vorlage ist eine Quelle**: `kind: internal_document`, `default_class: assumed`,
   `location` = Ablage der Datei, `notes` mit dem, was die Vorlage über ihre Herkunft
-  sagt (Autorschaft, Datum, genannte Erhebungen). Studien, die die Vorlage nur
-  nennt, aber nicht beilegen, sind keine eigenen Quellen – sonst schweigt L011,
-  obwohl niemand das Material gesehen hat.
+  sagt (Autorschaft als Rolle oder Stelle, Datum, genannte Erhebungen). Studien,
+  die die Vorlage nur nennt, aber nicht beilegen, sind keine eigenen Quellen –
+  sonst schweigt L011, obwohl niemand das Material gesehen hat.
+- **Datum**: Nennt die Vorlage selbst ein Datum, kommt es in `meta.created` – das
+  Alter der Journey ist das Alter der Vorlage, nicht das des Übertrags. Steht ein
+  Datum nur in den Metadaten der Datei (PDF-Eigenschaften, Änderungsdatum), kommt es
+  in `sources[].date` mit einem Vermerk in `notes`; `meta.created` bleibt leer, und
+  L035 meldet zu Recht, dass das Alter der Journey nicht belegt ist.
+- **Autorschaft aus Datei-Metadaten nie übernehmen**: Dort steht oft ein
+  Personenname. Ins Modell kommt nur, was die Vorlage selbst nennt, und auch dann
+  als Rolle oder Stelle.
 - **Pro übertragene Stelle ein Atom**, Klasse `assumed`, Text wörtlich wie auf der
   Vorlage. `locator` nach dem Raster der Vorlage, etwa «Phase 2, Spalte 3, Zeile
   Feelings» oder «Chancenband, Punkt 4». Die Klasse bleibt `assumed`, auch wenn die

@@ -90,7 +90,7 @@ _DE: dict[str, tuple[str, str]] = {
     "L034": ("{n} Chance(n) ohne Status: {ids}.", ""),
     "L035": (
         "Kein Datum (meta.created, meta.updated): Das Alter der Journey ist unbekannt.",
-        "Datum der letzten Erhebung oder Überarbeitung eintragen – bei einer fremden Map zuerst fragen, ob sie den heutigen Ablauf zeigt.",
+        "Datum der letzten Erhebung oder Überarbeitung eintragen, bei einer übernommenen Map das Datum der Vorlage – und zuerst fragen, ob sie den heutigen Ablauf zeigt.",
     ),
     # Empathie-Vakuum
     "L040": (
@@ -259,7 +259,7 @@ _FR: dict[str, tuple[str, str]] = {
     "L034": ("{n} opportunité(s) sans statut : {ids}.", ""),
     "L035": (
         "Aucune date (meta.created, meta.updated) : l'âge du parcours est inconnu.",
-        "Indiquer la date de la dernière enquête ou révision – pour une carte reprise d'ailleurs, vérifier d'abord qu'elle montre le déroulement actuel.",
+        "Indiquer la date de la dernière enquête ou révision, pour une carte reprise d'ailleurs la date du document d'origine – et vérifier d'abord qu'elle montre le déroulement actuel.",
     ),
     # Vide d'empathie
     "L040": (

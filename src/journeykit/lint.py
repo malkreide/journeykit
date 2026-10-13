@@ -459,6 +459,8 @@ def _rule_overcomplexity(idx: JourneyIndex, c: _Collector) -> None:
         c.add("L052", INFO, "overcomplexity", "scenario")
     if not (idx.journey["scenario"].get("end_state") or "").strip():
         c.add("L053", INFO, "overcomplexity", "scenario")
+    if not (idx.journey["scenario"].get("trigger") or "").strip():
+        c.add("L054", INFO, "overcomplexity", "scenario")
 
 
 def _rule_micro_disconnect(idx: JourneyIndex, c: _Collector) -> None:

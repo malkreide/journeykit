@@ -11,6 +11,8 @@ Kern trifft – das prüft ein Mensch. Diese Fragen stellt der Skill vor der
 - Wo hat das Material zur gewählten Persona am wenigsten zu sagen – und warum haben wir die Persona trotzdem so geschnitten?
 - Welche Aussage stützt sich nur auf das Prozessdokument? Haben wir sie als Annahme gekennzeichnet oder als Tatsache geschrieben?
 - Wenn wir den Filter «nur Primärevidenz» einschalten: Erzählt die Journey noch eine Geschichte?
+- Beginnt die Journey dort, wo die Persona anfängt (Lebensereignis, Hinweis von Bekannten, das Ausbleiben eines Briefs) – oder dort, wo die Verwaltung sie zum ersten Mal sieht (Brief, Antrag, Anruf)? Was davor liegt, ist oft die eigentliche Lücke (`scenario.trigger`).
+- Welche Pain Points kennen wir nur, weil Nutzende sie selbst benennen (Beschwerde, Befragung)? Welche latenten Bedürfnisse zeigen erst Beobachtung oder Analyse (`observed`) – und fehlen sie, weil niemand beobachtet hat?
 
 ## Happy Path
 

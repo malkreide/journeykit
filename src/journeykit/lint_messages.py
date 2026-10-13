@@ -129,6 +129,10 @@ _DE: dict[str, tuple[str, str]] = {
         "Kein Endzustand (scenario.end_state).",
         "Woran erkennt die Persona, dass ihr Anliegen erledigt ist? Endet die Journey vorher, ist das ein Breakdown oder ein Scope-Ausschluss.",
     ),
+    "L054": (
+        "Kein Auslöser (scenario.trigger).",
+        "Wo beginnt die Journey für die Persona – beim Lebensereignis oder beim Hinweis von Bekannten, nicht erst beim ersten Kontakt mit der Verwaltung? Was davor liegt, ist oft die eigentliche Lücke.",
+    ),
     # Micro-Level Disconnect
     "L060": (
         "Keine Chancen (opportunities) abgeleitet.",
@@ -306,6 +310,10 @@ _FR: dict[str, tuple[str, str]] = {
     "L053": (
         "Aucun état final (scenario.end_state).",
         "À quoi la persona reconnaît-elle que sa démarche est terminée ? Si le parcours s'arrête avant, c'est une rupture ou une exclusion de périmètre.",
+    ),
+    "L054": (
+        "Aucun déclencheur (scenario.trigger).",
+        "Où le parcours commence-t-il pour la persona – à l'événement de vie ou au conseil d'un proche, et pas seulement au premier contact avec l'administration ? Ce qui précède est souvent la vraie lacune.",
     ),
     # Déconnexion du niveau micro
     "L060": (

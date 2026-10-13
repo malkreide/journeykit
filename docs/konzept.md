@@ -82,7 +82,7 @@ belegen. Die Begründung eines Soll-Konzepts liegt in einer Ist-Journey
 | Inside-Out Bias | Evidenzklasse und Quelle an jeder Aussage; Hypothesen als solche kennzeichnen | `evidence_refs`, `meta.status: hypothesis`, `persona.is_hypothesis`, L010–L012, Filter im Viewer |
 | Happy Path Bias | Pflichtfelder für Edge Cases, Breakdowns, Recovery; aktives Nachfragen | `pain_points.type`, `workaround`, `edge_cases`, `recovery_paths.exists`, `scenario.perspective`, L020–L023, Prozess-Layer |
 | Static Map Trap | Datenbestand mit Versionen, Owner, Status; neuer Input erzeugt Diff | `meta.owner`, `review_cycle_days`, `next_review`, `status` an Pain Points und Chancen, `changelog`, `journeykit diff`, L030–L035 |
-| Empathie-Vakuum / Überkomplexität | Drilldown bis zum O-Ton; eine Persona, ein Szenario; Scope-Ausschlüsse | Drawer im Viewer, Schema erzwingt eine Persona, `scope_exclusions`, `end_state`, L040–L053 |
+| Empathie-Vakuum / Überkomplexität | Drilldown bis zum O-Ton; eine Persona, ein Szenario; Scope-Ausschlüsse | Drawer im Viewer, Schema erzwingt eine Persona, `scope_exclusions`, `trigger`, `end_state`, L040–L054 |
 | Micro-Level Disconnect | Export als Story Map und Backlog; Diagnose Journey vs. Blueprint | `opportunities.stories`, `opportunities.step_ref`, `export --format storymap/actions`, `meta.diagnosis`, L060–L064, L070–L072 |
 
 Zusätzlich für die Verwaltung: KPI-Übersetzungsschicht (`kpi.category:

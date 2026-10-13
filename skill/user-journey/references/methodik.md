@@ -35,7 +35,7 @@ In der Verwaltung sind viele «Journey»-Anfragen Blueprint-Anfragen.
 | **Static Map Trap** | Map wird erstellt, bewirkt nichts, veraltet | `meta.owner`, `review_cycle_days`, `next_review`, Status pro Pain Point und Chance, `journeykit diff` | L030–L035 |
 | **Inside-Out Bias** | Map aus dem Sitzungszimmer, ohne Nutzende | Evidenzklassen, `evidence_refs` an jeder Aussage, Status `hypothesis`, Filter «nur Primärevidenz» | L010–L012 |
 | **Happy Path Bias** | Nur der Idealpfad, keine Fehlschläge | Pflichtfelder `pain_points` (friction/breakdown), `edge_cases`, `recovery_paths`, `workaround` | L020–L023 |
-| **Überkomplexität vs. Empathie-Vakuum** | Stammbaum-Chaos oder Klickliste ohne Gefühl | Eine Persona pro Datei, `scope_exclusions`, `thinking`/`feeling` pro Schritt, `null` als ehrliche Lücke, `end_state` | L040–L053 |
+| **Überkomplexität vs. Empathie-Vakuum** | Stammbaum-Chaos oder Klickliste ohne Gefühl | Eine Persona pro Datei, `scope_exclusions`, `thinking`/`feeling` pro Schritt, `null` als ehrliche Lücke, `trigger`, `end_state` | L040–L054 |
 | **Micro-Level Disconnect** | Makro-Erkenntnis erreicht nie das Backlog | `opportunities` mit Scores und `stories`, Story-Map-Export, Massnahmen-CSV | L060–L064 |
 
 Dazu: Blueprint-Smell (L070–L072), Personendaten (L080–L081), Kennzahlen

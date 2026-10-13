@@ -1,0 +1,10 @@
+frage_id;frage;zustimmung_prozent;n;bemerkung
+F01;Ich wusste vor der Anmeldung, wie viel der Unterricht pro Semester kostet.;46;318;
+F02;Ich wusste vor der Anmeldung, dass die Gemeinde eine Tarifermässigung anbietet.;31;318;
+F03;Ich wusste vor der Anmeldung, dass für das Instrument Miet- oder Kaufkosten dazukommen.;52;318;
+F04;Mir wurde verständlich erklärt, wie lange die Wartezeit ungefähr dauert.;29;151;nur Familien, deren Kind auf der Warteliste war
+F05;Die Lehrperson hat die Unterrichtszeit gut mit uns abgestimmt.;81;318;
+F06;Ich musste wegen einer Rechnung bei der Musikschule oder der Gemeinde nachfragen.;22;318;
+F07;Die Abmeldefrist und der Weg der Abmeldung sind mir bekannt.;38;318;
+F08;Mein Kind geht gern in den Musikunterricht.;84;318;Einschätzung der Eltern
+F09;Ich würde die Musikschule anderen Familien empfehlen.;79;318;

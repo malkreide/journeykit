@@ -1,0 +1,31 @@
+anfrage_id;datum;kanal;kategorie;kurztext
+MS-001;2025-01-20;telefon;tarif;Kostet der Klavierunterricht 820 Franken pro Jahr oder pro Semester? Tarifblatt nicht verständlich.
+MS-002;2025-02-04;e-mail;tarif;Gibt es eine Ermässigung für Familien mit kleinem Einkommen? Auf der Website nichts gefunden.
+MS-003;2025-02-17;telefon;tarif;Was kostet Gruppenunterricht im Vergleich zum Einzelunterricht, und kommen weitere Kosten dazu?
+MS-004;2025-03-03;schalter;tarif;Vater möchte wissen, ob Geschwister günstiger sind. Tarifblatt mitgegeben.
+MS-005;2025-03-27;e-mail;anmeldung;Formular lässt sich nicht absenden, Fehlermeldung beim Geburtsdatum.
+MS-006;2025-04-02;telefon;anmeldung;Anmeldung nach dem 31. März verpasst. Kommt das Kind trotzdem noch dran?
+MS-007;2025-05-21;telefon;warteliste;E-Mail «Warteliste» erhalten. Wie lange dauert es ungefähr?
+MS-008;2025-05-26;e-mail;warteliste;An welcher Stelle der Warteliste ist unsere Tochter? Mitteilung nennt keinen Platz.
+MS-009;2025-06-03;telefon;platzangebot;Platzangebot erst nach Ablauf der Frist gesehen, war im Ausland. Ist der Platz noch frei?
+MS-010;2025-06-10;telefon;warteliste;Kind fragt jede Woche, wann es endlich losgeht. Gibt es eine Schätzung?
+MS-011;2025-06-16;telefon;instrument;Wo kann man ein Cello mieten, und was kostet das ungefähr?
+MS-012;2025-06-24;e-mail;platzangebot;Platzangebot im Spam-Ordner gefunden, Frist abgelaufen. Bitte um neues Angebot.
+MS-013;2025-07-08;e-mail;instrument;Muss das Instrument zur ersten Stunde schon da sein? Mietvertrag läuft erst ab September.
+MS-014;2025-08-19;telefon;stundenplan;Neuer Stundenplan der Schule, Gitarrenstunde fällt auf den Turnunterricht. Wer koordiniert?
+MS-015;2025-08-25;schalter;stundenplan;Lehrperson hat neue Zeit im Messenger vorgeschlagen, passt nicht. Andere Lehrperson möglich?
+MS-016;2025-09-09;telefon;rechnung;Rechnung ohne Ermässigung, obwohl Verfügung der Gemeinde vorliegt.
+MS-017;2025-09-11;telefon;abmeldung;Rechnung fürs Herbstsemester erhalten, Kind wurde im Mai bei der Lehrperson abgemeldet.
+MS-018;2025-09-15;e-mail;rechnung;Ermässigung von 25 Prozent fehlt auf der Rechnung. Muss ich trotzdem fristgerecht zahlen?
+MS-019;2025-09-18;telefon;abmeldung;Abmeldung per Messenger an die Lehrerin im Juni geschickt, trotzdem Rechnung. Bitte um Erlass.
+MS-020;2025-09-23;telefon;rechnung;Gemeinde sagt, Ermässigung sei gemeldet. Musikschule sagt, sie sei nicht da. Wer ist zuständig?
+MS-021;2025-09-30;telefon;warteliste;Seit über einem Jahr auf der Warteliste für Schlagzeug. Sind wir noch drauf?
+MS-022;2025-10-07;e-mail;rechnung;Rechnung enthält eine Einschreibegebühr, davon stand nichts in der Bestätigung.
+MS-023;2025-10-14;telefon;warteliste;Andere Familie hat nach kürzerer Zeit einen Platz bekommen. Wie wird die Warteliste geführt?
+MS-024;2025-10-28;telefon;rechnung;Ermässigung erst nach Mahnung berücksichtigt. Mahngebühr wird zurückgefordert.
+MS-025;2025-11-04;telefon;warteliste;Wartet seit Mai auf einen Klavierplatz. Soll die Familie privat Unterricht suchen?
+MS-026;2025-11-18;e-mail;abmeldung;Bis wann muss man für Ende Januar abmelden? Auf der Website stehen zwei verschiedene Daten.
+MS-027;2025-11-27;schalter;abmeldung;Mutter bringt die Abmeldung persönlich vorbei und möchte eine Bestätigung.
+MS-028;2025-12-02;telefon;warteliste;Zweiter Anruf zum Stand auf der Warteliste, keine Mitteilung seit Mai.
+MS-029;2025-12-09;e-mail;warteliste;Verkürzt ein Wechsel auf ein anderes Instrument die Wartezeit? Keine Angaben auf der Website.
+MS-030;2025-12-16;telefon;platzangebot;Platzangebot per E-Mail angekündigt, im Portal aber nicht sichtbar. Wie annehmen?

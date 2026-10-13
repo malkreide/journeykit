@@ -22,7 +22,7 @@ Das Vokabular ist für die Verwaltung übersetzt, wo niemand «konvertiert» ode
 - **Exporte**: Story Map nach Patton (Markdown), Massnahmenliste (CSV), Chancenmatrix, Audit-Report (Diagnose, Urteilsvorschlag, nächste Schritte, Befunde)
 - **Diff** zwischen zwei Versionen – was hat neue Evidenz verändert?
 - **Claude-Skill** `user-journey` mit drei Modi: *Synthese* (Rohmaterial → Journey), *Workshop* (Hypothesis-first mit Erhebungsplan), *Audit* (bestehende Journey prüfen)
-- **Durchgerechnete Beispiele**: Kindergarteneintritt aus Elternsicht, aus einem synthetischen Inputmix (3 Interviews, 30 Anfragen, Befragung, Webanalytics, internes Prozessdokument, Workshop-Notizen); dazu eine Baubewilligung für eine Wärmepumpe (Bauherrschaft und Nachbarschaft als zwei Personas), die die Übertragbarkeit auf einen anderen Bereich prüft und festhält, wo das Modell an Grenzen stösst
+- **Durchgerechnete Beispiele**: Kindergarteneintritt aus Elternsicht, aus einem synthetischen Inputmix (3 Interviews, 30 Anfragen, Befragung, Webanalytics, internes Prozessdokument, Workshop-Notizen); dazu eine Baubewilligung für eine Wärmepumpe (Bauherrschaft und Nachbarschaft als zwei Personas) und die Anmeldung an einer Musikschule (Eltern, Warteliste, Tarifermässigung, Abmeldung über die Lehrperson). Die beiden prüfen die Übertragbarkeit auf andere Bereiche und halten fest, wo das Modell an Grenzen stösst – Kosten, Ursachenketten, Fristen der Persona
 
 ### Demo
 
@@ -130,6 +130,7 @@ journeykit/
 ├── skill/user-journey/              # Claude-Skill: SKILL.md + references/ + evals/ (Testsatz Extraktion)
 ├── examples/kindergarteneintritt/   # durchgerechnetes, synthetisches Beispiel inkl. Rohmaterial
 ├── examples/baubewilligung/        # zweiter Bereich: Übertragbarkeitsprüfung und Befunde
+├── examples/musikschule/           # dritter Bereich: Kosten, vermeidbare Kontakte, Fristen
 ├── docs/                            # Konzept, Architekturentscheide, Demo-Bild
 ├── scripts/                         # Repo-Prüfungen, Scorer für den Testsatz Extraktion
 ├── tests/                           # pytest

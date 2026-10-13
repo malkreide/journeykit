@@ -1,0 +1,18 @@
+kennzahl;wert;einheit;zeitraum;bemerkung
+neuanmeldungen;412;Anzahl;Schuljahr 2025/26;Anmeldungen bis Anmeldeschluss 31. März 2025, Kinder und Jugendliche
+anteil_warteliste;47;%;Schuljahr 2025/26;Neuanmeldungen ohne Platzangebot bei der Einteilung im Mai
+wartezeit_median_warteliste;7;Monate;Schuljahr 2025/26;Anmeldung bis Platzangebot, nur Kinder auf der Warteliste
+wartezeit_median_klavier;14;Monate;Schuljahr 2025/26;Anmeldung bis Platzangebot, Kinder auf der Warteliste
+wartezeit_median_gitarre;9;Monate;Schuljahr 2025/26;Anmeldung bis Platzangebot, Kinder auf der Warteliste
+wartezeit_median_schlagzeug;16;Monate;Schuljahr 2025/26;Anmeldung bis Platzangebot, Kinder auf der Warteliste
+wartezeit_median_streichinstrumente;1;Monate;Schuljahr 2025/26;Violine, Viola und Cello: Anmeldung bis Platzangebot, Kinder auf der Warteliste
+anteil_rueckzug_waehrend_wartezeit;18;%;Schuljahr 2025/26;Kinder auf der Warteliste, Anmeldung vor einem Platzangebot zurückgezogen
+anteil_platzangebote_verfallen;9;%;Schuljahr 2025/26;Annahmefrist von zehn Tagen ohne Antwort abgelaufen
+anteil_mit_ermaessigung;21;%;Herbstsemester 2025;Schülerinnen und Schüler mit Tarifermässigung der Gemeinde
+anteil_ermaessigung_nach_rechnung;38;%;Herbstsemester 2025;Ermässigung erst nach Versand der Rechnung berücksichtigt (Gutschrift)
+elternbeitrag_durchschnitt;702;CHF;Herbstsemester 2025;Einzelunterricht 30 Minuten pro Semester, nach Ermässigung, ohne Einschreibegebühr
+anteil_abmeldung_nach_erstem_jahr;23;%;Schuljahr 2024/25;Kinder im ersten Unterrichtsjahr, Abmeldung auf Ende Schuljahr
+anteil_abmeldungen_nach_frist;27;%;Schuljahr 2024/25;Abmeldung nach dem 31. Mai bzw. 30. November eingegangen, folgendes Semester verrechnet
+anteil_zuerst_lehrperson;41;%;Schuljahr 2024/25;Anteil der verspäteten Abmeldungen mit Vermerk «zuerst der Lehrperson mitgeteilt»
+erlassgesuche;31;Anzahl;Schuljahr 2024/25;Gesuche um Erlass des Schulgelds nach verspäteter Abmeldung
+erlassgesuche_gutgeheissen;6;Anzahl;Schuljahr 2024/25;gutgeheissen wegen Umzug oder Krankheit

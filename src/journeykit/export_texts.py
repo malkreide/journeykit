@@ -64,6 +64,7 @@ _DE: dict[str, str] = {
     "audit.no_findings": "Keine Befunde.",
     "audit.open_questions": "## Offene Fragen",
     "audit.method": " _(Methode: {method})_",
+    "audit.oq_at": "«{name}»: ",
     # Diff-Report
     "diff.title": "# Änderungen {old} → {new}",
     "diff.none": "Keine Modelländerungen.",
@@ -133,6 +134,7 @@ _FR: dict[str, str] = {
     "audit.no_findings": "Aucun constat.",
     "audit.open_questions": "## Questions ouvertes",
     "audit.method": " _(méthode : {method})_",
+    "audit.oq_at": "« {name} » : ",
     # Rapport de différences
     "diff.title": "# Modifications {old} → {new}",
     "diff.none": "Aucune modification du modèle.",

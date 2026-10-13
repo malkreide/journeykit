@@ -280,7 +280,8 @@ Vorgehen:
 - **Verdeckte Breakdowns** – ein Scheitern, das nur im Aktivitätstext steht, oder
   ein Gefühlswert, der der Handlung widerspricht – nicht selbst als Pain Point
   modellieren, sondern als offene Frage mit `step_ref` festhalten. So erscheinen
-  sie im Audit-Report, und die Treue zur Vorlage bleibt gewahrt.
+  sie im Audit-Report und im Viewer mit ihrem Schritt, und die Treue zur Vorlage
+  bleibt gewahrt.
 - **Soll-Konzept**: Zeigt die Diagnose, dass die Vorlage beschreibt, wie der Weg
   künftig gehen soll, kommt `scenario.perspective: to_be` in den Übertrag – als
   vom Audit erschlossen, mit einem Satz im `changelog`. Ohne das Feld sähe der

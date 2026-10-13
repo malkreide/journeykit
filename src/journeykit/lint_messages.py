@@ -39,6 +39,10 @@ _DE: dict[str, tuple[str, str]] = {
         "Keine der {n} Erlebnis-Aussagen (Denken, Fühlen, Pain Points) stützt sich auf Nutzerevidenz.",
         "meta.status auf «hypothesis» setzen und einen Erhebungsplan unter open_questions festhalten - oder Interviews, Befragungen, Anfragen auswerten.",
     ),
+    "L010.empty": (
+        "Keine einzige Erlebnis-Aussage (Denken, Fühlen, Pain Points): Die Journey sagt nichts darüber, wie Menschen sie erleben.",
+        "Gedanken, Gefühle und Pain Points aus Interviews, Befragungen oder Anfragen erheben. Zeigt die Vorlage nur Abläufe und Touchpoints, Diagnose prüfen: eher User Flow oder Service Blueprint.",
+    ),
     "L010.most": (
         "{unsupported} von {n} Erlebnis-Aussagen ({pct}%) ohne Primärevidenz (beobachtet/berichtet).",
         "Im Viewer den Filter «nur Primärevidenz» einschalten: Was dann übrig bleibt, ist die belegte Journey.",
@@ -203,6 +207,10 @@ _FR: dict[str, tuple[str, str]] = {
     "L010.none": (
         "Aucun des {n} énoncés d'expérience (pensées, ressenti, irritants) ne s'appuie sur des preuves issues des usagers.",
         "Passer meta.status à « hypothesis » et consigner un plan d'enquête sous open_questions – ou exploiter des entretiens, des enquêtes, des demandes.",
+    ),
+    "L010.empty": (
+        "Aucun énoncé d'expérience (pensées, ressentis, irritants) : le parcours ne dit rien de la manière dont les personnes le vivent.",
+        "Recueillir pensées, ressentis et irritants par des entretiens, des enquêtes ou des demandes. Si le support ne montre que des déroulements et des points de contact, revoir le diagnostic : plutôt un user flow ou un service blueprint.",
     ),
     "L010.most": (
         "{unsupported} des {n} énoncés d'expérience ({pct} %) sans preuve primaire (observée/rapportée).",

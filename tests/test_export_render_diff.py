@@ -75,6 +75,18 @@ def test_verdict_hypothesis_names_failed_conditions(minimal):
     assert v.primary_pct == 0 and v.breakdowns_without_recovery == 1
 
 
+def test_verdict_and_report_without_experience_claims(minimal):
+    step = minimal["phases"][0]["steps"][0]
+    step.update(thinking=[], feeling=None, pain_points=[], recovery_paths=[])
+    minimal["opportunities"][0].pop("linked_pain_points")
+    v = propose_verdict(JourneyIndex.build(minimal))
+    assert (v.kind, v.reasons) == ("hypothesis", ("no_experience",))
+    md = audit_markdown(minimal, lint_journey(minimal))
+    assert "- Erlebnis-Aussagen: keine" in md
+    assert "keine einzige Erlebnis-Aussage" in md
+    assert "0% der Erlebnis-Aussagen" not in md
+
+
 def test_next_steps_put_research_plan_first_and_stop_at_three(minimal):
     minimal["meta"]["status"] = "hypothesis"
     for atom in minimal["evidence"]:

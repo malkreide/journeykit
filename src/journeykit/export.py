@@ -188,6 +188,7 @@ def _audit_verdict(v: Verdict, t) -> list[str]:
         lines.append(t("audit.verdict_poster", missing=", ".join(labels[m] for m in v.missing)))
     elif v.kind == "hypothesis":
         labels = {
+            "no_experience": t("audit.reason_no_experience"),
             "low_primary": t("audit.reason_low_primary", pct=v.primary_pct),
             "status_hypothesis": t("audit.reason_status_hypothesis"),
             "breakdown_without_recovery": t(
@@ -263,6 +264,8 @@ def audit_markdown(journey: dict[str, Any], findings: list[Finding], lang: str =
     if experience:
         pct = f"{backed / len(experience) * 100:.0f}"
         lines.append(t("audit.experience", backed=backed, n=len(experience), pct=pct))
+    else:
+        lines.append(t("audit.experience_none"))
     lines.append(
         t(
             "audit.counts",

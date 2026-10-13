@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Lint L010, variant `L010.empty` (WARN, INFO for `status: hypothesis`): a journey without a single experience statement (thoughts, feelings, pain points) – before, L010 measured only a share and stayed silent when there was nothing to measure. The audit report always prints the experience line («Erlebnis-Aussagen: keine»), and the proposed verdict names «no experience statement» instead of «0% primary evidence» (#42)
 - Lint L035 (INFO): neither `meta.created` nor `meta.updated` – the age of the journey is unknown, the first question for a map taken over from elsewhere (#31)
 - Lint L053 (INFO): no end state (`scenario.end_state`) – a journey that stops before the persona's goal is reached hides either a breakdown or a scope boundary; matching review question under «Happy Path» (#29)
 - Lint L064 (WARN, INFO for `status: hypothesis`): opportunities linked to neither a pain point (`linked_pain_points`) nor a phase (`phase_ref`) – typical for an idea band at the foot of a workshop map; without the link nobody can check which problem an opportunity solves (#27)

@@ -57,13 +57,13 @@ header.top { position: sticky; top: 0; z-index: 20; background: var(--surface); 
 .badge.err { background: var(--breakdown-soft); color: var(--breakdown); border-color: var(--breakdown); }
 .badge.warn { background: var(--friction-soft); color: var(--friction); border-color: var(--friction); }
 .badge.ok { background: var(--positive-soft); color: var(--positive); border-color: var(--positive); }
-.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; max-width: 100%; }
 .toggle { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); cursor: pointer; user-select: none; }
 .toggle input { accent-color: var(--accent); margin: 0; }
 .toggle.active { border-color: var(--accent); background: var(--accent-soft); }
 .btn { padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); cursor: pointer; }
 .btn:hover { border-color: var(--line-strong); }
-select.persona { padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); font: inherit; }
+select.persona { max-width: 100%; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); font: inherit; }
 nav.tabs { display: flex; gap: 2px; padding: 8px 16px 0; overflow-x: auto; scrollbar-width: none; }
 nav.tabs::-webkit-scrollbar { display: none; }
 nav.tabs button { border: 0; background: transparent; padding: 8px 12px 10px; border-bottom: 2px solid transparent; color: var(--ink-2); white-space: nowrap; cursor: pointer; border-radius: 6px 6px 0 0; }
@@ -688,6 +688,10 @@ function quadrant(o) { if (o.user_impact == null || o.effort == null) return nul
 const state = { j: 0, primOnly: false, tab: "journey" };
 let IDX;
 const journeys = DATA.journeys, findings = DATA.findings;
+// Beschriftung einer Datei: der Persona-Name. Tragen zwei Dateien denselben Namen
+// (Varianten desselben Anliegens), kommt das Szenario dazu – sonst sind sie nicht unterscheidbar.
+const sameName = (a, b) => a.persona.name.trim().toLowerCase() === b.persona.name.trim().toLowerCase();
+const jLabel = x => journeys.some(o => o !== x && sameName(o, x)) ? x.persona.name.trim() + " – " + x.scenario.title : x.persona.name;
 
 function evDots(idx, refs) { const c = idx.classes(refs); let h = '<span class="evc" title="' + esc(t("evDots", { o: c.observed, r: c.reported, a: c.assumed })) + '">'; h += '<i class="o"></i>'.repeat(Math.min(c.observed, 4)) + '<i class="r"></i>'.repeat(Math.min(c.reported, 4)) + '<i class="a"></i>'.repeat(Math.min(c.assumed, 4)); return h + '</span>'; }
 function claimBtn(idx, text, refs, extraCls, title) { const st = idx.evState(refs); return '<button class="claim ev-' + st + ' ' + (extraCls || "") + '" data-refs="' + esc((refs || []).join(",")) + '" data-title="' + esc(title || "") + '" data-text="' + esc(text) + '">' + esc(text) + (refs && refs.length ? evDots(idx, refs) : '<span class="evc muted" title="' + t("noEvidence") + '">∅</span>') + '</button>'; }
@@ -710,7 +714,7 @@ function renderHeader() {
     + '<span class="legend" title="' + t("legendTitle") + '"><span class="evbar"><span style="width:' + pct[0] + '%;background:var(--observed)"></span><span style="width:' + pct[1] + '%;background:var(--reported)"></span><span style="width:' + pct[2] + '%;background:var(--assumed)"></span></span>'
     + '<span class="c-observed"><i class="dot fill"></i> ' + s.observed + ' ' + L.classesPl.observed + '</span><span class="c-reported"><i class="dot fill"></i> ' + s.reported + ' ' + L.classesPl.reported + '</span><span class="c-assumed"><i class="dot"></i> ' + s.assumed + ' ' + L.classesPl.assumed + '</span></span>';
   const sel = $("#personaSel");
-  if (journeys.length > 1) { sel.hidden = false; sel.innerHTML = journeys.map((x, i) => '<option value="' + i + '"' + (i === state.j ? ' selected' : '') + '>' + esc(x.persona.name) + '</option>').join(""); }
+  if (journeys.length > 1) { sel.hidden = false; sel.innerHTML = journeys.map((x, i) => '<option value="' + i + '"' + (i === state.j ? ' selected' : '') + '>' + esc(jLabel(x)) + '</option>').join(""); }
   const tabs = [["journey", t("tabJourney")], ["process", t("tabProcess")], ["evidence", t("tabEvidence"), s.total], ["opps", t("tabOpps"), idx.opps.length], ["audit", t("tabAudit"), f.length]];
   $("#tabs").innerHTML = tabs.map(t => '<button data-tab="' + t[0] + '" class="' + (state.tab === t[0] ? "active" : "") + '">' + t[1] + (t[2] != null ? '<span class="n">' + t[2] + '</span>' : '') + '</button>').join("");
   $("#primToggle").classList.toggle("active", state.primOnly);
@@ -790,10 +794,10 @@ function drawCurve(idx) {
   journeys.forEach((other, oi) => { if (oi === state.j) return; const col = ["var(--observed)", "var(--reported)", "var(--friction)", "var(--positive)"][oi % 4]; const pts = [];
     idx.j.phases.forEach(p => { const op = other.phases.find(q => q.id === p.id);
       const why = !op ? t("noDataPhase") : op.steps.some(s => s.feeling) ? "" : t("noFeelingPhase");
-      if (why) { if (!gaps.has(p.id)) gaps.set(p.id, []); gaps.get(p.id).push(other.persona.name + t("colon") + why); } });
+      if (why) { if (!gaps.has(p.id)) gaps.set(p.id, []); gaps.get(p.id).push(jLabel(other) + t("colon") + why); } });
     const lost = other.phases.filter(op => !idx.j.phases.some(p => p.id === op.id)).map(op => t("quoted", { t: op.name }));
-    if (lost.length) dropped.push(other.persona.name + t("colon") + lost.join(", "));
-    other.phases.forEach(op => { const mine = idx.j.phases.find(p => p.id === op.id); if (!mine) return; const start = idx.steps.find(e => e.phase.id === mine.id).gi, span = mine.steps.length; op.steps.forEach((s, k) => { const gx = start + (k + 0.5) / op.steps.length * span - 0.5; pts.push({ gx, v: s.feeling ? s.feeling.valence : null, label: s.name, name: other.persona.name }); }); });
+    if (lost.length) dropped.push(jLabel(other) + t("colon") + lost.join(", "));
+    other.phases.forEach(op => { const mine = idx.j.phases.find(p => p.id === op.id); if (!mine) return; const start = idx.steps.find(e => e.phase.id === mine.id).gi, span = mine.steps.length; op.steps.forEach((s, k) => { const gx = start + (k + 0.5) / op.steps.length * span - 0.5; pts.push({ gx, v: s.feeling ? s.feeling.valence : null, label: s.name, name: jLabel(other) }); }); });
     let d = "", pen = false; pts.forEach(p => { if (p.v == null) { pen = false; return; } d += (pen ? " L" : " M") + x(p.gx) + " " + y(p.v); pen = true; });
     svg += '<path d="' + d + '" fill="none" stroke="' + col + '" stroke-width="1.5" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" opacity=".8"/>';
     pts.forEach(p => { if (p.v == null) return; html += '<span class="pt other" style="left:' + x(p.gx) + 'px;top:' + y(p.v) + 'px;border-color:' + col + ';background:' + col + '" title="' + esc(p.name + t("colon") + p.label) + '"></span>'; }); });

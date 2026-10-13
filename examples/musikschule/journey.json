@@ -784,7 +784,7 @@
     {
       "id": "bezahlen",
       "name": "Die erste Rechnung",
-      "description": "Anfang September kommt die Semesterrechnung. Für Familien mit Ermässigung oft zum vollen Tarif – die Ursache liegt bei der Meldung der Gemeinde an die Musikschule, zwei Schritte früher.",
+      "description": "Anfang September kommt die Semesterrechnung. Für Familien mit Ermässigung oft zum vollen Tarif – die Ursache liegt eine Phase früher, bei der Meldung der Gemeinde an die Musikschule.",
       "user_intent": "Den richtigen Betrag bezahlen – einmal und ohne nachzufragen.",
       "duration": "September bis Oktober",
       "kpis": [

@@ -168,6 +168,18 @@ Atome zu Schritten clustern. Pro Schritt:
   verrechnen, beim Schritt der Vermittlung festhalten (`performed_by`).
   Zeitkosten (Arbeitsausfall, Wartezeit) sind keine Kosten in diesem Sinn,
   sondern Dauer (`duration_days`, siehe unten).
+- **Vermeidbare Schritte** (failure demand: Rückfrage, Nachfrage, zweiter
+  Anlauf – nötig nur, weil ein Schritt davor nicht gelang) haben kein eigenes
+  Feld. Muster: Der Schritt bleibt stehen und erhält einen Pain Point
+  `friction`, dessen Text sagt, dass und warum er vermeidbar ist, mit Evidenz
+  (Anfragegrund, Zitat). Die Ursache gehört an den Schritt davor, meist als
+  Breakdown (unverständlicher Brief, fehlende Information); ist sie nicht
+  belegt, als offene Frage mit `step_ref` auf diesen Schritt. Eine Chance setzt
+  bei der Ursache an (`step_ref` des Schritts davor), nicht beim vermeidbaren
+  Schritt. Kennzahl: «Anteil vermeidbarer Kontakte» (`public_value`,
+  Frühindikator; `references/kpi-uebersetzung.md`). Nicht vermeidbar sind
+  Kontakte, die Wert schaffen – eine Beratung, die die Person braucht; im
+  Zweifel nach dem Grund des Kontakts fragen.
 
 Je Phase:
 
@@ -280,6 +292,12 @@ Vorgehen:
 - **Verluste festhalten**: Ein `changelog`-Eintrag zum Übertrag ist Pflicht und
   nennt, was dabei verloren ging oder gedeutet wurde – gerundete Kurve, geteilte
   Zeilen, unleserliche Stellen, nicht übernommene Bilder.
+- **Vermeidbare Schritte auf der Vorlage**: Markiert die Vorlage einen Schritt
+  als vermeidbar (etwa eine Zeile «Could this step have been avoided?»), wird
+  die Markierung ein Atom wie jede Stelle und der Schritt erhält einen Pain
+  Point `friction` («laut Vorlage vermeidbar»); der Typ ist vom Audit
+  erschlossen und steht im `changelog`. Die Ursache davor nicht selbst
+  modellieren, sondern als offene Frage mit `step_ref` auf den Schritt davor.
 - **Chancen am Schritt**: Ordnet die Vorlage eine Idee oder Verbesserung einer
   Spalte zu, kommt der Schritt in `step_ref` – keine Phase erfinden, nur um die
   Chance zu verankern. Eine Phase, die die ganze Journey umfasst, ist kein Bezug.

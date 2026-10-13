@@ -64,6 +64,25 @@ def test_verdict_poster_names_what_is_missing(minimal):
     assert "**Poster**" in md and "meta.owner" in md
 
 
+def test_step_ref_anchors_an_opportunity(minimal):
+    minimal["phases"].append(
+        {
+            "id": "phase-2",
+            "name": "Danach",
+            "steps": [{"id": "step-2-1", "name": "Nachfragen", "action": "Ruft an."}],
+        }
+    )
+    opp = minimal["opportunities"][0]
+    for key in ("linked_pain_points", "phase_ref"):
+        opp.pop(key)
+    opp["step_ref"] = "step-2-1"
+    idx = JourneyIndex.build(minimal)
+    assert idx.opportunity_anchor(opp) == ("phase-2", "step-2-1")
+    assert propose_verdict(idx).kind != "poster"
+    md = story_map_markdown(minimal)
+    assert f"### Danach\n**{opp['hmw']}**" in md
+
+
 def test_verdict_hypothesis_names_failed_conditions(minimal):
     minimal["meta"]["status"] = "hypothesis"
     for atom in minimal["evidence"]:

@@ -448,6 +448,7 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "noFindings": "Keine Befunde.",
    "openQuestions": "Offene Fragen ({n})",
    "oqGoto": "In der Journey zeigen",
+   "oppAt": "Ansatzpunkt",
    "none": "Keine.",
    "versions": "Versionen",
    "noChangelog": "Kein Changelog.",
@@ -629,6 +630,7 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "noFindings": "Aucun constat.",
    "openQuestions": "Questions ouvertes ({n})",
    "oqGoto": "Afficher dans le parcours",
+   "oppAt": "Point d'application",
    "none": "Aucune.",
    "versions": "Versions",
    "noChangelog": "Aucun historique des versions.",
@@ -679,7 +681,9 @@ class Idx {
   evState(refs) { if (!refs || !refs.length) return "none"; return this.hasPrimary(refs) ? "primary" : "assumed"; }
   summary() { const s = { observed: 0, reported: 0, assumed: 0, total: 0 }; this.ev.forEach(a => { s[a.class]++; s.total++; }); return s; }
   oppsFor(ppId) { return this.opps.filter(o => (o.linked_pain_points || []).includes(ppId)); }
-  oppsForPhase(phaseId) { return this.opps.filter(o => { if (o.phase_ref) return o.phase_ref === phaseId; const st = this.ppStep.get((o.linked_pain_points || [])[0]); const e = this.steps.find(x => x.step.id === st); return e && e.phase.id === phaseId; }); }
+  // Phase einer Chance: die ihres Schritts (step_ref), sonst phase_ref, sonst die des ersten Pain Points – wie model.opportunity_anchor
+  oppPhase(o) { const s = this.steps.find(x => x.step.id === o.step_ref); if (s) return s.phase.id; if (o.phase_ref) return o.phase_ref; const st = this.ppStep.get((o.linked_pain_points || [])[0]); const e = this.steps.find(x => x.step.id === st); return e ? e.phase.id : null; }
+  oppsForPhase(phaseId) { return this.opps.filter(o => this.oppPhase(o) === phaseId); }
   claims() { // für Heatmap und Quoten
     const out = [];
     this.steps.forEach(e => { const s = e.step; out.push({ kind: "step", refs: s.evidence_refs || [], e });
@@ -874,18 +878,21 @@ function renderOpps(idx) {
   os.forEach((o, i) => { if (o.user_impact == null || o.effort == null) return; const v = (o.user_impact + (o.public_value ?? o.user_impact)) / 2; const left = 8 + (o.effort - 1) / 4 * 84, top = 92 - (v - 1) / 4 * 84; h += '<span class="opp" style="left:' + left + '%;top:' + top + '%" title="' + esc(o.hmw) + '" data-opp="' + i + '">' + (i + 1) + '</span>'; });
   h += '</div><p class="muted" style="font-size:12px;margin:8px 0 0">' + t("unscored") + '</p></div><div class="panel"><h2>' + t("oppsStories") + '</h2>';
   os.forEach((o, i) => { const q = quadrant(o); h += '<div class="opp-card" id="opp-' + i + '"><div class="h"><span class="num">' + (i + 1) + '</span><div style="flex:1"><b>' + esc(o.hmw) + '</b>' + (o.description ? '<div class="muted" style="font-size:12.5px">' + esc(o.description) + '</div>' : '') + '</div></div><div class="scores">' + (q ? '<span class="badge">' + L.quadrant[q] + '</span>' : '') + '<span>' + t("impact") + ' ' + (o.user_impact ?? '–') + '</span><span>' + t("publicValue") + ' ' + (o.public_value ?? '–') + '</span><span>' + t("effort") + ' ' + (o.effort ?? '–') + '</span>' + (o.owner ? '<span>' + lbl("owner") + esc(o.owner) + '</span>' : '') + (o.status ? '<span class="tag status">' + (L.ppStatus[o.status] || o.status) + '</span>' : '') + '</div>'
+    + ((at => at ? '<div style="font-size:12px">' + lbl("oppAt") + at + '</div>' : '')(refAt(idx, o.step_ref, o.phase_ref)))
     + ((o.linked_pain_points || []).length ? '<div style="font-size:12px">' + lbl("rowPain") + o.linked_pain_points.map(p => '<button class="claim" style="display:inline;width:auto;padding:1px 6px;margin:0 2px" data-refs="' + esc((idx.pp.get(p)?.evidence_refs || []).join(",")) + '" data-title="' + esc(p) + '" data-text="' + esc(idx.pp.get(p)?.text || p) + '">' + esc(p) + '</button>').join("") + '</div>' : '')
     + ((o.stories || []).length ? '<ul>' + o.stories.map(st => '<li class="' + (st.mvp ? 'mvp' : '') + '">' + esc(st.text) + (st.mvp ? ' <small class="c-positive">MVP</small>' : '') + '</li>').join("") + '</ul>' : '<div class="muted" style="font-size:12px;margin-top:4px">' + t("noStories") + '</div>') + '</div>'; });
   return h + '</div></div>';
 }
 
 // ---------------------------------------------------------------- Layer 5: Prüfung
-// Fundort einer offenen Frage: der Schritt, sonst die Phase; ein unbekannter Verweis bleibt stumm (L001 meldet ihn).
-function oqAt(idx, q) {
-  const e = idx.steps.find(x => x.step.id === q.step_ref), p = e ? null : idx.j.phases.find(x => x.id === q.phase_ref);
+// Fundort (offene Frage, Chance): der Schritt, sonst die Phase, als Sprung in die Journey;
+// ein unbekannter Verweis bleibt stumm (L001 meldet ihn).
+function refAt(idx, stepRef, phaseRef) {
+  const e = idx.steps.find(x => x.step.id === stepRef), p = e ? null : idx.j.phases.find(x => x.id === phaseRef);
   const target = e ? { id: "jstep-" + e.step.id, name: e.step.name } : p ? { id: "jphase-" + p.id, name: p.name } : null;
-  return target ? '<button class="oq-at" data-goto="' + esc(target.id) + '" title="' + esc(t("oqGoto")) + '">' + esc(t("quoted", { t: target.name })) + '</button>' + t("colon") : "";
+  return target ? '<button class="oq-at" data-goto="' + esc(target.id) + '" title="' + esc(t("oqGoto")) + '">' + esc(t("quoted", { t: target.name })) + '</button>' : "";
 }
+function oqAt(idx, q) { const at = refAt(idx, q.step_ref, q.phase_ref); return at ? at + t("colon") : ""; }
 function renderAudit(idx) {
   const f = findings[state.j] || [], by = {}; f.forEach(x => (by[x.antipattern] = by[x.antipattern] || []).push(x));
   const ne = f.filter(x => x.level === "ERROR").length, nw = f.filter(x => x.level === "WARN").length, ni = f.length - ne - nw;

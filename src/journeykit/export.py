@@ -25,11 +25,7 @@ def _texts(lang: str):
 def _opps_by_phase(idx: JourneyIndex) -> dict[str | None, list[dict[str, Any]]]:
     out: dict[str | None, list[dict[str, Any]]] = {}
     for opp in idx.opportunities.values():
-        phase = opp.get("phase_ref")
-        if not phase and opp.get("linked_pain_points"):
-            step = idx.pain_point_step.get(opp["linked_pain_points"][0])
-            phase = idx.step_phase.get(step) if step else None
-        out.setdefault(phase, []).append(opp)
+        out.setdefault(idx.opportunity_anchor(opp)[0], []).append(opp)
     return out
 
 

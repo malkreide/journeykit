@@ -280,6 +280,9 @@ Vorgehen:
 - **Verluste festhalten**: Ein `changelog`-Eintrag zum Übertrag ist Pflicht und
   nennt, was dabei verloren ging oder gedeutet wurde – gerundete Kurve, geteilte
   Zeilen, unleserliche Stellen, nicht übernommene Bilder.
+- **Chancen am Schritt**: Ordnet die Vorlage eine Idee oder Verbesserung einer
+  Spalte zu, kommt der Schritt in `step_ref` – keine Phase erfinden, nur um die
+  Chance zu verankern. Eine Phase, die die ganze Journey umfasst, ist kein Bezug.
 - **Was die Vorlage nicht hat, bleibt leer**: keine Pain Points, Owner, Scores
   oder Phasenbezüge ergänzen, die nicht dastehen. Was fehlt, zeigen die Lints;
   ergänzt wird erst in der Synthese, mit Material.
@@ -301,6 +304,6 @@ Vorgehen:
 - Phasen aus dem Prozessdokument übernehmen statt aus dem Material.
 - Mehrere Personas in eine Datei pressen («Eltern» mit Zugezogenen, Berufstätigen und Fremdsprachigen in einer Kurve).
 - Pain Points ohne `workaround` – der Workaround ist das Verwaltungs-Äquivalent zu Churn und die beste Quelle für Breakdowns.
-- Chancen ohne verknüpfte Pain Points oder ohne Scores – dann gibt es keine Priorisierung.
+- Chancen ohne verknüpfte Pain Points oder ohne Scores – dann gibt es keine Priorisierung. Setzt eine Chance an einem bestimmten Schritt an, gehört er in `step_ref`.
 - KPIs mit kommerziellen Namen stehen lassen.
 - Den Viewer von Hand nachbauen statt `journeykit render` zu nutzen.

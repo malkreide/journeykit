@@ -63,7 +63,8 @@ zutrifft, gilt:
 
 1. **Poster**, wenn eines davon fehlt: verantwortliche Rolle (`meta.owner`),
    Review-Rhythmus (`meta.review_cycle_days`), mindestens eine Chance mit Bezug
-   zu einem Pain Point (`linked_pain_points`) oder einer Phase (`phase_ref`).
+   zu einem Pain Point (`linked_pain_points`), einem Schritt (`step_ref`) oder einer
+   Phase (`phase_ref`).
    So, wie sie ist, wird sie nichts bewirken – auch wenn sie viele Ideen enthält.
 2. **Belastbar**, wenn Primärevidenz (`observed`, `reported`) an mindestens der
    Hälfte der Erlebnis-Aussagen (Denken, Fühlen, Pain Points) steht, `meta.status`

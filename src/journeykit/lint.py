@@ -167,6 +167,28 @@ def _rule_integrity(idx: JourneyIndex, c: _Collector) -> None:
                     opp=opp["id"],
                     pp=pp,
                 )
+        step = opp.get("step_ref")
+        if step and step not in idx.steps:
+            c.add(
+                "L001",
+                ERROR,
+                "integrity",
+                f"opportunities[{oi}]",
+                msg="L001.opp_step",
+                opp=opp["id"],
+                step=step,
+            )
+        elif step and opp.get("phase_ref") and idx.step_phase[step] != opp["phase_ref"]:
+            c.add(
+                "L001",
+                ERROR,
+                "integrity",
+                f"opportunities[{oi}]",
+                msg="L001.opp_step_phase",
+                opp=opp["id"],
+                step=step,
+                phase=opp["phase_ref"],
+            )
         if opp.get("phase_ref") and opp["phase_ref"] not in idx.phases:
             c.add(
                 "L001",
@@ -454,7 +476,7 @@ def _rule_micro_disconnect(idx: JourneyIndex, c: _Collector) -> None:
     unanchored = [
         o["id"]
         for o in idx.opportunities.values()
-        if not (o.get("linked_pain_points") or o.get("phase_ref"))
+        if not (o.get("linked_pain_points") or o.get("step_ref") or o.get("phase_ref"))
     ]
     if unanchored:
         c.add(

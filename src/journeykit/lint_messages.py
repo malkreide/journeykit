@@ -24,6 +24,8 @@ _DE: dict[str, tuple[str, str]] = {
     "L001.contradicts": ("Evidenz «{atom}» widerspricht unbekanntem Atom «{other}».", ""),
     "L001.opp_pain_point": ("Chance «{opp}» verweist auf unbekannten Pain Point «{pp}».", ""),
     "L001.opp_phase": ("Chance «{opp}» verweist auf unbekannte Phase «{phase}».", ""),
+    "L001.opp_step": ("Chance «{opp}» verweist auf unbekannten Schritt «{step}».", ""),
+    "L001.opp_step_phase": ("Chance «{opp}»: Schritt «{step}» liegt nicht in Phase «{phase}».", ""),
     "L001.question_phase": ("Offene Frage verweist auf unbekannte Phase «{phase}».", ""),
     "L001.question_step": ("Offene Frage verweist auf unbekannten Schritt «{step}».", ""),
     "L002": (
@@ -139,8 +141,8 @@ _DE: dict[str, tuple[str, str]] = {
         "journeykit export --format storymap zeigt, was ankommt.",
     ),
     "L064": (
-        "{n} Chance(n) ohne Bezug zu Pain Point oder Phase: {ids}.",
-        "Ohne Bezug lässt sich nicht prüfen, welches Problem die Chance löst. linked_pain_points oder phase_ref setzen.",
+        "{n} Chance(n) ohne Bezug zu Pain Point, Schritt oder Phase: {ids}.",
+        "Ohne Bezug lässt sich nicht prüfen, welches Problem die Chance löst. linked_pain_points, step_ref oder phase_ref setzen.",
     ),
     # Blueprint statt Journey
     "L070": (
@@ -197,6 +199,11 @@ _FR: dict[str, tuple[str, str]] = {
     "L001.contradicts": ("La preuve « {atom} » contredit un atome inconnu « {other} ».", ""),
     "L001.opp_pain_point": ("L'opportunité « {opp} » renvoie à un irritant inconnu « {pp} ».", ""),
     "L001.opp_phase": ("L'opportunité « {opp} » renvoie à une phase inconnue « {phase} ».", ""),
+    "L001.opp_step": ("L'opportunité « {opp} » renvoie à une étape inconnue « {step} ».", ""),
+    "L001.opp_step_phase": (
+        "Opportunité « {opp} » : l'étape « {step} » ne se trouve pas dans la phase « {phase} ».",
+        "",
+    ),
     "L001.question_phase": ("Une question ouverte renvoie à une phase inconnue « {phase} ».", ""),
     "L001.question_step": ("Une question ouverte renvoie à une étape inconnue « {step} ».", ""),
     "L002": (
@@ -312,8 +319,8 @@ _FR: dict[str, tuple[str, str]] = {
         "journeykit export --format storymap montre ce qui en ressort.",
     ),
     "L064": (
-        "{n} opportunité(s) sans lien avec un irritant ou une phase : {ids}.",
-        "Sans lien, impossible de vérifier quel problème l'opportunité résout. Renseigner linked_pain_points ou phase_ref.",
+        "{n} opportunité(s) sans lien avec un irritant, une étape ou une phase : {ids}.",
+        "Sans lien, impossible de vérifier quel problème l'opportunité résout. Renseigner linked_pain_points, step_ref ou phase_ref.",
     ),
     # Blueprint au lieu de parcours
     "L070": (

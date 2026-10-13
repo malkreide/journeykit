@@ -83,7 +83,7 @@ belegen. Die Begründung eines Soll-Konzepts liegt in einer Ist-Journey
 | Happy Path Bias | Pflichtfelder für Edge Cases, Breakdowns, Recovery; aktives Nachfragen | `pain_points.type`, `workaround`, `edge_cases`, `recovery_paths.exists`, `scenario.perspective`, L020–L023, Prozess-Layer |
 | Static Map Trap | Datenbestand mit Versionen, Owner, Status; neuer Input erzeugt Diff | `meta.owner`, `review_cycle_days`, `next_review`, `status` an Pain Points und Chancen, `changelog`, `journeykit diff`, L030–L035 |
 | Empathie-Vakuum / Überkomplexität | Drilldown bis zum O-Ton; eine Persona, ein Szenario; Scope-Ausschlüsse | Drawer im Viewer, Schema erzwingt eine Persona, `scope_exclusions`, `end_state`, L040–L053 |
-| Micro-Level Disconnect | Export als Story Map und Backlog; Diagnose Journey vs. Blueprint | `opportunities.stories`, `export --format storymap/actions`, `meta.diagnosis`, L060–L064, L070–L072 |
+| Micro-Level Disconnect | Export als Story Map und Backlog; Diagnose Journey vs. Blueprint | `opportunities.stories`, `opportunities.step_ref`, `export --format storymap/actions`, `meta.diagnosis`, L060–L064, L070–L072 |
 
 Zusätzlich für die Verwaltung: KPI-Übersetzungsschicht (`kpi.category:
 public_value`, `commercial_equivalent`, L090–L092), Kanäle jenseits des Webs

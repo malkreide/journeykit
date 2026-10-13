@@ -36,6 +36,13 @@ def test_evidence_class_enum(minimal):
     assert any("guessed" in e.message for e in errors)
 
 
+def test_opportunity_step_ref(minimal):
+    minimal["opportunities"][0]["step_ref"] = "step-1-1"
+    assert is_valid(minimal)
+    minimal["opportunities"][0]["step_ref"] = "Kein Bezeichner"
+    assert not is_valid(minimal)
+
+
 def test_scenario_perspective(minimal):
     for value in ("as_is", "to_be"):
         minimal["scenario"]["perspective"] = value

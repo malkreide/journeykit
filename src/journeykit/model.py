@@ -147,12 +147,14 @@ class JourneyIndex:
                         **ids,
                     )
         for oi, opp in enumerate(j.get("opportunities", [])):
+            phase_id, step_id = self.opportunity_anchor(opp)
             yield Claim(
                 f"opportunities[{oi}]",
                 "opportunity",
                 opp["hmw"],
                 tuple(opp.get("evidence_refs", [])),
-                phase_id=opp.get("phase_ref"),
+                phase_id=phase_id,
+                step_id=step_id,
             )
 
     def all_refs(self) -> Iterator[tuple[str, str]]:
@@ -178,6 +180,17 @@ class JourneyIndex:
 
     def breakdowns(self) -> list[dict[str, Any]]:
         return [pp for pp in self.pain_points.values() if pp.get("type") == "breakdown"]
+
+    def opportunity_anchor(self, opp: dict[str, Any]) -> tuple[str | None, str | None]:
+        """(Phase, Schritt), an dem eine Chance ansetzt: step_ref, sonst phase_ref, sonst der
+        Schritt des ersten verknüpften Pain Points. Unbekannte Verweise zählen nicht (L001)."""
+        step = opp.get("step_ref")
+        if step in self.steps:
+            return self.step_phase[step], step
+        if opp.get("phase_ref") in self.phases:
+            return opp["phase_ref"], None
+        step = self.pain_point_step.get((opp.get("linked_pain_points") or [None])[0])
+        return (self.step_phase[step], step) if step else (None, None)
 
     def opportunity_for_pain_point(self, pain_point_id: str) -> list[dict[str, Any]]:
         return [
@@ -232,7 +245,8 @@ def propose_verdict(idx: JourneyIndex) -> Verdict:
     if not meta.get("review_cycle_days"):
         missing.append("review")
     if not any(
-        o.get("linked_pain_points") or o.get("phase_ref") for o in idx.opportunities.values()
+        o.get("linked_pain_points") or o.get("step_ref") or o.get("phase_ref")
+        for o in idx.opportunities.values()
     ):
         missing.append("anchored_opportunity")
     if missing:

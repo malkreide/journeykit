@@ -238,6 +238,31 @@ def test_opportunity_without_anchor(minimal):
     assert next(x for x in f if x.code == "L064").message.endswith("opp-1.")
     minimal["meta"]["status"] = "hypothesis"
     assert "L064" in codes(lint_journey(minimal, today=TODAY), INFO)
+    opp["step_ref"] = "step-1-1"
+    assert "L064" not in codes(lint_journey(minimal, today=TODAY))  # step_ref genügt
+
+
+def test_opportunity_step_ref_integrity(minimal):
+    opp = minimal["opportunities"][0]
+    opp["step_ref"] = "gibt-es-nicht"
+    hit = [f for f in lint_journey(minimal, today=TODAY) if f.code == "L001"]
+    assert [f.message for f in hit] == [
+        "Chance «opp-1» verweist auf unbekannten Schritt «gibt-es-nicht»."
+    ]
+    minimal["phases"].append(
+        {
+            "id": "phase-2",
+            "name": "Danach",
+            "steps": [{"id": "step-2-1", "name": "Nachfragen", "action": "Ruft an."}],
+        }
+    )
+    opp["step_ref"] = "step-2-1"  # phase_ref bleibt phase-1
+    hit = [f for f in lint_journey(minimal, today=TODAY) if f.code == "L001"]
+    assert [f.message for f in hit] == [
+        "Chance «opp-1»: Schritt «step-2-1» liegt nicht in Phase «phase-1»."
+    ]
+    del opp["phase_ref"]
+    assert "L001" not in codes(lint_journey(minimal, today=TODAY))
 
 
 def test_empathy_vacuum(minimal):

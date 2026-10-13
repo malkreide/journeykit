@@ -383,6 +383,7 @@
         "description": { "type": "string" },
         "linked_pain_points": { "type": "array", "items": { "$ref": "#/$defs/id" }, "uniqueItems": true },
         "phase_ref": { "$ref": "#/$defs/id" },
+        "step_ref": { "$ref": "#/$defs/id", "description": "Schritt, an dem die Chance ansetzt – genauer als phase_ref. Gesetzt beide, muss der Schritt in der Phase liegen (L001)." },
         "user_impact": { "$ref": "#/$defs/score_1_5" },
         "public_value": { "$ref": "#/$defs/score_1_5" },
         "effort": { "$ref": "#/$defs/score_1_5" },

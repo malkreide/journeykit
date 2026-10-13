@@ -43,6 +43,17 @@ ohne Gegenstück kennzeichnet er («keine Daten in dieser Phase»). Wer überlag
 will, übernimmt deshalb die Phasen-IDs der Hauptdatei, wo sich die Zeiträume
 decken.
 
+**Varianten desselben Anliegens** – gleiche Persona, anderer Weg (am Schalter
+ohne Termin oder mit Termin, online oder auf Papier): Auch dann **pro Variante
+eine Datei**, denn ein Szenario pro Datei bleibt die Regel. Wo sich die Wege
+decken, tragen die Phasen dieselben IDs; so zeigt die Überlagerung, wo die
+Varianten auseinanderlaufen und wo sie wieder zusammenfinden. Der Persona-Name
+bleibt in beiden Dateien gleich, der Unterschied steht in `scenario.title`.
+Trägt mehr als eine Datei denselben Persona-Namen, beschriftet der Viewer
+Auswahl und Kurve mit «Persona – Szenario». Unterscheiden sich die Varianten
+im Erleben so stark, dass die Ziele auseinandergehen, sind es zwei Personas
+(siehe oben).
+
 ## 3. Welcher Modus?
 
 ```

@@ -320,6 +320,9 @@ def audit_markdown(journey: dict[str, Any], findings: list[Finding], lang: str =
             method = (
                 t("audit.method", method=q["proposed_method"]) if q.get("proposed_method") else ""
             )
-            lines.append(f"- {q['text']}{method}")
+            # Fundort: der Schritt, sonst die Phase; ein unbekannter Verweis bleibt stumm (L001 meldet ihn)
+            target = idx.steps.get(q.get("step_ref", "")) or idx.phases.get(q.get("phase_ref", ""))
+            at = t("audit.oq_at", name=target["name"]) if target else ""
+            lines.append(f"- {at}{q['text']}{method}")
         lines.append("")
     return "\n".join(lines)

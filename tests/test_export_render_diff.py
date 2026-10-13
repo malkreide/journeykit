@@ -75,6 +75,22 @@ def test_verdict_hypothesis_names_failed_conditions(minimal):
     assert v.primary_pct == 0 and v.breakdowns_without_recovery == 1
 
 
+def test_open_questions_show_where_they_belong(minimal):
+    minimal["open_questions"] = [
+        {"text": "Warum rufen sie an?", "step_ref": "step-1-1", "phase_ref": "phase-1"},
+        {"text": "Wie lange dauert es?", "phase_ref": "phase-1", "proposed_method": "analytics"},
+        {"text": "Ohne Bezug."},
+        {"text": "Verweis ins Leere.", "step_ref": "gibt-es-nicht"},
+    ]
+    md = audit_markdown(minimal, lint_journey(minimal))
+    oq = md[md.index("## Offene Fragen") :].splitlines()
+    assert "- «Brief erhalten»: Warum rufen sie an?" in oq
+    assert "- «TODO Phase 1»: Wie lange dauert es? _(Methode: analytics)_" in oq
+    assert "- Ohne Bezug." in oq and "- Verweis ins Leere." in oq
+    fr = audit_markdown(minimal, lint_journey(minimal, lang="fr"), lang="fr")
+    assert "- «\u202fBrief erhalten\u202f»\u00a0: Warum rufen sie an?" in fr.splitlines()
+
+
 def test_to_be_concept_is_never_robust(minimal):
     assert propose_verdict(JourneyIndex.build(minimal)).kind == "robust"
     minimal["scenario"]["perspective"] = "to_be"

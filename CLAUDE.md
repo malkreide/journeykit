@@ -73,7 +73,7 @@ Siehe `docs/konzept.md`, Abschnitt «Roadmap». Kurz:
 
 1. **Evaluation**: eine manuell erstellte, reale Journey als Ground Truth gegen die Pipeline laufen lassen (lokal, Material unter `/eval/`, nur der Vergleichsbericht kommt ins Repo). Dabei auch prüfen, ob die Pipeline handelnde Dritte (`performed_by`) und belegte Dauern erkennt – und Fristen nicht als Dauer übernimmt.
 2. **Französisch gegenlesen**: Begriffe und Formulierungen aus #20, #21, #22 durch eine französischsprachige Person aus der Verwaltung prüfen lassen; Korrekturen sind einzelne Zeilen in den vier Katalogen.
-3. **Kosten** (H5, #15): Muster im Skill umgesetzt; ein Schemafeld erst, wenn ein drittes Beispiel es braucht.
+3. **Kosten** (H5, #15) und **vermeidbare Schritte** (#49): Muster im Skill umgesetzt; ein Schemafeld erst, wenn ein drittes Beispiel es braucht.
 4. **Testsatz Extraktion ausbauen**: Der Testsatz unter `skill/user-journey/evals/extraction/` steht (fünf synthetische Fälle, Scorer `scripts/eval_extraction.py`). Er trennt Schablonen bisher nur über Regelverstösse, nicht über Abdeckung – schwierigere Fälle ergänzen, am besten anonymisierte Ausschnitte aus der Evaluation (Punkt 1), und mehrere Läufe je Schablone vergleichen.
 5. **Viewer**: Vergleichsansicht zweier Versionen (Diff visuell), Kommentarfunktion, Export der Heatmap.
 6. **Variante B**: MCP-Server, der Journeys als Datenbestand hält (SQLite oder Notion), Versionen und Evidenz verwaltet – siehe ADR-0004.

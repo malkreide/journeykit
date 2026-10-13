@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JourneyKit Viewer</title>
+<meta name="description" content="Interaktive, evidenzbasierte User Journey: Journey-Layer, Prozess- und Fehlerpfade, Evidenz-Heatmap, Chancenmatrix und methodische Prüfung.">
+<style>
+:root {
+  --bg: #f6f5f1; --surface: #ffffff; --surface-2: #efede7; --line: #d9d6cd; --line-strong: #b9b5a9;
+  --ink: #1d1c1a; --ink-2: #5a5853; --ink-3: #8a877f;
+  --accent: #2f4f7f; --accent-ink: #ffffff; --accent-soft: #e3eaf4;
+  --observed: #1f7a8c; --observed-soft: #d9eef2; --reported: #6a4c93; --reported-soft: #e9e2f3; --assumed: #a07a2a; --assumed-soft: #f3ead6;
+  --friction: #c47f17; --friction-soft: #fbead0; --breakdown: #b3261e; --breakdown-soft: #f8dcd9; --positive: #2e7d4f; --positive-soft: #d8eee0;
+  --gap: #9c9a93; --shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.08);
+  --radius: 10px; --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: "Inter", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15161a; --surface: #1e2026; --surface-2: #272a31; --line: #343842; --line-strong: #4a4f5b;
+    --ink: #ebebe6; --ink-2: #b4b4ad; --ink-3: #85857f;
+    --accent: #8fb0e0; --accent-ink: #0f1320; --accent-soft: #233044;
+    --observed: #5fc3d6; --observed-soft: #173a42; --reported: #b79be0; --reported-soft: #33284a; --assumed: #e0b25a; --assumed-soft: #3f3418;
+    --friction: #e5a24a; --friction-soft: #43301a; --breakdown: #ef7b73; --breakdown-soft: #4a1f1c; --positive: #6fcf93; --positive-soft: #1d3a29;
+    --gap: #6e6e68; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15161a; --surface: #1e2026; --surface-2: #272a31; --line: #343842; --line-strong: #4a4f5b;
+  --ink: #ebebe6; --ink-2: #b4b4ad; --ink-3: #85857f;
+  --accent: #8fb0e0; --accent-ink: #0f1320; --accent-soft: #233044;
+  --observed: #5fc3d6; --observed-soft: #173a42; --reported: #b79be0; --reported-soft: #33284a; --assumed: #e0b25a; --assumed-soft: #3f3418;
+  --friction: #e5a24a; --friction-soft: #43301a; --breakdown: #ef7b73; --breakdown-soft: #4a1f1c; --positive: #6fcf93; --positive-soft: #1d3a29;
+  --gap: #6e6e68; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.5);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); }
+button { font: inherit; color: inherit; }
+h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.01em; }
+small, .muted { color: var(--ink-2); }
+.mono { font-family: var(--mono); font-size: 12px; }
+
+/* Kopf */
+header.top { position: sticky; top: 0; z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line); }
+.top-inner { padding: 12px 16px 0; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: flex-start; }
+.title-block { flex: 1 1 320px; min-width: 0; }
+.title-block h1 { font-size: 20px; line-height: 1.2; }
+.title-block .sub { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; color: var(--ink-2); }
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); font-size: 12px; white-space: nowrap; }
+.badge.status-validated { border-color: var(--positive); color: var(--positive); background: var(--positive-soft); }
+.badge.status-hypothesis, .badge.status-draft { border-color: var(--assumed); color: var(--assumed); background: var(--assumed-soft); }
+.badge.synthetic { border-style: dashed; }
+.badge.to-be { border-color: var(--assumed); color: var(--assumed); border-style: dashed; }
+.badge.wrap { white-space: normal; max-width: 100%; border-radius: 10px; }
+.badge.err { background: var(--breakdown-soft); color: var(--breakdown); border-color: var(--breakdown); }
+.badge.warn { background: var(--friction-soft); color: var(--friction); border-color: var(--friction); }
+.badge.ok { background: var(--positive-soft); color: var(--positive); border-color: var(--positive); }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; max-width: 100%; }
+.toggle { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); cursor: pointer; user-select: none; }
+.toggle input { accent-color: var(--accent); margin: 0; }
+.toggle.active { border-color: var(--accent); background: var(--accent-soft); }
+.btn { padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); cursor: pointer; }
+.btn:hover { border-color: var(--line-strong); }
+select.persona { max-width: 100%; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); font: inherit; }
+nav.tabs { display: flex; gap: 2px; padding: 8px 16px 0; overflow-x: auto; scrollbar-width: none; }
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs button { border: 0; background: transparent; padding: 8px 12px 10px; border-bottom: 2px solid transparent; color: var(--ink-2); white-space: nowrap; cursor: pointer; border-radius: 6px 6px 0 0; }
+nav.tabs button:hover { color: var(--ink); background: var(--surface-2); }
+nav.tabs button.active { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+nav.tabs button .n { margin-left: 6px; font-size: 11px; color: var(--ink-3); }
+.evbar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; width: 160px; background: var(--surface-2); }
+.evbar span { display: block; height: 100%; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--ink-2); align-items: center; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; border: 2px solid currentColor; vertical-align: -1px; }
+.dot.fill { background: currentColor; }
+.c-observed { color: var(--observed); } .c-reported { color: var(--reported); } .c-assumed { color: var(--assumed); } .c-gap { color: var(--gap); }
+
+/* Layouts */
+main { padding: 16px; max-width: 100%; }
+section.layer { display: none; }
+section.layer.active { display: block; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.panel + .panel { margin-top: 14px; }
+.panel h2 { font-size: 15px; margin-bottom: 8px; }
+.panel h3 { font-size: 13px; color: var(--ink-2); text-transform: uppercase; letter-spacing: .04em; margin: 14px 0 6px; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.tile { background: var(--surface-2); border-radius: 8px; padding: 10px 12px; }
+.tile .v { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
+.tile .l { font-size: 12px; color: var(--ink-2); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
+
+/* Journey-Raster */
+.map-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.map { display: grid; min-width: max-content; }
+.map > div { border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); padding: 10px 12px; min-width: 0; }
+.map .rowlabel { position: sticky; left: 0; z-index: 3; background: var(--surface-2); font-size: 12px; font-weight: 600; color: var(--ink-2); text-transform: uppercase; letter-spacing: .04em; }
+.map .rowlabel small { display: block; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--ink-3); margin-top: 2px; }
+.map .phase { background: var(--accent-soft); border-right: 2px solid var(--accent); }
+.map .phase h3 { font-size: 14px; color: var(--ink); text-transform: none; letter-spacing: 0; margin: 0; }
+.map .phase .intent { font-size: 12px; color: var(--ink-2); margin-top: 3px; }
+.map .phase .dur { font-size: 11px; color: var(--ink-3); margin-top: 2px; }
+.map .phase-end { border-right: 2px solid var(--accent); }
+.dbar { position: relative; height: 14px; margin: 2px 0 6px; }
+.dbar .typ { position: absolute; left: 0; top: 2px; height: 10px; border-radius: 2px; background: var(--accent); min-width: 2px; }
+.dbar .rng { position: absolute; top: 6px; height: 2px; background: var(--ink-3); }
+.dbar .rng::before, .dbar .rng::after { content: ""; position: absolute; top: -4px; width: 2px; height: 10px; background: var(--ink-3); }
+.dbar .rng::before { left: 0; } .dbar .rng::after { right: 0; }
+.dbasis { font-size: 11.5px; color: var(--ink-3); }
+.step h4 { font-size: 13.5px; margin-bottom: 4px; }
+.step .action { color: var(--ink-2); font-size: 13px; }
+.step .meta { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px; font-size: 11.5px; background: var(--surface-2); color: var(--ink-2); border: 1px solid transparent; }
+.chip.transition { border-color: var(--friction); color: var(--friction); background: var(--friction-soft); }
+.chip.actor { border-color: var(--line); border-style: dashed; }
+.claim { display: block; width: 100%; text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 8px 6px 10px; margin: 0 0 6px; cursor: pointer; position: relative; font-size: 13px; line-height: 1.35; }
+.claim:hover { border-color: var(--accent); }
+.claim::before { content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 3px; border-radius: 2px; background: var(--line-strong); }
+.claim.ev-primary::before { background: linear-gradient(var(--observed), var(--reported)); }
+.claim.ev-assumed { border-style: dashed; }
+.claim.ev-assumed::before { background: var(--assumed); }
+.claim.ev-none { border-style: dashed; color: var(--ink-2); }
+.claim.ev-none::before { background: transparent; border-left: 3px dotted var(--gap); }
+.claim .evc { display: inline-flex; gap: 3px; margin-left: 6px; vertical-align: middle; }
+.claim .evc i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
+.claim .evc i.o { background: var(--observed); } .claim .evc i.r { background: var(--reported); } .claim .evc i.a { background: var(--assumed); }
+.claim.pp { padding-left: 12px; }
+.claim.pp.friction::before { background: var(--friction); } .claim.pp.breakdown::before { background: var(--breakdown); }
+.claim.pp .pp-head { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-bottom: 3px; }
+.tag { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; font-weight: 700; padding: 1px 6px; border-radius: 4px; }
+.tag.friction { background: var(--friction-soft); color: var(--friction); } .tag.breakdown { background: var(--breakdown-soft); color: var(--breakdown); }
+.tag.status { background: var(--surface-2); color: var(--ink-2); font-weight: 600; text-transform: none; letter-spacing: 0; }
+.sev { display: inline-flex; gap: 2px; }
+.sev i { width: 6px; height: 6px; border-radius: 1px; background: var(--line-strong); display: inline-block; }
+.sev i.on { background: var(--ink-2); }
+.pp .wa { color: var(--ink-2); font-size: 12px; margin-top: 3px; }
+.hidden-note { font-size: 11.5px; color: var(--ink-3); font-style: italic; padding: 4px 0; }
+.empty { color: var(--ink-3); font-size: 12px; }
+.kpi { font-size: 12.5px; padding: 4px 0; border-bottom: 1px dashed var(--line); }
+.kpi:last-child { border-bottom: 0; }
+.kpi b { font-weight: 600; }
+.kpi .k { color: var(--ink-3); font-size: 11px; }
+
+/* Gefühlskurve */
+.curve { position: relative; height: 150px; padding: 0 !important; }
+.curve svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.curve .zero { position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dashed var(--line-strong); }
+.curve .nodata { position: absolute; bottom: 3px; padding: 0 8px; font-size: 10.5px; line-height: 1.3; color: var(--ink-3); font-style: italic; text-align: center; pointer-events: none; }
+.curve .dropped { position: absolute; top: 3px; right: 8px; max-width: 60%; font-size: 10.5px; color: var(--ink-3); font-style: italic; text-align: right; }
+.curve .pt { position: absolute; width: 14px; height: 14px; border-radius: 50%; transform: translate(-50%, -50%); border: 2.5px solid var(--ink); background: var(--ink); cursor: pointer; z-index: 2; }
+.curve .pt.hollow { background: var(--surface); border-style: solid; }
+.curve .pt.assumed { border-color: var(--assumed); background: var(--surface); border-style: dashed; }
+.curve .pt.gap { width: 18px; height: 18px; border: 2px dotted var(--gap); background: transparent; color: var(--gap); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+.curve .pt.other { width: 9px; height: 9px; border-width: 2px; opacity: .85; z-index: 1; }
+.curve .lbl { position: absolute; transform: translateX(-50%); font-size: 11px; color: var(--ink-2); max-width: 180px; text-align: center; line-height: 1.25; pointer-events: none; background: color-mix(in srgb, var(--surface) 85%, transparent); padding: 1px 4px; border-radius: 4px; }
+.curve .scale { position: absolute; left: 4px; font-size: 10px; color: var(--ink-3); }
+
+/* Prozess-Layer */
+.flow { display: flex; flex-direction: column; gap: 0; }
+.flow .phase-h { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-2); margin: 18px 0 8px; display: flex; align-items: center; gap: 10px; }
+.flow .phase-h::after { content: ""; flex: 1; border-top: 1px solid var(--line); }
+.node-row { display: grid; grid-template-columns: minmax(240px, 1.1fr) minmax(0, 2fr); gap: 14px; align-items: start; position: relative; padding-left: 22px; }
+.node-row::before { content: ""; position: absolute; left: 7px; top: 0; bottom: 0; border-left: 2px solid var(--line-strong); }
+.node-row:last-child::before { bottom: 50%; }
+.node { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; position: relative; }
+.node::before { content: ""; position: absolute; left: -19px; top: 16px; width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); }
+.node.has-breakdown { border-color: var(--breakdown); }
+.node.has-breakdown::before { border-color: var(--breakdown); background: var(--breakdown); }
+.node h4 { font-size: 13.5px; }
+.node .act { color: var(--ink-2); font-size: 12.5px; margin-top: 2px; }
+.branches { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.branch { border-radius: 10px; padding: 8px 10px 8px 12px; border: 1px solid var(--line); position: relative; font-size: 12.5px; background: var(--surface); }
+.branch.bd { border-color: var(--breakdown); background: var(--breakdown-soft); }
+.branch.fr { border-color: var(--friction); background: var(--friction-soft); }
+.branch.ec { border-left: 3px solid var(--assumed); }
+.branch .arrow { display: flex; gap: 8px; align-items: flex-start; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line-strong); }
+.branch .arrow .lab { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; font-weight: 700; white-space: nowrap; padding-top: 1px; }
+.branch .arrow.rec .lab { color: var(--positive); }
+.branch .arrow.rec.soll { opacity: .85; } .branch .arrow.rec.soll .lab { color: var(--assumed); }
+.branch .arrow.wa .lab { color: var(--breakdown); }
+
+/* Evidenz-Layer */
+.heat { overflow-x: auto; }
+.heat table { min-width: max-content; }
+.heat td.cell { text-align: center; padding: 0; }
+.heat .hc { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 64px; height: 44px; margin: 2px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid transparent; }
+.heat .hc small { font-weight: 400; font-size: 10px; opacity: .8; }
+.heat .hc.gap { border: 1px dashed var(--gap); color: var(--gap); font-weight: 400; }
+.heat .hc.na { background: transparent; color: var(--ink-3); cursor: default; }
+.heat th.step { font-weight: 500; color: var(--ink); max-width: 120px; white-space: normal; font-size: 11.5px; }
+.heat th.phase { background: var(--accent-soft); font-size: 11px; text-align: center; }
+.src-pii { font-size: 11px; }
+.atom { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; background: var(--surface); }
+.atom .meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 4px; font-size: 11.5px; color: var(--ink-2); }
+.atom .cls { font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: 10.5px; padding: 1px 6px; border-radius: 4px; }
+.atom .cls.observed { background: var(--observed-soft); color: var(--observed); } .atom .cls.reported { background: var(--reported-soft); color: var(--reported); } .atom .cls.assumed { background: var(--assumed-soft); color: var(--assumed); }
+.atom q { quotes: "«" "»"; font-style: italic; }
+.atom .txt { font-size: 13px; }
+.atom .loc { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+.atom .contra { margin-top: 4px; font-size: 12px; color: var(--breakdown); }
+
+/* Chancen-Layer */
+.matrix { position: relative; width: 100%; aspect-ratio: 1.3; max-height: 460px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); overflow: hidden; }
+.matrix .q { position: absolute; width: 50%; height: 50%; padding: 8px 10px; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-3); }
+.matrix .q.tl { left: 0; top: 0; width: 39.5%; border-right: 1px dashed var(--line-strong); border-bottom: 1px dashed var(--line-strong); }
+.matrix .q.tr { right: 0; top: 0; width: 60.5%; border-bottom: 1px dashed var(--line-strong); text-align: right; }
+.matrix .q.bl { left: 0; bottom: 0; width: 39.5%; border-right: 1px dashed var(--line-strong); display: flex; align-items: flex-end; }
+.matrix .q.br { right: 0; bottom: 0; width: 60.5%; display: flex; align-items: flex-end; justify-content: flex-end; }
+.matrix .ax { position: absolute; font-size: 11px; color: var(--ink-2); }
+.matrix .ax.x { bottom: 4px; left: 50%; transform: translateX(-50%); } .matrix .ax.y { top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--ink-3); font-size: 10px; }
+.matrix .opp { position: absolute; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid var(--surface); box-shadow: var(--shadow); }
+.matrix .opp:hover { transform: translate(-50%, -50%) scale(1.15); }
+.opp-card { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 10px; background: var(--surface); }
+.opp-card .h { display: flex; gap: 8px; align-items: flex-start; }
+.opp-card .num { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.opp-card .scores { display: flex; gap: 10px; font-size: 11.5px; color: var(--ink-2); margin: 6px 0; flex-wrap: wrap; }
+.opp-card ul { margin: 6px 0 0; padding-left: 18px; font-size: 12.5px; }
+.opp-card li.mvp::marker { content: "✓ "; color: var(--positive); }
+
+/* Prüfung */
+.oq-at { padding: 0; border: 0; background: none; color: var(--accent); font: inherit; cursor: pointer; text-decoration: underline dotted; text-underline-offset: 2px; }
+.flash { outline: 2px solid var(--accent); outline-offset: -2px; }
+.finding { display: grid; grid-template-columns: 64px 1fr; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.finding:last-child { border-bottom: 0; }
+.finding .lvl { font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; text-align: center; align-self: start; }
+.finding .lvl.ERROR { background: var(--breakdown-soft); color: var(--breakdown); } .finding .lvl.WARN { background: var(--friction-soft); color: var(--friction); } .finding .lvl.INFO { background: var(--surface-2); color: var(--ink-2); }
+.finding .hint { color: var(--ink-2); font-size: 12.5px; margin-top: 2px; }
+.finding .path { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+
+/* Drawer */
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 100%); background: var(--surface); border-left: 1px solid var(--line); box-shadow: var(--shadow); transform: translateX(105%); transition: transform .22s ease; z-index: 40; display: flex; flex-direction: column; }
+.drawer.open { transform: none; }
+.drawer .dh { padding: 14px 16px; border-bottom: 1px solid var(--line); display: flex; gap: 10px; align-items: flex-start; }
+.drawer .dh h2 { font-size: 14px; flex: 1; }
+.drawer .db { padding: 14px 16px; overflow: auto; }
+.drawer .close { border: 0; background: var(--surface-2); border-radius: 6px; width: 30px; height: 30px; cursor: pointer; }
+.scrim { position: fixed; inset: 0; background: rgba(0,0,0,.25); z-index: 30; display: none; }
+.scrim.open { display: block; }
+.claim-txt { font-size: 14px; margin-bottom: 10px; }
+.verdict { font-size: 12.5px; padding: 8px 10px; border-radius: 8px; margin-bottom: 12px; }
+.verdict.p { background: var(--positive-soft); } .verdict.a { background: var(--assumed-soft); } .verdict.n { background: var(--surface-2); color: var(--ink-2); }
+
+footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
+@media print {
+  header.top { position: static; } nav.tabs, .controls, .drawer, .scrim { display: none !important; }
+  section.layer { display: block !important; page-break-before: always; } section.layer:first-of-type { page-break-before: auto; }
+  .map-wrap { overflow: visible; } body { font-size: 11px; }
+}
+@media (max-width: 640px) {
+  main { padding: 10px; } .title-block h1 { font-size: 17px; } .node-row { grid-template-columns: 1fr; padding-left: 18px; }
+  .drawer { width: 100%; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="title-block">
+      <h1 id="title"></h1>
+      <div class="sub" id="subline"></div>
+    </div>
+    <div class="controls">
+      <select class="persona" id="personaSel" hidden data-i18n-aria="selectPersona"></select>
+      <label class="toggle" id="primToggle"><input type="checkbox" id="primOnly"> <span data-i18n="primOnly"></span></label>
+      <button class="btn" id="themeBtn" data-i18n="theme" data-i18n-title="themeTitle"></button>
+      <button class="btn" onclick="window.print()" data-i18n="print" data-i18n-title="printTitle"></button>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs"></nav>
+</header>
+<main id="main"></main>
+<footer id="footer"></footer>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-live="polite">
+  <div class="dh"><h2 id="dTitle"></h2><button class="close" id="dClose" data-i18n-aria="close">✕</button></div>
+  <div class="db" id="dBody"></div>
+</aside>
+
+<script type="application/json" id="jk-i18n">
+{
+ "de": {
+  "classes": {"observed": "beobachtet", "reported": "berichtet", "assumed": "angenommen"},
+  "classesPl": {"observed": "beobachtet", "reported": "berichtet", "assumed": "angenommen"},
+  "kinds": {"quote": "Zitat", "observation": "Beobachtung", "metric": "Messwert", "document_excerpt": "Dokumentstelle", "workshop_statement": "Workshop-Aussage"},
+  "srcKinds": {"interview": "Interview", "survey": "Befragung", "diary_study": "Tagebuchstudie", "observation": "Beobachtung", "ticket_export": "Ticket-Export", "inquiry_log": "Anfragen", "analytics": "Analytics", "case_records": "Geschäftskontrolle", "workshop": "Workshop", "internal_document": "Internes Dokument", "form": "Formular", "complaint": "Beschwerde", "other": "Andere"},
+  "channels": {"web": "Website", "app": "App", "email": "E-Mail", "phone": "Telefon", "letter": "Brief", "paper_form": "Papierformular", "counter": "Schalter", "in_person": "Vor Ort", "event": "Veranstaltung", "chat": "Chat", "sms": "SMS", "publication": "Publikation", "other": "Anderer Kanal"},
+  "status": {"hypothesis": "Hypothese", "draft": "Entwurf", "validated": "Validiert", "in_review": "In Review", "archived": "Archiviert"},
+  "mapType": {"user_journey": "User Journey", "customer_journey": "Customer Journey", "experience_map": "Experience Map", "service_blueprint": "Service Blueprint", "user_flow": "User Flow"},
+  "perspective": {"as_is": "Ist-Zustand", "to_be": "Soll-Konzept"},
+  "ppStatus": {"open": "offen", "in_progress": "in Arbeit", "resolved": "gelöst", "wontfix": "nicht geplant", "monitoring": "beobachtet"},
+  "freq": {"rare": "selten", "occasional": "gelegentlich", "frequent": "häufig", "systematic": "systematisch", "unknown": "unbekannt"},
+  "quadrant": {"quick_win": "Quick Win", "big_bet": "Big Bet", "fill_in": "Nebenbei", "skip": "Zurückstellen"},
+  "quadrantPl": {"quick_win": "Quick Wins", "big_bet": "Big Bets", "fill_in": "Nebenbei", "skip": "Zurückstellen"},
+  "antipatterns": {"integrity": "Referenzen und IDs", "inside_out": "Inside-Out Bias", "happy_path": "Happy Path Bias", "static_map": "Static Map Trap", "empathy_vacuum": "Empathie-Vakuum", "overcomplexity": "Überkomplexität", "micro_disconnect": "Micro-Level Disconnect", "blueprint": "Blueprint statt Journey", "privacy": "Personendaten", "kpi": "Kennzahlen", "evidence": "Evidenzqualität"},
+  "kpiCat": {"perception": "Wahrnehmung", "outcome": "Ergebnis", "public_value": "Public Value"},
+  "pii": {"none": "keine", "anonymised": "anonymisiert", "pseudonymised": "pseudonymisiert", "contains_pii": "enthält Personendaten"},
+  "performedBy": {"shared": "mit", "intermediary": "durch"},
+  "performedByTitle": {"shared": "Persona mit Hilfe Dritter", "intermediary": "Dritte handeln anstelle der Persona"},
+  "mandate": {"formal": "mit Vollmacht oder Auftrag", "informal": "informell"},
+  "context": {"language_situation": "Sprache", "digital_access": "Digitaler Zugang", "time_budget": "Zeitbudget", "prior_experience": "Vorerfahrung", "other": "Weiteres"},
+  "ui": {
+   "colon": ": ",
+   "quoted": "«{t}»",
+   "and": " und ",
+   "selectPersona": "Persona wählen",
+   "primOnly": "Nur Primärevidenz",
+   "theme": "Hell/Dunkel",
+   "themeTitle": "Hell/Dunkel umschalten",
+   "print": "Drucken",
+   "printTitle": "Drucken / PDF",
+   "close": "Schliessen",
+   "evDots": "Evidenz: {o} beobachtet, {r} berichtet, {a} angenommen",
+   "noEvidence": "keine Evidenz",
+   "day_one": "{n} Tag",
+   "day_other": "{n} Tage",
+   "weeksApprox": " (≈ {w} Wochen)",
+   "assumptionsHidden_one": "{n} Annahme ausgeblendet",
+   "assumptionsHidden_other": "{n} Annahmen ausgeblendet",
+   "errors_one": "{n} Fehler",
+   "errors_other": "{n} Fehler",
+   "warnings_one": "{n} Warnung",
+   "warnings_other": "{n} Warnungen",
+   "auditClean": "Prüfung ohne Warnungen",
+   "synthetic": "synthetisches Beispiel",
+   "toBeTitle": "Beschreibt, wie der Weg künftig gehen soll – nicht, wie Nutzende ihn heute erleben.",
+   "legendTitle": "Evidenz-Atome nach Klasse",
+   "tabJourney": "Journey",
+   "tabProcess": "Prozess & Fehlerpfade",
+   "tabEvidence": "Evidenz",
+   "tabOpps": "Chancen",
+   "tabAudit": "Prüfung",
+   "rowPhase": "Phase",
+   "rowDuration": "Dauer",
+   "rowDurationSub": "Kalendertage, ein Massstab für alle Phasen",
+   "noDuration": "keine belegte Dauer",
+   "durationHidden": "Dauer ohne Primärevidenz ausgeblendet",
+   "durTypical": "typisch {d}",
+   "durRange": " · Spanne {min}–{max} Tage",
+   "durUpTo": " · bis {max} Tage",
+   "durFrom": " · ab {min} Tagen",
+   "durTitle": "Dauer: {p}",
+   "touchpoint": "Touchpoint",
+   "counterpart": "Gegenüber",
+   "transition": "Übergang",
+   "stepEvidence": "Beleg für den Schritt",
+   "rowDoes": "Macht",
+   "rowDoesSub": "Aktion · Kanal · Touchpoint",
+   "rowThinks": "Denkt",
+   "rowThinksSub": "Fragen, Zweifel, Erwartungen",
+   "rowFeels": "Fühlt",
+   "rowFeelsSubMulti": "dicke Punkte: diese Persona, kleine: andere (Lage innerhalb der Phase ungefähr)",
+   "rowFeelsSub": "hohl = ohne Primärevidenz · ? = keine Evidenz",
+   "severity": "Schwere {n}/5",
+   "breakdown": "Breakdown",
+   "friction": "Reibung",
+   "owner": "Owner",
+   "noPrimaryHidden_one": "{n} ohne Primärevidenz ausgeblendet",
+   "noPrimaryHidden_other": "{n} ohne Primärevidenz ausgeblendet",
+   "rowPain": "Pain Points",
+   "rowPainSub": "Reibung vs. Breakdown · Workaround · Owner",
+   "edgeCase": "Edge Case",
+   "edgeCases": "Edge Cases",
+   "targetPath": "Soll-Pfad",
+   "recovery": "Recovery",
+   "trigger": "Auslöser",
+   "rowEdge": "Edge Cases & Recovery",
+   "rowEdgeSub": "Was, wenn es nicht nach Plan läuft",
+   "rowOpps": "Chancen",
+   "rowOppsSub": "How might we …",
+   "rowKpi": "Kennzahlen",
+   "rowKpiSub": "Wahrnehmung · Ergebnis · Public Value",
+   "kpiTarget": "→ Ziel {t}",
+   "leading": "Frühindikator",
+   "lagging": "Spätindikator",
+   "translatedFrom": "übersetzt aus {c}",
+   "persona": "Persona",
+   "goals": "Ziele",
+   "frustrations": "Frustrationen",
+   "contextH": "Kontext",
+   "personaEvidence": "Evidenz zur Persona",
+   "scenario": "Szenario",
+   "goal": "Ziel",
+   "triggerScenario": "Auslöser",
+   "endState": "Endzustand",
+   "timeframe": "Zeitraum",
+   "scopeExclusions": "Bewusst nicht abgedeckt",
+   "diagnosis": "Diagnose",
+   "backstage": "Back-Stage",
+   "noDataPhase": "keine Daten in dieser Phase",
+   "noFeelingPhase": "keine Gefühlsevidenz in dieser Phase",
+   "noFeelingTitle": "keine Evidenz zur Gefühlslage",
+   "feelingTitle": "Gefühlslage: {s}",
+   "droppedTitle": "Phasen anderer Personas ohne gleiche Phasen-ID werden nicht überlagert",
+   "dropped": "Nicht überlagert (keine gleiche Phasen-ID): {l}",
+   "processTitle": "Prozess- und Fehlerpfade",
+   "processIntro": "Links der Pfad der Persona, rechts wo er bricht: Breakdowns mit Workaround und Recovery-Pfad (gestrichelt = Soll-Pfad, heute nicht vorhanden), Reibungen und Edge Cases.",
+   "workaround": "Ausweichen",
+   "backToJourney": "Zurück in die Journey",
+   "noFailurePath": "Kein dokumentierter Fehlerpfad – Happy Path oder Lücke?",
+   "sources": "Quellen",
+   "atoms": "Evidenz-Atome",
+   "experienceShare": "Erlebnis-Aussagen mit Primärevidenz ({b}/{n})",
+   "step": "Schritt",
+   "heatmap": "Evidenz-Heatmap",
+   "heatIntro": "Zahl = Primärbelege (beobachtet + berichtet), klein = angenommen. Gestrichelt = Aussage vorhanden, aber kein Beleg. Wo die Map dünn ist, ist sie Innensicht.",
+   "statements_one": "{n} Aussage",
+   "statements_other": "{n} Aussagen",
+   "assumedShort": "+{n} angen.",
+   "sourceRegister": "Quellenregister",
+   "colId": "ID",
+   "colSource": "Quelle",
+   "colKind": "Art",
+   "colClass": "Klasse",
+   "colN": "n",
+   "colDate": "Datum",
+   "colPii": "Personendaten",
+   "colLocation": "Ablage",
+   "contradictions": "Widersprüche zwischen Quellen ({n})",
+   "noneShown": "Keine ausgewiesen.",
+   "unused": "Nicht eingeordnete Evidenz ({n})",
+   "allSynthesised": "Alles synthetisiert.",
+   "emotion": "Emotion",
+   "explicit": ", ausdrücklich geäussert",
+   "derived": ", abgeleitet",
+   "contradicts": "widerspricht {l}",
+   "noOpps": "Keine Chancen abgeleitet – die Map hat noch keine Handlungsableitung.",
+   "matrix": "Impact / Effort",
+   "axisX": "Aufwand 1 → 5",
+   "axisY": "↑ Nutzen (Mittel aus Impact und Public Value)",
+   "unscored": "Chancen ohne Scores erscheinen nur in der Liste.",
+   "oppsStories": "Chancen und Stories",
+   "impact": "Impact",
+   "publicValue": "Public Value",
+   "effort": "Aufwand",
+   "noStories": "Noch keine Stories.",
+   "errorsLbl": "Fehler",
+   "warningsLbl": "Warnungen",
+   "infosLbl": "Hinweise",
+   "nextReview": "Nächster Review",
+   "everyDays": " · alle {n} Tage",
+   "methodAudit": "Methodische Prüfung",
+   "generatedBy": "Erzeugt von {g} am {d}. Die Regeln prüfen das Modell gegen die bekannten Fallstricke – sie ersetzen kein Review, sie bereiten es vor.",
+   "noFindings": "Keine Befunde.",
+   "openQuestions": "Offene Fragen ({n})",
+   "oqGoto": "In der Journey zeigen",
+   "oppAt": "Ansatzpunkt",
+   "none": "Keine.",
+   "versions": "Versionen",
+   "noChangelog": "Kein Changelog.",
+   "evidence": "Evidenz",
+   "verdictNone": "Keine Evidenz hinterlegt – diese Aussage ist eine Annahme.",
+   "verdictObs": "{n} beobachtete",
+   "verdictRep": "{n} berichtete",
+   "verdictPrimary": "Gestützt durch {list} Evidenz{extra}.",
+   "verdictExtra": " sowie {n} Annahme(n)",
+   "verdictAssumed": "Nur Annahmen ({n}) – aus Innensicht, nicht von Nutzenden.",
+   "unknownRef": "Unbekannte Referenz «{id}»",
+   "asOf": "Stand {d}",
+   "noData": "Keine Daten",
+   "noDataText": "Diese Datei wurde ohne Journey erzeugt. {cmd} injiziert die Daten."
+  }
+ },
+ "fr": {
+  "classes": {"observed": "observé", "reported": "rapporté", "assumed": "supposé"},
+  "classesPl": {"observed": "observés", "reported": "rapportés", "assumed": "supposés"},
+  "kinds": {"quote": "Citation", "observation": "Observation", "metric": "Mesure", "document_excerpt": "Extrait de document", "workshop_statement": "Énoncé d'atelier"},
+  "srcKinds": {"interview": "Entretien", "survey": "Enquête", "diary_study": "Journal de bord", "observation": "Observation", "ticket_export": "Export de tickets", "inquiry_log": "Demandes", "analytics": "Analyse d'audience", "case_records": "Contrôle des affaires", "workshop": "Atelier", "internal_document": "Document interne", "form": "Formulaire", "complaint": "Réclamation", "other": "Autre"},
+  "channels": {"web": "Site web", "app": "Application", "email": "E-mail", "phone": "Téléphone", "letter": "Courrier", "paper_form": "Formulaire papier", "counter": "Guichet", "in_person": "Sur place", "event": "Manifestation", "chat": "Chat", "sms": "SMS", "publication": "Publication officielle", "other": "Autre canal"},
+  "status": {"hypothesis": "Hypothèse", "draft": "Projet", "validated": "Validé", "in_review": "En révision", "archived": "Archivé"},
+  "mapType": {"user_journey": "Parcours usager", "customer_journey": "Parcours client", "experience_map": "Carte d'expérience", "service_blueprint": "Service blueprint", "user_flow": "Flux utilisateur"},
+  "perspective": {"as_is": "Situation actuelle", "to_be": "Concept cible"},
+  "ppStatus": {"open": "ouvert", "in_progress": "en cours", "resolved": "résolu", "wontfix": "non prévu", "monitoring": "sous observation"},
+  "freq": {"rare": "rare", "occasional": "occasionnel", "frequent": "fréquent", "systematic": "systématique", "unknown": "inconnu"},
+  "quadrant": {"quick_win": "Gain rapide", "big_bet": "Grand chantier", "fill_in": "En passant", "skip": "À différer"},
+  "quadrantPl": {"quick_win": "Gains rapides", "big_bet": "Grands chantiers", "fill_in": "En passant", "skip": "À différer"},
+  "antipatterns": {"integrity": "Références et ID", "inside_out": "Biais de la vue interne (inside-out)", "happy_path": "Biais du parcours idéal (happy path)", "static_map": "Piège de la carte figée", "empathy_vacuum": "Vide d'empathie", "overcomplexity": "Surcomplexité", "micro_disconnect": "Déconnexion du niveau micro", "blueprint": "Blueprint au lieu de parcours", "privacy": "Données personnelles", "kpi": "Indicateurs", "evidence": "Qualité des preuves"},
+  "kpiCat": {"perception": "Perception", "outcome": "Résultat", "public_value": "Valeur publique"},
+  "pii": {"none": "aucune", "anonymised": "anonymisées", "pseudonymised": "pseudonymisées", "contains_pii": "contient des données personnelles"},
+  "performedBy": {"shared": "avec", "intermediary": "par"},
+  "performedByTitle": {"shared": "La persona, avec l'aide de tiers", "intermediary": "Des tiers agissent à la place de la persona"},
+  "mandate": {"formal": "avec procuration ou mandat", "informal": "informel"},
+  "context": {"language_situation": "Langue", "digital_access": "Accès numérique", "time_budget": "Temps disponible", "prior_experience": "Expérience préalable", "other": "Autres"},
+  "ui": {
+   "colon": "\u00a0: ",
+   "quoted": "«\u202f{t}\u202f»",
+   "and": " et ",
+   "selectPersona": "Choisir la persona",
+   "primOnly": "Preuves primaires seulement",
+   "theme": "Clair/sombre",
+   "themeTitle": "Basculer entre clair et sombre",
+   "print": "Imprimer",
+   "printTitle": "Imprimer / PDF",
+   "close": "Fermer",
+   "evDots": "Preuves\u00a0: {o} observées, {r} rapportées, {a} supposées",
+   "noEvidence": "aucune preuve",
+   "day_one": "{n} jour",
+   "day_other": "{n} jours",
+   "weeksApprox": " (≈ {w} semaines)",
+   "assumptionsHidden_one": "{n} supposition masquée",
+   "assumptionsHidden_other": "{n} suppositions masquées",
+   "errors_one": "{n} erreur",
+   "errors_other": "{n} erreurs",
+   "warnings_one": "{n} avertissement",
+   "warnings_other": "{n} avertissements",
+   "auditClean": "Contrôle sans avertissement",
+   "synthetic": "exemple synthétique",
+   "toBeTitle": "Décrit comment le chemin doit se dérouler à l'avenir – non comme les usagers le vivent aujourd'hui.",
+   "legendTitle": "Atomes de preuve par classe",
+   "tabJourney": "Parcours",
+   "tabProcess": "Processus et chemins d'erreur",
+   "tabEvidence": "Preuves",
+   "tabOpps": "Opportunités",
+   "tabAudit": "Contrôle",
+   "rowPhase": "Phase",
+   "rowDuration": "Durée",
+   "rowDurationSub": "Jours civils, une même échelle pour toutes les phases",
+   "noDuration": "aucune durée étayée",
+   "durationHidden": "Durée sans preuve primaire masquée",
+   "durTypical": "typiquement {d}",
+   "durRange": " · fourchette {min}–{max} jours",
+   "durUpTo": " · jusqu'à {max} jours",
+   "durFrom": " · dès {min} jours",
+   "durTitle": "Durée\u00a0: {p}",
+   "touchpoint": "Point de contact",
+   "counterpart": "Interlocuteur",
+   "transition": "Transition",
+   "stepEvidence": "Preuve pour l'étape",
+   "rowDoes": "Fait",
+   "rowDoesSub": "Action · canal · point de contact",
+   "rowThinks": "Pense",
+   "rowThinksSub": "Questions, doutes, attentes",
+   "rowFeels": "Ressent",
+   "rowFeelsSubMulti": "gros points\u00a0: cette persona, petits\u00a0: les autres (position approximative dans la phase)",
+   "rowFeelsSub": "creux = sans preuve primaire · ? = aucune preuve",
+   "severity": "Gravité {n}/5",
+   "breakdown": "Rupture",
+   "friction": "Friction",
+   "owner": "Responsable",
+   "noPrimaryHidden_one": "{n} élément sans preuve primaire masqué",
+   "noPrimaryHidden_other": "{n} éléments sans preuve primaire masqués",
+   "rowPain": "Irritants",
+   "rowPainSub": "Friction ou rupture · contournement · responsable",
+   "edgeCase": "Cas limite",
+   "edgeCases": "Cas limites",
+   "targetPath": "Parcours cible",
+   "recovery": "Rattrapage",
+   "trigger": "Déclencheur",
+   "rowEdge": "Cas limites et rattrapage",
+   "rowEdgeSub": "Quand tout ne se passe pas comme prévu",
+   "rowOpps": "Opportunités",
+   "rowOppsSub": "Comment pourrions-nous …",
+   "rowKpi": "Indicateurs",
+   "rowKpiSub": "Perception · résultat · valeur publique",
+   "kpiTarget": "→ objectif {t}",
+   "leading": "Indicateur avancé",
+   "lagging": "Indicateur retardé",
+   "translatedFrom": "traduit de {c}",
+   "persona": "Persona",
+   "goals": "Objectifs",
+   "frustrations": "Frustrations",
+   "contextH": "Contexte",
+   "personaEvidence": "Preuves sur la persona",
+   "scenario": "Scénario",
+   "goal": "Objectif",
+   "triggerScenario": "Déclencheur",
+   "endState": "État final",
+   "timeframe": "Période",
+   "scopeExclusions": "Volontairement non couvert",
+   "diagnosis": "Diagnostic",
+   "backstage": "Coulisses",
+   "noDataPhase": "aucune donnée dans cette phase",
+   "noFeelingPhase": "aucune preuve sur le ressenti dans cette phase",
+   "noFeelingTitle": "aucune preuve sur le ressenti",
+   "feelingTitle": "Ressenti\u00a0: {s}",
+   "droppedTitle": "Les phases des autres personas sans ID de phase identique ne sont pas superposées",
+   "dropped": "Non superposé (aucun ID de phase identique)\u00a0: {l}",
+   "processTitle": "Processus et chemins d'erreur",
+   "processIntro": "À gauche, le parcours de la persona, à droite, là où il se rompt\u00a0: ruptures avec contournement et voie de rattrapage (en pointillé = parcours cible, inexistant aujourd'hui), frictions et cas limites.",
+   "workaround": "Contournement",
+   "backToJourney": "Retour dans le parcours",
+   "noFailurePath": "Aucun chemin d'erreur documenté – parcours idéal ou lacune\u00a0?",
+   "sources": "Sources",
+   "atoms": "Atomes de preuve",
+   "experienceShare": "Énoncés d'expérience avec preuve primaire ({b}/{n})",
+   "step": "Étape",
+   "heatmap": "Carte de chaleur des preuves",
+   "heatIntro": "Chiffre = preuves primaires (observées + rapportées), petit = supposées. En pointillé = énoncé présent, mais sans preuve. Là où la carte est mince, elle reflète la vue interne.",
+   "statements_one": "{n} énoncé",
+   "statements_other": "{n} énoncés",
+   "assumedShort": "+{n} supp.",
+   "sourceRegister": "Registre des sources",
+   "colId": "ID",
+   "colSource": "Source",
+   "colKind": "Type",
+   "colClass": "Classe",
+   "colN": "n",
+   "colDate": "Date",
+   "colPii": "Données personnelles",
+   "colLocation": "Emplacement",
+   "contradictions": "Contradictions entre sources ({n})",
+   "noneShown": "Aucune signalée.",
+   "unused": "Preuves non intégrées ({n})",
+   "allSynthesised": "Tout est synthétisé.",
+   "emotion": "Émotion",
+   "explicit": ", exprimée explicitement",
+   "derived": ", déduite",
+   "contradicts": "contredit {l}",
+   "noOpps": "Aucune opportunité dégagée – la carte ne débouche pas encore sur des actions.",
+   "matrix": "Impact / effort",
+   "axisX": "Effort 1 → 5",
+   "axisY": "↑ Bénéfice (moyenne de l'impact et de la valeur publique)",
+   "unscored": "Les opportunités sans score n'apparaissent que dans la liste.",
+   "oppsStories": "Opportunités et stories",
+   "impact": "Impact",
+   "publicValue": "Valeur publique",
+   "effort": "Effort",
+   "noStories": "Pas encore de stories.",
+   "errorsLbl": "Erreurs",
+   "warningsLbl": "Avertissements",
+   "infosLbl": "Remarques",
+   "nextReview": "Prochaine révision",
+   "everyDays": " · tous les {n} jours",
+   "methodAudit": "Contrôle méthodologique",
+   "generatedBy": "Généré par {g} le {d}. Les règles vérifient le modèle au regard des pièges connus – elles ne remplacent pas une révision, elles la préparent.",
+   "noFindings": "Aucun constat.",
+   "openQuestions": "Questions ouvertes ({n})",
+   "oqGoto": "Afficher dans le parcours",
+   "oppAt": "Point d'application",
+   "none": "Aucune.",
+   "versions": "Versions",
+   "noChangelog": "Aucun historique des versions.",
+   "evidence": "Preuves",
+   "verdictNone": "Aucune preuve enregistrée – cet énoncé est une supposition.",
+   "verdictObs": "{n} observée(s)",
+   "verdictRep": "{n} rapportée(s)",
+   "verdictPrimary": "Étayé par des preuves\u00a0: {list}{extra}.",
+   "verdictExtra": ", ainsi que {n} supposition(s)",
+   "verdictAssumed": "Uniquement des suppositions ({n}) – vue interne, pas celle des usagers.",
+   "unknownRef": "Référence inconnue «\u202f{id}\u202f»",
+   "asOf": "état au {d}",
+   "noData": "Aucune donnée",
+   "noDataText": "Ce fichier a été généré sans parcours. {cmd} injecte les données."
+  }
+ }
+}
+</script>
+<script>
+const DATA = {"generator": "journeykit 0.1.0", "generated": "2026-10-13", "title": "Anmeldung an der Musikschule aus Elternsicht", "lang": "de", "journeys": [{"schema_version": "1.0", "meta": {"id": "musikschule-anmeldung-eltern", "title": "Anmeldung an der Musikschule aus Elternsicht", "version": "1.0", "status": "validated", "map_type": "user_journey", "diagnosis": {"rationale": "Gefragt ist, wie Eltern den Weg vom Instrumentenparcours bis zum Ende des ersten Unterrichtsjahrs erleben – über drei Stellen (Sekretariat, Lehrperson, Gemeindeverwaltung) und ein Musikgeschäft hinweg: wo sie warten, nachfragen, zu viel bezahlen und am falschen Ort abmelden. Einteilung, Fakturierung und die Meldung der Ermässigungen von der Gemeinde an die Musikschule bleiben Back-Stage; sie erscheinen nur, wo Eltern sie bemerken – als E-Mail, Rechnung oder Wartezeit.", "alternatives_considered": ["Service Blueprint «Ermässigung und Fakturierung»: zeigt die Übergabe zwischen Gemeinde und Musikschule, aber nicht, warum Eltern zweimal anrufen.", "Customer Journey: Die Musikschule ist ein Verein mit Vertrag und Kündigungsfrist. Tarife, Ermässigung und Leistungsvereinbarung sind aber kommunal geregelt, und Eltern erleben sie als öffentliche Leistung."], "backstage_documented_in": "Service Blueprint «Ermässigung und Fakturierung» (fiktiv, nicht Teil des Beispiels)"}, "language": "de", "created": "2026-10-08", "updated": "2026-10-13", "owner": {"role": "Schulleitung Musikschule", "unit": "Musikschule Musterau, Schulleitung", "contact": "Funktionsadresse"}, "review_cycle_days": 180, "next_review": "2027-04-12", "context": {"organisation": "Musikschule Musterau und Gemeinde Musterau, Abteilung Bildung (fiktives Beispiel)", "domain": "public_administration", "service": "Anmeldung, Tarifermässigung und Abmeldung an der Musikschule", "legal_basis": ["Tarifordnung der Musikschule Musterau (fiktiv)"], "notes": "Synthetisches Beispiel zur Prüfung der Übertragbarkeit, drittes Beispiel nach Kindergarteneintritt und Baubewilligung. Organisation, Abläufe, Tarife, Zahlen und Zitate sind erfunden und vereinfacht; kein Abbild einer realen Musikschule oder Gemeinde."}, "synthetic": true}, "persona": {"id": "eltern-erstanmeldung", "name": "Eltern bei der ersten Anmeldung", "role": "Elternteil (anmeldend und zahlend)", "description": "Eltern eines Primarschulkinds, das nach dem Instrumentenparcours ein Instrument lernen will. Erste Erfahrung mit der Musikschule. Anmeldung, Ermässigung, Instrument, Rechnung und Abmeldung liegen bei den Eltern; den Unterricht erlebt das Kind.", "goals": ["Dass mein Kind das Instrument lernen kann, das es sich wünscht", "Vorher wissen, was es kostet – und nicht mehr bezahlen als nötig", "Nicht hinterhertelefonieren müssen"], "frustrations": ["Warten, ohne zu wissen, wie lange", "Zwei Stellen, die aufeinander verweisen", "Regeln im Kleingedruckten, die erst auffallen, wenn es zu spät ist"], "context": {"digital_access": "Website, Portal, E-Mail und Messenger werden genutzt; der Antrag auf Ermässigung geht nur auf Papier.", "time_budget": "Berufstätig; Anrufe beim Sekretariat während der Bürozeiten.", "prior_experience": "Erstes Kind an der Musikschule. Knapp die Hälfte der neu angemeldeten Kinder kommt zuerst auf die Warteliste; rund jedes fünfte Kind hat eine Tarifermässigung.", "other": "Das Kind ist die begünstigte Person: Es lernt, übt und will – oder will nicht mehr. Seine Gefühle kennt diese Journey nur aus Sicht der Eltern."}, "evidence_refs": ["m1-01", "m2-02", "m3-01", "stat-01", "stat-02", "stat-10"], "is_hypothesis": false}, "scenario": {"title": "Vom Instrumentenparcours bis zum Ende des ersten Unterrichtsjahrs", "goal": "Ich will, dass mein Kind das Instrument lernen kann, das es sich wünscht – zu einem Preis, den ich vorher kenne, und ohne hinterherzutelefonieren.", "trigger": "Das Kind kommt vom Instrumentenparcours heim und will ein Instrument lernen; der Flyer nennt den Anmeldeschluss Ende März.", "end_state": "Das Kind hat zu einer passenden Zeit Unterricht, die Rechnung stimmt – und wenn es aufhört, ist es fristgerecht und mit Bestätigung abgemeldet.", "timeframe": "Rund ein Jahr ohne Warteliste, bis über zwei Jahre mit Warteliste", "scope_exclusions": ["Folgejahre und Instrumentenwechsel", "Gruppenunterricht, Ensembles und Orchester", "Jugendliche, die sich selbst anmelden", "Begabtenförderung und Vorkurse"], "evidence_refs": ["m1-01", "m1-03"]}, "phases": [{"id": "entdecken", "name": "Ein Instrument finden", "description": "Vom Instrumentenparcours bis zum Entschluss, das Kind anzumelden. Was der Unterricht kostet, klären die Eltern selbst – auf der Website der Musikschule und, wer davon weiss, für die Ermässigung auf der Website der Gemeinde.", "user_intent": "Herausfinden, welches Instrument mein Kind lernen kann – und was das kostet.", "duration": "Februar bis März (Anmeldeschluss 31. März)", "kpis": [{"name": "Anteil Eltern, die die Kosten vor der Anmeldung kannten", "category": "outcome", "indicator_type": "leading", "definition": "Zustimmung zu «Ich wusste vor der Anmeldung, wie viel der Unterricht pro Semester kostet» in der Elternbefragung.", "unit": "% Zustimmung", "current_value": 46, "target": 80, "source_ref": "bef-01", "commercial_equivalent": "Price transparency"}, {"name": "Anteil Eltern, die von der Tarifermässigung wussten", "category": "public_value", "indicator_type": "leading", "definition": "Zustimmung zu «Ich wusste vor der Anmeldung, dass die Gemeinde eine Tarifermässigung anbietet»; Chancengerechtigkeit beim Zugang zum Musikunterricht.", "unit": "% Zustimmung", "current_value": 31, "target": 70, "source_ref": "bef-02"}], "steps": [{"id": "instrumentenparcours", "name": "Instrument am Parcours entdecken", "action": "Das Kind probiert am Instrumentenparcours im Schulhaus Instrumente aus und kommt begeistert heim; die Eltern erhalten einen Flyer mit dem Anmeldeschluss.", "channel": "event", "touchpoint": "Instrumentenparcours im Schulhaus, Flyer", "counterpart": "Musikschule (Lehrpersonen)", "thinking": [{"text": "Was kostet das – und wie lange müssen wir warten?", "evidence_refs": ["m1-03"]}], "feeling": {"valence": 2, "label": "so gefreut, dass sie etwas gefunden hat", "evidence_refs": ["m1-02", "m1-01"]}, "pain_points": [{"id": "pp-flyer-ohne-kosten", "text": "Der Flyer nennt nur den Anmeldeschluss – weder Kosten noch Wartezeiten.", "type": "friction", "severity": 2, "frequency": "frequent", "workaround": "Auf der Website suchen oder beim Sekretariat anrufen.", "owner": "Leitung Sekretariat Musikschule", "status": "open", "evidence_refs": ["m1-03", "anf-01"]}], "edge_cases": [{"text": "Das Kind wählt das Instrument nach der Wartezeit statt nach dem Wunsch: Schlagzeug wartet im Median 16 Monate, Cello einen.", "evidence_refs": ["m2-01", "stat-06", "stat-07"]}], "evidence_refs": []}, {"id": "kosten-klaeren", "name": "Kosten und Ermässigung klären", "action": "Die Eltern suchen auf der Website der Musikschule die Tarife und – wenn sie davon wissen – auf der Website der Gemeinde die Ermässigung.", "channel": "web", "touchpoint": "Seite «Tarife» mit Tarifblatt (PDF); Seite «Ermässigung Musikschule» der Gemeinde", "counterpart": "Musikschule (Sekretariat)", "is_transition": true, "thinking": [{"text": "Sind 820 Franken pro Jahr oder pro Semester gemeint?", "evidence_refs": ["m1-04", "anf-10"]}, {"text": "Können wir uns das leisten?", "evidence_refs": ["m2-02"]}], "feeling": {"valence": -1, "label": "verwirrt", "evidence_refs": ["m1-05"]}, "pain_points": [{"id": "pp-tarif-unverstaendlich", "text": "Das Tarifblatt ist ein PDF mit einer Tabelle: Ob der Betrag pro Semester oder pro Jahr gilt, verstehen viele nicht. Nicht einmal die Hälfte der Eltern kennt die Kosten vor der Anmeldung.", "type": "friction", "severity": 3, "frequency": "frequent", "workaround": "Anmelden und abwarten; beim Sekretariat nachfragen.", "owner": "Leitung Sekretariat Musikschule", "status": "open", "evidence_refs": ["m1-04", "web-01", "anf-01", "anf-10", "bef-01"]}, {"id": "pp-ermaessigung-unbekannt", "text": "Die Tarifermässigung steht nur auf der Website der Gemeinde, nicht bei der Musikschule. Gut zwei Drittel der Eltern wissen vor der Anmeldung nicht davon; wer davon erfährt, dann meist von anderen Eltern.", "type": "friction", "severity": 4, "frequency": "frequent", "workaround": "Von anderen Eltern erfahren – oder den vollen Tarif bezahlen.", "owner": "Abteilung Bildung (Gemeinde)", "status": "open", "evidence_refs": ["m2-03", "m2-04", "bef-02", "web-02", "anf-11"]}], "edge_cases": [{"text": "Für Familien mit kleinem Einkommen sind 820 Franken pro Semester viel Geld; sie überlegen, das Kind gar nicht anzumelden. Wie viele verzichten, zeigt das Material nicht.", "evidence_refs": ["m2-02"]}], "evidence_refs": []}]}, {"id": "anmelden", "name": "Anmelden", "description": "Online-Anmeldung bis zum Anmeldeschluss; die Bestätigung kommt sofort per E-Mail.", "user_intent": "Mein Kind rechtzeitig anmelden.", "duration": "ein Abend; Anmeldeschluss 31. März", "kpis": [{"name": "Ausstiegsrate der Seite «Anmeldung»", "category": "outcome", "indicator_type": "leading", "definition": "Anteil Besuche, die auf der Anmeldeseite enden.", "unit": "% Ausstiegsrate", "current_value": 22, "target": 15, "source_ref": "web-03"}], "steps": [{"id": "online-anmelden", "name": "Online anmelden", "action": "Die Eltern füllen das Anmeldeformular im Portal aus und erhalten sofort eine automatische Bestätigung per E-Mail.", "channel": "web", "touchpoint": "Anmeldeportal, automatische Bestätigung", "counterpart": "Musikschule (Sekretariat)", "thinking": [{"text": "Wir melden sie an und schauen dann.", "evidence_refs": ["m1-06"]}], "feeling": {"valence": 1, "label": "wirklich einfach", "evidence_refs": ["m1-07"]}, "pain_points": [{"id": "pp-bestaetigung-ohne-kosten", "text": "Die Bestätigung sagt nur, dass die Anmeldung eingegangen ist – nichts zu Tarif, Einschreibegebühr oder Ermässigung, anders als im Prozess vorgesehen.", "type": "friction", "severity": 2, "frequency": "frequent", "owner": "Leitung Sekretariat Musikschule", "status": "open", "evidence_refs": ["m1-08", "anf-21", "doc-02"]}], "edge_cases": [{"text": "Wer den Anmeldeschluss verpasst, kommt direkt auf die Warteliste.", "evidence_refs": ["anf-12", "doc-01"]}], "evidence_refs": ["m1-07", "web-03", "anf-08"]}]}, {"id": "warten", "name": "Auf einen Platz warten", "description": "Bei der Einteilung im Mai erhält gut die Hälfte der Kinder sofort einen Platz und nimmt ihn an; die anderen 47 % kommen auf die Warteliste. Wie lange, hängt vom Instrument ab: rund ein Monat für Streichinstrumente, über ein Jahr für Klavier und Schlagzeug. «Platzangebot annehmen» betrifft alle.", "user_intent": "Wissen, wann mein Kind anfangen kann – und den Platz nicht verpassen.", "duration": "ohne Warteliste wenige Tage; auf der Warteliste ein Monat bis über ein Jahr, je nach Instrument", "duration_days": {"typical": 213, "min": 30, "max": 486, "basis": "Anmeldung bis Platzangebot, nur Kinder auf der Warteliste (47 % der Neuanmeldungen): Median 7 Monate; Spanne = Mediane je Instrument (Streichinstrumente 1, Schlagzeug 16 Monate); umgerechnet mit 30,4 Tagen pro Monat", "evidence_refs": ["stat-03", "stat-07", "stat-06", "stat-02"]}, "kpis": [{"name": "Anteil verfallener Platzangebote", "category": "outcome", "indicator_type": "leading", "definition": "Platzangebote, deren Annahmefrist von zehn Tagen ohne Antwort ablief.", "unit": "% der Platzangebote", "current_value": 9, "target": 2, "source_ref": "stat-09", "commercial_equivalent": "Drop-off"}, {"name": "Anteil Abmeldungen während der Wartezeit", "category": "outcome", "indicator_type": "lagging", "definition": "Kinder auf der Warteliste, die vor einem Platzangebot abgemeldet werden.", "unit": "% der Kinder auf der Warteliste", "current_value": 18, "target": 10, "source_ref": "stat-08"}], "steps": [{"id": "warteliste-bescheid", "name": "Bescheid «Warteliste» erhalten", "action": "Die Eltern erhalten im Mai eine E-Mail, dass ihr Kind auf der Warteliste steht – ohne Stand und ohne voraussichtliche Wartezeit. Bis zum Platzangebot kommt keine weitere Mitteilung.", "channel": "email", "touchpoint": "E-Mail «Warteliste»", "counterpart": "Musikschule (Sekretariat)", "is_transition": true, "thinking": [{"text": "Wie lange dauert das – Wochen oder ein Jahr?", "evidence_refs": ["m1-09", "anf-13"]}], "feeling": {"valence": -1, "label": "ratlos – sie war so enttäuscht", "evidence_refs": ["m1-10"]}, "pain_points": [{"id": "pp-warteliste-ohne-stand", "text": "Der Bescheid nennt weder Stand noch voraussichtliche Wartezeit, und danach kommt keine Mitteilung mehr – entgegen dem Soll «halbjährlich». Familien rufen an, oder sie geben auf.", "type": "breakdown", "severity": 4, "frequency": "frequent", "workaround": "Beim Sekretariat nachfragen; die Anmeldung zurückziehen und privat Unterricht suchen.", "owner": "Leitung Sekretariat Musikschule", "status": "open", "evidence_refs": ["m1-09", "anf-02", "anf-14", "bef-04", "web-04", "stat-08", "doc-03"]}], "edge_cases": [{"text": "Wer Klavier oder Schlagzeug lernen will, wartet im Median über ein Jahr, für Gitarre neun Monate; manche Familien suchen in der Zeit privaten Unterricht.", "evidence_refs": ["stat-04", "stat-05", "stat-06", "anf-15"]}], "recovery_paths": [{"trigger": "Bescheid ohne Stand und Wartezeit", "path": "Nachfrage beim Sekretariat: Auskunft zum ungefähren Platz auf der Liste.", "exists": true, "evidence_refs": ["m1-13"]}, {"trigger": "Bescheid ohne Stand und Wartezeit", "path": "Stand und übliche Wartezeit je Instrument selbst im Portal sehen.", "exists": false, "evidence_refs": ["m1-23"]}], "evidence_refs": ["stat-02"]}, {"id": "warteliste-nachfragen", "name": "Beim Sekretariat nachfragen", "action": "Die Eltern rufen beim Sekretariat an, um zu erfahren, ob ihr Kind noch auf der Liste steht und wie lange es noch dauert.", "channel": "phone", "touchpoint": "Telefon Sekretariat", "counterpart": "Musikschule (Sekretariat)", "is_transition": true, "thinking": [{"text": "Sind wir überhaupt noch auf der Liste?", "evidence_refs": ["m1-12", "anf-16"]}], "feeling": {"valence": -1, "label": "wollte nicht drängeln", "evidence_refs": ["m1-12"]}, "pain_points": [{"id": "pp-nachfrage-warteliste-vermeidbar", "text": "Vermeidbarer Kontakt: Die Nachfrage ist nur nötig, weil der Bescheid davor keinen Stand nennt. Die Warteliste ist die häufigste Anfragekategorie, die meisten Anfragen kommen per Telefon.", "type": "friction", "severity": 3, "frequency": "frequent", "workaround": "Mehrmals anrufen.", "owner": "Leitung Sekretariat Musikschule", "status": "open", "evidence_refs": ["m1-11", "m1-23", "anf-02", "anf-09", "anf-13", "anf-14"]}], "kpis": [{"name": "Anteil vermeidbarer Kontakte", "category": "public_value", "indicator_type": "leading", "definition": "Anfragen der Kategorien «warteliste» (Stand, Dauer, Regeln) und «rechnung» (Betrag falsch oder unerwartet) an allen Anfragen ans Sekretariat. Die Einordnung als vermeidbar stammt von der Autorschaft dieser Journey, nicht vom Sekretariat.", "unit": "% der Anfragen", "current_value": 43, "target": 15, "source_ref": "anfragen", "commercial_equivalent": "Failure demand"}], "evidence_refs": []}, {"id": "platz-annehmen", "name": "Platzangebot annehmen", "action": "Das Platzangebot kommt per E-Mail; die Eltern müssen es innert zehn Tagen im Portal annehmen, sonst geht der Platz an die nächste Familie.", "channel": "email", "touchpoint": "E-Mail mit Platzangebot, Portal", "counterpart": "Musikschule (Sekretariat)", "is_transition": true, "thinking": [{"text": "Ein SMS vor Ablauf der Frist hätte gereicht.", "evidence_refs": ["m1-18"]}], "feeling": {"valence": -2, "label": "hätte heulen können", "evidence_refs": ["m1-16"]}, "pain_points": [{"id": "pp-platz-verfallen", "text": "Das Angebot kommt nur per E-Mail, und die Frist von zehn Tagen läuft auch in den Ferien. Wer die Mail nicht rechtzeitig sieht – Ferien, Spam-Ordner –, verliert den Platz.", "type": "breakdown", "severity": 4, "frequency": "occasional", "workaround": "Sofort anrufen und um ein neues Angebot bitten.", "owner": "Leitung Sekretariat Musikschule", "status": "open", "evidence_refs": ["m1-14", "m1-15", "stat-09", "anf-03", "anf-17", "doc-04"]}], "edge_cases": [{"text": "Ohne Warteliste läuft die Annahme reibungslos: Zusage im Mai, Annahme im Portal.", "evidence_refs": ["m2-05"]}, {"text": "Das Angebot ist per E-Mail angekündigt, im Portal aber nicht sichtbar.", "evidence_refs": ["anf-18"]}], "recovery_paths": [{"trigger": "Annahmefrist verpasst", "path": "Anruf beim Sekretariat; das Kind kommt aus Kulanz wieder zuoberst auf die Liste. Geregelt ist das nicht.", "exists": true, "evidence_refs": ["m1-17", "m1-18"]}, {"trigger": "Annahmefrist verpasst", "path": "Erinnerung per SMS vor Ablauf der Frist.", "exists": false, "evidence_refs": ["m1-18"]}], "evidence_refs": []}]}, {"id": "start", "name": "Den Start vorbereiten", "description": "Zwischen Zusage und erster Lektion: Ermässigung bei der Gemeinde beantragen, Unterrichtszeit mit der Lehrperson abmachen, Instrument besorgen. Drei Stellen, drei Kanäle.", "user_intent": "Dass mein Kind zu einer passenden Zeit und mit einem Instrument anfangen kann – zum richtigen Tarif.", "duration": "Juni bis zur ersten Lektion im August, bei Wartelistenplätzen auch unter dem Jahr", "kpis": [{"name": "Anteil Ermässigungen, die auf der ersten Rechnung stehen", "category": "outcome", "indicator_type": "leading", "definition": "100 % minus Anteil der Ermässigungen, die erst nach Versand der Rechnung berücksichtigt wurden.", "unit": "% der Ermässigungen", "current_value": 62, "target": 95, "source_ref": "stat-11"}, {"name": "Zustimmung «Unterrichtszeit gut abgestimmt»", "category": "perception", "indicator_type": "lagging", "definition": "Zustimmung in der Elternbefragung.", "unit": "% Zustimmung", "current_value": 81, "target": 85, "source_ref": "bef-05"}], "steps": [{"id": "ermaessigung-beantragen", "name": "Ermässigung beantragen", "action": "Wer von der Ermässigung weiss, druckt das Formular der Gemeinde aus und bringt es mit einer Kopie der Steuerveranlagung auf die Gemeindeverwaltung; im Juli kommt die Verfügung.", "channel": "paper_form", "touchpoint": "Antragsformular, Kopie der Steuerveranlagung, Verfügung", "counterpart": "Gemeindeverwaltung, Abteilung Bildung", "is_transition": true, "thinking": [{"text": "Muss ich jetzt der Gemeinde meinen Lohn zeigen, damit mein Kind Cello spielen kann?", "evidence_refs": ["m2-07"]}, {"text": "Mit der Verfügung ist es erledigt.", "evidence_refs": ["m2-08"]}], "feeling": {"valence": -1, "label": "unangenehm", "evidence_refs": ["m2-07"]}, "pain_points": [{"id": "pp-ermaessigung-papier", "text": "Der Antrag geht auf Papier an eine andere Stelle als die Anmeldung, mit Kopie der Steuerveranlagung und Frist Ende Juni. Ob die Musikschule die Ermässigung kennt, erfahren die Eltern erst mit der Rechnung.", "type": "friction", "severity": 3, "frequency": "frequent", "workaround": "Formular ausdrucken und persönlich vorbeibringen.", "owner": "Abteilung Bildung (Gemeinde)", "status": "open", "evidence_refs": ["m2-06", "m2-08", "tar-03", "tar-04"]}], "backstage_notes": ["Die Gemeinde meldet bewilligte Ermässigungen der Musikschule (Soll: bis 15. August, doc-07). 38 % kommen erst nach der Rechnung an (stat-11) – die Ursache des Breakdowns bei «Rechnung prüfen» liegt hier, für die Eltern unsichtbar."], "evidence_refs": ["stat-10"]}, {"id": "unterrichtszeit-abmachen", "name": "Unterrichtszeit abmachen", "action": "Die Lehrperson meldet sich über einen Messenger und schlägt Zeiten vor; die Eltern stimmen sie mit Schule und Freizeit ab.", "channel": "chat", "touchpoint": "Messenger der Lehrperson", "counterpart": "Lehrperson der Musikschule", "is_transition": true, "feeling": {"valence": 1, "label": "ganz unkompliziert", "evidence_refs": ["m1-19", "m2-17"]}, "pain_points": [{"id": "pp-stundenplan-kollision", "text": "Ändert die Volksschule im August den Stundenplan, kollidiert die Unterrichtszeit. Die neue Abstimmung in der Messenger-Gruppe kostete im Beispiel drei Wochen ohne Unterricht.", "type": "friction", "severity": 3, "frequency": "occasional", "workaround": "Neue Zeit in der Messenger-Gruppe suchen; eine andere Lehrperson anfragen.", "owner": "Schulleitung Musikschule", "status": "open", "evidence_refs": ["m3-14", "m3-15", "anf-06", "anf-20"]}], "edge_cases": [{"text": "Statt der vorgesehenen Schul-App nutzen Lehrpersonen einen Messenger. Für die Eltern wird er zum Kanal für alles – auch für die Abmeldung, die dort nicht gilt.", "evidence_refs": ["m1-19", "m2-17", "m3-06", "doc-06"]}], "evidence_refs": ["bef-05", "doc-05", "ws-03"]}, {"id": "instrument-besorgen", "name": "Instrument mieten oder kaufen", "action": "Die Eltern mieten das Instrument bei einem Musikgeschäft von der Liste der Musikschule oder kaufen eines.", "channel": "in_person", "touchpoint": "Musikgeschäft", "counterpart": "Musikgeschäft", "is_transition": true, "thinking": [{"text": "Wo mieten wir das Instrument, und was kostet es?", "evidence_refs": ["anf-19"]}], "feeling": null, "pain_points": [{"id": "pp-instrumentkosten-ueberraschend", "text": "Miet- oder Kaufkosten für das Instrument – 35 Franken im Monat für ein Cello, 600 Franken für ein gebrauchtes Digitalpiano – kennt knapp die Hälfte der Eltern erst nach der Zusage.", "type": "friction", "severity": 3, "frequency": "frequent", "workaround": "Gebraucht kaufen oder mieten.", "owner": "Leitung Sekretariat Musikschule", "status": "open", "evidence_refs": ["m2-15", "m2-16", "m1-20", "bef-03", "anf-07"]}], "edge_cases": [{"text": "Klavier und Schlagzeug lassen sich kaum mieten; die Familie kauft – und muss es rasch tun, wenn das Platzangebot kommt.", "evidence_refs": ["m1-20", "m1-21"]}], "evidence_refs": ["tar-05"]}, {"id": "erste-lektion", "name": "Erste Lektion", "action": "Das Kind besucht die erste Lektion im Musikzimmer des Schulhauses; die Eltern bringen es hin oder holen es ab.", "channel": "in_person", "touchpoint": "Musikzimmer im Schulhaus", "counterpart": "Lehrperson der Musikschule", "is_transition": true, "feeling": {"valence": 2, "label": "richtig stolz", "evidence_refs": ["m1-22"]}, "evidence_refs": ["m1-22", "m3-01"]}]}, {"id": "bezahlen", "name": "Die erste Rechnung", "description": "Anfang September kommt die Semesterrechnung. Für Familien mit Ermässigung oft zum vollen Tarif – die Ursache liegt bei der Meldung der Gemeinde an die Musikschule, zwei Schritte früher.", "user_intent": "Den richtigen Betrag bezahlen – einmal und ohne nachzufragen.", "duration": "September bis Oktober", "kpis": [{"name": "Anteil Eltern, die wegen einer Rechnung nachfragen mussten", "category": "outcome", "indicator_type": "leading", "definition": "Zustimmung zu «Ich musste wegen einer Rechnung bei der Musikschule oder der Gemeinde nachfragen» in der Elternbefragung.", "unit": "% Zustimmung", "current_value": 22, "target": 5, "source_ref": "bef-06"}], "steps": [{"id": "rechnung-pruefen", "name": "Rechnung prüfen", "action": "Die Eltern erhalten die Semesterrechnung per Post: Schulgeld und einmalige Einschreibegebühr – bei Familien mit Ermässigung oft noch zum vollen Tarif.", "channel": "letter", "touchpoint": "Semesterrechnung", "counterpart": "Musikschule (Sekretariat)", "is_transition": true, "thinking": [{"text": "Ich hatte doch alles gemacht.", "evidence_refs": ["m2-10"]}], "feeling": {"valence": -2, "label": "wirklich sauer", "evidence_refs": ["m2-10"]}, "pain_points": [{"id": "pp-volle-rechnung", "text": "Volle Rechnung trotz bewilligter Ermässigung: Bei 38 % der Ermässigungen kommt die Meldung der Gemeinde erst nach der Rechnung an. Die Familie streckt den vollen Betrag vor oder riskiert eine Mahnung.", "type": "breakdown", "severity": 4, "frequency": "frequent", "workaround": "Den vollen Betrag bezahlen, um keine Mahnung zu riskieren, und nachfragen.", "owner": "Abteilung Bildung (Gemeinde)", "status": "open", "evidence_refs": ["m2-09", "stat-11", "anf-04", "anf-22", "anf-24", "doc-07"]}, {"id": "pp-einschreibegebuehr-unerwartet", "text": "Die einmalige Einschreibegebühr von 40 Franken steht auf der ersten Rechnung, aber nicht in der Bestätigung der Anmeldung.", "type": "friction", "severity": 2, "frequency": "occasional", "owner": "Leitung Sekretariat Musikschule", "status": "open", "evidence_refs": ["anf-21", "tar-02", "m2-09"]}], "recovery_paths": [{"trigger": "Volle Rechnung trotz Ermässigung", "path": "Nachfrage; nach einigen Wochen kommt eine Gutschrift. Bis dahin streckt die Familie den Betrag vor.", "exists": true, "evidence_refs": ["m2-13", "m2-14"]}], "evidence_refs": ["tar-01", "stat-12", "doc-08"]}, {"id": "rechnung-nachfragen", "name": "Wegen der Rechnung nachfragen", "action": "Die Eltern rufen bei der Musikschule an, werden an die Gemeinde verwiesen und von dort zurück an die Musikschule.", "channel": "phone", "touchpoint": "Telefon Sekretariat und Abteilung Bildung", "counterpart": "Musikschule (Sekretariat) und Gemeindeverwaltung, Abteilung Bildung", "is_transition": true, "thinking": [{"text": "Wer ist zuständig?", "evidence_refs": ["anf-23"]}], "feeling": {"valence": -1, "label": "hin- und hergeschoben", "evidence_refs": ["m2-12"]}, "pain_points": [{"id": "pp-nachfrage-rechnung-vermeidbar", "text": "Vermeidbarer Kontakt: Die Nachfrage ist nur nötig, weil die Ermässigung nicht rechtzeitig übermittelt wurde. Musikschule und Gemeinde verweisen aufeinander.", "type": "friction", "severity": 3, "frequency": "frequent", "workaround": "Bei beiden Stellen anrufen, bis eine die Korrektur auslöst.", "owner": "Abteilung Bildung (Gemeinde)", "status": "open", "evidence_refs": ["m2-11", "m2-12", "anf-04", "anf-23", "bef-06"]}], "evidence_refs": []}]}, {"id": "weiterfuehren", "name": "Weitermachen oder aufhören", "description": "Gegen Ende des ersten Unterrichtsjahrs: Will das Kind weiterspielen? Wer aufhören will, muss bis 31. Mai schriftlich beim Sekretariat abmelden – die Folgen einer verpassten Frist kommen erst mit der Rechnung im September.", "user_intent": "Entscheiden, ob mein Kind weiterspielt – und das richtig mitteilen.", "duration": "Januar bis Mai; Folgen bis zur Rechnung im September", "kpis": [{"name": "Anteil verspäteter Abmeldungen", "category": "outcome", "indicator_type": "leading", "definition": "Abmeldungen, die nach dem 31. Mai bzw. 30. November eingehen; das folgende Semester wird verrechnet.", "unit": "% der Abmeldungen", "current_value": 27, "target": 5, "source_ref": "stat-14"}, {"name": "Anteil Kinder, die nach dem ersten Jahr weiterspielen", "category": "public_value", "indicator_type": "lagging", "definition": "100 % minus Anteil der Kinder im ersten Unterrichtsjahr, die auf Ende Schuljahr abgemeldet werden.", "unit": "% der Kinder im ersten Jahr", "current_value": 77, "target": null, "source_ref": "stat-13", "commercial_equivalent": "Retention Rate"}], "steps": [{"id": "weitermachen-entscheiden", "name": "Entscheiden, ob es weitergeht", "action": "Wenn das Üben zum Streit wird, wägen die Eltern ab, ob das Kind aufhören darf.", "thinking": [{"text": "Sollen wir aufhören, oder ist das nur eine Phase?", "evidence_refs": ["m3-03"]}], "feeling": {"valence": -1, "label": "hin- und hergerissen", "evidence_refs": ["m3-04"]}, "edge_cases": [{"text": "Jedes vierte bis fünfte Kind hört nach dem ersten Jahr auf, obwohl die meisten nach Einschätzung der Eltern gern in den Unterricht gehen.", "evidence_refs": ["stat-13", "bef-08", "m2-18", "m3-02"]}], "evidence_refs": ["m3-02", "m3-05"]}, {"id": "abmelden", "name": "Abmelden", "action": "Die Eltern teilen der Lehrperson im Messenger mit, dass das Kind aufhört – so, wie sie alles andere auch mit ihr klären. Gültig wäre nur ein Brief an das Sekretariat bis 31. Mai.", "channel": "chat", "touchpoint": "Messenger der Lehrperson", "counterpart": "Lehrperson der Musikschule", "is_transition": true, "thinking": [{"text": "Für mich war die Sache damit erledigt.", "evidence_refs": ["m3-07"]}], "feeling": null, "pain_points": [{"id": "pp-abmeldung-ungueltig", "text": "Die Abmeldung bei der Lehrperson gilt nicht; die Lehrperson leitet sie nicht weiter und weist nicht auf den richtigen Weg hin. Die Frist verstreicht unbemerkt – bei 41 % der verspäteten Abmeldungen wusste die Lehrperson Bescheid.", "type": "breakdown", "severity": 5, "frequency": "frequent", "workaround": "Gesuch um Erlass; das Kind besucht das bezahlte Semester.", "owner": "Leitung Sekretariat Musikschule", "status": "open", "evidence_refs": ["m3-06", "m3-09", "m3-10", "stat-14", "stat-15", "anf-05", "anf-25", "anf-26", "anf-27", "bef-07", "tar-06"]}], "recovery_paths": [{"trigger": "Abmeldefrist verpasst", "path": "Gesuch um Erlass an die Schulleitung – gutgeheissen nur bei Umzug oder Krankheit (6 von 31).", "exists": true, "evidence_refs": ["m3-11", "stat-16", "stat-17", "tar-08"]}, {"trigger": "Abmeldefrist verpasst", "path": "Die Lehrperson leitet eine Abmeldung ans Sekretariat weiter, oder das Sekretariat nennt die nächste Frist gross auf jeder Rechnung.", "exists": false, "evidence_refs": ["m3-18"]}], "evidence_refs": ["m3-05", "doc-09", "web-05"]}, {"id": "semester-bezahlen", "name": "Nicht abgemeldetes Semester bezahlen", "action": "Im September kommt die Rechnung für das Herbstsemester. Die Eltern bezahlen und schicken das Kind noch ein Semester in den Unterricht; auf Ende Januar melden sie per Brief beim Sekretariat ab und erhalten eine Bestätigung.", "channel": "letter", "touchpoint": "Rechnung Herbstsemester, Abmeldebrief, Bestätigung", "counterpart": "Musikschule (Sekretariat)", "is_transition": true, "thinking": [{"text": "Wenn wir schon zahlen, dann soll er wenigstens hingehen.", "evidence_refs": ["m3-13"]}], "feeling": {"valence": -2, "label": "hat richtig wehgetan", "evidence_refs": ["m3-12"]}, "pain_points": [{"id": "pp-semester-ohne-nutzen", "text": "Folgekosten der ungültigen Abmeldung: 820 Franken für ein Semester, das die Familie abgemeldet glaubte. Das Kind geht lustlos weiter, oder die Familie zahlt für Unterricht, der nicht stattfindet.", "type": "friction", "severity": 4, "frequency": "frequent", "workaround": "Bezahlen und das Semester nutzen; Gesuch um Erlass.", "owner": "Leitung Sekretariat Musikschule", "status": "open", "evidence_refs": ["m3-08", "m3-12", "m3-13", "tar-07", "stat-14"]}], "edge_cases": [{"text": "Beim zweiten Anlauf – Brief ans Sekretariat, fristgerecht – kommt eine Bestätigung.", "evidence_refs": ["m3-16"]}], "evidence_refs": ["m3-17"]}]}], "opportunities": [{"id": "opp-kosten-auf-einen-blick", "hmw": "Wie könnten Familien vor der Anmeldung auf einen Blick sehen, was ein Jahr Unterricht kostet – mit Einschreibegebühr, Instrument und möglicher Ermässigung?", "description": "Eine Kostenübersicht pro Instrument auf der Seite «Tarife» statt eines PDF, mit dem Hinweis auf die Ermässigung der Gemeinde und typischen Mietkosten; dieselben Angaben auf dem Flyer und in der Bestätigung.", "linked_pain_points": ["pp-tarif-unverstaendlich", "pp-ermaessigung-unbekannt", "pp-instrumentkosten-ueberraschend", "pp-flyer-ohne-kosten", "pp-bestaetigung-ohne-kosten", "pp-einschreibegebuehr-unerwartet"], "phase_ref": "entdecken", "step_ref": "kosten-klaeren", "user_impact": 4, "public_value": 4, "effort": 2, "owner": "Leitung Sekretariat Musikschule", "status": "open", "stories": [{"text": "Als Elternteil möchte ich vor der Anmeldung sehen, was ein Jahr Unterricht inklusive Instrument kostet, damit ich ohne Überraschung entscheiden kann.", "mvp": true}, {"text": "Als Familie mit kleinem Einkommen möchte ich bei den Tarifen erfahren, dass es eine Ermässigung gibt und wie ich sie beantrage.", "mvp": true}, {"text": "Als Elternteil möchte ich in der Bestätigung der Anmeldung die Kosten noch einmal finden.", "mvp": false}], "evidence_refs": ["bef-01", "bef-02", "bef-03", "web-01"]}, {"id": "opp-warteliste-stand", "hmw": "Wie könnten Familien auf der Warteliste ihren Stand und die übliche Wartezeit für ihr Instrument selbst sehen?", "description": "Stand auf der Liste und Median-Wartezeit je Instrument im Portal; halbjährliche Mitteilung, wie im Prozess vorgesehen. Setzt bei der Ursache der Nachfragen an, nicht beim Telefon.", "linked_pain_points": ["pp-warteliste-ohne-stand", "pp-nachfrage-warteliste-vermeidbar"], "phase_ref": "warten", "step_ref": "warteliste-bescheid", "user_impact": 4, "public_value": 4, "effort": 3, "owner": "Leitung Sekretariat Musikschule", "status": "open", "stories": [{"text": "Als Elternteil möchte ich im Portal sehen, an welcher Stelle mein Kind auf der Warteliste steht, damit ich nicht anrufen muss.", "mvp": true}, {"text": "Als Elternteil möchte ich vor der Anmeldung sehen, wie lange man für welches Instrument üblicherweise wartet.", "mvp": false}], "evidence_refs": ["m1-23", "anf-02", "bef-04"]}, {"id": "opp-platz-nicht-verlieren", "hmw": "Wie könnten wir verhindern, dass ein Platz verfällt, nur weil das Angebot in den Ferien kam?", "description": "Erinnerung per SMS drei Tage vor Ablauf der Frist; Annahme auch per Antwort oder Telefon; Frist, die in den Schulferien ruht.", "linked_pain_points": ["pp-platz-verfallen"], "phase_ref": "warten", "step_ref": "platz-annehmen", "user_impact": 5, "public_value": 3, "effort": 1, "owner": "Leitung Sekretariat Musikschule", "status": "open", "stories": [{"text": "Als Elternteil möchte ich vor Ablauf der Annahmefrist eine Erinnerung aufs Telefon erhalten, damit ich den Platz nicht verpasse.", "mvp": true}, {"text": "Als Elternteil möchte ich einen Platz auch während der Ferien annehmen können, ohne das Portal zu öffnen.", "mvp": false}], "evidence_refs": ["m1-18", "stat-09"]}, {"id": "opp-ermaessigung-mit-anmeldung", "hmw": "Wie könnten Familien die Ermässigung zusammen mit der Anmeldung beantragen – und sicher sein, dass sie auf der ersten Rechnung steht?", "description": "Setzt bei der Ursache an, nicht bei der Rechnung: Antrag im Anmeldeportal, Entscheid der Gemeinde vor der Rechnung, Bestätigung an die Familie, dass die Musikschule die Ermässigung kennt. Erfordert eine geregelte Datenübergabe zwischen Gemeinde und Musikschule (Steuerdaten).", "linked_pain_points": ["pp-ermaessigung-papier", "pp-volle-rechnung", "pp-nachfrage-rechnung-vermeidbar", "pp-ermaessigung-unbekannt"], "phase_ref": "start", "step_ref": "ermaessigung-beantragen", "user_impact": 5, "public_value": 5, "effort": 4, "owner": "Abteilung Bildung (Gemeinde)", "status": "open", "stories": [{"text": "Als Familie mit Ermässigung möchte ich auf der ersten Rechnung den ermässigten Betrag sehen, damit ich nichts vorstrecken und nicht nachfragen muss.", "mvp": true}, {"text": "Als Elternteil möchte ich die Ermässigung bei der Anmeldung angeben und die Unterlagen online einreichen.", "mvp": false}], "evidence_refs": ["m2-19", "stat-11", "bef-06"]}, {"id": "opp-abmeldung-ankommen", "hmw": "Wie könnten wir dafür sorgen, dass eine Abmeldung ankommt, auch wenn Eltern sie dort aussprechen, wo sie mit der Musikschule reden – bei der Lehrperson?", "description": "Lehrpersonen leiten Abmeldungen ans Sekretariat weiter oder verweisen auf ein Abmeldeformular; das Sekretariat bestätigt jede Abmeldung; die nächste Frist steht gross auf jeder Rechnung.", "linked_pain_points": ["pp-abmeldung-ungueltig", "pp-semester-ohne-nutzen"], "phase_ref": "weiterfuehren", "step_ref": "abmelden", "user_impact": 5, "public_value": 4, "effort": 2, "owner": "Schulleitung Musikschule", "status": "open", "stories": [{"text": "Als Elternteil möchte ich, dass eine Abmeldung bei der Lehrperson beim Sekretariat ankommt oder dass ich sofort erfahre, wo ich sie einreichen muss.", "mvp": true}, {"text": "Als Elternteil möchte ich auf jeder Rechnung lesen, bis wann ich für das nächste Semester abmelden kann.", "mvp": true}], "evidence_refs": ["m3-17", "m3-18", "stat-15"]}, {"id": "opp-stundenplan-abstimmen", "hmw": "Wie könnten Musikschule und Volksschule die Unterrichtszeiten so abstimmen, dass ein neuer Stundenplan im August nicht drei Wochen Unterricht kostet?", "description": "Stundenpläne der Volksschule früher an die Musikschule; Unterrichtszeiten erst nach Schulbeginn fix; Abstimmung über die Schul-App statt einen privaten Messenger.", "linked_pain_points": ["pp-stundenplan-kollision"], "phase_ref": "start", "step_ref": "unterrichtszeit-abmachen", "user_impact": 3, "public_value": 3, "effort": 4, "owner": "Schulleitung Musikschule", "status": "open", "stories": [{"text": "Als Elternteil möchte ich nach einer Stundenplanänderung innert einer Woche eine neue Unterrichtszeit haben.", "mvp": true}], "evidence_refs": ["m3-15", "anf-06"]}], "sources": [{"id": "int-m1", "title": "Interview M1 – Mutter, Tochter auf der Warteliste für Klavier", "kind": "interview", "default_class": "reported", "date": "2026-06", "n": 1, "participants": "Mutter, Tochter 8 Jahre, Wunschinstrument Klavier, rund 13 Monate Warteliste", "pii_status": "anonymised", "location": "input/interview-m1.md", "notes": "Synthetisches Transkript, gekürzt."}, {"id": "int-m2", "title": "Interview M2 – Vater, Sohn lernt Cello, Tarifermässigung", "kind": "interview", "default_class": "reported", "date": "2026-02", "n": 1, "participants": "Vater, Sohn 9 Jahre, Cello ohne Wartezeit, Familie mit Tarifermässigung", "pii_status": "anonymised", "location": "input/interview-m2.md", "notes": "Synthetisches Transkript, gekürzt."}, {"id": "int-m3", "title": "Interview M3 – Mutter, Sohn spielt Gitarre, Abmeldung über die Lehrperson", "kind": "interview", "default_class": "reported", "date": "2026-03", "n": 1, "participants": "Mutter, Sohn 10 Jahre, Gitarre seit einem Jahr, verspätete Abmeldung", "pii_status": "anonymised", "location": "input/interview-m3.md", "notes": "Synthetisches Transkript, gekürzt."}, {"id": "anfragen", "title": "Anfragen an das Sekretariat der Musikschule (anonymisierter Export)", "kind": "inquiry_log", "default_class": "observed", "date": "2025-01 bis 2025-12", "n": 30, "participants": "Eltern", "pii_status": "anonymised", "location": "input/anfragen-export.csv", "notes": "Synthetische Stichprobe von 30 Anfragen; Kategorien vom Sekretariat vergeben, Kurztexte ohne Namen und Adressen."}, {"id": "statistik", "title": "Kennzahlen der Musikschulverwaltung 2024/25 und 2025/26", "kind": "case_records", "default_class": "observed", "date": "Schuljahre 2024/25 und 2025/26", "n": 412, "participants": "Neuanmeldungen, Wartelisten, Rechnungen und Abmeldungen (Aggregate)", "pii_status": "none", "location": "input/musikschul-statistik.csv", "notes": "Aggregierte Auswertung aus der Schulverwaltungssoftware; n = Neuanmeldungen 2025/26."}, {"id": "befragung", "title": "Elternbefragung 2026 (erstes und zweites Unterrichtsjahr)", "kind": "survey", "default_class": "reported", "date": "2026-05", "n": 318, "participants": "Eltern von Kindern im ersten oder zweiten Unterrichtsjahr", "pii_status": "anonymised", "location": "input/elternbefragung.csv", "notes": "Aggregierte Zustimmungswerte; erreicht nur angemeldete Familien."}, {"id": "analytics", "title": "Webanalytics Musikschule und Gemeinde", "kind": "analytics", "default_class": "observed", "date": "2025", "pii_status": "none", "location": "input/webanalytics.csv"}, {"id": "tarife", "title": "Tarifordnung der Musikschule (Auszug, öffentlich)", "kind": "internal_document", "default_class": "assumed", "date": "2025", "pii_status": "none", "location": "input/tarifordnung-auszug.md", "notes": "Öffentlicher Erlass; als internal_document erfasst, weil das Schema keine Quellenart für Erlasse und Reglemente kennt. Sagt, was gelten soll, nicht was bezahlt wurde."}, {"id": "prozessdok", "title": "Prozessbeschrieb Anmeldung, Einteilung und Abmeldung (Soll, intern)", "kind": "internal_document", "default_class": "assumed", "date": "2025", "pii_status": "none", "location": "input/prozess-anmeldung-intern.md"}, {"id": "workshop", "title": "Hypothesen-Workshop ohne Eltern", "kind": "workshop", "default_class": "assumed", "date": "2026-04-22", "n": 6, "participants": "Schulleitung und Sekretariat der Musikschule, Vertretung der Lehrpersonen, Abteilung Bildung der Gemeinde (Rollen)", "pii_status": "none", "location": "input/workshop-notizen.md"}], "evidence": [{"id": "m1-01", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Sie kam heim und hat nur noch vom Klavier geredet.", "locator": "Zeile 7", "signal": "positive", "phase_hint": "entdecken", "persona_hint": "eltern-erstanmeldung", "tags": ["gefuehl-kind"]}, {"id": "m1-02", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Ich habe mich so gefreut, dass sie etwas gefunden hat.", "locator": "Zeile 7", "signal": "positive", "phase_hint": "entdecken", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": 2, "label": "so gefreut", "explicit": true}}, {"id": "m1-03", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Auf dem Flyer stand nur: Anmeldung bis 31. März. Nichts zu den Kosten, nichts zu Wartezeiten.", "locator": "Zeile 8", "signal": "friction", "phase_hint": "entdecken", "persona_hint": "eltern-erstanmeldung", "tags": ["frist", "kosten"]}, {"id": "m1-04", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Die Tarife sind ein PDF mit einer Tabelle. Ich habe nicht verstanden, ob 820 Franken pro Jahr oder pro Semester gemeint sind.", "locator": "Zeile 10", "value": 820, "unit": "CHF", "signal": "friction", "phase_hint": "entdecken", "channel_hint": "web", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"], "contradicts": ["ws-01"]}, {"id": "m1-05", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Ich war ehrlich gesagt verwirrt.", "locator": "Zeile 11", "signal": "friction", "phase_hint": "entdecken", "channel_hint": "web", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": -1, "label": "verwirrt", "explicit": true}}, {"id": "m1-06", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Wir haben uns dann gesagt: Wir melden sie an und schauen dann.", "locator": "Zeile 11", "signal": "workaround", "phase_hint": "anmelden", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "m1-07", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Das Online-Formular war in zehn Minuten erledigt. Das war wirklich einfach.", "locator": "Zeile 13", "signal": "positive", "phase_hint": "anmelden", "channel_hint": "web", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": 1, "label": "wirklich einfach", "explicit": false}}, {"id": "m1-08", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Danach kam sofort eine E-Mail: Ihre Anmeldung ist eingegangen.", "locator": "Zeile 14", "signal": "neutral", "phase_hint": "anmelden", "channel_hint": "email", "persona_hint": "eltern-erstanmeldung"}, {"id": "m1-09", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Im Mai kam eine zweite E-Mail: Ihre Tochter ist auf der Warteliste. Kein Wort, wie lange das dauert oder an welcher Stelle wir sind.", "locator": "Zeile 16", "signal": "breakdown", "phase_hint": "warten", "channel_hint": "email", "persona_hint": "eltern-erstanmeldung", "contradicts": ["doc-03"]}, {"id": "m1-10", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Sie war so enttäuscht, und ich wusste nicht, was ich ihr sagen soll.", "locator": "Zeile 17", "signal": "friction", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": -1, "label": "ratlos", "explicit": false}, "tags": ["gefuehl-kind"]}, {"id": "m1-11", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Zweimal angerufen, im September und im Januar.", "locator": "Zeile 19", "signal": "workaround", "phase_hint": "warten", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["vermeidbar"]}, {"id": "m1-12", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Ich wollte nicht drängeln, aber man fragt sich ja: Sind wir überhaupt noch auf der Liste?", "locator": "Zeile 19", "signal": "friction", "phase_hint": "warten", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": -1, "label": "wollte nicht drängeln", "explicit": false}, "tags": ["vermeidbar"]}, {"id": "m1-13", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Beim zweiten Mal hat mir die Frau gesagt, wir seien etwa an zwölfter Stelle. Das hat schon geholfen.", "locator": "Zeile 20", "signal": "positive", "phase_hint": "warten", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung"}, {"id": "m1-14", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Das Platzangebot kam per E-Mail, genau in der ersten Woche der Sportferien.", "locator": "Zeile 22", "signal": "breakdown", "phase_hint": "warten", "channel_hint": "email", "persona_hint": "eltern-erstanmeldung", "tags": ["frist"]}, {"id": "m1-15", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Als wir zurück waren, war die Frist von zehn Tagen abgelaufen und der Platz weg.", "locator": "Zeile 23", "signal": "breakdown", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung", "tags": ["frist"]}, {"id": "m1-16", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Ich hätte heulen können. Ein Jahr gewartet, und dann verpasst man es wegen einer E-Mail.", "locator": "Zeile 24", "signal": "breakdown", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": -2, "label": "hätte heulen können", "explicit": true}}, {"id": "m1-17", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Ich habe sofort angerufen. Sie haben uns wieder zuoberst auf die Liste gesetzt, und im April kam ein neues Angebot.", "locator": "Zeile 26", "signal": "workaround", "phase_hint": "warten", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung"}, {"id": "m1-18", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Das war kulant. Aber das wusste ich vorher ja nicht. Ein SMS vor Ablauf der Frist hätte gereicht.", "locator": "Zeile 27", "signal": "need", "phase_hint": "warten", "channel_hint": "sms", "persona_hint": "eltern-erstanmeldung", "tags": ["frist"]}, {"id": "m1-19", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Die Lehrerin hat mir über den Messenger geschrieben und drei Zeiten vorgeschlagen. Das ging ganz unkompliziert.", "locator": "Zeile 29", "signal": "positive", "phase_hint": "start", "channel_hint": "chat", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": 1, "label": "ganz unkompliziert", "explicit": false}, "tags": ["messenger"], "contradicts": ["doc-06"]}, {"id": "m1-20", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Wir haben ein Digitalpiano gekauft, gebraucht, für 600 Franken.", "locator": "Zeile 31", "value": 600, "unit": "CHF", "signal": "neutral", "phase_hint": "start", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "m1-21", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Dass man ein Instrument zu Hause braucht, war klar, aber nicht, dass es so schnell gehen muss.", "locator": "Zeile 31", "signal": "friction", "phase_hint": "start", "persona_hint": "eltern-erstanmeldung"}, {"id": "m1-22", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Als sie nach der ersten Stunde rauskam, hat sie gestrahlt. Ich war richtig stolz.", "locator": "Zeile 33", "signal": "positive", "phase_hint": "start", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": 2, "label": "richtig stolz", "explicit": true}, "tags": ["gefuehl-kind"]}, {"id": "m1-23", "source_ref": "int-m1", "class": "reported", "kind": "quote", "text": "Wenn ich auf der Website hätte sehen können, wo wir auf der Liste stehen. Dann hätte ich nicht anrufen müssen.", "locator": "Zeile 35", "signal": "need", "phase_hint": "warten", "channel_hint": "web", "persona_hint": "eltern-erstanmeldung", "tags": ["vermeidbar"]}, {"id": "m2-01", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Er wollte eigentlich Schlagzeug, aber dort war die Warteliste lang, und das Cello hat ihm auch gefallen.", "locator": "Zeile 7", "signal": "workaround", "phase_hint": "entdecken", "persona_hint": "eltern-erstanmeldung", "tags": ["gefuehl-kind"]}, {"id": "m2-02", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "820 Franken pro Semester, das ist für uns viel Geld. Ich hätte ihn fast nicht angemeldet.", "locator": "Zeile 9", "value": 820, "unit": "CHF pro Semester", "signal": "friction", "phase_hint": "entdecken", "channel_hint": "web", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "m2-03", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Von der Ermässigung habe ich erst später erfahren. Eine andere Mutter hat es mir beim Fussballtraining gesagt.", "locator": "Zeile 10", "signal": "workaround", "phase_hint": "entdecken", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "m2-04", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Auf der Seite der Musikschule stand nichts davon. Das ist auf der Website der Gemeinde, unter Bildung.", "locator": "Zeile 11", "signal": "friction", "phase_hint": "entdecken", "channel_hint": "web", "persona_hint": "eltern-erstanmeldung"}, {"id": "m2-05", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Online, ohne Probleme. Im Mai kam die Zusage per E-Mail, und ich habe im Portal angenommen.", "locator": "Zeile 13", "signal": "positive", "phase_hint": "warten", "channel_hint": "email", "persona_hint": "eltern-erstanmeldung"}, {"id": "m2-06", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Das Formular musste ich ausdrucken und mit einer Kopie der Steuerveranlagung auf die Gemeinde bringen.", "locator": "Zeile 15", "signal": "friction", "phase_hint": "start", "channel_hint": "paper_form", "persona_hint": "eltern-erstanmeldung"}, {"id": "m2-07", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Muss ich jetzt der Gemeinde meinen Lohn zeigen, damit mein Kind Cello spielen kann? Das war mir unangenehm.", "locator": "Zeile 16", "signal": "friction", "phase_hint": "start", "channel_hint": "paper_form", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": -1, "label": "unangenehm", "explicit": true}}, {"id": "m2-08", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Im Juli kam die Verfügung: 50 Prozent. Ich habe die Verfügung bekommen und dachte, damit ist es erledigt.", "locator": "Zeile 17", "signal": "neutral", "phase_hint": "start", "channel_hint": "letter", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "m2-09", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Im September kam die Rechnung über 860 Franken, also der volle Betrag und noch die Einschreibegebühr.", "locator": "Zeile 19", "value": 860, "unit": "CHF", "signal": "breakdown", "phase_hint": "bezahlen", "channel_hint": "letter", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"], "contradicts": ["doc-07"]}, {"id": "m2-10", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Da war ich wirklich sauer. Ich hatte doch alles gemacht.", "locator": "Zeile 20", "signal": "breakdown", "phase_hint": "bezahlen", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": -2, "label": "wirklich sauer", "explicit": true}}, {"id": "m2-11", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Ich habe bei der Musikschule angerufen. Dort hiess es, die Ermässigung sei Sache der Gemeinde.", "locator": "Zeile 22", "signal": "friction", "phase_hint": "bezahlen", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["vermeidbar"]}, {"id": "m2-12", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Die Gemeinde hat gesagt, sie hätten das gemeldet, die Musikschule müsse die Rechnung korrigieren. Ich kam mir hin- und hergeschoben vor.", "locator": "Zeile 23", "signal": "friction", "phase_hint": "bezahlen", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": -1, "label": "hin- und hergeschoben", "explicit": true}, "tags": ["vermeidbar"]}, {"id": "m2-13", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Bezahlt habe ich trotzdem den vollen Betrag, weil ich keine Mahnung wollte.", "locator": "Zeile 24", "signal": "workaround", "phase_hint": "bezahlen", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "m2-14", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Nach fünf Wochen kam eine Gutschrift. Das Geld war also zurück, aber in dem Monat war es knapp.", "locator": "Zeile 25", "value": 5, "unit": "Wochen", "signal": "positive", "phase_hint": "bezahlen", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "m2-15", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Die Musikschule hat eine Liste mit Musikgeschäften geschickt. Wir mieten das Cello für 35 Franken im Monat.", "locator": "Zeile 27", "value": 35, "unit": "CHF pro Monat", "signal": "neutral", "phase_hint": "start", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "m2-16", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Dass noch die Miete fürs Cello dazukommt, hat mir vorher niemand gesagt.", "locator": "Zeile 28", "signal": "friction", "phase_hint": "start", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "m2-17", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Die Lehrerin hat uns über den Messenger geschrieben. Das war gut, sie hat auf das Fussballtraining Rücksicht genommen.", "locator": "Zeile 30", "signal": "positive", "phase_hint": "start", "channel_hint": "chat", "persona_hint": "eltern-erstanmeldung", "tags": ["messenger"], "contradicts": ["doc-06"]}, {"id": "m2-18", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Er geht gern hin. Für uns ist es eine grosse Sache, dass er das machen kann.", "locator": "Zeile 32", "signal": "positive", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "tags": ["gefuehl-kind"]}, {"id": "m2-19", "source_ref": "int-m2", "class": "reported", "kind": "quote", "text": "Wenn man die Ermässigung gleich bei der Anmeldung angeben könnte. Und wenn sie dann einfach auf der Rechnung steht.", "locator": "Zeile 34", "signal": "need", "phase_hint": "start", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "m3-01", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Am Anfang super. Die Lehrerin ist toll, und er hat zu Hause von sich aus geübt.", "locator": "Zeile 7", "signal": "positive", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "tags": ["gefuehl-kind"]}, {"id": "m3-02", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Nach den Weihnachtsferien wurde es zäh. Jeden Abend Streit ums Üben.", "locator": "Zeile 8", "signal": "friction", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "tags": ["gefuehl-kind"]}, {"id": "m3-03", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Er mag nicht mehr üben. Sollen wir aufhören, oder ist das nur eine Phase?", "locator": "Zeile 9", "signal": "need", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung"}, {"id": "m3-04", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Ich war hin- und hergerissen. Man will ja nicht, dass das Kind beim ersten Widerstand aufgibt.", "locator": "Zeile 10", "signal": "neutral", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": -1, "label": "hin- und hergerissen", "explicit": true}}, {"id": "m3-05", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Im Mai haben wir gesagt: Nach den Sommerferien hört er auf.", "locator": "Zeile 12", "signal": "neutral", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung"}, {"id": "m3-06", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Ich habe es der Lehrerin über den Messenger geschrieben, wie alles andere auch. Sie hat geantwortet: Schade, danke für die Info.", "locator": "Zeile 13", "signal": "breakdown", "phase_hint": "weiterfuehren", "channel_hint": "chat", "persona_hint": "eltern-erstanmeldung", "tags": ["messenger", "frist"], "contradicts": ["doc-09"]}, {"id": "m3-07", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Für mich war die Sache damit erledigt.", "locator": "Zeile 14", "signal": "neutral", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung"}, {"id": "m3-08", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Im September kam die Rechnung fürs Herbstsemester, 820 Franken.", "locator": "Zeile 16", "value": 820, "unit": "CHF", "signal": "breakdown", "phase_hint": "weiterfuehren", "channel_hint": "letter", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "m3-09", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Die Abmeldung müsse schriftlich ans Sekretariat gehen, bis Ende Mai. Eine Nachricht an die Lehrerin gelte nicht.", "locator": "Zeile 17", "signal": "breakdown", "phase_hint": "weiterfuehren", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["frist", "messenger"]}, {"id": "m3-10", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Das stand wohl irgendwo im Kleingedruckten. Aber wir haben ein ganzes Jahr nur mit der Lehrerin kommuniziert.", "locator": "Zeile 18", "signal": "friction", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "tags": ["frist", "messenger"], "contradicts": ["ws-05"]}, {"id": "m3-11", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Ich habe ein Gesuch um Erlass geschrieben. Abgelehnt.", "locator": "Zeile 19", "signal": "workaround", "phase_hint": "weiterfuehren", "channel_hint": "letter", "persona_hint": "eltern-erstanmeldung"}, {"id": "m3-12", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "820 Franken für etwas, das wir abgemeldet hatten. Das hat richtig wehgetan.", "locator": "Zeile 20", "value": 820, "unit": "CHF", "signal": "breakdown", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "emotion_hint": {"valence": -2, "label": "hat richtig wehgetan", "explicit": true}, "tags": ["kosten"]}, {"id": "m3-13", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Wenn wir schon zahlen, dann soll er wenigstens hingehen. Er ist noch ein Semester gegangen, ziemlich lustlos.", "locator": "Zeile 22", "signal": "workaround", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "tags": ["gefuehl-kind"]}, {"id": "m3-14", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Ja, im August hat die Schule den Stundenplan geändert, und die Gitarrenstunde lag plötzlich auf dem Turnen.", "locator": "Zeile 24", "signal": "friction", "phase_hint": "start", "persona_hint": "eltern-erstanmeldung"}, {"id": "m3-15", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Die Lehrerin hat in der Messenger-Gruppe neue Zeiten herumgeschickt. Bis alles wieder gepasst hat, waren es drei Wochen ohne Unterricht.", "locator": "Zeile 25", "value": 3, "unit": "Wochen", "signal": "friction", "phase_hint": "start", "channel_hint": "chat", "persona_hint": "eltern-erstanmeldung", "tags": ["messenger"]}, {"id": "m3-16", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Diesmal mit einem Brief ans Sekretariat, Ende November, für Ende Januar. Da habe ich sogar eine Bestätigung bekommen.", "locator": "Zeile 27", "signal": "positive", "phase_hint": "weiterfuehren", "channel_hint": "letter", "persona_hint": "eltern-erstanmeldung"}, {"id": "m3-17", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Alles Wichtige schriftlich ans Sekretariat. Die Lehrerin ist nett, aber sie ist nicht die Verwaltung.", "locator": "Zeile 29", "signal": "need", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "tags": ["messenger"]}, {"id": "m3-18", "source_ref": "int-m3", "class": "reported", "kind": "quote", "text": "Wenn die Lehrerin weiss, dass er aufhört, könnte sie das doch weitergeben. Oder man schreibt es auf die Rechnung, gross, mit Datum.", "locator": "Zeile 31", "signal": "need", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "tags": ["frist"]}, {"id": "anf-01", "source_ref": "anfragen", "class": "observed", "kind": "metric", "text": "4 von 30 Anfragen in der Kategorie «tarif» (MS-001, MS-002, MS-003, MS-004) – Kosten vor der Anmeldung: pro Semester oder pro Jahr, Ermässigung, weitere Kosten.", "locator": "Spalte kategorie = tarif", "value": 13, "unit": "% der Anfragen", "signal": "friction", "phase_hint": "entdecken", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "anf-02", "source_ref": "anfragen", "class": "observed", "kind": "metric", "text": "8 von 30 Anfragen in der Kategorie «warteliste» (MS-007, MS-008, MS-010, MS-021, MS-023, MS-025, MS-028, MS-029) – die häufigste Kategorie: Stand, Dauer und Regeln der Warteliste.", "locator": "Spalte kategorie = warteliste", "value": 27, "unit": "% der Anfragen", "signal": "friction", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung", "tags": ["vermeidbar"], "contradicts": ["ws-02"]}, {"id": "anf-03", "source_ref": "anfragen", "class": "observed", "kind": "metric", "text": "3 von 30 Anfragen in der Kategorie «platzangebot» (MS-009, MS-012, MS-030) – Frist verpasst, Angebot im Spam-Ordner oder im Portal nicht sichtbar.", "locator": "Spalte kategorie = platzangebot", "value": 10, "unit": "% der Anfragen", "signal": "breakdown", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung", "tags": ["frist"]}, {"id": "anf-04", "source_ref": "anfragen", "class": "observed", "kind": "metric", "text": "5 von 30 Anfragen in der Kategorie «rechnung» (MS-016, MS-018, MS-020, MS-022, MS-024) – Ermässigung fehlt, Zuständigkeit unklar, Einschreibegebühr unerwartet.", "locator": "Spalte kategorie = rechnung", "value": 17, "unit": "% der Anfragen", "signal": "breakdown", "phase_hint": "bezahlen", "persona_hint": "eltern-erstanmeldung", "tags": ["vermeidbar", "kosten"], "contradicts": ["ws-04"]}, {"id": "anf-05", "source_ref": "anfragen", "class": "observed", "kind": "metric", "text": "4 von 30 Anfragen in der Kategorie «abmeldung» (MS-017, MS-019, MS-026, MS-027) – Abmeldung bei der Lehrperson, Frist unklar, Bitte um Bestätigung.", "locator": "Spalte kategorie = abmeldung", "value": 13, "unit": "% der Anfragen", "signal": "breakdown", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "tags": ["frist"]}, {"id": "anf-06", "source_ref": "anfragen", "class": "observed", "kind": "metric", "text": "2 von 30 Anfragen in der Kategorie «stundenplan» (MS-014, MS-015) – Kollision mit dem neuen Stundenplan der Volksschule.", "locator": "Spalte kategorie = stundenplan", "value": 7, "unit": "% der Anfragen", "signal": "friction", "phase_hint": "start", "persona_hint": "eltern-erstanmeldung"}, {"id": "anf-07", "source_ref": "anfragen", "class": "observed", "kind": "metric", "text": "2 von 30 Anfragen in der Kategorie «instrument» (MS-011, MS-013) – wo mieten, was kostet es, ab wann nötig.", "locator": "Spalte kategorie = instrument", "value": 7, "unit": "% der Anfragen", "signal": "need", "phase_hint": "start", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "anf-08", "source_ref": "anfragen", "class": "observed", "kind": "metric", "text": "2 von 30 Anfragen in der Kategorie «anmeldung» (MS-005, MS-006) – technisches Problem im Formular, Anmeldeschluss verpasst.", "locator": "Spalte kategorie = anmeldung", "value": 7, "unit": "% der Anfragen", "signal": "friction", "phase_hint": "anmelden", "persona_hint": "eltern-erstanmeldung"}, {"id": "anf-09", "source_ref": "anfragen", "class": "observed", "kind": "metric", "text": "18 von 30 Anfragen kommen per telefon; E-Mail und Schalter folgen.", "locator": "Spalte kanal = telefon", "value": 60, "unit": "% der Anfragen", "signal": "workaround", "persona_hint": "eltern-erstanmeldung"}, {"id": "anf-10", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Kostet der Klavierunterricht 820 Franken pro Jahr oder pro Semester? Tarifblatt nicht verständlich.", "locator": "anfrage_id MS-001", "signal": "friction", "phase_hint": "entdecken", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "anf-11", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Gibt es eine Ermässigung für Familien mit kleinem Einkommen? Auf der Website nichts gefunden.", "locator": "anfrage_id MS-002", "signal": "friction", "phase_hint": "entdecken", "channel_hint": "email", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "anf-12", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Anmeldung nach dem 31. März verpasst. Kommt das Kind trotzdem noch dran?", "locator": "anfrage_id MS-006", "signal": "friction", "phase_hint": "anmelden", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["frist"]}, {"id": "anf-13", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "An welcher Stelle der Warteliste ist unsere Tochter? Mitteilung nennt keinen Platz.", "locator": "anfrage_id MS-008", "signal": "friction", "phase_hint": "warten", "channel_hint": "email", "persona_hint": "eltern-erstanmeldung", "tags": ["vermeidbar"]}, {"id": "anf-14", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Zweiter Anruf zum Stand auf der Warteliste, keine Mitteilung seit Mai.", "locator": "anfrage_id MS-028", "signal": "friction", "phase_hint": "warten", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["vermeidbar"], "contradicts": ["doc-03"]}, {"id": "anf-15", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Wartet seit Mai auf einen Klavierplatz. Soll die Familie privat Unterricht suchen?", "locator": "anfrage_id MS-025", "signal": "workaround", "phase_hint": "warten", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung"}, {"id": "anf-16", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Seit über einem Jahr auf der Warteliste für Schlagzeug. Sind wir noch drauf?", "locator": "anfrage_id MS-021", "signal": "friction", "phase_hint": "warten", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["vermeidbar"]}, {"id": "anf-17", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Platzangebot im Spam-Ordner gefunden, Frist abgelaufen. Bitte um neues Angebot.", "locator": "anfrage_id MS-012", "signal": "breakdown", "phase_hint": "warten", "channel_hint": "email", "persona_hint": "eltern-erstanmeldung", "tags": ["frist"]}, {"id": "anf-18", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Platzangebot per E-Mail angekündigt, im Portal aber nicht sichtbar. Wie annehmen?", "locator": "anfrage_id MS-030", "signal": "friction", "phase_hint": "warten", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung"}, {"id": "anf-19", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Wo kann man ein Cello mieten, und was kostet das ungefähr?", "locator": "anfrage_id MS-011", "signal": "need", "phase_hint": "start", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "anf-20", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Neuer Stundenplan der Schule, Gitarrenstunde fällt auf den Turnunterricht. Wer koordiniert?", "locator": "anfrage_id MS-014", "signal": "friction", "phase_hint": "start", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung"}, {"id": "anf-21", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Rechnung enthält eine Einschreibegebühr, davon stand nichts in der Bestätigung.", "locator": "anfrage_id MS-022", "signal": "friction", "phase_hint": "bezahlen", "channel_hint": "email", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten", "vermeidbar"], "contradicts": ["doc-02"]}, {"id": "anf-22", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Rechnung ohne Ermässigung, obwohl Verfügung der Gemeinde vorliegt.", "locator": "anfrage_id MS-016", "signal": "breakdown", "phase_hint": "bezahlen", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten", "vermeidbar"]}, {"id": "anf-23", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Gemeinde sagt, Ermässigung sei gemeldet. Musikschule sagt, sie sei nicht da. Wer ist zuständig?", "locator": "anfrage_id MS-020", "signal": "friction", "phase_hint": "bezahlen", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["vermeidbar"]}, {"id": "anf-24", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Ermässigung erst nach Mahnung berücksichtigt. Mahngebühr wird zurückgefordert.", "locator": "anfrage_id MS-024", "signal": "breakdown", "phase_hint": "bezahlen", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "anf-25", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Rechnung fürs Herbstsemester erhalten, Kind wurde im Mai bei der Lehrperson abgemeldet.", "locator": "anfrage_id MS-017", "signal": "breakdown", "phase_hint": "weiterfuehren", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["frist", "messenger"]}, {"id": "anf-26", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Abmeldung per Messenger an die Lehrerin im Juni geschickt, trotzdem Rechnung. Bitte um Erlass.", "locator": "anfrage_id MS-019", "signal": "breakdown", "phase_hint": "weiterfuehren", "channel_hint": "phone", "persona_hint": "eltern-erstanmeldung", "tags": ["frist", "messenger"]}, {"id": "anf-27", "source_ref": "anfragen", "class": "observed", "kind": "observation", "text": "Bis wann muss man für Ende Januar abmelden? Auf der Website stehen zwei verschiedene Daten.", "locator": "anfrage_id MS-026", "signal": "friction", "phase_hint": "weiterfuehren", "channel_hint": "email", "persona_hint": "eltern-erstanmeldung", "tags": ["frist"]}, {"id": "stat-01", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "412 Neuanmeldungen für das Schuljahr 2025/26 bis zum Anmeldeschluss am 31. März 2025.", "locator": "Zeile 2", "value": 412, "unit": "Anmeldungen", "persona_hint": "eltern-erstanmeldung"}, {"id": "stat-02", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "47 % der Neuanmeldungen erhielten bei der Einteilung im Mai keinen Platz und kamen auf die Warteliste (Schuljahr 2025/26).", "locator": "Zeile 3", "value": 47, "unit": "% der Neuanmeldungen", "signal": "friction", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung"}, {"id": "stat-03", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "Wartezeit von der Anmeldung bis zum Platzangebot, nur Kinder auf der Warteliste: Median 7 Monate (Schuljahr 2025/26).", "locator": "Zeile 4", "value": 7, "unit": "Monate", "signal": "friction", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung"}, {"id": "stat-04", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "Wartezeit Klavier, Anmeldung bis Platzangebot: Median 14 Monate.", "locator": "Zeile 5", "value": 14, "unit": "Monate", "signal": "friction", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung"}, {"id": "stat-05", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "Wartezeit Gitarre, Anmeldung bis Platzangebot: Median 9 Monate.", "locator": "Zeile 6", "value": 9, "unit": "Monate", "signal": "friction", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung"}, {"id": "stat-06", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "Wartezeit Schlagzeug, Anmeldung bis Platzangebot: Median 16 Monate.", "locator": "Zeile 7", "value": 16, "unit": "Monate", "signal": "friction", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung"}, {"id": "stat-07", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "Wartezeit Violine, Viola und Cello, Anmeldung bis Platzangebot: Median 1 Monat.", "locator": "Zeile 8", "value": 1, "unit": "Monat", "signal": "neutral", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung"}, {"id": "stat-08", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "18 % der Kinder auf der Warteliste wurden vor einem Platzangebot abgemeldet.", "locator": "Zeile 9", "value": 18, "unit": "% der Kinder auf der Warteliste", "signal": "breakdown", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung"}, {"id": "stat-09", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "9 % der Platzangebote verfielen, weil die Annahmefrist von zehn Tagen ohne Antwort ablief.", "locator": "Zeile 10", "value": 9, "unit": "% der Platzangebote", "signal": "breakdown", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung", "tags": ["frist"]}, {"id": "stat-10", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "21 % der Schülerinnen und Schüler haben eine Tarifermässigung der Gemeinde (Herbstsemester 2025).", "locator": "Zeile 11", "value": 21, "unit": "% der Schülerinnen und Schüler", "phase_hint": "start", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "stat-11", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "38 % der Ermässigungen wurden erst nach Versand der Rechnung berücksichtigt, per Gutschrift (Herbstsemester 2025).", "locator": "Zeile 12", "value": 38, "unit": "% der Ermässigungen", "signal": "breakdown", "phase_hint": "bezahlen", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten", "vermeidbar"], "contradicts": ["doc-07", "ws-04"]}, {"id": "stat-12", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "Durchschnittlicher Elternbeitrag für Einzelunterricht von 30 Minuten: 702 Franken pro Semester, nach Ermässigung, ohne Einschreibegebühr.", "locator": "Zeile 13", "value": 702, "unit": "CHF pro Semester", "phase_hint": "bezahlen", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "stat-13", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "23 % der Kinder im ersten Unterrichtsjahr wurden auf Ende Schuljahr abgemeldet (Schuljahr 2024/25).", "locator": "Zeile 14", "value": 23, "unit": "% der Kinder im ersten Jahr", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung"}, {"id": "stat-14", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "27 % der Abmeldungen gingen nach der Frist ein; das folgende Semester wurde verrechnet (Schuljahr 2024/25).", "locator": "Zeile 15", "value": 27, "unit": "% der Abmeldungen", "signal": "breakdown", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "tags": ["frist", "kosten"], "contradicts": ["ws-05"]}, {"id": "stat-15", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "41 % der verspäteten Abmeldungen tragen den Vermerk «zuerst der Lehrperson mitgeteilt».", "locator": "Zeile 16", "value": 41, "unit": "% der verspäteten Abmeldungen", "signal": "breakdown", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "tags": ["messenger"], "contradicts": ["doc-09"]}, {"id": "stat-16", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "31 Gesuche um Erlass des Schulgelds nach verspäteter Abmeldung (Schuljahr 2024/25).", "locator": "Zeile 17", "value": 31, "unit": "Gesuche", "signal": "workaround", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung"}, {"id": "stat-17", "source_ref": "statistik", "class": "observed", "kind": "metric", "text": "6 von 31 Erlassgesuchen wurden gutgeheissen, wegen Umzug oder Krankheit.", "locator": "Zeile 18", "value": 6, "unit": "Gesuche", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung"}, {"id": "bef-01", "source_ref": "befragung", "class": "reported", "kind": "metric", "text": "«Ich wusste vor der Anmeldung, wie viel der Unterricht pro Semester kostet.»: 46 % Zustimmung (n = 318).", "locator": "Zeile 2", "value": 46, "unit": "% Zustimmung", "signal": "friction", "phase_hint": "entdecken", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"], "contradicts": ["ws-01"]}, {"id": "bef-02", "source_ref": "befragung", "class": "reported", "kind": "metric", "text": "«Ich wusste vor der Anmeldung, dass die Gemeinde eine Tarifermässigung anbietet.»: 31 % Zustimmung (n = 318).", "locator": "Zeile 3", "value": 31, "unit": "% Zustimmung", "signal": "friction", "phase_hint": "entdecken", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "bef-03", "source_ref": "befragung", "class": "reported", "kind": "metric", "text": "«Ich wusste vor der Anmeldung, dass für das Instrument Miet- oder Kaufkosten dazukommen.»: 52 % Zustimmung (n = 318).", "locator": "Zeile 4", "value": 52, "unit": "% Zustimmung", "signal": "friction", "phase_hint": "start", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "bef-04", "source_ref": "befragung", "class": "reported", "kind": "metric", "text": "«Mir wurde verständlich erklärt, wie lange die Wartezeit ungefähr dauert.»: 29 % Zustimmung (n = 151), nur Familien, deren Kind auf der Warteliste war.", "locator": "Zeile 5", "value": 29, "unit": "% Zustimmung", "signal": "friction", "phase_hint": "warten", "persona_hint": "eltern-erstanmeldung", "contradicts": ["ws-02"]}, {"id": "bef-05", "source_ref": "befragung", "class": "reported", "kind": "metric", "text": "«Die Lehrperson hat die Unterrichtszeit gut mit uns abgestimmt.»: 81 % Zustimmung (n = 318).", "locator": "Zeile 6", "value": 81, "unit": "% Zustimmung", "signal": "positive", "phase_hint": "start", "persona_hint": "eltern-erstanmeldung"}, {"id": "bef-06", "source_ref": "befragung", "class": "reported", "kind": "metric", "text": "«Ich musste wegen einer Rechnung bei der Musikschule oder der Gemeinde nachfragen.»: 22 % Zustimmung (n = 318).", "locator": "Zeile 7", "value": 22, "unit": "% Zustimmung", "signal": "friction", "phase_hint": "bezahlen", "persona_hint": "eltern-erstanmeldung", "tags": ["vermeidbar"]}, {"id": "bef-07", "source_ref": "befragung", "class": "reported", "kind": "metric", "text": "«Die Abmeldefrist und der Weg der Abmeldung sind mir bekannt.»: 38 % Zustimmung (n = 318).", "locator": "Zeile 8", "value": 38, "unit": "% Zustimmung", "signal": "friction", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "tags": ["frist"], "contradicts": ["ws-05"]}, {"id": "bef-08", "source_ref": "befragung", "class": "reported", "kind": "metric", "text": "«Mein Kind geht gern in den Musikunterricht.»: 84 % Zustimmung (n = 318), Einschätzung der Eltern.", "locator": "Zeile 9", "value": 84, "unit": "% Zustimmung", "signal": "positive", "phase_hint": "weiterfuehren", "persona_hint": "eltern-erstanmeldung", "tags": ["gefuehl-kind"]}, {"id": "bef-09", "source_ref": "befragung", "class": "reported", "kind": "metric", "text": "«Ich würde die Musikschule anderen Familien empfehlen.»: 79 % Zustimmung (n = 318).", "locator": "Zeile 10", "value": 79, "unit": "% Zustimmung", "signal": "positive", "persona_hint": "eltern-erstanmeldung"}, {"id": "web-01", "source_ref": "analytics", "class": "observed", "kind": "metric", "text": "Seite «Tarife» der Musikschule (/musikschule/tarife): 3880 Aufrufe, Ausstiegsrate 64 %, durchschnittlich 41 Sekunden.", "locator": "Zeile 3", "value": 64, "unit": "% Ausstiegsrate", "signal": "friction", "phase_hint": "entdecken", "channel_hint": "web", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "web-02", "source_ref": "analytics", "class": "observed", "kind": "metric", "text": "Seite «Ermässigung Musikschule» der Gemeinde (/gemeinde/bildung/ermaessigung-musikschule): 610 Aufrufe, Ausstiegsrate 48 %, durchschnittlich 72 Sekunden.", "locator": "Zeile 5", "value": 610, "unit": "Aufrufe", "signal": "friction", "phase_hint": "entdecken", "channel_hint": "web", "persona_hint": "eltern-erstanmeldung", "tags": ["kosten"]}, {"id": "web-03", "source_ref": "analytics", "class": "observed", "kind": "metric", "text": "Seite «Anmeldung» (/musikschule/anmeldung): 2940 Aufrufe, Ausstiegsrate 22 %, durchschnittlich 380 Sekunden.", "locator": "Zeile 4", "value": 22, "unit": "% Ausstiegsrate", "signal": "positive", "phase_hint": "anmelden", "channel_hint": "web", "persona_hint": "eltern-erstanmeldung"}, {"id": "web-04", "source_ref": "analytics", "class": "observed", "kind": "metric", "text": "Seite «Warteliste» (/musikschule/warteliste): 2150 Aufrufe, Ausstiegsrate 73 %, durchschnittlich 28 Sekunden.", "locator": "Zeile 6", "value": 73, "unit": "% Ausstiegsrate", "signal": "friction", "phase_hint": "warten", "channel_hint": "web", "persona_hint": "eltern-erstanmeldung"}, {"id": "web-05", "source_ref": "analytics", "class": "observed", "kind": "metric", "text": "Seite «Abmeldung» (/musikschule/abmeldung): 940 Aufrufe, Ausstiegsrate 41 %, durchschnittlich 55 Sekunden.", "locator": "Zeile 7", "value": 940, "unit": "Aufrufe", "signal": "neutral", "phase_hint": "weiterfuehren", "channel_hint": "web", "persona_hint": "eltern-erstanmeldung"}, {"id": "tar-01", "source_ref": "tarife", "class": "assumed", "kind": "document_excerpt", "text": "Das Schulgeld für Einzelunterricht von 30 Minuten pro Woche beträgt für Kinder und Jugendliche mit Wohnsitz in der Gemeinde 820 Franken pro Semester.", "locator": "Zeile 7", "value": 820, "unit": "CHF pro Semester", "signal": "neutral", "phase_hint": "bezahlen", "tags": ["kosten"]}, {"id": "tar-02", "source_ref": "tarife", "class": "assumed", "kind": "document_excerpt", "text": "Bei Eintritt wird eine einmalige Einschreibegebühr von 40 Franken erhoben.", "locator": "Zeile 9", "value": 40, "unit": "CHF", "signal": "neutral", "phase_hint": "bezahlen", "tags": ["kosten"]}, {"id": "tar-03", "source_ref": "tarife", "class": "assumed", "kind": "document_excerpt", "text": "Die Gemeinde gewährt auf Antrag eine Ermässigung von 25 oder 50 Prozent, abgestuft nach dem steuerbaren Einkommen gemäss letzter Steuerveranlagung.", "locator": "Zeile 13", "signal": "neutral", "phase_hint": "start", "tags": ["kosten"]}, {"id": "tar-04", "source_ref": "tarife", "class": "assumed", "kind": "document_excerpt", "text": "Der Antrag ist bei der Gemeindeverwaltung, Abteilung Bildung, bis 30. Juni für das folgende Schuljahr einzureichen.", "locator": "Zeile 14", "signal": "neutral", "phase_hint": "start", "tags": ["frist"]}, {"id": "tar-05", "source_ref": "tarife", "class": "assumed", "kind": "document_excerpt", "text": "Die Instrumente werden von den Eltern beschafft. Die Musikschule vermittelt Adressen von Musikgeschäften.", "locator": "Zeile 18", "signal": "neutral", "phase_hint": "start", "tags": ["kosten"]}, {"id": "tar-06", "source_ref": "tarife", "class": "assumed", "kind": "document_excerpt", "text": "Die Abmeldung erfolgt schriftlich an das Sekretariat der Musikschule bis 31. Mai auf Ende des Schuljahres oder bis 30. November auf Ende des Herbstsemesters.", "locator": "Zeile 22", "signal": "neutral", "phase_hint": "weiterfuehren", "channel_hint": "letter", "tags": ["frist"]}, {"id": "tar-07", "source_ref": "tarife", "class": "assumed", "kind": "document_excerpt", "text": "Bei verspäteter Abmeldung ist das Schulgeld für das folgende Semester geschuldet.", "locator": "Zeile 23", "signal": "neutral", "phase_hint": "weiterfuehren", "tags": ["frist", "kosten"]}, {"id": "tar-08", "source_ref": "tarife", "class": "assumed", "kind": "document_excerpt", "text": "Über einen Erlass entscheidet die Schulleitung; Gründe sind insbesondere Umzug oder Krankheit.", "locator": "Zeile 24", "signal": "neutral", "phase_hint": "weiterfuehren"}, {"id": "doc-01", "source_ref": "prozessdok", "class": "assumed", "kind": "document_excerpt", "text": "Anmeldungen gehen bis 31. März über das Online-Portal ein.", "locator": "Zeile 22", "signal": "neutral", "phase_hint": "anmelden", "channel_hint": "web", "tags": ["frist"]}, {"id": "doc-02", "source_ref": "prozessdok", "class": "assumed", "kind": "document_excerpt", "text": "Die automatische Bestätigung informiert über Tarife und Ermässigung.", "locator": "Zeile 23", "signal": "neutral", "phase_hint": "anmelden", "channel_hint": "email"}, {"id": "doc-03", "source_ref": "prozessdok", "class": "assumed", "kind": "document_excerpt", "text": "Familien auf der Warteliste werden halbjährlich über ihren Stand informiert.", "locator": "Zeile 28", "signal": "neutral", "phase_hint": "warten"}, {"id": "doc-04", "source_ref": "prozessdok", "class": "assumed", "kind": "document_excerpt", "text": "Platzangebote werden per E-Mail versandt. Die Annahme erfolgt innert zehn Tagen im Portal; ohne Annahme geht der Platz an die nächste Person auf der Warteliste.", "locator": "Zeile 29", "signal": "neutral", "phase_hint": "warten", "channel_hint": "email", "tags": ["frist"]}, {"id": "doc-05", "source_ref": "prozessdok", "class": "assumed", "kind": "document_excerpt", "text": "Die Lehrperson vereinbart die Unterrichtszeit direkt mit der Familie.", "locator": "Zeile 33", "signal": "neutral", "phase_hint": "start"}, {"id": "doc-06", "source_ref": "prozessdok", "class": "assumed", "kind": "document_excerpt", "text": "Für die Kommunikation mit den Familien ist die Schul-App der Musikschule zu verwenden.", "locator": "Zeile 34", "signal": "neutral", "phase_hint": "start", "tags": ["messenger"]}, {"id": "doc-07", "source_ref": "prozessdok", "class": "assumed", "kind": "document_excerpt", "text": "Bewilligte Ermässigungen meldet die Gemeinde der Musikschule bis 15. August.", "locator": "Zeile 38", "signal": "neutral", "phase_hint": "start", "tags": ["kosten"]}, {"id": "doc-08", "source_ref": "prozessdok", "class": "assumed", "kind": "document_excerpt", "text": "Die Rechnungen für das Herbstsemester werden Anfang September versandt.", "locator": "Zeile 39", "signal": "neutral", "phase_hint": "bezahlen", "channel_hint": "letter"}, {"id": "doc-09", "source_ref": "prozessdok", "class": "assumed", "kind": "document_excerpt", "text": "Abmeldungen nimmt ausschliesslich das Sekretariat entgegen. Die Lehrpersonen weisen die Familien darauf hin.", "locator": "Zeile 43", "signal": "neutral", "phase_hint": "weiterfuehren", "tags": ["messenger"]}, {"id": "ws-01", "source_ref": "workshop", "class": "assumed", "kind": "workshop_statement", "text": "Annahme: Eltern informieren sich vor der Anmeldung über die Tarife; die Kosten sind bekannt.", "locator": "Zeile 11", "signal": "neutral", "phase_hint": "entdecken", "tags": ["kosten"]}, {"id": "ws-02", "source_ref": "workshop", "class": "assumed", "kind": "workshop_statement", "text": "Annahme: Die Warteliste ist bekannt und akzeptiert; Nachfragen sind die Ausnahme.", "locator": "Zeile 12", "signal": "neutral", "phase_hint": "warten"}, {"id": "ws-03", "source_ref": "workshop", "class": "assumed", "kind": "workshop_statement", "text": "Annahme: Die Lehrpersonen klären die Unterrichtszeit selbstständig mit den Familien, und das funktioniert gut.", "locator": "Zeile 13", "signal": "neutral", "phase_hint": "start"}, {"id": "ws-04", "source_ref": "workshop", "class": "assumed", "kind": "workshop_statement", "text": "Annahme: Die Ermässigungen kommen rechtzeitig von der Gemeinde; Fehler auf der Rechnung sind Einzelfälle.", "locator": "Zeile 14", "signal": "neutral", "phase_hint": "bezahlen", "tags": ["kosten"]}, {"id": "ws-05", "source_ref": "workshop", "class": "assumed", "kind": "workshop_statement", "text": "Annahme: Die Abmeldefrist ist bekannt, weil sie auf jeder Rechnung steht.", "locator": "Zeile 15", "signal": "neutral", "phase_hint": "weiterfuehren", "tags": ["frist"]}], "open_questions": [{"text": "Wie viele Familien verzichten wegen der Kosten auf eine Anmeldung – und wie viele, weil sie die Ermässigung nicht kennen? Befragung und Statistik erreichen nur angemeldete Familien.", "step_ref": "kosten-klaeren", "proposed_method": "interview"}, {"text": "Wann und auf welchem Weg meldet die Gemeinde bewilligte Ermässigungen der Musikschule, und warum kommen 38 % erst nach der Rechnung an? Gehört in den Service Blueprint.", "step_ref": "ermaessigung-beantragen", "proposed_method": "source_request"}, {"text": "Wohin gehen die 18 % der Familien, die während der Wartezeit abmelden – privater Unterricht, anderes Instrument, gar nichts?", "step_ref": "warteliste-bescheid", "proposed_method": "survey"}, {"text": "Wie erlebt das Kind die Warteliste, den ersten Unterricht und das Aufhören? Die Journey kennt seine Gefühle nur aus dem Mund der Eltern; ein kindgerechtes Gespräch würde zeigen, ob die Kurve der Eltern auch seine ist.", "phase_ref": "weiterfuehren", "proposed_method": "interview"}], "changelog": [{"version": "0.1", "date": "2026-04-22", "summary": "Hypothesen-Workshop ohne Eltern: Phasen nach dem Ablauf der Musikschule (Anmeldung, Einteilung, Unterrichtsbeginn, Rechnung, Abmeldung), keine Nutzerevidenz.", "author": "Schulleitung Musikschule"}, {"version": "1.0", "date": "2026-10-13", "summary": "Drei Interviews, Anfragen-Export, Kennzahlen der Musikschulverwaltung, Elternbefragung und Webanalytics eingearbeitet; Phasen aus Elternsicht neu geschnitten (Warteliste sowie Weitermachen oder aufhören als eigene Phasen); Kosten und vermeidbare Kontakte nach den Mustern des Skills erfasst; Chancen priorisiert.", "author": "Schulleitung Musikschule"}]}], "findings": [[{"code": "L043", "level": "INFO", "antipattern": "evidence", "message": "4 Emotionspunkt(e) sind aus Evidenz abgeleitet, nicht ausdrücklich geäussert (emotion_hint.explicit fehlt).", "path": "", "hint": ""}, {"code": "L100", "level": "INFO", "antipattern": "evidence", "message": "5 Evidenz-Atom(e) werden nirgends referenziert: bef-09, ws-01, ws-02, ws-04, ws-05.", "path": "evidence", "hint": "Nicht synthetisiertes Material - entweder einordnen oder bewusst als «ausserhalb Scope» markieren."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «anf-02» widerspricht ws-02.", "path": "evidence[anf-02]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «anf-04» widerspricht ws-04.", "path": "evidence[anf-04]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «anf-14» widerspricht doc-03.", "path": "evidence[anf-14]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «anf-21» widerspricht doc-02.", "path": "evidence[anf-21]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «bef-01» widerspricht ws-01.", "path": "evidence[bef-01]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «bef-04» widerspricht ws-02.", "path": "evidence[bef-04]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «bef-07» widerspricht ws-05.", "path": "evidence[bef-07]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «m1-04» widerspricht ws-01.", "path": "evidence[m1-04]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «m1-09» widerspricht doc-03.", "path": "evidence[m1-09]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «m1-19» widerspricht doc-06.", "path": "evidence[m1-19]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «m2-09» widerspricht doc-07.", "path": "evidence[m2-09]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «m2-17» widerspricht doc-06.", "path": "evidence[m2-17]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «m3-06» widerspricht doc-09.", "path": "evidence[m3-06]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «m3-10» widerspricht ws-05.", "path": "evidence[m3-10]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «stat-11» widerspricht doc-07, ws-04.", "path": "evidence[stat-11]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «stat-14» widerspricht ws-05.", "path": "evidence[stat-14]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}, {"code": "L101", "level": "INFO", "antipattern": "evidence", "message": "Evidenz «stat-15» widerspricht doc-09.", "path": "evidence[stat-15]", "hint": "Widersprüche gehören in die Journey (z. B. als Edge Case oder offene Frage), nicht geglättet."}]]};
+
+// UI-Texte stehen im JSON-Block «jk-i18n» (de, fr); der Renderer setzt DATA.lang.
+const I18N = JSON.parse(document.getElementById("jk-i18n").textContent);
+const LANG = DATA && I18N[DATA.lang] ? DATA.lang : "de", L = I18N[LANG];
+const t = (key, vars) => vars ? L.ui[key].replace(/\{(\w+)\}/g, (m, k) => vars[k] ?? m) : L.ui[key];
+// Plural: Französisch zählt 0 und 1 als Singular, Deutsch nur 1.
+const tn = (key, n, vars) => t(key + ((LANG === "fr" ? n > 1 : n !== 1) ? "_other" : "_one"), { n, ...vars });
+const lbl = key => t(key) + t("colon");
+const PRIMARY = new Set(["observed", "reported"]);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+// ADR-0005: wer den Schritt ausführt, wenn nicht die Persona allein
+const actorChip = s => { const p = s.performed_by; if (!p || p.kind === "persona") return ""; return '<span class="chip actor" title="' + esc(L.performedByTitle[p.kind] + (p.mandate ? " · " + (L.mandate[p.mandate] || p.mandate) : "")) + '">' + L.performedBy[p.kind] + ' ' + esc(p.role) + '</span>'; };
+const $ = (sel, root = document) => root.querySelector(sel);
+
+// ---------------------------------------------------------------- Modell
+class Idx {
+  constructor(j) {
+    this.j = j; this.ev = new Map(); this.src = new Map(); this.steps = []; this.pp = new Map(); this.ppStep = new Map(); this.opps = j.opportunities || [];
+    (j.evidence || []).forEach(a => this.ev.set(a.id, a));
+    (j.sources || []).forEach(s => this.src.set(s.id, s));
+    j.phases.forEach((p, pi) => p.steps.forEach((s, si) => {
+      this.steps.push({ step: s, phase: p, pi, si, gi: this.steps.length });
+      (s.pain_points || []).forEach(pp => { this.pp.set(pp.id, pp); this.ppStep.set(pp.id, s.id); });
+    }));
+  }
+  classes(refs) { const out = { observed: 0, reported: 0, assumed: 0, missing: 0 }; (refs || []).forEach(r => { const a = this.ev.get(r); if (a) out[a.class]++; else out.missing++; }); return out; }
+  hasPrimary(refs) { return (refs || []).some(r => PRIMARY.has(this.ev.get(r)?.class)); }
+  evState(refs) { if (!refs || !refs.length) return "none"; return this.hasPrimary(refs) ? "primary" : "assumed"; }
+  summary() { const s = { observed: 0, reported: 0, assumed: 0, total: 0 }; this.ev.forEach(a => { s[a.class]++; s.total++; }); return s; }
+  oppsFor(ppId) { return this.opps.filter(o => (o.linked_pain_points || []).includes(ppId)); }
+  // Phase einer Chance: die ihres Schritts (step_ref), sonst phase_ref, sonst die des ersten Pain Points – wie model.opportunity_anchor
+  oppPhase(o) { const s = this.steps.find(x => x.step.id === o.step_ref); if (s) return s.phase.id; if (o.phase_ref) return o.phase_ref; const st = this.ppStep.get((o.linked_pain_points || [])[0]); const e = this.steps.find(x => x.step.id === st); return e ? e.phase.id : null; }
+  oppsForPhase(phaseId) { return this.opps.filter(o => this.oppPhase(o) === phaseId); }
+  claims() { // für Heatmap und Quoten
+    const out = [];
+    this.steps.forEach(e => { const s = e.step; out.push({ kind: "step", refs: s.evidence_refs || [], e });
+      (s.thinking || []).forEach(t => out.push({ kind: "thinking", refs: t.evidence_refs || [], e }));
+      if (s.feeling) out.push({ kind: "feeling", refs: s.feeling.evidence_refs || [], e });
+      (s.pain_points || []).forEach(p => out.push({ kind: "pain_point", refs: p.evidence_refs || [], e }));
+      (s.edge_cases || []).forEach(p => out.push({ kind: "edge_case", refs: p.evidence_refs || [], e }));
+      (s.recovery_paths || []).forEach(p => out.push({ kind: "recovery", refs: p.evidence_refs || [], e })); });
+    return out;
+  }
+}
+function quadrant(o) { if (o.user_impact == null || o.effort == null) return null; const v = o.user_impact + (o.public_value ?? o.user_impact); const hv = v >= 6, le = o.effort <= 2; return hv && le ? "quick_win" : hv ? "big_bet" : le ? "fill_in" : "skip"; }
+
+// ---------------------------------------------------------------- Zustand
+const state = { j: 0, primOnly: false, tab: "journey" };
+let IDX;
+const journeys = DATA.journeys, findings = DATA.findings;
+// Beschriftung einer Datei: der Persona-Name. Tragen zwei Dateien denselben Namen
+// (Varianten desselben Anliegens), kommt das Szenario dazu – sonst sind sie nicht unterscheidbar.
+const sameName = (a, b) => a.persona.name.trim().toLowerCase() === b.persona.name.trim().toLowerCase();
+const jLabel = x => journeys.some(o => o !== x && sameName(o, x)) ? x.persona.name.trim() + " – " + x.scenario.title : x.persona.name;
+
+function evDots(idx, refs) { const c = idx.classes(refs); let h = '<span class="evc" title="' + esc(t("evDots", { o: c.observed, r: c.reported, a: c.assumed })) + '">'; h += '<i class="o"></i>'.repeat(Math.min(c.observed, 4)) + '<i class="r"></i>'.repeat(Math.min(c.reported, 4)) + '<i class="a"></i>'.repeat(Math.min(c.assumed, 4)); return h + '</span>'; }
+function claimBtn(idx, text, refs, extraCls, title) { const st = idx.evState(refs); return '<button class="claim ev-' + st + ' ' + (extraCls || "") + '" data-refs="' + esc((refs || []).join(",")) + '" data-title="' + esc(title || "") + '" data-text="' + esc(text) + '">' + esc(text) + (refs && refs.length ? evDots(idx, refs) : '<span class="evc muted" title="' + t("noEvidence") + '">∅</span>') + '</button>'; }
+function days(n) { return tn("day", n) + (n >= 21 ? t("weeksApprox", { w: Math.round(n / 7) }) : ""); }
+function visible(idx, refs) { return !state.primOnly || idx.hasPrimary(refs); }
+function renderClaims(idx, items, getText, getRefs, extra) { let h = "", hidden = 0; items.forEach(it => { const refs = getRefs(it); if (!visible(idx, refs)) { hidden++; return; } h += claimBtn(idx, getText(it), refs, extra ? extra(it) : "", getText(it)); }); if (hidden) h += '<div class="hidden-note">' + tn("assumptionsHidden", hidden) + '</div>'; return h || (items.length ? "" : '<span class="empty">–</span>'); }
+
+// ---------------------------------------------------------------- Kopf
+function renderHeader() {
+  const j = journeys[state.j], m = j.meta, idx = IDX, s = idx.summary();
+  $("#title").textContent = DATA.title;
+  const f = findings[state.j] || [], ne = f.filter(x => x.level === "ERROR").length, nw = f.filter(x => x.level === "WARN").length;
+  const lintBadge = ne ? '<span class="badge err">' + tn("errors", ne) + '</span>' : nw ? '<span class="badge warn">' + tn("warnings", nw) + '</span>' : '<span class="badge ok">' + t("auditClean") + '</span>';
+  const pct = s.total ? [s.observed, s.reported, s.assumed].map(v => Math.round(v / s.total * 100)) : [0, 0, 0];
+  $("#subline").innerHTML = '<span class="badge wrap"><b>' + esc(j.persona.name) + '</b>&nbsp;· ' + esc(j.persona.role) + '</span>'
+    + '<span class="badge status-' + esc(m.status) + '">' + (L.status[m.status] || m.status) + ' · v' + esc(m.version) + '</span>'
+    + '<span class="badge">' + (L.mapType[m.map_type] || m.map_type) + '</span>'
+    + (j.scenario.perspective === "to_be" ? '<span class="badge to-be" title="' + esc(t("toBeTitle")) + '">' + L.perspective.to_be + '</span>' : '')
+    + (m.synthetic ? '<span class="badge synthetic">' + t("synthetic") + '</span>' : '')
+    + lintBadge
+    + '<span class="legend" title="' + t("legendTitle") + '"><span class="evbar"><span style="width:' + pct[0] + '%;background:var(--observed)"></span><span style="width:' + pct[1] + '%;background:var(--reported)"></span><span style="width:' + pct[2] + '%;background:var(--assumed)"></span></span>'
+    + '<span class="c-observed"><i class="dot fill"></i> ' + s.observed + ' ' + L.classesPl.observed + '</span><span class="c-reported"><i class="dot fill"></i> ' + s.reported + ' ' + L.classesPl.reported + '</span><span class="c-assumed"><i class="dot"></i> ' + s.assumed + ' ' + L.classesPl.assumed + '</span></span>';
+  const sel = $("#personaSel");
+  if (journeys.length > 1) { sel.hidden = false; sel.innerHTML = journeys.map((x, i) => '<option value="' + i + '"' + (i === state.j ? ' selected' : '') + '>' + esc(jLabel(x)) + '</option>').join(""); }
+  const tabs = [["journey", t("tabJourney")], ["process", t("tabProcess")], ["evidence", t("tabEvidence"), s.total], ["opps", t("tabOpps"), idx.opps.length], ["audit", t("tabAudit"), f.length]];
+  $("#tabs").innerHTML = tabs.map(t => '<button data-tab="' + t[0] + '" class="' + (state.tab === t[0] ? "active" : "") + '">' + t[1] + (t[2] != null ? '<span class="n">' + t[2] + '</span>' : '') + '</button>').join("");
+  $("#primToggle").classList.toggle("active", state.primOnly);
+}
+
+// ---------------------------------------------------------------- Layer 1: Journey
+function renderJourney(idx) {
+  const j = idx.j, n = idx.steps.length;
+  const cols = 'grid-template-columns: 170px repeat(' + n + ', 270px);';
+  let h = '<div class="map-wrap"><div class="map" style="' + cols + '">';
+  const row = (label, sub, cells, cls) => { h += '<div class="rowlabel">' + label + (sub ? '<small>' + sub + '</small>' : '') + '</div>'; h += cells; };
+  // Phasen
+  h += '<div class="rowlabel">' + t("rowPhase") + '<small>' + esc(j.scenario.goal) + '</small></div>';
+  j.phases.forEach(p => { h += '<div class="phase" id="jphase-' + esc(p.id) + '" style="grid-column: span ' + p.steps.length + '"><h3>' + esc(p.name) + '</h3>' + (p.user_intent ? '<div class="intent">' + esc(p.user_intent) + '</div>' : '') + (p.duration ? '<div class="dur">' + esc(p.duration) + '</div>' : '') + '</div>'; });
+  // Dauer: ein Massstab über alle Phasen, damit lange Wartezeiten nicht gleich kurz aussehen wie zwei Tage Einbau.
+  // Das Schrittraster bleibt gleich breit; nur die Balken folgen der belegten Dauer.
+  const timed = j.phases.filter(p => p.duration_days);
+  if (timed.length) {
+    const room = Math.min(...j.phases.map(p => p.steps.length)) * 270 - 24, top = Math.max(...timed.map(p => p.duration_days.max || p.duration_days.typical)), px = v => Math.round(v / top * room);
+    h += '<div class="rowlabel">' + t("rowDuration") + '<small>' + t("rowDurationSub") + '</small></div>';
+    j.phases.forEach(p => { const d = p.duration_days; let c;
+      if (!d) c = '<span class="empty">' + t("noDuration") + '</span>';
+      else if (!visible(idx, d.evidence_refs)) c = '<div class="hidden-note">' + t("durationHidden") + '</div>';
+      else { const lo = d.min != null ? d.min : d.typical, hi = d.max != null ? d.max : d.typical, label = t("durTypical", { d: days(d.typical) }) + (d.min != null && d.max != null ? t("durRange", { min: d.min, max: d.max }) : d.max != null ? t("durUpTo", { max: d.max }) : d.min != null ? t("durFrom", { min: d.min }) : "");
+        c = '<div class="dbar" title="' + esc(label) + '"><span class="typ" style="width:' + px(d.typical) + 'px"></span>' + (hi > lo ? '<span class="rng" style="left:' + px(lo) + 'px;width:' + (px(hi) - px(lo)) + 'px"></span>' : '') + '</div>'
+          + claimBtn(idx, label, d.evidence_refs, "", t("durTitle", { p: p.name })) + (d.basis ? '<div class="dbasis">' + esc(d.basis) + '</div>' : ''); }
+      h += '<div class="phase-end" style="grid-column: span ' + p.steps.length + '">' + c + '</div>'; });
+  }
+  // Schritte
+  let cells = "";
+  idx.steps.forEach(e => { const s = e.step, last = e.si === e.phase.steps.length - 1;
+    cells += '<div class="step' + (last ? ' phase-end' : '') + '" id="jstep-' + esc(s.id) + '"><h4>' + esc(s.name) + '</h4><div class="action">' + esc(s.action) + '</div><div class="meta">'
+      + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.touchpoint ? '<span class="chip" title="' + t("touchpoint") + '">' + esc(s.touchpoint) + '</span>' : '') + (s.counterpart ? '<span class="chip" title="' + t("counterpart") + '">' + esc(s.counterpart) + '</span>' : '') + actorChip(s) + (s.is_transition ? '<span class="chip transition">' + t("transition") + '</span>' : '')
+      + '</div>' + ((s.evidence_refs || []).length ? '<div style="margin-top:6px">' + claimBtn(idx, t("stepEvidence"), s.evidence_refs, "", s.name) + '</div>' : '') + '</div>'; });
+  row(t("rowDoes"), t("rowDoesSub"), cells);
+  // Denkt
+  cells = ""; idx.steps.forEach(e => { cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + renderClaims(idx, e.step.thinking || [], t => t.text, t => t.evidence_refs) + '</div>'; });
+  row(t("rowThinks"), t("rowThinksSub"), cells);
+  // Fühlt
+  h += '<div class="rowlabel">' + t("rowFeels") + '<small>' + (journeys.length > 1 ? t("rowFeelsSubMulti") : t("rowFeelsSub")) + '</small></div>';
+  h += '<div class="curve" style="grid-column: 2 / -1" id="curve"></div>';
+  // Pain Points
+  cells = ""; idx.steps.forEach(e => { const pps = e.step.pain_points || []; let c = "", hidden = 0; pps.forEach(pp => { if (!visible(idx, pp.evidence_refs)) { hidden++; return; }
+      const sev = pp.severity ? '<span class="sev" title="' + t("severity", { n: pp.severity }) + '">' + [1, 2, 3, 4, 5].map(i => '<i class="' + (i <= pp.severity ? 'on' : '') + '"></i>').join("") + '</span>' : '';
+      c += '<button class="claim pp ' + pp.type + ' ev-' + idx.evState(pp.evidence_refs) + '" data-refs="' + esc((pp.evidence_refs || []).join(",")) + '" data-title="' + esc(pp.id) + '" data-text="' + esc(pp.text) + '" data-pp="' + esc(pp.id) + '"><div class="pp-head"><span class="tag ' + pp.type + '">' + (pp.type === "breakdown" ? t("breakdown") : t("friction")) + '</span>' + sev + (pp.status ? '<span class="tag status">' + (L.ppStatus[pp.status] || pp.status) + '</span>' : '') + '</div>' + esc(pp.text) + evDots(idx, pp.evidence_refs) + (pp.workaround ? '<div class="wa">↪ ' + esc(pp.workaround) + '</div>' : '') + (pp.owner ? '<div class="wa">' + lbl("owner") + esc(pp.owner) + '</div>' : '') + '</button>'; });
+    if (hidden) c += '<div class="hidden-note">' + tn("noPrimaryHidden", hidden) + '</div>'; cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + (c || '<span class="empty">–</span>') + '</div>'; });
+  row(t("rowPain"), t("rowPainSub"), cells);
+  // Edge Cases & Recovery
+  cells = ""; idx.steps.forEach(e => { const s = e.step; let c = renderClaims(idx, s.edge_cases || [], x => lbl("edgeCase") + x.text, x => x.evidence_refs); (s.recovery_paths || []).forEach(r => { if (!visible(idx, r.evidence_refs)) return; c += claimBtn(idx, lbl(r.exists === false ? "targetPath" : "recovery") + r.path, r.evidence_refs, r.exists === false ? "ev-assumed" : "", lbl("trigger") + r.trigger); }); cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + (c || '<span class="empty">–</span>') + '</div>'; });
+  row(t("rowEdge"), t("rowEdgeSub"), cells);
+  // Chancen (phasenweise)
+  h += '<div class="rowlabel">' + t("rowOpps") + '<small>' + t("rowOppsSub") + '</small></div>';
+  j.phases.forEach(p => { const os = idx.oppsForPhase(p.id); h += '<div class="phase-end" style="grid-column: span ' + p.steps.length + '">' + (os.length ? os.map(o => { const q = quadrant(o); return claimBtn(idx, o.hmw + (q ? " · " + L.quadrant[q] : ""), o.evidence_refs, "", o.id); }).join("") : '<span class="empty">–</span>') + '</div>'; });
+  // KPIs (phasenweise)
+  h += '<div class="rowlabel">' + t("rowKpi") + '<small>' + t("rowKpiSub") + '</small></div>';
+  j.phases.forEach(p => { const ks = p.kpis || []; h += '<div class="phase-end" style="grid-column: span ' + p.steps.length + '">' + (ks.length ? ks.map(k => '<div class="kpi"><b>' + esc(k.name) + '</b>' + (k.current_value != null ? ' · <span>' + esc(k.current_value) + (k.unit ? ' ' + esc(k.unit) : '') + '</span>' : '') + (k.target != null ? ' ' + t("kpiTarget", { t: esc(k.target) }) : '') + '<div class="k">' + (L.kpiCat[k.category] || k.category) + ' · ' + (k.indicator_type === "leading" ? t("leading") : t("lagging")) + (k.commercial_equivalent ? ' · ' + t("translatedFrom", { c: esc(k.commercial_equivalent) }) : '') + '</div></div>').join("") : '<span class="empty">–</span>') + '</div>'; });
+  h += '</div></div>';
+  // Persona & Szenario
+  const per = j.persona, sc = j.scenario;
+  h += '<div class="grid-2" style="margin-top:14px"><div class="panel"><h2>' + lbl("persona") + esc(per.name) + (per.is_hypothesis ? ' <span class="badge status-hypothesis">' + L.status.hypothesis + '</span>' : '') + '</h2>' + (per.description ? '<p class="muted" style="margin:4px 0 8px">' + esc(per.description) + '</p>' : '')
+    + (per.goals?.length ? '<h3>' + t("goals") + '</h3><ul>' + per.goals.map(g => '<li>' + esc(g) + '</li>').join("") + '</ul>' : '') + (per.frustrations?.length ? '<h3>' + t("frustrations") + '</h3><ul>' + per.frustrations.map(g => '<li>' + esc(g) + '</li>').join("") + '</ul>' : '')
+    + (per.context ? '<h3>' + t("contextH") + '</h3><table>' + Object.entries(per.context).map(([k, v]) => '<tr><th>' + esc(L.context[k] || k) + '</th><td>' + esc(v) + '</td></tr>').join("") + '</table>' : '')
+    + '<div style="margin-top:10px">' + claimBtn(idx, t("personaEvidence"), per.evidence_refs, "", per.name) + '</div></div>'
+    + '<div class="panel"><h2>' + lbl("scenario") + esc(sc.title) + '</h2><table>' + [[t("goal"), sc.goal], [t("triggerScenario"), sc.trigger], [t("endState"), sc.end_state], [t("timeframe"), sc.timeframe]].filter(x => x[1]).map(x => '<tr><th>' + x[0] + '</th><td>' + esc(x[1]) + '</td></tr>').join("") + '</table>'
+    + (sc.scope_exclusions?.length ? '<h3>' + t("scopeExclusions") + '</h3><ul>' + sc.scope_exclusions.map(g => '<li>' + esc(g) + '</li>').join("") + '</ul>' : '') + (j.meta.diagnosis ? '<h3>' + t("diagnosis") + '</h3><p class="muted" style="margin:0">' + esc(j.meta.diagnosis.rationale) + (j.meta.diagnosis.backstage_documented_in ? '<br>' + lbl("backstage") + esc(j.meta.diagnosis.backstage_documented_in) : '') + '</p>' : '') + '</div></div>';
+  return h;
+}
+function drawCurve(idx) {
+  const el = $("#curve"); if (!el) return;
+  const n = idx.steps.length, W = el.clientWidth || n * 230, H = el.clientHeight || 150;
+  const x = i => (i + 0.5) / n * W, y = v => H * (0.5 - v * 0.19);
+  let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">';
+  let html = '<div class="zero"></div><span class="scale" style="top:' + (y(2) - 6) + 'px">++</span><span class="scale" style="top:' + (y(-2) - 6) + 'px">−−</span>';
+  // andere Personas: Punkte je Phase gleichmässig verteilt (Position, nicht Zeit).
+  // Zuordnung nur über gleiche Phasen-IDs; was dabei wegfällt, wird gekennzeichnet statt verschwiegen.
+  const gaps = new Map(), dropped = [];
+  journeys.forEach((other, oi) => { if (oi === state.j) return; const col = ["var(--observed)", "var(--reported)", "var(--friction)", "var(--positive)"][oi % 4]; const pts = [];
+    idx.j.phases.forEach(p => { const op = other.phases.find(q => q.id === p.id);
+      const why = !op ? t("noDataPhase") : op.steps.some(s => s.feeling) ? "" : t("noFeelingPhase");
+      if (why) { if (!gaps.has(p.id)) gaps.set(p.id, []); gaps.get(p.id).push(jLabel(other) + t("colon") + why); } });
+    const lost = other.phases.filter(op => !idx.j.phases.some(p => p.id === op.id)).map(op => t("quoted", { t: op.name }));
+    if (lost.length) dropped.push(jLabel(other) + t("colon") + lost.join(", "));
+    other.phases.forEach(op => { const mine = idx.j.phases.find(p => p.id === op.id); if (!mine) return; const start = idx.steps.find(e => e.phase.id === mine.id).gi, span = mine.steps.length; op.steps.forEach((s, k) => { const gx = start + (k + 0.5) / op.steps.length * span - 0.5; pts.push({ gx, v: s.feeling ? s.feeling.valence : null, label: s.name, name: jLabel(other) }); }); });
+    let d = "", pen = false; pts.forEach(p => { if (p.v == null) { pen = false; return; } d += (pen ? " L" : " M") + x(p.gx) + " " + y(p.v); pen = true; });
+    svg += '<path d="' + d + '" fill="none" stroke="' + col + '" stroke-width="1.5" stroke-dasharray="4 3" vector-effect="non-scaling-stroke" opacity=".8"/>';
+    pts.forEach(p => { if (p.v == null) return; html += '<span class="pt other" style="left:' + x(p.gx) + 'px;top:' + y(p.v) + 'px;border-color:' + col + ';background:' + col + '" title="' + esc(p.name + t("colon") + p.label) + '"></span>'; }); });
+  // diese Persona
+  let d = "", pen = false, lastPt = null;
+  idx.steps.forEach(e => { const f = e.step.feeling; const px = x(e.gi); if (!f) { pen = false; return; }
+    if (pen) d += " L" + px + " " + y(f.valence);
+    else { if (lastPt) svg += '<path d="M' + lastPt.x + ' ' + lastPt.y + ' L' + px + ' ' + y(f.valence) + '" fill="none" stroke="var(--gap)" stroke-width="1.5" stroke-dasharray="3 4" vector-effect="non-scaling-stroke"/>'; d += " M" + px + " " + y(f.valence); }
+    pen = true; lastPt = { x: px, y: y(f.valence) }; });
+  svg += '<path d="' + d + '" fill="none" stroke="var(--ink)" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>';
+  idx.steps.forEach(e => { const f = e.step.feeling, px = x(e.gi);
+    if (!f) { html += '<span class="pt gap" style="left:' + px + 'px;top:' + (H / 2) + 'px" title="' + t("noFeelingTitle") + '">?</span><span class="lbl" style="left:' + px + 'px;top:' + (H / 2 + 14) + 'px">' + t("noEvidence") + '</span>'; return; }
+    const st = idx.evState(f.evidence_refs), cls = st === "primary" ? "" : st === "assumed" ? " assumed" : " hollow";
+    html += '<span class="pt' + cls + '" style="left:' + px + 'px;top:' + y(f.valence) + 'px" data-refs="' + esc((f.evidence_refs || []).join(",")) + '" data-title="' + esc(t("feelingTitle", { s: e.step.name })) + '" data-text="' + esc(f.label || "") + ' (' + (f.valence > 0 ? "+" : "") + f.valence + ')" title="' + esc(f.label || "") + '"></span>';
+    if (f.label) html += '<span class="lbl" style="left:' + px + 'px;top:' + (f.valence >= 0 ? y(f.valence) + 12 : y(f.valence) - 34) + 'px">' + esc(f.label.length > 44 ? f.label.slice(0, 42) + "…" : f.label) + '</span>'; });
+  gaps.forEach((notes, pid) => { const first = idx.steps.find(e => e.phase.id === pid); if (!first) return; const span = first.phase.steps.length;
+    html += '<span class="nodata" style="left:' + (first.gi / n * W) + 'px;width:' + (span / n * W) + 'px">' + notes.map(esc).join("<br>") + '</span>'; });
+  if (dropped.length) html += '<span class="dropped" title="' + t("droppedTitle") + '">' + esc(t("dropped", { l: dropped.join("; ") })) + '</span>';
+  el.innerHTML = svg + html;
+}
+
+// ---------------------------------------------------------------- Layer 2: Prozess
+function renderProcess(idx) {
+  let h = '<div class="panel"><h2>' + t("processTitle") + '</h2><p class="muted" style="margin:0">' + t("processIntro") + '</p></div><div class="flow">';
+  idx.j.phases.forEach(p => { h += '<div class="phase-h">' + esc(p.name) + (p.duration_days && visible(idx, p.duration_days.evidence_refs) ? ' · ' + t("durTypical", { d: days(p.duration_days.typical) }) : '') + '</div>';
+    p.steps.forEach(s => { const bds = (s.pain_points || []).filter(x => x.type === "breakdown"), frs = (s.pain_points || []).filter(x => x.type !== "breakdown");
+      h += '<div class="node-row"><div class="node' + (bds.length ? ' has-breakdown' : '') + '"><h4>' + esc(s.name) + '</h4><div class="act">' + esc(s.action) + '</div><div class="meta" style="margin-top:6px">' + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.counterpart ? '<span class="chip">' + esc(s.counterpart) + '</span>' : '') + actorChip(s) + (s.is_transition ? '<span class="chip transition">' + t("transition") + '</span>' : '') + '</div>' + ((s.backstage_notes || []).length ? '<div class="muted" style="font-size:11.5px;margin-top:6px">' + lbl("backstage") + s.backstage_notes.map(esc).join(" · ") + '</div>' : '') + '</div><div class="branches">';
+      bds.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch bd"><b>' + lbl("breakdown") + '</b>' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">' + t("workaround") + '</span><span>' + esc(pp.workaround) + '</span></div>' : '') + '</div>'; });
+      const rps = (s.recovery_paths || []).filter(r => visible(idx, r.evidence_refs));
+      if (rps.length) { h += '<div class="branch" style="border-color:var(--positive)"><b>' + t("backToJourney") + '</b>'; rps.forEach(r => { h += '<div class="arrow rec' + (r.exists === false ? ' soll' : '') + '"><span class="lab">' + (r.exists === false ? t("targetPath") : t("recovery")) + '</span><span><i class="muted">' + esc(r.trigger) + '</i> → ' + esc(r.path) + ' ' + claimInline(idx, r.evidence_refs, t("recovery"), r.path) + '</span></div>'; }); h += '</div>'; }
+      frs.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch fr"><b>' + lbl("friction") + '</b>' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">' + t("workaround") + '</span><span>' + esc(pp.workaround) + '</span></div>' : '') + '</div>'; });
+      (s.edge_cases || []).forEach(ec => { if (!visible(idx, ec.evidence_refs)) return; h += '<div class="branch ec"><b>' + lbl("edgeCase") + '</b>' + esc(ec.text) + ' ' + claimInline(idx, ec.evidence_refs, t("edgeCase"), ec.text) + '</div>'; });
+      if (!bds.length && !(s.recovery_paths || []).length && !frs.length && !(s.edge_cases || []).length) h += '<div class="muted" style="font-size:12px;padding:8px 0">' + t("noFailurePath") + '</div>';
+      h += '</div></div>'; }); });
+  return h + '</div>';
+}
+function claimInline(idx, refs, title, text) { if (!refs || !refs.length) return '<button class="claim" style="display:inline;width:auto;padding:0 4px;margin:0;border:0;background:none" data-refs="" data-title="' + esc(title) + '" data-text="' + esc(text) + '"><span class="evc muted" title="' + t("noEvidence") + '">∅</span></button>'; return '<button class="claim" style="display:inline;width:auto;padding:0 4px;margin:0;border:0;background:none" data-refs="' + esc(refs.join(",")) + '" data-title="' + esc(title) + '" data-text="' + esc(text) + '">' + evDots(idx, refs) + '</button>'; }
+
+// ---------------------------------------------------------------- Layer 3: Evidenz
+function renderEvidence(idx) {
+  const s = idx.summary(), cl = idx.claims(), exp = cl.filter(c => ["thinking", "feeling", "pain_point"].includes(c.kind)), backed = exp.filter(c => idx.hasPrimary(c.refs)).length;
+  let h = '<div class="tiles"><div class="tile"><div class="v">' + idx.src.size + '</div><div class="l">' + t("sources") + '</div></div><div class="tile"><div class="v">' + s.total + '</div><div class="l">' + t("atoms") + '</div></div><div class="tile"><div class="v c-observed">' + s.observed + '</div><div class="l">' + L.classesPl.observed + '</div></div><div class="tile"><div class="v c-reported">' + s.reported + '</div><div class="l">' + L.classesPl.reported + '</div></div><div class="tile"><div class="v c-assumed">' + s.assumed + '</div><div class="l">' + L.classesPl.assumed + '</div></div><div class="tile"><div class="v">' + (exp.length ? Math.round(backed / exp.length * 100) : 0) + '%</div><div class="l">' + t("experienceShare", { b: backed, n: exp.length }) + '</div></div></div>';
+  // Heatmap
+  const dims = [["step", t("step")], ["thinking", t("rowThinks")], ["feeling", t("rowFeels")], ["pain_point", t("rowPain")], ["edge_case", t("edgeCases")], ["recovery", t("recovery")]];
+  h += '<div class="panel" style="margin-top:14px"><h2>' + t("heatmap") + '</h2><p class="muted" style="margin:0 0 8px">' + t("heatIntro") + '</p><div class="heat"><table><thead><tr><th></th>' + idx.j.phases.map(p => '<th class="phase" colspan="' + p.steps.length + '">' + esc(p.name) + '</th>').join("") + '</tr><tr><th></th>' + idx.steps.map(e => '<th class="step">' + esc(e.step.name) + '</th>').join("") + '</tr></thead><tbody>';
+  dims.forEach(([k, label]) => { h += '<tr><th>' + label + '</th>'; idx.steps.forEach(e => { const cs = cl.filter(c => c.kind === k && c.e === e); if (!cs.length) { h += '<td class="cell"><div class="hc na">·</div></td>'; return; } let prim = 0, ass = 0; const refs = []; cs.forEach(c => { const cc = idx.classes(c.refs); prim += cc.observed + cc.reported; ass += cc.assumed; refs.push(...c.refs); });
+      const bg = prim === 0 ? "" : 'background: color-mix(in srgb, var(--observed) ' + Math.min(15 + prim * 18, 85) + '%, var(--surface));color:' + (prim >= 3 ? 'var(--accent-ink)' : 'var(--ink)');
+      h += '<td class="cell"><div class="hc' + (prim === 0 ? ' gap' : '') + '" style="' + bg + '" data-refs="' + esc([...new Set(refs)].join(",")) + '" data-title="' + esc(label + t("colon") + e.step.name) + '" data-text="' + tn("statements", cs.length) + '">' + (prim || "–") + (ass ? '<small>' + t("assumedShort", { n: ass }) + '</small>' : '') + '</div></td>'; }); h += '</tr>'; });
+  h += '</tbody></table></div></div>';
+  // Quellen
+  h += '<div class="panel"><h2>' + t("sourceRegister") + '</h2><table><thead><tr>' + ["colId", "colSource", "colKind", "colClass", "colN", "colDate", "colPii", "colLocation"].map(k => '<th>' + t(k) + '</th>').join("") + '</tr></thead><tbody>' + [...idx.src.values()].map(x => '<tr><td class="mono">' + esc(x.id) + '</td><td>' + esc(x.title) + (x.participants ? '<br><small>' + esc(x.participants) + '</small>' : '') + '</td><td>' + (L.srcKinds[x.kind] || x.kind) + '</td><td class="c-' + x.default_class + '">' + L.classes[x.default_class] + '</td><td>' + (x.n ?? '–') + '</td><td>' + esc(x.date || '–') + '</td><td class="src-pii' + (x.pii_status === "contains_pii" ? ' c-breakdown' : '') + '">' + (L.pii[x.pii_status] || x.pii_status) + '</td><td class="mono">' + esc(x.location || '–') + '</td></tr>').join("") + '</tbody></table></div>';
+  // Widersprüche & unbenutzt
+  const contra = [...idx.ev.values()].filter(a => a.contradicts?.length), used = new Set(); cl.forEach(c => c.refs.forEach(r => used.add(r))); (idx.j.persona.evidence_refs || []).forEach(r => used.add(r)); (idx.j.scenario.evidence_refs || []).forEach(r => used.add(r)); idx.opps.forEach(o => (o.evidence_refs || []).forEach(r => used.add(r)));
+  const unused = [...idx.ev.values()].filter(a => !used.has(a.id));
+  h += '<div class="grid-2"><div class="panel"><h2>' + t("contradictions", { n: contra.length }) + '</h2>' + (contra.length ? contra.map(a => atomHtml(idx, a) + '<div style="margin:-4px 0 12px 14px">' + a.contradicts.map(c => idx.ev.get(c) ? atomHtml(idx, idx.ev.get(c)) : '').join("") + '</div>').join("") : '<p class="muted">' + t("noneShown") + '</p>') + '</div><div class="panel"><h2>' + t("unused", { n: unused.length }) + '</h2>' + (unused.length ? unused.map(a => atomHtml(idx, a)).join("") : '<p class="muted">' + t("allSynthesised") + '</p>') + '</div></div>';
+  return h;
+}
+function atomHtml(idx, a) { const src = idx.src.get(a.source_ref); const txt = a.kind === "quote" ? '<q>' + esc(a.text) + '</q>' : esc(a.text); return '<div class="atom"><div class="meta"><span class="cls ' + a.class + '">' + L.classes[a.class] + '</span><span>' + (L.kinds[a.kind] || a.kind) + '</span><span>·</span><span>' + esc(src ? src.title : a.source_ref) + '</span>' + (a.locator ? '<span class="loc">' + esc(a.locator) + '</span>' : '') + '<span class="loc">' + esc(a.id) + '</span></div><div class="txt">' + txt + (a.value != null && a.kind === "metric" ? ' <b>' + esc(a.value) + (a.unit ? ' ' + esc(a.unit) : '') + '</b>' : '') + '</div>' + (a.emotion_hint ? '<div class="muted" style="font-size:12px;margin-top:3px">' + lbl("emotion") + esc(a.emotion_hint.label || "") + ' (' + (a.emotion_hint.valence > 0 ? "+" : "") + a.emotion_hint.valence + ')' + (a.emotion_hint.explicit ? t("explicit") : t("derived")) + '</div>' : '') + (a.contradicts?.length ? '<div class="contra">' + esc(t("contradicts", { l: a.contradicts.join(", ") })) + '</div>' : '') + '</div>'; }
+
+// ---------------------------------------------------------------- Layer 4: Chancen
+function renderOpps(idx) {
+  const os = idx.opps; if (!os.length) return '<div class="panel"><h2>' + t("tabOpps") + '</h2><p class="muted">' + t("noOpps") + '</p></div>';
+  let h = '<div class="grid-2"><div class="panel"><h2>' + t("matrix") + '</h2><div class="matrix"><div class="q tl">' + L.quadrantPl.quick_win + '</div><div class="q tr">' + L.quadrantPl.big_bet + '</div><div class="q bl">' + L.quadrantPl.fill_in + '</div><div class="q br">' + L.quadrantPl.skip + '</div><span class="ax x">' + t("axisX") + '</span><span class="ax y">' + t("axisY") + '</span>';
+  os.forEach((o, i) => { if (o.user_impact == null || o.effort == null) return; const v = (o.user_impact + (o.public_value ?? o.user_impact)) / 2; const left = 8 + (o.effort - 1) / 4 * 84, top = 92 - (v - 1) / 4 * 84; h += '<span class="opp" style="left:' + left + '%;top:' + top + '%" title="' + esc(o.hmw) + '" data-opp="' + i + '">' + (i + 1) + '</span>'; });
+  h += '</div><p class="muted" style="font-size:12px;margin:8px 0 0">' + t("unscored") + '</p></div><div class="panel"><h2>' + t("oppsStories") + '</h2>';
+  os.forEach((o, i) => { const q = quadrant(o); h += '<div class="opp-card" id="opp-' + i + '"><div class="h"><span class="num">' + (i + 1) + '</span><div style="flex:1"><b>' + esc(o.hmw) + '</b>' + (o.description ? '<div class="muted" style="font-size:12.5px">' + esc(o.description) + '</div>' : '') + '</div></div><div class="scores">' + (q ? '<span class="badge">' + L.quadrant[q] + '</span>' : '') + '<span>' + t("impact") + ' ' + (o.user_impact ?? '–') + '</span><span>' + t("publicValue") + ' ' + (o.public_value ?? '–') + '</span><span>' + t("effort") + ' ' + (o.effort ?? '–') + '</span>' + (o.owner ? '<span>' + lbl("owner") + esc(o.owner) + '</span>' : '') + (o.status ? '<span class="tag status">' + (L.ppStatus[o.status] || o.status) + '</span>' : '') + '</div>'
+    + ((at => at ? '<div style="font-size:12px">' + lbl("oppAt") + at + '</div>' : '')(refAt(idx, o.step_ref, o.phase_ref)))
+    + ((o.linked_pain_points || []).length ? '<div style="font-size:12px">' + lbl("rowPain") + o.linked_pain_points.map(p => '<button class="claim" style="display:inline;width:auto;padding:1px 6px;margin:0 2px" data-refs="' + esc((idx.pp.get(p)?.evidence_refs || []).join(",")) + '" data-title="' + esc(p) + '" data-text="' + esc(idx.pp.get(p)?.text || p) + '">' + esc(p) + '</button>').join("") + '</div>' : '')
+    + ((o.stories || []).length ? '<ul>' + o.stories.map(st => '<li class="' + (st.mvp ? 'mvp' : '') + '">' + esc(st.text) + (st.mvp ? ' <small class="c-positive">MVP</small>' : '') + '</li>').join("") + '</ul>' : '<div class="muted" style="font-size:12px;margin-top:4px">' + t("noStories") + '</div>') + '</div>'; });
+  return h + '</div></div>';
+}
+
+// ---------------------------------------------------------------- Layer 5: Prüfung
+// Fundort (offene Frage, Chance): der Schritt, sonst die Phase, als Sprung in die Journey;
+// ein unbekannter Verweis bleibt stumm (L001 meldet ihn).
+function refAt(idx, stepRef, phaseRef) {
+  const e = idx.steps.find(x => x.step.id === stepRef), p = e ? null : idx.j.phases.find(x => x.id === phaseRef);
+  const target = e ? { id: "jstep-" + e.step.id, name: e.step.name } : p ? { id: "jphase-" + p.id, name: p.name } : null;
+  return target ? '<button class="oq-at" data-goto="' + esc(target.id) + '" title="' + esc(t("oqGoto")) + '">' + esc(t("quoted", { t: target.name })) + '</button>' : "";
+}
+function oqAt(idx, q) { const at = refAt(idx, q.step_ref, q.phase_ref); return at ? at + t("colon") : ""; }
+function renderAudit(idx) {
+  const f = findings[state.j] || [], by = {}; f.forEach(x => (by[x.antipattern] = by[x.antipattern] || []).push(x));
+  const ne = f.filter(x => x.level === "ERROR").length, nw = f.filter(x => x.level === "WARN").length, ni = f.length - ne - nw;
+  let h = '<div class="tiles"><div class="tile"><div class="v c-breakdown">' + ne + '</div><div class="l">' + t("errorsLbl") + '</div></div><div class="tile"><div class="v" style="color:var(--friction)">' + nw + '</div><div class="l">' + t("warningsLbl") + '</div></div><div class="tile"><div class="v">' + ni + '</div><div class="l">' + t("infosLbl") + '</div></div><div class="tile"><div class="v">' + esc(idx.j.meta.owner?.role || "–") + '</div><div class="l">' + t("owner") + (idx.j.meta.owner?.unit ? ' · ' + esc(idx.j.meta.owner.unit) : '') + '</div></div><div class="tile"><div class="v">' + esc(idx.j.meta.next_review || "–") + '</div><div class="l">' + t("nextReview") + (idx.j.meta.review_cycle_days ? t("everyDays", { n: idx.j.meta.review_cycle_days }) : '') + '</div></div></div>';
+  h += '<div class="panel" style="margin-top:14px"><h2>' + t("methodAudit") + '</h2><p class="muted" style="margin:0 0 6px">' + esc(t("generatedBy", { g: DATA.generator, d: DATA.generated })) + '</p>';
+  if (!f.length) h += '<p>' + t("noFindings") + '</p>';
+  Object.keys(L.antipatterns).forEach(ap => { const items = by[ap]; if (!items) return; h += '<h3>' + L.antipatterns[ap] + ' <span class="muted" style="font-weight:400">(' + items.length + ')</span></h3>' + items.map(x => '<div class="finding"><span class="lvl ' + x.level + '">' + x.level + '</span><div><b class="mono">' + esc(x.code) + '</b> ' + esc(x.message) + (x.path ? ' <span class="path">' + esc(x.path) + '</span>' : '') + (x.hint ? '<div class="hint">→ ' + esc(x.hint) + '</div>' : '') + '</div></div>').join(""); });
+  h += '</div>';
+  const oq = idx.j.open_questions || [];
+  h += '<div class="grid-2"><div class="panel"><h2>' + t("openQuestions", { n: oq.length }) + '</h2>' + (oq.length ? '<ul style="margin:0;padding-left:18px">' + oq.map(q => '<li>' + oqAt(idx, q) + esc(q.text) + (q.proposed_method ? ' <span class="badge">' + esc(q.proposed_method) + '</span>' : '') + '</li>').join("") + '</ul>' : '<p class="muted">' + t("none") + '</p>') + '</div>';
+  const chl = idx.j.changelog || [];
+  h += '<div class="panel"><h2>' + t("versions") + '</h2>' + (chl.length ? '<table>' + chl.map(c => '<tr><th>v' + esc(c.version) + '</th><td>' + esc(c.date) + '</td><td>' + esc(c.summary) + '</td></tr>').join("") + '</table>' : '<p class="muted">' + t("noChangelog") + '</p>') + '</div></div>';
+  return h;
+}
+
+// ---------------------------------------------------------------- Drawer
+function openDrawer(title, text, refs) {
+  const idx = IDX, atoms = (refs || "").split(",").filter(Boolean).map(r => idx.ev.get(r) || { id: r, missing: true });
+  $("#dTitle").textContent = title || t("evidence");
+  const c = idx.classes(atoms.filter(a => !a.missing).map(a => a.id));
+  let v;
+  if (!atoms.length) v = '<div class="verdict n">' + t("verdictNone") + '</div>';
+  else if (c.observed + c.reported > 0) v = '<div class="verdict p">' + t("verdictPrimary", { list: [c.observed ? t("verdictObs", { n: c.observed }) : "", c.reported ? t("verdictRep", { n: c.reported }) : ""].filter(Boolean).join(t("and")), extra: c.assumed ? t("verdictExtra", { n: c.assumed }) : "" }) + '</div>';
+  else v = '<div class="verdict a">' + t("verdictAssumed", { n: c.assumed }) + '</div>';
+  $("#dBody").innerHTML = '<div class="claim-txt">' + esc(text) + '</div>' + v + atoms.map(a => a.missing ? '<div class="atom c-breakdown">' + esc(t("unknownRef", { id: a.id })) + '</div>' : atomHtml(idx, a)).join("");
+  $("#drawer").classList.add("open"); $("#scrim").classList.add("open");
+}
+function closeDrawer() { $("#drawer").classList.remove("open"); $("#scrim").classList.remove("open"); }
+
+// ---------------------------------------------------------------- Render
+function render() {
+  IDX = new Idx(journeys[state.j]); renderHeader();
+  const m = $("#main");
+  m.innerHTML = '<section class="layer' + (state.tab === "journey" ? " active" : "") + '" data-l="journey">' + renderJourney(IDX) + '</section>'
+    + '<section class="layer' + (state.tab === "process" ? " active" : "") + '" data-l="process">' + renderProcess(IDX) + '</section>'
+    + '<section class="layer' + (state.tab === "evidence" ? " active" : "") + '" data-l="evidence">' + renderEvidence(IDX) + '</section>'
+    + '<section class="layer' + (state.tab === "opps" ? " active" : "") + '" data-l="opps">' + renderOpps(IDX) + '</section>'
+    + '<section class="layer' + (state.tab === "audit" ? " active" : "") + '" data-l="audit">' + renderAudit(IDX) + '</section>';
+  const meta = journeys[state.j].meta;
+  $("#footer").textContent = (meta.context?.organisation ? meta.context.organisation + " · " : "") + (meta.context?.service || "") + (meta.updated ? " · " + t("asOf", { d: meta.updated }) : "") + " · " + DATA.generator;
+  requestAnimationFrame(() => drawCurve(IDX));
+}
+function showTab(t) { state.tab = t; document.querySelectorAll("section.layer").forEach(s => s.classList.toggle("active", s.dataset.l === t)); document.querySelectorAll("nav.tabs button").forEach(b => b.classList.toggle("active", b.dataset.tab === t)); if (t === "journey") requestAnimationFrame(() => drawCurve(IDX)); }
+
+document.addEventListener("click", ev => {
+  const tab = ev.target.closest("nav.tabs button"); if (tab) return showTab(tab.dataset.tab);
+  const cl = ev.target.closest("[data-refs]"); if (cl) return openDrawer(cl.dataset.title, cl.dataset.text, cl.dataset.refs);
+  const go = ev.target.closest("[data-goto]"); if (go) { showTab("journey"); const el = document.getElementById(go.dataset.goto); el?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" }); if (el) { el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1500); } return; }
+  const op = ev.target.closest(".matrix .opp"); if (op) { const card = $("#opp-" + op.dataset.opp); card?.scrollIntoView({ behavior: "smooth", block: "center" }); card.style.borderColor = "var(--accent)"; setTimeout(() => card.style.borderColor = "", 1500); return; }
+  if (ev.target.closest("#dClose") || ev.target.closest("#scrim")) closeDrawer();
+});
+document.addEventListener("keydown", ev => { if (ev.key === "Escape") closeDrawer(); });
+$("#primOnly").addEventListener("change", ev => { state.primOnly = ev.target.checked; render(); });
+$("#personaSel").addEventListener("change", ev => { state.j = +ev.target.value; render(); });
+$("#themeBtn").addEventListener("click", () => { const r = document.documentElement, cur = r.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); r.dataset.theme = cur === "dark" ? "light" : "dark"; });
+window.addEventListener("resize", () => drawCurve(IDX));
+document.documentElement.lang = LANG;
+document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+document.querySelectorAll("[data-i18n-title]").forEach(el => { el.title = t(el.dataset.i18nTitle); });
+document.querySelectorAll("[data-i18n-aria]").forEach(el => { el.setAttribute("aria-label", t(el.dataset.i18nAria)); });
+
+if (!DATA || !DATA.journeys?.length) { $("#main").innerHTML = '<div class="panel"><h2>' + t("noData") + '</h2><p>' + t("noDataText", { cmd: "<code>journeykit render journey.json</code>" }) + '</p></div>'; }
+else render();
+</script>
+</body>
+</html>

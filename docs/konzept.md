@@ -127,11 +127,55 @@ etwas übersehen, Pipeline hat etwas erfunden, Pipeline hat etwas gefunden,
 das die manuelle Journey übersehen hat. Erst dieser Vergleich sagt, was
 «methodisch rigoros» konkret heisst.
 
+### Übertragbarkeit: was dem Modell in anderen Bereichen gefehlt hat
+
+Bevor die Synthese an echtem Material gemessen wird, prüfen synthetische
+Beispiele aus anderen Bereichen das **Modell**: Welche Aussagen lassen sich
+nicht ablegen, welche Regel sieht etwas nicht oder stört? Rohmaterial und
+Journey stammen dabei aus derselben Hand. Die Beispiele sagen deshalb nichts
+über die Qualität der Synthese, nur über die Tragfähigkeit von Schema, Lints
+und Skill. Die Hypothesen werden je Beispiel vor dem Material festgehalten und
+fortlaufend nummeriert: H1–H7 Baubewilligung, H8–H15 Musikschule.
+Begründungen und Belege stehen in den Beispiel-READMEs.
+
+| Befund | Beispiel | Was fehlte oder störte | Stand |
+|---|---|---|---|
+| Dritte handeln für die Persona | Baubewilligung H1 | kein Feld, wer handelt | umgesetzt: `step.performed_by`, L073 (ADR-0005) |
+| Wartephasen ohne Kontaktpunkt | Baubewilligung H2 | `phase.duration` nur Freitext; zwei Tage so breit wie vier Monate | umgesetzt: `phase.duration_days`, L003 (#13) |
+| Amtliche Publikation als Kanal | Baubewilligung H7 | nur `other` | umgesetzt: Kanal `publication` (#7) |
+| Statistik aus der Geschäftskontrolle | Baubewilligung | Quellenart fehlte; L011 hätte eine `observed`-Quelle als «ohne Nutzerquelle» gewarnt | umgesetzt: `case_records` (#8) |
+| Persona-Vergleich ohne gemeinsame Phasen | Baubewilligung H3 | Viewer liess Phasen still weg | umgesetzt (#9) |
+| Rechtsmittel statt Breakdown | Baubewilligung H4 | Unterscheidung nur im Urteil der Modellierenden | umgesetzt: Review-Frage, Skill (#14) |
+| Kosten und Gebühren | Baubewilligung H5, Musikschule H8 | kein Feld; wiederkehrende, ermässigte und an Dritte bezahlte Beträge stehen in Freitext-Einheiten nebeneinander, «Was kostet das?» bleibt unbeantwortet | Muster im Skill umgesetzt; Feld `step.costs[]` empfohlen, «vorher bekannt» als Kennzahl statt Feld (#15, ADR offen) |
+| Vermeidbare Kontakte und Ursachenketten | Musikschule H9 | Ursache liegt oft Phasen früher, bei einer anderen Stelle oder Back-Stage; die Kette steht nur im Text, `backstage_notes` ohne Belege | Muster im Skill umgesetzt (#49); Feld `pain_point.caused_by` empfohlen (ADR offen) |
+| Fristen der Persona | Musikschule H10 | Annahme- und Abmeldefrist tragen Breakdowns, existieren aber nur als Dokumentstelle | Muster und Review-Frage vorgeschlagen; Feld erst mit einem weiteren Beispiel |
+| Variante mit eingeschobener Phase (Warteliste für 47 %) | Musikschule H11 | Regel «pro Variante eine Datei» hätte 13 von 15 Schritten kopiert; Viewer zeigt die Dauer, als warteten alle | Präzisierung in `diagnose.md` vorgeschlagen |
+| Begünstigte Person ≠ Persona (Kind und Eltern) | Musikschule H12 | `emotion_hint` kennt kein «wessen»; Gefühle des Kindes nur aus zweiter Hand | Regel im Skill und Review-Frage vorgeschlagen; kein Feld |
+| Genutzter ≠ vorgeschriebener Kanal | Musikschule H13 | Formvorschrift (Abmeldung schriftlich) nur im Atom; privater Messenger nicht von einem Behördenchat unterscheidbar | Review-Frage vorgeschlagen; Feld erst mit einem zweiten Beispiel |
+| Gegenüber ausserhalb der Verwaltung | Baubewilligung, Musikschule H14 | Beschreibung von `counterpart` («Verwaltungsseite») zu eng; bei 12 von 15 Übergängen verliert `is_transition` an Trennschärfe | Textänderung vorgeschlagen; Zeile «Breakdowns an Übergängen» im Audit prüfen |
+| Öffentliche Erlasse als Quelle | Musikschule | nur `internal_document`, im Viewer «Internes Dokument» | niedrige Priorität |
+
+Was die Beispiele über die Lints sagen: Alle drei erreichen 0 Fehler und
+0 Warnungen ohne angepasste Schwellen. Die Regeln sind bereichsneutral, und
+die Struktur trägt. Die Lücken der Übertragbarkeit sind dagegen semantisch:
+Beträge, Ursachenketten, Fristen und Formvorschriften. Ein Lint sieht sie
+erst, wenn das Schema sie ausdrückt. Gestört hat keine Regel. Zwei Richtwerte
+passen aber schlecht: Der Richtwert von 40–80 Atomen je Journey wird bei
+Material mit vielen strukturierten Quellen weit überschritten (85 und 140
+Atome), ohne dass das Material überladen wäre. Und L023 verlangt zu Recht jede
+Übergangsmarkierung; wo fast jeder Schritt ein Übergang ist, verliert die
+Markierung aber ihre Aussagekraft.
+
+Für die Evaluation gegen echtes Material (unten, Roadmap 2) heisst das: neben
+`performed_by` und belegten Dauern gezielt prüfen, ob die Pipeline Kosten,
+Ursachenketten und Fristen der Persona erkennt – also genau das, was das
+Modell heute nur als Muster kennt.
+
 ## Roadmap
 
 1. ~~GitHub-Repo, CI grün, Secret Scanning (0.1.x)~~ – erledigt am 2026-10-07
 2. Evaluation gegen eine reale Ground-Truth-Journey (0.2)
 3. ~~Testsatz für die Extraktion: Input → erwartete Atome (0.2)~~ – `skill/user-journey/evals/extraction/`, fünf Fälle; Ausbau mit Material aus der Evaluation offen
-4. ~~Zweites Beispiel aus einem anderen Verwaltungsbereich (0.2)~~ – `examples/baubewilligung/`; Befunde zur Übertragbarkeit (Handelnde Dritte, Kanal «Publikation», Quellenart für Geschäftskontrolle, Dauer von Wartephasen u. a.) im Beispiel-README, grösstenteils umgesetzt; offen ist ein Kostenfeld (#15)
+4. ~~Zweites Beispiel aus einem anderen Verwaltungsbereich (0.2)~~ – `examples/baubewilligung/`; Befunde zur Übertragbarkeit (Handelnde Dritte, Kanal «Publikation», Quellenart für Geschäftskontrolle, Dauer von Wartephasen u. a.) im Beispiel-README, grösstenteils umgesetzt; drittes Beispiel `examples/musikschule/` (H8–H15): Kostenfeld (#15) und Ursachenketten (`pain_point.caused_by`) empfohlen, Fristen der Persona als Muster; Übersicht im Abschnitt «Evaluation»
 5. Viewer: visueller Versionsvergleich, Export der Heatmap (0.3); ~~französische UI, Lint-Meldungen, Exporte, Diff und CLI~~ – umgesetzt (`--lang fr` je Befehl, `JOURNEYKIT_LANG`)
 6. Variante B: MCP-Server für Journeys als Datenbestand (0.4)

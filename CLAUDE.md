@@ -73,12 +73,12 @@ Siehe `docs/konzept.md`, Abschnitt «Roadmap». Kurz:
 
 1. **Evaluation**: eine manuell erstellte, reale Journey als Ground Truth gegen die Pipeline laufen lassen (lokal, Material unter `/eval/`, nur der Vergleichsbericht kommt ins Repo). Dabei auch prüfen, ob die Pipeline handelnde Dritte (`performed_by`) und belegte Dauern erkennt – und Fristen nicht als Dauer übernimmt.
 2. **Französisch gegenlesen**: Begriffe und Formulierungen aus #20, #21, #22 durch eine französischsprachige Person aus der Verwaltung prüfen lassen; Korrekturen sind einzelne Zeilen in den vier Katalogen.
-3. **Kosten** (H5, #15) und **vermeidbare Schritte** (#49): Muster im Skill umgesetzt; ein Schemafeld erst, wenn ein drittes Beispiel es braucht.
+3. **Kosten** (H5/H8, #15) und **vermeidbare Schritte** (#49): Muster im Skill umgesetzt. Das dritte Beispiel `examples/musikschule/` braucht beide Felder – Vorschlag `step.costs[]` und `pain_point.caused_by`, je mit ADR; Entscheid offen. Weitere Vorschläge (Fristen der Persona, vorgeschriebener Kanal, Beschreibung von `counterpart`) im Beispiel-README und in `docs/konzept.md`, «Evaluation».
 4. **Testsatz Extraktion ausbauen**: Der Testsatz unter `skill/user-journey/evals/extraction/` steht (fünf synthetische Fälle, Scorer `scripts/eval_extraction.py`). Er trennt Schablonen bisher nur über Regelverstösse, nicht über Abdeckung – schwierigere Fälle ergänzen, am besten anonymisierte Ausschnitte aus der Evaluation (Punkt 1), und mehrere Läufe je Schablone vergleichen.
 5. **Viewer**: Vergleichsansicht zweier Versionen (Diff visuell), Kommentarfunktion, Export der Heatmap.
 6. **Variante B**: MCP-Server, der Journeys als Datenbestand hält (SQLite oder Notion), Versionen und Evidenz verwaltet – siehe ADR-0004.
 
-Erledigt seit 0.1.0 (Details in `CHANGELOG.md`): GitHub-Setup mit CI, Secret Scanning und Dependabot; zweites Beispiel `examples/baubewilligung/` mit den Befunden H1–H4, H7 (u. a. `step.performed_by` nach ADR-0005, Kanal `publication`, Quellenart `case_records`, `phase.duration_days`); alle Ausgaben auf Französisch.
+Erledigt seit 0.1.0 (Details in `CHANGELOG.md`): GitHub-Setup mit CI, Secret Scanning und Dependabot; zweites Beispiel `examples/baubewilligung/` mit den Befunden H1–H4, H7 (u. a. `step.performed_by` nach ADR-0005, Kanal `publication`, Quellenart `case_records`, `phase.duration_days`); alle Ausgaben auf Französisch; drittes Beispiel `examples/musikschule/` mit den Befunden H8–H15.
 
 ## Was nicht tun
 

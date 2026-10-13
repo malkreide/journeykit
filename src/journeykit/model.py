@@ -194,7 +194,8 @@ class Verdict:
     ``kind`` ist ``poster``, ``robust`` oder ``hypothesis``. ``missing`` nennt beim
     Poster, was fehlt (``owner``, ``review``, ``anchored_opportunity``);
     ``reasons`` bei der Hypothese, welche Bedingung für «belastbar» nicht erfüllt
-    ist (``low_primary``, ``status_hypothesis``, ``breakdown_without_recovery``).
+    ist (``no_experience``, ``low_primary``, ``status_hypothesis``,
+    ``breakdown_without_recovery``).
     """
 
     kind: str
@@ -236,7 +237,9 @@ def propose_verdict(idx: JourneyIndex) -> Verdict:
     if missing:
         return Verdict("poster", missing=tuple(missing), **common)
     reasons = []
-    if share < 0.5:
+    if not experience:
+        reasons.append("no_experience")
+    elif share < 0.5:
         reasons.append("low_primary")
     if meta.get("status") == "hypothesis":
         reasons.append("status_hypothesis")

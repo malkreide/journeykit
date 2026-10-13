@@ -218,7 +218,14 @@ def _rule_inside_out(idx: JourneyIndex, c: _Collector) -> None:
     j = idx.journey
     status = j["meta"]["status"]
     experience = [cl for cl in idx.claims() if cl.kind in {"thinking", "feeling", "pain_point"}]
-    if experience:
+    if not experience:
+        c.add(
+            "L010",
+            INFO if status == "hypothesis" else WARN,
+            "inside_out",
+            msg="L010.empty",
+        )
+    else:
         unsupported = [cl for cl in experience if not idx.has_primary(cl.evidence_refs)]
         ratio = len(unsupported) / len(experience)
         if ratio == 1.0 and status != "hypothesis":

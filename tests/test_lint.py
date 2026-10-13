@@ -122,6 +122,26 @@ def test_audit_transfer_is_not_primary_evidence(minimal):
     assert {"L011", "L012"} <= codes(findings, WARN)
 
 
+def _without_experience(journey):
+    step = journey["phases"][0]["steps"][0]
+    step["thinking"] = []
+    step["feeling"] = None
+    step["pain_points"] = []
+    step["recovery_paths"] = []
+    journey["opportunities"][0].pop("linked_pain_points")
+    return journey
+
+
+def test_no_experience_claims_at_all(minimal):
+    # Ohne jede Erlebnis-Aussage gibt es keine Quote – L010 meldet die Leere selbst.
+    f = lint_journey(_without_experience(minimal), today=TODAY)
+    hit = [x for x in f if x.code == "L010"]
+    assert len(hit) == 1 and hit[0].level == WARN
+    assert hit[0].message.startswith("Keine einzige Erlebnis-Aussage")
+    minimal["meta"]["status"] = "hypothesis"
+    assert "L010" in codes(lint_journey(minimal, today=TODAY), INFO)
+
+
 def test_no_breakdown_is_error_unless_hypothesis(minimal):
     minimal["phases"][0]["steps"][0]["pain_points"][0]["type"] = "friction"
     minimal["opportunities"][0]["linked_pain_points"] = ["pp-1"]

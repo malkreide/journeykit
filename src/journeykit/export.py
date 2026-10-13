@@ -12,7 +12,7 @@ import io
 from typing import Any
 
 from .export_texts import QUADRANT_LABELS, text
-from .lint import ERROR, INFO, WARN, Finding, summarize
+from .lint import ERROR, INFO, PRIMARY_SOURCE_KINDS, WARN, Finding, summarize
 from .lint_messages import ANTIPATTERN_LABELS, check_language
 from .model import JourneyIndex, Verdict, priority_quadrant, propose_verdict
 
@@ -209,10 +209,30 @@ def _audit_verdict(v: Verdict, t) -> list[str]:
     return lines + ["", t("audit.verdict_note"), ""]
 
 
-def _audit_next_steps(v: Verdict, findings: list[Finding], t, limit: int = 3) -> list[str]:
-    """Die schwersten Befunde, je Anti-Pattern einer; bei einer Hypothese ohne Plan zuerst der Plan."""
+def _audit_next_steps(
+    v: Verdict,
+    findings: list[Finding],
+    t,
+    relayed: int = 0,
+    source_request: dict[str, Any] | None = None,
+    limit: int = 3,
+) -> list[str]:
+    """Die schwersten Befunde, je Anti-Pattern einer.
+
+    Davor, in dieser Reihenfolge: die Rückfrage nach den Quellen, wenn Zitate nur aus
+    zweiter Hand vorliegen (mit dem Rohmaterial werden sie Primärevidenz), und bei einer
+    Hypothese ohne Plan der Plan.
+    """
     lines: list[str] = []
     n = 0
+    if relayed:
+        n += 1
+        if source_request:
+            lines.append(
+                t("audit.step_source_request", n=n, q=relayed, text=source_request["text"])
+            )
+        else:
+            lines.append(t("audit.step_source_request_new", n=n, q=relayed))
     if v.kind == "hypothesis" and not v.has_research_plan:
         n += 1
         lines.append(t("audit.step_plan", n=n))
@@ -253,7 +273,24 @@ def audit_markdown(journey: dict[str, Any], findings: list[Finding], lang: str =
     lines += _audit_diagnosis(meta, journey["scenario"], t)
     verdict = propose_verdict(idx)
     lines += _audit_verdict(verdict, t)
-    lines += _audit_next_steps(verdict, findings, t)
+    # Zitate aus zweiter Hand: Die Quelle schreibt sie Nutzenden zu, ist selbst aber keine
+    # Nutzerquelle (z. B. eine übernommene Map). Die Klasse bleibt an der Quelle.
+    relayed = sum(
+        1
+        for a in idx.evidence.values()
+        if a["kind"] == "quote"
+        and a["class"] == "assumed"
+        and idx.sources.get(a["source_ref"], {}).get("kind") not in PRIMARY_SOURCE_KINDS
+    )
+    source_request = next(
+        (
+            q
+            for q in journey.get("open_questions", [])
+            if q.get("proposed_method") == "source_request"
+        ),
+        None,
+    )
+    lines += _audit_next_steps(verdict, findings, t, relayed, source_request)
     lines.append(t("audit.evidence"))
     lines.append("")
     kinds = ", ".join(sorted({s["kind"] for s in idx.sources.values()})) or "–"
@@ -267,6 +304,8 @@ def audit_markdown(journey: dict[str, Any], findings: list[Finding], lang: str =
             assumed=ev["assumed"],
         )
     )
+    if relayed:
+        lines.append(t("audit.relayed_quotes", n=relayed))
     experience = [c for c in idx.claims() if c.kind in {"thinking", "feeling", "pain_point"}]
     backed = sum(1 for c in experience if idx.has_primary(c.evidence_refs))
     if experience:

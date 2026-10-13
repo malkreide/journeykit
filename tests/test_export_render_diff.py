@@ -75,6 +75,33 @@ def test_verdict_hypothesis_names_failed_conditions(minimal):
     assert v.primary_pct == 0 and v.breakdowns_without_recovery == 1
 
 
+def test_relayed_quotes_are_counted_and_put_the_source_request_first(minimal):
+    # Eine übernommene Map: Die Zitate schreibt sie Nutzenden zu, die Quelle bleibt die Map.
+    for atom in minimal["evidence"]:
+        atom.update(source_ref="doc-1", **{"class": "assumed"})
+    minimal["sources"] = [s for s in minimal["sources"] if s["id"] == "doc-1"]
+    md = audit_markdown(minimal, lint_journey(minimal))
+    assert "  - davon 3 Zitat(e), die die Quelle Nutzenden zuschreibt" in md
+    steps = md[md.index("## Nächste Schritte") : md.index("## Evidenzlage")]
+    assert steps.splitlines()[2].startswith("1. **Quellen anfordern**: 3 Zitat(e)")
+    assert "Rückfrage festhalten (open_questions mit proposed_method: source_request)" in steps
+    minimal["open_questions"].insert(
+        0, {"text": "Rohmaterial anfordern.", "proposed_method": "source_request"}
+    )
+    md = audit_markdown(minimal, lint_journey(minimal))
+    assert "Offene Frage: Rohmaterial anfordern." in md
+    fr = audit_markdown(minimal, lint_journey(minimal, lang="fr"), lang="fr")
+    assert "**Demander les sources**" in fr and "dont 3 citation(s)" in fr
+
+
+def test_quotes_from_user_sources_are_not_relayed(minimal):
+    for atom in minimal["evidence"]:
+        atom["class"] = "assumed"  # Klasse gesetzt, die Quelle bleibt das Interview
+    md = audit_markdown(minimal, lint_journey(minimal))
+    assert "Zitat(e), die die Quelle Nutzenden zuschreibt" not in md
+    assert "Quellen anfordern" not in md
+
+
 def test_open_questions_show_where_they_belong(minimal):
     minimal["open_questions"] = [
         {"text": "Warum rufen sie an?", "step_ref": "step-1-1", "phase_ref": "phase-1"},

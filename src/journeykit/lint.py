@@ -275,11 +275,15 @@ def _rule_inside_out(idx: JourneyIndex, c: _Collector) -> None:
 def _rule_happy_path(idx: JourneyIndex, c: _Collector) -> None:
     status = idx.journey["meta"]["status"]
     if not idx.breakdowns():
-        c.add(
-            "L020",
-            WARN if status == "hypothesis" else ERROR,
-            "happy_path",
-        )
+        if idx.journey["scenario"].get("perspective") == "to_be":
+            # Ein Soll-Konzept hat keine Breakdowns; die Frage ist, welche von heute es behebt.
+            c.add("L020", INFO, "happy_path", msg="L020.to_be")
+        else:
+            c.add(
+                "L020",
+                WARN if status == "hypothesis" else ERROR,
+                "happy_path",
+            )
     for pi, phase in enumerate(idx.journey["phases"]):
         pains = sum(len(s.get("pain_points", [])) for s in phase["steps"])
         edges = sum(len(s.get("edge_cases", [])) for s in phase["steps"])

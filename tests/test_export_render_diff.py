@@ -75,6 +75,22 @@ def test_verdict_hypothesis_names_failed_conditions(minimal):
     assert v.primary_pct == 0 and v.breakdowns_without_recovery == 1
 
 
+def test_to_be_concept_is_never_robust(minimal):
+    assert propose_verdict(JourneyIndex.build(minimal)).kind == "robust"
+    minimal["scenario"]["perspective"] = "to_be"
+    v = propose_verdict(JourneyIndex.build(minimal))
+    assert (v.kind, v.reasons) == ("hypothesis", ("to_be",))
+    md = audit_markdown(minimal, lint_journey(minimal))
+    head = md[: md.index("## Urteil (Vorschlag)")]
+    assert "**Soll-Konzept** (`scenario.perspective: to_be`)" in head
+    assert "**Hypothese**: ein Soll-Konzept" in md and "noch nicht belegt" not in md
+    minimal["meta"]["status"] = "hypothesis"
+    md = audit_markdown(minimal, lint_journey(minimal))
+    assert "Ist-Journey begründen. Ausserdem: Status `hypothesis`." in md
+    fr = audit_markdown(minimal, lint_journey(minimal, lang="fr"), lang="fr")
+    assert "**Concept cible**" in fr and "un concept cible" in fr
+
+
 def test_verdict_and_report_without_experience_claims(minimal):
     step = minimal["phases"][0]["steps"][0]
     step.update(thinking=[], feeling=None, pain_points=[], recovery_paths=[])

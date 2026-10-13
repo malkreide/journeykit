@@ -36,6 +36,14 @@ def test_evidence_class_enum(minimal):
     assert any("guessed" in e.message for e in errors)
 
 
+def test_scenario_perspective(minimal):
+    for value in ("as_is", "to_be"):
+        minimal["scenario"]["perspective"] = value
+        assert is_valid(minimal)
+    minimal["scenario"]["perspective"] = "soll"
+    assert not is_valid(minimal)
+
+
 def test_feeling_null_allowed(minimal):
     minimal["phases"][0]["steps"][0]["feeling"] = None
     assert is_valid(minimal)

@@ -39,7 +39,7 @@ darauf. Daraus folgt:
 |---|---|---|
 | 1 Input | Interviews, Befragungen, Anfragen-/Ticketexporte, Analytics, Auswertungen der Geschäftskontrolle, Fotos von Workshop-Wänden, Prozessdokumente, bestehende Journeys | Quellenregister (`sources`) mit Art, Standard-Evidenzklasse, Stichprobe, Datenschutzstatus, Ablage |
 | 2 Evidenz-Atome | Kleinste belegbare Einheit: Zitat, Beobachtung, Messwert, Dokumentstelle, mit Fundstelle, Klasse, Signal, Emotion (nur explizit), Widerspruch | `evidence[]` im Schema; Extraktionsregeln und Prompt-Schablone im Skill |
-| 3 Journey-Modell | Persona, Szenario, Phasen (mit belegter Dauer in Kalendertagen), Schritte (inkl. handelnde Dritte, ADR-0005), Denken/Fühlen, Pain Points (Reibung/Breakdown), Edge Cases, Recovery, KPIs, Chancen, offene Fragen, Owner, Review | JSON Schema 2020-12 |
+| 3 Journey-Modell | Persona, Szenario (Ist-Zustand oder Soll-Konzept, ADR-0006), Phasen (mit belegter Dauer in Kalendertagen), Schritte (inkl. handelnde Dritte, ADR-0005), Denken/Fühlen, Pain Points (Reibung/Breakdown), Edge Cases, Recovery, KPIs, Chancen, offene Fragen, Owner, Review | JSON Schema 2020-12 |
 | 4 Synthese-Engine | Clustern, Kurve nur aus Evidenz, Widersprüche und Lücken ausweisen, Chancen und Scores vorschlagen | Claude-Skill (Modi Synthese / Workshop / Audit) + Lints als Rückkopplung |
 | 5 Darstellung | Journey mit Kurve und Dauer je Phase (ein Massstab, damit Wartezeit nicht gleich kurz aussieht wie ein Termin), Prozess/Fehlerpfade, Evidenz-Heatmap, Chancenmatrix, Prüfung; Drilldown bis zum O-Ton; Filter «nur Primärevidenz»; Persona-Überlagerung | Single-File-Viewer |
 | 6 Betrieb | Owner, Review-Rhythmus, Status pro Pain Point und Chance, Versionen, Diff | Schema-Felder, Lints L030–L035, `journeykit diff` |
@@ -64,12 +64,21 @@ der Klasse `assumed`, auch wenn sie sich auf Interviews beruft. Jede
 nachprüfbar, was auf der Vorlage stand, was das Audit erschlossen und was es
 ergänzt hat (Skill, «Modus Audit»).
 
+Nicht jede Vorlage, die sich «Journey» oder «Parcours» nennt, beschreibt den
+Weg von heute. Ein Soll-Konzept stellt Lösungen vor und zeigt, wie der Weg
+damit gelingen soll; übertragen sähe es aus wie eine Ist-Journey ohne Reibung.
+`scenario.perspective: to_be` macht den Unterschied sichtbar: Der Viewer zeigt
+«Soll-Konzept», L020 meldet fehlende Breakdowns nur als INFO, und das Urteil
+kann nie «belastbar» sein – was sein soll, lässt sich nicht durch Nutzende
+belegen. Die Begründung eines Soll-Konzepts liegt in einer Ist-Journey
+(ADR-0006).
+
 ## Fallstricke → Anforderungen → Umsetzung
 
 | Fallstrick | Anforderung | Umsetzung |
 |---|---|---|
 | Inside-Out Bias | Evidenzklasse und Quelle an jeder Aussage; Hypothesen als solche kennzeichnen | `evidence_refs`, `meta.status: hypothesis`, `persona.is_hypothesis`, L010–L012, Filter im Viewer |
-| Happy Path Bias | Pflichtfelder für Edge Cases, Breakdowns, Recovery; aktives Nachfragen | `pain_points.type`, `workaround`, `edge_cases`, `recovery_paths.exists`, L020–L023, Prozess-Layer |
+| Happy Path Bias | Pflichtfelder für Edge Cases, Breakdowns, Recovery; aktives Nachfragen | `pain_points.type`, `workaround`, `edge_cases`, `recovery_paths.exists`, `scenario.perspective`, L020–L023, Prozess-Layer |
 | Static Map Trap | Datenbestand mit Versionen, Owner, Status; neuer Input erzeugt Diff | `meta.owner`, `review_cycle_days`, `next_review`, `status` an Pain Points und Chancen, `changelog`, `journeykit diff`, L030–L035 |
 | Empathie-Vakuum / Überkomplexität | Drilldown bis zum O-Ton; eine Persona, ein Szenario; Scope-Ausschlüsse | Drawer im Viewer, Schema erzwingt eine Persona, `scope_exclusions`, `end_state`, L040–L053 |
 | Micro-Level Disconnect | Export als Story Map und Backlog; Diagnose Journey vs. Blueprint | `opportunities.stories`, `export --format storymap/actions`, `meta.diagnosis`, L060–L064, L070–L072 |

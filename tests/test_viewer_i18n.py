@@ -26,6 +26,7 @@ ENUM_LABELS = {
     ("status",): "ppStatus",
     ("meta", "properties", "status"): "status",
     ("meta", "properties", "map_type"): "mapType",
+    ("scenario", "properties", "perspective"): "perspective",
     ("pain_point", "properties", "frequency"): "freq",
     ("kpi", "properties", "category"): "kpiCat",
     ("source", "properties", "kind"): "srcKinds",

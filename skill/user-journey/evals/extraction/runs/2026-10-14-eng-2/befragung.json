@@ -1,0 +1,219 @@
+[
+  {
+    "id": "bef-01",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "metric",
+    "text": "F1 «Ich wusste rechtzeitig, bis wann ich mein Kind anmelden muss.»: 47 % Zustimmung (n = 286; weiss nicht 6 %)",
+    "locator": "Geschlossene Fragen, F1",
+    "value": 47,
+    "unit": "%",
+    "signal": "friction",
+    "phase_hint": "orientierung",
+    "tags": [
+      "anmeldeschluss"
+    ]
+  },
+  {
+    "id": "bef-02",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "metric",
+    "text": "F2 «Die Anmeldung über die Website war einfach.» (nur Eltern, die online angemeldet haben): 71 % Zustimmung (n = 201; weiss nicht 2 %)",
+    "locator": "Geschlossene Fragen, F2",
+    "value": 71,
+    "unit": "%",
+    "signal": "positive",
+    "phase_hint": "anmeldung",
+    "channel_hint": "web",
+    "tags": [
+      "online-anmeldung"
+    ]
+  },
+  {
+    "id": "bef-03",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "metric",
+    "text": "F3 «Ich wusste vor der ersten Rechnung, was die Betreuung insgesamt kostet.»: 38 % Zustimmung (n = 286; weiss nicht 9 %)",
+    "locator": "Geschlossene Fragen, F3",
+    "value": 38,
+    "unit": "%",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "tags": [
+      "kostentransparenz"
+    ]
+  },
+  {
+    "id": "bef-04",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "metric",
+    "text": "F4 «Die Wartezeit bis zum Bescheid war zu lang.»: 64 % Zustimmung (n = 286; weiss nicht 11 %)",
+    "locator": "Geschlossene Fragen, F4",
+    "value": 64,
+    "unit": "%",
+    "signal": "friction",
+    "phase_hint": "warten",
+    "tags": [
+      "wartezeit"
+    ]
+  },
+  {
+    "id": "bef-05",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "metric",
+    "text": "F5 «Ich bin mit der Betreuung im Hort zufrieden.»: 88 % Zustimmung (n = 286; weiss nicht 3 %)",
+    "locator": "Geschlossene Fragen, F5",
+    "value": 88,
+    "unit": "%",
+    "signal": "positive",
+    "phase_hint": "eintritt",
+    "tags": [
+      "zufriedenheit"
+    ]
+  },
+  {
+    "id": "bef-06",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "metric",
+    "text": "F6 «Ich konnte die Ermässigung ohne Hilfe beantragen.» (nur Eltern, die eine Ermässigung beantragt haben): 31 % Zustimmung (n = 52; weiss nicht 4 %)",
+    "locator": "Geschlossene Fragen, F6",
+    "value": 31,
+    "unit": "%",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "tags": [
+      "ermaessigung"
+    ]
+  },
+  {
+    "id": "bef-07",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "metric",
+    "text": "F7 «Die Informationen gab es in einer Sprache, die ich gut verstehe.»: 79 % Zustimmung (n = 286; weiss nicht 1 %)",
+    "locator": "Geschlossene Fragen, F7",
+    "value": 79,
+    "unit": "%",
+    "signal": "positive",
+    "phase_hint": "orientierung",
+    "tags": [
+      "sprache"
+    ]
+  },
+  {
+    "id": "bef-08",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "metric",
+    "text": "F8 wie F7 «Die Informationen gab es in einer Sprache, die ich gut verstehe.», nur Eltern mit einer anderen Erstsprache als Deutsch: 36 % Zustimmung (n = 14; weiss nicht 0 %)",
+    "locator": "Geschlossene Fragen, F8",
+    "value": 36,
+    "unit": "%",
+    "signal": "friction",
+    "phase_hint": "orientierung",
+    "tags": [
+      "sprache"
+    ]
+  },
+  {
+    "id": "bef-09",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Mehr Plätze.",
+    "locator": "Freitext F9, Antwort 1",
+    "signal": "need",
+    "phase_hint": "warten",
+    "tags": [
+      "platzangebot"
+    ]
+  },
+  {
+    "id": "bef-10",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Wir haben erst durch Zufall erfahren, dass es einen Anmeldeschluss gibt.",
+    "locator": "Freitext F9, Antwort 2",
+    "signal": "friction",
+    "phase_hint": "orientierung",
+    "tags": [
+      "anmeldeschluss"
+    ]
+  },
+  {
+    "id": "bef-11",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das Mittagessen kostet extra, das stand nirgends.",
+    "locator": "Freitext F9, Antwort 3",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "tags": [
+      "kostentransparenz"
+    ]
+  },
+  {
+    "id": "bef-12",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Mein Mann hat die Anmeldung gemacht, weil ich mit dem Formular auf Deutsch nicht zurechtkam.",
+    "locator": "Freitext F9, Antwort 4",
+    "signal": "workaround",
+    "phase_hint": "anmeldung",
+    "tags": [
+      "vermittlung",
+      "sprache"
+    ]
+  },
+  {
+    "id": "bef-13",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "quote",
+    "text": "[Name] im Sekretariat hat mir am Telefon alles erklärt, ohne sie hätte ich aufgegeben.",
+    "locator": "Freitext F9, Antwort 6",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "channel_hint": "phone",
+    "tags": [
+      "hilfe",
+      "telefon"
+    ]
+  },
+  {
+    "id": "bef-14",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Die Warteliste ist eine Blackbox. Niemand sagt einem, wo man steht.",
+    "locator": "Freitext F9, Antwort 7",
+    "signal": "friction",
+    "phase_hint": "warten",
+    "tags": [
+      "warteliste",
+      "status"
+    ]
+  },
+  {
+    "id": "bef-15",
+    "source_ref": "befragung",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Für Schichtarbeit passen die Öffnungszeiten nicht. Wir können frühestens um halb sieben abholen, der Hort schliesst um sechs.",
+    "locator": "Freitext F9, Antwort 9",
+    "signal": "friction",
+    "phase_hint": "eintritt",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "oeffnungszeiten"
+    ]
+  }
+]

@@ -59,7 +59,7 @@ Read (das eigene Bundle) und ein Write (die eigene Antwort), sonst nichts.
 
 - **Pflicht-Atome gefunden** – Anteil der Gold-Atome, für die die Extraktion ein passendes Atom hat. Ein umformuliertes Zitat zählt nicht als Treffer.
 - **Feldtreue** – bei den gefundenen Atomen: `kind`, `class`, `signal`, Fundstelle, Emotion, `value`, `unit` (eine Schreibweise oder eine Liste gleichwertiger, z. B. «CHF» oder «Franken pro Betreuungstag»), `contradicts` und `text_has` (Angaben, die im `text` stehen müssen, etwa n einer Befragung), soweit das Gold sie vorgibt.
-- Bei den unabhängigen Fällen darf ein Atom mehrere Gold-Einträge abdecken (`shared_atoms` in `expected.json`): Ihr Gold zerlegt lange Redebeiträge feiner als jede Extraktion. Wie grob eine Extraktion zusammenfasst, zeigt deshalb nicht die Abdeckung, sondern die Zahl der Atome.
+- Bei den unabhängigen Fällen darf ein Atom mehrere Gold-Einträge abdecken (`shared_atoms` in `expected.json`): Ihr Gold zerlegt lange Redebeiträge feiner als jede Extraktion. Wie grob eine Extraktion zusammenfasst, zeigt deshalb nicht die Abdeckung, sondern die Zahl der Atome und die **geteilten Pflicht-Einträge**: gefundene Pflicht-Einträge, deren Atom auch einen anderen gefundenen Pflicht-Eintrag abdeckt (Abschnitt «Körnung» in `compare`).
 - **Regelverstösse** – über alle Atome: Schema, Präfix und `source_ref`, Klasse, erlaubte Arten, Zitat wörtlich (Auslassungen «…» und Ersetzungen «[Name]» erlaubt), Fundstelle, Personendaten, Fragen statt Aussagen, Emotionen, wo keine geäussert werden, eine Aussage auf mehrere Atome verteilt, Anzahl und Einzelfälle.
 
 ## Ergebnisse (2026-10-08)
@@ -189,6 +189,46 @@ Nächster Kandidat, mit eigenem Kriterium vor dem Lauf: die Regel auf lange
 Redebeiträge in Interviews beschränken – kurze Redebeiträge, die eine Sache
 erzählen, ausdrücklich ausnehmen und die übrigen Quellenarten nicht berühren.
 Dieselben elf Fälle und dieselben drei Bedingungen taugen als Messlatte.
+
+## Messlauf engere Körnungsregel (2026-10-14): Kriterium vorab festgelegt
+
+Änderung in `evidenz.md` gegenüber `main`, an denselben zwei Stellen wie im
+Messlauf Körnung. Die Regel gilt nur noch für Interviews (Quellenart
+`interview`, auch Fokusgruppen), und kurze Redebeiträge sind ausdrücklich
+ausgenommen: «Ein kurzer Redebeitrag (bis drei Sätze) bleibt ein Atom, auch wenn
+er Ursache und Folge oder Problem und Ausweg nennt; wechselt ein langer
+Redebeitrag das Thema oder den Schritt, wird jede Aussage ein eigenes Atom mit
+derselben Fundstelle.» Der Teil für lange Redebeiträge ist wörtlich der
+verworfene, damit nur die Einschränkung gemessen wird. Der Richtwert «Typisch
+12–25 Atome pro 45-Minuten-Interview» bleibt unverändert.
+
+Die Schwelle «bis drei Sätze» ist so gewählt, dass alle Redebeiträge, die der
+letzte Messlauf aufgeteilt hat, darunter fallen. Die eigenen Interviewfälle
+haben fast nur solche (`interview` 12 von 12, `interview-hort` 30 von 31), die
+unabhängigen viele längere (Elterninterview 51 von 86 Redebeiträgen mit vier und
+mehr Sätzen, Fokusgruppe 42 von 78, Dolmetsch-Interview 24 von 67). Ob die
+Wirkung auf die langen Redebeiträge damit erhalten bleibt, zeigt erst der Lauf.
+
+**Vorher** sind dieselben Läufe wie im Messlauf Körnung
+(`2026-10-14-aktuell-1..3`, `2026-10-14-unabhaengig-aktuell-1..3`). **Nachher**
+sind je drei blinde Läufe über alle elf Fälle mit der geänderten Schablone.
+
+Die Änderung wird **übernommen**, wenn über die drei Läufe nachher dieselben drei
+Bedingungen gelten wie im Messlauf Körnung, sonst wird `evidenz.md`
+zurückgesetzt und die Läufe bleiben als Beleg:
+
+1. Unabhängige Fälle: Die gefundenen Pflicht-Einträge nehmen nicht ab (im Mittel
+   mindestens 170 von 172).
+2. Elterninterview: Im Mittel teilen sich weniger als 30 der gefundenen
+   Pflicht-Einträge ein Atom mit einem anderen gefundenen Pflicht-Eintrag
+   (Abschnitt «Körnung» in `compare`; vorher 37–42 von 61, verworfene Regel 6–12
+   von 63).
+3. Die acht übrigen Fälle: in jedem Lauf 71/71 Pflicht-Atome und Feldtreue von
+   mindestens 99 %; Regelverstösse im Mittel höchstens 2 (vorher 0, verworfene
+   Regel 5,3).
+
+Die Fallregeln bleiben für diesen Messlauf unverändert, auch «ein Atom je
+Fundstelle» in `interview-hort`.
 
 ## Grenzen
 

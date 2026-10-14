@@ -482,6 +482,8 @@ def compare_markdown(
                 f"| {_spread(violations, '{:.1f}')} |"
             )
     by_case = {name: {r.case: r for r in runs[name]} for name in names}
+    # nur Fälle, die mindestens ein Lauf enthält – spätere Fälle verändern alte Vergleiche nicht
+    cases = [c for c in cases if any(c.id in by_case[n] for n in names)]
     lines += ["", "## Je Fall: Pflicht-Atome · Feldtreue · Regelverstösse", ""]
     lines.append("| Fall | " + " | ".join(names) + " |")
     lines.append("|---|" + "---|" * len(names))

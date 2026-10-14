@@ -143,7 +143,7 @@ Nach den Konventionen in `CLAUDE.md` für Schemaänderungen:
 
 Angenommen am 2026-10-13 wie vorgeschlagen (Option C), zusammen mit ADR-0007.
 Die Umsetzung folgt nach ADR-0007; die Codes stehen damit fest: L004 gehört
-den Kosten, L005 dieser Regel. Die Frage zu L061 bleibt offen (siehe unten).
+den Kosten, L005 dieser Regel.
 
 Umgesetzt am 2026-10-14. Beim Umsetzen festgelegt:
 
@@ -166,12 +166,14 @@ Umgesetzt am 2026-10-14. Beim Umsetzen festgelegt:
   für die Verbindung (`b2-07`: niemand hatte den Standort mit dem Nachbarn
   besprochen) steht jetzt auch bei der Folge.
 
+**L061 bleibt unverändert** (Entscheid 2026-10-14). Jeder Pain Point ab
+Severity 4 braucht weiterhin eine eigene verknüpfte Chance, auch wenn er eine
+Folge ist. Eine Chance an der Ursache deckt eine Folge nur ab, wenn sie diese
+in `linked_pain_points` mitführt – wie in beiden Beispielen. Die Regel bleibt
+so streng wie bisher, und die Folge bleibt in der Chance sichtbar.
+
 ## Nicht entschieden
 
-- **L061 und Folgen**: Heute braucht jeder Pain Point ab Severity 4 eine
-  eigene Chance. Ob eine Chance an der Ursache auch ihre Folgen abdeckt,
-  bleibt offen. Es würde L061 nachsichtiger machen, und das verlangt einen
-  eigenen Entscheid (`CLAUDE.md`: «Was nicht tun»).
 - **Belege an Back-Stage-Notizen**: `backstage_notes` bleiben Freitext. Erst
   wenn ein Beispiel Back-Stage-Ursachen belegen muss, die die Persona nicht
   trifft – und dann eher im Blueprint als in der Journey.

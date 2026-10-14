@@ -1,0 +1,36 @@
+{
+  "title": "Elternbefragung Tagesbetreuung 2026",
+  "kind": "survey",
+  "class": "reported",
+  "source_id": "befragung",
+  "prefix": "bef",
+  "input": "input.md",
+  "phases": [
+    "orientierung",
+    "anmeldung",
+    "warten",
+    "eintritt",
+    "kosten"
+  ],
+  "persona": "berufstaetig",
+  "known_atoms": [],
+  "tests": "Aggregate als metric mit value und unit wie in der Quelle, n und Fragewortlaut im text (evidenz.md, «Befragungen») – auch dort, wo n von der Grundgesamtheit abweicht (F2, F6, F8: Teilgruppen mit n = 201, 52 und 14). Die negativ formulierte Frage F4 (Wartezeit zu lang, 64 % Zustimmung) ist Reibung, obwohl die Zustimmung über 60 % liegt. Freitexte nur, wenn sie etwas zeigen, das die Zahlen nicht zeigen: vier Antworten tun das (Dritte handeln, Telefon als Rettung, Warteliste ohne Auskunft, Öffnungszeiten), drei wiederholen F1, F3, F5. «Keine Angabe» ist keine Aussage. Erfundener Name im Freitext wird ersetzt.",
+  "rules": {
+    "atoms_min": 11,
+    "atoms_max": 15,
+    "kinds": [
+      "metric",
+      "quote"
+    ],
+    "locator_required": true,
+    "pii_terms": [
+      "Meier"
+    ],
+    "forbidden": [
+      {
+        "text": "Keine Angabe",
+        "why": "keine Aussage"
+      }
+    ]
+  }
+}

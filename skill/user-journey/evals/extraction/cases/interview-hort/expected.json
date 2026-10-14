@@ -1,0 +1,356 @@
+{
+  "atoms": [
+    {
+      "key": "anmeldeschluss-unbekannt",
+      "required": true,
+      "match": [
+        "zum ersten Mal vom Anmeldeschluss"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "01:31"
+      ],
+      "emotion": "not_explicit",
+      "why": "Die Frist der Persona erst durch Zufall erfahren – Orientierungslücke, noch kein Scheitern."
+    },
+    {
+      "key": "warteliste",
+      "required": true,
+      "match": [
+        "Mitte April",
+        "kommen auf die Warteliste"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "02:05"
+      ],
+      "emotion": "not_explicit",
+      "why": "Anmeldeschluss verpasst, Warteliste statt Platz."
+    },
+    {
+      "key": "schwiegermutter",
+      "required": true,
+      "match": [
+        "Schwiegermutter"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "locator": [
+        "02:58"
+      ],
+      "emotion": "not_explicit",
+      "why": "Dritte handeln anstelle der Person (performed_by, ADR-0005) – eigenes Atom nach evidenz.md, «Vermittlung»."
+    },
+    {
+      "key": "upload-sekretariat",
+      "required": true,
+      "match": [
+        "nicht hochladen",
+        "ausgedruckt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "breakdown",
+        "workaround"
+      ],
+      "locator": [
+        "03:40"
+      ],
+      "why": "Upload gescheitert, auf Papier im Sekretariat ausgewichen."
+    },
+    {
+      "key": "bescheid-sieben-wochen",
+      "required": true,
+      "match": [
+        "sieben"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "04:30"
+      ],
+      "value": 7,
+      "unit": [
+        "Wochen"
+      ],
+      "contradicts": [
+        "doc-02"
+      ],
+      "why": "Erlebte Dauer nach der Korrektur: sieben Wochen, nicht die Frist (zwei Wochen) und nicht der Versprecher (fünf)."
+    },
+    {
+      "key": "telefon-dreimal",
+      "required": true,
+      "match": [
+        "dreimal"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "breakdown",
+        "workaround"
+      ],
+      "locator": [
+        "05:15"
+      ],
+      "value": 3,
+      "why": "Telefon gescheitert, danach auf E-Mail ausgewichen."
+    },
+    {
+      "key": "email-vier-tage",
+      "required": true,
+      "match": [
+        "vier Tagen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "05:40"
+      ],
+      "value": 4,
+      "unit": [
+        "Tage",
+        "Tagen"
+      ],
+      "why": "Antwort ohne Auskunft – behindert, die Person scheitert nicht."
+    },
+    {
+      "key": "verzweifelt",
+      "required": true,
+      "match": [
+        "verzweifelt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "06:20"
+      ],
+      "emotion": "explicit_negative",
+      "why": "Ausdrücklich geäusserte Emotion."
+    },
+    {
+      "key": "zusage-ende-juni",
+      "required": true,
+      "match": [
+        "erst Ende Juni"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "06:58"
+      ],
+      "emotion": "any",
+      "why": "Folge des späten Bescheids. «Nicht begeistert» ist das Gefühl des Chefs, nicht der Person – das Gold lässt die Emotion offen."
+    },
+    {
+      "key": "leiterin-positiv",
+      "required": true,
+      "match": [
+        "halbe Stunde"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "07:38"
+      ],
+      "emotion": "any"
+    },
+    {
+      "key": "sohn-geweint",
+      "required": true,
+      "match": [
+        "geweint"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "locator": [
+        "08:15"
+      ],
+      "emotion": "not_explicit",
+      "why": "Weinen ist ein Verhalten des Kindes, keine ausdrücklich geäusserte Emotion der befragten Person."
+    },
+    {
+      "key": "beitrag-23",
+      "required": true,
+      "match": [
+        "23 Franken"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "signal": [
+        "neutral",
+        "positive"
+      ],
+      "locator": [
+        "09:26"
+      ],
+      "value": 23,
+      "unit": [
+        "CHF",
+        "Franken",
+        "Fr.",
+        "CHF pro Betreuungstag",
+        "Franken pro Betreuungstag",
+        "CHF/Betreuungstag",
+        "CHF pro Tag",
+        "Franken pro Tag",
+        "CHF/Tag",
+        "Fr. pro Tag"
+      ],
+      "why": "Betrag mit Periode; vorher bekannt (Tarifrechner)."
+    },
+    {
+      "key": "mittagessen-unbekannt",
+      "required": true,
+      "match": [
+        "erst auf der ersten Rechnung",
+        "hat uns niemand gesagt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "10:02"
+      ],
+      "value": 9,
+      "unit": [
+        "CHF",
+        "Franken",
+        "Fr.",
+        "CHF pro Betreuungstag",
+        "Franken pro Betreuungstag",
+        "CHF/Betreuungstag",
+        "CHF pro Tag",
+        "Franken pro Tag",
+        "CHF/Tag",
+        "Fr. pro Tag"
+      ],
+      "contradicts": [
+        "doc-05"
+      ],
+      "why": "Kosten vorher nicht bekannt – die Aussage, die eine Journey braucht (evidenz.md, «Kosten und Gebühren»)."
+    },
+    {
+      "key": "rechnung-412",
+      "required": true,
+      "match": [
+        "412"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "10:45"
+      ],
+      "value": 412,
+      "unit": [
+        "CHF",
+        "Franken",
+        "Fr.",
+        "CHF pro Monat",
+        "Franken pro Monat",
+        "CHF/Monat",
+        "Fr. pro Monat"
+      ]
+    },
+    {
+      "key": "ermaessigung-steuer",
+      "required": true,
+      "match": [
+        "Steuerveranlagung"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "11:20"
+      ]
+    },
+    {
+      "key": "wunsch-warteliste",
+      "required": true,
+      "match": [
+        "auf welchem Platz der Warteliste"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "12:12"
+      ]
+    },
+    {
+      "key": "anlass-arbeit",
+      "required": false,
+      "match": [
+        "sechzig Prozent"
+      ]
+    },
+    {
+      "key": "wunsch-essen",
+      "required": false,
+      "match": [
+        "Kosten fürs Essen"
+      ],
+      "signal": [
+        "need"
+      ]
+    }
+  ]
+}

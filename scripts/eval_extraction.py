@@ -10,9 +10,10 @@ Fall unter ``skill/user-journey/evals/extraction/cases/<fall>/`` hat
 
 Ablauf::
 
-    python scripts/eval_extraction.py prompts -o /tmp/prompts      # gefüllte Prompts
-    # je Fall den Prompt an ein Modell geben, Antwort als <fall>.json speichern
+    python scripts/eval_extraction.py prompts -o /tmp/prompts --bundle   # gefüllte Prompts
+    # je Fall das Bundle an ein Modell geben, Antwort als <fall>.json speichern
     python scripts/eval_extraction.py score /tmp/antworten -o bericht.md
+    python scripts/eval_extraction.py compare runs/a-1 runs/a-2 runs/b-1 -o vergleich.md
 
 Entwicklerwerkzeug – Ausgaben nur deutsch. Keine Abhängigkeit von einem LLM:
 Das Skript bewertet, es extrahiert nicht.
@@ -99,6 +100,15 @@ def render_prompt(case: Case, tmpl: str | None = None) -> str:
     tmpl = template() if tmpl is None else tmpl
     prompt = tmpl.format(**template_values(case))
     return f"{prompt}\nQuelle «{case.input_name}»:\n\n```\n{case.input_text}```\n"
+
+
+def render_bundle(case: Case, evidenz_md: Path = EVIDENZ_MD) -> str:
+    """Alles, was ein Lauf sehen darf, in einer Datei: evidenz.md und der gefüllte Prompt."""
+    return (
+        evidenz_md.read_text(encoding="utf-8").rstrip()
+        + "\n\n---\n\n# Auftrag\n\n"
+        + render_prompt(case, template(evidenz_md))
+    )
 
 
 # -- Bewertung -----------------------------------------------------------------
@@ -201,8 +211,16 @@ def field_checks(gold: dict[str, Any], atom: dict[str, Any]) -> list[tuple[str, 
             ok = False
         out.append(("value", ok, gold["value"], atom.get("value")))
     if "unit" in gold:
-        ok = _norm(str(atom.get("unit", ""))).casefold() == gold["unit"].casefold()
+        # eine Einheit oder eine Liste gleichwertiger Schreibweisen («CHF», «Franken pro Tag»)
+        units = [gold["unit"]] if isinstance(gold["unit"], str) else gold["unit"]
+        got = _norm(str(atom.get("unit", ""))).casefold()
+        ok = any(got == u.casefold() for u in units)
         out.append(("unit", ok, gold["unit"], atom.get("unit")))
+    if "text_has" in gold:
+        # Angaben, die im text stehen müssen, z. B. n einer Befragung
+        text = _norm(atom.get("text", "")).casefold()
+        ok = all(x.casefold() in text for x in gold["text_has"])
+        out.append(("text_has", ok, gold["text_has"], atom.get("text")))
     if "contradicts" in gold:
         ok = set(gold["contradicts"]) <= set(atom.get("contradicts", []))
         out.append(("contradicts", ok, gold["contradicts"], atom.get("contradicts", [])))
@@ -391,6 +409,111 @@ def report_markdown(results: list[CaseResult], title: str = "Extraktion gegen Go
     return "\n".join(lines) + "\n"
 
 
+def score_run(run: Path, cases: list[Case]) -> list[CaseResult]:
+    """Einen abgelegten Lauf bewerten; Fälle ohne Datei im Lauf fehlen im Ergebnis."""
+    return [
+        score_case(c, parse_candidate((run / f"{c.id}.json").read_text(encoding="utf-8")))
+        for c in cases
+        if (run / f"{c.id}.json").exists()
+    ]
+
+
+def _totals(results: list[CaseResult]) -> tuple[int, int, int, int, int, int]:
+    """Atome, gefundene und geforderte Pflicht-Atome, erfüllte und geprüfte Felder, Verstösse."""
+    return (
+        sum(r.n_atoms for r in results),
+        sum(r.found_required for r in results),
+        sum(r.required for r in results),
+        sum(1 for r in results for f in r.fields if f[2]),
+        sum(len(r.fields) for r in results),
+        sum(len(r.violations) for r in results),
+    )
+
+
+def _spread(values: list[float], fmt: str = "{:.0%}") -> str:
+    lo, hi, mean = min(values), max(values), sum(values) / len(values)
+    if lo == hi:
+        return fmt.format(mean)
+    return f"{fmt.format(mean)} ({fmt.format(lo)}–{fmt.format(hi)})"
+
+
+def _gold_cell(result: CaseResult, key: str) -> str:
+    if key in result.missing:
+        return "–"
+    failed = [name for k, name, ok, _, _ in result.fields if k == key and not ok]
+    return ", ".join(failed) if failed else "✓"
+
+
+def compare_markdown(
+    runs: dict[str, list[CaseResult]], cases: list[Case], title: str = "Vergleich der Läufe"
+) -> str:
+    """Mehrere Läufe nebeneinander: je Lauf, je Schablone (Lauf-Name ohne «-<Nummer>»),
+    je Fall und je Pflicht-Atom, das nicht jeder Lauf trifft."""
+    names = list(runs)
+    lines = [f"# {title}", "", "## Läufe", ""]
+    lines.append("| Lauf | Fälle | Atome | Pflicht-Atome | Feldtreue | Regelverstösse |")
+    lines.append("|---|---|---|---|---|---|")
+    for name in names:
+        atoms, found, req, ok, fld, vio = _totals(runs[name])
+        lines.append(
+            f"| {name} | {len(runs[name])} | {atoms} | {found}/{req} ({found / req if req else 1:.0%}) "
+            f"| {ok}/{fld} ({ok / fld if fld else 1:.0%}) | {vio} |"
+        )
+    groups: dict[str, list[str]] = {}
+    for name in names:
+        groups.setdefault(re.sub(r"-\d+$", "", name), []).append(name)
+    if any(len(g) > 1 for g in groups.values()):
+        lines += ["", "## Je Schablone: Mittel (Spanne)", ""]
+        lines.append("| Schablone | Läufe | Pflicht-Atome | Feldtreue | Regelverstösse |")
+        lines.append("|---|---|---|---|---|")
+        for group, members in groups.items():
+            totals = [_totals(runs[m]) for m in members]
+            recall = [t[1] / t[2] if t[2] else 1.0 for t in totals]
+            accuracy = [t[3] / t[4] if t[4] else 1.0 for t in totals]
+            violations = [float(t[5]) for t in totals]
+            lines.append(
+                f"| {group} | {len(members)} | {_spread(recall)} | {_spread(accuracy)} "
+                f"| {_spread(violations, '{:.1f}')} |"
+            )
+    by_case = {name: {r.case: r for r in runs[name]} for name in names}
+    lines += ["", "## Je Fall: Pflicht-Atome · Feldtreue · Regelverstösse", ""]
+    lines.append("| Fall | " + " | ".join(names) + " |")
+    lines.append("|---|" + "---|" * len(names))
+    for case in cases:
+        cells = []
+        for name in names:
+            r = by_case[name].get(case.id)
+            cells.append(
+                "·"
+                if r is None
+                else f"{r.found_required}/{r.required} · {sum(1 for f in r.fields if f[2])}/{len(r.fields)} · {len(r.violations)}"
+            )
+        lines.append(f"| {case.id} | " + " | ".join(cells) + " |")
+    rows = []
+    for case in cases:
+        for gold in case.expected["atoms"]:
+            if not gold.get("required"):
+                continue
+            cells = [
+                "·" if case.id not in by_case[n] else _gold_cell(by_case[n][case.id], gold["key"])
+                for n in names
+            ]
+            if any(c not in ("✓", "·") for c in cells):
+                rows.append(f"| {case.id} | {gold['key']} | " + " | ".join(cells) + " |")
+    lines += ["", "## Pflicht-Atome, die nicht jeder Lauf ganz trifft", ""]
+    if rows:
+        lines.append(
+            "✓ gefunden, alle Felder richtig · – nicht gefunden · Feldname: gefunden, Feld falsch · "
+            "· Fall nicht im Lauf"
+        )
+        lines += ["", "| Fall | Gold-Atom | " + " | ".join(names) + " |"]
+        lines.append("|---|---|" + "---|" * len(names))
+        lines += rows
+    else:
+        lines.append("Alle Läufe treffen alle Pflicht-Atome mit allen Feldern.")
+    return "\n".join(lines) + "\n"
+
+
 # -- Kommandozeile -------------------------------------------------------------
 
 
@@ -399,19 +522,50 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("prompts", help="Gefüllte Prompts je Fall schreiben")
     s.add_argument("-o", "--output", required=True)
+    s.add_argument(
+        "--evidenz",
+        type=Path,
+        default=EVIDENZ_MD,
+        help="evidenz.md, aus der die Schablone stammt (Standard: die aktuelle; "
+        "für eine ältere z. B. git show <commit>:skill/user-journey/references/evidenz.md)",
+    )
+    s.add_argument(
+        "--bundle",
+        action="store_true",
+        help="zusätzlich <fall>.bundle.md: evidenz.md und Prompt in einer Datei – alles, "
+        "was ein Lauf sehen darf",
+    )
     s = sub.add_parser("score", help="Extraktionen (<fall>.json) gegen das Gold bewerten")
     s.add_argument("candidates")
     s.add_argument("-o", "--output")
     s.add_argument("--title", default="Extraktion gegen Gold")
+    s = sub.add_parser("compare", help="Mehrere abgelegte Läufe nebeneinander bewerten")
+    s.add_argument("runs", nargs="+", help="Verzeichnisse mit <fall>.json")
+    s.add_argument("-o", "--output")
+    s.add_argument("--title", default="Vergleich der Läufe")
     args = p.parse_args(argv)
 
     cases = load_cases()
     if args.cmd == "prompts":
         out = Path(args.output)
         out.mkdir(parents=True, exist_ok=True)
+        tmpl = template(args.evidenz)
         for case in cases:
-            (out / f"{case.id}.prompt.md").write_text(render_prompt(case), encoding="utf-8")
+            (out / f"{case.id}.prompt.md").write_text(render_prompt(case, tmpl), encoding="utf-8")
+            if args.bundle:
+                (out / f"{case.id}.bundle.md").write_text(
+                    render_bundle(case, args.evidenz), encoding="utf-8"
+                )
         print(f"{len(cases)} Prompts geschrieben: {out}", file=sys.stderr)
+        return 0
+
+    if args.cmd == "compare":
+        runs = {Path(r).name: score_run(Path(r), cases) for r in args.runs}
+        report = compare_markdown(runs, cases, args.title)
+        if args.output:
+            Path(args.output).write_text(report, encoding="utf-8")
+        else:
+            sys.stdout.write(report)
         return 0
 
     results = []

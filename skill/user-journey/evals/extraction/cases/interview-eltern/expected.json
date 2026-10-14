@@ -71,7 +71,7 @@
       "key": "info-von-vormieterin",
       "required": false,
       "match": [
-        "dass ihre Kinder in die Bachmatt gehen",
+        "dass ihre Kinder in die",
         "vielleicht kann man irgendwie ein Gesuch machen",
         "Ich hab schon früher daran gedacht"
       ],
@@ -497,7 +497,7 @@
         "im falschen Briefkasten",
         [
           "als der",
-          "schon in der Bachmatt war"
+          "schon in der"
         ],
         "dass das Gesuch abgelehnt ist"
       ],
@@ -839,8 +839,14 @@
       "key": "mittagstisch-formular-neu",
       "required": true,
       "match": [
-        "Anmeldeformular für die Bachmatt neu ausfüllen",
-        "das vom Lindenhof gelte dort nicht"
+        [
+          "Anmeldeformular für die",
+          "neu ausfüllen"
+        ],
+        [
+          "das vom",
+          "gelte dort nicht"
+        ]
       ],
       "kind": [
         "quote"
@@ -862,7 +868,7 @@
       "match": [
         "bis zum Fünfzehnten vom Vormonat",
         "war natürlich schon vorbei",
-        "der Montag sei in der Bachmatt voll",
+        "der Montag sei in der",
         "den Donnerstag mache sie ausnahmsweise"
       ],
       "kind": [
@@ -1022,7 +1028,7 @@
       "key": "uebergangswoche-fahrdienst",
       "required": false,
       "match": [
-        "mit dem Auto in den Lindenhof gefahren",
+        "mit dem Auto in den",
         "beim Dorfladen rausgelassen",
         "am Mittag hat ihn das Grosi geholt"
       ],
@@ -1494,7 +1500,10 @@
       "required": true,
       "match": [
         "für die ganze Gemeinde der gleiche Dienst",
-        "in der Bachmatt ist eine andere Logopädin",
+        [
+          "in der",
+          "ist eine andere Logopädin"
+        ],
         "zuerst schauen, ob sie Platz hat"
       ],
       "kind": [
@@ -2141,7 +2150,7 @@
       "key": "finken-turnsack-verschwunden",
       "required": false,
       "match": [
-        "die Finken sind im Lindenhof geblieben",
+        "die Finken sind im",
         "Die sind bis heute verschwunden",
         "noch Sachen im alten Schulhaus hat"
       ],

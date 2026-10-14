@@ -1,0 +1,1551 @@
+[
+  {
+    "id": "f2-01",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Also bei uns, ähm, das war schon am Elternabend im September. Da hat die [Klassenlehrerin] … gesagt, im Juni ist das Lager, und das Datum stand dann auch auf dem Jahresplan, den wir an dem Abend bekommen haben. Also ich wusste das eigentlich ein Dreivierteljahr vorher. Was ich gut fand, weil ich musste ja auch schauen mit der Arbeit.",
+    "locator": "[04:22] B1",
+    "signal": "positive",
+    "phase_hint": "information",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "elternabend",
+      "vorlauf"
+    ]
+  },
+  {
+    "id": "f2-02",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab mir die Woche dann so eingerichtet, dass ich … also nicht frei, aber dass ich immer erreichbar bin. Sagen wir's so. … Die [Tochter] hat eine Nussallergie, und da will ich nicht in einer Sitzung sitzen, wenn etwas ist.",
+    "locator": "[04:22] B1",
+    "signal": "need",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "allergie",
+      "erreichbarkeit",
+      "arbeit"
+    ]
+  },
+  {
+    "id": "f2-03",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei uns kam das über die App. Im Januar, glaub ich, so ein «Save the date», Abschlusslager im Mai, und später dann nochmals ein PDF mit allem drin. Ehrlich gesagt hab ich das erste fast übersehen, weil in dieser App, da kommt … also da kommt jeden Tag irgendwas. Läuse in der dritten Klasse, Turnsack liegen gelassen, Fundsachen, Adventssingen …, und irgendwann liest man das halt nicht mehr so genau.",
+    "locator": "[05:27] B2",
+    "signal": "friction",
+    "phase_hint": "information",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "app",
+      "informationsflut"
+    ]
+  },
+  {
+    "id": "f2-04",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Meine Frau liest das alles. Ich, ehrlich gesagt, nicht.",
+    "locator": "[05:27] B2",
+    "signal": "neutral",
+    "phase_hint": "information",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "vermittlung",
+      "performed_by",
+      "app"
+    ]
+  },
+  {
+    "id": "f2-05",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei uns war's ein Zettel. Im Thek. … Die [Tochter] hat ihn mir nicht gegeben, die hat das einfach vergessen, und ich hab ihn am Sonntagabend gefunden, als ich den Thek ausgeräumt hab. Und da stand, man muss den Talon bis am Freitag zurückgeben. Also die Frist war schon vorbei, um zwei Tage, oder um einen, je nachdem, wie man zählt.",
+    "locator": "[06:19] B3",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "papier",
+      "kind-als-bote",
+      "vermittlung",
+      "frist"
+    ]
+  },
+  {
+    "id": "f2-06",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab dann am Montag einfach ein Zettelchen dazugelegt, «Entschuldigung, zu spät gefunden», und es war kein Problem, die [Klassenlehrerin] hat nichts gesagt. Aber ich bin schon erschrocken. Ich hab gedacht, jetzt darf sie nicht mit.",
+    "locator": "[06:19] B3",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "erschrocken",
+      "explicit": true
+    },
+    "tags": [
+      "b3",
+      "frist",
+      "talon"
+    ]
+  },
+  {
+    "id": "f2-07",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber vorher weiss man das halt nicht. Die [Tochter] war ja das erste Mal in einem Lager, und ich hab in der Klasse noch fast niemanden gekannt, den ich hätte fragen können.",
+    "locator": "[07:33] B3",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "erstes-lager",
+      "netzwerk"
+    ]
+  },
+  {
+    "id": "f2-08",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab's vom [Sohn] erfahren. … Der kam nach den Sommerferien zu mir und hat gesagt, in drei Wochen gehen wir ins Lager. Und ich so: aha. … Die Infos sind schon vorher gekommen, vor den Sommerferien, aber nicht zu mir.",
+    "locator": "[08:01] B4",
+    "signal": "friction",
+    "phase_hint": "information",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b4",
+      "getrennte-eltern",
+      "kind-als-bote",
+      "vermittlung"
+    ]
+  },
+  {
+    "id": "f2-09",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Wir sind getrennt, der [Sohn] ist eine Woche bei mir, eine Woche bei der Mutter, und die Briefe gehen alle an ihre Adresse. Und die App hat auch nur sie.",
+    "locator": "[08:01] B4",
+    "signal": "friction",
+    "phase_hint": "information",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b4",
+      "getrennte-eltern",
+      "app",
+      "post"
+    ]
+  },
+  {
+    "id": "f2-10",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei uns war das ein PDF, das man ausdrucken musste …, ausfüllen, unterschreiben und dem Kind wieder mitgeben. Drauf war: Notfallnummern, Krankenkasse, Hausarzt, Allergien, Medikamente, ob sie schwimmen darf, ob man Fotos von ihr machen darf, und ob die Leitung eine Zecke selber rausnehmen darf.",
+    "locator": "[09:37] B1",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "formular",
+      "papier",
+      "kind-als-bote"
+    ]
+  },
+  {
+    "id": "f2-11",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und bei Allergien hab ich hingeschrieben: Nussallergie, Notfallset im Rucksack, vorderes Fach. Da war so eine Zeile, vielleicht drei Zentimeter. Da passt ja gar nicht rein, was man dazu eigentlich sagen müsste.",
+    "locator": "[09:37] B1",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "formular",
+      "allergie"
+    ]
+  },
+  {
+    "id": "f2-12",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Wer kocht? Weiss die Person, dass auch Spuren gefährlich sind? Wer hat das Notfallset dabei, und wer kann damit umgehen, wenn's drauf ankommt?",
+    "locator": "[10:31] B1",
+    "signal": "need",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "allergie",
+      "verantwortung"
+    ]
+  },
+  {
+    "id": "f2-13",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab dann der [Klassenlehrerin] eine Mail geschrieben, und sie hat zurückgeschrieben, sie gebe das an die Küche weiter. Dann hab ich zwei Wochen nichts gehört und nochmals nachgefragt, und dann hat mich irgendwann die Köchin angerufen – das war eine Mutter aus der Parallelklasse, die macht das jedes Jahr.",
+    "locator": "[10:31] B1",
+    "signal": "workaround",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "allergie",
+      "email",
+      "nachfragen",
+      "vermittlung"
+    ]
+  },
+  {
+    "id": "f2-14",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und die war super, wirklich. Die hat gesagt, sie kocht die ganze Woche für alle ohne Nüsse, dann gibt's gar kein Durcheinander.",
+    "locator": "[10:31] B1",
+    "signal": "positive",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "allergie",
+      "kueche"
+    ]
+  },
+  {
+    "id": "f2-15",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Dauer von der Mail an die Lehrperson bis zur Bestätigung durch die Köchin, dass die Angaben zur Allergie angekommen sind (Angabe B1, geschätzt): «Aber bis ich das wusste – das waren so drei Wochen, wo ich nicht wusste: Ist das jetzt angekommen oder nicht?»",
+    "value": 3,
+    "unit": "Wochen",
+    "locator": "[10:31] B1",
+    "signal": "friction",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "unsicher",
+      "explicit": false
+    },
+    "tags": [
+      "b1",
+      "allergie",
+      "dauer",
+      "rueckmeldung"
+    ]
+  },
+  {
+    "id": "f2-16",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich weiss es nicht mehr genau, das hat meine Frau gemacht. Was ich weiss, ist … wir haben da extra ihre neue Handynummer draufgeschrieben",
+    "locator": "[11:48] B2",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "formular",
+      "vermittlung",
+      "performed_by",
+      "notfallkontakt"
+    ]
+  },
+  {
+    "id": "f2-17",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab das zuerst so verstanden, dass man das Kind anmelden kann, wie bei einem Ferienlager. Also dass das freiwillig ist. Und ehrlich gesagt hab ich kurz überlegt, ob ich sie überhaupt anmelden soll, wegen dem Geld",
+    "locator": "[12:35] B3",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "verbindlichkeit",
+      "kosten"
+    ]
+  },
+  {
+    "id": "f2-18",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber auf dem Zettel stand oben gross «Anmeldung Klassenlager». Da denk ich doch: Wenn man sich anmelden muss, dann kann man sich auch nicht anmelden. Oder?",
+    "locator": "[13:10] B3",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "verbindlichkeit",
+      "wording"
+    ]
+  },
+  {
+    "id": "f2-19",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber das Lager ist doch obligatorisch. Das ist ganz normale Schulzeit.",
+    "locator": "[13:03] B2",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "verbindlichkeit"
+    ]
+  },
+  {
+    "id": "f2-20",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei uns stand irgendwo, wer nicht mitkommt, geht die Woche in eine andere Klasse in den Unterricht. Also es ginge schon. Aber ich weiss nicht, ob das jemand macht.",
+    "locator": "[13:29] B1",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "verbindlichkeit"
+    ]
+  },
+  {
+    "id": "f2-21",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab das Formular nie gesehen. Ich hab erst nach dem Lager gemerkt, dass ich auf der Notfallliste gar nicht drauf war. Nur sie, und als Zweite ihre Mutter, also das Grosi vom [Sohn]. Und sie war in der Lagerwoche drei Tage geschäftlich weg, im Ausland.",
+    "locator": "[14:20] B4",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b4",
+      "getrennte-eltern",
+      "notfallkontakt",
+      "formular",
+      "vermittlung",
+      "performed_by"
+    ]
+  },
+  {
+    "id": "f2-22",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "dann sagt sie: Ah, ich hab nur mich draufgeschrieben, ich hab gedacht, die haben dich sowieso im System. Und die haben mich halt nicht im System. … Es ist nichts passiert. Aber wenn.",
+    "locator": "[14:20] B4",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "besorgt",
+      "explicit": false
+    },
+    "tags": [
+      "b4",
+      "getrennte-eltern",
+      "notfallkontakt",
+      "stammdaten"
+    ]
+  },
+  {
+    "id": "f2-23",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "«Merkblatt Abschlusslager», das waren, ich glaub, sechs Seiten. Mit Programm, Hausordnung, Packliste, Handyregel, Adresse vom Lagerhaus. Das war eigentlich gut gemacht, muss ich sagen, da war alles drin.",
+    "locator": "[15:44] B2",
+    "signal": "positive",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "merkblatt"
+    ]
+  },
+  {
+    "id": "f2-24",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das Problem ist, man liest das einmal, am Handy, im Zug, und dann ist es weg. Und auf Seite zwei – das hab ich nachher gesehen – stand: Kranke Kinder werden von den Eltern abgeholt. Hab ich nicht gelesen. Oder gelesen, aber nicht gespeichert.",
+    "locator": "[15:44] B2",
+    "signal": "friction",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "merkblatt",
+      "abholpflicht",
+      "krankheit"
+    ]
+  },
+  {
+    "id": "f2-25",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Vorlauf der Packliste und des Programms vor Lagerbeginn (Angabe B1): «Zuerst im März der Brief mit Datum, Ort und Kosten, dann das Formular, und dann zwei Wochen vor dem Lager die Packliste und das Programm. Und die Packliste war mir eigentlich zu spät.»",
+    "value": 2,
+    "unit": "Wochen",
+    "locator": "[16:29] B1",
+    "signal": "friction",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "packliste",
+      "vorlauf",
+      "dauer"
+    ]
+  },
+  {
+    "id": "f2-26",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Wegen den Wanderschuhen. Die [Tochter] hatte keine passenden mehr, die vom letzten Sommer waren zu klein, und auf der Liste stand: «gute, eingelaufene Wanderschuhe». Eingelaufen! In zwei Wochen! … Wir sind dann jeden Abend eine Runde ums Quartier gelaufen, damit die eingelaufen sind. Sie hatte trotzdem Blasen.",
+    "locator": "[16:29] B1",
+    "signal": "workaround",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "packliste",
+      "ausruestung"
+    ]
+  },
+  {
+    "id": "f2-27",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei uns waren's die Finken. Ich hab nicht gewusst, dass sie im Lagerhaus Finken braucht, und die vom Schulhaus darf man nicht mitnehmen, die bleiben dort. Das stand nicht auf der Liste, oder ich hab's nicht gesehen. Also ist sie am ersten Abend in den Socken rumgelaufen, und dann hat ihr eine Kollegin ein zweites Paar ausgeliehen.",
+    "locator": "[17:20] B3",
+    "signal": "friction",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "packliste",
+      "ausruestung"
+    ]
+  },
+  {
+    "id": "f2-28",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und wir hatten vieles nicht. Den Schlafsack hab ich von der Nachbarin ausgeliehen, die Wanderschuhe hab ich im Brocki gefunden, für zwölf Franken, die waren super. Die Regenhose hab ich neu gekauft, und dann hat's die ganze Woche nicht geregnet.",
+    "locator": "[18:04] B3",
+    "signal": "workaround",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "ausruestung",
+      "ausleihen",
+      "kosten"
+    ]
+  },
+  {
+    "id": "f2-29",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und die Nachbarn einen Stock weiter unten, die haben einen Sohn in der Parallelklasse, und die sprechen nicht so gut Deutsch. Die haben mich gefragt, ob ich ihnen den Brief erklären kann.",
+    "locator": "[18:04] B3",
+    "signal": "workaround",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "vermittlung",
+      "sprache",
+      "fremdsprachige-eltern",
+      "hoerensagen"
+    ]
+  },
+  {
+    "id": "f2-30",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und die dachten, man muss das alles neu kaufen. Die waren schon im Laden und haben einen Schlafsack für hundertzwanzig Franken angeschaut. Und ich hab gesagt, nein, das muss nicht neu sein, das kann man auch ausleihen. Aber das stand halt nirgends.",
+    "locator": "[18:04] B3",
+    "signal": "friction",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "ausruestung",
+      "kosten",
+      "fremdsprachige-eltern",
+      "hoerensagen"
+    ]
+  },
+  {
+    "id": "f2-31",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei uns stand unten so eine Zeile in verschiedenen Sprachen, «Brauchen Sie eine Übersetzung? Melden Sie sich bei …» – ich weiss nicht mehr, bei wem. Aber ob das bei allen Briefen so war, keine Ahnung. Und ob dann jemand anruft, der den Brief gar nicht lesen kann …",
+    "locator": "[19:55] B1",
+    "signal": "friction",
+    "phase_hint": "information",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "sprache",
+      "uebersetzung"
+    ]
+  },
+  {
+    "id": "f2-32",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Der [Sohn] hat bei mir gesagt, er braucht einen Schlafsack, der alte ist zu klein. Also hab ich einen gekauft. Und bei der Mutter hat er's auch gesagt. Und dann hatte er zwei. … Aber es zeigt halt, dass wir das nicht abgesprochen haben, und dass die Schule eben nur mit ihr kommuniziert. Das gibt dann so ein Puff.",
+    "locator": "[20:32] B4",
+    "signal": "friction",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b4",
+      "getrennte-eltern",
+      "ausruestung",
+      "koordination"
+    ]
+  },
+  {
+    "id": "f2-33",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab dann im Sekretariat angerufen, ob ich auch auf die App kann. Und da hiess es, pro Kind gibt es ein Konto, für den Hauptkontakt. Inzwischen geht's, glaub ich, ich hab jetzt einen eigenen Zugang. Aber ich musste drei- oder viermal nachfragen, und das hat gedauert bis … ungefähr Weihnachten. Da war das Lager längst vorbei.",
+    "locator": "[20:32] B4",
+    "signal": "breakdown",
+    "phase_hint": "information",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b4",
+      "getrennte-eltern",
+      "app",
+      "telefon",
+      "nachfragen"
+    ]
+  },
+  {
+    "id": "f2-34",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Es ist zu viel auf einmal, und dann zu wenig, wenn man's braucht.",
+    "locator": "[22:34] B2",
+    "signal": "friction",
+    "phase_hint": "information",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "informationsflut",
+      "zeitpunkt"
+    ]
+  },
+  {
+    "id": "f2-35",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Lagerbeitrag (Angabe B1), Betrag vorher bekannt: «Bei uns waren das achtzig Franken, mit einer QR-Rechnung von der Gemeinde, die kam mit dem Brief im März.»",
+    "value": 80,
+    "unit": "CHF",
+    "locator": "[23:03] B1",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "kosten",
+      "qr-rechnung"
+    ]
+  },
+  {
+    "id": "f2-36",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und es hiess, wenn am Schluss etwas übrig bleibt, gibt's eine Rückzahlung. Hab ich aber nie mehr etwas gehört.",
+    "locator": "[23:03] B1",
+    "signal": "friction",
+    "phase_hint": "nachher",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "kosten",
+      "abrechnung",
+      "rueckzahlung"
+    ]
+  },
+  {
+    "id": "f2-37",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Lagerbeitrag (Angabe B2, unsicher: 100 oder 110), inklusive Ausflug: «Hundert oder hundertzehn, ich bin nicht mehr sicher. Aber da war noch ein Ausflug dabei, so ein Seilpark.»",
+    "value": 100,
+    "unit": "CHF",
+    "locator": "[23:26] B2",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "kosten"
+    ]
+  },
+  {
+    "id": "f2-38",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Taschengeld, Obergrenze laut Schule (Angabe B2): «Und das Taschengeld extra, ‹maximal dreissig Franken›, und dann haben natürlich alle dreissig mitgenommen.»",
+    "value": 30,
+    "unit": "CHF",
+    "locator": "[23:26] B2",
+    "signal": "neutral",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "kosten",
+      "taschengeld"
+    ]
+  },
+  {
+    "id": "f2-39",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Lagerbeitrag vor der Reduktion (Angabe B3), für vier Tage, ohne Taschengeld: «Bei uns hundertzwanzig, für vier Tage. Plus zwanzig Franken Taschengeld.»",
+    "value": 120,
+    "unit": "CHF",
+    "locator": "[23:58] B3",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "kosten",
+      "taschengeld"
+    ]
+  },
+  {
+    "id": "f2-40",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und das alles bar, im Couvert, mit Namen drauf, am ersten Morgen der Lehrerin abgeben. Hundertvierzig Franken gibt man einer Zehnjährigen in den Thek. … Nein, es ist angekommen. Aber ich war den ganzen Morgen nervös.",
+    "locator": "[23:58]–[24:45] B3",
+    "signal": "friction",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "nervös",
+      "explicit": true
+    },
+    "tags": [
+      "b3",
+      "kosten",
+      "barzahlung",
+      "kind-als-bote"
+    ]
+  },
+  {
+    "id": "f2-41",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich bin alleinerziehend, ich arbeite sechzig Prozent. … Hundertzwanzig Franken plus Taschengeld plus das, was man noch kaufen muss – das ist für uns nicht nichts.",
+    "locator": "[25:04] B3",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "kosten",
+      "alleinerziehend",
+      "finanzielle-belastung"
+    ]
+  },
+  {
+    "id": "f2-42",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und im Brief stand ganz unten so ein Satz, irgendwie: «In finanziellen Härtefällen wenden Sie sich bitte vertraulich an die Klassenlehrperson.» Und das wollte ich nicht. Ehrlich nicht. Die [Klassenlehrerin] ist super, aber die sieht die [Tochter] jeden Tag, und ich will nicht, dass sie denkt … ich weiss auch nicht. Dass sie sie anders anschaut. Also hab ich das einfach mal liegen lassen.",
+    "locator": "[25:04] B3",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "befangen",
+      "explicit": false
+    },
+    "tags": [
+      "b3",
+      "kosten",
+      "haertefall",
+      "stigma",
+      "aufgeben"
+    ]
+  },
+  {
+    "id": "f2-43",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dann hat mir eine Mutter vom Elternrat, beim Abholen vom Turnen, so nebenbei gesagt, dass man das auch direkt bei der Schulverwaltung machen kann und dass die Gemeinde dann einen Teil übernimmt. Das wusste ich nicht.",
+    "locator": "[26:17] B3",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "kosten",
+      "haertefall",
+      "informelles-netz"
+    ]
+  },
+  {
+    "id": "f2-44",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Also hab ich dort angerufen. Und – ja. Ich wurde zweimal weiterverbunden …, die erste Person wusste nicht genau, wer zuständig ist. Und dann eine Frau, die war sehr nett, die hat gesagt, das geht, ich soll ein Formular ausfüllen und den Lohnausweis oder die letzte Steuerveranlagung mitschicken.",
+    "locator": "[26:17] B3",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "kosten",
+      "haertefall",
+      "telefon",
+      "zustaendigkeit"
+    ]
+  },
+  {
+    "id": "f2-45",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Dauer vom eingereichten Gesuch um Kostenreduktion (Formular mit Lohnausweis oder Steuerveranlagung) bis zum Entscheid per Brief (Angabe B3, geschätzt): «nach ungefähr zwei Wochen kam ein Brief»",
+    "value": 2,
+    "unit": "Wochen",
+    "locator": "[26:17] B3",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "kosten",
+      "haertefall",
+      "dauer"
+    ]
+  },
+  {
+    "id": "f2-46",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Lagerbeitrag nach Kostenreduktion durch die Gemeinde (Angabe B3): «Ich zahle vierzig Franken statt hundertzwanzig.»",
+    "value": 40,
+    "unit": "CHF",
+    "locator": "[26:17] B3",
+    "signal": "positive",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "kosten",
+      "haertefall"
+    ]
+  },
+  {
+    "id": "f2-47",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber das war knapp vor dem Lager. Ich hab bis zum Schluss nicht gewusst, ob ich jetzt hundertzwanzig ins Couvert tun soll oder vierzig. Ich hab dann vierzig plus die zwanzig Taschengeld reingetan und einen Zettel dazu, und das war okay. Aber ich hab schon schlecht geschlafen die Tage davor.",
+    "locator": "[26:17] B3",
+    "signal": "friction",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "besorgt",
+      "explicit": false
+    },
+    "tags": [
+      "b3",
+      "kosten",
+      "haertefall",
+      "barzahlung",
+      "unsicherheit"
+    ]
+  },
+  {
+    "id": "f2-48",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Also ich find ja, das darf eigentlich gar nicht so viel kosten. Mein Schwager ist Lehrer, und der sagt, die Schule darf den Eltern eigentlich nur das Essen verrechnen, so sechzehn Franken pro Tag oder so, weil die Volksschule gratis sein muss. Ich weiss nicht, ob das stimmt, ich bin kein Jurist.",
+    "locator": "[27:48] B2",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "kosten",
+      "rechtsgrundlage",
+      "hoerensagen"
+    ]
+  },
+  {
+    "id": "f2-49",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dann frag ich mich halt, wieso zahlt der eine achtzig für fünf Tage und der andere hundertzwanzig für vier. In derselben Gemeinde …",
+    "locator": "[28:29] B2",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "kosten",
+      "transparenz",
+      "ungleichbehandlung"
+    ]
+  },
+  {
+    "id": "f2-50",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Achtzig, glaub ich. Die Mutter hat's bezahlt, und ich hab ihr die Hälfte überwiesen. … Das hat funktioniert. Das ist so ziemlich das Einzige, was wir gut abgesprochen haben.",
+    "locator": "[29:05] B4",
+    "signal": "positive",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b4",
+      "kosten",
+      "getrennte-eltern",
+      "vermittlung",
+      "performed_by"
+    ]
+  },
+  {
+    "id": "f2-51",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Ausgaben für Ausrüstung (Angabe B1, Schätzung), höher als der Lagerbeitrag: «Wanderschuhe, eine neue Regenjacke, ein neuer Rucksack, weil der alte kaputt war –, dann waren das schnell zweihundert Franken. Mehr als das Lager selber. Wir können uns das leisten, aber … ja.»",
+    "value": 200,
+    "unit": "CHF",
+    "locator": "[29:23] B1",
+    "signal": "friction",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "kosten",
+      "ausruestung"
+    ]
+  },
+  {
+    "id": "f2-52",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei uns gab's einen Lagerblog, mit Passwort, das stand auf der Packliste. Und die [Klassenlehrerin] hat jeden Abend, also fast jeden Abend, drei, vier Fotos raufgeladen und zwei, drei Sätze geschrieben, was sie gemacht haben. Ich hab das geliebt, ehrlich. Ich bin jeden Abend um neun vor dem Laptop gesessen und hab gewartet, bis es neu lädt.",
+    "locator": "[30:07] B1",
+    "signal": "positive",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "emotion_hint": {
+      "valence": 1,
+      "label": "begeistert",
+      "explicit": true
+    },
+    "tags": [
+      "b1",
+      "lagerblog",
+      "kommunikation-waehrend-lager"
+    ]
+  },
+  {
+    "id": "f2-53",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Telefonieren durften sie nicht, die Handys wurden beim Car eingesammelt. Nur im Notfall.",
+    "locator": "[30:07] B1",
+    "signal": "neutral",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "handyregel",
+      "kommunikation-waehrend-lager"
+    ]
+  },
+  {
+    "id": "f2-54",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich find, das macht so einen Druck. In der Klasse von meinem Neffen gab's das auch, und dann haben die Eltern im Klassenchat geschrieben: «Meiner ist auf keinem Foto, ist etwas passiert?» Und die Lehrerin muss dann am Abend, nach einem ganzen Tag mit fünfundzwanzig Kindern, noch Fotos aussuchen, damit jedes Kind einmal drauf ist.",
+    "locator": "[31:11] B2",
+    "signal": "friction",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "lagerblog",
+      "kommunikation-waehrend-lager",
+      "hoerensagen"
+    ]
+  },
+  {
+    "id": "f2-55",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei uns hat der [Lehrer] einmal am Tag in der App eine Nachricht geschrieben: «Alle gesund, heute gewandert, morgen Seilpark.» Fertig. Und das fand ich, ehrlich gesagt, genug.",
+    "locator": "[31:11] B2",
+    "signal": "positive",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "app",
+      "kommunikation-waehrend-lager"
+    ]
+  },
+  {
+    "id": "f2-56",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Der [Sohn] hat am Mittwochabend Fieber bekommen, ziemlich hoch, neununddreissig irgendwas. … Und am Donnerstagmorgen um sieben hat der [Lehrer] angerufen – aber zuerst meine Frau, auf ihre alte Nummer. Die hat sie seit über einem Jahr nicht mehr. Und eben, auf dem Formular stand die neue. Aber die Formulare waren in einem Ordner im Schulhaus, und mitgenommen hat er die Klassenliste aus dem System, also von der Schulverwaltung, und dort war noch die alte Nummer drin.",
+    "locator": "[32:09] B2",
+    "signal": "friction",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "krankheit",
+      "notfallkontakt",
+      "stammdaten",
+      "formular"
+    ]
+  },
+  {
+    "id": "f2-57",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Verzögerung, bis die Lagerleitung nach dem Anruf auf die veraltete Nummer einen erreichbaren Elternteil anrief (Angabe B2, geschätzt): «Nach einer Viertelstunde oder so hat er's dann bei mir probiert, ich war als Zweiter drauf.»",
+    "value": 15,
+    "unit": "Minuten",
+    "locator": "[32:09] B2",
+    "signal": "friction",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "krankheit",
+      "notfallkontakt",
+      "dauer"
+    ]
+  },
+  {
+    "id": "f2-58",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Fahrzeit je Richtung, um das kranke Kind im Lager abzuholen (Angabe B2): «Und dann hiess es: Er muss heim, Sie müssen ihn holen. Also hab ich im Geschäft angerufen, mich abgemeldet, ins Auto, zwei Stunden hin, zwei Stunden zurück.»",
+    "value": 2,
+    "unit": "Stunden",
+    "locator": "[32:09] B2",
+    "signal": "friction",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "krankheit",
+      "abholpflicht",
+      "arbeit",
+      "dauer"
+    ]
+  },
+  {
+    "id": "f2-59",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Der arme Kerl lag auf einer Matratze im Leiterzimmer, mit einem Kübel neben sich. … Nein, er wurde gut betreut, das muss ich sagen.",
+    "locator": "[32:09] B2",
+    "signal": "positive",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "krankheit",
+      "betreuung"
+    ]
+  },
+  {
+    "id": "f2-60",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber ich hab nicht gewusst, dass man selber holen muss. Ich hab gedacht, die gehen mit ihm dort zum Arzt oder so. Und das stand eben auf Seite zwei.",
+    "locator": "[32:09] B2",
+    "signal": "friction",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "krankheit",
+      "abholpflicht",
+      "merkblatt"
+    ]
+  },
+  {
+    "id": "f2-61",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und wenn man nicht kann? Also wenn man kein Auto hat, oder arbeitet und nicht weg kann?",
+    "locator": "[34:01] B4",
+    "signal": "need",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b4",
+      "abholpflicht",
+      "mobilitaet",
+      "arbeit"
+    ]
+  },
+  {
+    "id": "f2-62",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab kein Auto. Bei uns wär das mit dem Zug gewesen, zweimal umsteigen und dann noch mit dem Bus, ich weiss nicht, wie lange. … Daran hab ich gar nie gedacht.",
+    "locator": "[34:12] B3",
+    "signal": "need",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "abholpflicht",
+      "mobilitaet"
+    ]
+  },
+  {
+    "id": "f2-63",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und die [Tochter] hatte am zweiten Abend Heimweh, also richtig, sie hat geweint und nicht mehr aufgehört, und die [Klassenlehrerin] hat ihr dann erlaubt, mich anzurufen, mit dem Handy von der Lehrerin. Das war so um halb zehn, ich war schon im Pyjama. … Wir haben zehn Minuten geredet, und dann ging's. Ich fand das extrem lieb von ihr.",
+    "locator": "[34:12] B3",
+    "signal": "positive",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "emotion_hint": {
+      "valence": 1,
+      "label": "dankbar",
+      "explicit": false
+    },
+    "tags": [
+      "b3",
+      "heimweh",
+      "handyregel",
+      "kommunikation-waehrend-lager"
+    ]
+  },
+  {
+    "id": "f2-64",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber ich hätte gern vorher gewusst, dass das überhaupt möglich ist. Ich hab nämlich die ganzen Tage vorher gedacht: Und wenn sie Heimweh hat, dann erfahr ich das gar nicht.",
+    "locator": "[34:12] B3",
+    "signal": "need",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "besorgt",
+      "explicit": false
+    },
+    "tags": [
+      "b3",
+      "heimweh",
+      "handyregel",
+      "erwartungsklarheit"
+    ]
+  },
+  {
+    "id": "f2-65",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab nichts gehört, ich war ja nicht in der App. Es gab, glaub ich, schon Nachrichten von der Lehrerin, die hat mir die Mutter dann am Freitag als Screenshots weitergeleitet.",
+    "locator": "[35:45] B4",
+    "signal": "friction",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b4",
+      "getrennte-eltern",
+      "app",
+      "vermittlung",
+      "kommunikation-waehrend-lager"
+    ]
+  },
+  {
+    "id": "f2-66",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber eben: Wenn etwas gewesen wäre – die Mutter war weg, ich nicht auf der Liste –, dann hätten die das Grosi angerufen. Die ist zweiundachtzig. … Aber es ist halt ein Umweg. Und ich wär eigentlich der Erste gewesen, der hätte hinfahren können.",
+    "locator": "[35:45] B4",
+    "signal": "friction",
+    "phase_hint": "lager",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b4",
+      "getrennte-eltern",
+      "notfallkontakt"
+    ]
+  },
+  {
+    "id": "f2-67",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Also die Rückkehr war am Freitag um vier beim Schulhaus, das hat gut geklappt, der Car war sogar zehn Minuten zu früh.",
+    "locator": "[36:49] B1",
+    "signal": "positive",
+    "phase_hint": "nachher",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "rueckkehr"
+    ]
+  },
+  {
+    "id": "f2-68",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Zeit nach dem Lager, bis die Fundsachen im Schulhaus ausgestellt wurden (Angabe B1): «Es fehlten ein Pulli und ein Frottiertuch. Es hiess, die Fundsachen kommen in eine Kiste im Eingang vom Schulhaus. Den Pulli hab ich dann gefunden, aber erst drei Wochen später, weil der Hauswart die Kiste erst dann rausgestellt hat. Das Frottiertuch nie.»",
+    "value": 3,
+    "unit": "Wochen",
+    "locator": "[36:49] B1",
+    "signal": "friction",
+    "phase_hint": "nachher",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "fundsachen",
+      "dauer"
+    ]
+  },
+  {
+    "id": "f2-69",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Wir haben auch nichts zurückbekommen, obwohl der [Sohn] den Seilpark gar nicht gemacht hat und früher heim ist. Nicht, dass es mir um die zwanzig Franken geht. Aber man weiss halt nicht, was mit dem Geld passiert.",
+    "locator": "[37:45] B2",
+    "signal": "friction",
+    "phase_hint": "nachher",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "kosten",
+      "abrechnung",
+      "rueckzahlung",
+      "transparenz"
+    ]
+  },
+  {
+    "id": "f2-70",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Fotos gab's dann, einen Link zu so einem Ordner, der war dreissig Tage gültig.",
+    "locator": "[37:45] B2",
+    "signal": "neutral",
+    "phase_hint": "nachher",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "fotos"
+    ]
+  },
+  {
+    "id": "f2-71",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei mir war der abgelaufen. Die Mutter hat ihn mir weitergeleitet, aber erst nach ein paar Wochen, sie hat's vergessen, was ja passieren kann. Und dann hab ich draufgeklickt, und es kam: «Dieser Link ist nicht mehr gültig.» Sie hat mir dann ein paar geschickt, die sie gespeichert hatte. Aber nicht alle.",
+    "locator": "[38:14] B4",
+    "signal": "breakdown",
+    "phase_hint": "nachher",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b4",
+      "fotos",
+      "getrennte-eltern",
+      "vermittlung"
+    ]
+  },
+  {
+    "id": "f2-72",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich will aber nicht, dass das jetzt so tönt, als wär das Lager schlecht gewesen. Der [Sohn] war begeistert. Der kam heim, hat drei Tage nur geschlafen und dann eine Woche lang nur vom Lager erzählt.",
+    "locator": "[38:14] B4",
+    "signal": "positive",
+    "phase_hint": "nachher",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b4",
+      "kind-erlebnis"
+    ]
+  },
+  {
+    "id": "f2-73",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Die [Tochter] auch. Trotz Heimweh. Die will nächstes Jahr unbedingt wieder. Und sie haben eine Lagerzeitung gemacht, die Kinder, mit Zeichnungen und kleinen Berichten, die kam dann vor den Sommerferien nach Hause. Die ist richtig herzig, die hängt jetzt am Kühlschrank.",
+    "locator": "[39:14] B3",
+    "signal": "positive",
+    "phase_hint": "nachher",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "kind-erlebnis",
+      "lagerzeitung"
+    ]
+  },
+  {
+    "id": "f2-74",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Eine Abrechnung hab ich aber auch nie gesehen.",
+    "locator": "[39:14] B3",
+    "signal": "friction",
+    "phase_hint": "nachher",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "kosten",
+      "abrechnung"
+    ]
+  },
+  {
+    "id": "f2-75",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Die [Tochter] hat mir am Sonntag nach dem Lager erzählt, dass am Mittwoch beim Ausflug ein anderes Kind ein Schoggistängeli mit Haselnüssen dabeihatte, und die [Klassenlehrerin] hat das gesehen und ihr gesagt, sie soll sich woanders hinsetzen. Es ist nichts passiert. Aber das hab ich vom Kind erfahren, beim Znacht. Von der Schule kam da nichts. Und ich hätte das schon gern von der Lehrerin gehört.",
+    "locator": "[39:45] B1",
+    "signal": "friction",
+    "phase_hint": "nachher",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "allergie",
+      "rueckmeldung",
+      "kind-als-bote"
+    ]
+  },
+  {
+    "id": "f2-76",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ja, ganz einfach: Beide Eltern bekommen die Infos. Wenn das geteiltes Sorgerecht ist, dann beide, in der App und per Post. Und beide stehen auf der Notfallliste, ohne dass man das extra verlangen muss.",
+    "locator": "[41:36] B4",
+    "signal": "need",
+    "phase_hint": "information",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b4",
+      "getrennte-eltern",
+      "notfallkontakt",
+      "wunsch"
+    ]
+  },
+  {
+    "id": "f2-77",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei mir ist's halt das Geld, gäll. Dass im Brief steht, an wen man sich wenden kann, und zwar nicht nur an die Lehrerin. Und vielleicht nicht bar.",
+    "locator": "[42:04] B3",
+    "signal": "need",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "kosten",
+      "haertefall",
+      "barzahlung",
+      "wunsch"
+    ]
+  },
+  {
+    "id": "f2-78",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dass nicht «Anmeldung» drübersteht, wenn's obligatorisch ist.",
+    "locator": "[42:04] B3",
+    "signal": "need",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "verbindlichkeit",
+      "wording",
+      "wunsch"
+    ]
+  },
+  {
+    "id": "f2-79",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dass man Sachen ausleihen kann – ich hab nachher gehört, bei Ihnen im Schulhaus, [Name], gibt's so eine Kiste mit Schlafsäcken?",
+    "locator": "[42:04] B3",
+    "signal": "need",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "ausruestung",
+      "ausleihen",
+      "wunsch",
+      "hoerensagen"
+    ]
+  },
+  {
+    "id": "f2-80",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und das mit dem Telefonieren: dass man vorher weiss, wenn das Kind Heimweh hat, darf's anrufen. Oder eben nicht. Aber dass man's weiss.",
+    "locator": "[42:04] B3",
+    "signal": "need",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b3",
+      "heimweh",
+      "handyregel",
+      "erwartungsklarheit",
+      "wunsch"
+    ]
+  },
+  {
+    "id": "f2-81",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei mir: die Packliste früher, mindestens einen Monat vorher.",
+    "locator": "[42:51] B1",
+    "signal": "need",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "packliste",
+      "vorlauf",
+      "wunsch"
+    ]
+  },
+  {
+    "id": "f2-82",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und bei medizinischen Sachen ein richtiges Gespräch vorher, nicht ein Feld auf dem Formular, sondern dass jemand anruft.",
+    "locator": "[42:51] B1",
+    "signal": "need",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "allergie",
+      "formular",
+      "wunsch"
+    ]
+  },
+  {
+    "id": "f2-83",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und nachher eine kurze Rückmeldung.",
+    "locator": "[42:51] B1",
+    "signal": "need",
+    "phase_hint": "nachher",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "rueckmeldung",
+      "wunsch"
+    ]
+  },
+  {
+    "id": "f2-84",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Vielleicht wär's schon genug, wenn man vorher weiss, wie kommuniziert wird. Weil das Schlimmste ist ja, wenn man nichts hört und nicht weiss, ob man etwas hören sollte.",
+    "locator": "[42:51] B1",
+    "signal": "need",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b1",
+      "kommunikation-waehrend-lager",
+      "erwartungsklarheit",
+      "wunsch"
+    ]
+  },
+  {
+    "id": "f2-85",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das unterschreib ich. Wenn ich weiss, es kommt einmal am Tag eine Nachricht, und sonst heisst nichts eine gute Nachricht, dann ist das für mich okay.",
+    "locator": "[43:47] B2",
+    "signal": "need",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "kommunikation-waehrend-lager",
+      "erwartungsklarheit",
+      "wunsch"
+    ]
+  },
+  {
+    "id": "f2-86",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und sonst: weniger Nachrichten in der App, dafür die wichtigen markiert. Also das Lager nicht zwischen den Läusen.",
+    "locator": "[43:47] B2",
+    "signal": "need",
+    "phase_hint": "information",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "app",
+      "informationsflut",
+      "wunsch"
+    ]
+  },
+  {
+    "id": "f2-87",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das mit dem Abholen gehört auf die erste Seite, fett. Und dass die Nummern stimmen.",
+    "locator": "[43:47] B2",
+    "signal": "need",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "eltern-mittelstufe",
+    "tags": [
+      "b2",
+      "abholpflicht",
+      "merkblatt",
+      "notfallkontakt",
+      "wunsch"
+    ]
+  },
+  {
+    "id": "f2-88",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab nachher im Sekretariat angerufen und die Nummer korrigieren lassen, und da hiess es, das Lagerformular geht gar nicht ins System, das ist nur für die Lehrperson. Das versteh ich ehrlich gesagt nicht ganz. Man schreibt's ja nicht zum Spass auf.",
+    "locator": "[43:47] B2",
+    "signal": "workaround",
+    "phase_hint": "nachher",
+    "persona_hint": "eltern-mittelstufe",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "irritiert",
+      "explicit": false
+    },
+    "tags": [
+      "b2",
+      "notfallkontakt",
+      "stammdaten",
+      "formular",
+      "telefon"
+    ]
+  }
+]

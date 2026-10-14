@@ -31,7 +31,7 @@
     "source_ref": "int-e7",
     "class": "reported",
     "kind": "quote",
-    "text": "dass ihre Kinder in die Bachmatt gehen",
+    "text": "dass ihre Kinder in die",
     "locator": "[04:01]",
     "signal": "neutral"
   },
@@ -341,7 +341,7 @@
     "source_ref": "int-e7",
     "class": "reported",
     "kind": "quote",
-    "text": "Anmeldeformular für die Bachmatt neu ausfüllen",
+    "text": "Anmeldeformular für die … neu ausfüllen",
     "locator": "[18:26]",
     "signal": "friction"
   },
@@ -413,7 +413,7 @@
     "source_ref": "int-e7",
     "class": "reported",
     "kind": "quote",
-    "text": "mit dem Auto in den Lindenhof gefahren",
+    "text": "mit dem Auto in den",
     "locator": "[22:13]",
     "signal": "workaround"
   },
@@ -880,7 +880,7 @@
     "source_ref": "int-e7",
     "class": "reported",
     "kind": "quote",
-    "text": "die Finken sind im Lindenhof geblieben",
+    "text": "die Finken sind im",
     "locator": "[43:27]",
     "signal": "friction"
   },

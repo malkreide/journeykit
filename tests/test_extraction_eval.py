@@ -181,6 +181,26 @@ def test_assignment_does_not_depend_on_gold_order():
     assert ev.score_case(reversed_gold, [unterlagen, telefon, *rest]).missing == []
 
 
+def test_sentence_count_ignores_stage_directions_abbreviations_and_ordinals():
+    assert ev.sentence_count("Ja, sicher. Klar. Möchten Sie noch einen Kafi? (lacht)") == 3
+    assert ev.sentence_count("Das war z. B. am 28. März, d. h. kurz vor Ostern.") == 1
+    assert ev.sentence_count("[spricht Tigrinya]") == 0
+
+
+def test_signal_conflicts_count_short_turns_with_incompatible_gold_signals(tmp_path):
+    by_id = {c.id: c for c in CASES}
+    # Upload gescheitert, auf Papier ausgewichen: Das Gold lässt für ein Atom beide Signale zu.
+    hort = ev.signal_conflicts(by_id["interview-hort"])
+    assert hort.conflicts == [] and hort.short == 15
+    fokus = ev.signal_conflicts(by_id["fokusgruppe"])
+    assert [loc for loc, _ in fokus.conflicts] == ["23:03"]
+    assert ev.signal_conflicts(by_id["anfragen"]) is None
+    assert ev.main(["signale", "-o", str(tmp_path / "s.md")]) == 0
+    report = (tmp_path / "s.md").read_text(encoding="utf-8")
+    assert "| **gesamt** | 111 | 30 | 1 (3% der kurzen) |" in report
+    assert "- fokusgruppe [23:03]: b1-kosten-80-qr-rechnung (neutral)" in report
+
+
 def test_numbers_ignore_swiss_thousands_separator():
     assert 1236.0 in ev._numbers({"text": "Mahnung über 1'236 Franken"})
     assert 1236.0 in ev._numbers({"text": "Mahnung", "value": "1’236"})

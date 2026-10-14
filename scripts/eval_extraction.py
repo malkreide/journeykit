@@ -14,6 +14,7 @@ Ablauf::
     # je Fall das Bundle an ein Modell geben, Antwort als <fall>.json speichern
     python scripts/eval_extraction.py score /tmp/antworten -o bericht.md
     python scripts/eval_extraction.py compare runs/a-1 runs/a-2 runs/b-1 -o vergleich.md
+    python scripts/eval_extraction.py signale        # unvereinbare Signale im Gold zählen
 
 Entwicklerwerkzeug – Ausgaben nur deutsch. Keine Abhängigkeit von einem LLM:
 Das Skript bewertet, es extrahiert nicht.
@@ -421,6 +422,87 @@ def parse_candidate(text: str) -> list[dict[str, Any]]:
     return data
 
 
+# -- Signale in kurzen Redebeiträgen ---------------------------------------------
+
+_TURN = re.compile(r"^\[(\d{1,2}:\d\d(?::\d\d)?)\]\s*[^:\n]{1,20}:[ \t]*(.*)$", re.M)
+_NO_END = re.compile(r"\b(?:z\.\s?B|d\.\s?h|u\.\s?a|bzw|ca|usw|vgl|Nr)\.|(?<=\d)\.(?=\s)")
+
+
+def sentence_count(text: str) -> int:
+    """Sätze eines Redebeitrags. Regieanweisungen wie «(lacht)» zählen nicht, Punkte
+    nach Abkürzungen und Ordnungszahlen («28. März») beenden keinen Satz."""
+    t = _NO_END.sub("", re.sub(r"\([^)]*\)|\[[^\]]*\]", " ", text))
+    return sum(1 for s in re.split(r"(?<=[.!?…])\s+", t) if re.search(r"\w", s))
+
+
+@dataclass
+class SignalTurns:
+    case: str
+    turns: int = 0  # Redebeiträge mit Pflicht-Einträgen
+    short: int = 0  # davon kurz (bis drei Sätze)
+    conflicts: list[tuple[str, list[tuple[str, list[str]]]]] = field(default_factory=list)
+
+
+def signal_conflicts(case: Case) -> SignalTurns | None:
+    """Kurze Redebeiträge, deren Pflicht-Einträge im Gold kein gemeinsames ``signal`` zulassen.
+
+    Ein kurzer Redebeitrag (bis drei Sätze) bleibt ein Atom, und ein Atom trägt nur
+    ein ``signal`` (``evidenz.md``). Verlangt das Gold dort zwei Signale, die sich
+    ausschliessen, trifft keine Extraktion beide. Ein Eintrag zählt bei seiner
+    ersten Fundstelle. Nur für Interviews; sonst ``None``.
+    """
+    if case.config.get("kind") != "interview":
+        return None
+    turns = {m.group(1): m.group(2) for m in _TURN.finditer(case.input_text)}
+    by_turn: dict[str, list[dict[str, Any]]] = {}
+    for g in case.expected["atoms"]:
+        if g.get("required") and g.get("locator"):
+            by_turn.setdefault(g["locator"][0].strip("[]"), []).append(g)
+
+    def signals(g: dict[str, Any]) -> list[str]:
+        sig = g.get("signal") or []
+        return [sig] if isinstance(sig, str) else list(sig)
+
+    res = SignalTurns(case.id, turns=len(by_turn))
+    for loc, entries in sorted(by_turn.items()):
+        if not 0 < sentence_count(turns.get(loc, "")) <= 3:
+            continue
+        res.short += 1
+        sets = [set(signals(g)) for g in entries if signals(g)]
+        if any(not (a & b) for i, a in enumerate(sets) for b in sets[i + 1 :]):
+            res.conflicts.append((loc, [(g["key"], signals(g)) for g in entries]))
+    return res
+
+
+def signals_markdown(
+    results: list[SignalTurns], title: str = "Signale in kurzen Redebeiträgen"
+) -> str:
+    lines = [
+        f"# {title}",
+        "",
+        "Kurz heisst bis drei Sätze (Regel in `evidenz.md`). Unvereinbar: zwei Pflicht-Einträge "
+        "desselben Redebeitrags, die kein gemeinsames `signal` zulassen.",
+        "",
+        "| Fall | Redebeiträge mit Pflicht-Einträgen | davon kurz | unvereinbar |",
+        "|---|---|---|---|",
+    ]
+    for r in results:
+        lines.append(f"| {r.case} | {r.turns} | {r.short} | {len(r.conflicts)} |")
+    short = sum(r.short for r in results)
+    n = sum(len(r.conflicts) for r in results)
+    lines.append(
+        f"| **gesamt** | {sum(r.turns for r in results)} | {short} "
+        f"| {n} ({n / short if short else 0:.0%} der kurzen) |"
+    )
+    conflicts = [(r.case, loc, es) for r in results for loc, es in r.conflicts]
+    if conflicts:
+        lines += ["", "## Unvereinbar", ""]
+        for case, loc, es in conflicts:
+            parts = " · ".join(f"{key} ({', '.join(sig) or '–'})" for key, sig in es)
+            lines.append(f"- {case} [{loc}]: {parts}")
+    return "\n".join(lines) + "\n"
+
+
 # -- Bericht ---------------------------------------------------------------------
 
 
@@ -585,6 +667,12 @@ def compare_markdown(
 
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    p.add_argument(
+        "--cases",
+        type=Path,
+        default=CASES_DIR,
+        help="Verzeichnis der Fälle (Standard: der synthetische Testsatz)",
+    )
     sub = p.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("prompts", help="Gefüllte Prompts je Fall schreiben")
     s.add_argument("-o", "--output", required=True)
@@ -609,9 +697,13 @@ def main(argv: list[str] | None = None) -> int:
     s.add_argument("runs", nargs="+", help="Verzeichnisse mit <fall>.json")
     s.add_argument("-o", "--output")
     s.add_argument("--title", default="Vergleich der Läufe")
+    s = sub.add_parser(
+        "signale", help="Kurze Redebeiträge zählen, deren Gold zwei unvereinbare Signale verlangt"
+    )
+    s.add_argument("-o", "--output")
     args = p.parse_args(argv)
 
-    cases = load_cases()
+    cases = load_cases(args.cases)
     if args.cmd == "prompts":
         out = Path(args.output)
         out.mkdir(parents=True, exist_ok=True)
@@ -623,6 +715,15 @@ def main(argv: list[str] | None = None) -> int:
                     render_bundle(case, args.evidenz), encoding="utf-8"
                 )
         print(f"{len(cases)} Prompts geschrieben: {out}", file=sys.stderr)
+        return 0
+
+    if args.cmd == "signale":
+        found = [r for r in map(signal_conflicts, cases) if r is not None]
+        report = signals_markdown(found)
+        if args.output:
+            Path(args.output).write_text(report, encoding="utf-8")
+        else:
+            sys.stdout.write(report)
         return 0
 
     if args.cmd == "compare":

@@ -161,6 +161,11 @@ Atome zu Schritten clustern. Pro Schritt:
   nur, was die Persona selbst empfindet.
 - `pain_points`: `type` friction oder breakdown, `severity`, `frequency`,
   `workaround` (wohin ausgewichen wird), `owner` als Rolle, `status`.
+  Ein Atom trägt nur ein `signal`, und ein kurzer Redebeitrag bleibt ein Atom,
+  auch wenn er Problem und Ausweg nennt (`references/evidenz.md`). Darum jedes
+  Atom mit `breakdown` oder `friction` auch auf einen Ausweg prüfen (→
+  `workaround`) und jedes mit `workaround` auf das Problem dahinter (→ Pain
+  Point mit diesem Atom in den `evidence_refs`).
   Ein Rechtsmittel (Einsprache, Rekurs) ist kein Breakdown, sondern Reibung;
   das Versagen liegt meist davor (siehe `references/review-fragen.md`,
   Happy Path).

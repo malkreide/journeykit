@@ -129,6 +129,33 @@ Schulhausnamen enthielten, sind um den Namen gekürzt wie zuvor die Personenname
 alle sechs Läufe hatten «Bachmatt» und «Lindenhof» ersetzt, wie es die Schablone
 für Orte verlangt. Gekürzte Ausschnitte behalten mindestens vier Wörter.
 
+## Messlauf Körnung (2026-10-14): Kriterium vorab festgelegt
+
+Änderung in `evidenz.md`, ein Hebel an zwei Stellen (Schablone und Abschnitt
+«Interview-Transkripte»): «Ein Atom pro belegbarer Aussage, nicht pro Satz **und
+nicht pro Redebeitrag**: … wechselt ein Redebeitrag das Thema oder den Schritt,
+wird jede Aussage ein eigenes Atom mit derselben Fundstelle.» Der Richtwert
+«Typisch 12–25 Atome pro 45-Minuten-Interview» bleibt unverändert, damit nur die
+neue Regel gemessen wird.
+
+**Vorher** sind die Läufe `2026-10-14-aktuell-1..3` (acht Fälle) und
+`2026-10-14-unabhaengig-aktuell-1..3` (drei Fälle) – gleiche Schablone, gleiche
+Prompts. **Nachher** sind je drei blinde Läufe über alle elf Fälle mit der
+geänderten Schablone.
+
+Die Änderung wird **übernommen**, wenn über die drei Läufe nachher alle drei
+Bedingungen gelten, sonst wird `evidenz.md` zurückgesetzt und die Läufe bleiben
+als Beleg:
+
+1. Unabhängige Fälle: Die gefundenen Pflicht-Einträge nehmen nicht ab (im Mittel
+   mindestens 170 von 172, wie vorher).
+2. Elterninterview: Im Mittel teilen sich weniger als 30 der gefundenen
+   Pflicht-Einträge ein Atom mit einem anderen (vorher 37–42 von 61).
+3. Die acht übrigen Fälle: in jedem Lauf 71/71 Pflicht-Atome und Feldtreue von
+   mindestens 99 %; Regelverstösse im Mittel höchstens 2 (vorher 0) – die Regel
+   darf nicht in Aufteilen umschlagen, wo die Fälle einen Redebeitrag als eine
+   Aussage meinen.
+
 ## Grenzen
 
 - **Über die Abdeckung trennt der Testsatz nicht.** Die acht Fälle aus derselben Hand wie die Schablone löst die aktuelle Schablone fehlerfrei; auch die drei unabhängigen Fälle finden beide Schablonen zu 98–100 %. Autor, Gold und Extraktion sind bisher dasselbe Modell – was ihm entgeht, entgeht allen dreien. Erst reales Material aus der Evaluation (anonymisierte Ausschnitte, Mundart, echte Unordnung) kann zeigen, was eine Extraktion wirklich übersieht.

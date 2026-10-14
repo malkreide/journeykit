@@ -52,7 +52,7 @@ Eine ältere Schablone prüft man mit ihrer `evidenz.md`:
 Das Modell darf weder `expected.json` noch `reference.json` sehen. Die Läufe
 unten wurden so gemacht: je Fall ein frischer Subagent, der nur das Bundle lesen
 und nur seine Antwortdatei schreiben durfte. Für die Läufe vom 2026-10-14 ist
-das an den Werkzeugaufrufen aller 99 Subagenten geprüft (48 + 18 + 33): je ein
+das an den Werkzeugaufrufen aller 132 Subagenten geprüft (48 + 18 + 33 + 33): je ein
 Read (das eigene Bundle) und ein Write (die eigene Antwort), sonst nichts.
 
 ## Was gemessen wird
@@ -190,7 +190,12 @@ Redebeiträge in Interviews beschränken – kurze Redebeiträge, die eine Sache
 erzählen, ausdrücklich ausnehmen und die übrigen Quellenarten nicht berühren.
 Dieselben elf Fälle und dieselben drei Bedingungen taugen als Messlatte.
 
-## Messlauf engere Körnungsregel (2026-10-14): Kriterium vorab festgelegt
+## Messlauf engere Körnungsregel (2026-10-14): übernommen
+
+### Kriterium, vorab festgelegt
+
+Festgelegt und gepusht vor dem ersten Lauf (Commit `afd8ea5`, PR #68), hier
+unverändert.
 
 Änderung in `evidenz.md` gegenüber `main`, an denselben zwei Stellen wie im
 Messlauf Körnung. Die Regel gilt nur noch für Interviews (Quellenart
@@ -230,9 +235,65 @@ zurückgesetzt und die Läufe bleiben als Beleg:
 Die Fallregeln bleiben für diesen Messlauf unverändert, auch «ein Atom je
 Fundstelle» in `interview-hort`.
 
+### Ergebnis
+
+Je drei blinde Läufe über alle elf Fälle mit der engeren Regel
+(`runs/2026-10-14-eng-1..3`, `runs/2026-10-14-unabhaengig-eng-1..3`; die Prompts
+liegen jeweils in Lauf 1). Vollständige Vergleiche in
+[`runs/2026-10-14-eng-vergleich.md`](runs/2026-10-14-eng-vergleich.md) und
+[`runs/2026-10-14-unabhaengig-eng-vergleich.md`](runs/2026-10-14-unabhaengig-eng-vergleich.md)
+(dort auch die verworfene Regel zum Vergleich).
+
+| Bedingung | vorher | verworfene Regel | engere Regel | erfüllt |
+|---|---|---|---|---|
+| 1. Unabhängige Fälle: gefundene Pflicht-Einträge | 170 von 172 | 172 von 172 | 172 von 172 in jedem Lauf | ja |
+| 2. Elterninterview: Pflicht-Einträge, die sich ein Atom teilen | 42, 40, 37 von 61 | 12, 6, 10 von 63 | 14, 16, 14 von 63 (Mittel 14,7) | ja |
+| 3. Acht übrige Fälle: Pflicht-Atome · Feldtreue · Regelverstösse | 71/71 · 100 % · 0 | 71/71 · 100 % · 5,3 | 71/71 · ≥ 99,6 % · 1, 1, 1 | ja |
+
+Alle drei Bedingungen gelten, die Regel bleibt in `evidenz.md`.
+
+**Abweichung vom festgelegten Stand, offengelegt.** Mit dem Scorer, wie er beim
+Festlegen des Kriteriums war, zählt Lauf 1 in den acht Fällen 70/71, und
+Bedingung 3 wäre verfehlt. Der fehlende Eintrag ist ein Fehler des Scorers, nicht
+der Extraktion: Das Atom «8 von 20 Anfragen … in der Kategorie Unterlagen» nennt
+auch «3 Telefon» und die Ticket-Nummer «A-12» und passte damit auch auf
+`kanal-telefon` (12 Anrufe). Der Scorer ordnete gierig in Gold-Reihenfolge zu und
+gab es diesem früheren Eintrag, obwohl die Extraktion ein eigenes Telefon-Atom
+hatte. Korrigiert in PR #69 (`76589fa`): Zuerst ein freies Atom wie bisher, sonst
+wird ein besetztes umgehängt, wenn dessen Eintrag ein anderes passendes Atom
+bekommt. Die Korrektur entstand nach dem Blick auf dieses Ergebnis. Sie ändert
+aber keinen der früher abgelegten Läufe – auch nicht die verworfene Regel – und
+ist mit einem Test belegt, der mit dem alten Scorer fehlschlägt.
+
+Was die Läufe zeigen:
+
+- **Die kurzen Redebeiträge bleiben ganz.** `interview` hat in jedem Lauf 9 Atome
+  wie vorher (verworfene Regel 12–14), `interview-hort` 18–19 (vorher 18), kein
+  Redebeitrag ist aufgeteilt. Befragung und Beschwerde liegen wieder in ihrer
+  Spanne. Die drei Verstösse haben mit der Körnung nichts zu tun: einmal eine
+  ausdrückliche Emotion im Workshop, zweimal ein Zitat der Beschwerde über zwei
+  Briefzeilen, bei dem die Zeilennummer «08» dazwischen den wörtlichen Abgleich
+  bricht – eine Grenze des Scorers.
+- **Auf langen Redebeiträgen bleibt der grösste Teil der Wirkung.** Alle 63
+  Pflicht-Einträge des Elterninterviews in jedem Lauf (vorher je 61), 14–16
+  geteilte statt 37–42.
+- **Beim `signal` bleibt weniger.** Feldtreue gegen das unabhängige Gold 97 %
+  (vorher 96 %, verworfene Regel 98 %): 93 Abweichungen beim `signal` über drei
+  Läufe, vorher 111, verworfene Regel 50.
+- **Die Zahl der Atome steigt weniger stark:** Elterninterview 87–92 (vorher
+  41–47, verworfene Regel 91–102), Fokusgruppe 87–94 (80–86; 115–116),
+  Dolmetsch-Interview 50–54 (47; 57–58). Die Ausnahme für kurze Redebeiträge
+  wirkt vor allem in der Fokusgruppe, wo viele Beiträge kurz sind.
+
+Offen: Der Richtwert «Typisch 12–25 Atome pro 45-Minuten-Interview» passt zu
+keiner der Schablonen mehr – das Elterninterview (etwa 45 Minuten) ergibt 87–92
+Atome. Ihn anzupassen ist eine Änderung an `evidenz.md` und braucht einen eigenen
+Messlauf.
+
 ## Grenzen
 
 - **Über die Abdeckung trennt der Testsatz nicht.** Die acht Fälle aus derselben Hand wie die Schablone löst die aktuelle Schablone fehlerfrei; auch die drei unabhängigen Fälle finden beide Schablonen zu 98–100 %. Autor, Gold und Extraktion sind bisher dasselbe Modell – was ihm entgeht, entgeht allen dreien. Erst reales Material aus der Evaluation (anonymisierte Ausschnitte, Mundart, echte Unordnung) kann zeigen, was eine Extraktion wirklich übersieht.
 - **Ein Modell.** Alle Läufe stammen vom selben Modell; ein anderes Modell kann anders streuen. Vor einem Urteil über eine Schablonenänderung mehrere Läufe vergleichen (`compare`).
 - **Gold und Schablone stammen aus derselben Hand.** Das Gold prüft, was `evidenz.md` verlangt – nicht, ob das, was `evidenz.md` verlangt, die richtige Methode ist.
+- **Der Scorer ist selbst ein Messinstrument.** Zweimal hat erst ein Lauf einen Fehler gezeigt (das Tausendertrennzeichen in «1'236», die Zuordnung in Gold-Reihenfolge). Korrekturen gelten für alle Läufe gleich; die abgelegten Berichte und Vergleiche prüft `tests/test_extraction_eval.py` nach jeder Änderung. Bekannte Grenze: Ein Zitat über zwei Zeilen einer Quelle mit Zeilennummern gilt als nicht wörtlich.
 - **Ermessensfragen bleiben offen.** Wo das Gold mehrere Antworten zulässt (z. B. `signal` bei der Nachbarin, Emotion beim Wunsch nach einer Liste), steht das im Gold als Liste erlaubter Werte oder als `"emotion": "any"`.

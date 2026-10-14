@@ -290,6 +290,37 @@ keiner der Schablonen mehr – das Elterninterview (etwa 45 Minuten) ergibt 87�
 Atome. Ihn anzupassen ist eine Änderung an `evidenz.md` und braucht einen eigenen
 Messlauf.
 
+## Bestätigungslauf engere Körnungsregel (2026-10-14): Kriterium vorab festgelegt
+
+Die engere Regel wurde übernommen, aber nur dank einer Scorer-Korrektur, die nach
+dem Blick auf ein Ergebnis entstand. Ein zweiter, neuer Messlauf soll klären, ob
+das Ergebnis ohne diesen Schritt hält.
+
+- **Schablone** unverändert: `evidenz.md` wie auf `main` seit `afd8ea5`.
+- **Scorer** mit der Korrektur aus `76589fa` von Anfang an. Bis zur Auswertung
+  wird am Scorer, an den Fällen und am Gold nichts geändert.
+- **Nachher** sind je drei neue blinde Läufe über alle elf Fälle
+  (`2026-10-14-bestaetigung-1..3`, `2026-10-14-unabhaengig-bestaetigung-1..3`),
+  durchgeführt wie die übrigen. **Vorher** sind dieselben Läufe wie in den beiden
+  Messläufen zur Körnung (`2026-10-14-aktuell-1..3`,
+  `2026-10-14-unabhaengig-aktuell-1..3`).
+
+Die Regel **bleibt**, wenn über die drei neuen Läufe dieselben drei Bedingungen
+gelten wie zuvor:
+
+1. Unabhängige Fälle: im Mittel mindestens 170 von 172 gefundenen
+   Pflicht-Einträgen.
+2. Elterninterview: Im Mittel teilen sich weniger als 30 der gefundenen
+   Pflicht-Einträge ein Atom mit einem anderen gefundenen Pflicht-Eintrag
+   (Abschnitt «Körnung» in `compare`).
+3. Die acht übrigen Fälle: in jedem Lauf 71/71 Pflicht-Atome und Feldtreue von
+   mindestens 99 %; Regelverstösse im Mittel höchstens 2.
+
+Fällt eine Bedingung durch, wird `evidenz.md` auf den Stand vor `afd8ea5`
+zurückgesetzt – auch dann, wenn der Grund wieder ein Fehler des Scorers sein
+sollte. Ein solcher Fehler wird dann behoben und in einem weiteren Lauf gemessen,
+nicht in diesem verrechnet.
+
 ## Grenzen
 
 - **Über die Abdeckung trennt der Testsatz nicht.** Die acht Fälle aus derselben Hand wie die Schablone löst die aktuelle Schablone fehlerfrei; auch die drei unabhängigen Fälle finden beide Schablonen zu 98–100 %. Autor, Gold und Extraktion sind bisher dasselbe Modell – was ihm entgeht, entgeht allen dreien. Erst reales Material aus der Evaluation (anonymisierte Ausschnitte, Mundart, echte Unordnung) kann zeigen, was eine Extraktion wirklich übersieht.

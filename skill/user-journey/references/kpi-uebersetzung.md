@@ -36,7 +36,7 @@ Mindestens ein Frühindikator pro Journey, sonst meldet Lint L092.
 | Customer Effort Score | **Aufwand pro Anliegen** (Anzahl Kontakte, Zeit bis Klarheit, Zustimmung «war einfach») | Befragung, Fallverlauf |
 | Time-to-first-value | **Zeit bis Klarheit** («Ich weiss, was gilt und was ich tun muss») | Befragung, Zeitstempel Brief → erste Rückfrage |
 | Activation Rate | **Anteil, der den nächsten Pflichtschritt fristgerecht macht** | Fristenstatistik |
-| Retention | **Anteil, der beim nächsten Anlass denselben Kanal wählt** | Kanalstatistik über Zeit |
+| Retention | **Anteil, der beim nächsten Anlass denselben Kanal wählt**; bei Dauerleistungen (Unterricht, Betreuung, Abonnement) wörtlich: **Anteil, der weiterführt** – dort nach dem Grund der Abmeldung fragen | Kanalstatistik über Zeit; Abmeldestatistik |
 | NPS | **Weiterempfehlung des Verfahrens** oder **Vertrauen in den Entscheid** (Zustimmung) | Befragung – nicht als Gesamtwert, sondern pro Phase |
 | First Contact Resolution | **Erledigung im Erstkontakt** | Auskunftsstatistik |
 | Contact rate, failure demand | **Anteil vermeidbarer Kontakte** (Rückfragen, Nachfragen, zweite Anläufe, die bei gelungenem Schritt davor nicht nötig wären) – anders als die Erledigung im Erstkontakt zählt hier nicht, ob die Rückfrage gelöst wurde, sondern ob sie nötig war | Anfragenexport nach Grund kategorisiert, Auskunftsstatistik, Befragung («Ich musste nachfragen, weil …») |

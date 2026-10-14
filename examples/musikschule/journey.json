@@ -378,7 +378,7 @@
           ],
           "feeling": {
             "valence": -1,
-            "label": "ratlos – sie war so enttäuscht",
+            "label": "ratlos",
             "evidence_refs": [
               "m1-10"
             ]
@@ -412,6 +412,12 @@
                 "stat-05",
                 "stat-06",
                 "anf-15"
+              ]
+            },
+            {
+              "text": "Enttäuscht ist vor allem das Kind; die Eltern wissen nicht, was sie ihm sagen sollen. Das Gefühl des Kindes kennt die Journey nur aus dem Bericht der Eltern.",
+              "evidence_refs": [
+                "m1-10"
               ]
             }
           ],

@@ -19,6 +19,8 @@ Kern trifft – das prüft ein Mensch. Diese Fragen stellt der Skill vor der
 - An welcher Stelle rufen Menschen an, obwohl sie es nicht müssten? Steht der Schritt als vermeidbar drin (Pain Point `friction`) – und verweist er mit `caused_by` auf den Pain Point, der den Anruf auslöst? Muster «Vermeidbare Schritte und Folgen» im Skill.
 - Belegt die Folge auch die Verbindung zu ihrer Ursache – oder haben wir sie nur vermutet? Ein `caused_by` ohne Aussage oder Zahl, die beides verknüpft, ist eine Annahme.
 - Was passiert, wenn der Brief nicht ankommt, die Frist verpasst ist, die Sprache nicht reicht, das System die Person nicht findet? Steht es drin?
+- Welche Frist muss die Persona einhalten – und wer erinnert sie? Steht die Frist als Beleg beim Pain Point, der entsteht, wenn sie verpasst wird? Muster «Fristen der Persona» im Skill.
+- Wo nutzt die Persona einen Kanal, der für diesen Schritt nicht gilt (Formvorschrift: schriftlich, persönlich, im Portal)? Steht die Vorschrift als Beleg drin – und der Pain Point, wenn sie nicht eingehalten wird? Muster «Vorgeschriebener Kanal» im Skill.
 - Für jeden Breakdown: Gibt es heute einen Rückweg? Wenn nein, ist das als `exists: false` festgehalten – oder haben wir einen Soll-Pfad als Ist-Pfad geschrieben?
 - Welcher Übergang (Kanal- oder Zuständigkeitswechsel) ist am wenigsten belegt?
 - Beschreibt die Journey, wie der Weg heute ist – oder wie er sein soll? Wenn Soll: Ist `scenario.perspective: to_be` gesetzt, und wo steht die Ist-Journey, die das Konzept begründet?
@@ -38,6 +40,7 @@ Kern trifft – das prüft ein Mensch. Diese Fragen stellt der Skill vor der
 - Welcher Schritt hat eine Gefühlslage, die wir nicht belegen können? Streichen oder stehen lassen – bewusst?
 - Wo widerspricht der Gefühlswert dem, was im Schritt passiert (Scheitern, Ablehnung, Rücksprung) – und welche Quelle erklärt das? Ohne Erklärung ist der Wert eher gesetzt als erhoben.
 - Steht ein Gefühlswert für mehrere Stimmen, die sich widersprechen («konnte nicht zum Schalter» neben «am Schalter sehr gut beraten»)? Dann ist er ein Mittelwert, der beide verdeckt – wer erlebt was, und braucht eine der Gruppen eine eigene Datei?
+- Wessen Gefühl zeigt dieser Punkt – das der Persona oder das einer Person, über die sie berichtet (etwa das Kind, das den Unterricht besucht)? Gefühle anderer gehören als Tag und Edge Case dazu, nicht in die Kurve der Persona.
 - Welche zwei Schritte könnten zu einem werden, ohne dass Erleben verloren geht?
 - Welche Nutzergruppe würde an derselben Stelle anders fühlen? Braucht sie eine eigene Datei?
 - Ist der Scope-Ausschluss noch richtig, oder hat das Material etwas gezeigt, das hineingehört?

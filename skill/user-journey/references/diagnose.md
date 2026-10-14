@@ -76,6 +76,15 @@ Auswahl und Kurve mit «Persona – Szenario». Unterscheiden sich die Varianten
 im Erleben so stark, dass die Ziele auseinandergehen, sind es zwei Personas
 (siehe oben).
 
+**Ausnahme: eine eingeschobene Phase.** Unterscheidet sich der Weg nur darin,
+dass für einen Teil der Persona eine Phase dazukommt (Warteliste, Rückweisung
+mit Nachreichen), bleibt er in derselben Datei. Eine zweite Datei würde fast
+alle Schritte kopieren, und die Kopien liefen bei der Pflege auseinander. Die
+Phase nennt in `description`, für wen sie gilt und für wie viele (etwa «47 %
+der Neuanmeldungen»), `duration_days.basis` sagt, worauf sich die Dauer
+bezieht, und Schritte, die alle betreffen, sagen es im Text (Beispiel:
+`examples/musikschule/`, Phase «Auf einen Platz warten»).
+
 ## 3. Welcher Modus?
 
 ```

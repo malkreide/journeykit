@@ -122,6 +122,9 @@ blockiert.
   `unit` und der Zeile oder Spalte, aus der sie stammen. Grosse Exporte zuerst
   kategorisieren und als Metriken verdichten, nicht jede Zeile als Atom.
 - `emotion_hint` nur, wenn die Emotion im Text steht (`explicit: true`).
+  Berichtet die Person über die Gefühle eines anderen («Sie war so
+  enttäuscht»), das Atom zusätzlich taggen (z. B. `gefuehl-kind`); bei der
+  Synthese kommt es nicht in die Kurve der Persona (siehe `feeling`).
   Abgeleitete Emotionen als `explicit: false` kennzeichnen.
 - `signal`: friction, breakdown, positive, need, workaround, neutral.
 - `phase_hint`, `persona_hint`, `channel_hint` als Sortierhilfe.
@@ -137,7 +140,9 @@ zeigt es) oder wird bewusst als ausserhalb des Scopes markiert.
 Atome zu Schritten clustern. Pro Schritt:
 
 - `action` (was die Persona tut), `channel`, `touchpoint`, `counterpart`,
-  `is_transition` bei Kanal- oder Zuständigkeitswechsel. Wechselt die Stelle,
+  `is_transition` bei Kanal- oder Zuständigkeitswechsel. `counterpart` ist das
+  Gegenüber der Persona als Rolle: die Verwaltung, eine Stelle in ihrem Auftrag
+  oder Dritte wie ein Fachgeschäft oder eine Installationsfirma. Wechselt die Stelle,
   steht in `counterpart` die neue Stelle, und der Schritt, in dem sie zum ersten
   Mal auftritt, trägt `is_transition: true` – kein «A → B» im `counterpart`.
   L023 meldet beide Arten von Wechsel, wenn die Markierung fehlt.
@@ -148,7 +153,11 @@ Atome zu Schritten clustern. Pro Schritt:
   Betrifft es nur einen Teil der Persona, ist es ein Edge Case. Handeln
   mehrheitlich Dritte, meldet Lint L073: dann die Diagnose prüfen.
 - `thinking`: Fragen und Zweifel mit `evidence_refs`.
-- `feeling`: `valence` −2…+2 und `label` in Nutzerworten – oder `null`.
+- `feeling`: `valence` −2…+2 und `label` in Nutzerworten – oder `null`. Es ist
+  die Gefühlslage der **Persona**. Berichtet sie über die Gefühle einer anderen
+  Person – etwa des Kindes, das den Unterricht besucht –, ist das kein
+  `feeling` der Persona: Das Gefühl steht als Edge Case, und das Label nennt
+  nur, was die Persona selbst empfindet.
 - `pain_points`: `type` friction oder breakdown, `severity`, `frequency`,
   `workaround` (wohin ausgewichen wird), `owner` als Rolle, `status`.
   Ein Rechtsmittel (Einsprache, Rekurs) ist kein Breakdown, sondern Reibung;
@@ -195,6 +204,25 @@ Atome zu Schritten clustern. Pro Schritt:
   vermeidbar sind Kontakte, die Wert schaffen – eine Beratung, die die Person
   braucht – und Rückwege, die funktionieren; im Zweifel nach dem Grund des
   Kontakts fragen.
+- **Fristen der Persona** (Annahme-, Antrags-, Abmeldefrist) haben kein eigenes
+  Feld. Anders als eine Frist der Verwaltung, die ein Soll für die Behörde ist
+  (siehe `duration_days` unten), ist eine Frist der Persona eine Bedingung mit
+  Folgen: Platz weg, Semester bezahlt, Anspruch verloren. Muster: die Frist als
+  `document_excerpt` (Klasse `assumed`, Tag `frist`) in den `evidence_refs` des
+  Pain Points, der entsteht, wenn sie verpasst wird – meist ein Breakdown mit
+  Recovery-Pfad (Kulanz, Erlass) oder Soll-Pfad (Erinnerung vor Ablauf).
+  Kennzahl «Anteil, der den Pflichtschritt fristgerecht macht»
+  (`references/kpi-uebersetzung.md`). Ein Feld erst, wenn ein weiteres
+  Beispiel es braucht.
+- **Vorgeschriebener Kanal**: Gilt für einen Schritt eine Formvorschrift
+  (schriftlich, persönlich, im Portal) und nutzt die Persona einen anderen
+  Kanal – etwa den Messenger der Lehrperson statt eines Briefs ans
+  Sekretariat –, steht in `channel` der genutzte Kanal. Die Vorschrift kommt
+  als `document_excerpt` in die `evidence_refs` des Pain Points, der entsteht,
+  wenn sie nicht eingehalten wird. Ein privater Messenger statt des
+  vorgesehenen Kanals ist zudem eine Datenschutzfrage für die verantwortliche
+  Stelle (Edge Case oder offene Frage). Ein Feld für den vorgeschriebenen Kanal
+  erst, wenn ein zweites Beispiel dieselbe Lücke zeigt.
 
 Je Phase:
 

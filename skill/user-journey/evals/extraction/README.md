@@ -364,6 +364,55 @@ Messläufe: Unterschiede von wenigen Prozentpunkten zwischen zwei Schablonen nic
 aus einem Durchgang ableiten; die Bedingungen der Kriterien liegen bisher weit
 genug von den Messwerten entfernt.
 
+
+## Messlauf Richtwert Atomzahl (2026-10-14): Kriterium vorab festgelegt
+
+Der Richtwert in `evidenz.md` (Abschnitt «Interview-Transkripte») passt zu keiner
+gemessenen Schablone: «Typisch 12–25 Atome pro 45-Minuten-Interview», gemessen
+sind mit der aktuellen Regel 87–106 im Elterninterview (45 Minuten). Die sechs
+Läufe aus zwei Durchgängen (`2026-10-14-eng-1..3`, `2026-10-14-bestaetigung-1..3`):
+
+| Interview | Dauer | Redebeiträge | Atome | je Minute |
+|---|---|---|---|---|
+| `interview` | ~6 min | 12 | 9 | ~1,5 |
+| `interview-hort` | ~13 min | 31 | 18–19 | ~1,4 |
+| `interview-eltern` | ~45 min | 86 | 87–106 | ~1,9–2,4 |
+| `fokusgruppe` | ~41 min | 78 | 87–102 | ~2,1–2,5 |
+| `interview-dolmetsch` | ~35 min | 67 | 50–57 | ~1,4–1,6 |
+
+**Änderung**, genau ein Satz: «Typisch 12–25 Atome pro 45-Minuten-Interview.»
+wird zu «Die Zahl der Atome folgt aus den Aussagen, nicht aus einer Vorgabe. Zur
+Grössenordnung: In den synthetischen Testfällen ergab eine Gesprächsminute etwa
+1,5–2,5 Atome, ein 45-Minuten-Interview mit vielen langen Redebeiträgen rund
+90–110 (an realem Material nicht geprüft).» Die Zahlen stammen aus Fällen, die
+dasselbe Modell geschrieben hat; deshalb als Grössenordnung, nicht als Ziel.
+
+Diesmal kommt nur dieses Kriterium vorab auf `main`. `evidenz.md` wird erst mit
+dem Ergebnis geändert; die Läufe bekommen die geänderte Fassung über
+`prompts --evidenz`. Scorer, Fälle und Gold bleiben bis zur Auswertung
+unverändert.
+
+**Vorher** sind die sechs Läufe oben (zwei Durchgänge, gleiche Schablone).
+**Nachher** sind je drei neue blinde Läufe über alle elf Fälle
+(`2026-10-14-richtwert-1..3`, `2026-10-14-unabhaengig-richtwert-1..3`).
+
+Die Änderung wird **übernommen**, wenn über die drei neuen Läufe alle vier
+Bedingungen gelten, sonst bleibt `evidenz.md` unverändert und die Läufe bleiben
+als Beleg:
+
+1. Unabhängige Fälle: im Mittel mindestens 170 von 172 gefundenen
+   Pflicht-Einträgen.
+2. Elterninterview: im Mittel weniger als 30 gefundene Pflicht-Einträge, die sich
+   ein Atom mit einem anderen teilen.
+3. Die acht übrigen Fälle: in jedem Lauf 71/71 Pflicht-Atome und Feldtreue von
+   mindestens 99 %; Regelverstösse im Mittel höchstens 2.
+4. Die Zahl der Atome bleibt, wo sie war: Für jeden der fünf Interviewfälle liegt
+   das Mittel der drei neuen Läufe im Bereich der sechs bisherigen, mit 10 %
+   Spielraum nach beiden Seiten – `interview` 8,1–9,9, `interview-hort`
+   16,2–20,9, Elterninterview 78,3–116,6, Fokusgruppe 78,3–112,2,
+   Dolmetsch-Interview 45,0–62,7. Der Satz soll beschreiben, was die Regel
+   ergibt, nicht die Körnung verschieben.
+
 ## Grenzen
 
 - **Über die Abdeckung trennt der Testsatz nicht.** Die acht Fälle aus derselben Hand wie die Schablone löst die aktuelle Schablone fehlerfrei; auch die drei unabhängigen Fälle finden beide Schablonen zu 98–100 %. Autor, Gold und Extraktion sind bisher dasselbe Modell – was ihm entgeht, entgeht allen dreien. Erst reales Material aus der Evaluation (anonymisierte Ausschnitte, Mundart, echte Unordnung) kann zeigen, was eine Extraktion wirklich übersieht.

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "stat-01",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Geschäftskontrolle 2025: 412 Zuzüge mit Wohnsitzanmeldung (Grundgesamtheit der Anmeldungen im Jahr 2025).",
+    "value": 412,
+    "unit": "Anzahl",
+    "locator": "input.csv, Zeile 2 (anmeldungen_total)",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "volumen"
+    ]
+  },
+  {
+    "id": "stat-02",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Geschäftskontrolle 2025: 38 % der Anmeldungen vollständig über das Online-Formular abgewickelt (Zeitraum 2025; Grundgesamtheit in der Quelle nicht ausgewiesen).",
+    "value": 38,
+    "unit": "%",
+    "locator": "input.csv, Zeile 3 (anteil_online)",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "kanal",
+      "online-formular"
+    ]
+  },
+  {
+    "id": "stat-03",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Geschäftskontrolle 2025: 21 % der online begonnenen Anmeldungen wurden nicht abgeschlossen (Anteil an allen online begonnenen Anmeldungen, Zeitraum 2025).",
+    "value": 21,
+    "unit": "%",
+    "locator": "input.csv, Zeile 4 (anteil_online_abgebrochen)",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "abbruch",
+      "online-formular"
+    ]
+  },
+  {
+    "id": "stat-04",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Geschäftskontrolle 2025: 17 % der Anmeldungen erfolgten später als 14 Tage nach dem Umzug (Zeitraum 2025; Grundgesamtheit in der Quelle nicht ausgewiesen).",
+    "value": 17,
+    "unit": "%",
+    "locator": "input.csv, Zeile 5 (anteil_verspaetet)",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "verspaetung"
+    ]
+  },
+  {
+    "id": "stat-05",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Geschäftskontrolle 2025: Bearbeitungsdauer im Median 6 Arbeitstage, gemessen vom Eingang bis zum Versand der Bestätigung.",
+    "value": 6,
+    "unit": "Arbeitstage",
+    "locator": "input.csv, Zeile 6 (bearbeitungsdauer_median)",
+    "signal": "neutral",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "dauer",
+      "bearbeitung"
+    ]
+  },
+  {
+    "id": "stat-06",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Geschäftskontrolle 2025: Bearbeitungsdauer 90. Perzentil 14 Arbeitstage (90 % der Fälle sind schneller), gemessen vom Eingang bis zum Versand der Bestätigung.",
+    "value": 14,
+    "unit": "Arbeitstage",
+    "locator": "input.csv, Zeile 7 (bearbeitungsdauer_p90)",
+    "signal": "neutral",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "dauer",
+      "bearbeitung"
+    ]
+  },
+  {
+    "id": "stat-07",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Geschäftskontrolle 2025: Bei 29 % der Anmeldungen mindestens eine Rückfrage wegen fehlender Unterlagen (Zeitraum 2025; Grundgesamtheit in der Quelle nicht ausgewiesen).",
+    "value": 29,
+    "unit": "%",
+    "locator": "input.csv, Zeile 8 (anteil_rueckfragen)",
+    "signal": "friction",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "rueckfrage",
+      "unterlagen"
+    ]
+  }
+]

@@ -1,0 +1,123 @@
+[
+  {
+    "id": "stat-01",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Zuzüge mit Wohnsitzanmeldung im Zeitraum 2025: 412 Anmeldungen total (Grundgesamtheit der Geschäftskontrolle).",
+    "locator": "Zeile 2, anmeldungen_total",
+    "value": 412,
+    "unit": "Anzahl",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "volumen",
+      "grundgesamtheit"
+    ]
+  },
+  {
+    "id": "stat-02",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Anteil der Wohnsitzanmeldungen 2025 (n = 412), die vollständig über das Online-Formular erfolgten: 38 %.",
+    "locator": "Zeile 3, anteil_online",
+    "value": 38,
+    "unit": "%",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "kanalwahl",
+      "online-formular"
+    ]
+  },
+  {
+    "id": "stat-03",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Anteil der online begonnenen Anmeldungen 2025, die nicht abgeschlossen wurden: 21 % (Bezugsgrösse: alle online begonnenen Anmeldungen, Anzahl nicht ausgewiesen).",
+    "locator": "Zeile 4, anteil_online_abgebrochen",
+    "value": 21,
+    "unit": "%",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "abbruch",
+      "online-formular"
+    ]
+  },
+  {
+    "id": "stat-04",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Anteil der Wohnsitzanmeldungen 2025, die später als 14 Tage nach dem Umzug erfolgten: 17 %.",
+    "locator": "Zeile 5, anteil_verspaetet",
+    "value": 17,
+    "unit": "%",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "verspaetung",
+      "frist"
+    ]
+  },
+  {
+    "id": "stat-05",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Bearbeitungsdauer 2025, Median, gemessen vom Eingang bis zum Versand der Bestätigung: 6 Arbeitstage.",
+    "locator": "Zeile 6, bearbeitungsdauer_median",
+    "value": 6,
+    "unit": "Arbeitstage",
+    "signal": "neutral",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "dauer",
+      "bearbeitung"
+    ]
+  },
+  {
+    "id": "stat-06",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Bearbeitungsdauer 2025, 90. Perzentil (90 % der Fälle sind schneller), gemessen vom Eingang bis zum Versand der Bestätigung: 14 Arbeitstage.",
+    "locator": "Zeile 7, bearbeitungsdauer_p90",
+    "value": 14,
+    "unit": "Arbeitstage",
+    "signal": "neutral",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "dauer",
+      "bearbeitung"
+    ]
+  },
+  {
+    "id": "stat-07",
+    "source_ref": "stat",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Anteil der Wohnsitzanmeldungen 2025 mit mindestens einer Rückfrage wegen fehlender Unterlagen: 29 %.",
+    "locator": "Zeile 8, anteil_rueckfragen",
+    "value": 29,
+    "unit": "%",
+    "signal": "friction",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "rueckfrage",
+      "unterlagen"
+    ]
+  }
+]

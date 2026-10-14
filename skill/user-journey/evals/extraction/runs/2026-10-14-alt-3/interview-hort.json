@@ -1,0 +1,388 @@
+[
+  {
+    "id": "h1-01",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Unser Sohn kam im August in die erste Klasse, und ich wollte nach der Elternzeit wieder sechzig Prozent arbeiten. Ohne Hort geht das bei uns nicht.",
+    "locator": "00:44",
+    "signal": "need",
+    "phase_hint": "orientierung",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "anlass",
+      "vereinbarkeit"
+    ]
+  },
+  {
+    "id": "h1-02",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Von einer anderen Mutter beim Abholen in der Kita. Die hat mich gefragt, ob wir schon angemeldet sind, und da habe ich zum ersten Mal vom Anmeldeschluss gehört.",
+    "locator": "01:31",
+    "signal": "friction",
+    "phase_hint": "orientierung",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "information",
+      "anmeldeschluss",
+      "zufall"
+    ]
+  },
+  {
+    "id": "h1-03",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Der Anmeldeschluss war Ende März. Wir haben uns Mitte April angemeldet, und da hiess es, wir kommen auf die Warteliste.",
+    "locator": "02:05",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "anmeldeschluss",
+      "warteliste"
+    ]
+  },
+  {
+    "id": "h1-04",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das Formular auf der Website habe ich gar nicht selbst ausgefüllt. Ich lag damals … im Spital, das hat meine Schwiegermutter für mich gemacht, mit meinem Login.",
+    "locator": "02:58",
+    "signal": "workaround",
+    "phase_hint": "anmeldung",
+    "persona_hint": "berufstaetig",
+    "channel_hint": "web",
+    "tags": [
+      "vermittlung",
+      "performed_by",
+      "stellvertretung",
+      "login"
+    ]
+  },
+  {
+    "id": "h1-05",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Den Arbeitsvertrag konnte sie nicht hochladen, die Datei war zu gross. Sie hat ihn dann ausgedruckt und im Sekretariat im Schulhaus abgegeben.",
+    "locator": "03:40",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "persona_hint": "berufstaetig",
+    "channel_hint": "counter",
+    "tags": [
+      "upload",
+      "dateigroesse",
+      "kanalwechsel",
+      "vermittlung",
+      "performed_by"
+    ]
+  },
+  {
+    "id": "h1-06",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Wartezeit bis zum Bescheid über den Hortplatz, Einzelfall (berichtet): sieben Wochen. Die Befragte korrigiert sich von fünf auf sieben Wochen und gibt an, es nachgeschaut zu haben. Gemessener Abschnitt nicht eindeutig: die Website nennt zwei Wochen ab Anmeldeschluss (Ende März), die Familie hat sich erst Mitte April angemeldet und kam auf die Warteliste.",
+    "locator": "04:30",
+    "value": 7,
+    "unit": "Wochen",
+    "signal": "friction",
+    "phase_hint": "warten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "dauer",
+      "bescheid",
+      "warteliste"
+    ],
+    "contradicts": [
+      "doc-02"
+    ]
+  },
+  {
+    "id": "h1-07",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "In der Zeit habe ich dreimal im Sekretariat angerufen und nie jemanden erreicht.",
+    "locator": "05:15",
+    "signal": "breakdown",
+    "phase_hint": "warten",
+    "persona_hint": "berufstaetig",
+    "channel_hint": "phone",
+    "tags": [
+      "erreichbarkeit",
+      "statusnachfrage"
+    ]
+  },
+  {
+    "id": "h1-08",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Am Schluss habe ich eine E-Mail geschrieben. Die Antwort kam nach vier Tagen, aber da stand nur, ich solle Geduld haben.",
+    "locator": "05:40",
+    "signal": "breakdown",
+    "phase_hint": "warten",
+    "persona_hint": "berufstaetig",
+    "channel_hint": "email",
+    "tags": [
+      "statusnachfrage",
+      "antwortqualitaet",
+      "kanalwechsel"
+    ]
+  },
+  {
+    "id": "h1-09",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Antwortzeit auf die E-Mail-Nachfrage zum Stand der Anmeldung, Einzelfall (berichtet): vier Tage (Abschnitt: E-Mail gesendet bis Antwort erhalten).",
+    "locator": "05:40",
+    "value": 4,
+    "unit": "Tage",
+    "signal": "friction",
+    "phase_hint": "warten",
+    "persona_hint": "berufstaetig",
+    "channel_hint": "email",
+    "tags": [
+      "dauer",
+      "antwortzeit"
+    ]
+  },
+  {
+    "id": "h1-10",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich war richtig verzweifelt, weil ich meinem Arbeitgeber zusagen musste, ab wann ich wieder komme.",
+    "locator": "06:20",
+    "signal": "friction",
+    "phase_hint": "warten",
+    "persona_hint": "berufstaetig",
+    "emotion_hint": {
+      "valence": -2,
+      "label": "verzweifelt",
+      "explicit": true
+    },
+    "tags": [
+      "planungsunsicherheit",
+      "arbeitgeber"
+    ]
+  },
+  {
+    "id": "h1-11",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Weil der Bescheid so spät kam, konnte ich erst Ende Juni zusagen. Mein Chef war nicht begeistert.",
+    "locator": "06:58",
+    "signal": "friction",
+    "phase_hint": "warten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "planungsunsicherheit",
+      "arbeitgeber",
+      "folgen"
+    ]
+  },
+  {
+    "id": "h1-12",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Die Leiterin vom Hort … hat sich am ersten Tag eine halbe Stunde Zeit genommen und uns alles gezeigt. Das war wirklich gut.",
+    "locator": "07:38",
+    "signal": "positive",
+    "phase_hint": "eintritt",
+    "persona_hint": "berufstaetig",
+    "emotion_hint": {
+      "valence": 1,
+      "label": "zufrieden",
+      "explicit": false
+    },
+    "tags": [
+      "empfang",
+      "einfuehrung"
+    ]
+  },
+  {
+    "id": "h1-13",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Unser Sohn hat in der ersten Woche jeden Abend geweint und wollte nicht mehr hin.",
+    "locator": "08:15",
+    "signal": "friction",
+    "phase_hint": "eintritt",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "eingewoehnung",
+      "kind"
+    ]
+  },
+  {
+    "id": "h1-14",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ja, schon.",
+    "locator": "09:00",
+    "signal": "friction",
+    "phase_hint": "eintritt",
+    "persona_hint": "berufstaetig",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "belastet",
+      "explicit": false
+    },
+    "tags": [
+      "eingewoehnung",
+      "suggestivfrage",
+      "bestaetigung-auf-frage"
+    ]
+  },
+  {
+    "id": "h1-15",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Der Elternbeitrag ist bei uns 23 Franken pro Betreuungstag, das wussten wir vom Tarifrechner auf der Website.",
+    "locator": "09:26",
+    "signal": "positive",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "channel_hint": "web",
+    "tags": [
+      "kosten-vorher-bekannt",
+      "tarifrechner",
+      "elternbeitrag"
+    ]
+  },
+  {
+    "id": "h1-16",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Elternbeitrag pro Betreuungstag laut Befragter: 23 Franken; vorher bekannt aus dem Tarifrechner auf der Website.",
+    "locator": "09:26",
+    "value": 23,
+    "unit": "CHF",
+    "signal": "neutral",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "elternbeitrag",
+      "betrag"
+    ]
+  },
+  {
+    "id": "h1-17",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Dass das Mittagessen noch einmal 9 Franken pro Tag kostet, hat uns niemand gesagt. Das haben wir erst auf der ersten Rechnung gesehen.",
+    "locator": "10:02",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "kosten-nicht-vorher-bekannt",
+      "mittagessen",
+      "rechnung"
+    ],
+    "contradicts": [
+      "doc-05"
+    ]
+  },
+  {
+    "id": "h1-18",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Kosten Mittagessen pro Betreuungstag laut Befragter: 9 Franken, zusätzlich zum Elternbeitrag; erst auf der ersten Rechnung bemerkt.",
+    "locator": "10:02",
+    "value": 9,
+    "unit": "CHF",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "mittagessen",
+      "betrag"
+    ]
+  },
+  {
+    "id": "h1-19",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Monatsrechnung Hort im September laut Befragter: 412 Franken (Einzelfall). Einschätzung der Befragten: «Das ist für uns viel Geld, aber es geht.»",
+    "locator": "10:45",
+    "value": 412,
+    "unit": "CHF",
+    "signal": "neutral",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "rechnung",
+      "betrag",
+      "monatlich"
+    ]
+  },
+  {
+    "id": "h1-20",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Wir haben eine Ermässigung beantragt, aber das Formular verlangt die Steuerveranlagung vom letzten Jahr, und die hatten wir noch nicht.",
+    "locator": "11:20",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "ermaessigung",
+      "nachweis",
+      "steuerveranlagung"
+    ]
+  },
+  {
+    "id": "h1-21",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Dass man online sieht, auf welchem Platz der Warteliste man steht. Dann hätte ich wenigstens planen können.",
+    "locator": "12:12",
+    "signal": "need",
+    "phase_hint": "warten",
+    "persona_hint": "berufstaetig",
+    "channel_hint": "web",
+    "tags": [
+      "wunsch",
+      "warteliste",
+      "statusanzeige",
+      "planbarkeit"
+    ]
+  },
+  {
+    "id": "h1-22",
+    "source_ref": "int-h1",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dass die Kosten fürs Essen gleich beim Tarif stehen.",
+    "locator": "12:50",
+    "signal": "need",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "channel_hint": "web",
+    "tags": [
+      "wunsch",
+      "mittagessen",
+      "kostentransparenz"
+    ]
+  }
+]

@@ -1,0 +1,261 @@
+[
+  {
+    "id": "bes-01",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Im Februar habe ich eine Ermässigung des Elternbeitrags beantragt.",
+    "locator": "Zeile 06",
+    "signal": "neutral",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "ermaessigung",
+      "gesuch"
+    ]
+  },
+  {
+    "id": "bes-02",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das Gesuch hat mein Treuhänder für mich eingereicht, mit Vollmacht, weil er auch meine Steuern macht.",
+    "locator": "Zeile 06",
+    "signal": "neutral",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "vermittlung",
+      "vollmacht",
+      "treuhand",
+      "ermaessigung"
+    ]
+  },
+  {
+    "id": "bes-03",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Gemäss Ihrer Website erhalten Gesuchstellende innert 20 Arbeitstagen einen Entscheid.",
+    "locator": "Zeile 07",
+    "signal": "neutral",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "channel_hint": "web",
+    "tags": [
+      "erwartung",
+      "frist",
+      "ermaessigung"
+    ]
+  },
+  {
+    "id": "bes-04",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Dauer vom Ermässigungsgesuch (Februar) bis zum Entscheid, Einzelfall, berichtet: «Ihr Entscheid kam nach elf Wochen»",
+    "value": 11,
+    "unit": "Wochen",
+    "locator": "Zeile 08",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "dauer",
+      "ermaessigung",
+      "entscheid"
+    ],
+    "contradicts": [
+      "doc-04"
+    ]
+  },
+  {
+    "id": "bes-05",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ihr Entscheid kam nach elf Wochen, und zwar an meine alte Adresse, obwohl ich den Umzug im März gemeldet hatte.",
+    "locator": "Zeile 08",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "zustellung",
+      "adresse",
+      "entscheid"
+    ]
+  },
+  {
+    "id": "bes-06",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Weil ich den Entscheid nie erhalten habe, wusste ich nicht, dass ich noch eine Lohnabrechnung nachreichen muss. Die Frist dafür ist abgelaufen, und die Ermässigung wurde abgelehnt.",
+    "locator": "Zeile 09",
+    "signal": "breakdown",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "unterlagen",
+      "frist",
+      "ablehnung",
+      "ermaessigung"
+    ]
+  },
+  {
+    "id": "bes-07",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Mahnung Ende August über den vollen Elternbeitrag für die Monate Mai bis Juli (Einzelfall, berichtet): 1'236 Franken",
+    "value": 1236,
+    "unit": "CHF",
+    "locator": "Zeile 10",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "mahnung",
+      "elternbeitrag"
+    ]
+  },
+  {
+    "id": "bes-08",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Mahngebühr zusätzlich zum Elternbeitrag (Einzelfall, berichtet): 40 Franken",
+    "value": 40,
+    "unit": "CHF",
+    "locator": "Zeile 11",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "mahngebuehr",
+      "mahnung"
+    ]
+  },
+  {
+    "id": "bes-09",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Dazu kam eine Mahngebühr von 40 Franken, und dass eine solche Gebühr anfällt, stand in keinem Ihrer Schreiben.",
+    "locator": "Zeile 11",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "mahngebuehr",
+      "kosten-vorher-unbekannt"
+    ],
+    "contradicts": [
+      "doc-07"
+    ]
+  },
+  {
+    "id": "bes-10",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich habe zweimal die Nummer auf der Mahnung angerufen. Beide Male kam nur eine Ansage, das Büro sei geschlossen.",
+    "locator": "Zeile 12",
+    "signal": "breakdown",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "channel_hint": "phone",
+    "tags": [
+      "erreichbarkeit",
+      "mahnung"
+    ]
+  },
+  {
+    "id": "bes-11",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Am 9. September bin ich deshalb am Schalter im Gemeindehaus vorbeigegangen. Dort sagte man mir, man könne nichts machen, ich müsse schriftlich Beschwerde einreichen.",
+    "locator": "Zeile 13",
+    "signal": "breakdown",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "channel_hint": "counter",
+    "tags": [
+      "kanalwechsel",
+      "verweis",
+      "beschwerde"
+    ]
+  },
+  {
+    "id": "bes-12",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Vielen Dank auch für die schnelle und unkomplizierte Hilfe.",
+    "locator": "Zeile 14",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "verärgert (ironisch)",
+      "explicit": false
+    },
+    "tags": [
+      "ironie",
+      "unterstuetzung"
+    ]
+  },
+  {
+    "id": "bes-13",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich bin wütend und fühle mich von Ihrer Verwaltung nicht ernst genommen.",
+    "locator": "Zeile 15",
+    "signal": "friction",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "wütend, nicht ernst genommen",
+      "explicit": true
+    },
+    "tags": [
+      "vertrauen"
+    ]
+  },
+  {
+    "id": "bes-14",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich verlange, dass Sie mein Gesuch neu prüfen und die Mahngebühr streichen.",
+    "locator": "Zeile 16",
+    "signal": "need",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "tags": [
+      "ermaessigung",
+      "mahngebuehr",
+      "neubeurteilung"
+    ]
+  },
+  {
+    "id": "bes-15",
+    "source_ref": "bes",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ausserdem wünsche ich mir, dass Entscheide per E-Mail kommen, wenn man das im Gesuch so angibt.",
+    "locator": "Zeile 17",
+    "signal": "need",
+    "phase_hint": "kosten",
+    "persona_hint": "berufstaetig",
+    "channel_hint": "email",
+    "tags": [
+      "zustellung",
+      "entscheid"
+    ]
+  }
+]

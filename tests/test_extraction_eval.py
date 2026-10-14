@@ -164,6 +164,18 @@ def test_cli_prompts_and_score(tmp_path, capsys):
     assert "| **gesamt** |" in (tmp_path / "r.md").read_text(encoding="utf-8")
 
 
+def test_recorded_comparisons_still_score_as_reported():
+    """Abgelegte Vergleiche (runs/*-vergleich.md) bleiben mit dem aktuellen Scorer reproduzierbar."""
+    runs = ROOT / "skill" / "user-journey" / "evals" / "extraction" / "runs"
+    for report in sorted(runs.glob("*-vergleich.md")):
+        text = report.read_text(encoding="utf-8")
+        title = text.splitlines()[0][2:]
+        table = text.split("## Läufe", 1)[1].split("\n\n")[1].splitlines()[2:]
+        names = [row.split("|")[1].strip() for row in table]
+        results = {name: ev.score_run(runs / name, CASES) for name in names}
+        assert ev.compare_markdown(results, CASES, title) == text, report.name
+
+
 def test_recorded_runs_still_score_as_reported():
     """Die abgelegten Läufe bleiben mit dem aktuellen Scorer reproduzierbar."""
     runs = ROOT / "skill" / "user-journey" / "evals" / "extraction" / "runs"

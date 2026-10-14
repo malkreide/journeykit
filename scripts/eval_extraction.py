@@ -344,31 +344,65 @@ def rule_violations(case: Case, atoms: list[dict[str, Any]]) -> list[tuple[str, 
     return out
 
 
+def _assign(
+    gold: list[dict[str, Any]], atoms: list[dict[str, Any]], shared: bool
+) -> list[int | None]:
+    """Je Gold-Eintrag das zugeordnete Atom (Index) oder None.
+
+    Kandidaten in der Reihenfolge: meiste erfüllte Felder, dann früheres Atom. Mit
+    shared_atoms nimmt jeder Eintrag seinen besten Kandidaten. Sonst deckt ein Atom
+    höchstens einen Eintrag: zuerst ein freies Atom; ist keines frei, wird ein besetztes
+    umgehängt, wenn dessen Eintrag ein anderes passendes Atom bekommt. So hängt das
+    Ergebnis nicht davon ab, in welcher Reihenfolge das Gold die Einträge aufführt.
+    """
+    cands = [
+        sorted(
+            (i for i, a in enumerate(atoms) if matches(g, a)),
+            key=lambda i, g=g: (-sum(ok for _, ok, _, _ in field_checks(g, atoms[i])), i),
+        )
+        for g in gold
+    ]
+    if shared:
+        return [c[0] if c else None for c in cands]
+    hit: list[int | None] = [None] * len(gold)
+    owner: dict[int, int] = {}
+
+    def place(k: int, seen: set[int]) -> bool:
+        for i in cands[k]:
+            if i not in owner:
+                owner[i], hit[k] = k, i
+                return True
+        for i in cands[k]:
+            if i not in seen:
+                seen.add(i)
+                if place(owner[i], seen):
+                    owner[i], hit[k] = k, i
+                    return True
+        return False
+
+    for k in range(len(gold)):
+        place(k, set())
+    return hit
+
+
 def score_case(case: Case, atoms: list[dict[str, Any]]) -> CaseResult:
     gold = case.expected["atoms"]
     res = CaseResult(case.id, len(atoms), sum(1 for g in gold if g.get("required")), 0)
     # shared_atoms: Ein Atom darf mehrere Gold-Einträge abdecken – für Gold, das lange
     # Redebeiträge feiner zerlegt als die Extraktion; sonst zählte die Körnung als Lücke.
     shared = case.expected.get("shared_atoms", False)
-    used: set[int] = set()
     required_hits: list[int] = []
-    for g in gold:
-        # unter den passenden Atomen das mit den meisten erfüllten Feldern – nicht einfach das erste
-        candidates = [i for i, a in enumerate(atoms) if (shared or i not in used) and matches(g, a)]
-        hit = max(
-            candidates,
-            key=lambda i: (sum(ok for _, ok, _, _ in field_checks(g, atoms[i])), -i),
-            default=None,
-        )
+    hits = _assign(gold, atoms, shared)
+    for g, hit in zip(gold, hits):
         if hit is None:
             if g.get("required"):
                 res.missing.append(g["key"])
             continue
-        used.add(hit)
         if g.get("required"):
             res.found_required += 1
             required_hits.append(hit)
         res.fields += [(g["key"], *check) for check in field_checks(g, atoms[hit])]
+    used = {h for h in hits if h is not None}
     res.unmatched = [a.get("id", "?") for i, a in enumerate(atoms) if i not in used]
     if shared:
         res.shared_required = sum(1 for h in required_hits if required_hits.count(h) > 1)

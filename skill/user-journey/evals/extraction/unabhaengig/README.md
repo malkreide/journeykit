@@ -23,10 +23,13 @@ Problem der «gleichen Hand» teilweise brechen. Sie bleiben synthetisch, wie es
    - `shared_atoms: true` – ein Atom darf mehrere Gold-Einträge abdecken. Das Gold
      zerlegt lange Redebeiträge feiner als jede Extraktion; sonst zählte die Körnung
      als Lücke.
-   - Ausschnitte mit erfundenen Namen um den Namen gekürzt, weil eine Extraktion
-     Namen ersetzen muss («[Name]»). Betroffen: sechs Ausschnitte in
-     `interview-eltern` (z. B. «seine Unterlagen an den Herrn Lüthi» → «seine
-     Unterlagen an den»).
+   - Ausschnitte mit erfundenen Namen und Schulhausnamen um den Namen gekürzt, weil
+     eine Extraktion sie ersetzen muss («[Name]», «[Ort]»). Gekürzte Ausschnitte
+     behalten mindestens vier Wörter, sonst fällt die Alternative weg. Betroffen:
+     13 Ausschnitte in `interview-eltern` (z. B. «seine Unterlagen an den Herrn
+     Lüthi» → «seine Unterlagen an den»). Die Schulhausnamen kamen erst nach den
+     Läufen dazu: Alle sechs Läufe hatten sie ersetzt, und eine Aussage galt in allen
+     als übersehen, obwohl sie erfasst war.
    - Regeln des Falls: Arten `quote` und `metric`, Fundstelle Pflicht, die
      erfundenen Namen als Personendaten, die ersten sechs Wörter jedes längeren
      Redebeitrags der interviewenden Person als «keine Evidenz». Keine Regeln zur
@@ -35,7 +38,8 @@ Problem der «gleichen Hand» teilweise brechen. Sie bleiben synthetisch, wie es
      Ausschnitt). Sie belegt, dass das Gold mit voller Punktzahl erfüllbar ist; eine
      von Hand erstellte Extraktion ist sie nicht.
 4. **Läufe** wie bei den übrigen Fällen: je Fall ein frischer Subagent, der nur sein
-   Bundle las.
+   Bundle las. An den Werkzeugaufrufen geprüft für alle 24 Subagenten dieser Runde
+   (3 Autoren, 3 Gold, 18 Läufe). Ergebnisse im [README des Testsatzes](../README.md).
 
 | Fall | Redebeiträge | Gold-Einträge | davon Pflicht |
 |---|---|---|---|

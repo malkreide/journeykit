@@ -21,6 +21,11 @@ Scorer zusammenpassen. Extraktionsläufe macht, wer die Schablone ändert.
 | `interview-hort` | längeres Interview, `reported`, 16 Pflicht-Atome | Frist neben erlebter Dauer, mit Korrektur mitten im Satz («fünf – nein, sieben Wochen»: value 7); handelnde Dritte (Schwiegermutter füllt das Formular aus); Kosten mit Periode und ob sie vorher bekannt waren; Gefühle anderer (Kind weint, Chef nicht begeistert); Suggestivfrage; `contradicts` gegen zwei von drei bekannten Soll-Aussagen |
 | `befragung` | Elternbefragung mit Freitext, `reported` | n und Fragewortlaut im `text`, auch bei Teilgruppen (n = 201, 52, 14); eine negativ formulierte Frage mit 64 % Zustimmung ist Reibung; Freitexte nur, wo sie zeigen, was die Zahlen nicht zeigen |
 | `beschwerde` | Beschwerde per E-Mail, `reported` | Treuhänder mit Vollmacht; Soll-Frist neben erlebter Dauer; Ursache und Folge; «1'236» als Zahl; Mahngebühr vorher nicht bekannt; Ironie ist kein positives Signal; Kopf-, Gruss- und Signaturzeilen bleiben draussen |
+| `interview-eltern` | langes Interview mit zwei Befragten, `reported` – **unabhängig** | 86 Redebeiträge, Mutter und Vater korrigieren einander, Abschweifungen, Aussagen über mehrere Redebeiträge; 63 Pflicht-Einträge |
+| `fokusgruppe` | Fokusgruppe mit vier Eltern, `reported` – **unabhängig** | 78 Redebeiträge, Ins-Wort-Fallen, Zustimmung und Widerspruch, Bezüge auf früher Gesagtes; 62 Pflicht-Einträge |
+| `interview-dolmetsch` | Interview über eine Dolmetscherin, `reported` – **unabhängig** | 67 Redebeiträge, Übersetzung in Ich- und Er-Form, eigene Erklärungen der Dolmetscherin; 47 Pflicht-Einträge |
+
+**Unabhängig** heisst: Ein Subagent ohne `evidenz.md` schrieb das Material, ein zweiter, der nur das Atom-Modell kannte, legte das Gold fest. Verfahren und Grenzen in [`unabhaengig/`](unabhaengig/README.md).
 
 Je Fall:
 
@@ -54,6 +59,7 @@ Bundle) und ein Write (die eigene Antwort), sonst nichts.
 
 - **Pflicht-Atome gefunden** – Anteil der Gold-Atome, für die die Extraktion ein passendes Atom hat. Ein umformuliertes Zitat zählt nicht als Treffer.
 - **Feldtreue** – bei den gefundenen Atomen: `kind`, `class`, `signal`, Fundstelle, Emotion, `value`, `unit` (eine Schreibweise oder eine Liste gleichwertiger, z. B. «CHF» oder «Franken pro Betreuungstag»), `contradicts` und `text_has` (Angaben, die im `text` stehen müssen, etwa n einer Befragung), soweit das Gold sie vorgibt.
+- Bei den unabhängigen Fällen darf ein Atom mehrere Gold-Einträge abdecken (`shared_atoms` in `expected.json`): Ihr Gold zerlegt lange Redebeiträge feiner als jede Extraktion. Wie grob eine Extraktion zusammenfasst, zeigt deshalb nicht die Abdeckung, sondern die Zahl der Atome.
 - **Regelverstösse** – über alle Atome: Schema, Präfix und `source_ref`, Klasse, erlaubte Arten, Zitat wörtlich (Auslassungen «…» und Ersetzungen «[Name]» erlaubt), Fundstelle, Personendaten, Fragen statt Aussagen, Emotionen, wo keine geäussert werden, eine Aussage auf mehrere Atome verteilt, Anzahl und Einzelfälle.
 
 ## Ergebnisse (2026-10-08)
@@ -97,9 +103,35 @@ erkannt (ein `metric`-Atom darf umschreiben), und `beschwerde` hat keine Regel
 «ein Atom je Fundstelle», weil eine Briefzeile zwei vertretbar getrennte
 Aussagen tragen kann. Die Extraktionen selbst blieben unberührt.
 
+## Ergebnisse (2026-10-14): unabhängige Fälle, je drei Läufe
+
+Je drei blinde Läufe über die drei unabhängigen Fälle mit beiden Schablonen.
+Vollständiger Vergleich in [`runs/2026-10-14-unabhaengig-vergleich.md`](runs/2026-10-14-unabhaengig-vergleich.md).
+
+| Schablone | Läufe | Atome je Lauf | Pflicht-Einträge | Feldtreue | Regelverstösse |
+|---|---|---|---|---|---|
+| alt | 3 | 222–229 | 168–172 von 172 | 96–97 % | 0, 93, 0 |
+| aktuell | 3 | 168–179 | 170 von 172 in jedem Lauf | 96 % | 0 |
+
+- **Über die Abdeckung trennen auch unabhängige Fälle nicht.** Beide Schablonen finden 98–100 % dessen, was ein unabhängiges Gold als Pflicht festlegt. Die vier Fehlstellen eines alten Laufs sind umschriebene Messwerte («80 Franken» statt «achtzig Franken»): Der Inhalt ist da, der wörtliche Abgleich findet ihn nicht. Die aktuelle Schablone übersieht im Elterninterview in jedem Lauf zwei Aussagen wirklich – an der Stelle steht kein Atom.
+- **Die Körnung trennt.** Die aktuelle Schablone fasst gröber zusammen: im Elterninterview 41–47 Atome gegenüber 70–83, und 37–42 der 61 gefundenen Pflicht-Einträge teilen sich dort ein Atom mit einem anderen (alt: 12–26 von 63). Das ist die Regel «Ein Atom pro Aussage, nicht pro Satz: Sätze desselben Redebeitrags … bleiben ein Atom» aus der Überarbeitung. In der Fokusgruppe mit kurzen Beiträgen ist der Unterschied klein (80–86 gegen 88–96 Atome).
+- **Die Feldtreue misst hier die Uneinigkeit zweier Urteile**, nicht eine Schablone: 96–97 % für beide. Die Extraktion wertet schärfer als das Gold – Gold «neutral», Extraktion «friction» (17-mal in je drei Läufen beider Schablonen), Reibung als Breakdown (aktuell 15, alt 9), ausdrückliche Emotion, wo das Gold keine sieht (8–9).
+- **Die Regeln trennen kaum.** Die Quellen-IDs (`int-e7`, `fg-f2`, `int-d3`) lassen sich aus den Beispielen in `evidenz.md` erraten; nur ein alter Lauf verfehlt sie in einem Fall (93 Verstösse).
+
+Was daraus folgt: Die Überarbeitung vom 2026-10-08 hat Doppelungen beseitigt und
+die Regeln durchgesetzt, aber die Atome gröber gemacht. In langen Redebeiträgen
+gehen dadurch einzelne Aussagen unter, und ein Atom mit mehreren Aussagen trägt
+nur ein `signal`. Das ist der nächste Kandidat für eine Schablonenänderung
+(«in langen Redebeiträgen je Aussage ein Atom») – mit Messlauf vorher und nachher.
+
+Nach den Läufen korrigiert, für alle Läufe gleich: Ausschnitte im Gold, die
+Schulhausnamen enthielten, sind um den Namen gekürzt wie zuvor die Personennamen;
+alle sechs Läufe hatten «Bachmatt» und «Lindenhof» ersetzt, wie es die Schablone
+für Orte verlangt. Gekürzte Ausschnitte behalten mindestens vier Wörter.
+
 ## Grenzen
 
-- **Die aktuelle Schablone schöpft den Testsatz aus.** Auch die drei schwierigeren Fälle löst sie in drei von drei Läufen fehlerfrei. Der Testsatz erkennt damit Rückschritte, aber keine weitere Verbesserung. Über die Abdeckung trennt er gar nicht: Synthetische Fälle aus derselben Hand wie die Schablone machen die Pflicht-Atome offenbar zu gut sichtbar. Mehr trennen würde Material, das nicht für den Test geschrieben ist – anonymisierte Ausschnitte aus der Evaluation mit realer Ground Truth, lange Transkripte mit mehreren Sprechenden, Mundart in der Transkription, Aussagen, die sich erst über mehrere Redebeiträge ergeben.
+- **Über die Abdeckung trennt der Testsatz nicht.** Die acht Fälle aus derselben Hand wie die Schablone löst die aktuelle Schablone fehlerfrei; auch die drei unabhängigen Fälle finden beide Schablonen zu 98–100 %. Autor, Gold und Extraktion sind bisher dasselbe Modell – was ihm entgeht, entgeht allen dreien. Erst reales Material aus der Evaluation (anonymisierte Ausschnitte, Mundart, echte Unordnung) kann zeigen, was eine Extraktion wirklich übersieht.
 - **Ein Modell.** Alle Läufe stammen vom selben Modell; ein anderes Modell kann anders streuen. Vor einem Urteil über eine Schablonenänderung mehrere Läufe vergleichen (`compare`).
 - **Gold und Schablone stammen aus derselben Hand.** Das Gold prüft, was `evidenz.md` verlangt – nicht, ob das, was `evidenz.md` verlangt, die richtige Methode ist.
 - **Ermessensfragen bleiben offen.** Wo das Gold mehrere Antworten zulässt (z. B. `signal` bei der Nachbarin, Emotion beim Wunsch nach einer Liste), steht das im Gold als Liste erlaubter Werte oder als `"emotion": "any"`.

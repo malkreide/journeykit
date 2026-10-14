@@ -68,38 +68,38 @@ case = {
     json.dumps(case, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
 )
 
-# Ausschnitte mit erfundenen Namen um den Namen kürzen: Eine Extraktion muss Namen
-# ersetzen («[Name]») und könnte sie sonst nie treffen. Teile mit weniger als zwei
-# Wörtern fallen weg; bleibt nichts, bleibt der Ausschnitt unverändert.
+# Ausschnitte mit erfundenen Namen und Ortsnamen um den Namen kürzen: Eine Extraktion
+# muss sie ersetzen («[Name]», «[Ort]») und könnte sie sonst nie treffen. Die übrigen
+# Teile müssen alle vorkommen; Teile unter zwei Wörtern fallen weg. Bleiben weniger als
+# vier Wörter, fällt die Alternative weg – ein Fetzen wie «schon in» träfe fremde Atome.
+# Bleibt keine Alternative, bleibt der Ausschnitt unverändert.
+# Ortsnamen gelten nicht als Personendaten und stehen deshalb nicht in pii_terms.
+strip_terms = cfg["pii_terms"] + cfg.get("place_terms", [])
 name_rx = re.compile(
-    r"\b(?:Herrn?|Frau)?\s*(?:" + "|".join(map(re.escape, cfg["pii_terms"])) + r")\b"
+    r"\b(?:Herrn?\s+|Frau\s+)?(?:" + "|".join(map(re.escape, strip_terms)) + r")\b"
 )
 cut = []
 
 
-def strip_names(fragment):
-    if not name_rx.search(fragment):
-        return fragment
-    parts = [p.strip(" ,;.") for p in name_rx.split(fragment)]
-    parts = [p for p in parts if len(p.split()) >= 2]
-    if not parts:
-        return fragment
-    cut.append(fragment)
-    return parts[0] if len(parts) == 1 else parts
+def strip_names(alt):
+    """Eine Alternative (Text oder Liste) ohne Namen; None, wenn zu wenig übrig bleibt."""
+    parts = [alt] if isinstance(alt, str) else list(alt)
+    if not any(name_rx.search(p) for p in parts):
+        return alt
+    kept = []
+    for p in parts:
+        kept += [q.strip(" ,;.") for q in name_rx.split(p)]
+    kept = [q for q in kept if len(q.split()) >= 2]
+    cut.append(alt)
+    if sum(len(q.split()) for q in kept) < 4:
+        return None
+    return kept[0] if len(kept) == 1 else kept
 
 
 for g in gold["atoms"]:
-    new_match = []
-    for alt in g["match"]:
-        if isinstance(alt, str):
-            new_match.append(strip_names(alt))
-        else:
-            flat = []
-            for p in alt:
-                r = strip_names(p)
-                flat += [r] if isinstance(r, str) else r
-            new_match.append(flat)
-    g["match"] = new_match
+    stripped = [strip_names(alt) for alt in g["match"]]
+    if any(a is not None for a in stripped):
+        g["match"] = [a for a in stripped if a is not None]
 expected = {"shared_atoms": True, **gold}
 (dst / "expected.json").write_text(
     json.dumps(expected, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"

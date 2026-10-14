@@ -1,0 +1,1430 @@
+[
+  {
+    "id": "e7-01",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich bin einfach davon ausgegangen, das ist ja die gleiche Gemeinde, dann bleibt er halt … mindestens bis zum Sommer, und dann schaut man weiter. Ich hab gar nicht gewusst, dass das mit der Adresse so fix ist. Mit den Schulhäusern, meine ich.",
+    "locator": "[03:23] V",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "zuteilung-nach-adresse",
+      "informationsluecke"
+    ]
+  },
+  {
+    "id": "e7-02",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber ich hab mir gedacht, vielleicht kann man irgendwie ein Gesuch machen oder so, ich hab es nicht genau gewusst. Und der … hatte ja dort seine Kollegen, … die waren seit dem Kindergarten zusammen, fast wie Brüder. Und das war für mich schon so ein – ja, so ein Stein im Bauch, sagen wir es so.",
+    "locator": "[04:01] M",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "besorgt",
+      "explicit": true
+    },
+    "tags": [
+      "gesuch",
+      "informationsluecke",
+      "freundschaften"
+    ]
+  },
+  {
+    "id": "e7-03",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab ja vorher schon geschrieben, über dieses Kontaktformular auf der Website. Ende Januar, Anfang Februar, ich weiss es nicht mehr genau, … Da kam so eine automatische Antwort, «Wir haben Ihre Anfrage erhalten und melden uns so rasch wie möglich», und dann –",
+    "locator": "[05:11] V",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "web",
+    "tags": [
+      "kontaktformular",
+      "keine-antwort"
+    ]
+  },
+  {
+    "id": "e7-04",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dann nichts. (lacht) Also nichts gegen Sie, gell. Drum hab ich dann angerufen, ich wollte nicht mehr warten.",
+    "locator": "[05:37] M",
+    "signal": "breakdown",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "tags": [
+      "kontaktformular",
+      "kanalwechsel",
+      "schulsekretariat"
+    ]
+  },
+  {
+    "id": "e7-05",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und die Frau am Telefon war sehr nett, das muss ich sagen, die hat sich Zeit genommen. Sie hat gesagt, die Zuteilung zum Schulhaus geht nach der Wohnadresse, … und zwar ab dann, wenn wir dort angemeldet sind. Und wenn wir möchten, dass er … bleibt, dann müssen wir ein Gesuch machen, schriftlich, mit Begründung, das Formular sei auf der Website.",
+    "locator": "[05:37] M",
+    "signal": "positive",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "tags": [
+      "schulsekretariat",
+      "auskunft",
+      "zuteilung-nach-adresse",
+      "gesuch"
+    ]
+  },
+  {
+    "id": "e7-06",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dann hat sie noch gesagt – ich weiss nicht mehr genau wie, aber so ungefähr: «Machen Sie sich aber nicht zu grosse Hoffnungen.» Oder: «Das wird eher selten bewilligt.» Irgendwie so.",
+    "locator": "[05:37] M",
+    "signal": "neutral",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "tags": [
+      "bewilligungschance",
+      "muendliche-auskunft"
+    ]
+  },
+  {
+    "id": "e7-07",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ja, das hab dann ich gemacht. Das Formular ist ein PDF, das muss man herunterladen, ausdrucken, von Hand ausfüllen, unterschreiben und per Post schicken. Im Couvert. Also im Jahr 2026, oder. (lacht) Ich hab extra noch Briefmarken kaufen müssen, wir hatten keine mehr im Haus.",
+    "locator": "[06:58] V",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "letter",
+    "tags": [
+      "gesuch",
+      "medienbruch",
+      "vermittlung",
+      "vater"
+    ]
+  },
+  {
+    "id": "e7-08",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und für die Begründung hatte es so ein Feld, vielleicht vier Zeilen, und ich hab dann noch ein separates Blatt dazugelegt. Ich hab geschrieben, dass er dort seine Freunde hat, dass es nur noch ein paar Monate sind bis zum Sommer, dass er … in die Logopädie geht und dass das gut läuft und wir das nicht unterbrechen möchten. Und dass wir den Schulweg selber organisieren, dass das die Gemeinde also nichts kostet. Ich hab gedacht, das ist vielleicht wichtig für die. Ende Februar war das, ungefähr.",
+    "locator": "[06:58] V",
+    "signal": "neutral",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "letter",
+    "tags": [
+      "gesuch",
+      "begruendung",
+      "logopaedie"
+    ]
+  },
+  {
+    "id": "e7-09",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dann hast du meine Unterschrift vergessen. (lacht) Es braucht ja die Unterschrift von beiden Eltern, und er hat nur selber unterschrieben. Dann hat jemand vom Sekretariat angerufen, und wir mussten es nochmals schicken.",
+    "locator": "[08:05] M",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "letter",
+    "tags": [
+      "gesuch",
+      "unterschrift-beider-eltern",
+      "nachreichung"
+    ]
+  },
+  {
+    "id": "e7-10",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Verzögerung des Gesuchs durch die fehlende zweite Unterschrift und den erneuten Versand per Post: «sicher nochmals eine Woche» (Schätzung der Mutter, Einzelfall).",
+    "value": 1,
+    "unit": "Woche",
+    "locator": "[08:05] M",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "gesuch",
+      "dauer",
+      "nachreichung"
+    ]
+  },
+  {
+    "id": "e7-11",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Nein. Nicht ganz. Ich war – ich war hin und her. … Aber andererseits hab ich gedacht, wenn er sowieso wechseln muss, dann lieber nach den Frühlingsferien als nach dem Sommer. Dann kennt er schon ein paar Kinder, wenn es im August weitergeht. Und dann der Weg. Ich hätte ihn ja jeden Tag fahren müssen oder mit dem Bus schicken, zweieinhalb Kilometer, mit Umsteigen, für einen Neunjährigen –",
+    "locator": "[08:33] M",
+    "signal": "neutral",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "hin- und hergerissen",
+      "explicit": true
+    },
+    "tags": [
+      "eltern-uneinig",
+      "zeitpunkt-wechsel",
+      "schulweg"
+    ]
+  },
+  {
+    "id": "e7-12",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und ich hab einfach gefunden, man reisst ein Kind nicht mitten im Jahr aus der Klasse. Das war so mein Gefühl. Aber im Nachhinein war es ja eh egal, weil es dann anders gekommen ist.",
+    "locator": "[09:35] V",
+    "signal": "neutral",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "eltern-uneinig",
+      "zeitpunkt-wechsel"
+    ]
+  },
+  {
+    "id": "e7-13",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Dann haben wir gewartet. Und gewartet. (lacht) Ich hab gedacht, so etwas geht vielleicht zwei Wochen.",
+    "locator": "[10:27] V",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "gesuch",
+      "warten",
+      "erwartete-dauer"
+    ]
+  },
+  {
+    "id": "e7-14",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dann, das war schon Mitte März oder so, also wirklich nicht mehr lange vor dem Zügeln, da hat die Schulleiterin von der … angerufen. … und er ist ab dem 20. April bei ihnen, … Und ich hab gesagt, ja, aber wir haben doch ein Gesuch gemacht. Und sie hat gesagt, das wisse sie nicht genau, das laufe über die Schulverwaltung, aber sie gehe davon aus, dass er zu ihnen komme. Ich hab dann nachher eine Weile nicht gewusst, was ich davon halten soll.",
+    "locator": "[10:27] V; [11:02] V",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "verunsichert",
+      "explicit": false
+    },
+    "tags": [
+      "schulleitung-neu",
+      "widerspruechliche-information",
+      "gesuch-offen"
+    ]
+  },
+  {
+    "id": "e7-15",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Der Entscheid, also der richtige, der schriftliche, der ist irgendwann per Post gekommen. An die neue Adresse. Aber da hatten wir unseren Namen noch nicht am Briefkasten, … Auf jeden Fall ist der Brief bei der Nachbarin gelandet, im falschen Briefkasten. Und die war über Ostern in den Ferien und hat ihn uns erst gebracht, als der … schon in der … war. Ein paar Tage sicher.",
+    "locator": "[12:14] M",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "letter",
+    "tags": [
+      "entscheid-zustellung",
+      "vermittlung",
+      "nachbarin",
+      "zu-spaet"
+    ]
+  },
+  {
+    "id": "e7-16",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und da stand dann drin, dass das Gesuch abgelehnt ist, mit einer Begründung und mit so einer Rechtsmittelbelehrung unten dran, dass man innert dreissig Tagen Beschwerde machen kann, oder Rekurs, oder wie das heisst. Und datiert war er – ich hab nachher extra geschaut – auf Ende März. Also ungefähr die Woche, wo wir gezügelt haben.",
+    "locator": "[12:14] M",
+    "signal": "neutral",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "letter",
+    "tags": [
+      "entscheid",
+      "abgelehnt",
+      "rechtsmittelfrist"
+    ]
+  },
+  {
+    "id": "e7-17",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das hat mich am meisten genervt, ehrlich gesagt. Nicht dass es abgelehnt wurde, das hab ich ja dann irgendwann auch begriffen. Aber dieser Brief. Das tönt so amtlich, als hätten wir etwas verbrochen. Und er war ja schon längst dort. Was willst du da noch einen Rekurs machen.",
+    "locator": "[13:33] V",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "letter",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "genervt",
+      "explicit": true
+    },
+    "tags": [
+      "entscheid",
+      "amtssprache",
+      "zu-spaet",
+      "rekurs-sinnlos"
+    ]
+  },
+  {
+    "id": "e7-18",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Dauer vom Versand des Gesuchs (Ende Februar) bis zum Erhalt des schriftlichen Entscheids (Ende April); der Entscheid war auf Ende März datiert: «fast zwei Monate, bis wir es schwarz auf weiss hatten» (Einzelfall, Rechnung des Vaters, inkl. erneutem Versand und verspäteter Zustellung).",
+    "value": 2,
+    "unit": "Monate",
+    "locator": "[13:33] V",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "gesuch",
+      "entscheid",
+      "dauer"
+    ]
+  },
+  {
+    "id": "e7-19",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dazwischen hat man nicht gewusst, was jetzt gilt. Wir haben dem … auch nichts Richtiges sagen können. Ich hab ihm am Anfang sogar noch gesagt, vielleicht kannst du bleiben. Das hätte ich nicht machen sollen.",
+    "locator": "[14:36] V",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "bedauernd",
+      "explicit": false
+    },
+    "tags": [
+      "ungewissheit",
+      "kind-informieren"
+    ]
+  },
+  {
+    "id": "e7-20",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Am Abend nach dem Anruf, beim Znacht. Und er hat zuerst gar nichts gesagt, und dann ist er in sein Zimmer und hat geweint. … Ja. Das war schon hart.",
+    "locator": "[15:01] M",
+    "signal": "neutral",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "belastet",
+      "explicit": true
+    },
+    "tags": [
+      "kind-informieren",
+      "abschied"
+    ]
+  },
+  {
+    "id": "e7-21",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber die …, die muss ich wirklich loben. Die hat am letzten Tag vor den Ferien ein kleines Abschiedsfest gemacht in der Klasse. Die Kinder haben ihm ein Büchlein gemacht, jedes Kind eine Seite, mit Zeichnungen und so. … Und sie hat ihm gesagt, er darf jederzeit vorbeikommen und Hallo sagen. Das Büchlein hat er heute noch neben dem Bett.",
+    "locator": "[15:01] M",
+    "signal": "positive",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "emotion_hint": {
+      "valence": 1,
+      "label": "dankbar",
+      "explicit": false
+    },
+    "tags": [
+      "abschied",
+      "lehrperson-alt"
+    ]
+  },
+  {
+    "id": "e7-22",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und sie hat gesagt, sie schickt seine Unterlagen an den … Also wo er steht und was sie gerade durchnehmen. Ob sie das dann gemacht hat, weiss ich nicht.",
+    "locator": "[16:11] V",
+    "signal": "neutral",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "lernstand-uebergabe",
+      "uebergabe-unklar"
+    ]
+  },
+  {
+    "id": "e7-23",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das hab ich ihm aber beim Schnuppern selber gesagt. Das mit dem Einmaleins.",
+    "locator": "[16:34] M",
+    "signal": "workaround",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "lernstand-uebergabe",
+      "vermittlung",
+      "mutter"
+    ]
+  },
+  {
+    "id": "e7-24",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das war am ersten April, am Mittwochmorgen. … Nein, aber es war wirklich schön. … Wir waren um Viertel nach acht dort, und der … hat uns unten beim Eingang abgeholt. Und im Schulzimmer hatten die Kinder ein Plakat gemacht, … mit allen Namen drauf.",
+    "locator": "[16:47] M",
+    "signal": "positive",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "emotion_hint": {
+      "valence": 1,
+      "label": "erfreut",
+      "explicit": true
+    },
+    "tags": [
+      "schnuppern",
+      "willkommen"
+    ]
+  },
+  {
+    "id": "e7-25",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und er hat ihm gleich einen Götti zugeteilt, … so ein Gspänli halt, das neben ihm sitzt, ihm alles zeigt und schaut, dass er in der Pause nicht allein herumsteht. Und der … wohnt bei uns im Quartier, zwei Häuser weiter. Das hat sich dann auch als super herausgestellt, wegen dem Schulweg.",
+    "locator": "[16:47] M",
+    "signal": "positive",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "schnuppern",
+      "goetti",
+      "peer-unterstuetzung"
+    ]
+  },
+  {
+    "id": "e7-26",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber der … hat so nebenbei gefragt, ob der … am Mittagstisch ist. Und ich hab gesagt, ja, im … ist er am Montag und am Donnerstag am Mittagstisch. Ich bin einfach davon ausgegangen, dass das mitgeht. Dass das automatisch – das ist ja auch die Gemeinde. Und er hat ein bisschen komisch geschaut und gesagt, da müsse ich mich bei den Tagesstrukturen melden, das sei separat.",
+    "locator": "[18:26] M",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "tagesstrukturen",
+      "mittagstisch",
+      "informationsluecke",
+      "once-only"
+    ]
+  },
+  {
+    "id": "e7-27",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "(seufzt) Das war dann eigentlich fast das Mühsamste von allem. Die Tagesstrukturen sind ja nicht im Schulsekretariat, das ist eine andere Stelle mit einer anderen Telefonnummer, und die haben nur am Vormittag Telefonzeit, bis halb zwölf. Und ich arbeite am Vormittag. Ich hab dann in der Pause angerufen, …",
+    "locator": "[18:26] M",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "mühsam",
+      "explicit": true
+    },
+    "tags": [
+      "tagesstrukturen",
+      "erreichbarkeit",
+      "telefonzeiten",
+      "vereinbarkeit"
+    ]
+  },
+  {
+    "id": "e7-28",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "… und dann hiess es, ich müsse das Anmeldeformular für die … neu ausfüllen, das vom … gelte dort nicht. Und die Anmeldung müsse bis zum Fünfzehnten vom Vormonat drin sein. Der Fünfzehnte März war natürlich schon vorbei.",
+    "locator": "[18:26] M",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "tags": [
+      "tagesstrukturen",
+      "formular",
+      "anmeldefrist"
+    ]
+  },
+  {
+    "id": "e7-29",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Dann hat sie geschaut und gesagt, den Donnerstag mache sie ausnahmsweise trotzdem schon ab April, aber der Montag sei in der … voll, da gebe es eine Warteliste.",
+    "locator": "[18:26] M",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "tags": [
+      "tagesstrukturen",
+      "mittagstisch",
+      "warteliste"
+    ]
+  },
+  {
+    "id": "e7-30",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Am Anfang ist das Grosi gekommen, also meine Mutter. Die wohnt im Nachbardorf, eine halbe Stunde mit dem Auto, und sie hat am Montag gekocht. Sie hat das gern gemacht, aber auf die Dauer – sie ist auch nicht mehr die Jüngste.",
+    "locator": "[20:14] V",
+    "signal": "workaround",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "mittagstisch",
+      "warteliste",
+      "vermittlung",
+      "grosi"
+    ]
+  },
+  {
+    "id": "e7-31",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dann hab ich mit meinem Chef geredet, und ab Mitte Mai hab ich am Montag Homeoffice gemacht, damit ich über Mittag zuhause bin. … Aber das musste man zuerst einmal organisieren. Und das kann ja nicht jeder. … Seit dem September. Im August war er noch auf der Warteliste, da hab ich noch Homeoffice gemacht.",
+    "locator": "[20:14] V; [21:12] V",
+    "signal": "workaround",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "mittagstisch",
+      "warteliste",
+      "homeoffice",
+      "vereinbarkeit"
+    ]
+  },
+  {
+    "id": "e7-32",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und was ich auch nicht gewusst hab: Im … haben sie uns den Mittagstisch für den ganzen April noch verrechnet, obwohl er nach den Ferien gar nicht mehr dort war. Weil man das hätte abmelden müssen, mit Frist. Das hab ich dann reklamiert, per Mail, und sie haben es auch korrigiert. Aber eben. Nochmals ein Mail.",
+    "locator": "[21:23] M",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "email",
+    "tags": [
+      "kosten",
+      "kosten-nicht-bekannt",
+      "abmeldung",
+      "mittagstisch"
+    ]
+  },
+  {
+    "id": "e7-33",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das hab ich gemacht, online, über dieses eUmzug. … schon vorher, in der Woche vor dem Zügeln, man kann das ja vorher machen. Das ging eigentlich gut, das waren vielleicht zehn Minuten.",
+    "locator": "[22:13] V",
+    "signal": "positive",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "web",
+    "tags": [
+      "ummeldung",
+      "eumzug",
+      "vermittlung",
+      "vater"
+    ]
+  },
+  {
+    "id": "e7-34",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Aufwand für die Online-Ummeldung (eUmzug) in der Woche vor dem Umzug: «vielleicht zehn Minuten» (Schätzung des Vaters, Einzelfall).",
+    "value": 10,
+    "unit": "Minuten",
+    "locator": "[22:13] V",
+    "signal": "positive",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "web",
+    "tags": [
+      "ummeldung",
+      "eumzug",
+      "dauer"
+    ]
+  },
+  {
+    "id": "e7-35",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und ich hab ehrlich gesagt gedacht, damit weiss es dann die ganze Gemeinde. Also auch die Schule und die Tagesstrukturen und alle. Das ist ja eine Gemeinde. Die Schule hat es dann ja auch gewusst – gut, die wussten es vom Gesuch. Aber die Tagesstrukturen offenbar nicht, und die Logopädie auch nicht.",
+    "locator": "[22:13] V",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "ummeldung",
+      "once-only",
+      "datenweitergabe",
+      "tagesstrukturen",
+      "logopaedie"
+    ]
+  },
+  {
+    "id": "e7-36",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und in der letzten Woche vor den Ferien, als wir schon oben gewohnt haben, da hab ich ihn am Morgen mit dem Auto in den … gefahren, auf dem Weg zur Arbeit. … Und am Mittag hat ihn das Grosi geholt. Allein gefahren ist er nie.",
+    "locator": "[22:13] V",
+    "signal": "neutral",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "schulweg-alt",
+      "letzte-woche",
+      "vermittlung",
+      "grosi"
+    ]
+  },
+  {
+    "id": "e7-37",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Doch, einmal. Am Donnerstag, mit dem Bus, … Nach der Schule, am Nachmittag. … und dann umsteigen und allein weiter bis zu uns hinauf. … Ich bin an der Haltestelle gestanden und fast gestorben vor Angst. (lacht) Er fand es super.",
+    "locator": "[23:26] M",
+    "signal": "friction",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "Angst",
+      "explicit": true
+    },
+    "tags": [
+      "schulweg-alt",
+      "letzte-woche",
+      "eltern-widersprechen-sich"
+    ]
+  },
+  {
+    "id": "e7-38",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Wegen dem Bus hab ich übrigens noch gefragt, ob die Gemeinde da etwas zahlt, weil ich irgendwo gelesen hab, dass es bei einem langen Schulweg eine Entschädigung gibt. Da hiess es, das gelte nur für den Weg zum zugeteilten Schulhaus, und zugeteilt war er ja eigentlich schon der … Für eine Woche – das war eh nicht viel, eine Mehrfahrtenkarte für Kinder. Aber es ging mir mehr ums Prinzip.",
+    "locator": "[23:57] V",
+    "signal": "friction",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "kosten",
+      "schulweg-entschaedigung",
+      "schulweg-alt"
+    ]
+  },
+  {
+    "id": "e7-39",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Also das Erste war: Wir haben nicht gewusst, wann die Schule anfängt. … Und dann waren wir um acht parat vor dem Schulhaus, der … und ich, und alles war noch zu. Dann hat uns eine andere Mutter gesagt, am Montag haben die Dritten in der … erst um zwanzig vor neun, wegen der Turnhalle oder so. Den Stundenplan hatten wir nicht. … Und es hat geregnet wie verrückt, richtiges Aprilwetter, und wir sind eine halbe Stunde unter dem Vordach gestanden.",
+    "locator": "[24:42] M",
+    "signal": "friction",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "erster-schultag",
+      "stundenplan",
+      "informationsluecke",
+      "andere-eltern"
+    ]
+  },
+  {
+    "id": "e7-40",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ab dem Dienstag hab ich ihn dann begleitet, die ganze erste Woche. Zu Fuss sind es zehn, zwölf Minuten, das ist eigentlich nah. Aber er muss über die Hauptstrasse, … und dort hat es zwar einen Fussgängerstreifen, aber am Morgen ist viel Verkehr, die Pendler, und es hat keinen Lotsen. … Zum Schulweg hat uns im April übrigens niemand etwas gesagt. Erst beim Elternabend im August hiess es, bei der Hauptstrasse sei ein Lotsendienst geplant.",
+    "locator": "[25:45] V",
+    "signal": "friction",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "schulweg",
+      "sicherheit",
+      "informationsluecke"
+    ]
+  },
+  {
+    "id": "e7-41",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dann hab ich gemerkt, dass der … um die gleiche Zeit geht, und die Mutter vom … und ich, wir haben uns abgesprochen. Seither gehen die zwei zusammen.",
+    "locator": "[25:45] V",
+    "signal": "workaround",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "schulweg",
+      "vermittlung",
+      "andere-eltern"
+    ]
+  },
+  {
+    "id": "e7-42",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Im … hatte er ein Tablet von der Schule, und das musste er am letzten Tag abgeben. In der … hat er zwar gleich am ersten Tag wieder eins bekommen, aber kein Login. Er konnte sich nicht anmelden auf dieser Lernplattform, wo sie die Aufgaben und den Wochenplan drauf haben. Und das hat sicher zwei Wochen gedauert.",
+    "locator": "[27:10] M",
+    "signal": "breakdown",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "login",
+      "lernplattform",
+      "tablet"
+    ]
+  },
+  {
+    "id": "e7-43",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Zeit ohne Login für die Lernplattform ab dem ersten Schultag im neuen Schulhaus: «sicher zwei Wochen» (Schätzung der Mutter, Einzelfall).",
+    "value": 2,
+    "unit": "Wochen",
+    "locator": "[27:10] M",
+    "signal": "friction",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "login",
+      "lernplattform",
+      "dauer"
+    ]
+  },
+  {
+    "id": "e7-44",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "In der Zeit musste er alles auf Papier machen, der … hat ihm die Sachen ausgedruckt, das war lieb, aber alle anderen haben am Tablet gearbeitet, und er hat gesagt, er komme sich vor wie ein Baby. Das hat ihn, glaube ich, mehr beschäftigt als alles andere.",
+    "locator": "[27:10] M",
+    "signal": "workaround",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "zurückgesetzt (Kind)",
+      "explicit": false
+    },
+    "tags": [
+      "login",
+      "papier-statt-tablet",
+      "kind"
+    ]
+  },
+  {
+    "id": "e7-45",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Der … hat gesagt, das Login macht der Informatik-Support von der Gemeinde, und die brauchen eine Meldung vom Sekretariat. Und das Sekretariat hat gesagt, sie hätten es gemeldet. Irgendwo dazwischen ist es halt hängen geblieben. Das Komische ist ja: Im … hatte er ein Login, auf der gleichen Plattform. Ich versteh nicht, warum man das nicht einfach umhängen kann.",
+    "locator": "[28:15] V",
+    "signal": "friction",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "login",
+      "zustaendigkeit",
+      "schnittstelle",
+      "informatik-support"
+    ]
+  },
+  {
+    "id": "e7-46",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und die Infos für die Eltern laufen auch über diese Plattform. Den Waldtag zum Beispiel, mit Regenhosen und Gummistiefeln, das haben wir nicht gewusst, und er ist in den Turnschuhen gegangen.",
+    "locator": "[28:15] V",
+    "signal": "friction",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "login",
+      "elterninformation",
+      "informationsluecke"
+    ]
+  },
+  {
+    "id": "e7-47",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "In der … arbeiten sie mit dem Wochenplan, das kannte er nicht, da muss er selber einteilen, was er wann macht. Das war am Anfang schwierig für ihn. Und in Mathe waren sie weiter, die hatten das Einmaleins schon fertig, …",
+    "locator": "[29:12] M",
+    "signal": "friction",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "unterricht",
+      "lernstand",
+      "wochenplan"
+    ]
+  },
+  {
+    "id": "e7-48",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Er war auf jeden Fall hinten nach. Der … hat ihm Zusatzblätter mitgegeben, zum Üben zuhause, und ich hab am Abend mit ihm geübt, mit so Kärtchen. Im Juni war er dann wieder ungefähr dort, wo die anderen sind.",
+    "locator": "[29:39] V",
+    "signal": "workaround",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "lernstand",
+      "aufholen",
+      "eltern-ueben"
+    ]
+  },
+  {
+    "id": "e7-49",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "… er hat nach zwei, drei Wochen von sich aus angerufen und gefragt, ob wir einmal vorbeikommen möchten. Kein Problemgespräch, hat er gesagt, einfach um zu schauen, wie es läuft.",
+    "locator": "[29:39] V",
+    "signal": "positive",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "tags": [
+      "lehrperson-neu",
+      "proaktiv",
+      "elterngespraech"
+    ]
+  },
+  {
+    "id": "e7-50",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das war Mitte Mai. Und das hab ich sehr geschätzt, dass er das von sich aus gemacht hat.",
+    "locator": "[30:23] M",
+    "signal": "positive",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "emotion_hint": {
+      "valence": 1,
+      "label": "wertgeschätzt",
+      "explicit": true
+    },
+    "tags": [
+      "lehrperson-neu",
+      "proaktiv",
+      "elterngespraech"
+    ]
+  },
+  {
+    "id": "e7-51",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "In der … dürfen die Dritten nur am Dienstag und am Donnerstag auf den Platz, an den anderen Tagen sind die Grossen dran. Das hat ihm niemand gesagt. Und dann ist er halt am Montag aufs Feld, und die Sechstklässler – ja.",
+    "locator": "[30:42] V",
+    "signal": "friction",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "hausregeln",
+      "informationsluecke",
+      "pause"
+    ]
+  },
+  {
+    "id": "e7-52",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ja, so eine Willkommensmappe. Mit Stundenplan, Ferienplan, Hausordnung, was er mitnehmen muss, Finken, Turnsack, Znüni und so. Die war eigentlich gut gemacht, das muss ich sagen. Aber die hat er erst am ersten Schultag heimgebracht, im Schulsack. Hätten wir die vorher gehabt, dann hätten wir auch gewusst, wann die Schule anfängt.",
+    "locator": "[31:20] M",
+    "signal": "friction",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "willkommensmappe",
+      "zeitpunkt-information",
+      "stundenplan"
+    ]
+  },
+  {
+    "id": "e7-53",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und in den Klassenchat von den Eltern sind wir auch erst im Mai gekommen, weil die Mutter vom … gefragt hat, ob wir da eigentlich drin sind.",
+    "locator": "[31:20] M",
+    "signal": "friction",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "klassenchat",
+      "vermittlung",
+      "andere-eltern"
+    ]
+  },
+  {
+    "id": "e7-54",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und ich hab gedacht, die Logopädie ist ja für die ganze Gemeinde der gleiche Dienst, dann geht das in der … einfach weiter. Aber in der … ist eine andere Logopädin, und die musste zuerst schauen, ob sie Platz hat. Und sie hatte die Unterlagen nicht, weil die … die nicht einfach weitergeben darf, wegen dem Datenschutz. Dafür braucht es eine Einverständniserklärung von den Eltern.",
+    "locator": "[32:38] M",
+    "signal": "friction",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "logopaedie",
+      "einverstaendniserklaerung",
+      "datenschutz",
+      "uebergabe"
+    ]
+  },
+  {
+    "id": "e7-55",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und das hab ich erst gemerkt, als nach den Ferien der Dienstag kam und niemand etwas von Logopädie gesagt hat. Dann hab ich die … angerufen, und sie hat gesagt, ah ja, da müssen Sie noch ein Formular unterschreiben, das schick ich Ihnen per Mail.",
+    "locator": "[32:38] M",
+    "signal": "breakdown",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "tags": [
+      "logopaedie",
+      "einverstaendniserklaerung",
+      "unterbruch"
+    ]
+  },
+  {
+    "id": "e7-56",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und das haben wir dann ausgedruckt, unterschrieben und mit dem Natel fotografiert, weil wir keinen Scanner mehr haben.",
+    "locator": "[34:05] V",
+    "signal": "workaround",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "email",
+    "tags": [
+      "logopaedie",
+      "einverstaendniserklaerung",
+      "medienbruch"
+    ]
+  },
+  {
+    "id": "e7-57",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Unterbruch der Logopädie beim Schulhauswechsel, von der letzten Stunde im alten Schulhaus (Ende März, vor den Frühlingsferien) bis zum Wiederbeginn (4. Juni), Ferien eingerechnet: «über zwei Monate» (Angabe der Mutter, gestützt auf ihre Agenda; der Vater schätzte zuvor «Zwei, drei Wochen oder so»).",
+    "value": 2,
+    "unit": "Monate",
+    "locator": "[34:24] M; [34:05] V",
+    "signal": "friction",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "logopaedie",
+      "unterbruch",
+      "dauer",
+      "eltern-widersprechen-sich"
+    ]
+  },
+  {
+    "id": "e7-58",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Anrufe der Mutter bis zur Wiederaufnahme der Logopädie: «insgesamt dreimal, bei zwei verschiedenen Stellen», davon zwei Nachfragen nach dem Einreichen des Formulars.",
+    "value": 3,
+    "unit": "Anrufe",
+    "locator": "[34:24] M",
+    "signal": "friction",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "tags": [
+      "logopaedie",
+      "nachfragen",
+      "aufwand"
+    ]
+  },
+  {
+    "id": "e7-59",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und die … hat dann beim ersten Mal gesagt, man merke, dass er ein bisschen zurückgefallen ist. Nicht viel, aber –",
+    "locator": "[34:24] M",
+    "signal": "friction",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "logopaedie",
+      "unterbruch",
+      "folgen"
+    ]
+  },
+  {
+    "id": "e7-60",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ja, sicher. Die … hätte es mir sagen können, als ich ihr im Februar gesagt hab, dass wir zügeln. Oder die Schule, oder irgendwer. … ich glaube, sie hat einfach nicht daran gedacht. Oder sie hat gedacht, das macht die Schule.",
+    "locator": "[35:30] M",
+    "signal": "need",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "logopaedie",
+      "proaktive-information",
+      "zustaendigkeit"
+    ]
+  },
+  {
+    "id": "e7-61",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das war irgendwie überall so. Jeder hat gedacht, das macht der andere.",
+    "locator": "[35:57] V",
+    "signal": "friction",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "zustaendigkeit",
+      "schnittstelle"
+    ]
+  },
+  {
+    "id": "e7-62",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Am Anfang hab ich gedacht, er findet hier nie jemanden, er war die ersten Tage so still. Und jetzt sind die zwei unzertrennlich.",
+    "locator": "[36:19] M",
+    "signal": "positive",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "freundschaften",
+      "goetti",
+      "angekommen"
+    ]
+  },
+  {
+    "id": "e7-63",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und ehrlich gesagt, ich war froh, als es vorbei war. Die Wochen vor und nach dem Zügeln waren einfach viel. Ich weiss nicht, wie viele Telefonate ich in dieser Zeit gemacht hab. Zwanzig? Dreissig? Und immer in der Pause, weil man ja nur zu den Bürozeiten anrufen kann, und während den Bürozeiten bin ich selber im Büro.",
+    "locator": "[36:19] M",
+    "signal": "friction",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "belastet",
+      "explicit": false
+    },
+    "tags": [
+      "aufwand",
+      "erreichbarkeit",
+      "buerozeiten",
+      "vereinbarkeit"
+    ]
+  },
+  {
+    "id": "e7-64",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "metric",
+    "text": "Anzahl Telefonate der Mutter in den Wochen vor und nach dem Umzug, grobe Schätzung: «Zwanzig? Dreissig?» (Wert = untere Grenze der Schätzung).",
+    "value": 20,
+    "unit": "Telefonate",
+    "locator": "[36:19] M",
+    "signal": "friction",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "tags": [
+      "aufwand",
+      "telefonate"
+    ]
+  },
+  {
+    "id": "e7-65",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Die Telefonate hat sie gemacht, das muss man sagen. Ich hab das Online-Zeug gemacht, das Ummelden und das Gesuch – ja, zweimal, ich weiss.",
+    "locator": "[38:01] V",
+    "signal": "neutral",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "vermittlung",
+      "rollenteilung",
+      "mutter",
+      "vater"
+    ]
+  },
+  {
+    "id": "e7-66",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber eben: Man muss alles mehrmals sagen. Wir sind umgezogen, wir sind umgezogen, wir sind umgezogen. Und jedes Mal ein anderes Formular.",
+    "locator": "[38:01] V",
+    "signal": "friction",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "once-only",
+      "mehrfacheingabe",
+      "formular"
+    ]
+  },
+  {
+    "id": "e7-67",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und man weiss als Eltern auch nicht, was man alles machen muss. Das ist eigentlich das Hauptproblem. Hätten wir am Anfang eine Liste gehabt – das müssen Sie machen, dort müssen Sie anrufen, bis dann und dann –, dann hätten wir das alles gemacht. Wir sind ja nicht unorganisiert. Aber wenn man es nicht weiss, dann weiss man es nicht.",
+    "locator": "[38:01] V",
+    "signal": "need",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "checkliste",
+      "orientierung"
+    ]
+  },
+  {
+    "id": "e7-68",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Wobei, die Leute waren alle nett. Das möchte ich schon sagen. Es war nie jemand unfreundlich.",
+    "locator": "[38:57] M",
+    "signal": "positive",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "freundlichkeit"
+    ]
+  },
+  {
+    "id": "e7-69",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Es weiss einfach keiner, was der andere macht. Am ehesten den Überblick gehabt hat eigentlich der …, aber der ist ja Lehrer, der ist dafür gar nicht zuständig.",
+    "locator": "[38:57] M",
+    "signal": "friction",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "zustaendigkeit",
+      "ansprechperson",
+      "ueberblick"
+    ]
+  },
+  {
+    "id": "e7-70",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ja, aber am Telefon. Das ist ja nicht verbindlich. Da denkt man, vielleicht haben wir Glück.",
+    "locator": "[39:34] V",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "phone",
+    "tags": [
+      "bewilligungschance",
+      "muendliche-auskunft",
+      "verbindlichkeit"
+    ]
+  },
+  {
+    "id": "e7-71",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Für mich war das Schwierigste dieses Nicht-Wissen. Wir haben wochenlang nicht gewusst, was jetzt gilt, und dann kommt der Brief, wenn alles schon passiert ist. Man kommt sich ein bisschen nicht ernst genommen vor.",
+    "locator": "[39:34] V",
+    "signal": "friction",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "nicht ernst genommen",
+      "explicit": true
+    },
+    "tags": [
+      "ungewissheit",
+      "entscheid",
+      "zu-spaet"
+    ]
+  },
+  {
+    "id": "e7-72",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Wenn es sowieso fast nie bewilligt wird, dann soll man das auf der Website so hinschreiben, klar und deutlich. Dann hätte ich das Gesuch gar nicht gemacht, und wir hätten dem … nicht wochenlang Hoffnung gemacht.",
+    "locator": "[39:34] V",
+    "signal": "need",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "channel_hint": "web",
+    "tags": [
+      "bewilligungschance",
+      "transparenz",
+      "website"
+    ]
+  },
+  {
+    "id": "e7-73",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und wenn man es macht, dann soll der Entscheid kommen, bevor man planen muss. Nicht nachher.",
+    "locator": "[39:34] V",
+    "signal": "need",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "entscheid",
+      "rechtzeitigkeit"
+    ]
+  },
+  {
+    "id": "e7-74",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Für mich der Mittagstisch. Weil uns das als Familie am meisten Organisation gekostet hat, mit dem Grosi und dem Homeoffice.",
+    "locator": "[40:34] M",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "mittagstisch",
+      "aufwand",
+      "vereinbarkeit"
+    ]
+  },
+  {
+    "id": "e7-75",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ein Blatt. Wenn Sie innerhalb der Gemeinde zügeln und ein Kind in der Schule haben: erstens, zweitens, drittens. Ab wann das Schulhaus wechselt. Mittagstisch neu anmelden, bis wann. Logopädie, Formular. Tablet und Login.",
+    "locator": "[40:34] M",
+    "signal": "need",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "checkliste",
+      "orientierung"
+    ]
+  },
+  {
+    "id": "e7-76",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und eine Ansprechperson, eine einzige, die man auch am Nachmittag erreicht.",
+    "locator": "[40:34] M",
+    "signal": "need",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "ansprechperson",
+      "erreichbarkeit"
+    ]
+  },
+  {
+    "id": "e7-77",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dass man das automatisch bekommt, wenn man sich ummeldet. Oder noch besser, dass man es gar nicht machen muss, dass die Stellen das unter sich regeln. Die Schule sagt den Tagesstrukturen, der … wechselt, fertig. Das wäre der Traum.",
+    "locator": "[40:34] M",
+    "signal": "need",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "once-only",
+      "datenweitergabe",
+      "ummeldung"
+    ]
+  },
+  {
+    "id": "e7-78",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Heute würde ich sagen, es war richtig so. Also dass er nach den Frühlingsferien gewechselt hat. Er hatte so noch ein paar Monate, um anzukommen, bevor das neue Schuljahr angefangen hat. … Aber ich finde trotzdem, man hätte uns früher und klarer sagen müssen, woran wir sind.",
+    "locator": "[41:48] V",
+    "signal": "positive",
+    "phase_hint": "entscheid",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "zeitpunkt-wechsel",
+      "rueckblick",
+      "transparenz"
+    ]
+  },
+  {
+    "id": "e7-79",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Nein, aber heute ist er angekommen, wirklich. Er ist gern in der Schule, er hat seine Kollegen, er geht beide Tage an den Mittagstisch.",
+    "locator": "[42:29] M",
+    "signal": "positive",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "angekommen",
+      "rueckblick"
+    ]
+  },
+  {
+    "id": "e7-80",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Er ist auch nach den Sommerferien beim … geblieben, das war uns wichtig. Wobei wir das auch erst kurz vor den Sommerferien erfahren haben, vorher war das wieder so ein Fragezeichen.",
+    "locator": "[42:29] M",
+    "signal": "friction",
+    "phase_hint": "ankommen",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "ungewissheit",
+      "klassenzuteilung",
+      "zeitpunkt-information"
+    ]
+  },
+  {
+    "id": "e7-81",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das ist ein Detail, aber die Finken sind im … geblieben, im Garderobenkasten, zusammen mit dem Turnsack. Das haben wir erst gemerkt, als er in der … am ersten Tag keine hatte. Dann bin ich in der zweiten Woche in den …, und der Hauswart hat mir den Sack gegeben, aber die Turnschuhe waren nicht mehr drin. … Niemand denkt daran, dass das Kind ja noch Sachen im alten Schulhaus hat.",
+    "locator": "[43:27] M",
+    "signal": "friction",
+    "phase_hint": "uebergang",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "persoenliche-sachen",
+      "altes-schulhaus"
+    ]
+  },
+  {
+    "id": "e7-82",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Wir sind eigentlich zufrieden mit der Schule. … Die Leute vor Ort, die Lehrer, die waren super. Das Problem war mehr das, was drumherum ist. Die Verwaltung, sagen wir es so – sorry.",
+    "locator": "[44:13] V",
+    "signal": "positive",
+    "persona_hint": "eltern-umzug",
+    "emotion_hint": {
+      "valence": 1,
+      "label": "zufrieden",
+      "explicit": true
+    },
+    "tags": [
+      "lehrpersonen",
+      "verwaltung",
+      "rueckblick"
+    ]
+  },
+  {
+    "id": "e7-83",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Man hat einfach das Gefühl, wir sind die Ersten, die je gezügelt haben. Und das passiert doch sicher jedes Jahr ein paarmal.",
+    "locator": "[44:13] V",
+    "signal": "friction",
+    "persona_hint": "eltern-umzug",
+    "tags": [
+      "standardfall-fehlt",
+      "verwaltung"
+    ]
+  }
+]

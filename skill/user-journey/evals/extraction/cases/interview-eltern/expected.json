@@ -1,0 +1,2207 @@
+{
+  "shared_atoms": true,
+  "atoms": [
+    {
+      "key": "umzug-datum",
+      "required": false,
+      "match": [
+        "gezügelt haben wir dann am 28. März"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "01:22"
+      ],
+      "emotion": "none",
+      "why": "M: Zügeltermin als Auslöser und Zeitanker der Journey; reine Zeitangabe, V korrigiert nur das Wetter (Schneeregen), nicht das Datum."
+    },
+    {
+      "key": "mietvertrag-januar",
+      "required": false,
+      "match": [
+        "den Vertrag haben wir im Januar unterschrieben",
+        "im Dezember, nein, im Januar"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "02:51",
+        "01:22"
+      ],
+      "emotion": "none",
+      "why": "M korrigiert sich selbst von Dezember auf Januar und V bestätigt Januar, also gilt Januar; Zeitanker für die erste Kontaktaufnahme «ein, zwei Wochen nach dem Vertrag», sonst Nebensache."
+    },
+    {
+      "key": "zuteilung-nach-adresse-unbekannt",
+      "required": true,
+      "match": [
+        "mit der Adresse so fix ist",
+        "das ist ja die gleiche Gemeinde",
+        "nur ein Schulhaus im ganzen Dorf"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "03:23"
+      ],
+      "why": "V: wusste nicht, dass die Schulhauszuteilung an die Wohnadresse gebunden ist, und nahm an, innerhalb der Gemeinde bleibe alles gleich – Kern-Informationslücke am Anfang; dass M früher daran dachte (04:01), ist kein Widerspruch, sondern ein anderer Wissensstand, beide gelten je für die Person."
+    },
+    {
+      "key": "info-von-vormieterin",
+      "required": false,
+      "match": [
+        "dass ihre Kinder in die Bachmatt gehen",
+        "vielleicht kann man irgendwie ein Gesuch machen",
+        "Ich hab schon früher daran gedacht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "friction"
+      ],
+      "locator": [
+        "04:01"
+      ],
+      "why": "M: erfuhr bei der Besichtigung informell von der Vormieterin vom neuen Schulhaus und wusste nicht genau, ob und wie ein Gesuch geht – informelle Quelle statt Auskunft der Verwaltung."
+    },
+    {
+      "key": "sorge-freunde-stein-im-bauch",
+      "required": true,
+      "match": [
+        "so ein Stein im Bauch",
+        "fast wie Brüder"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "locator": [
+        "04:01"
+      ],
+      "emotion": "any",
+      "why": "M: Sorge, dass Elio seine Freunde (Mats) verliert, emotionaler Ausgangspunkt der Journey; «Stein im Bauch» ist als eigenes Gefühl geäussert, aber bildhaft, darum sind explizit und abgeleitet beide vertretbar."
+    },
+    {
+      "key": "kontaktformular-ohne-antwort",
+      "required": true,
+      "match": [
+        "über dieses Kontaktformular auf der Website",
+        "so eine automatische Antwort",
+        "Und dann nichts",
+        "ich wollte nicht mehr warten"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "05:11",
+        "05:37"
+      ],
+      "why": "V schrieb über das Kontaktformular und erhielt nur eine automatische Eingangsbestätigung, M ergänzt «Und dann nichts» und wechselt deshalb aufs Telefon – Aussage über zwei Redebeiträge, die sich ergänzen; es gilt die Reihenfolge zuerst Formular (V), dann Anruf (M)."
+    },
+    {
+      "key": "telefon-sekretariat-nett",
+      "required": false,
+      "match": [
+        "die Frau am Telefon war sehr nett",
+        "die hat sich Zeit genommen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "05:37"
+      ],
+      "why": "M: positiver Kontaktpunkt beim ersten Anruf im Schulsekretariat."
+    },
+    {
+      "key": "auskunft-zuteilung-gesuch",
+      "required": true,
+      "match": [
+        "geht nach der Wohnadresse",
+        "wenn wir dort angemeldet sind",
+        "das Formular sei auf der Website"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "05:37"
+      ],
+      "why": "M gibt die erste Auskunft der Verwaltung wieder (Zuteilung nach Wohnadresse ab Anmeldung, Verbleib nur per schriftlichem Gesuch mit Formular von der Website) – Schritt im Ablauf, von M berichtet, die das Gespräch selbst geführt hat."
+    },
+    {
+      "key": "telefon-hinweis-selten-bewilligt",
+      "required": true,
+      "match": [
+        "nicht zu grosse Hoffnungen",
+        "Das wird eher selten bewilligt",
+        "dass es selten bewilligt wird"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "locator": [
+        "05:37",
+        "38:57"
+      ],
+      "why": "M: die Sekretärin deutete am Telefon an, dass Gesuche selten bewilligt werden (M zitiert sinngemäss, «Irgendwie so»), und M hält das später fairerweise nochmals fest; M war am Telefon, darum gilt ihre Darstellung, auch wenn V sich nicht daran erinnert (06:40)."
+    },
+    {
+      "key": "v-hinweis-nicht-angekommen",
+      "required": false,
+      "match": [
+        "gar nicht im Kopf gehabt",
+        "mit dem Gesuch vielleicht gar nicht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "06:40"
+      ],
+      "why": "V: die mündliche Warnung kam beim Elternteil, der das Gesuch dann schrieb, nicht an; zählt als Aussage über sein Wissen, nicht als Widerspruch zu M, die das Telefonat selbst geführt hat."
+    },
+    {
+      "key": "gesuch-formular-papier-post",
+      "required": true,
+      "match": [
+        "Das Formular ist ein PDF",
+        "von Hand ausfüllen, unterschreiben",
+        "per Post schicken",
+        "Also im Jahr 2026, oder"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "06:58"
+      ],
+      "emotion": "not_explicit",
+      "why": "V: das Gesuch gab es nur als PDF zum Ausdrucken, von Hand Ausfüllen und Versand per Post – Medienbruch im Kanal; V hat das Gesuch erstellt, die Ironie «im Jahr 2026» trägt höchstens eine abgeleitete Emotion."
+    },
+    {
+      "key": "gesuch-briefmarken",
+      "required": false,
+      "match": [
+        "extra noch Briefmarken kaufen müssen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "06:58"
+      ],
+      "why": "V: Zusatzaufwand und kleine Kosten durch den Postversand; darf eigens erfasst werden, muss aber nicht."
+    },
+    {
+      "key": "gesuch-begruendungsfeld-zu-klein",
+      "required": false,
+      "match": [
+        "vielleicht vier Zeilen",
+        "ein separates Blatt dazugelegt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "workaround"
+      ],
+      "locator": [
+        "06:58"
+      ],
+      "why": "V: das Begründungsfeld war zu knapp, er legte ein separates Blatt bei – kleiner Formularmangel mit Umgehung."
+    },
+    {
+      "key": "gesuch-gruende",
+      "required": false,
+      "match": [
+        "dass er dort seine Freunde hat",
+        "wir das nicht unterbrechen möchten",
+        "dass das die Gemeinde also nichts kostet"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need",
+        "neutral"
+      ],
+      "locator": [
+        "06:58"
+      ],
+      "why": "V: die Gründe im Gesuch (Freunde, wenige Monate bis zum Sommer, laufende Logopädie, Schulweg selbst organisiert) zeigen das Bedürfnis der Familie nach Kontinuität."
+    },
+    {
+      "key": "gesuch-ende-februar",
+      "required": false,
+      "match": [
+        "Ende Februar war das, ungefähr",
+        "Das Gesuch ist Ende Februar weg"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "06:58",
+        "13:33"
+      ],
+      "emotion": "none",
+      "why": "V: Zeitpunkt des Gesuchs als Anker für die belegte Dauer bis zum Entscheid; reine Zeitangabe."
+    },
+    {
+      "key": "gesuch-unterschrift-fehlt",
+      "required": true,
+      "match": [
+        "Unterschrift von beiden Eltern",
+        "wir mussten es nochmals schicken",
+        "nochmals eine Woche gekostet"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "08:05"
+      ],
+      "why": "M: das Gesuch musste erneut geschickt werden, weil die Unterschrift beider Eltern fehlte, das Sekretariat rief an, das kostete rund eine Woche – Schleife mit belegter Verzögerung, die V selbst bestätigt («ja, zweimal, ich weiss», 38:01)."
+    },
+    {
+      "key": "m-wechsel-lieber-nach-fruehlingsferien",
+      "required": false,
+      "match": [
+        "nach den Frühlingsferien als nach dem Sommer",
+        "ich war hin und her",
+        "Dann kennt er schon ein paar Kinder"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need",
+        "neutral"
+      ],
+      "locator": [
+        "08:33"
+      ],
+      "why": "M: war hin und her und fand einen Wechsel nach den Frühlingsferien besser als nach dem Sommer – Gegenposition zu V (09:35); beide Haltungen gelten je für die Person, V gibt M später recht (41:48)."
+    },
+    {
+      "key": "m-schulweg-lindenhof-bus",
+      "required": false,
+      "match": [
+        "zweieinhalb Kilometer, mit Umsteigen",
+        "jeden Tag fahren müssen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "08:33"
+      ],
+      "why": "M: Bedenken gegen den Verbleib im Lindenhof wegen des langen Busweges; V bestreitet das Umsteigen (09:17), M wird unterbrochen und berichtet später eine Fahrt mit Umsteigen (23:26) – es gelten die Bedenken von M als ihre Aussage, die Behauptung von V ist keine Evidenz für eine direkte Verbindung, ob morgens umgestiegen werden muss, bleibt offen."
+    },
+    {
+      "key": "v-nicht-mitten-im-jahr",
+      "required": false,
+      "match": [
+        "reisst ein Kind nicht mitten im Jahr",
+        "das schafft er schon"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need",
+        "neutral"
+      ],
+      "locator": [
+        "09:35"
+      ],
+      "why": "V: seine damalige Haltung, ein Kind nicht mitten im Jahr aus der Klasse zu nehmen, und sein Vertrauen in den Busweg – gilt als seine Sicht zu jenem Zeitpunkt, die er später selbst revidiert (41:48)."
+    },
+    {
+      "key": "warten-auf-entscheid",
+      "required": true,
+      "match": [
+        "Dann haben wir gewartet",
+        "so etwas geht vielleicht zwei Wochen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "10:27"
+      ],
+      "why": "V: langes Warten ohne Rückmeldung zum Gesuch; die «zwei Wochen» sind seine Erwartung, keine belegte Dauer."
+    },
+    {
+      "key": "sekretaerin-ruft-zuerst-an",
+      "required": false,
+      "match": [
+        "Zuerst hat die Sekretärin angerufen",
+        "die Schulleiterin meldet sich dann noch"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "10:51"
+      ],
+      "emotion": "none",
+      "why": "M korrigiert V: zuerst rief die Sekretärin auf ihr Natel an und kündigte die Schulleiterin an; V akzeptiert («Ah so. Ja, kann sein.»), darum gilt die Reihenfolge nach M."
+    },
+    {
+      "key": "schulleiterin-teilt-zu-vor-entscheid",
+      "required": true,
+      "match": [
+        "ab dem 20. April bei ihnen",
+        "aber wir haben doch ein Gesuch gemacht",
+        "das laufe über die Schulverwaltung",
+        "nicht gewusst, was ich davon halten soll"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "11:02"
+      ],
+      "emotion": "any",
+      "why": "V: die Schulleiterin der Bachmatt teilte Eintrittsdatum, Klasse und Schnuppern mit, während das Gesuch noch hängig war, und wusste selbst nichts vom Entscheid – faktische Zuteilung vor dem formellen Entscheid, Kernbruch der Journey; V führte dieses Gespräch, seine Verunsicherung ist geäussert, aber kein Gefühlswort."
+    },
+    {
+      "key": "entscheid-kommt-nach-wechsel",
+      "required": true,
+      "match": [
+        "bei der Nachbarin gelandet",
+        "im falschen Briefkasten",
+        [
+          "als der",
+          "schon in der Bachmatt war"
+        ],
+        "dass das Gesuch abgelehnt ist"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "12:14"
+      ],
+      "why": "M: der schriftliche, ablehnende Entscheid ging an die neue Adresse ohne Namensschild, landete bei der Nachbarin und kam erst an, als Elio schon in der Bachmatt war – der formelle Entscheid erreichte die Familie nach dem Vollzug."
+    },
+    {
+      "key": "dauer-bis-schriftlicher-entscheid",
+      "required": true,
+      "match": [
+        "fast zwei Monate",
+        "der Entscheid ist Ende März datiert",
+        "ich hab nachher extra geschaut"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "13:33",
+        "12:14"
+      ],
+      "why": "V rechnet nach (Gesuch Ende Februar, Entscheid datiert Ende März, Empfang Ende April, also fast zwei Monate bis zum Entscheid in der Hand), M bestätigt das Datum Ende März und den Empfang nach dem 20. April – belegte Dauer, nicht zu verwechseln mit der dreissigtägigen Rekursfrist."
+    },
+    {
+      "key": "brief-ton-genervt",
+      "required": true,
+      "match": [
+        "am meisten genervt",
+        "Das tönt so amtlich",
+        "als hätten wir etwas verbrochen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "13:33"
+      ],
+      "emotion": "explicit_negative",
+      "why": "V: ausdrücklich genervt, nicht über die Ablehnung, sondern über Ton und Zeitpunkt des Briefs – ausdrücklich geäusserte negative Emotion."
+    },
+    {
+      "key": "rekurs-frist-nach-vollzug",
+      "required": false,
+      "match": [
+        "innert dreissig Tagen Beschwerde",
+        "da noch einen Rekurs machen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "12:14",
+        "13:33"
+      ],
+      "why": "M gibt die Rechtsmittelbelehrung wieder und V hält einen Rekurs nach dem Wechsel für sinnlos; die dreissig Tage sind eine Frist, keine Dauer, und dürfen nicht als Dauer erfasst werden."
+    },
+    {
+      "key": "kind-nichts-sagen-koennen",
+      "required": true,
+      "match": [
+        "dazwischen hat man nicht gewusst",
+        "nichts Richtiges sagen können",
+        "vielleicht kannst du bleiben",
+        "Das hätte ich nicht machen sollen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "14:36"
+      ],
+      "emotion": "not_explicit",
+      "why": "V: in der Schwebe konnten die Eltern Elio nichts Verlässliches sagen, V machte ihm Hoffnung und bereut das – Folge der Ungewissheit für das Kind, Reue nicht ausdrücklich benannt; das «Genau» bestätigt nur die Zusammenfassung der interviewenden Person, die selbst keine Evidenz ist."
+    },
+    {
+      "key": "elio-weint",
+      "required": true,
+      "match": [
+        "in sein Zimmer und hat geweint",
+        [
+          "ob der",
+          "auch mitkommen kann"
+        ],
+        "Das war schon hart"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "locator": [
+        "15:01"
+      ],
+      "emotion": "any",
+      "why": "M: Elio weinte, als er vom Wechsel erfuhr, und fragte nach Mats, «Das war schon hart» – emotionaler Tiefpunkt; als ausdrücklich (M: hart) oder abgeleitet (Weinen des Kindes) erfasst ist beides vertretbar."
+    },
+    {
+      "key": "abschied-lindenhof",
+      "required": true,
+      "match": [
+        "ein kleines Abschiedsfest gemacht",
+        "die muss ich wirklich loben",
+        "Die Kinder haben ihm ein Büchlein gemacht",
+        "jederzeit vorbeikommen und Hallo sagen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "15:01"
+      ],
+      "why": "M: die bisherige Lehrerin (Frau Ammann) gestaltete einen Abschied mit Fest und Büchlein – positiver Moment beim Übergang, ausgeführt von der Lehrperson."
+    },
+    {
+      "key": "unterlagen-uebergabe-lehrpersonen",
+      "required": false,
+      "match": [
+        "seine Unterlagen an den",
+        "Ob sie das dann gemacht hat",
+        "beim Schnuppern selber gesagt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "workaround"
+      ],
+      "locator": [
+        "16:11",
+        "16:34"
+      ],
+      "why": "V: die Lehrerin kündigte an, Unterlagen weiterzugeben, ob sie es tat, weiss er nicht, und seinen Schluss aus dem Wissen von Herrn Lüthi widerlegt M (sie hat es beim Schnuppern selbst gesagt) – es gilt: Übergabe zwischen Lehrpersonen unbelegt, die Mutter gab die Information selbst weiter."
+    },
+    {
+      "key": "schnuppern-willkommen",
+      "required": true,
+      "match": [
+        "es war wirklich schön",
+        "hat uns unten beim Eingang abgeholt",
+        "die Kinder ein Plakat gemacht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "16:47"
+      ],
+      "why": "M: Schnuppern am 1. April mit Empfang durch die Lehrperson und Willkommensplakat der Klasse – positiver Kontaktpunkt; M war dabei, V nicht (18:04)."
+    },
+    {
+      "key": "goetti-nando",
+      "required": true,
+      "match": [
+        "einen Götti zugeteilt, den",
+        "in der Pause nicht allein herumsteht",
+        "zwei Häuser weiter"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "16:47"
+      ],
+      "why": "M: Herr Lüthi teilte Elio ein Gspänli zu, das im Quartier wohnt – wirksame Unterstützung durch die Lehrperson, die später auch den Schulweg löst."
+    },
+    {
+      "key": "m-morgen-freinehmen",
+      "required": false,
+      "match": [
+        "Ich hab mir den Morgen freigenommen",
+        "mit einer Kollegin abtauschen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "locator": [
+        "16:47"
+      ],
+      "why": "M: musste für das Schnuppern freinehmen und mit einer Kollegin tauschen – Zeitaufwand der berufstätigen Mutter, Signal Ermessenssache."
+    },
+    {
+      "key": "elio-mega-cool",
+      "required": false,
+      "match": [
+        "Es isch mega cool gsi",
+        "das will etwas heissen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "18:04"
+      ],
+      "emotion": "any",
+      "why": "V gibt Elios eigene Worte nach dem Schnuppern wieder (V war nicht dabei, das Urteil stammt vom Kind) – positive Rückmeldung des Kindes."
+    },
+    {
+      "key": "mittagstisch-nicht-automatisch",
+      "required": true,
+      "match": [
+        "davon ausgegangen, dass das mitgeht",
+        "bei den Tagesstrukturen melden",
+        "das sei separat"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "18:26"
+      ],
+      "why": "M: nahm an, der Mittagstisch gehe mit, und erfuhr nur nebenbei von der Lehrperson, dass die Tagesstrukturen separat anzumelden sind – nicht kommunizierte Abhängigkeit zwischen Stellen."
+    },
+    {
+      "key": "mittagstisch-muehsamste",
+      "required": true,
+      "match": [
+        "fast das Mühsamste von allem",
+        "Für mich der Mittagstisch",
+        "am meisten Organisation gekostet"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "18:26",
+        "40:34"
+      ],
+      "emotion": "any",
+      "why": "M bewertet den Mittagstisch zweimal als das Schwierigste (Seufzer, «mühsam»), weil er der Familie am meisten Organisation kostete – Gewichtung des Pain Points durch die Befragte, ausdrücklich oder abgeleitet vertretbar."
+    },
+    {
+      "key": "tagesstrukturen-telefonzeit",
+      "required": true,
+      "match": [
+        "nur am Vormittag Telefonzeit",
+        "eine andere Stelle mit einer anderen Telefonnummer",
+        "im Spital im Gang draussen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "workaround"
+      ],
+      "locator": [
+        "18:26"
+      ],
+      "why": "M: die Tagesstrukturen sind eine eigene Stelle, telefonisch nur vormittags bis halb zwölf erreichbar, während sie arbeitet, also rief sie in der Pause im Spitalgang an – Erreichbarkeit des Kanals passt nicht zu berufstätigen Eltern."
+    },
+    {
+      "key": "mittagstisch-formular-neu",
+      "required": true,
+      "match": [
+        "Anmeldeformular für die Bachmatt neu ausfüllen",
+        "das vom Lindenhof gelte dort nicht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "18:26"
+      ],
+      "why": "M: die bestehende Anmeldung galt nicht weiter, ein neues Formular war nötig – doppelte Erfassung innerhalb derselben Gemeinde."
+    },
+    {
+      "key": "mittagstisch-frist-warteliste",
+      "required": true,
+      "match": [
+        "bis zum Fünfzehnten vom Vormonat",
+        "war natürlich schon vorbei",
+        "der Montag sei in der Bachmatt voll",
+        "den Donnerstag mache sie ausnahmsweise"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "18:26"
+      ],
+      "why": "M: die Anmeldefrist (15. des Vormonats) war schon vorbei, der Donnerstag ging ausnahmsweise ab April, der Montag war voll mit Warteliste – Betreuungslücke als Folge; der 15. ist eine Frist, keine Dauer."
+    },
+    {
+      "key": "grosi-kocht-montag",
+      "required": true,
+      "match": [
+        "Am Anfang ist das Grosi gekommen",
+        "sie hat am Montag gekocht",
+        "nicht mehr die Jüngste"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround"
+      ],
+      "locator": [
+        "20:14"
+      ],
+      "why": "V: seine Mutter (das Grosi) überbrückte den fehlenden Montagsplatz und kochte – Workaround, ausgeführt von einer Drittperson aus der Familie, auf Dauer nicht tragfähig."
+    },
+    {
+      "key": "homeoffice-montag",
+      "required": true,
+      "match": [
+        "am Montag Homeoffice gemacht",
+        "mit meinem Chef geredet",
+        "Und das kann ja nicht jeder"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround"
+      ],
+      "locator": [
+        "20:14"
+      ],
+      "why": "V: ab Mitte Mai Homeoffice am Montag, um über Mittag zuhause zu sein – Workaround von V mit seinem Arbeitgeber, ausdrücklich nicht für alle Familien möglich."
+    },
+    {
+      "key": "mittagstisch-platz-ab-september",
+      "required": true,
+      "match": [
+        "Seit dem September",
+        "war er noch auf der Warteliste",
+        "der Brief kam ja erst Ende August"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "positive"
+      ],
+      "locator": [
+        "21:12",
+        "21:23"
+      ],
+      "emotion": "none",
+      "why": "V korrigiert M (der Montagsplatz gilt erst seit September, im August war Elio noch auf der Warteliste) und M akzeptiert mit Verweis auf den Brief Ende August, also gilt September und nicht «seit den Sommerferien» (21:03); die Rechnung «knappes halbes Jahr» stammt von der interviewenden Person und ist keine Evidenz."
+    },
+    {
+      "key": "lindenhof-mittagstisch-verrechnet",
+      "required": true,
+      "match": [
+        "für den ganzen April noch verrechnet",
+        "hätte abmelden müssen, mit Frist",
+        "Nochmals ein Mail"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "21:23"
+      ],
+      "why": "M: der alte Mittagstisch wurde für den ganzen April verrechnet, weil die Abmeldung mit Frist niemand angekündigt hatte, und erst nach Reklamation per Mail korrigiert – Kosten und Zusatzaufwand; «mit Frist» ist eine Frist, keine Dauer."
+    },
+    {
+      "key": "eumzug-zehn-minuten",
+      "required": true,
+      "match": [
+        "über dieses eUmzug",
+        "das waren vielleicht zehn Minuten",
+        "in der Woche vor dem Zügeln"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "22:13"
+      ],
+      "emotion": "none",
+      "why": "V: Ummeldung online über eUmzug, rund zehn Minuten, problemlos – positiver Schritt mit belegter Dauer; V korrigiert sich selbst («um Ostern herum – nein, schon vorher»), es gilt die Woche vor dem Zügeln."
+    },
+    {
+      "key": "erwartung-ummeldung-informiert-alle",
+      "required": true,
+      "match": [
+        "damit weiss es dann die ganze Gemeinde",
+        "Aber die Tagesstrukturen offenbar nicht",
+        "und die Logopädie auch nicht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "need"
+      ],
+      "locator": [
+        "22:13"
+      ],
+      "why": "V: erwartete, dass die Ummeldung alle Stellen der Gemeinde informiert, Tagesstrukturen und Logopädie wussten aber nichts – enttäuschte Erwartung an eine einmalige Meldung."
+    },
+    {
+      "key": "uebergangswoche-fahrdienst",
+      "required": false,
+      "match": [
+        "mit dem Auto in den Lindenhof gefahren",
+        "beim Dorfladen rausgelassen",
+        "am Mittag hat ihn das Grosi geholt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround"
+      ],
+      "locator": [
+        "22:13"
+      ],
+      "why": "V: in der letzten Woche im Lindenhof fuhr er Elio morgens (wegen Halteverbot bis zum Dorfladen), mittags holte ihn das Grosi – Workaround mit Drittperson; der Zusatz von V «Allein gefahren ist er nie» ist durch M widerlegt (23:26) und gehört nicht dazu."
+    },
+    {
+      "key": "allein-bus-angst",
+      "required": true,
+      "match": [
+        "fast gestorben vor Angst",
+        "dann umsteigen und allein weiter",
+        "weil das Grosi zum Arzt musste"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "locator": [
+        "23:26"
+      ],
+      "emotion": "explicit_negative",
+      "why": "M korrigiert V: Elio fuhr einmal allein mit Umsteigen, weil das Grosi verhindert war, und M hatte ausdrücklich Angst; V räumt ein, es nicht gewusst zu haben, also gilt die Darstellung von M (Elio selbst fand es super)."
+    },
+    {
+      "key": "schulweg-entschaedigung-abgelehnt",
+      "required": true,
+      "match": [
+        "ob die Gemeinde da etwas zahlt",
+        "nur für den Weg zum zugeteilten Schulhaus",
+        "eine Mehrfahrtenkarte für Kinder",
+        "mehr ums Prinzip"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "23:57"
+      ],
+      "why": "V: fragte nach einer Schulwegentschädigung und erhielt eine Absage, weil Elio schon der Bachmatt zugeteilt war – die Kosten (Mehrfahrtenkarte) trug die Familie, und die Zuteilung galt faktisch vor dem Entscheid."
+    },
+    {
+      "key": "erster-schultag-beginnzeit",
+      "required": true,
+      "match": [
+        "nicht gewusst, wann die Schule anfängt",
+        "Den Stundenplan hatten wir nicht",
+        "halbe Stunde unter dem Vordach",
+        "erst um zwanzig vor neun"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "24:42"
+      ],
+      "why": "M: am ersten Schultag fehlte der Stundenplan, Mutter und Kind standen eine halbe Stunde im Regen vor dem geschlossenen Schulhaus (ob der Lehrer den Plan vergass oder M ihn liegen liess, bleibt offen); der Einwand von V, sie habe den Tag als gut geschildert, widerlegt nichts, M war dabei und ihre Darstellung gilt."
+    },
+    {
+      "key": "schulweg-hauptstrasse-ohne-lotsen",
+      "required": true,
+      "match": [
+        "es hat keinen Lotsen",
+        "am Morgen ist viel Verkehr",
+        "die Schülerlotsen mit den Westen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "25:45"
+      ],
+      "why": "V: der neue Schulweg führt über eine verkehrsreiche Hauptstrasse ohne Lotsen, anders als im Lindenhof – Sicherheitsbedenken beim neuen Schulweg."
+    },
+    {
+      "key": "schulweg-begleitung-absprache",
+      "required": true,
+      "match": [
+        "hab ich ihn dann begleitet",
+        "die ganze erste Woche",
+        "wir haben uns abgesprochen",
+        "Seither gehen die zwei zusammen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround"
+      ],
+      "locator": [
+        "25:45"
+      ],
+      "why": "V begleitete Elio die erste Woche und sprach sich dann mit der Mutter von Nando ab, seither gehen die Kinder zusammen – Workaround der Eltern untereinander, handelnde Personen V und die Mutter von Nando."
+    },
+    {
+      "key": "schulweg-dauer",
+      "required": false,
+      "match": [
+        "zehn, zwölf Minuten"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "25:45"
+      ],
+      "emotion": "none",
+      "why": "V: Fussweg zur Bachmatt zehn bis zwölf Minuten – belegte Dauer als Kontext zum Schulweg."
+    },
+    {
+      "key": "schulweg-info-erst-august",
+      "required": false,
+      "match": [
+        "im April übrigens niemand etwas gesagt",
+        "ein Lotsendienst geplant"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "25:45"
+      ],
+      "why": "V: zum Schulweg gab es im April keine Information, erst am Elternabend im August hiess es, ein Lotsendienst sei geplant."
+    },
+    {
+      "key": "tablet-login-fehlt",
+      "required": true,
+      "match": [
+        "aber kein Login",
+        "sicher zwei Wochen gedauert",
+        "nicht anmelden auf dieser Lernplattform",
+        "alles auf Papier machen"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "27:10"
+      ],
+      "why": "M: Elio bekam am ersten Tag ein Tablet, aber rund zwei Wochen kein Login für die Lernplattform und arbeitete auf Papier – Bruch beim Systemzugang mit belegter Dauer."
+    },
+    {
+      "key": "tablet-wie-ein-baby",
+      "required": true,
+      "match": [
+        "vor wie ein Baby",
+        "mehr beschäftigt als alles andere"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "27:10"
+      ],
+      "emotion": "any",
+      "why": "M gibt wieder, dass Elio sich «wie ein Baby» vorkam, und schätzt, das habe ihn mehr beschäftigt als alles andere – stärkste Belastung aus Sicht des Kindes, vermittelt durch M; das Gefühl äusserte das Kind, aber bildhaft, darum explizit oder abgeleitet vertretbar."
+    },
+    {
+      "key": "papier-ausdrucke-luethi",
+      "required": false,
+      "match": [
+        "die Sachen ausgedruckt, das war lieb"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround",
+        "positive"
+      ],
+      "locator": [
+        "27:10"
+      ],
+      "why": "M: Herr Lüthi überbrückte das fehlende Login mit Ausdrucken – Workaround der Lehrperson."
+    },
+    {
+      "key": "login-zwischen-stellen-haengen",
+      "required": true,
+      "match": [
+        "dazwischen ist es halt hängen geblieben",
+        "brauchen eine Meldung vom Sekretariat",
+        "nicht einfach umhängen kann",
+        "sie hätten es gemeldet"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "28:15"
+      ],
+      "why": "V: das Login hing zwischen Sekretariat und Informatik-Support der Gemeinde fest, obwohl Elio auf derselben Plattform schon ein Login hatte – Bruch an der Schnittstelle zwischen Stellen."
+    },
+    {
+      "key": "waldtag-info-plattform",
+      "required": true,
+      "match": [
+        "laufen auch über diese Plattform",
+        "Den Waldtag zum Beispiel",
+        "in den Turnschuhen gegangen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "28:15"
+      ],
+      "why": "V: die Elterninformationen laufen über dieselbe Plattform, ohne Zugang verpassten die Eltern die Ausrüstung für den Waldtag – Folge für die Eltern und Hinweis auf einen einzigen Informationskanal."
+    },
+    {
+      "key": "wochenplan-unbekannt",
+      "required": false,
+      "match": [
+        "mit dem Wochenplan, das kannte er nicht",
+        "Das war am Anfang schwierig für ihn"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "29:12"
+      ],
+      "why": "M: die neue Arbeitsform mit Wochenplan war für Elio ungewohnt und anfangs schwierig."
+    },
+    {
+      "key": "stoff-rueckstand",
+      "required": true,
+      "match": [
+        "in Mathe waren sie weiter",
+        "das Einmaleins schon fertig",
+        "Er war auf jeden Fall hinten nach"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "29:12",
+        "29:39"
+      ],
+      "why": "M und V: in Mathematik war die neue Klasse weiter und Elio im Rückstand; ob der Lindenhof beim Siebner (M) oder Achter (V) war, bleibt offen und ist unerheblich, beide stimmen im Rückstand überein, und das gilt."
+    },
+    {
+      "key": "aufholen-bis-juni",
+      "required": false,
+      "match": [
+        "hat ihm Zusatzblätter mitgegeben",
+        "mit so Kärtchen",
+        "Im Juni war er dann wieder"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround",
+        "positive"
+      ],
+      "locator": [
+        "29:39"
+      ],
+      "why": "V: mit Zusatzblättern der Lehrperson und Üben zuhause mit V holte Elio bis Juni auf – Aufholzeit April bis Juni, ausgeführt von Lehrperson und Vater."
+    },
+    {
+      "key": "luethi-gespraech-von-sich-aus",
+      "required": true,
+      "match": [
+        "von sich aus angerufen",
+        "Kein Problemgespräch, hat er gesagt",
+        "das hab ich sehr geschätzt",
+        "Das war Mitte Mai"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "29:39",
+        "30:23"
+      ],
+      "why": "V und M: Herr Lüthi lud nach einigen Wochen von sich aus zum Gespräch ein und M schätzte das sehr – proaktiver positiver Kontaktpunkt; M datiert es auf Mitte Mai, was zur Angabe von V («zwei, drei Wochen») passt."
+    },
+    {
+      "key": "pausenplatz-regeln",
+      "required": false,
+      "match": [
+        "in der Pause ein paarmal Streit hatte",
+        "am Donnerstag auf den Platz",
+        "Das hat ihm niemand gesagt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "30:23",
+        "30:42"
+      ],
+      "why": "M und V: Streit in der Pause, weil Elio die Platzregel für die Dritten nicht kannte – fehlende Information über Hausregeln."
+    },
+    {
+      "key": "willkommensmappe-zu-spaet",
+      "required": true,
+      "match": [
+        "so eine Willkommensmappe",
+        "erst am ersten Schultag heimgebracht",
+        "Hätten wir die vorher gehabt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "positive"
+      ],
+      "locator": [
+        "31:20"
+      ],
+      "why": "M: die Willkommensmappe war gut gemacht, kam aber erst am ersten Schultag heim – richtige Information zum falschen Zeitpunkt, erklärt die Panne mit der Beginnzeit."
+    },
+    {
+      "key": "klassenchat-erst-mai",
+      "required": false,
+      "match": [
+        "in den Klassenchat von den Eltern",
+        "auch erst im Mai gekommen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "31:20"
+      ],
+      "why": "M: in den Klassenchat der Eltern kamen sie erst im Mai, auf Nachfrage der Mutter von Nando – informeller Kanal ohne Aufnahme durch die Schule."
+    },
+    {
+      "key": "gipfeli-regel",
+      "required": false,
+      "match": [
+        "kein Gipfeli zum Znüni mitgeben",
+        "Er war tagelang beleidigt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "31:59"
+      ],
+      "emotion": "any",
+      "why": "V: eine unbekannte Znüni-Regel traf Elio, er war tagelang beleidigt – Detail zu Hausregeln, Emotion des Kindes von V berichtet."
+    },
+    {
+      "key": "logopaedie-nicht-automatisch",
+      "required": true,
+      "match": [
+        "für die ganze Gemeinde der gleiche Dienst",
+        "in der Bachmatt ist eine andere Logopädin",
+        "zuerst schauen, ob sie Platz hat"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "32:38"
+      ],
+      "why": "M: nahm an, die Logopädie laufe als gemeindeweiter Dienst einfach weiter, in der Bachmatt war aber eine andere Logopädin, die zuerst Kapazität prüfen musste – Bruch der Kontinuität einer Therapie."
+    },
+    {
+      "key": "logopaedie-einverstaendnis-datenschutz",
+      "required": true,
+      "match": [
+        "wegen dem Datenschutz",
+        "Einverständniserklärung von den Eltern",
+        "niemand etwas von Logopädie gesagt hat"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "32:38"
+      ],
+      "why": "M: die Unterlagen durften ohne Einverständnis der Eltern nicht weitergegeben werden, niemand sagte es vorher, und M merkte es erst, als nach den Ferien keine Logopädie stattfand – fehlender Schritt, den die Eltern nicht kannten."
+    },
+    {
+      "key": "logopaedie-formular-foto",
+      "required": false,
+      "match": [
+        "mit dem Natel fotografiert",
+        "keinen Scanner mehr haben"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround"
+      ],
+      "locator": [
+        "34:05"
+      ],
+      "why": "V: das Einverständnisformular wurde ausgedruckt, unterschrieben und mit dem Natel fotografiert – Workaround mangels Scanner."
+    },
+    {
+      "key": "logopaedie-unterbruch-dauer",
+      "required": true,
+      "match": [
+        "über zwei Monate",
+        "am vierten Juni",
+        "weil es in meiner Agenda steht",
+        "Das war viel länger"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "34:24"
+      ],
+      "why": "M widerspricht V: der Unterbruch dauerte von Ende März bis 4. Juni, mit den Ferien über zwei Monate, belegt mit ihrer Agenda, und V räumt ein, es nicht gewusst zu haben (35:11) – es gilt die Dauer von M, die Schätzung von V «zwei, drei Wochen» (34:05) zählt nicht."
+    },
+    {
+      "key": "logopaedie-dreimal-anrufen",
+      "required": true,
+      "match": [
+        "noch zweimal anrufen müssen",
+        "dreimal, bei zwei verschiedenen Stellen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "34:24"
+      ],
+      "why": "M: nach dem Formular noch zweimal nachtelefoniert, insgesamt dreimal bei zwei Stellen, bis sich die neue Logopädin meldete – Nachfassaufwand, den M getragen hat."
+    },
+    {
+      "key": "logopaedie-zurueckgefallen",
+      "required": true,
+      "match": [
+        "ein bisschen zurückgefallen ist"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "34:24"
+      ],
+      "why": "M gibt die neue Logopädin wieder: Elio war etwas zurückgefallen – Folge des Unterbruchs für das Kind."
+    },
+    {
+      "key": "m-aufgeregt",
+      "required": false,
+      "match": [
+        "dass du dich aufgeregt hast"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "locator": [
+        "35:11"
+      ],
+      "emotion": "any",
+      "why": "V: M habe sich über die Logopädie aufgeregt – Fremdbeschreibung einer Emotion von M durch V, darf erfasst werden."
+    },
+    {
+      "key": "kunz-haette-sagen-koennen",
+      "required": false,
+      "match": [
+        "als ich ihr im Februar gesagt hab",
+        "sie hat einfach nicht daran gedacht",
+        "das macht die Schule"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need",
+        "friction"
+      ],
+      "locator": [
+        "35:30"
+      ],
+      "why": "M: die bisherige Logopädin wusste seit Februar vom Umzug und hätte auf die Einverständniserklärung hinweisen können – verpasster Hinweis; Antwort auf eine Frage der interviewenden Person, aber eine eigene Aussage von M."
+    },
+    {
+      "key": "zustaendigkeit-keiner-weiss",
+      "required": true,
+      "match": [
+        "Jeder hat gedacht, das macht der andere",
+        "weiss einfach keiner, was der andere macht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "35:57",
+        "38:57"
+      ],
+      "why": "V und M sagen unabhängig dasselbe: keine Stelle wusste, was die andere tut, jede dachte, die andere übernehme es – übergreifendes Muster; die Liste der Stellen um 37:29 ist eine Zusammenfassung der interviewenden Person und zählt nicht."
+    },
+    {
+      "key": "arbeitsteilung-eltern",
+      "required": false,
+      "match": [
+        "Die Telefonate hat sie gemacht",
+        "Ich hab das Online-Zeug gemacht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "38:01"
+      ],
+      "why": "V: M führte die Telefonate, V erledigte Ummeldung und Gesuch – wer welche Schritte ausgeführt hat."
+    },
+    {
+      "key": "alles-mehrmals-sagen",
+      "required": true,
+      "match": [
+        "Man muss alles mehrmals sagen",
+        "jedes Mal ein anderes Formular"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "38:01"
+      ],
+      "why": "V: dieselbe Information (Umzug) musste jeder Stelle einzeln gemeldet werden, jedes Mal mit eigenem Formular – Mehrfacherfassung."
+    },
+    {
+      "key": "nicht-wissen-was-machen-hauptproblem",
+      "required": true,
+      "match": [
+        "man weiss als Eltern auch nicht",
+        "Das ist eigentlich das Hauptproblem",
+        "Wir sind ja nicht unorganisiert"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "38:01"
+      ],
+      "why": "V: das Hauptproblem ist, dass Eltern nicht wissen, was alles zu tun ist – von ihm selbst als zentral gewichteter Pain Point."
+    },
+    {
+      "key": "need-checkliste",
+      "required": true,
+      "match": [
+        "am Anfang eine Liste gehabt",
+        "erstens, zweitens, drittens",
+        "Mittagstisch neu anmelden, bis wann",
+        "Wenn Sie innerhalb der Gemeinde zügeln"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "38:01",
+        "40:34"
+      ],
+      "why": "V und M wünschen sich dasselbe, eine Liste beim Umzug innerhalb der Gemeinde mit allen Schritten, Stellen und Fristen – zentrales Bedürfnis, von beiden geäussert."
+    },
+    {
+      "key": "telefonate-anzahl",
+      "required": true,
+      "match": [
+        "wie viele Telefonate ich in dieser Zeit",
+        "Zwanzig? Dreissig?"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "36:19"
+      ],
+      "why": "M: schätzt zwanzig bis dreissig Telefonate rund um den Umzug – Mass für den Koordinationsaufwand, den sie getragen hat (V bestätigt, 38:01); als Schätzung zu kennzeichnen."
+    },
+    {
+      "key": "buerozeiten-kollision",
+      "required": true,
+      "match": [
+        "nur zu den Bürozeiten anrufen kann",
+        "bin ich selber im Büro",
+        "Und immer in der Pause"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "workaround"
+      ],
+      "locator": [
+        "36:19"
+      ],
+      "why": "M: die Stellen sind nur zu Bürozeiten erreichbar, wenn sie selbst arbeitet, darum telefonierte sie immer in der Pause – grundsätzliches Kanalproblem für berufstätige Eltern."
+    },
+    {
+      "key": "froh-als-vorbei",
+      "required": false,
+      "match": [
+        "ich war froh, als es vorbei war",
+        "nach dem Zügeln waren einfach viel"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "locator": [
+        "36:19"
+      ],
+      "emotion": "any",
+      "why": "M: Erleichterung, als die Zeit vorbei war, und Bilanz «einfach viel» – Gesamtbelastung, Valenz je nach Bezug (Erleichterung oder Belastung) vertretbar."
+    },
+    {
+      "key": "freundschaften-heute",
+      "required": false,
+      "match": [
+        "jetzt sind die zwei unzertrennlich",
+        "er findet hier nie jemanden",
+        "Aber es wird weniger"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "neutral"
+      ],
+      "locator": [
+        "36:19"
+      ],
+      "why": "M: Elio hat mit Nando einen engen Freund gefunden, die alte Freundschaft zu Mats wird weniger – sozialer Ausgang des Wechsels."
+    },
+    {
+      "key": "leute-alle-nett",
+      "required": true,
+      "match": [
+        "die Leute waren alle nett",
+        "Es war nie jemand unfreundlich"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "38:57"
+      ],
+      "why": "M: alle Kontaktpersonen waren freundlich – das Problem liegt nicht beim Personal, sondern in der Koordination, wichtig für eine faire Synthese."
+    },
+    {
+      "key": "luethi-ueberblick-nicht-zustaendig",
+      "required": true,
+      "match": [
+        "den Überblick gehabt hat eigentlich",
+        "der ist dafür gar nicht zuständig"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "locator": [
+        "38:57"
+      ],
+      "why": "M: den besten Überblick hatte der Klassenlehrer, der dafür nicht zuständig ist – es fehlt eine zuständige Stelle für den Gesamtablauf."
+    },
+    {
+      "key": "telefon-nicht-verbindlich",
+      "required": true,
+      "match": [
+        "Das ist ja nicht verbindlich",
+        "vielleicht haben wir Glück"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "39:34"
+      ],
+      "why": "V entgegnet M, der mündliche Hinweis am Telefon sei nicht verbindlich gewesen und habe Hoffnung offengelassen – beide Aussagen gelten nebeneinander (M: Hinweis wurde gegeben, V: mündlich reicht nicht), kein Widerspruch in den Fakten."
+    },
+    {
+      "key": "nicht-wissen-nicht-ernst-genommen",
+      "required": true,
+      "match": [
+        "das Schwierigste dieses Nicht-Wissen",
+        "nicht ernst genommen vor",
+        "wochenlang nicht gewusst, was jetzt gilt",
+        "wenn alles schon passiert ist"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "39:34"
+      ],
+      "emotion": "explicit_negative",
+      "why": "V: das Schwierigste war die wochenlange Ungewissheit, der Entscheid kam erst nach den Tatsachen, und man komme sich nicht ernst genommen vor – ausdrücklich geäussertes Gefühl und von V selbst gewichteter Haupt-Pain-Point."
+    },
+    {
+      "key": "need-website-klar",
+      "required": true,
+      "match": [
+        "auf der Website so hinschreiben",
+        "klar und deutlich",
+        "das Gesuch gar nicht gemacht",
+        "nicht wochenlang Hoffnung gemacht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "39:34"
+      ],
+      "why": "V: wenn Gesuche fast nie bewilligt werden, soll das klar auf der Website stehen, dann hätten sie kein Gesuch gestellt und dem Kind keine Hoffnung gemacht."
+    },
+    {
+      "key": "need-entscheid-vor-planung",
+      "required": true,
+      "match": [
+        "bevor man planen muss"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "39:34"
+      ],
+      "why": "V: der Entscheid muss kommen, bevor die Familie planen muss, nicht nachher – Bedürfnis zum Zeitpunkt des Entscheids."
+    },
+    {
+      "key": "need-ansprechperson",
+      "required": true,
+      "match": [
+        "eine Ansprechperson, eine einzige",
+        "die man auch am Nachmittag erreicht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "40:34"
+      ],
+      "why": "M: eine einzige Ansprechperson, auch nachmittags erreichbar – direkte Antwort auf zersplitterte Zuständigkeiten und Telefonzeiten."
+    },
+    {
+      "key": "need-automatisch-stellen-regeln",
+      "required": true,
+      "match": [
+        "automatisch bekommt, wenn man sich ummeldet",
+        "dass die Stellen das unter sich regeln",
+        "Das wäre der Traum"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "40:34"
+      ],
+      "why": "M: die Information soll mit der Ummeldung automatisch kommen, besser noch sollen die Stellen den Wechsel unter sich regeln – Bedürfnis nach einmaliger Meldung und Koordination durch die Verwaltung."
+    },
+    {
+      "key": "rueckblick-wechsel-richtig",
+      "required": true,
+      "match": [
+        "es war richtig so",
+        "sie hatte recht",
+        "noch ein paar Monate, um anzukommen",
+        "dann wäre alles gleichzeitig gekommen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "neutral"
+      ],
+      "locator": [
+        "41:48"
+      ],
+      "why": "V revidiert seine frühere Haltung (09:35) und gibt M recht, der Wechsel nach den Frühlingsferien war richtig, weil Elio vor dem neuen Schuljahr ankommen konnte – damit gilt in der früheren Uneinigkeit der Eltern die Sicht von M als gemeinsame Bilanz."
+    },
+    {
+      "key": "need-frueher-klarer",
+      "required": false,
+      "match": [
+        "früher und klarer sagen müssen",
+        "woran wir sind"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "41:48"
+      ],
+      "why": "V: man hätte trotz allem früher und klarer sagen müssen, woran sie sind – bekräftigt das Bedürfnis nach klarer, rechtzeitiger Auskunft."
+    },
+    {
+      "key": "heute-angekommen",
+      "required": true,
+      "match": [
+        "heute ist er angekommen",
+        "Er ist gern in der Schule"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "42:29"
+      ],
+      "why": "M: heute ist Elio angekommen, geht gern zur Schule und an beiden Tagen an den Mittagstisch – Endzustand der Journey."
+    },
+    {
+      "key": "lehrperson-erst-kurz-vorher",
+      "required": false,
+      "match": [
+        "erst kurz vor den Sommerferien erfahren",
+        "wieder so ein Fragezeichen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "42:29"
+      ],
+      "why": "M: dass Elio beim Herrn Lüthi bleibt, war den Eltern wichtig, sie erfuhren es aber erst kurz vor den Sommerferien – erneute Ungewissheit."
+    },
+    {
+      "key": "logopaedie-laeuft-bucher",
+      "required": false,
+      "match": [
+        "die Logopädie läuft, bei der",
+        "Nicht so gern wie die"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "42:29"
+      ],
+      "why": "M: die Logopädie läuft wieder, Elio hat die neue Logopädin gern – Abschluss dieses Strangs."
+    },
+    {
+      "key": "finken-turnsack-verschwunden",
+      "required": false,
+      "match": [
+        "die Finken sind im Lindenhof geblieben",
+        "Die sind bis heute verschwunden",
+        "noch Sachen im alten Schulhaus hat"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "43:27"
+      ],
+      "why": "M: Finken und Turnsack blieben im alten Schulhaus, die Turnschuhe gingen verloren, niemand denkt an die Sachen des Kindes – von M selbst als Detail bezeichnet, darf erfasst werden."
+    },
+    {
+      "key": "zufrieden-mit-schule",
+      "required": true,
+      "match": [
+        "Wir sind eigentlich zufrieden mit der Schule",
+        "die Lehrer, die waren super",
+        "was drumherum ist"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "44:13"
+      ],
+      "why": "V: zufrieden mit beiden Schulen und den Lehrpersonen, das Problem liege in der Verwaltung drumherum – Einordnung, wo der Pain liegt, übereinstimmend mit M (38:57)."
+    },
+    {
+      "key": "erste-die-je-gezuegelt",
+      "required": true,
+      "match": [
+        "die Ersten, die je gezügelt haben",
+        "passiert doch sicher jedes Jahr"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "44:13"
+      ],
+      "emotion": "any",
+      "why": "V: man habe das Gefühl, die Ersten zu sein, die je gezügelt haben, obwohl das jedes Jahr vorkomme – Hinweis auf einen wiederkehrenden, aber nicht geregelten Vorgang; «Gefühl» steht im Text, ist aber eher Urteil als Emotion."
+    }
+  ]
+}

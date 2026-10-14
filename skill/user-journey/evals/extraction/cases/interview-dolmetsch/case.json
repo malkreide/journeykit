@@ -1,0 +1,96 @@
+{
+  "title": "Interview D3 – Einschulung nach Zuzug, mit Dolmetscherin",
+  "kind": "interview",
+  "class": "reported",
+  "source_id": "int-d3",
+  "prefix": "d3",
+  "input": "input.md",
+  "phases": [
+    "ankunft",
+    "anmeldung",
+    "einschulung",
+    "alltag"
+  ],
+  "persona": "zugezogen-fremdsprachig",
+  "known_atoms": [],
+  "tests": "Unabhängiger Fall (2026-10-14): Transkript von einem Subagenten ohne Kenntnis von evidenz.md geschrieben, Gold von einem zweiten Subagenten ohne Prompt-Schablone festgelegt (nur Atom-Modell). Interview über eine Dolmetscherin: Übersetzungen in Ich- und Er-Form, eigene Erklärungen der Dolmetscherin, Missverständnisse, Aussagen über mehrere Redebeiträge. Prüft vor allem die Abdeckung; ein Atom darf mehrere Gold-Einträge abdecken (shared_atoms).",
+  "rules": {
+    "kinds": [
+      "quote",
+      "metric"
+    ],
+    "locator_required": true,
+    "pii_terms": [
+      "Asfaha",
+      "Weldu",
+      "Ruta",
+      "Sandra"
+    ],
+    "forbidden": [
+      {
+        "text": "So, ich glaube, es läuft. Ja,",
+        "why": "Redebeitrag der interviewenden Person (00:00)"
+      },
+      {
+        "text": "Ja, das stimmt, die Lehrpersonen bekommen",
+        "why": "Redebeitrag der interviewenden Person (01:43)"
+      },
+      {
+        "text": "Mhm. Und als Sie dann hier",
+        "why": "Redebeitrag der interviewenden Person (04:06)"
+      },
+      {
+        "text": "Habe ich das richtig verstanden –",
+        "why": "Redebeitrag der interviewenden Person (07:25)"
+      },
+      {
+        "text": "Mhm. Dann erzählen Sie doch vom",
+        "why": "Redebeitrag der interviewenden Person (07:48)"
+      },
+      {
+        "text": "Mhm. Und diese Papiere – wissen",
+        "why": "Redebeitrag der interviewenden Person (10:42)"
+      },
+      {
+        "text": "Mhm. Und wie ist das mit",
+        "why": "Redebeitrag der interviewenden Person (13:27)"
+      },
+      {
+        "text": "(lacht) Ja. Ich komme nachher nochmals",
+        "why": "Redebeitrag der interviewenden Person (15:25)"
+      },
+      {
+        "text": "Mhm. Also, der Mann mit dem",
+        "why": "Redebeitrag der interviewenden Person (17:31)"
+      },
+      {
+        "text": "Gut, danke. Wie bekommen Sie denn",
+        "why": "Redebeitrag der interviewenden Person (19:22)"
+      },
+      {
+        "text": "Einen Vogel? (lacht) Ah – das",
+        "why": "Redebeitrag der interviewenden Person (20:55)"
+      },
+      {
+        "text": "Mhm. Sie sagen Regenhosen – wie",
+        "why": "Redebeitrag der interviewenden Person (22:33)"
+      },
+      {
+        "text": "Das war wahrscheinlich ein Weiterbildungstag, die",
+        "why": "Redebeitrag der interviewenden Person (25:08)"
+      },
+      {
+        "text": "(lacht) Das habe ich verstanden. Und",
+        "why": "Redebeitrag der interviewenden Person (27:55)"
+      },
+      {
+        "text": "Danke, das ist sehr hilfreich. Den",
+        "why": "Redebeitrag der interviewenden Person (31:21)"
+      },
+      {
+        "text": "Schön, das freut mich. Und danke",
+        "why": "Redebeitrag der interviewenden Person (34:23)"
+      }
+    ]
+  }
+}

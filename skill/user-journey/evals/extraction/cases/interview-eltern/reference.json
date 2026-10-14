@@ -1,0 +1,905 @@
+[
+  {
+    "id": "e7-01",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "gezügelt haben wir dann am 28. März",
+    "locator": "[01:22]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-02",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "den Vertrag haben wir im Januar unterschrieben",
+    "locator": "[02:51]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-03",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "mit der Adresse so fix ist",
+    "locator": "[03:23]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-04",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "dass ihre Kinder in die Bachmatt gehen",
+    "locator": "[04:01]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-05",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "so ein Stein im Bauch",
+    "locator": "[04:01]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-06",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "über dieses Kontaktformular auf der Website",
+    "locator": "[05:11]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "e7-07",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Frau am Telefon war sehr nett",
+    "locator": "[05:37]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-08",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "geht nach der Wohnadresse",
+    "locator": "[05:37]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-09",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "nicht zu grosse Hoffnungen",
+    "locator": "[05:37]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-10",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "gar nicht im Kopf gehabt",
+    "locator": "[06:40]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-11",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das Formular ist ein PDF",
+    "locator": "[06:58]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-12",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "extra noch Briefmarken kaufen müssen",
+    "locator": "[06:58]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-13",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "vielleicht vier Zeilen",
+    "locator": "[06:58]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-14",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "dass er dort seine Freunde hat",
+    "locator": "[06:58]",
+    "signal": "need"
+  },
+  {
+    "id": "e7-15",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ende Februar war das, ungefähr",
+    "locator": "[06:58]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-16",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Unterschrift von beiden Eltern",
+    "locator": "[08:05]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "e7-17",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "nach den Frühlingsferien als nach dem Sommer",
+    "locator": "[08:33]",
+    "signal": "need"
+  },
+  {
+    "id": "e7-18",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "zweieinhalb Kilometer, mit Umsteigen",
+    "locator": "[08:33]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-19",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "reisst ein Kind nicht mitten im Jahr",
+    "locator": "[09:35]",
+    "signal": "need"
+  },
+  {
+    "id": "e7-20",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Dann haben wir gewartet",
+    "locator": "[10:27]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-21",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Zuerst hat die Sekretärin angerufen",
+    "locator": "[10:51]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-22",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ab dem 20. April bei ihnen",
+    "locator": "[11:02]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "e7-23",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "bei der Nachbarin gelandet",
+    "locator": "[12:14]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "e7-24",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "fast zwei Monate",
+    "locator": "[13:33]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-25",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "am meisten genervt",
+    "locator": "[13:33]",
+    "signal": "friction",
+    "emotion_hint": {
+      "valence": -1,
+      "explicit": true
+    }
+  },
+  {
+    "id": "e7-26",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "innert dreissig Tagen Beschwerde",
+    "locator": "[12:14]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-27",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "dazwischen hat man nicht gewusst",
+    "locator": "[14:36]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-28",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "in sein Zimmer und hat geweint",
+    "locator": "[15:01]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-29",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ein kleines Abschiedsfest gemacht",
+    "locator": "[15:01]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-30",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "seine Unterlagen an den",
+    "locator": "[16:11]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-31",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "es war wirklich schön",
+    "locator": "[16:47]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-32",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "einen Götti zugeteilt, den",
+    "locator": "[16:47]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-33",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab mir den Morgen freigenommen",
+    "locator": "[16:47]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-34",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Es isch mega cool gsi",
+    "locator": "[18:04]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-35",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "davon ausgegangen, dass das mitgeht",
+    "locator": "[18:26]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-36",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "fast das Mühsamste von allem",
+    "locator": "[18:26]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-37",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "nur am Vormittag Telefonzeit",
+    "locator": "[18:26]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-38",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Anmeldeformular für die Bachmatt neu ausfüllen",
+    "locator": "[18:26]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-39",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "bis zum Fünfzehnten vom Vormonat",
+    "locator": "[18:26]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "e7-40",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Am Anfang ist das Grosi gekommen",
+    "locator": "[20:14]",
+    "signal": "workaround"
+  },
+  {
+    "id": "e7-41",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "am Montag Homeoffice gemacht",
+    "locator": "[20:14]",
+    "signal": "workaround"
+  },
+  {
+    "id": "e7-42",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Seit dem September",
+    "locator": "[21:12]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-43",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "für den ganzen April noch verrechnet",
+    "locator": "[21:23]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-44",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "über dieses eUmzug",
+    "locator": "[22:13]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-45",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "damit weiss es dann die ganze Gemeinde",
+    "locator": "[22:13]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-46",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "mit dem Auto in den Lindenhof gefahren",
+    "locator": "[22:13]",
+    "signal": "workaround"
+  },
+  {
+    "id": "e7-47",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "fast gestorben vor Angst",
+    "locator": "[23:26]",
+    "signal": "neutral",
+    "emotion_hint": {
+      "valence": -1,
+      "explicit": true
+    }
+  },
+  {
+    "id": "e7-48",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ob die Gemeinde da etwas zahlt",
+    "locator": "[23:57]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-49",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "nicht gewusst, wann die Schule anfängt",
+    "locator": "[24:42]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-50",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "es hat keinen Lotsen",
+    "locator": "[25:45]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-51",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "hab ich ihn dann begleitet",
+    "locator": "[25:45]",
+    "signal": "workaround"
+  },
+  {
+    "id": "e7-52",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "zehn, zwölf Minuten",
+    "locator": "[25:45]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-53",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "im April übrigens niemand etwas gesagt",
+    "locator": "[25:45]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-54",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "aber kein Login",
+    "locator": "[27:10]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "e7-55",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "vor wie ein Baby",
+    "locator": "[27:10]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-56",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Sachen ausgedruckt, das war lieb",
+    "locator": "[27:10]",
+    "signal": "workaround"
+  },
+  {
+    "id": "e7-57",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "dazwischen ist es halt hängen geblieben",
+    "locator": "[28:15]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-58",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "laufen auch über diese Plattform",
+    "locator": "[28:15]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-59",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "mit dem Wochenplan, das kannte er nicht",
+    "locator": "[29:12]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-60",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "in Mathe waren sie weiter",
+    "locator": "[29:12]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-61",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "hat ihm Zusatzblätter mitgegeben",
+    "locator": "[29:39]",
+    "signal": "workaround"
+  },
+  {
+    "id": "e7-62",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "von sich aus angerufen",
+    "locator": "[29:39]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-63",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "in der Pause ein paarmal Streit hatte",
+    "locator": "[30:23]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-64",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "so eine Willkommensmappe",
+    "locator": "[31:20]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-65",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "in den Klassenchat von den Eltern",
+    "locator": "[31:20]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-66",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "kein Gipfeli zum Znüni mitgeben",
+    "locator": "[31:59]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-67",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "für die ganze Gemeinde der gleiche Dienst",
+    "locator": "[32:38]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-68",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "wegen dem Datenschutz",
+    "locator": "[32:38]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "e7-69",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "mit dem Natel fotografiert",
+    "locator": "[34:05]",
+    "signal": "workaround"
+  },
+  {
+    "id": "e7-70",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "über zwei Monate",
+    "locator": "[34:24]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-71",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "noch zweimal anrufen müssen",
+    "locator": "[34:24]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-72",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ein bisschen zurückgefallen ist",
+    "locator": "[34:24]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-73",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "dass du dich aufgeregt hast",
+    "locator": "[35:11]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-74",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "als ich ihr im Februar gesagt hab",
+    "locator": "[35:30]",
+    "signal": "need"
+  },
+  {
+    "id": "e7-75",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Jeder hat gedacht, das macht der andere",
+    "locator": "[35:57]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-76",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Die Telefonate hat sie gemacht",
+    "locator": "[38:01]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-77",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Man muss alles mehrmals sagen",
+    "locator": "[38:01]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-78",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "man weiss als Eltern auch nicht",
+    "locator": "[38:01]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-79",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "am Anfang eine Liste gehabt",
+    "locator": "[38:01]",
+    "signal": "need"
+  },
+  {
+    "id": "e7-80",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "wie viele Telefonate ich in dieser Zeit",
+    "locator": "[36:19]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-81",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "nur zu den Bürozeiten anrufen kann",
+    "locator": "[36:19]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-82",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ich war froh, als es vorbei war",
+    "locator": "[36:19]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-83",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "jetzt sind die zwei unzertrennlich",
+    "locator": "[36:19]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-84",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Leute waren alle nett",
+    "locator": "[38:57]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-85",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "den Überblick gehabt hat eigentlich",
+    "locator": "[38:57]",
+    "signal": "neutral"
+  },
+  {
+    "id": "e7-86",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das ist ja nicht verbindlich",
+    "locator": "[39:34]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-87",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das Schwierigste dieses Nicht-Wissen",
+    "locator": "[39:34]",
+    "signal": "friction",
+    "emotion_hint": {
+      "valence": -1,
+      "explicit": true
+    }
+  },
+  {
+    "id": "e7-88",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "auf der Website so hinschreiben",
+    "locator": "[39:34]",
+    "signal": "need"
+  },
+  {
+    "id": "e7-89",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "bevor man planen muss",
+    "locator": "[39:34]",
+    "signal": "need"
+  },
+  {
+    "id": "e7-90",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "eine Ansprechperson, eine einzige",
+    "locator": "[40:34]",
+    "signal": "need"
+  },
+  {
+    "id": "e7-91",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "automatisch bekommt, wenn man sich ummeldet",
+    "locator": "[40:34]",
+    "signal": "need"
+  },
+  {
+    "id": "e7-92",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "es war richtig so",
+    "locator": "[41:48]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-93",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "früher und klarer sagen müssen",
+    "locator": "[41:48]",
+    "signal": "need"
+  },
+  {
+    "id": "e7-94",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "heute ist er angekommen",
+    "locator": "[42:29]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-95",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "erst kurz vor den Sommerferien erfahren",
+    "locator": "[42:29]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-96",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Logopädie läuft, bei der",
+    "locator": "[42:29]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-97",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Finken sind im Lindenhof geblieben",
+    "locator": "[43:27]",
+    "signal": "friction"
+  },
+  {
+    "id": "e7-98",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Wir sind eigentlich zufrieden mit der Schule",
+    "locator": "[44:13]",
+    "signal": "positive"
+  },
+  {
+    "id": "e7-99",
+    "source_ref": "int-e7",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Ersten, die je gezügelt haben",
+    "locator": "[44:13]",
+    "signal": "friction"
+  }
+]

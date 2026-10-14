@@ -1,0 +1,647 @@
+[
+  {
+    "id": "d3-01",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ob die Lehrerin die Aufnahme hört",
+    "locator": "[01:28]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-02",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "letztes Jahr in die Schweiz gekommen",
+    "locator": "[03:10]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-03",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "in der ersten Klasse, auf Tigrinya",
+    "locator": "[03:10]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-04",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "mit sieben in die Schule",
+    "locator": "[03:10]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-05",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Geholfen hat die Sozialarbeiterin",
+    "locator": "[06:05]",
+    "signal": "positive"
+  },
+  {
+    "id": "d3-06",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Die Schule kommt",
+    "locator": "[06:05]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-07",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "gewartet, zwei oder drei Wochen",
+    "locator": "[06:05]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-08",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ein Brief gekommen, auf Deutsch",
+    "locator": "[06:05]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-09",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "der schon lange hier ist",
+    "locator": "[06:05]",
+    "signal": "workaround"
+  },
+  {
+    "id": "d3-10",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "am Sonntagabend zusammen ausgefüllt",
+    "locator": "[06:05]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-11",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "nichts hingeschrieben",
+    "locator": "[06:05]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-12",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Schulleiterin und die Sekretärin",
+    "locator": "[09:20]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-13",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "vielleicht die Hälfte verstanden",
+    "locator": "[09:20]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-14",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die ganze Zeit nervös",
+    "locator": "[09:20]",
+    "signal": "friction",
+    "emotion_hint": {
+      "valence": -1,
+      "explicit": true
+    }
+  },
+  {
+    "id": "d3-15",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "kommt in die zweite Klasse",
+    "locator": "[09:20]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-16",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "in den oben beim Wald",
+    "locator": "[09:20]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-17",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "erst nach den Weihnachtsferien anfangen",
+    "locator": "[09:20]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-18",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "einen Stapel Papiere bekommen",
+    "locator": "[09:20]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-19",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "erst nach zwei Wochen oder so",
+    "locator": "[12:25]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-20",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das meiste ist nur Information",
+    "locator": "[12:25]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-21",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "war das Datum schon vorbei",
+    "locator": "[12:25]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "d3-22",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "jeden Mittag geholt und wieder gebracht",
+    "locator": "[12:25]",
+    "signal": "workaround"
+  },
+  {
+    "id": "d3-23",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "neun Franken oder elf",
+    "locator": "[12:25]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-24",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das grösste Problem",
+    "locator": "[14:25]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-25",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Schule hat andere Zeiten",
+    "locator": "[14:25]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-26",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "den ganzen Morgen hin und her",
+    "locator": "[14:25]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-27",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ich musste absagen",
+    "locator": "[14:25]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "d3-28",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "einen Abendkurs, zweimal in der Woche",
+    "locator": "[14:25]",
+    "signal": "workaround"
+  },
+  {
+    "id": "d3-29",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "man sucht eine Lösung",
+    "locator": "[14:25]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-30",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "grosse Angst, sie hat geweint",
+    "locator": "[16:36]",
+    "signal": "friction",
+    "emotion_hint": {
+      "valence": -1,
+      "explicit": true
+    }
+  },
+  {
+    "id": "d3-31",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "auf den Schoss genommen",
+    "locator": "[16:36]",
+    "signal": "positive"
+  },
+  {
+    "id": "d3-32",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Er hat sich Sorgen gemacht",
+    "locator": "[16:36]",
+    "signal": "friction",
+    "emotion_hint": {
+      "valence": -1,
+      "explicit": true
+    }
+  },
+  {
+    "id": "d3-33",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "viermal in der Woche",
+    "locator": "[19:18]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-34",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "da ist er ganz sicher",
+    "locator": "[18:41]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-35",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "hat es ihm niemand erklärt",
+    "locator": "[18:41]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-36",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "geholfen, sie zu installieren",
+    "locator": "[20:10]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-37",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Tigrinya hat es dort nicht",
+    "locator": "[20:10]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-38",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Er nimmt Englisch",
+    "locator": "[20:10]",
+    "signal": "workaround"
+  },
+  {
+    "id": "d3-39",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "einen Vogel mitbringen",
+    "locator": "[20:10]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "d3-40",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "sie war in den Socken",
+    "locator": "[21:57]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "d3-41",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "mit der Nachbarin ins Brockenhaus",
+    "locator": "[21:57]",
+    "signal": "workaround"
+  },
+  {
+    "id": "d3-42",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "eine Liste, was das Kind braucht",
+    "locator": "[21:57]",
+    "signal": "need"
+  },
+  {
+    "id": "d3-43",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "am Morgen dabeibleiben, drei Morgen",
+    "locator": "[23:50]",
+    "signal": "positive"
+  },
+  {
+    "id": "d3-44",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "immer Waldtag",
+    "locator": "[23:50]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "d3-45",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "einen Zettel gegeben, mit Bildern",
+    "locator": "[23:50]",
+    "signal": "positive"
+  },
+  {
+    "id": "d3-46",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das gefällt ihm sehr",
+    "locator": "[23:50]",
+    "signal": "positive",
+    "emotion_hint": {
+      "valence": 1,
+      "explicit": true
+    }
+  },
+  {
+    "id": "d3-47",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ist es mehr Text",
+    "locator": "[23:50]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-48",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Tür war zu, niemand war da",
+    "locator": "[23:50]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "d3-49",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "zu Fuss, zwanzig Minuten",
+    "locator": "[26:35]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-50",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "aber kein Lichtsignal",
+    "locator": "[26:35]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-51",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das macht er nicht",
+    "locator": "[26:35]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-52",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ins gleiche Haus gezügelt",
+    "locator": "[26:35]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-53",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das entscheidet die Schulleitung",
+    "locator": "[26:35]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "d3-54",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "er hat alles verstanden",
+    "locator": "[29:31]",
+    "signal": "positive"
+  },
+  {
+    "id": "d3-55",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "sehr still und liest langsam",
+    "locator": "[29:31]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-56",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "krank im Kopf",
+    "locator": "[29:31]",
+    "signal": "friction",
+    "emotion_hint": {
+      "valence": -1,
+      "explicit": true
+    }
+  },
+  {
+    "id": "d3-57",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "zweimal dort, mit einer Dolmetscherin",
+    "locator": "[29:31]",
+    "signal": "neutral"
+  },
+  {
+    "id": "d3-58",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "vier Seiten, auf Deutsch",
+    "locator": "[29:31]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-59",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das hat ihn sehr gefreut",
+    "locator": "[29:31]",
+    "signal": "positive",
+    "emotion_hint": {
+      "valence": 1,
+      "explicit": true
+    }
+  },
+  {
+    "id": "d3-60",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "etwas von einer Förderung",
+    "locator": "[29:31]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-61",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "fast vier Monate",
+    "locator": "[30:51]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-62",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "nur für psychisch Kranke",
+    "locator": "[30:51]",
+    "signal": "friction"
+  },
+  {
+    "id": "d3-63",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die im Zimmer sitzt, nicht am Telefon",
+    "locator": "[33:23]",
+    "signal": "need"
+  },
+  {
+    "id": "d3-64",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "wie die Schule hier funktioniert",
+    "locator": "[33:23]",
+    "signal": "need"
+  },
+  {
+    "id": "d3-65",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "eine Liste mit Bildern",
+    "locator": "[33:23]",
+    "signal": "need"
+  },
+  {
+    "id": "d3-66",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "beide Kinder am gleichen Ort",
+    "locator": "[33:23]",
+    "signal": "need"
+  },
+  {
+    "id": "d3-67",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "eine Farbe oder ein Zeichen",
+    "locator": "[33:23]",
+    "signal": "need"
+  },
+  {
+    "id": "d3-68",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "sehr gut, sehr geduldig",
+    "locator": "[33:23]",
+    "signal": "positive"
+  },
+  {
+    "id": "d3-69",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "kein Schweinefleisch",
+    "locator": "[33:23]",
+    "signal": "positive"
+  }
+]

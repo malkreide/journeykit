@@ -674,7 +674,11 @@
               "frequency": "occasional",
               "owner": "Bauberatung",
               "status": "open",
+              "caused_by": [
+                "pp-einsprache-unvorbereitet"
+              ],
               "evidence_refs": [
+                "b2-07",
                 "b2-09",
                 "b2-10",
                 "b2-11",

@@ -140,6 +140,38 @@ def test_audit_lists_costs_without_total(minimal):
     assert "pro Semester" not in fr
 
 
+def test_audit_counts_chains_of_causes(minimal):
+    assert "Ursachenketten" not in audit_markdown(minimal, lint_journey(minimal))
+    minimal["phases"].append(
+        {
+            "id": "phase-2",
+            "name": "Nachfassen",
+            "steps": [
+                {
+                    "id": "step-2",
+                    "name": "Nachfragen",
+                    "action": "Die Persona ruft an.",
+                    "pain_points": [
+                        {
+                            "id": "pp-2",
+                            "text": "Vermeidbarer Kontakt",
+                            "type": "friction",
+                            "caused_by": ["pp-1"],
+                            "evidence_refs": ["ev-2"],
+                        }
+                    ],
+                }
+            ],
+        }
+    )
+    md = audit_markdown(minimal, lint_journey(minimal))
+    assert (
+        "- Ursachenketten: 1 Pain Point(s) mit Ursache im Modell, davon 1 über Phasen hinweg" in md
+    )
+    fr = audit_markdown(minimal, lint_journey(minimal, lang="fr"), lang="fr")
+    assert "Chaînes de causes" in fr and "d'une phase à l'autre" in fr
+
+
 def test_quotes_from_user_sources_are_not_relayed(minimal):
     for atom in minimal["evidence"]:
         atom["class"] = "assumed"  # Klasse gesetzt, die Quelle bleibt das Interview

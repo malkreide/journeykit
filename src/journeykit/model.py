@@ -38,6 +38,8 @@ class JourneyIndex:
     opportunities: dict[str, dict[str, Any]] = field(default_factory=dict)
     step_phase: dict[str, str] = field(default_factory=dict)
     pain_point_step: dict[str, str] = field(default_factory=dict)
+    step_order: dict[str, int] = field(default_factory=dict)
+    consequences: dict[str, list[str]] = field(default_factory=dict)
 
     @classmethod
     def build(cls, journey: dict[str, Any]) -> JourneyIndex:
@@ -51,11 +53,17 @@ class JourneyIndex:
             for step in phase.get("steps", []):
                 idx.steps[step["id"]] = step
                 idx.step_phase[step["id"]] = phase["id"]
+                idx.step_order.setdefault(step["id"], len(idx.step_order))
                 for pp in step.get("pain_points", []):
                     idx.pain_points[pp["id"]] = pp
                     idx.pain_point_step[pp["id"]] = step["id"]
         for opp in journey.get("opportunities", []):
             idx.opportunities[opp["id"]] = opp
+        # Rückweg von der Ursache zu ihren Folgen (ADR-0008); unbekannte Ursachen meldet L001
+        for pid, pp in idx.pain_points.items():
+            for cause in pp.get("caused_by", []):
+                if cause in idx.pain_points and cause != pid:
+                    idx.consequences.setdefault(cause, []).append(pid)
         return idx
 
     # -- Evidenz ---------------------------------------------------------
@@ -201,6 +209,18 @@ class JourneyIndex:
             return opp["phase_ref"], None
         step = self.pain_point_step.get((opp.get("linked_pain_points") or [None])[0])
         return (self.step_phase[step], step) if step else (None, None)
+
+    def root_causes(self, pain_point_id: str) -> set[str]:
+        """Alle Ursachen eines Pain Points über caused_by, auch mittelbare; ohne ihn selbst."""
+        seen: set[str] = set()
+        todo = list(self.pain_points.get(pain_point_id, {}).get("caused_by", []))
+        while todo:
+            cause = todo.pop()
+            if cause in seen or cause == pain_point_id or cause not in self.pain_points:
+                continue
+            seen.add(cause)
+            todo += self.pain_points[cause].get("caused_by", [])
+        return seen
 
     def opportunity_for_pain_point(self, pain_point_id: str) -> list[dict[str, Any]]:
         return [

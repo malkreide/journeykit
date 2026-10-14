@@ -176,18 +176,25 @@ Atome zu Schritten clustern. Pro Schritt:
   Betrag, meldet L103: Sie sagt, was gelten soll, nicht was bezahlt wurde.
   Zeitkosten (Arbeitsausfall, Wartezeit) sind keine Kosten in diesem Sinn,
   sondern Dauer (`duration_days`, siehe unten).
-- **Vermeidbare Schritte** (failure demand: Rückfrage, Nachfrage, zweiter
-  Anlauf – nötig nur, weil ein Schritt davor nicht gelang) haben kein eigenes
-  Feld. Muster: Der Schritt bleibt stehen und erhält einen Pain Point
-  `friction`, dessen Text sagt, dass und warum er vermeidbar ist, mit Evidenz
-  (Anfragegrund, Zitat). Die Ursache gehört an den Schritt davor, meist als
-  Breakdown (unverständlicher Brief, fehlende Information); ist sie nicht
-  belegt, als offene Frage mit `step_ref` auf diesen Schritt. Eine Chance setzt
-  bei der Ursache an (`step_ref` des Schritts davor), nicht beim vermeidbaren
-  Schritt. Kennzahl: «Anteil vermeidbarer Kontakte» (`public_value`,
-  Frühindikator; `references/kpi-uebersetzung.md`). Nicht vermeidbar sind
-  Kontakte, die Wert schaffen – eine Beratung, die die Person braucht; im
-  Zweifel nach dem Grund des Kontakts fragen.
+- **Vermeidbare Schritte und Folgen** (failure demand: Rückfrage, Nachfrage,
+  zweiter Anlauf – nötig nur, weil ein Schritt davor nicht gelang; ebenso
+  Folgekosten): Der Schritt bleibt stehen und erhält einen Pain Point
+  `friction`, dessen Text sagt, dass und warum er vermeidbar ist. In
+  `caused_by` stehen die IDs der Pain Points, aus denen er folgt (ADR-0008) –
+  im selben oder einem früheren Schritt, auch über Phasen und Stellen hinweg.
+  Die Ursache ist immer ein Pain Point am Schritt, an dem sie die Persona
+  trifft, meist ein Breakdown (unverständlicher Brief, fehlende Information);
+  liegt sie Back-Stage, der Pain Point dort, wo die Persona sie bemerkt (z. B.
+  keine Bestätigung), nie eine `backstage_notes`-Zeile. Ist die Ursache nicht
+  belegt, statt `caused_by` eine offene Frage mit `step_ref`. Den Beleg für die
+  Verbindung tragen die `evidence_refs` der Folge («Dann hätte ich nicht
+  anrufen müssen»; eine Zahl, die beides verknüpft). Eine Chance setzt bei der
+  Ursache an – Ursache in `linked_pain_points` oder `step_ref` auf ihren
+  Schritt; sonst meldet L065. Kennzahl: «Anteil vermeidbarer Kontakte»
+  (`public_value`, Frühindikator; `references/kpi-uebersetzung.md`). Nicht
+  vermeidbar sind Kontakte, die Wert schaffen – eine Beratung, die die Person
+  braucht – und Rückwege, die funktionieren; im Zweifel nach dem Grund des
+  Kontakts fragen.
 
 Je Phase:
 
@@ -304,8 +311,9 @@ Vorgehen:
   als vermeidbar (etwa eine Zeile «Could this step have been avoided?»), wird
   die Markierung ein Atom wie jede Stelle und der Schritt erhält einen Pain
   Point `friction` («laut Vorlage vermeidbar»); der Typ ist vom Audit
-  erschlossen und steht im `changelog`. Die Ursache davor nicht selbst
-  modellieren, sondern als offene Frage mit `step_ref` auf den Schritt davor.
+  erschlossen und steht im `changelog`. `caused_by` nur, wenn die Vorlage die
+  Ursache nennt; sonst die Ursache nicht selbst modellieren, sondern als
+  offene Frage mit `step_ref` auf den Schritt davor.
 - **Chancen am Schritt**: Ordnet die Vorlage eine Idee oder Verbesserung einer
   Spalte zu, kommt der Schritt in `step_ref` – keine Phase erfinden, nur um die
   Chance zu verankern. Eine Phase, die die ganze Journey umfasst, ist kein Bezug.

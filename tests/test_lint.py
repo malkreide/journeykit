@@ -94,6 +94,75 @@ def test_cost_backed_only_by_assumptions_is_info(minimal):
     assert "L103" not in codes(lint_journey(minimal, today=TODAY))
 
 
+def _two_steps(minimal):
+    """Zweiter Schritt mit einer Nachfrage, die aus dem Breakdown im ersten folgt."""
+    first = minimal["phases"][0]["steps"][0]
+    second = {
+        "id": "step-2",
+        "name": "Nachfragen",
+        "action": "Die Persona ruft an.",
+        "channel": "phone",
+        "is_transition": True,
+        "pain_points": [
+            {
+                "id": "pp-2",
+                "text": "Vermeidbarer Kontakt",
+                "type": "friction",
+                "caused_by": ["pp-1"],
+                "evidence_refs": ["ev-2"],
+            }
+        ],
+    }
+    minimal["phases"][0]["steps"].append(second)
+    return first, second
+
+
+def test_caused_by_is_clean(minimal):
+    _two_steps(minimal)
+    assert {"L001", "L005", "L065"}.isdisjoint(codes(lint_journey(minimal, today=TODAY)))
+
+
+def test_caused_by_unknown_or_self_is_error(minimal):
+    _, second = _two_steps(minimal)
+    second["pain_points"][0]["caused_by"] = ["gibt-es-nicht"]
+    findings = lint_journey(minimal, today=TODAY)
+    assert any(f.code == "L001" and "gibt-es-nicht" in f.message for f in findings)
+    second["pain_points"][0]["caused_by"] = ["pp-2"]
+    findings = lint_journey(minimal, today=TODAY)
+    assert any(f.code == "L001" and "selbst" in f.message for f in findings)
+
+
+def test_cause_after_consequence_is_error(minimal):
+    first, second = _two_steps(minimal)
+    second["pain_points"][0].pop("caused_by")
+    first["pain_points"][0]["caused_by"] = ["pp-2"]  # Ursache liegt erst im zweiten Schritt
+    assert "L005" in codes(lint_journey(minimal, today=TODAY), ERROR)
+
+
+def test_causes_in_a_circle_are_error(minimal):
+    first, _ = _two_steps(minimal)
+    first["pain_points"].append(
+        {"id": "pp-3", "text": "Reibung", "type": "friction", "caused_by": ["pp-1"]}
+    )
+    assert "L005" not in codes(lint_journey(minimal, today=TODAY)), "im selben Schritt erlaubt"
+    first["pain_points"][0]["caused_by"] = ["pp-3"]
+    findings = [f for f in lint_journey(minimal, today=TODAY) if f.code == "L005"]
+    assert findings and "pp-1, pp-3" in findings[0].message
+
+
+def test_opportunity_only_at_consequences_is_info(minimal):
+    first, _ = _two_steps(minimal)
+    opp = minimal["opportunities"][0]
+    opp["linked_pain_points"] = ["pp-2"]
+    opp.pop("phase_ref")
+    assert "L065" in codes(lint_journey(minimal, today=TODAY), INFO)
+    opp["step_ref"] = first["id"]  # setzt am Schritt der Ursache an
+    assert "L065" not in codes(lint_journey(minimal, today=TODAY))
+    opp.pop("step_ref")
+    opp["linked_pain_points"] = ["pp-2", "pp-1"]  # Ursache mitverknüpft
+    assert "L065" not in codes(lint_journey(minimal, today=TODAY))
+
+
 def test_all_assumed_with_validated_status_is_error(minimal):
     for atom in minimal["evidence"]:
         atom["class"] = "assumed"

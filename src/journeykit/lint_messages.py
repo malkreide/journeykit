@@ -28,6 +28,11 @@ _DE: dict[str, tuple[str, str]] = {
     "L001.opp_step_phase": ("Chance «{opp}»: Schritt «{step}» liegt nicht in Phase «{phase}».", ""),
     "L001.question_phase": ("Offene Frage verweist auf unbekannte Phase «{phase}».", ""),
     "L001.question_step": ("Offene Frage verweist auf unbekannten Schritt «{step}».", ""),
+    "L001.caused_by": (
+        "Pain Point «{pp}» nennt einen unbekannten Pain Point «{ref}» als Ursache.",
+        "",
+    ),
+    "L001.caused_by_self": ("Pain Point «{pp}» nennt sich selbst als Ursache.", ""),
     "L002": (
         "ID «{id}» wird {n}-mal vergeben.",
         "IDs eindeutig machen; sie sind Referenzziele.",
@@ -39,6 +44,14 @@ _DE: dict[str, tuple[str, str]] = {
     "L004": (
         "Kosten «{label}» bei «{step}» sind widersprüchlich: min {min}, Betrag {amount}, max {max}.",
         "Es muss min ≤ amount ≤ max gelten; Grenzen weglassen, die die Belege nicht tragen.",
+    ),
+    "L005": (
+        "Pain Point «{pp}» bei «{step}»: Die Ursache «{cause}» liegt erst später, bei «{cause_step}».",
+        "Eine Ursache liegt im selben oder einem früheren Schritt. Verweis prüfen – oder die Reihenfolge der Schritte.",
+    ),
+    "L005.cycle": (
+        "Pain Points im Schritt «{step}» verweisen im Kreis aufeinander: {ids}.",
+        "Eine Folge kann nicht ihre eigene Ursache sein: den Verweis entfernen, den die Belege nicht tragen.",
     ),
     # Inside-Out Bias
     "L010.none": (
@@ -152,6 +165,10 @@ _DE: dict[str, tuple[str, str]] = {
         "{n} Chance(n) ohne Bezug zu Pain Point, Schritt oder Phase: {ids}.",
         "Ohne Bezug lässt sich nicht prüfen, welches Problem die Chance löst. linked_pain_points, step_ref oder phase_ref setzen.",
     ),
+    "L065": (
+        "{n} Chance(n) setzen nur bei Folgen an, nicht bei deren Ursache: {ids}.",
+        "Die Ursache beheben, nicht die Folge: die Ursache in linked_pain_points aufnehmen oder step_ref auf ihren Schritt setzen.",
+    ),
     # Blueprint statt Journey
     "L070": (
         "Keine Eingangsdiagnose (meta.diagnosis): Warum ist das eine User Journey und kein Service Blueprint?",
@@ -218,6 +235,11 @@ _FR: dict[str, tuple[str, str]] = {
     ),
     "L001.question_phase": ("Une question ouverte renvoie à une phase inconnue « {phase} ».", ""),
     "L001.question_step": ("Une question ouverte renvoie à une étape inconnue « {step} ».", ""),
+    "L001.caused_by": (
+        "L'irritant « {pp} » indique comme cause un irritant inconnu « {ref} ».",
+        "",
+    ),
+    "L001.caused_by_self": ("L'irritant « {pp} » s'indique lui-même comme cause.", ""),
     "L002": (
         "L'ID « {id} » est attribué {n} fois.",
         "Rendre les ID uniques ; ce sont des cibles de référence.",
@@ -229,6 +251,14 @@ _FR: dict[str, tuple[str, str]] = {
     "L004": (
         "Les coûts « {label} » à l'étape « {step} » sont contradictoires : min {min}, montant {amount}, max {max}.",
         "Il faut que min ≤ amount ≤ max ; omettre les bornes que les preuves ne soutiennent pas.",
+    ),
+    "L005": (
+        "Irritant « {pp} » à l'étape « {step} » : la cause « {cause} » ne survient que plus tard, à l'étape « {cause_step} ».",
+        "Une cause se situe à la même étape ou à une étape antérieure. Vérifier la référence – ou l'ordre des étapes.",
+    ),
+    "L005.cycle": (
+        "Les irritants de l'étape « {step} » se désignent mutuellement comme cause, en boucle : {ids}.",
+        "Une conséquence ne peut pas être sa propre cause : supprimer la référence que les preuves ne soutiennent pas.",
     ),
     # Biais de la vue interne
     "L010.none": (
@@ -341,6 +371,10 @@ _FR: dict[str, tuple[str, str]] = {
     "L064": (
         "{n} opportunité(s) sans lien avec un irritant, une étape ou une phase : {ids}.",
         "Sans lien, impossible de vérifier quel problème l'opportunité résout. Renseigner linked_pain_points, step_ref ou phase_ref.",
+    ),
+    "L065": (
+        "{n} opportunité(s) ne visent que des conséquences, pas leur cause : {ids}.",
+        "Traiter la cause, pas la conséquence : ajouter la cause dans linked_pain_points ou placer step_ref sur son étape.",
     ),
     # Blueprint au lieu de parcours
     "L070": (

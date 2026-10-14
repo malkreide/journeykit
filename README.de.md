@@ -18,7 +18,7 @@ Das Vokabular ist für die Verwaltung übersetzt, wo niemand «konvertiert» ode
 
 - **Journey-Modell** als JSON Schema (Draft 2020-12) mit Evidenz-Atomen, Quellenregister, Datenschutzstatus, Owner und Review-Rhythmus
 - **Methodische Lints** für die fünf Fallstricke – Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathie-Vakuum / Überkomplexität, Micro-Level Disconnect – plus Blueprint-Smell, Personendaten, KPI-Übersetzung und Evidenzqualität (L001–L103)
-- **Interaktiver Viewer**: eine eigenständige HTML-Datei mit fünf Layern – Journey Map mit emotionaler Kurve, belegter Dauer je Phase auf einem gemeinsamen Massstab und den Kosten, die je Schritt fällig werden, Prozess- und Fehlerpfade, Evidenz-Heatmap und Quellenregister, Impact/Effort-Matrix mit User Stories, Prüfung – Evidenz-Drilldown bis zum O-Ton auf jeder Zelle, Filter «nur Primärevidenz», Persona-Überlagerung, hell/dunkel, Druck, Oberfläche deutsch oder französisch
+- **Interaktiver Viewer**: eine eigenständige HTML-Datei mit fünf Layern – Journey Map mit emotionaler Kurve, belegter Dauer je Phase auf einem gemeinsamen Massstab, den Kosten, die je Schritt fällig werden, und Verweisen von einem Pain Point auf seine Ursache, Prozess- und Fehlerpfade, Evidenz-Heatmap und Quellenregister, Impact/Effort-Matrix mit User Stories, Prüfung – Evidenz-Drilldown bis zum O-Ton auf jeder Zelle, Filter «nur Primärevidenz», Persona-Überlagerung, hell/dunkel, Druck, Oberfläche deutsch oder französisch
 - **Exporte**: Story Map nach Patton (Markdown), Massnahmenliste (CSV), Chancenmatrix, Audit-Report (Diagnose, Urteilsvorschlag, nächste Schritte, Kosten, Befunde)
 - **Diff** zwischen zwei Versionen – was hat neue Evidenz verändert?
 - **Claude-Skill** `user-journey` mit drei Modi: *Synthese* (Rohmaterial → Journey), *Workshop* (Hypothesis-first mit Erhebungsplan), *Audit* (bestehende Journey prüfen)
@@ -90,13 +90,13 @@ Sprache aller Ausgaben: `--lang` je Befehl, sonst `meta.language` der Journey, s
 
 | Bereich | Fallstrick | Beispiele |
 |---|---|---|
-| L001–L004 | Integrität | hängende Evidenz-Referenzen, doppelte IDs, widersprüchliche Phasendauer (min > typisch oder typisch > max), widersprüchliche Kostenspanne (min > Betrag oder Betrag > max) |
+| L001–L004 | Integrität | hängende Evidenz-Referenzen, doppelte IDs, widersprüchliche Phasendauer (min > typisch oder typisch > max), widersprüchliche Kostenspanne (min > Betrag oder Betrag > max), unbekannte Ursache eines Pain Points oder eine Ursache, die erst nach ihrer Folge kommt |
 | L010–L012 | Inside-Out Bias | Erlebnis-Aussagen ohne Primärevidenz oder gar keine; Persona auf weniger als 3 Primärbelegen |
 | L020–L023 | Happy Path Bias | keine Breakdowns; Phase ohne Reibung oder Edge Case; Breakdown ohne Recovery-Pfad; Kanal- oder Zuständigkeitswechsel nicht als Übergang markiert |
 | L030–L035 | Static Map Trap | kein Owner, kein Review-Rhythmus, schwerer Pain Point ohne Owner; kein Datum |
 | L040–L043 | Empathie-Vakuum | Schritte ohne Gefühle oder Gedanken; Emotionen ohne Beleg |
 | L050–L054 | Überkomplexität | zu viele Phasen/Schritte; kein Scope-Ausschluss; kein Endzustand; kein Auslöser |
-| L060–L064 | Micro-Level Disconnect | keine Chancen; schwerer Pain Point ohne Chance; keine Stories; Chance ohne Bezug zu Pain Point oder Phase |
+| L060–L065 | Micro-Level Disconnect | keine Chancen; schwerer Pain Point ohne Chance; keine Stories; Chance ohne Bezug zu Pain Point oder Phase; Chance, die nur bei Folgen ansetzt, nicht bei deren Ursache |
 | L070–L073 | Blueprint-Smell | keine Diagnose; mehr Back-Stage-Notizen als Schritte; mehrheitlich Schritte, die Dritte anstelle der Persona ausführen |
 | L080–L081 | Personendaten | Quelle enthält Personendaten; E-Mail-/Telefonmuster im Evidenztext |
 | L090–L092 | Kennzahlen | keine; kommerzielle Benennung; kein Frühindikator |

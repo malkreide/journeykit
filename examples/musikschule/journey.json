@@ -471,6 +471,9 @@
               "workaround": "Mehrmals anrufen.",
               "owner": "Leitung Sekretariat Musikschule",
               "status": "open",
+              "caused_by": [
+                "pp-warteliste-ohne-stand"
+              ],
               "evidence_refs": [
                 "m1-11",
                 "m1-23",
@@ -653,7 +656,7 @@
             }
           ],
           "backstage_notes": [
-            "Die Gemeinde meldet bewilligte Ermässigungen der Musikschule (Soll: bis 15. August, doc-07). 38 % kommen erst nach der Rechnung an (stat-11) – die Ursache des Breakdowns bei «Rechnung prüfen» liegt hier, für die Eltern unsichtbar."
+            "Die Gemeinde meldet bewilligte Ermässigungen der Musikschule (Soll: bis 15. August). 38 % kommen erst nach der Rechnung an – die Ursache des Breakdowns bei «Rechnung prüfen» liegt hier, für die Eltern unsichtbar."
           ],
           "evidence_refs": [
             "stat-10"
@@ -855,6 +858,9 @@
               "workaround": "Den vollen Betrag bezahlen, um keine Mahnung zu riskieren, und nachfragen.",
               "owner": "Abteilung Bildung (Gemeinde)",
               "status": "open",
+              "caused_by": [
+                "pp-ermaessigung-papier"
+              ],
               "evidence_refs": [
                 "m2-09",
                 "stat-11",
@@ -956,6 +962,9 @@
               "workaround": "Bei beiden Stellen anrufen, bis eine die Korrektur auslöst.",
               "owner": "Abteilung Bildung (Gemeinde)",
               "status": "open",
+              "caused_by": [
+                "pp-volle-rechnung"
+              ],
               "evidence_refs": [
                 "m2-11",
                 "m2-12",
@@ -1136,6 +1145,9 @@
               "workaround": "Bezahlen und das Semester nutzen; Gesuch um Erlass.",
               "owner": "Leitung Sekretariat Musikschule",
               "status": "open",
+              "caused_by": [
+                "pp-abmeldung-ungueltig"
+              ],
               "evidence_refs": [
                 "m3-08",
                 "m3-12",

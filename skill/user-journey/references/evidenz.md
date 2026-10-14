@@ -61,7 +61,7 @@ Aussage, nicht pro Satz. Ein kurzer Redebeitrag (bis drei Sätze) bleibt ein
 Atom, auch wenn er Ursache und Folge oder Problem und Ausweg nennt. Wechselt ein
 langer Redebeitrag das Thema oder den Schritt, wird jede Aussage ein eigenes Atom
 mit derselben Fundstelle. Zitate wörtlich. Emotionen nur mit Beleg im Text.
-Typisch 12–25 Atome pro 45-Minuten-Interview. Fragen der interviewenden Person
+Die Zahl der Atome folgt aus den Aussagen, nicht aus einer Vorgabe. Zur Grössenordnung: In den synthetischen Testfällen ergab eine Gesprächsminute etwa 1,5–2,5 Atome, ein 45-Minuten-Interview mit vielen langen Redebeiträgen rund 90–110 (an realem Material nicht geprüft). Fragen der interviewenden Person
 sind keine Evidenz. Auf **Vermittlung** achten: Wer hat einen Schritt
 tatsächlich gemacht – die Person selbst, mit Hilfe (Nachbarin übersetzt) oder
 jemand an ihrer Stelle (Firma mit Vollmacht)? Solche Stellen als eigenes Atom

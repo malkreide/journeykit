@@ -52,7 +52,7 @@ Eine ältere Schablone prüft man mit ihrer `evidenz.md`:
 Das Modell darf weder `expected.json` noch `reference.json` sehen. Die Läufe
 unten wurden so gemacht: je Fall ein frischer Subagent, der nur das Bundle lesen
 und nur seine Antwortdatei schreiben durfte. Für die Läufe vom 2026-10-14 ist
-das an den Werkzeugaufrufen aller 165 Subagenten geprüft (48 + 18 + 33 + 33 + 33): je ein
+das an den Werkzeugaufrufen aller 198 Subagenten geprüft (48 + 18 + 33 + 33 + 33 + 33): je ein
 Read (das eigene Bundle) und ein Write (die eigene Antwort), sonst nichts.
 
 ## Was gemessen wird
@@ -365,7 +365,12 @@ aus einem Durchgang ableiten; die Bedingungen der Kriterien liegen bisher weit
 genug von den Messwerten entfernt.
 
 
-## Messlauf Richtwert Atomzahl (2026-10-14): Kriterium vorab festgelegt
+## Messlauf Richtwert Atomzahl (2026-10-14): übernommen
+
+### Kriterium, vorab festgelegt
+
+Festgelegt und gepusht vor dem ersten Lauf (Commit `bf62400`, PR #73), hier
+unverändert.
 
 Der Richtwert in `evidenz.md` (Abschnitt «Interview-Transkripte») passt zu keiner
 gemessenen Schablone: «Typisch 12–25 Atome pro 45-Minuten-Interview», gemessen
@@ -413,10 +418,48 @@ als Beleg:
    Dolmetsch-Interview 45,0–62,7. Der Satz soll beschreiben, was die Regel
    ergibt, nicht die Körnung verschieben.
 
+### Ergebnis
+
+Je drei blinde Läufe über alle elf Fälle mit dem neuen Satz
+(`runs/2026-10-14-richtwert-1..3`, `runs/2026-10-14-unabhaengig-richtwert-1..3`),
+an den Werkzeugaufrufen geprüft wie die übrigen. Vergleiche mit den sechs
+bisherigen Läufen in
+[`runs/2026-10-14-richtwert-vergleich.md`](runs/2026-10-14-richtwert-vergleich.md) und
+[`runs/2026-10-14-unabhaengig-richtwert-vergleich.md`](runs/2026-10-14-unabhaengig-richtwert-vergleich.md).
+
+| Bedingung | Messwert | erfüllt |
+|---|---|---|
+| 1. Unabhängige Fälle: gefundene Pflicht-Einträge | 172 von 172 in jedem Lauf | ja |
+| 2. Elterninterview: geteilte Pflicht-Einträge | 4, 10, 6 (Mittel 6,7) | ja |
+| 3. Acht übrige Fälle: Pflicht-Atome · Feldtreue · Regelverstösse | 71/71 · 99,6 % in jedem Lauf · 1, 0, 2 | ja |
+| 4. Atomzahl, Mittel je Interviewfall | `interview` 9,0 · `interview-hort` 18,7 · Elterninterview 109,7 · Fokusgruppe 110,7 · Dolmetsch-Interview 61,0 | ja |
+
+Der Satz steht damit genau im festgelegten Wortlaut in `evidenz.md`. Die
+Verstösse sind dieselben wie zuvor (Zitat der Beschwerde über zwei Briefzeilen,
+eine ausdrückliche Emotion im Workshop), keiner ist eine Aufteilung.
+
+**Die Atomzahl steigt von Durchgang zu Durchgang**, in allen drei langen Fällen
+und in derselben Reihenfolge – auch zwischen den ersten beiden Durchgängen, deren
+Bundles byte-identisch waren:
+
+| Mittel der Atome | engere Regel | Bestätigung | neuer Satz |
+|---|---|---|---|
+| Elterninterview | 89,0 | 103,3 | 109,7 |
+| Fokusgruppe | 90,0 | 98,3 | 110,7 |
+| Dolmetsch-Interview | 52,0 | 57,0 | 61,0 |
+| Abweichungen beim `signal` (drei Läufe) | 93 | 64 | 56 |
+
+Ob der neue Satz zum letzten Schritt beiträgt, lässt sich von diesem Trend nicht
+trennen. Die Fokusgruppe liegt mit 110,7 knapp unter der Grenze von 112,2 und mit
+etwa 2,7 Atomen je Minute über der Grössenordnung im Satz (1,5–2,5). Der Wortlaut
+bleibt wie festgelegt; die Zahlen nach jedem Durchgang nachzuziehen hiesse, einem
+Trend synthetischer Läufe hinterherzulaufen. Sie gehören an realem Material
+geprüft (Punkt 1 der offenen Punkte).
+
 ## Grenzen
 
 - **Über die Abdeckung trennt der Testsatz nicht.** Die acht Fälle aus derselben Hand wie die Schablone löst die aktuelle Schablone fehlerfrei; auch die drei unabhängigen Fälle finden beide Schablonen zu 98–100 %. Autor, Gold und Extraktion sind bisher dasselbe Modell – was ihm entgeht, entgeht allen dreien. Erst reales Material aus der Evaluation (anonymisierte Ausschnitte, Mundart, echte Unordnung) kann zeigen, was eine Extraktion wirklich übersieht.
-- **Ein Modell.** Alle Läufe stammen vom selben Modell; ein anderes Modell kann anders streuen. Vor einem Urteil über eine Schablonenänderung mehrere Läufe vergleichen (`compare`) – bei knappen Unterschieden aus mehr als einem Durchgang: Zwei Durchgänge derselben Schablone unterschieden sich bei den langen Interviews stärker als die Läufe innerhalb eines Durchgangs (Bestätigungslauf oben).
+- **Ein Modell.** Alle Läufe stammen vom selben Modell; ein anderes Modell kann anders streuen. Vor einem Urteil über eine Schablonenänderung mehrere Läufe vergleichen (`compare`) – bei knappen Unterschieden aus mehr als einem Durchgang: Zwei Durchgänge derselben Schablone unterschieden sich bei den langen Interviews stärker als die Läufe innerhalb eines Durchgangs, und die Atomzahl stieg über drei Durchgänge stetig (Bestätigungslauf und Messlauf Richtwert oben).
 - **Gold und Schablone stammen aus derselben Hand.** Das Gold prüft, was `evidenz.md` verlangt – nicht, ob das, was `evidenz.md` verlangt, die richtige Methode ist.
 - **Der Scorer ist selbst ein Messinstrument.** Zweimal hat erst ein Lauf einen Fehler gezeigt (das Tausendertrennzeichen in «1'236», die Zuordnung in Gold-Reihenfolge). Korrekturen gelten für alle Läufe gleich; die abgelegten Berichte und Vergleiche prüft `tests/test_extraction_eval.py` nach jeder Änderung. Bekannte Grenze: Ein Zitat über zwei Zeilen einer Quelle mit Zeilennummern gilt als nicht wörtlich.
 - **Ermessensfragen bleiben offen.** Wo das Gold mehrere Antworten zulässt (z. B. `signal` bei der Nachbarin, Emotion beim Wunsch nach einer Liste), steht das im Gold als Liste erlaubter Werte oder als `"emotion": "any"`.

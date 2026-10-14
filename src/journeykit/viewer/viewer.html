@@ -141,6 +141,8 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
 .sev i { width: 6px; height: 6px; border-radius: 1px; background: var(--line-strong); display: inline-block; }
 .sev i.on { background: var(--ink-2); }
 .pp .wa { color: var(--ink-2); font-size: 12px; margin-top: 3px; }
+.pp-cause { color: var(--ink-2); font-size: 12px; margin: -2px 0 8px 2px; }
+.branch > .pp-cause { margin: 4px 0 0; } .branch > .wa { color: var(--ink-2); font-size: 12px; margin-top: 2px; }
 .hidden-note { font-size: 11.5px; color: var(--ink-3); font-style: italic; padding: 4px 0; }
 .empty { color: var(--ink-3); font-size: 12px; }
 .kpi { font-size: 12.5px; padding: 4px 0; border-bottom: 1px dashed var(--line); }
@@ -367,6 +369,9 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "breakdown": "Breakdown",
    "friction": "Reibung",
    "owner": "Owner",
+   "causedBy": "Folge von",
+   "consequences_one": "führt zu {n} Folge",
+   "consequences_other": "führt zu {n} Folgen",
    "noPrimaryHidden_one": "{n} ohne Primärevidenz ausgeblendet",
    "noPrimaryHidden_other": "{n} ohne Primärevidenz ausgeblendet",
    "rowPain": "Pain Points",
@@ -555,6 +560,9 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "breakdown": "Rupture",
    "friction": "Friction",
    "owner": "Responsable",
+   "causedBy": "Conséquence de",
+   "consequences_one": "entraîne {n} conséquence",
+   "consequences_other": "entraîne {n} conséquences",
    "noPrimaryHidden_one": "{n} élément sans preuve primaire masqué",
    "noPrimaryHidden_other": "{n} éléments sans preuve primaire masqués",
    "rowPain": "Irritants",
@@ -689,6 +697,8 @@ class Idx {
       this.steps.push({ step: s, phase: p, pi, si, gi: this.steps.length });
       (s.pain_points || []).forEach(pp => { this.pp.set(pp.id, pp); this.ppStep.set(pp.id, s.id); });
     }));
+    // Folgen je Ursache (ADR-0008) – wie model.JourneyIndex.consequences; unbekannte Ursachen meldet L001
+    this.cons = new Map(); this.pp.forEach((pp, id) => (pp.caused_by || []).forEach(c => { if (c !== id && this.pp.has(c)) this.cons.set(c, (this.cons.get(c) || []).concat(id)); }));
   }
   classes(refs) { const out = { observed: 0, reported: 0, assumed: 0, missing: 0 }; (refs || []).forEach(r => { const a = this.ev.get(r); if (a) out[a.class]++; else out.missing++; }); return out; }
   hasPrimary(refs) { return (refs || []).some(r => PRIMARY.has(this.ev.get(r)?.class)); }
@@ -798,7 +808,7 @@ function renderJourney(idx) {
   // Pain Points
   cells = ""; idx.steps.forEach(e => { const pps = e.step.pain_points || []; let c = "", hidden = 0; pps.forEach(pp => { if (!visible(idx, pp.evidence_refs)) { hidden++; return; }
       const sev = pp.severity ? '<span class="sev" title="' + t("severity", { n: pp.severity }) + '">' + [1, 2, 3, 4, 5].map(i => '<i class="' + (i <= pp.severity ? 'on' : '') + '"></i>').join("") + '</span>' : '';
-      c += '<button class="claim pp ' + pp.type + ' ev-' + idx.evState(pp.evidence_refs) + '" data-refs="' + esc((pp.evidence_refs || []).join(",")) + '" data-title="' + esc(pp.id) + '" data-text="' + esc(pp.text) + '" data-pp="' + esc(pp.id) + '"><div class="pp-head"><span class="tag ' + pp.type + '">' + (pp.type === "breakdown" ? t("breakdown") : t("friction")) + '</span>' + sev + (pp.status ? '<span class="tag status">' + (L.ppStatus[pp.status] || pp.status) + '</span>' : '') + '</div>' + esc(pp.text) + evDots(idx, pp.evidence_refs) + (pp.workaround ? '<div class="wa">↪ ' + esc(pp.workaround) + '</div>' : '') + (pp.owner ? '<div class="wa">' + lbl("owner") + esc(pp.owner) + '</div>' : '') + '</button>'; });
+      c += '<button class="claim pp ' + pp.type + ' ev-' + idx.evState(pp.evidence_refs) + '" data-refs="' + esc((pp.evidence_refs || []).join(",")) + '" data-title="' + esc(pp.id) + '" data-text="' + esc(pp.text) + '" data-pp="' + esc(pp.id) + '"><div class="pp-head"><span class="tag ' + pp.type + '">' + (pp.type === "breakdown" ? t("breakdown") : t("friction")) + '</span>' + sev + (pp.status ? '<span class="tag status">' + (L.ppStatus[pp.status] || pp.status) + '</span>' : '') + '</div>' + esc(pp.text) + evDots(idx, pp.evidence_refs) + (pp.workaround ? '<div class="wa">↪ ' + esc(pp.workaround) + '</div>' : '') + (pp.owner ? '<div class="wa">' + lbl("owner") + esc(pp.owner) + '</div>' : '') + consequenceNote(idx, pp) + '</button>' + causeLinks(idx, pp); });
     if (hidden) c += '<div class="hidden-note">' + tn("noPrimaryHidden", hidden) + '</div>'; cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + (c || '<span class="empty">–</span>') + '</div>'; });
   row(t("rowPain"), t("rowPainSub"), cells);
   // Edge Cases & Recovery
@@ -864,15 +874,22 @@ function renderProcess(idx) {
   idx.j.phases.forEach(p => { h += '<div class="phase-h">' + esc(p.name) + (p.duration_days && visible(idx, p.duration_days.evidence_refs) ? ' · ' + t("durTypical", { d: days(p.duration_days.typical) }) : '') + '</div>';
     p.steps.forEach(s => { const bds = (s.pain_points || []).filter(x => x.type === "breakdown"), frs = (s.pain_points || []).filter(x => x.type !== "breakdown");
       h += '<div class="node-row"><div class="node' + (bds.length ? ' has-breakdown' : '') + '"><h4>' + esc(s.name) + '</h4><div class="act">' + esc(s.action) + '</div><div class="meta" style="margin-top:6px">' + (s.channel ? '<span class="chip">' + (L.channels[s.channel] || s.channel) + '</span>' : '') + (s.counterpart ? '<span class="chip">' + esc(s.counterpart) + '</span>' : '') + actorChip(s) + (s.is_transition ? '<span class="chip transition">' + t("transition") + '</span>' : '') + '</div>' + ((s.backstage_notes || []).length ? '<div class="muted" style="font-size:11.5px;margin-top:6px">' + lbl("backstage") + s.backstage_notes.map(esc).join(" · ") + '</div>' : '') + '</div><div class="branches">';
-      bds.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch bd"><b>' + lbl("breakdown") + '</b>' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">' + t("workaround") + '</span><span>' + esc(pp.workaround) + '</span></div>' : '') + '</div>'; });
+      bds.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch bd"><b>' + lbl("breakdown") + '</b>' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">' + t("workaround") + '</span><span>' + esc(pp.workaround) + '</span></div>' : '') + causeLinks(idx, pp) + consequenceNote(idx, pp) + '</div>'; });
       const rps = (s.recovery_paths || []).filter(r => visible(idx, r.evidence_refs));
       if (rps.length) { h += '<div class="branch" style="border-color:var(--positive)"><b>' + t("backToJourney") + '</b>'; rps.forEach(r => { h += '<div class="arrow rec' + (r.exists === false ? ' soll' : '') + '"><span class="lab">' + (r.exists === false ? t("targetPath") : t("recovery")) + '</span><span><i class="muted">' + esc(r.trigger) + '</i> → ' + esc(r.path) + ' ' + claimInline(idx, r.evidence_refs, t("recovery"), r.path) + '</span></div>'; }); h += '</div>'; }
-      frs.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch fr"><b>' + lbl("friction") + '</b>' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">' + t("workaround") + '</span><span>' + esc(pp.workaround) + '</span></div>' : '') + '</div>'; });
+      frs.forEach(pp => { if (!visible(idx, pp.evidence_refs)) return; h += '<div class="branch fr"><b>' + lbl("friction") + '</b>' + esc(pp.text) + ' ' + claimInline(idx, pp.evidence_refs, pp.id, pp.text) + (pp.workaround ? '<div class="arrow wa"><span class="lab">' + t("workaround") + '</span><span>' + esc(pp.workaround) + '</span></div>' : '') + causeLinks(idx, pp) + consequenceNote(idx, pp) + '</div>'; });
       (s.edge_cases || []).forEach(ec => { if (!visible(idx, ec.evidence_refs)) return; h += '<div class="branch ec"><b>' + lbl("edgeCase") + '</b>' + esc(ec.text) + ' ' + claimInline(idx, ec.evidence_refs, t("edgeCase"), ec.text) + '</div>'; });
       if (!bds.length && !(s.recovery_paths || []).length && !frs.length && !(s.edge_cases || []).length) h += '<div class="muted" style="font-size:12px;padding:8px 0">' + t("noFailurePath") + '</div>';
       h += '</div></div>'; }); });
   return h + '</div>';
 }
+// Ursachen eines Pain Points als Sprung zum Schritt der Ursache; Folgen als Zahl (ADR-0008)
+function causeLinks(idx, pp) {
+  const causes = (pp.caused_by || []).filter(c => c !== pp.id && idx.pp.has(c));
+  if (!causes.length) return "";
+  return '<div class="pp-cause">' + lbl("causedBy") + causes.map(c => { const e = idx.steps.find(x => x.step.id === idx.ppStep.get(c)); return '<button class="oq-at" data-goto="jstep-' + esc(e.step.id) + '" title="' + esc(idx.pp.get(c).text) + '">' + esc(t("quoted", { t: e.step.name })) + '</button>'; }).join(", ") + '</div>';
+}
+function consequenceNote(idx, pp) { const n = (idx.cons.get(pp.id) || []).length; return n ? '<div class="wa">→ ' + tn("consequences", n) + '</div>' : ""; }
 function claimInline(idx, refs, title, text) { if (!refs || !refs.length) return '<button class="claim" style="display:inline;width:auto;padding:0 4px;margin:0;border:0;background:none" data-refs="" data-title="' + esc(title) + '" data-text="' + esc(text) + '"><span class="evc muted" title="' + t("noEvidence") + '">∅</span></button>'; return '<button class="claim" style="display:inline;width:auto;padding:0 4px;margin:0;border:0;background:none" data-refs="' + esc(refs.join(",")) + '" data-title="' + esc(title) + '" data-text="' + esc(text) + '">' + evDots(idx, refs) + '</button>'; }
 
 // ---------------------------------------------------------------- Layer 3: Evidenz

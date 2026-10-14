@@ -160,3 +160,12 @@ def test_costs_require_period_amount_and_evidence(minimal):
     ):
         step["costs"] = [{**base, **bad}]
         assert not is_valid(minimal), bad
+
+
+def test_caused_by(minimal):
+    pp = minimal["phases"][0]["steps"][0]["pain_points"][0]
+    pp["caused_by"] = ["pp-0"]
+    assert is_valid(minimal)
+    for bad in ([], ["pp-0", "pp-0"], ["Kein Bezeichner"], "pp-0"):
+        pp["caused_by"] = bad
+        assert not is_valid(minimal), bad

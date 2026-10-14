@@ -365,6 +365,13 @@
         "workaround": { "type": "string", "description": "Wohin die Persona ausweicht (das Verwaltungs-Äquivalent zu Churn)." },
         "owner": { "type": "string", "description": "Rolle oder Stelle, die für die Behebung verantwortlich ist." },
         "status": { "$ref": "#/$defs/status" },
+        "caused_by": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" },
+          "uniqueItems": true,
+          "minItems": 1,
+          "description": "IDs der Pain Points, aus denen dieser folgt: Ohne sie gäbe es ihn nicht (ADR-0008). Deckt vermeidbare Kontakte und Folgekosten ab. Die Ursache liegt im selben oder einem früheren Schritt und ist immer ein Pain Point; den Beleg für die Verbindung tragen die evidence_refs dieses Pain Points."
+        },
         "evidence_refs": { "$ref": "#/$defs/evidence_refs" }
       }
     },

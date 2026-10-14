@@ -1,6 +1,6 @@
 # ADR-0008: Ursachen von Pain Points (`pain_point.caused_by`)
 
-Datum: 2026-10-13 · Status: angenommen (2026-10-13), Umsetzung offen · Issue: [#49](https://github.com/malkreide/journeykit/issues/49) (Muster umgesetzt, Feld offen)
+Datum: 2026-10-13 · Status: angenommen (2026-10-13), umgesetzt (2026-10-14) · Issue: [#49](https://github.com/malkreide/journeykit/issues/49)
 
 ## Kontext
 
@@ -144,6 +144,27 @@ Nach den Konventionen in `CLAUDE.md` für Schemaänderungen:
 Angenommen am 2026-10-13 wie vorgeschlagen (Option C), zusammen mit ADR-0007.
 Die Umsetzung folgt nach ADR-0007; die Codes stehen damit fest: L004 gehört
 den Kosten, L005 dieser Regel. Die Frage zu L061 bleibt offen (siehe unten).
+
+Umgesetzt am 2026-10-14. Beim Umsetzen festgelegt:
+
+- **Meldungen**: `L001.caused_by` (unbekannte Ursache) und
+  `L001.caused_by_self` (Verweis auf sich selbst) als zwei Varianten von
+  L001. `L005.cycle` meldet einen Kreis im selben Schritt einmal je Schritt;
+  Kreise über Schritte hinweg fängt schon die Regel «Ursache liegt später».
+- **L065** zählt mittelbare Ursachen mit: Eine Chance, die bei der Ursache
+  der Ursache ansetzt, ist nicht gemeint. L065 fasst alle betroffenen Chancen
+  in einem Befund zusammen, wie L064.
+- **Viewer**: «Folge von ‹Schritt›» steht unter dem Pain-Point-Kärtchen,
+  nicht darin, denn das Kärtchen ist selbst ein Beleg-Knopf. Der Sprung führt
+  in den Journey-Layer, auch aus dem Prozess-Layer – wie bei den offenen
+  Fragen. Die Ursache zeigt «führt zu n Folgen».
+- **Audit-Bericht**: Die Zeile «Ursachenketten» erscheint nur, wenn es
+  Verbindungen gibt; Journeys ohne `caused_by` geben denselben Bericht aus
+  wie vorher.
+- **Beispiele**: Die Baubewilligung verweist von
+  `pp-standort-nachtraeglich` auf `pp-einsprache-unvorbereitet`. Der Beleg
+  für die Verbindung (`b2-07`: niemand hatte den Standort mit dem Nachbarn
+  besprochen) steht jetzt auch bei der Folge.
 
 ## Nicht entschieden
 

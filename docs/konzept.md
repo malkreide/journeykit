@@ -39,7 +39,7 @@ darauf. Daraus folgt:
 |---|---|---|
 | 1 Input | Interviews, Befragungen, Anfragen-/Ticketexporte, Analytics, Auswertungen der Geschäftskontrolle, Fotos von Workshop-Wänden, Prozessdokumente, bestehende Journeys | Quellenregister (`sources`) mit Art, Standard-Evidenzklasse, Stichprobe, Datenschutzstatus, Ablage |
 | 2 Evidenz-Atome | Kleinste belegbare Einheit: Zitat, Beobachtung, Messwert, Dokumentstelle, mit Fundstelle, Klasse, Signal, Emotion (nur explizit), Widerspruch | `evidence[]` im Schema; Extraktionsregeln und Prompt-Schablone im Skill |
-| 3 Journey-Modell | Persona, Szenario (Ist-Zustand oder Soll-Konzept, ADR-0006), Phasen (mit belegter Dauer in Kalendertagen), Schritte (inkl. handelnde Dritte, ADR-0005, und fällige Kosten, ADR-0007), Denken/Fühlen, Pain Points (Reibung/Breakdown), Edge Cases, Recovery, KPIs, Chancen, offene Fragen, Owner, Review | JSON Schema 2020-12 |
+| 3 Journey-Modell | Persona, Szenario (Ist-Zustand oder Soll-Konzept, ADR-0006), Phasen (mit belegter Dauer in Kalendertagen), Schritte (inkl. handelnde Dritte, ADR-0005, und fällige Kosten, ADR-0007), Denken/Fühlen, Pain Points (Reibung/Breakdown, mit Ursache, ADR-0008), Edge Cases, Recovery, KPIs, Chancen, offene Fragen, Owner, Review | JSON Schema 2020-12 |
 | 4 Synthese-Engine | Clustern, Kurve nur aus Evidenz, Widersprüche und Lücken ausweisen, Chancen und Scores vorschlagen | Claude-Skill (Modi Synthese / Workshop / Audit) + Lints als Rückkopplung |
 | 5 Darstellung | Journey mit Kurve und Dauer je Phase (ein Massstab, damit Wartezeit nicht gleich kurz aussieht wie ein Termin), Prozess/Fehlerpfade, Evidenz-Heatmap, Chancenmatrix, Prüfung; Drilldown bis zum O-Ton; Filter «nur Primärevidenz»; Persona-Überlagerung | Single-File-Viewer |
 | 6 Betrieb | Owner, Review-Rhythmus, Status pro Pain Point und Chance, Versionen, Diff | Schema-Felder, Lints L030–L035, `journeykit diff` |
@@ -147,7 +147,7 @@ Begründungen und Belege stehen in den Beispiel-READMEs.
 | Persona-Vergleich ohne gemeinsame Phasen | Baubewilligung H3 | Viewer liess Phasen still weg | umgesetzt (#9) |
 | Rechtsmittel statt Breakdown | Baubewilligung H4 | Unterscheidung nur im Urteil der Modellierenden | umgesetzt: Review-Frage, Skill (#14) |
 | Kosten und Gebühren | Baubewilligung H5, Musikschule H8 | kein Feld; wiederkehrende, ermässigte und an Dritte bezahlte Beträge stehen in Freitext-Einheiten nebeneinander, «Was kostet das?» bleibt unbeantwortet | umgesetzt: `step.costs[]`, L004, L103; «vorher bekannt» als Kennzahl statt Feld (ADR-0007, #15) |
-| Vermeidbare Kontakte und Ursachenketten | Musikschule H9 | Ursache liegt oft Phasen früher, bei einer anderen Stelle oder Back-Stage; die Kette steht nur im Text, `backstage_notes` ohne Belege | Muster im Skill umgesetzt (#49); Feld `pain_point.caused_by` angenommen, Umsetzung offen (ADR-0008) |
+| Vermeidbare Kontakte und Ursachenketten | Musikschule H9 | Ursache liegt oft Phasen früher, bei einer anderen Stelle oder Back-Stage; die Kette steht nur im Text, `backstage_notes` ohne Belege | umgesetzt: `pain_point.caused_by`, L001, L005, L065 (ADR-0008, #49) |
 | Fristen der Persona | Musikschule H10 | Annahme- und Abmeldefrist tragen Breakdowns, existieren aber nur als Dokumentstelle | Muster und Review-Frage vorgeschlagen; Feld erst mit einem weiteren Beispiel |
 | Variante mit eingeschobener Phase (Warteliste für 47 %) | Musikschule H11 | Regel «pro Variante eine Datei» hätte 13 von 15 Schritten kopiert; Viewer zeigt die Dauer, als warteten alle | Präzisierung in `diagnose.md` vorgeschlagen |
 | Begünstigte Person ≠ Persona (Kind und Eltern) | Musikschule H12 | `emotion_hint` kennt kein «wessen»; Gefühle des Kindes nur aus zweiter Hand | Regel im Skill und Review-Frage vorgeschlagen; kein Feld |
@@ -168,14 +168,14 @@ Markierung aber ihre Aussagekraft.
 
 Für die Evaluation gegen echtes Material (unten, Roadmap 2) heisst das: neben
 `performed_by` und belegten Dauern gezielt prüfen, ob die Pipeline Kosten mit
-ihrer Periode, Ursachenketten und Fristen der Persona erkennt – Kosten als Feld
-(ADR-0007), die beiden anderen bisher nur als Muster.
+ihrer Periode, Ursachenketten und Fristen der Persona erkennt – Kosten und
+Ursachen als Feld (ADR-0007, ADR-0008), Fristen bisher nur als Muster.
 
 ## Roadmap
 
 1. ~~GitHub-Repo, CI grün, Secret Scanning (0.1.x)~~ – erledigt am 2026-10-07
 2. Evaluation gegen eine reale Ground-Truth-Journey (0.2)
 3. ~~Testsatz für die Extraktion: Input → erwartete Atome (0.2)~~ – `skill/user-journey/evals/extraction/`, fünf Fälle; Ausbau mit Material aus der Evaluation offen
-4. ~~Zweites Beispiel aus einem anderen Verwaltungsbereich (0.2)~~ – `examples/baubewilligung/`; Befunde zur Übertragbarkeit (Handelnde Dritte, Kanal «Publikation», Quellenart für Geschäftskontrolle, Dauer von Wartephasen u. a.) im Beispiel-README, grösstenteils umgesetzt; drittes Beispiel `examples/musikschule/` (H8–H15): Kostenfeld umgesetzt (ADR-0007, #15), Ursachenketten angenommen (ADR-0008), Fristen der Persona als Muster; Übersicht im Abschnitt «Evaluation»
+4. ~~Zweites Beispiel aus einem anderen Verwaltungsbereich (0.2)~~ – `examples/baubewilligung/`; Befunde zur Übertragbarkeit (Handelnde Dritte, Kanal «Publikation», Quellenart für Geschäftskontrolle, Dauer von Wartephasen u. a.) im Beispiel-README, grösstenteils umgesetzt; drittes Beispiel `examples/musikschule/` (H8–H15): Kostenfeld umgesetzt (ADR-0007, #15), Ursachenketten umgesetzt (ADR-0008), Fristen der Persona als Muster; Übersicht im Abschnitt «Evaluation»
 5. Viewer: visueller Versionsvergleich, Export der Heatmap (0.3); ~~französische UI, Lint-Meldungen, Exporte, Diff und CLI~~ – umgesetzt (`--lang fr` je Befehl, `JOURNEYKIT_LANG`)
 6. Variante B: MCP-Server für Journeys als Datenbestand (0.4)

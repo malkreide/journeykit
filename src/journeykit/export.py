@@ -352,6 +352,21 @@ def audit_markdown(journey: dict[str, Any], findings: list[Finding], lang: str =
             opps=len(idx.opportunities),
         )
     )
+    # Ursachenketten (ADR-0008): Folgen mit bekannter Ursache, davon über Phasen hinweg
+    caused = {pid: idx.root_causes(pid) for pid in idx.pain_points}
+    chains = [pid for pid, causes in caused.items() if causes]
+    if chains:
+        phase_of = {pid: idx.step_phase[idx.pain_point_step[pid]] for pid in idx.pain_points}
+        cross = sum(
+            1
+            for pid in chains
+            if any(
+                phase_of[c] != phase_of[pid]
+                for c in idx.pain_points[pid]["caused_by"]
+                if c in idx.pain_points
+            )
+        )
+        lines.append(t("audit.chains", n=len(chains), cross=cross))
     lines.append("")
     lines += _audit_costs(idx, t)
     lines.append(

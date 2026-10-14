@@ -16,7 +16,8 @@ Kern trifft – das prüft ein Mensch. Diese Fragen stellt der Skill vor der
 
 ## Happy Path
 
-- An welcher Stelle rufen Menschen an, obwohl sie es nicht müssten? Steht der Schritt als vermeidbar drin (Pain Point `friction`) – und davor der Breakdown, der den Anruf auslöst? Muster «Vermeidbare Schritte» im Skill.
+- An welcher Stelle rufen Menschen an, obwohl sie es nicht müssten? Steht der Schritt als vermeidbar drin (Pain Point `friction`) – und verweist er mit `caused_by` auf den Pain Point, der den Anruf auslöst? Muster «Vermeidbare Schritte und Folgen» im Skill.
+- Belegt die Folge auch die Verbindung zu ihrer Ursache – oder haben wir sie nur vermutet? Ein `caused_by` ohne Aussage oder Zahl, die beides verknüpft, ist eine Annahme.
 - Was passiert, wenn der Brief nicht ankommt, die Frist verpasst ist, die Sprache nicht reicht, das System die Person nicht findet? Steht es drin?
 - Für jeden Breakdown: Gibt es heute einen Rückweg? Wenn nein, ist das als `exists: false` festgehalten – oder haben wir einen Soll-Pfad als Ist-Pfad geschrieben?
 - Welcher Übergang (Kanal- oder Zuständigkeitswechsel) ist am wenigsten belegt?

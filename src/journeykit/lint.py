@@ -248,6 +248,61 @@ def _rule_integrity(idx: JourneyIndex, c: _Collector) -> None:
                 amount=amount,
                 max=hi,
             )
+    _rule_causes(idx, c)
+
+
+def _rule_causes(idx: JourneyIndex, c: _Collector) -> None:
+    """Ursachen von Pain Points (ADR-0008): bekannt, nicht der Pain Point selbst, nicht später."""
+    same_step: dict[str, dict[str, list[str]]] = {}
+    for pid, pp in idx.pain_points.items():
+        step_id = idx.pain_point_step[pid]
+        for cause in pp.get("caused_by", []):
+            path = f"pain_points[{pid}]"
+            if cause == pid:
+                c.add("L001", ERROR, "integrity", path, msg="L001.caused_by_self", pp=pid)
+            elif cause not in idx.pain_points:
+                c.add("L001", ERROR, "integrity", path, msg="L001.caused_by", pp=pid, ref=cause)
+            else:
+                cause_step = idx.pain_point_step[cause]
+                if idx.step_order[cause_step] > idx.step_order[step_id]:
+                    c.add(
+                        "L005",
+                        ERROR,
+                        "integrity",
+                        path,
+                        pp=pid,
+                        step=idx.steps[step_id]["name"],
+                        cause=cause,
+                        cause_step=idx.steps[cause_step]["name"],
+                    )
+                elif cause_step == step_id:
+                    same_step.setdefault(step_id, {}).setdefault(pid, []).append(cause)
+    # Kreise sind nur innerhalb eines Schritts möglich, wenn kein Verweis nach vorn zeigt
+    for step_id, edges in same_step.items():
+        in_cycle = [p for p in edges if _reaches(edges, p, p)]
+        if in_cycle:
+            c.add(
+                "L005",
+                ERROR,
+                "integrity",
+                f"steps[{step_id}]",
+                msg="L005.cycle",
+                step=idx.steps[step_id]["name"],
+                ids=", ".join(in_cycle),
+            )
+
+
+def _reaches(edges: dict[str, list[str]], start: str, target: str) -> bool:
+    seen: set[str] = set()
+    todo = list(edges.get(start, []))
+    while todo:
+        node = todo.pop()
+        if node == target:
+            return True
+        if node not in seen:
+            seen.add(node)
+            todo += edges.get(node, [])
+    return False
 
 
 def _rule_inside_out(idx: JourneyIndex, c: _Collector) -> None:
@@ -502,6 +557,25 @@ def _rule_micro_disconnect(idx: JourneyIndex, c: _Collector) -> None:
             "opportunities",
             n=len(unanchored),
             ids=_shortlist(unanchored, 5),
+        )
+    # Chance setzt nur bei Folgen an, nicht bei deren Ursache (ADR-0008)
+    at_consequences = []
+    for o in idx.opportunities.values():
+        linked = [p for p in o.get("linked_pain_points", []) if p in idx.pain_points]
+        if not linked or not all(idx.root_causes(p) for p in linked):
+            continue
+        causes = set().union(*(idx.root_causes(p) for p in linked))
+        cause_steps = {idx.pain_point_step[p] for p in causes}
+        if not (causes & set(linked)) and o.get("step_ref") not in cause_steps:
+            at_consequences.append(o["id"])
+    if at_consequences:
+        c.add(
+            "L065",
+            INFO,
+            "micro_disconnect",
+            "opportunities",
+            n=len(at_consequences),
+            ids=_shortlist(at_consequences, 5),
         )
     unscored = [
         o["id"]

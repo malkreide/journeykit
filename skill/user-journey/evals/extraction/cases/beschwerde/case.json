@@ -1,0 +1,58 @@
+{
+  "title": "Beschwerde per E-Mail: Mahnung Elternbeitrag Hort",
+  "kind": "complaint",
+  "class": "reported",
+  "source_id": "beschwerde-0922",
+  "prefix": "bes",
+  "input": "input.md",
+  "phases": [
+    "orientierung",
+    "anmeldung",
+    "warten",
+    "eintritt",
+    "kosten"
+  ],
+  "persona": "berufstaetig",
+  "known_atoms": [
+    {
+      "id": "doc-01",
+      "text": "Gesuche um Ermässigung können online oder auf Papier eingereicht werden."
+    },
+    {
+      "id": "doc-04",
+      "text": "Gesuche um Ermässigung werden innert 20 Arbeitstagen entschieden."
+    },
+    {
+      "id": "doc-07",
+      "text": "Die Mahnung weist auf die Mahngebühr von 40 Franken hin."
+    }
+  ],
+  "tests": "Beschwerde als Quelle mit Klasse reported: Dritte mit Vollmacht (Treuhänder); die Frist aus dem Soll (20 Arbeitstage) neben der erlebten Dauer (elf Wochen, value 11); Ursache und Folge (Entscheid nie erhalten → Frist verpasst → abgelehnt); Beträge mit Schweizer Tausendertrennzeichen (1'236) als Zahl; Mahngebühr vorher nicht bekannt; zwei Kanalwechsel (Telefon, Schalter); Ironie ist kein positives Signal und keine ausdrücklich geäusserte Emotion, «wütend» schon. Kopf- und Grusszeilen sind keine Aussagen, der Name in der Signatur kommt nicht in ein Atom. contradicts gegen zwei Soll-Aussagen, eine dritte ist Ablenkung. Eine Briefzeile ist kein Redebeitrag und kann zwei Aussagen tragen (Zeile 8: Dauer und falsche Adresse) – deshalb hier keine Regel «ein Atom je Fundstelle».",
+  "rules": {
+    "atoms_min": 10,
+    "atoms_max": 14,
+    "kinds": [
+      "quote",
+      "metric"
+    ],
+    "locator_required": true,
+    "pii_terms": [
+      "Imhof",
+      "Sandra"
+    ],
+    "forbidden": [
+      {
+        "text": "Betreff:",
+        "why": "Kopfzeile, keine Aussage"
+      },
+      {
+        "text": "Sehr geehrte Damen und Herren",
+        "why": "Anrede, keine Aussage"
+      },
+      {
+        "text": "Freundliche Grüsse",
+        "why": "Grussformel, keine Aussage"
+      }
+    ]
+  }
+}

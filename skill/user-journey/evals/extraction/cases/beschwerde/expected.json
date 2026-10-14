@@ -1,0 +1,283 @@
+{
+  "atoms": [
+    {
+      "key": "treuhaender",
+      "required": true,
+      "match": [
+        "Treuhänder"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "locator": [
+        "06",
+        "Zeile 6",
+        "Z. 6",
+        "Z.6",
+        "Z 6"
+      ],
+      "emotion": "not_explicit",
+      "why": "Dritte mit Vollmacht handeln anstelle der Person (performed_by, intermediary, formal)."
+    },
+    {
+      "key": "entscheid-elf-wochen",
+      "required": true,
+      "match": [
+        "elf Wochen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "08",
+        "Zeile 8",
+        "Z. 8",
+        "Z.8",
+        "Z 8"
+      ],
+      "value": 11,
+      "unit": [
+        "Wochen"
+      ],
+      "contradicts": [
+        "doc-04"
+      ],
+      "why": "Erlebte Dauer (elf Wochen), nicht die Frist aus Zeile 7 (20 Arbeitstage)."
+    },
+    {
+      "key": "frist-verpasst",
+      "required": true,
+      "match": [
+        "nie erhalten",
+        "abgelehnt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "breakdown"
+      ],
+      "locator": [
+        "09",
+        "Zeile 9",
+        "Z. 9",
+        "Z.9",
+        "Z 9"
+      ],
+      "why": "Die Person scheitert: Frist verpasst, Ermässigung abgelehnt – Folge der falschen Adresse."
+    },
+    {
+      "key": "mahnung-voll",
+      "required": true,
+      "match": [
+        "Mahnung"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "10",
+        "Zeile 10",
+        "Z. 10",
+        "Z.10",
+        "Z 10"
+      ],
+      "value": 1236,
+      "unit": [
+        "CHF",
+        "Franken",
+        "Fr."
+      ],
+      "why": "Betrag als Zahl (1236), das Schweizer Tausendertrennzeichen nicht übernehmen. Erkannt am Betrag, nicht am Wortlaut – ein metric-Atom darf umschreiben.",
+      "value_any": [
+        1236
+      ]
+    },
+    {
+      "key": "mahngebuehr-unbekannt",
+      "required": true,
+      "match": [
+        "stand in keinem"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "11",
+        "Zeile 11",
+        "Z. 11",
+        "Z.11",
+        "Z 11"
+      ],
+      "value": 40,
+      "unit": [
+        "CHF",
+        "Franken",
+        "Fr."
+      ],
+      "contradicts": [
+        "doc-07"
+      ],
+      "why": "Kosten vorher nicht bekannt; widerspricht dem Soll, dass die Mahnung auf die Gebühr hinweist."
+    },
+    {
+      "key": "telefon-ansage",
+      "required": true,
+      "match": [
+        "Ansage"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "breakdown",
+        "workaround"
+      ],
+      "locator": [
+        "12",
+        "Zeile 12",
+        "Z. 12",
+        "Z.12",
+        "Z 12"
+      ],
+      "value": 2,
+      "why": "Telefon gescheitert, danach an den Schalter ausgewichen."
+    },
+    {
+      "key": "schalter",
+      "required": true,
+      "match": [
+        "Schalter"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "breakdown",
+        "workaround"
+      ],
+      "locator": [
+        "13",
+        "Zeile 13",
+        "Z. 13",
+        "Z.13",
+        "Z 13"
+      ]
+    },
+    {
+      "key": "ironie",
+      "required": true,
+      "match": [
+        "Vielen Dank auch"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction",
+        "breakdown",
+        "neutral"
+      ],
+      "locator": [
+        "14",
+        "Zeile 14",
+        "Z. 14",
+        "Z.14",
+        "Z 14"
+      ],
+      "emotion": "not_explicit",
+      "why": "Ironie: kein positives Signal, keine ausdrücklich geäusserte Emotion."
+    },
+    {
+      "key": "wuetend",
+      "required": true,
+      "match": [
+        "wütend"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "15",
+        "Zeile 15",
+        "Z. 15",
+        "Z.15",
+        "Z 15"
+      ],
+      "emotion": "explicit_negative"
+    },
+    {
+      "key": "forderung",
+      "required": true,
+      "match": [
+        "neu prüfen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "16",
+        "Zeile 16",
+        "Z. 16",
+        "Z.16",
+        "Z 16"
+      ]
+    },
+    {
+      "key": "wunsch-email",
+      "required": true,
+      "match": [
+        "per E-Mail kommen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "17",
+        "Zeile 17",
+        "Z. 17",
+        "Z.17",
+        "Z 17"
+      ]
+    },
+    {
+      "key": "frist-website",
+      "required": false,
+      "match": [
+        "20 Arbeitstagen"
+      ]
+    },
+    {
+      "key": "einleitung",
+      "required": false,
+      "match": [
+        "nicht einverstanden"
+      ]
+    }
+  ]
+}

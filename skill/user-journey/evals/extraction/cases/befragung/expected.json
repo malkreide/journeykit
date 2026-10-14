@@ -1,0 +1,346 @@
+{
+  "atoms": [
+    {
+      "key": "f1-frist",
+      "required": true,
+      "match": [
+        "rechtzeitig",
+        "F1"
+      ],
+      "kind": [
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "F1"
+      ],
+      "value": 47,
+      "unit": [
+        "%"
+      ],
+      "text_has": [
+        "286"
+      ]
+    },
+    {
+      "key": "f2-website",
+      "required": true,
+      "match": [
+        "Website war einfach",
+        "F2"
+      ],
+      "kind": [
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "neutral"
+      ],
+      "locator": [
+        "F2"
+      ],
+      "value": 71,
+      "unit": [
+        "%"
+      ],
+      "text_has": [
+        "201"
+      ],
+      "why": "Teilgruppe: n = 201, nicht 286."
+    },
+    {
+      "key": "f3-kosten",
+      "required": true,
+      "match": [
+        "insgesamt kostet",
+        "F3"
+      ],
+      "kind": [
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "F3"
+      ],
+      "value": 38,
+      "unit": [
+        "%"
+      ],
+      "text_has": [
+        "286"
+      ]
+    },
+    {
+      "key": "f4-wartezeit",
+      "required": true,
+      "match": [
+        "Wartezeit",
+        "F4"
+      ],
+      "kind": [
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "F4"
+      ],
+      "value": 64,
+      "unit": [
+        "%"
+      ],
+      "text_has": [
+        "286"
+      ],
+      "why": "Negativ formuliert: 64 % Zustimmung zu «zu lang» ist Reibung, obwohl der Wert über 60 % liegt."
+    },
+    {
+      "key": "f5-zufrieden",
+      "required": true,
+      "match": [
+        "zufrieden",
+        "F5"
+      ],
+      "kind": [
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "neutral"
+      ],
+      "locator": [
+        "F5"
+      ],
+      "value": 88,
+      "unit": [
+        "%"
+      ],
+      "text_has": [
+        "286"
+      ]
+    },
+    {
+      "key": "f6-ermaessigung",
+      "required": true,
+      "match": [
+        "Ermässigung",
+        "F6"
+      ],
+      "kind": [
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "F6"
+      ],
+      "value": 31,
+      "unit": [
+        "%"
+      ],
+      "text_has": [
+        "52"
+      ],
+      "why": "Teilgruppe: n = 52."
+    },
+    {
+      "key": "f7-sprache",
+      "required": true,
+      "match": [
+        "Sprache",
+        "F7"
+      ],
+      "kind": [
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "neutral"
+      ],
+      "locator": [
+        "F7"
+      ],
+      "value": 79,
+      "unit": [
+        "%"
+      ],
+      "text_has": [
+        "286"
+      ],
+      "value_any": [
+        79
+      ]
+    },
+    {
+      "key": "f8-erstsprache",
+      "required": true,
+      "match": [
+        "Erstsprache",
+        "F8"
+      ],
+      "kind": [
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "F8"
+      ],
+      "value": 36,
+      "unit": [
+        "%"
+      ],
+      "text_has": [
+        "14"
+      ],
+      "why": "Eigener Befund der Teilgruppe (36 % statt 79 %), mit kleinem n = 14 im text."
+    },
+    {
+      "key": "ruecklauf",
+      "required": false,
+      "match": [
+        "Rücklauf",
+        "512"
+      ]
+    },
+    {
+      "key": "ft-mann-anmeldung",
+      "required": true,
+      "match": [
+        "Mein Mann hat die Anmeldung gemacht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround",
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "F9"
+      ],
+      "why": "Dritte handeln für die Person – zeigt, was keine Zahl zeigt."
+    },
+    {
+      "key": "ft-telefon-erklaert",
+      "required": true,
+      "match": [
+        "am Telefon alles erklärt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "workaround",
+        "positive",
+        "breakdown"
+      ],
+      "locator": [
+        "F9"
+      ]
+    },
+    {
+      "key": "ft-warteliste-blackbox",
+      "required": true,
+      "match": [
+        "Blackbox"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction",
+        "need"
+      ],
+      "locator": [
+        "F9"
+      ],
+      "why": "F4 zeigt, dass die Wartezeit zu lang ist, nicht, dass niemand Auskunft gibt."
+    },
+    {
+      "key": "ft-oeffnungszeiten",
+      "required": true,
+      "match": [
+        "Schichtarbeit"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "F9"
+      ]
+    },
+    {
+      "key": "ft-anmeldeschluss",
+      "required": false,
+      "match": [
+        "durch Zufall"
+      ]
+    },
+    {
+      "key": "ft-mittagessen",
+      "required": false,
+      "match": [
+        "Mittagessen kostet extra"
+      ]
+    },
+    {
+      "key": "ft-betreuerinnen",
+      "required": false,
+      "match": [
+        "Betreuerinnen sind toll"
+      ]
+    },
+    {
+      "key": "ft-mehr-plaetze",
+      "required": false,
+      "match": [
+        "Mehr Plätze"
+      ]
+    }
+  ]
+}

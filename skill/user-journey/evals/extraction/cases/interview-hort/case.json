@@ -1,0 +1,62 @@
+{
+  "title": "Interview H1 – Anmeldung im Hort und Elternbeitrag",
+  "kind": "interview",
+  "class": "reported",
+  "source_id": "int-h1",
+  "prefix": "h1",
+  "input": "input.md",
+  "phases": [
+    "orientierung",
+    "anmeldung",
+    "warten",
+    "eintritt",
+    "kosten"
+  ],
+  "persona": "berufstaetig",
+  "known_atoms": [
+    {
+      "id": "doc-02",
+      "text": "Die Eltern erhalten innert zwei Wochen nach dem Anmeldeschluss einen Bescheid."
+    },
+    {
+      "id": "doc-03",
+      "text": "Anmeldungen sind online oder am Schalter im Schulhaus möglich."
+    },
+    {
+      "id": "doc-05",
+      "text": "Alle Tarife der Tagesbetreuung sind auf der Website vollständig publiziert."
+    }
+  ],
+  "tests": "Längeres Interview mit 16 Pflicht-Atomen, von denen einige leicht zu übersehen sind. Eine Frist (innert zwei Wochen) neben der erlebten Dauer, mit Korrektur im selben Satz (fünf, nein sieben Wochen): value 7, nicht 2 oder 5. Handelnde Dritte (Schwiegermutter füllt das Formular aus) als eigenes Atom. Kosten mit Periode (pro Betreuungstag, pro Monat) und die Aussage, ob die Kosten vorher bekannt waren. Gefühle anderer (Sohn weint, Chef nicht begeistert) sind keine ausdrücklich geäusserte Emotion der Person. Suggestivfrage der interviewenden Person ist keine Evidenz. contradicts gegen zwei bekannte Soll-Aussagen, eine dritte ist Ablenkung.",
+  "rules": {
+    "atoms_min": 14,
+    "atoms_max": 22,
+    "kinds": [
+      "quote",
+      "metric"
+    ],
+    "locator_required": true,
+    "pii_terms": [
+      "Brunner"
+    ],
+    "forbidden": [
+      {
+        "text": "Wir nehmen das Gespräch auf",
+        "why": "Frage der interviewenden Person"
+      },
+      {
+        "text": "Erzählen Sie zuerst",
+        "why": "Frage der interviewenden Person"
+      },
+      {
+        "text": "Wie haben Sie erfahren",
+        "why": "Frage der interviewenden Person"
+      },
+      {
+        "text": "War das für Sie belastend",
+        "why": "Suggestivfrage der interviewenden Person – das Gefühl stammt nicht von der befragten Person"
+      }
+    ],
+    "one_atom_per_locator": true
+  }
+}

@@ -1,0 +1,158 @@
+[
+  {
+    "id": "doc-01",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Zuziehende melden sich innert 14 Tagen nach dem Umzug an.",
+    "locator": "Abschnitt 1, Ziff. 1 (Zeile 7)",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "anmeldefrist"
+    ]
+  },
+  {
+    "id": "doc-02",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Die Anmeldung erfolgt online oder am Schalter.",
+    "locator": "Abschnitt 1, Ziff. 1 (Zeile 7)",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "kanal"
+    ]
+  },
+  {
+    "id": "doc-03",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Für die Anmeldung sind Heimatschein, Mietvertrag und ein amtlicher Ausweis nötig.",
+    "locator": "Abschnitt 1, Ziff. 2 (Zeile 8)",
+    "signal": "neutral",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "unterlagen"
+    ]
+  },
+  {
+    "id": "doc-04",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Das Online-Formular nimmt PDF-Dateien und Fotos bis 10 MB entgegen.",
+    "locator": "Abschnitt 1, Ziff. 3 (Zeile 9)",
+    "signal": "neutral",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "upload",
+      "formular"
+    ],
+    "contradicts": [
+      "anf-07"
+    ]
+  },
+  {
+    "id": "doc-05",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Die Einwohnerdienste prüfen die Anmeldung innert 5 Arbeitstagen.",
+    "locator": "Abschnitt 1, Ziff. 4 (Zeile 10)",
+    "signal": "neutral",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "bearbeitung"
+    ]
+  },
+  {
+    "id": "doc-06",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Die Anmeldebestätigung wird innert 10 Arbeitstagen nach Eingang per Post verschickt.",
+    "locator": "Abschnitt 1, Ziff. 5 (Zeile 11)",
+    "signal": "neutral",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "bestaetigung"
+    ],
+    "contradicts": [
+      "anf-17"
+    ]
+  },
+  {
+    "id": "doc-07",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Die Liste der Unterlagen ist auf der Website unter «Umzug» aufgeführt.",
+    "locator": "Abschnitt 2, Ziff. 6 (Zeile 15)",
+    "signal": "neutral",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "unterlagen",
+      "information"
+    ],
+    "contradicts": [
+      "anf-12"
+    ]
+  },
+  {
+    "id": "doc-08",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Bei verspäteter Anmeldung kann eine Ordnungsbusse erhoben werden.",
+    "locator": "Abschnitt 2, Ziff. 7 (Zeile 16)",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "busse"
+    ]
+  },
+  {
+    "id": "doc-09",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "In der Praxis wird bei der ersten Anmeldung auf die Ordnungsbusse verzichtet.",
+    "locator": "Abschnitt 2, Ziff. 7 (Zeile 16)",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "busse",
+      "praxis"
+    ]
+  },
+  {
+    "id": "doc-10",
+    "source_ref": "doc",
+    "class": "assumed",
+    "kind": "document_excerpt",
+    "text": "Fachverantwortung: Leitung Einwohnerdienste.",
+    "locator": "Abschnitt 3, Ziff. 8 (Zeile 20)",
+    "signal": "neutral",
+    "tags": [
+      "zustaendigkeit"
+    ]
+  }
+]

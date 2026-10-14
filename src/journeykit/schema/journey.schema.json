@@ -133,6 +133,27 @@
         "evidence_refs": { "$ref": "#/$defs/evidence_refs", "minItems": 1 }
       }
     },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "amount", "period", "evidence_refs"],
+      "description": "Betrag, den die Persona trägt, am Schritt, an dem er fällig wird (ADR-0007). Ohne belegten Betrag kein Eintrag. Nicht hierher gehören Zeitkosten (duration_days), Kosten der Verwaltung und Subventionen, die die Persona nicht trägt.",
+      "properties": {
+        "label": { "type": "string", "minLength": 1, "description": "Was bezahlt wird, in Nutzerworten oder nach dem Erlass." },
+        "amount": { "type": "number", "minimum": 0, "description": "Regelbetrag oder typischer Betrag, z. B. Tarif oder Median." },
+        "min": { "type": "number", "minimum": 0, "description": "Untere Grenze der belegten Spanne, z. B. mit Ermässigung; keine Extremwerte." },
+        "max": { "type": "number", "minimum": 0, "description": "Obere Grenze der belegten Spanne." },
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$", "default": "CHF", "description": "Währung als ISO-4217-Code." },
+        "period": {
+          "type": "string",
+          "enum": ["once", "month", "semester", "year"],
+          "description": "Wofür der Betrag gilt. Wiederkehrende Kosten einmal erfassen, am Schritt der ersten Fälligkeit."
+        },
+        "paid_to": { "type": "string", "description": "Rolle der Empfängerin, keine Namen (z. B. «Musikschule», «Musikgeschäft»)." },
+        "basis": { "type": "string", "description": "Was der Betrag misst oder wann er anfällt (z. B. «Median 2025», «nur nach verpasster Abmeldung»)." },
+        "evidence_refs": { "$ref": "#/$defs/evidence_refs", "minItems": 1 }
+      }
+    },
     "score_1_5": { "type": "integer", "minimum": 1, "maximum": 5 },
     "valence": {
       "type": "integer",
@@ -305,6 +326,11 @@
           "type": "array",
           "items": { "type": "string" },
           "description": "Was intern passieren muss. Viele Einträge sind ein Hinweis, dass ein Service Blueprint gebraucht wird."
+        },
+        "costs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/cost" },
+          "description": "Kosten, die an diesem Schritt fällig werden (ADR-0007). Keine Summe bilden: Kosten einer Journey sind oft Alternativen (mieten oder kaufen) oder bedingt."
         },
         "kpis": { "type": "array", "items": { "$ref": "#/$defs/kpi" } },
         "evidence_refs": { "$ref": "#/$defs/evidence_refs" }

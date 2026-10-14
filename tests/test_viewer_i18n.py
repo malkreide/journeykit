@@ -33,6 +33,7 @@ ENUM_LABELS = {
     ("source", "properties", "pii_status"): "pii",
     ("evidence_atom", "properties", "kind"): "kinds",
     ("performed_by", "properties", "mandate"): "mandate",
+    ("cost", "properties", "period"): "costPeriod",
 }
 
 

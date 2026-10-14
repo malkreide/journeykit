@@ -36,6 +36,10 @@ _DE: dict[str, tuple[str, str]] = {
         "Dauer der Phase «{phase}» ist widersprüchlich: min {min}, typisch {typical}, max {max}.",
         "Es muss min ≤ typical ≤ max gelten; Grenzen weglassen, die die Belege nicht tragen.",
     ),
+    "L004": (
+        "Kosten «{label}» bei «{step}» sind widersprüchlich: min {min}, Betrag {amount}, max {max}.",
+        "Es muss min ≤ amount ≤ max gelten; Grenzen weglassen, die die Belege nicht tragen.",
+    ),
     # Inside-Out Bias
     "L010.none": (
         "Keine der {n} Erlebnis-Aussagen (Denken, Fühlen, Pain Points) stützt sich auf Nutzerevidenz.",
@@ -194,6 +198,10 @@ _DE: dict[str, tuple[str, str]] = {
         "{n} Primärevidenz(en) ohne Fundstelle (locator).",
         "Ohne Fundstelle lässt sich ein Zitat nicht nachprüfen.",
     ),
+    "L103": (
+        "{n} Kostenangabe(n) nur mit Annahmen belegt: {labels}.",
+        "Eine Gebührenordnung sagt, was gelten soll, nicht was bezahlt wurde. Rechnung, Statistik oder Aussagen von Nutzenden ergänzen.",
+    ),
 }
 
 _FR: dict[str, tuple[str, str]] = {
@@ -217,6 +225,10 @@ _FR: dict[str, tuple[str, str]] = {
     "L003": (
         "La durée de la phase « {phase} » est contradictoire : min {min}, typique {typical}, max {max}.",
         "Il faut que min ≤ typical ≤ max ; omettre les bornes que les preuves ne soutiennent pas.",
+    ),
+    "L004": (
+        "Les coûts « {label} » à l'étape « {step} » sont contradictoires : min {min}, montant {amount}, max {max}.",
+        "Il faut que min ≤ amount ≤ max ; omettre les bornes que les preuves ne soutiennent pas.",
     ),
     # Biais de la vue interne
     "L010.none": (
@@ -378,6 +390,10 @@ _FR: dict[str, tuple[str, str]] = {
     "L102": (
         "{n} preuve(s) primaire(s) sans emplacement (locator).",
         "Sans emplacement, une citation ne peut pas être vérifiée.",
+    ),
+    "L103": (
+        "{n} indication(s) de coûts étayée(s) uniquement par des suppositions : {labels}.",
+        "Un barème des émoluments dit ce qui devrait s'appliquer, pas ce qui a été payé. Ajouter une facture, une statistique ou des témoignages d'usagers.",
     ),
 }
 

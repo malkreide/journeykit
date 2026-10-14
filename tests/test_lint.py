@@ -65,6 +65,35 @@ def test_consistent_duration_is_clean(minimal):
     assert {"L001", "L003"}.isdisjoint(codes(findings))
 
 
+def _cost(**kw):
+    return {"label": "Gebühr", "amount": 720, "period": "once", "evidence_refs": ["ev-1"], **kw}
+
+
+def test_dangling_cost_reference_is_error(minimal):
+    minimal["phases"][0]["steps"][0]["costs"] = [_cost(evidence_refs=["gibt-es-nicht"])]
+    assert "L001" in codes(lint_journey(minimal, today=TODAY), ERROR)
+
+
+def test_contradictory_cost_range_is_error(minimal):
+    step = minimal["phases"][0]["steps"][0]
+    step["costs"] = [_cost(max=500)]
+    assert "L004" in codes(lint_journey(minimal, today=TODAY), ERROR)
+    step["costs"] = [_cost(min=800)]
+    assert "L004" in codes(lint_journey(minimal, today=TODAY), ERROR)
+    step["costs"] = [_cost(min=410, max=820)]
+    assert {"L001", "L004"}.isdisjoint(codes(lint_journey(minimal, today=TODAY)))
+
+
+def test_cost_backed_only_by_assumptions_is_info(minimal):
+    step = minimal["phases"][0]["steps"][0]
+    step["costs"] = [_cost(evidence_refs=["ev-4"])]  # nur Prozessdokument (assumed)
+    findings = lint_journey(minimal, today=TODAY)
+    assert "L103" in codes(findings, INFO)
+    assert "L100" not in codes(findings), "Kostenbelege zählen als referenziert"
+    step["costs"] = [_cost(evidence_refs=["ev-4", "ev-1"])]
+    assert "L103" not in codes(lint_journey(minimal, today=TODAY))
+
+
 def test_all_assumed_with_validated_status_is_error(minimal):
     for atom in minimal["evidence"]:
         atom["class"] = "assumed"

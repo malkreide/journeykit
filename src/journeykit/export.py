@@ -14,7 +14,7 @@ from typing import Any
 from .export_texts import QUADRANT_LABELS, text
 from .lint import ERROR, INFO, PRIMARY_SOURCE_KINDS, WARN, Finding, summarize
 from .lint_messages import ANTIPATTERN_LABELS, check_language
-from .model import JourneyIndex, Verdict, priority_quadrant, propose_verdict
+from .model import EVIDENCE_CLASSES, JourneyIndex, Verdict, priority_quadrant, propose_verdict
 
 
 def _texts(lang: str):
@@ -247,6 +247,41 @@ def _audit_next_steps(
     return [t("audit.next_steps"), ""] + (lines or [t("audit.no_steps")]) + [""]
 
 
+def _number(x: float) -> str:
+    """820.0 → «820», 35.5 → «35.5»; keine Exponentialschreibweise bei grossen Beträgen."""
+    return str(int(x)) if isinstance(x, float) and x.is_integer() else str(x)
+
+
+def _audit_costs(idx: JourneyIndex, t) -> list[str]:
+    """Kostentabelle (ADR-0007), ohne Summe – Alternativen und bedingte Kosten lassen sich nicht addieren."""
+    rows = list(idx.costs())
+    if not rows:
+        return []
+    periods = {
+        "once": t("audit.period_once"),
+        "month": t("audit.period_month"),
+        "semester": t("audit.period_semester"),
+        "year": t("audit.period_year"),
+    }
+    classes = {
+        "observed": t("audit.class_observed"),
+        "reported": t("audit.class_reported"),
+        "assumed": t("audit.class_assumed"),
+    }
+    lines = [t("audit.costs"), "", t("audit.costs_header"), "|---|---|---|---|---|---|"]
+    for _, step, cost in rows:
+        lo, hi = cost.get("min", cost["amount"]), cost.get("max", cost["amount"])
+        amount = f"{_number(cost['amount'])} {cost.get('currency', 'CHF')}"
+        if lo != hi:
+            amount += f" ({_number(lo)}–{_number(hi)})"
+        found = idx.classes_of(cost["evidence_refs"])
+        evidence = ", ".join(classes[c] for c in EVIDENCE_CLASSES if c in found) or "–"
+        cells = [step["name"], cost["label"], amount, periods[cost["period"]]]
+        cells += [cost.get("paid_to", "–"), evidence]
+        lines.append("| " + " | ".join(c.replace("|", "\\|") for c in cells) + " |")
+    return lines + ["", t("audit.costs_note"), ""]
+
+
 def audit_markdown(journey: dict[str, Any], findings: list[Finding], lang: str = "de") -> str:
     """Audit-Report: Diagnose, Urteilsvorschlag, nächste Schritte, Evidenzlage, Befunde je Anti-Pattern.
 
@@ -318,6 +353,7 @@ def audit_markdown(journey: dict[str, Any], findings: list[Finding], lang: str =
         )
     )
     lines.append("")
+    lines += _audit_costs(idx, t)
     lines.append(
         t(
             "audit.findings",

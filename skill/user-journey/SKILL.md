@@ -159,13 +159,21 @@ Atome zu Schritten clustern. Pro Schritt:
   dass keiner existiert.
 - `backstage_notes` sparsam. Werden es mehr als Schritte, ist ein Service
   Blueprint fällig (Lint L071).
-- **Kosten** (Gebühren, Auslagen, Mehrkosten durch Verzögerung) haben kein
-  eigenes Feld. Muster: Betrag als `metric`-Atom mit `unit` «CHF» und Quelle;
-  im betroffenen Schritt verknüpfen (über `thinking`, einen Pain Point oder
-  die `evidence_refs` des Schritts); kommen die Kosten
-  überraschend oder hindern sie am Handeln, ein Pain Point mit `workaround`
-  (z. B. Ratenzahlung, Verzicht, Nachfrage). Mehrkosten, die Dritte
-  verrechnen, beim Schritt der Vermittlung festhalten (`performed_by`).
+- **Kosten** (Gebühren, Schulgeld, Miete, Folgekosten) in `costs` am
+  Schritt, an dem der Betrag fällig wird – Rechnung, Kauf, Vertrag, Entscheid
+  (ADR-0007): `label`, `amount`, `period` (`once`, `month`, `semester`,
+  `year`) und `evidence_refs` sind Pflicht; `min`/`max` für eine belegte
+  Spanne (Ermässigung, je Instrument), `paid_to` als Rolle (gerade bei
+  Dritten wie einem Fachgeschäft), `basis` für das, was der Betrag misst oder
+  wann er anfällt. Wiederkehrende Kosten einmal, am Schritt der ersten
+  Fälligkeit. Ohne belegten Betrag kein Eintrag: Dann bleiben die Kosten
+  Text und Pain Point. Keine Summe bilden – Kosten sind oft Alternativen
+  (mieten oder kaufen) oder bedingt. Kommen die Kosten überraschend oder
+  hindern sie am Handeln, zusätzlich ein Pain Point mit `workaround` (z. B.
+  Ratenzahlung, Verzicht, Nachfrage), denn ob Nutzende die Kosten vorher
+  kannten, ist kein Feld, sondern eine Kennzahl je Kostenart
+  (`references/kpi-uebersetzung.md`). Belegt allein die Gebührenordnung den
+  Betrag, meldet L103: Sie sagt, was gelten soll, nicht was bezahlt wurde.
   Zeitkosten (Arbeitsausfall, Wartezeit) sind keine Kosten in diesem Sinn,
   sondern Dauer (`duration_days`, siehe unten).
 - **Vermeidbare Schritte** (failure demand: Rückfrage, Nachfrage, zweiter

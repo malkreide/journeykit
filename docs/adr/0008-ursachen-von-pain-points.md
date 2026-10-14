@@ -1,6 +1,6 @@
 # ADR-0008: Ursachen von Pain Points (`pain_point.caused_by`)
 
-Datum: 2026-10-13 · Status: vorgeschlagen · Issue: [#49](https://github.com/malkreide/journeykit/issues/49) (Muster umgesetzt, Feld offen)
+Datum: 2026-10-13 · Status: angenommen (2026-10-13), Umsetzung offen · Issue: [#49](https://github.com/malkreide/journeykit/issues/49) (Muster umgesetzt, Feld offen)
 
 ## Kontext
 
@@ -109,8 +109,7 @@ Nach den Konventionen in `CLAUDE.md` für Schemaänderungen:
     einer ihrer Ursachen an. Das prüft die Regel des Musters «die Chance setzt
     bei der Ursache an» am Modell.
   - Meldungen und Hinweise in `lint_messages.py` (de, fr), Tests in
-    `tests/test_lint.py`, je eine Zeile in beiden READMEs. Die Codes sind
-    vorläufig: Wird ADR-0007 nicht angenommen, rückt L005 auf L004.
+    `tests/test_lint.py`, je eine Zeile in beiden READMEs.
 - **Viewer**: Pain Points mit Ursache zeigen «Folge von ‹…›» als Link, der zum
   Schritt der Ursache springt, im Journey- und im Prozess-Layer; die Ursache
   zeigt «führt zu n Folgen». Gezeichnete Pfeile vorerst nicht: Sie über das
@@ -139,6 +138,12 @@ Nach den Konventionen in `CLAUDE.md` für Schemaänderungen:
     Ursachenketten».
 - **Tests**, **`docs/konzept.md`** (Schicht 3), **beide READMEs**,
   **`CHANGELOG.md`**.
+
+## Entscheid
+
+Angenommen am 2026-10-13 wie vorgeschlagen (Option C), zusammen mit ADR-0007.
+Die Umsetzung folgt nach ADR-0007; die Codes stehen damit fest: L004 gehört
+den Kosten, L005 dieser Regel. Die Frage zu L061 bleibt offen (siehe unten).
 
 ## Nicht entschieden
 

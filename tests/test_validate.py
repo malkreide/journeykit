@@ -125,3 +125,38 @@ def test_duration_days_requires_evidence_and_positive_typical(minimal):
     assert not is_valid(minimal)
     phase["duration_days"] = {"typical": 3, "unit": "weeks", "evidence_refs": ["ev-1"]}
     assert not is_valid(minimal)
+
+
+def test_costs(minimal):
+    step = minimal["phases"][0]["steps"][0]
+    step["costs"] = [
+        {
+            "label": "Schulgeld",
+            "amount": 820,
+            "min": 410,
+            "currency": "CHF",
+            "period": "semester",
+            "paid_to": "Musikschule",
+            "basis": "Tarif laut Tarifordnung",
+            "evidence_refs": ["ev-4"],
+        },
+        {"label": "Einschreibegebühr", "amount": 40, "period": "once", "evidence_refs": ["ev-1"]},
+    ]
+    assert is_valid(minimal)
+
+
+def test_costs_require_period_amount_and_evidence(minimal):
+    step = minimal["phases"][0]["steps"][0]
+    base = {"label": "Gebühr", "amount": 720, "period": "once", "evidence_refs": ["ev-1"]}
+    for missing in ("label", "amount", "period", "evidence_refs"):
+        step["costs"] = [{k: v for k, v in base.items() if k != missing}]
+        assert not is_valid(minimal), missing
+    for bad in (
+        {"evidence_refs": []},
+        {"amount": -5},
+        {"period": "week"},
+        {"currency": "Fr."},
+        {"unit": "CHF"},
+    ):
+        step["costs"] = [{**base, **bad}]
+        assert not is_valid(minimal), bad

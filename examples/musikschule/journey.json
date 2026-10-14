@@ -755,6 +755,28 @@
               ]
             }
           ],
+          "costs": [
+            {
+              "label": "Cello mieten",
+              "amount": 35,
+              "period": "month",
+              "paid_to": "Musikgeschäft",
+              "basis": "Beispiel Cello; Mietpreise je Instrument verschieden",
+              "evidence_refs": [
+                "m2-15",
+                "m2-16"
+              ]
+            },
+            {
+              "label": "Digitalpiano kaufen, gebraucht",
+              "amount": 600,
+              "period": "once",
+              "basis": "Alternative zur Miete, wo sich das Instrument kaum mieten lässt",
+              "evidence_refs": [
+                "m1-20"
+              ]
+            }
+          ],
           "evidence_refs": [
             "tar-05"
           ]
@@ -865,6 +887,33 @@
               "evidence_refs": [
                 "m2-13",
                 "m2-14"
+              ]
+            }
+          ],
+          "costs": [
+            {
+              "label": "Schulgeld Einzelunterricht 30 Minuten",
+              "amount": 820,
+              "min": 410,
+              "period": "semester",
+              "paid_to": "Musikschule",
+              "basis": "Tarif laut Tarifordnung; mit Ermässigung der Gemeinde 615 oder 410 Franken, im Durchschnitt bezahlt 702 Franken",
+              "evidence_refs": [
+                "tar-01",
+                "tar-03",
+                "m2-02",
+                "stat-12"
+              ]
+            },
+            {
+              "label": "Einschreibegebühr",
+              "amount": 40,
+              "period": "once",
+              "paid_to": "Musikschule",
+              "basis": "einmalig, mit der ersten Rechnung",
+              "evidence_refs": [
+                "tar-02",
+                "anf-21"
               ]
             }
           ],
@@ -1101,6 +1150,20 @@
               "text": "Beim zweiten Anlauf – Brief ans Sekretariat, fristgerecht – kommt eine Bestätigung.",
               "evidence_refs": [
                 "m3-16"
+              ]
+            }
+          ],
+          "costs": [
+            {
+              "label": "Schulgeld für das nicht abgemeldete Herbstsemester",
+              "amount": 820,
+              "period": "semester",
+              "paid_to": "Musikschule",
+              "basis": "nur nach verpasster Abmeldefrist; Folge von «Abmelden»",
+              "evidence_refs": [
+                "m3-08",
+                "m3-12",
+                "tar-07"
               ]
             }
           ],

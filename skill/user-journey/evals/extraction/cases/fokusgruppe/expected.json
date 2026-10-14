@@ -1,0 +1,2148 @@
+{
+  "shared_atoms": true,
+  "atoms": [
+    {
+      "key": "b1-info-elternabend-frueh",
+      "required": true,
+      "match": [
+        "das war schon am Elternabend im September",
+        "ein Dreivierteljahr vorher",
+        "auch schauen mit der Arbeit"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "neutral"
+      ],
+      "locator": [
+        "04:22"
+      ],
+      "why": "B1: Lagerdatum schon am Elternabend und im Jahresplan, ein Dreivierteljahr vorher, half bei der Planung der Arbeit – früher Kanal, der geholfen hat."
+    },
+    {
+      "key": "b1-erreichbar-nussallergie",
+      "required": false,
+      "match": [
+        "dass ich immer erreichbar bin",
+        "hat eine Nussallergie"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround",
+        "need",
+        "neutral"
+      ],
+      "locator": [
+        "04:22"
+      ],
+      "why": "B1: Wegen der Nussallergie des Kindes richtet sie die Arbeitswoche so ein, dass sie erreichbar ist – Kontext der Persona und Aufwand, darf gezählt werden."
+    },
+    {
+      "key": "b2-save-the-date-app",
+      "required": false,
+      "match": [
+        "Bei uns kam das über die App",
+        "Save the date"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "05:27"
+      ],
+      "why": "B2: Kanal App mit «Save the date» im Januar und späterem PDF – beschreibend, darf gezählt werden."
+    },
+    {
+      "key": "b2-app-nachrichtenflut",
+      "required": true,
+      "match": [
+        "das erste fast übersehen",
+        "da kommt jeden Tag irgendwas",
+        "das halt nicht mehr so genau"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "05:27"
+      ],
+      "why": "B2: Die erste Lagerinfo in der App fast übersehen, weil täglich Nachrichten kommen – zentrale Reibung beim Kanal App."
+    },
+    {
+      "key": "b2-frau-liest-app",
+      "required": false,
+      "match": [
+        "Meine Frau liest das alles"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "05:27"
+      ],
+      "why": "B2: Die Partnerin liest die Schulnachrichten, er nicht – Hinweis darauf, wer handelt, kein eigener Befund."
+    },
+    {
+      "key": "b3-zettel-thek-frist-verpasst",
+      "required": true,
+      "match": [
+        "die hat das einfach vergessen",
+        "am Sonntagabend gefunden",
+        "die Frist war schon vorbei"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "06:19"
+      ],
+      "why": "B3: Der Talon lag unbemerkt im Thek, das Kind hatte ihn vergessen, beim Finden war die Frist vorbei – der Papierkanal über das Kind scheitert."
+    },
+    {
+      "key": "b3-erschrocken-darf-nicht-mit",
+      "required": true,
+      "match": [
+        "ich bin schon erschrocken",
+        "jetzt darf sie nicht mit"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "06:19"
+      ],
+      "emotion": "explicit_negative",
+      "why": "B3: Ausdrücklich erschrocken aus Angst, das Kind dürfe wegen der verpassten Frist nicht mit – geäusserte negative Emotion."
+    },
+    {
+      "key": "b3-zu-spaet-zettelchen",
+      "required": false,
+      "match": [
+        "Entschuldigung, zu spät gefunden",
+        "es war kein Problem"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround",
+        "positive"
+      ],
+      "locator": [
+        "06:19"
+      ],
+      "why": "B3: Talon mit Entschuldigungszettel verspätet abgegeben, ohne Folgen – Umgehung, darf gezählt werden."
+    },
+    {
+      "key": "b3-niemanden-zum-fragen",
+      "required": true,
+      "match": [
+        "fast niemanden gekannt",
+        "vorher weiss man das halt nicht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "need"
+      ],
+      "locator": [
+        "07:33"
+      ],
+      "why": "B3: Erstes Lager, kaum Kontakte in der Klasse, niemand zum Fragen – erklärt die Unsicherheit und kennzeichnet eine Persona ohne informelles Netz."
+    },
+    {
+      "key": "b4-info-nur-an-mutter",
+      "required": true,
+      "match": [
+        "die Briefe gehen alle an ihre Adresse",
+        "die App hat auch nur sie",
+        "in drei Wochen gehen wir ins Lager"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "08:01"
+      ],
+      "why": "B4: Der getrennt lebende Vater erfährt drei Wochen vorher über den Sohn vom Lager, weil Briefe und App nur an die Mutter gehen – die Information erreicht einen Elternteil nicht."
+    },
+    {
+      "key": "b2-bruder-drei-ecken",
+      "required": false,
+      "match": [
+        "erfährt auch alles über drei Ecken"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "09:00"
+      ],
+      "why": "B2: Zustimmung mit eigenem Fall (Bruder, Hörensagen) – fügt etwas hinzu, aber nur aus zweiter Hand."
+    },
+    {
+      "key": "b1-formular-ausdrucken",
+      "required": false,
+      "match": [
+        "das man ausdrucken musste",
+        "dem Kind wieder mitgeben"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "09:37"
+      ],
+      "why": "B1: Formular als PDF ausdrucken, ausfüllen, unterschreiben und dem Kind mitgeben – Ablauf mit Medienbruch, beschreibend."
+    },
+    {
+      "key": "b1-allergie-feld-zu-klein",
+      "required": true,
+      "match": [
+        "Da passt ja gar nicht rein",
+        "vielleicht drei Zentimeter"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "09:37"
+      ],
+      "why": "B1: Das Feld für Allergien ist eine Zeile von etwa drei Zentimetern, zu klein für das Nötige – Reibung am Formular."
+    },
+    {
+      "key": "b1-allergie-offene-fragen",
+      "required": false,
+      "match": [
+        "dass auch Spuren gefährlich sind",
+        "wer kann damit umgehen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "10:31"
+      ],
+      "why": "B1: Konkrete Fragen zu Küche, Spuren und Notfallset – Inhalt des Bedarfs, der um 42:51 als Wunsch steht."
+    },
+    {
+      "key": "b1-allergie-wartezeit",
+      "required": true,
+      "match": [
+        "zwei Wochen nichts gehört",
+        "so drei Wochen, wo ich nicht wusste",
+        "Ist das jetzt angekommen oder nicht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "10:31"
+      ],
+      "emotion": "not_explicit",
+      "why": "B1: Nach der Mail an die Lehrerin zwei Wochen keine Antwort, Nachfrage, insgesamt etwa drei Wochen Ungewissheit – Reibung mit Dauer, Gefühl nur abgeleitet."
+    },
+    {
+      "key": "b1-koechin-ohne-nuesse",
+      "required": true,
+      "match": [
+        "für alle ohne Nüsse",
+        "Und die war super, wirklich"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "10:31"
+      ],
+      "why": "B1: Die Köchin rief an und kocht die ganze Woche nussfrei – positives Erlebnis, das die Sorge löst."
+    },
+    {
+      "key": "b3-lager-fuer-freiwillig-gehalten",
+      "required": true,
+      "match": [
+        "Also dass das freiwillig ist",
+        "wie bei einem Ferienlager"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "12:35"
+      ],
+      "why": "B3: Hielt das obligatorische Lager für freiwillig wie ein Ferienlager – Missverständnis über die Verbindlichkeit."
+    },
+    {
+      "key": "b3-anmeldung-wegen-geld-ueberlegt",
+      "required": true,
+      "match": [
+        "ob ich sie überhaupt anmelden soll",
+        "wegen dem Geld"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "12:35"
+      ],
+      "why": "B3: Überlegte wegen der Kosten, das Kind nicht anzumelden – Kosten als Hürde bis zur möglichen Nichtteilnahme."
+    },
+    {
+      "key": "b2-lager-obligatorisch",
+      "required": false,
+      "match": [
+        "das Lager ist doch obligatorisch",
+        "Das ist ganz normale Schulzeit"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "13:03"
+      ],
+      "why": "B2: Weiss, dass das Lager obligatorisch ist – Gegenposition, zeigt das unterschiedliche Verständnis in der Gruppe."
+    },
+    {
+      "key": "b3-titel-anmeldung-irrefuehrend",
+      "required": true,
+      "match": [
+        "auf dem Zettel stand oben gross",
+        "Wenn man sich anmelden muss",
+        "dann kann man sich auch nicht anmelden"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "13:10"
+      ],
+      "why": "B3: Der Titel «Anmeldung Klassenlager» liess sie schliessen, man könne auch nicht anmelden – Ursache des Missverständnisses im Dokument."
+    },
+    {
+      "key": "b1-alternative-andere-klasse",
+      "required": false,
+      "match": [
+        "geht die Woche in eine andere Klasse"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "13:29"
+      ],
+      "why": "B1: Wer nicht mitkommt, besucht eine andere Klasse – Hinweis auf die Regel, unsicher, ob sie genutzt wird."
+    },
+    {
+      "key": "b4-ein-kind-nicht-dabei",
+      "required": false,
+      "match": [
+        "einer nicht dabei",
+        "irgendwas Medizinisches, hat der"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "13:47"
+      ],
+      "why": "B4: Ein Kind war wohl aus medizinischen Gründen nicht dabei – Hörensagen vom Kind, darf gezählt werden."
+    },
+    {
+      "key": "b4-nicht-auf-notfallliste",
+      "required": true,
+      "match": [
+        "auf der Notfallliste gar nicht drauf",
+        "Ich hab das Formular nie gesehen",
+        "die haben mich halt nicht im System",
+        "die haben dich sowieso im System"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown"
+      ],
+      "locator": [
+        "14:20"
+      ],
+      "emotion": "not_explicit",
+      "why": "B4: Hat das Formular nie gesehen und stand nicht auf der Notfallliste, während die Mutter im Ausland war – Lücke im Notfallkontakt, Sorge nur angedeutet («Aber wenn.»)."
+    },
+    {
+      "key": "b2-merkblatt-gut-gemacht",
+      "required": false,
+      "match": [
+        "eigentlich gut gemacht",
+        "da war alles drin"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "15:44"
+      ],
+      "why": "B2: Das sechsseitige Merkblatt war vollständig und gut gemacht – positives Urteil, das die folgende Reibung einordnet."
+    },
+    {
+      "key": "b2-merkblatt-nicht-gespeichert",
+      "required": true,
+      "match": [
+        "gelesen, aber nicht gespeichert",
+        "man liest das einmal, am Handy",
+        "und dann ist es weg"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "15:44"
+      ],
+      "why": "B2: Merkblatt einmal am Handy gelesen, die Abholregel auf Seite zwei nicht behalten – wichtige Information geht im langen Dokument unter."
+    },
+    {
+      "key": "b1-info-in-drei-teilen",
+      "required": false,
+      "match": [
+        "Bei uns kam das in drei Teilen",
+        "der Brief mit Datum, Ort und Kosten"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "16:29"
+      ],
+      "why": "B1: Abfolge der Information (Brief im März, Formular, Packliste zwei Wochen vorher) – beschreibend für die Zeitachse."
+    },
+    {
+      "key": "b1-packliste-zu-spaet",
+      "required": true,
+      "match": [
+        "die Packliste war mir eigentlich zu spät",
+        "Eingelaufen! In zwei Wochen!",
+        "Sie hatte trotzdem Blasen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "16:29"
+      ],
+      "emotion": "not_explicit",
+      "why": "B1: Packliste zwei Wochen vor dem Lager zu spät, um Wanderschuhe zu kaufen und einzulaufen, Folge Blasen – Reibung mit Zeitbezug."
+    },
+    {
+      "key": "b1-schuhe-einlaufen",
+      "required": false,
+      "match": [
+        "jeden Abend eine Runde ums Quartier"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround"
+      ],
+      "locator": [
+        "16:29"
+      ],
+      "why": "B1: Jeden Abend Schuhe einlaufen – Umgehung der zu späten Packliste."
+    },
+    {
+      "key": "b3-finken-fehlten",
+      "required": false,
+      "match": [
+        "am ersten Abend in den Socken",
+        "Das stand nicht auf der Liste"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "17:20"
+      ],
+      "why": "B3: Finken fehlten auf der Liste oder wurden übersehen, das Kind lief in Socken – kleine Reibung, unsicher belegt."
+    },
+    {
+      "key": "b3-ausruestung-ausgeliehen-brocki",
+      "required": true,
+      "match": [
+        "von der Nachbarin ausgeliehen",
+        "im Brocki gefunden, für zwölf Franken",
+        "Und wir hatten vieles nicht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround"
+      ],
+      "locator": [
+        "18:04"
+      ],
+      "why": "B3: Vieles fehlte; Schlafsack geliehen, Wanderschuhe im Brocki für zwölf Franken – Umgehung, um die Kosten tief zu halten."
+    },
+    {
+      "key": "b3-nachbarn-sprachbarriere",
+      "required": true,
+      "match": [
+        "die sprechen nicht so gut Deutsch",
+        "ob ich ihnen den Brief erklären kann"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "workaround"
+      ],
+      "locator": [
+        "18:04"
+      ],
+      "why": "B3 über Nachbarn: Sie verstehen den Brief nicht und fragen B3 um Hilfe – Sprachbarriere und informelle Hilfe als Umweg, aus zweiter Hand."
+    },
+    {
+      "key": "b3-nachbarn-alles-neu-kaufen",
+      "required": true,
+      "match": [
+        "man muss das alles neu kaufen",
+        "Schlafsack für hundertzwanzig Franken",
+        "Aber das stand halt nirgends"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "need"
+      ],
+      "locator": [
+        "18:04"
+      ],
+      "why": "B3 über Nachbarn: Sie glaubten, alles neu kaufen zu müssen (Schlafsack für 120 Franken), weil nirgends stand, dass Ausleihen genügt – fehlende Information treibt Kosten."
+    },
+    {
+      "key": "b3-keine-uebersetzung-gesehen",
+      "required": false,
+      "match": [
+        "Also ich hab keinen gesehen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "19:47"
+      ],
+      "why": "B3: Hat keinen übersetzten Brief gesehen – Antwort auf die Frage der Moderation, schwacher Beleg."
+    },
+    {
+      "key": "b1-uebersetzungszeile",
+      "required": false,
+      "match": [
+        "Brauchen Sie eine Übersetzung",
+        "der den Brief gar nicht lesen kann"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "friction"
+      ],
+      "locator": [
+        "19:55"
+      ],
+      "why": "B1: Briefe trugen eine mehrsprachige Zeile zur Übersetzung, mit Zweifel, ob Betroffene sich melden – darf gezählt werden."
+    },
+    {
+      "key": "b4-zwei-schlafsaecke",
+      "required": true,
+      "match": [
+        "Und dann hatte er zwei",
+        "die Schule eben nur mit ihr kommuniziert",
+        "dass wir das nicht abgesprochen haben"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "20:32"
+      ],
+      "why": "B4: Beide Elternteile kauften je einen Schlafsack, weil die Schule nur mit der Mutter kommuniziert – Doppelkauf als Folge der einseitigen Information."
+    },
+    {
+      "key": "b4-app-zugang-bis-weihnachten",
+      "required": true,
+      "match": [
+        "pro Kind gibt es ein Konto",
+        "drei- oder viermal nachfragen",
+        "Da war das Lager längst vorbei",
+        "ob ich auch auf die App kann"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "20:32"
+      ],
+      "why": "B4: Die App hat ein Konto pro Kind für den Hauptkontakt; eigener Zugang erst nach drei bis vier Nachfragen um Weihnachten – Reibung mit Dauer."
+    },
+    {
+      "key": "b2-zu-viel-dann-zu-wenig",
+      "required": false,
+      "match": [
+        "zu viel auf einmal"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "22:34"
+      ],
+      "why": "B2: Eigene Zuspitzung auf die Zusammenfassung der Moderation – darf gezählt werden, die Zusammenfassung selbst nicht."
+    },
+    {
+      "key": "b1-kosten-80-qr-rechnung",
+      "required": true,
+      "match": [
+        "Bei uns waren das achtzig Franken",
+        "mit einer QR-Rechnung von der Gemeinde"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "23:03"
+      ],
+      "emotion": "none",
+      "why": "B1: Das Lager kostete 80 Franken, bezahlt per QR-Rechnung der Gemeinde – Kosten und Zahlweg am Schritt."
+    },
+    {
+      "key": "b1-rueckzahlung-abrechnung-fehlt",
+      "required": true,
+      "match": [
+        "Hab ich aber nie mehr etwas gehört",
+        "wenn am Schluss etwas übrig bleibt",
+        "was ich mich auch frage: die Abrechnung",
+        "Hat bei Ihnen jemand eine bekommen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "23:03",
+        "36:49"
+      ],
+      "why": "B1: Rückzahlung angekündigt, aber nie eine Abrechnung erhalten – Aussage über zwei Redebeiträge, fehlende Transparenz nach dem Lager."
+    },
+    {
+      "key": "b2-kosten-mit-seilpark",
+      "required": true,
+      "match": [
+        "Hundert oder hundertzehn",
+        "maximal dreissig Franken"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "23:26"
+      ],
+      "emotion": "none",
+      "why": "B2: Etwa 100 bis 110 Franken inklusive Seilpark plus bis 30 Franken Taschengeld – Kosten, Betrag unsicher erinnert."
+    },
+    {
+      "key": "b3-kosten-120-vier-tage",
+      "required": true,
+      "match": [
+        "hundertzwanzig, für vier Tage",
+        "Plus zwanzig Franken Taschengeld"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "friction"
+      ],
+      "locator": [
+        "23:58"
+      ],
+      "why": "B3: 120 Franken für vier Tage plus 20 Franken Taschengeld – Kosten am Schritt."
+    },
+    {
+      "key": "b3-bargeld-im-thek",
+      "required": true,
+      "match": [
+        "das alles bar, im Couvert",
+        "gibt man einer Zehnjährigen in den Thek"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "23:58"
+      ],
+      "emotion": "not_explicit",
+      "why": "B3: Alles bar im Couvert über das Kind abgeben, 140 Franken im Thek einer Zehnjährigen – Reibung beim Zahlweg."
+    },
+    {
+      "key": "b3-nervoes-wegen-bargeld",
+      "required": true,
+      "match": [
+        "ich war den ganzen Morgen nervös"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "24:45"
+      ],
+      "emotion": "explicit_negative",
+      "why": "B3: Ausdrücklich nervös, bis das Bargeld angekommen war – geäusserte negative Emotion zum Zahlweg."
+    },
+    {
+      "key": "b3-kosten-belastend",
+      "required": true,
+      "match": [
+        "das ist für uns nicht nichts",
+        "Ich bin alleinerziehend",
+        "noch die Zahnarztrechnung"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "25:04"
+      ],
+      "emotion": "not_explicit",
+      "why": "B3: Alleinerziehend, 60 Prozent, gleichzeitig eine Zahnarztrechnung – die Lagerkosten belasten spürbar; Persona und Kostenhürde."
+    },
+    {
+      "key": "b3-haertefall-nicht-ueber-lehrperson",
+      "required": true,
+      "match": [
+        "Und das wollte ich nicht",
+        "Dass sie sie anders anschaut",
+        "das einfach mal liegen lassen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "25:04"
+      ],
+      "emotion": "not_explicit",
+      "why": "B3: Wollte den Härtefall nicht bei der Klassenlehrperson melden, aus Sorge, das Kind werde anders angeschaut, und liess es liegen – der angebotene Weg wird gemieden, Scham nur abgeleitet."
+    },
+    {
+      "key": "b3-tipp-vom-elternrat",
+      "required": true,
+      "match": [
+        "eine Mutter vom Elternrat",
+        "direkt bei der Schulverwaltung machen kann",
+        "die Gemeinde dann einen Teil übernimmt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "workaround",
+        "neutral"
+      ],
+      "locator": [
+        "26:17"
+      ],
+      "why": "B3: Erfuhr nur nebenbei von einer Mutter aus dem Elternrat, dass man sich direkt an die Schulverwaltung wenden kann – ein informeller Kanal schliesst eine Informationslücke."
+    },
+    {
+      "key": "b3-zweimal-weiterverbunden",
+      "required": true,
+      "match": [
+        "Ich wurde zweimal weiterverbunden",
+        "wusste nicht genau, wer zuständig ist"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "26:17"
+      ],
+      "why": "B3: Am Telefon zweimal weiterverbunden, die erste Person kannte die Zuständigkeit nicht – Reibung beim Kontakt mit der Verwaltung."
+    },
+    {
+      "key": "b3-gesuch-nett-unterlagen",
+      "required": false,
+      "match": [
+        "die war sehr nett",
+        "den Lohnausweis oder die letzte Steuerveranlagung"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "neutral"
+      ],
+      "locator": [
+        "26:17"
+      ],
+      "why": "B3: Freundliche Mitarbeiterin, Gesuch mit Lohnausweis oder Steuerveranlagung – Ablauf und positiver Kontakt, darf gezählt werden."
+    },
+    {
+      "key": "b3-reduktion-nach-zwei-wochen",
+      "required": true,
+      "match": [
+        "vierzig Franken statt hundertzwanzig",
+        "nach ungefähr zwei Wochen kam ein Brief"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "neutral"
+      ],
+      "locator": [
+        "26:17"
+      ],
+      "why": "B3: Nach etwa zwei Wochen der Entscheid, 40 statt 120 Franken – Ergebnis mit Dauer und Betrag."
+    },
+    {
+      "key": "b3-ungewiss-bis-zum-schluss",
+      "required": true,
+      "match": [
+        "knapp vor dem Lager",
+        "hundertzwanzig ins Couvert tun soll oder vierzig",
+        "schlecht geschlafen die Tage davor"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "26:17"
+      ],
+      "emotion": "any",
+      "why": "B3: Der Entscheid kam knapp vor dem Lager, bis zuletzt unklar, welcher Betrag ins Couvert gehört, schlecht geschlafen – Reibung; ob «schlecht geschlafen» als ausdrückliche Emotion gilt, ist Ermessen."
+    },
+    {
+      "key": "b3-couvert-mit-zettel",
+      "required": false,
+      "match": [
+        "vierzig plus die zwanzig Taschengeld reingetan"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround"
+      ],
+      "locator": [
+        "26:17"
+      ],
+      "why": "B3: Den reduzierten Betrag mit einem Zettel ins Couvert gelegt – Umgehung der Unklarheit."
+    },
+    {
+      "key": "b2-schwager-volksschule-gratis",
+      "required": false,
+      "match": [
+        "darf eigentlich gar nicht so viel kosten",
+        "nur das Essen verrechnen",
+        "weil die Volksschule gratis sein muss"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "27:48"
+      ],
+      "why": "B2: Hält die Kosten für zu hoch und gibt Hörensagen zur Unentgeltlichkeit wieder, selbst unsicher – Wahrnehmung, kein Beleg für die Rechtslage."
+    },
+    {
+      "key": "b3-selbst-ausgerechnet",
+      "required": false,
+      "match": [
+        "Hab ich mir auch schon ausgerechnet"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "friction"
+      ],
+      "locator": [
+        "28:24"
+      ],
+      "why": "B3: Hat die Kosten selbst nachgerechnet – Zustimmung mit kleinem eigenem Zusatz."
+    },
+    {
+      "key": "b2-kosten-unterschiedlich",
+      "required": true,
+      "match": [
+        "wieso zahlt der eine achtzig",
+        "In derselben Gemeinde"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "28:29"
+      ],
+      "why": "B2: In derselben Gemeinde 80 Franken für fünf Tage hier und 120 für vier dort – die Kosten sind nicht nachvollziehbar."
+    },
+    {
+      "key": "b4-kosten-geteilt",
+      "required": false,
+      "match": [
+        "ich hab ihr die Hälfte überwiesen",
+        "was wir gut abgesprochen haben"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "neutral"
+      ],
+      "locator": [
+        "29:05"
+      ],
+      "why": "B4: Die Mutter zahlte rund 80 Franken, er überwies die Hälfte – funktionierende Absprache getrennter Eltern, darf gezählt werden."
+    },
+    {
+      "key": "b1-ausruestung-zweihundert",
+      "required": true,
+      "match": [
+        "schnell zweihundert Franken",
+        "Mehr als das Lager selber"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "friction"
+      ],
+      "locator": [
+        "29:23"
+      ],
+      "why": "B1: Die Ausrüstung kostete rund 200 Franken, mehr als das Lager – eigene Zahl zu den versteckten Kosten, baut auf B3 auf."
+    },
+    {
+      "key": "b1-lagerblog-geliebt",
+      "required": true,
+      "match": [
+        "Ich hab das geliebt",
+        "jeden Abend um neun vor dem Laptop"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "30:07"
+      ],
+      "emotion": "explicit_positive",
+      "why": "B1: Den Lagerblog mit täglichen Fotos ausdrücklich geliebt – positive Emotion zur Kommunikation während der Woche."
+    },
+    {
+      "key": "b1-handys-eingesammelt",
+      "required": false,
+      "match": [
+        "die Handys wurden beim Car eingesammelt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "30:07"
+      ],
+      "why": "B1: Handys eingesammelt, Anrufe nur im Notfall – Regel, beschreibend."
+    },
+    {
+      "key": "b2-blog-macht-druck",
+      "required": true,
+      "match": [
+        "das macht so einen Druck",
+        "Meiner ist auf keinem Foto",
+        "noch Fotos aussuchen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "31:11"
+      ],
+      "emotion": "any",
+      "why": "B2: Ein Fotoblog erzeugt Druck auf Eltern und Lehrperson (Beispiel aus der Klasse des Neffen) – Gegenposition zu B1, teils aus zweiter Hand."
+    },
+    {
+      "key": "b2-tagesnachricht-genug",
+      "required": true,
+      "match": [
+        "in der App eine Nachricht geschrieben",
+        "fand ich, ehrlich gesagt, genug"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "31:11"
+      ],
+      "why": "B2: Eine kurze Nachricht pro Tag in der App genügte – positiver Gegenentwurf zum Blog."
+    },
+    {
+      "key": "b2-fieber",
+      "required": false,
+      "match": [
+        "am Mittwochabend Fieber bekommen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "32:09"
+      ],
+      "why": "B2: Das Kind bekam im Lager hohes Fieber – auslösendes Ereignis, beschreibend."
+    },
+    {
+      "key": "b2-fiebermittel-erlaubt",
+      "required": false,
+      "match": [
+        "das hatten wir auf dem Formular erlaubt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "neutral"
+      ],
+      "locator": [
+        "32:09"
+      ],
+      "why": "B2: Fiebermittel gemäss Formular gegeben – das Formular wirkte hier, darf gezählt werden."
+    },
+    {
+      "key": "b2-alte-nummer-aus-system",
+      "required": true,
+      "match": [
+        "auf ihre alte Nummer",
+        "dort war noch die alte Nummer drin",
+        "die Klassenliste aus dem System",
+        "Nach einer Viertelstunde oder so"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown"
+      ],
+      "locator": [
+        "32:09"
+      ],
+      "why": "B2: Die Lehrperson rief die alte Nummer aus dem System an, obwohl auf dem Formular die neue stand; der Vater wurde erst nach einer Viertelstunde erreicht – Datenbruch zwischen Formular und System."
+    },
+    {
+      "key": "b2-abholen-vier-stunden",
+      "required": true,
+      "match": [
+        "zwei Stunden hin, zwei Stunden zurück",
+        "Er muss heim, Sie müssen ihn holen",
+        "im Geschäft angerufen, mich abgemeldet"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "32:09"
+      ],
+      "why": "B2: Musste sich bei der Arbeit abmelden und je zwei Stunden hin und zurück fahren – Aufwand mit belegter Dauer."
+    },
+    {
+      "key": "b2-gut-betreut",
+      "required": false,
+      "match": [
+        "er wurde gut betreut"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "32:09"
+      ],
+      "why": "B2: Das kranke Kind wurde gut betreut – positives Urteil, darf gezählt werden."
+    },
+    {
+      "key": "b2-abholpflicht-nicht-gewusst",
+      "required": true,
+      "match": [
+        "nicht gewusst, dass man selber holen muss",
+        "die gehen mit ihm dort zum Arzt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "32:09"
+      ],
+      "why": "B2: Wusste nicht, dass Eltern kranke Kinder selbst abholen müssen, und erwartete einen Arztbesuch vor Ort – falsche Erwartung trotz Merkblatt."
+    },
+    {
+      "key": "b4-frage-ohne-auto",
+      "required": false,
+      "match": [
+        "wenn man kein Auto hat"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "locator": [
+        "34:01"
+      ],
+      "why": "B4: Frage nach Eltern ohne Auto oder ohne Möglichkeit, von der Arbeit wegzugehen – wirft einen Grenzfall auf, kein Erlebnis; Signal offen."
+    },
+    {
+      "key": "b3-kein-auto-abholen",
+      "required": true,
+      "match": [
+        "Ich hab kein Auto",
+        "zweimal umsteigen und dann noch",
+        "Daran hab ich gar nie gedacht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "locator": [
+        "34:12"
+      ],
+      "why": "B3: Ohne Auto wäre das Abholen eine lange Reise mit Zug und Bus gewesen – Grenzfall der Abholpflicht; Signal offen, weil hypothetisch."
+    },
+    {
+      "key": "b3-heimweh-geweint",
+      "required": false,
+      "match": [
+        "am zweiten Abend Heimweh",
+        "sie hat geweint und nicht mehr aufgehört",
+        "Da stand auch: keine Anrufe"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "locator": [
+        "34:12"
+      ],
+      "emotion": "any",
+      "why": "B3: Das Kind hatte am zweiten Abend starkes Heimweh, obwohl keine Anrufe vorgesehen waren – Ereignis; die Emotion ist die des Kindes."
+    },
+    {
+      "key": "b3-heimweh-anruf-erlaubt",
+      "required": true,
+      "match": [
+        "mit dem Handy von der Lehrerin",
+        "Ich fand das extrem lieb von ihr",
+        "zehn Minuten geredet"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "34:12"
+      ],
+      "emotion": "any",
+      "why": "B3: Die Lehrerin erlaubte trotz Regel einen Anruf mit ihrem Handy – positives Erlebnis; «extrem lieb» ist eher Urteil als Emotion, daher offen."
+    },
+    {
+      "key": "b3-heimweh-vorher-wissen",
+      "required": true,
+      "match": [
+        "gern vorher gewusst, dass das überhaupt möglich ist",
+        "dann erfahr ich das gar nicht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need",
+        "friction"
+      ],
+      "locator": [
+        "34:12"
+      ],
+      "emotion": "not_explicit",
+      "why": "B3: Hätte vorher wissen wollen, dass Anrufe bei Heimweh möglich sind; vorher die Sorge, nichts zu erfahren – Bedarf, Sorge nur angedeutet."
+    },
+    {
+      "key": "b4-screenshots-am-freitag",
+      "required": false,
+      "match": [
+        "als Screenshots weitergeleitet",
+        "ich war ja nicht in der App"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "35:45"
+      ],
+      "why": "B4: Während der Woche keine Nachrichten, erst am Freitag als Screenshots über die Mutter – Variante der einseitigen Information."
+    },
+    {
+      "key": "b4-notfall-ueber-grosi",
+      "required": true,
+      "match": [
+        "dann hätten die das Grosi angerufen",
+        "Aber es ist halt ein Umweg",
+        "der Erste gewesen, der hätte hinfahren können"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "35:45"
+      ],
+      "why": "B4: Im Notfall wäre die 82-jährige Grossmutter angerufen worden, obwohl er am schnellsten vor Ort gewesen wäre – Notfallkette mit Umweg."
+    },
+    {
+      "key": "b1-rueckkehr-geklappt",
+      "required": true,
+      "match": [
+        "das hat gut geklappt",
+        "zehn Minuten zu früh"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "36:49"
+      ],
+      "why": "B1: Die Rückkehr am Freitag hat gut geklappt – einziger Beleg für die Phase Rückkehr, positiv."
+    },
+    {
+      "key": "b1-fundsachen-spaet",
+      "required": true,
+      "match": [
+        "erst drei Wochen später",
+        "weil der Hauswart die Kiste erst dann",
+        "Das Frottiertuch nie"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "36:49"
+      ],
+      "why": "B1: Fundsachen erst nach drei Wochen zugänglich, ein Frottiertuch nie gefunden – Reibung nach dem Lager mit Dauer."
+    },
+    {
+      "key": "b2-nichts-zurueckbekommen",
+      "required": true,
+      "match": [
+        "Wir haben auch nichts zurückbekommen",
+        "was mit dem Geld passiert"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "37:45"
+      ],
+      "why": "B2: Keine Rückzahlung, obwohl das Kind den Seilpark und den Rest der Woche verpasste; unklar, was mit dem Geld geschieht – eigener Fall zur fehlenden Abrechnung."
+    },
+    {
+      "key": "b2-fotolink-dreissig-tage",
+      "required": false,
+      "match": [
+        "der war dreissig Tage gültig"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "37:45"
+      ],
+      "why": "B2: Der Fotolink war 30 Tage gültig – beschreibend, Voraussetzung für das Erlebnis von B4."
+    },
+    {
+      "key": "b4-fotolink-abgelaufen",
+      "required": true,
+      "match": [
+        "Dieser Link ist nicht mehr gültig",
+        "Bei mir war der abgelaufen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "38:14"
+      ],
+      "why": "B4: Der weitergeleitete Fotolink war abgelaufen, er sah nur einen Teil der Fotos – Folge der Information über nur einen Elternteil."
+    },
+    {
+      "key": "b4-kind-begeistert",
+      "required": true,
+      "match": [
+        "eine Woche lang nur vom Lager erzählt",
+        "als wär das Lager schlecht gewesen",
+        "hat drei Tage nur geschlafen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "38:14"
+      ],
+      "emotion": "any",
+      "why": "B4: Der Sohn war begeistert vom Lager – positives Ergebnis; die Emotion ist die des Kindes, daher offen."
+    },
+    {
+      "key": "b3-will-wieder",
+      "required": false,
+      "match": [
+        "will nächstes Jahr unbedingt wieder"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "39:14"
+      ],
+      "why": "B3: Die Tochter will trotz Heimweh wieder ins Lager – Zustimmung zu B4 mit eigenem Zusatz."
+    },
+    {
+      "key": "b3-lagerzeitung",
+      "required": false,
+      "match": [
+        "eine Lagerzeitung gemacht",
+        "hängt jetzt am Kühlschrank"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "39:14"
+      ],
+      "why": "B3: Die Lagerzeitung der Kinder kam nach Hause – positiver Abschluss, darf gezählt werden."
+    },
+    {
+      "key": "b3-keine-abrechnung",
+      "required": false,
+      "match": [
+        "Abrechnung hab ich aber auch nie gesehen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "39:14"
+      ],
+      "why": "B3: Auch keine Abrechnung gesehen – Zustimmung ohne viel Eigenes."
+    },
+    {
+      "key": "b1-allergievorfall-nicht-informiert",
+      "required": true,
+      "match": [
+        "Von der Schule kam da nichts",
+        "das hab ich vom Kind erfahren",
+        "gern von der Lehrerin gehört"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "need"
+      ],
+      "locator": [
+        "39:45"
+      ],
+      "why": "B1: Vom Nussvorfall im Lager erfuhr sie nur vom Kind, nicht von der Schule – fehlende Rückmeldung nach dem Lager."
+    },
+    {
+      "key": "b1-lehrerin-reagiert",
+      "required": false,
+      "match": [
+        "sie soll sich woanders hinsetzen",
+        "Schoggistängeli mit Haselnüssen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "neutral"
+      ],
+      "locator": [
+        "39:45"
+      ],
+      "why": "B1: Die Lehrerin reagierte beim Ausflug richtig auf die Nüsse – Ereignis, darf gezählt werden."
+    },
+    {
+      "key": "b4-wunsch-beide-eltern",
+      "required": true,
+      "match": [
+        "Beide Eltern bekommen die Infos",
+        "beide stehen auf der Notfallliste",
+        "ohne dass man das extra verlangen muss"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "41:36"
+      ],
+      "why": "B4: Beide sorgeberechtigten Eltern sollen die Infos per App und Post erhalten und ohne Antrag auf der Notfallliste stehen – zentraler Wunsch."
+    },
+    {
+      "key": "b3-wunsch-anlaufstelle-kosten",
+      "required": true,
+      "match": [
+        "an wen man sich wenden kann",
+        "nicht nur an die Lehrerin"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "42:04"
+      ],
+      "why": "B3: Im Brief soll eine Anlaufstelle für die Kosten stehen, nicht nur die Lehrperson – Bedarf aus dem Härtefall-Erlebnis."
+    },
+    {
+      "key": "b3-wunsch-nicht-bar",
+      "required": false,
+      "match": [
+        "Und vielleicht nicht bar"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "42:04"
+      ],
+      "why": "B3: Wunsch nach einem anderen Zahlweg als Bargeld – vorsichtig geäussert."
+    },
+    {
+      "key": "b3-wunsch-nicht-anmeldung",
+      "required": true,
+      "match": [
+        "nicht «Anmeldung» drübersteht",
+        [
+          "drübersteht",
+          "obligatorisch ist"
+        ]
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "42:04"
+      ],
+      "why": "B3: Kein Titel «Anmeldung», wenn das Lager obligatorisch ist – Wunsch aus dem Missverständnis; zweite Alternative für Zitate mit anderen Anführungszeichen."
+    },
+    {
+      "key": "b3-wunsch-ausleihen",
+      "required": true,
+      "match": [
+        "dass man Sachen ausleihen kann",
+        "so eine Kiste mit Schlafsäcken"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "42:04"
+      ],
+      "why": "B3: Ausrüstung ausleihen können, etwa aus einer Kiste mit Schlafsäcken – Bedarf zu den Ausrüstungskosten."
+    },
+    {
+      "key": "b3-wunsch-regel-heimweh",
+      "required": true,
+      "match": [
+        "vorher weiss, wenn das Kind Heimweh hat",
+        "das mit dem Telefonieren"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "42:04"
+      ],
+      "why": "B3: Vorher wissen, ob ein Kind mit Heimweh anrufen darf – Bedarf an klaren Regeln."
+    },
+    {
+      "key": "b1-wunsch-packliste-frueher",
+      "required": true,
+      "match": [
+        "die Packliste früher",
+        "mindestens einen Monat vorher"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "42:51"
+      ],
+      "why": "B1: Packliste mindestens einen Monat vorher – Bedarf aus dem Erlebnis mit den Wanderschuhen."
+    },
+    {
+      "key": "b1-wunsch-gespraech-medizin",
+      "required": true,
+      "match": [
+        "ein richtiges Gespräch vorher",
+        "nicht ein Feld auf dem Formular"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "42:51"
+      ],
+      "why": "B1: Bei medizinischen Fragen ein Gespräch statt eines Formularfelds – Bedarf aus der Erfahrung mit der Allergie."
+    },
+    {
+      "key": "b1-wunsch-rueckmeldung",
+      "required": true,
+      "match": [
+        "Und nachher eine kurze Rückmeldung"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "42:51"
+      ],
+      "why": "B1: Nach dem Lager eine kurze Rückmeldung – Bedarf aus dem nicht gemeldeten Vorfall."
+    },
+    {
+      "key": "b1-wunsch-kommunikation-vorher-klar",
+      "required": true,
+      "match": [
+        "wenn man vorher weiss, wie kommuniziert wird",
+        "wenn man nichts hört und nicht weiss",
+        "ob man etwas hören sollte"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "42:51"
+      ],
+      "why": "B1: Vorher wissen, wie während der Woche kommuniziert wird, denn schlimmer als Stille ist Ungewissheit – Bedarf, der die Positionen von B1 und B2 verbindet."
+    },
+    {
+      "key": "b2-nichts-heisst-gut",
+      "required": false,
+      "match": [
+        "sonst heisst nichts eine gute Nachricht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "43:47"
+      ],
+      "why": "B2: Zustimmung zu B1 mit eigenem Zusatz – eine Nachricht pro Tag, sonst gilt Stille als gute Nachricht."
+    },
+    {
+      "key": "b2-wunsch-wichtiges-markiert",
+      "required": true,
+      "match": [
+        "dafür die wichtigen markiert",
+        "das Lager nicht zwischen den Läusen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "43:47"
+      ],
+      "why": "B2: Weniger Nachrichten in der App, die wichtigen markiert – Bedarf aus der Nachrichtenflut."
+    },
+    {
+      "key": "b2-wunsch-abholen-erste-seite",
+      "required": true,
+      "match": [
+        "gehört auf die erste Seite, fett"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "43:47"
+      ],
+      "why": "B2: Die Abholregel gehört gut sichtbar auf die erste Seite – Bedarf aus dem Krankheitsfall."
+    },
+    {
+      "key": "b2-wunsch-nummern-stimmen",
+      "required": false,
+      "match": [
+        "Und dass die Nummern stimmen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "43:47"
+      ],
+      "why": "B2: Die Kontaktnummern müssen stimmen – kurzer Wunsch, der Kern steht im folgenden Eintrag."
+    },
+    {
+      "key": "b2-lagerformular-nicht-im-system",
+      "required": true,
+      "match": [
+        "das Lagerformular geht gar nicht ins System",
+        "die Nummer korrigieren lassen",
+        "ja nicht zum Spass auf"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "43:47"
+      ],
+      "why": "B2: Das Sekretariat bestätigt, dass das Lagerformular nicht ins System geht – Ursache der falschen Nummer, dazu sein Unverständnis."
+    }
+  ]
+}

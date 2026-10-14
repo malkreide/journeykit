@@ -1,0 +1,905 @@
+[
+  {
+    "id": "f2-01",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das war schon am Elternabend im September",
+    "locator": "[04:22]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-02",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "dass ich immer erreichbar bin",
+    "locator": "[04:22]",
+    "signal": "workaround"
+  },
+  {
+    "id": "f2-03",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei uns kam das über die App",
+    "locator": "[05:27]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-04",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das erste fast übersehen",
+    "locator": "[05:27]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-05",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Meine Frau liest das alles",
+    "locator": "[05:27]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-06",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die hat das einfach vergessen",
+    "locator": "[06:19]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "f2-07",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ich bin schon erschrocken",
+    "locator": "[06:19]",
+    "signal": "friction",
+    "emotion_hint": {
+      "valence": -1,
+      "explicit": true
+    }
+  },
+  {
+    "id": "f2-08",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Entschuldigung, zu spät gefunden",
+    "locator": "[06:19]",
+    "signal": "workaround"
+  },
+  {
+    "id": "f2-09",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "fast niemanden gekannt",
+    "locator": "[07:33]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-10",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Briefe gehen alle an ihre Adresse",
+    "locator": "[08:01]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "f2-11",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "erfährt auch alles über drei Ecken",
+    "locator": "[09:00]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-12",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das man ausdrucken musste",
+    "locator": "[09:37]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-13",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Da passt ja gar nicht rein",
+    "locator": "[09:37]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-14",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "dass auch Spuren gefährlich sind",
+    "locator": "[10:31]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-15",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "zwei Wochen nichts gehört",
+    "locator": "[10:31]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-16",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "für alle ohne Nüsse",
+    "locator": "[10:31]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-17",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Also dass das freiwillig ist",
+    "locator": "[12:35]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-18",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ob ich sie überhaupt anmelden soll",
+    "locator": "[12:35]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-19",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das Lager ist doch obligatorisch",
+    "locator": "[13:03]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-20",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "auf dem Zettel stand oben gross",
+    "locator": "[13:10]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-21",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "geht die Woche in eine andere Klasse",
+    "locator": "[13:29]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-22",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "einer nicht dabei",
+    "locator": "[13:47]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-23",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "auf der Notfallliste gar nicht drauf",
+    "locator": "[14:20]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "f2-24",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "eigentlich gut gemacht",
+    "locator": "[15:44]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-25",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "gelesen, aber nicht gespeichert",
+    "locator": "[15:44]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-26",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei uns kam das in drei Teilen",
+    "locator": "[16:29]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-27",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Packliste war mir eigentlich zu spät",
+    "locator": "[16:29]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-28",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "jeden Abend eine Runde ums Quartier",
+    "locator": "[16:29]",
+    "signal": "workaround"
+  },
+  {
+    "id": "f2-29",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "am ersten Abend in den Socken",
+    "locator": "[17:20]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-30",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "von der Nachbarin ausgeliehen",
+    "locator": "[18:04]",
+    "signal": "workaround"
+  },
+  {
+    "id": "f2-31",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die sprechen nicht so gut Deutsch",
+    "locator": "[18:04]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-32",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "man muss das alles neu kaufen",
+    "locator": "[18:04]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-33",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Also ich hab keinen gesehen",
+    "locator": "[19:47]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-34",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Brauchen Sie eine Übersetzung",
+    "locator": "[19:55]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-35",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dann hatte er zwei",
+    "locator": "[20:32]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-36",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "pro Kind gibt es ein Konto",
+    "locator": "[20:32]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-37",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "zu viel auf einmal",
+    "locator": "[22:34]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-38",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei uns waren das achtzig Franken",
+    "locator": "[23:03]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-39",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Hab ich aber nie mehr etwas gehört",
+    "locator": "[23:03]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-40",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Hundert oder hundertzehn",
+    "locator": "[23:26]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-41",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "hundertzwanzig, für vier Tage",
+    "locator": "[23:58]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-42",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das alles bar, im Couvert",
+    "locator": "[23:58]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-43",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ich war den ganzen Morgen nervös",
+    "locator": "[24:45]",
+    "signal": "friction",
+    "emotion_hint": {
+      "valence": -1,
+      "explicit": true
+    }
+  },
+  {
+    "id": "f2-44",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das ist für uns nicht nichts",
+    "locator": "[25:04]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-45",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und das wollte ich nicht",
+    "locator": "[25:04]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "f2-46",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "eine Mutter vom Elternrat",
+    "locator": "[26:17]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-47",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich wurde zweimal weiterverbunden",
+    "locator": "[26:17]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-48",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die war sehr nett",
+    "locator": "[26:17]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-49",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "vierzig Franken statt hundertzwanzig",
+    "locator": "[26:17]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-50",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "knapp vor dem Lager",
+    "locator": "[26:17]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-51",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "vierzig plus die zwanzig Taschengeld reingetan",
+    "locator": "[26:17]",
+    "signal": "workaround"
+  },
+  {
+    "id": "f2-52",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "darf eigentlich gar nicht so viel kosten",
+    "locator": "[27:48]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-53",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Hab ich mir auch schon ausgerechnet",
+    "locator": "[28:24]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-54",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "wieso zahlt der eine achtzig",
+    "locator": "[28:29]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-55",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ich hab ihr die Hälfte überwiesen",
+    "locator": "[29:05]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-56",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "schnell zweihundert Franken",
+    "locator": "[29:23]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-57",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab das geliebt",
+    "locator": "[30:07]",
+    "signal": "positive",
+    "emotion_hint": {
+      "valence": 1,
+      "explicit": true
+    }
+  },
+  {
+    "id": "f2-58",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Handys wurden beim Car eingesammelt",
+    "locator": "[30:07]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-59",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das macht so einen Druck",
+    "locator": "[31:11]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-60",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "in der App eine Nachricht geschrieben",
+    "locator": "[31:11]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-61",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "am Mittwochabend Fieber bekommen",
+    "locator": "[32:09]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-62",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das hatten wir auf dem Formular erlaubt",
+    "locator": "[32:09]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-63",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "auf ihre alte Nummer",
+    "locator": "[32:09]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "f2-64",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "zwei Stunden hin, zwei Stunden zurück",
+    "locator": "[32:09]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-65",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "er wurde gut betreut",
+    "locator": "[32:09]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-66",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "nicht gewusst, dass man selber holen muss",
+    "locator": "[32:09]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-67",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "wenn man kein Auto hat",
+    "locator": "[34:01]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-68",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich hab kein Auto",
+    "locator": "[34:12]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-69",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "am zweiten Abend Heimweh",
+    "locator": "[34:12]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-70",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "mit dem Handy von der Lehrerin",
+    "locator": "[34:12]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-71",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "gern vorher gewusst, dass das überhaupt möglich ist",
+    "locator": "[34:12]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-72",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "als Screenshots weitergeleitet",
+    "locator": "[35:45]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-73",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "dann hätten die das Grosi angerufen",
+    "locator": "[35:45]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-74",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das hat gut geklappt",
+    "locator": "[36:49]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-75",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "erst drei Wochen später",
+    "locator": "[36:49]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-76",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Wir haben auch nichts zurückbekommen",
+    "locator": "[37:45]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-77",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "der war dreissig Tage gültig",
+    "locator": "[37:45]",
+    "signal": "neutral"
+  },
+  {
+    "id": "f2-78",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Dieser Link ist nicht mehr gültig",
+    "locator": "[38:14]",
+    "signal": "breakdown"
+  },
+  {
+    "id": "f2-79",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "eine Woche lang nur vom Lager erzählt",
+    "locator": "[38:14]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-80",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "will nächstes Jahr unbedingt wieder",
+    "locator": "[39:14]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-81",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "eine Lagerzeitung gemacht",
+    "locator": "[39:14]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-82",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Abrechnung hab ich aber auch nie gesehen",
+    "locator": "[39:14]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-83",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Von der Schule kam da nichts",
+    "locator": "[39:45]",
+    "signal": "friction"
+  },
+  {
+    "id": "f2-84",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "sie soll sich woanders hinsetzen",
+    "locator": "[39:45]",
+    "signal": "positive"
+  },
+  {
+    "id": "f2-85",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Beide Eltern bekommen die Infos",
+    "locator": "[41:36]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-86",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "an wen man sich wenden kann",
+    "locator": "[42:04]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-87",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und vielleicht nicht bar",
+    "locator": "[42:04]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-88",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "nicht «Anmeldung» drübersteht",
+    "locator": "[42:04]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-89",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "dass man Sachen ausleihen kann",
+    "locator": "[42:04]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-90",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "vorher weiss, wenn das Kind Heimweh hat",
+    "locator": "[42:04]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-91",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "die Packliste früher",
+    "locator": "[42:51]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-92",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "ein richtiges Gespräch vorher",
+    "locator": "[42:51]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-93",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und nachher eine kurze Rückmeldung",
+    "locator": "[42:51]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-94",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "wenn man vorher weiss, wie kommuniziert wird",
+    "locator": "[42:51]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-95",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "sonst heisst nichts eine gute Nachricht",
+    "locator": "[43:47]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-96",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "dafür die wichtigen markiert",
+    "locator": "[43:47]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-97",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "gehört auf die erste Seite, fett",
+    "locator": "[43:47]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-98",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und dass die Nummern stimmen",
+    "locator": "[43:47]",
+    "signal": "need"
+  },
+  {
+    "id": "f2-99",
+    "source_ref": "fg-f2",
+    "class": "reported",
+    "kind": "quote",
+    "text": "das Lagerformular geht gar nicht ins System",
+    "locator": "[43:47]",
+    "signal": "friction"
+  }
+]

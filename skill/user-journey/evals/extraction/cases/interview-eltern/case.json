@@ -1,0 +1,138 @@
+{
+  "title": "Interview E7 – Schulwechsel nach Umzug innerhalb der Gemeinde",
+  "kind": "interview",
+  "class": "reported",
+  "source_id": "int-e7",
+  "prefix": "e7",
+  "input": "input.md",
+  "phases": [
+    "entscheid",
+    "anmeldung",
+    "uebergang",
+    "ankommen"
+  ],
+  "persona": "eltern-umzug",
+  "known_atoms": [],
+  "tests": "Unabhängiger Fall (2026-10-14): Transkript von einem Subagenten ohne Kenntnis von evidenz.md geschrieben, Gold von einem zweiten Subagenten ohne Prompt-Schablone festgelegt (nur Atom-Modell). Interview mit zwei befragten Personen (Mutter, Vater), etwa 45 Minuten: Korrekturen und Widersprüche zwischen den beiden, Abschweifungen, Aussagen über mehrere Redebeiträge, Helvetismen. Prüft vor allem die Abdeckung; ein Atom darf mehrere Gold-Einträge abdecken (shared_atoms).",
+  "rules": {
+    "kinds": [
+      "quote",
+      "metric"
+    ],
+    "locator_required": true,
+    "pii_terms": [
+      "Ammann",
+      "Odermatt",
+      "Lüthi",
+      "Kunz",
+      "Bucher",
+      "Elio",
+      "Fina",
+      "Leandro",
+      "Mats",
+      "Nando"
+    ],
+    "forbidden": [
+      {
+        "text": "So, jetzt läuft es, glaube ich.",
+        "why": "Redebeitrag der interviewenden Person (00:00)"
+      },
+      {
+        "text": "(lacht) Nein danke, ich habe noch,",
+        "why": "Redebeitrag der interviewenden Person (01:03)"
+      },
+      {
+        "text": "Mhm. Und wann haben Sie zum",
+        "why": "Redebeitrag der interviewenden Person (03:15)"
+      },
+      {
+        "text": "Mhm. Und was haben Sie dann",
+        "why": "Redebeitrag der interviewenden Person (04:54)"
+      },
+      {
+        "text": "Und dann haben Sie das Gesuch",
+        "why": "Redebeitrag der interviewenden Person (06:52)"
+      },
+      {
+        "text": "Mhm. Und waren Sie sich denn",
+        "why": "Redebeitrag der interviewenden Person (08:26)"
+      },
+      {
+        "text": "Alles gut? – Gut. Wir waren",
+        "why": "Redebeitrag der interviewenden Person (10:14)"
+      },
+      {
+        "text": "Erzählen Sie ruhig, ich kenne die",
+        "why": "Redebeitrag der interviewenden Person (12:04)"
+      },
+      {
+        "text": "Wenn ich das kurz zusammenfassen darf:",
+        "why": "Redebeitrag der interviewenden Person (14:14)"
+      },
+      {
+        "text": "Wie haben Sie es Elio dann",
+        "why": "Redebeitrag der interviewenden Person (14:55)"
+      },
+      {
+        "text": "Sie haben das Schnuppern jetzt ein",
+        "why": "Redebeitrag der interviewenden Person (16:41)"
+      },
+      {
+        "text": "(lacht) Gab es beim Schnuppern auch",
+        "why": "Redebeitrag der interviewenden Person (18:20)"
+      },
+      {
+        "text": "Und wie haben Sie das mit",
+        "why": "Redebeitrag der interviewenden Person (20:09)"
+      },
+      {
+        "text": "Mhm. Also eigentlich ein knappes halbes",
+        "why": "Redebeitrag der interviewenden Person (22:00)"
+      },
+      {
+        "text": "Mhm. Dann der erste Schultag in",
+        "why": "Redebeitrag der interviewenden Person (24:34)"
+      },
+      {
+        "text": "Mhm. Und im Unterricht, in den",
+        "why": "Redebeitrag der interviewenden Person (27:02)"
+      },
+      {
+        "text": "Mhm. Und vom Schulstoff her, war",
+        "why": "Redebeitrag der interviewenden Person (29:06)"
+      },
+      {
+        "text": "(lacht) Haben Sie zu solchen Regeln",
+        "why": "Redebeitrag der interviewenden Person (31:13)"
+      },
+      {
+        "text": "(lacht) Sie haben vorhin beim Gesuch",
+        "why": "Redebeitrag der interviewenden Person (32:30)"
+      },
+      {
+        "text": "Hätte Ihnen jemand vorher sagen können,",
+        "why": "Redebeitrag der interviewenden Person (35:23)"
+      },
+      {
+        "text": "(lacht) Ah, Sie sind wieder da.",
+        "why": "Redebeitrag der interviewenden Person (37:29)"
+      },
+      {
+        "text": "Mhm. Und für Sie – was",
+        "why": "Redebeitrag der interviewenden Person (40:27)"
+      },
+      {
+        "text": "Ich möchte noch auf etwas vom",
+        "why": "Redebeitrag der interviewenden Person (41:35)"
+      },
+      {
+        "text": "Gibt es noch etwas zu den",
+        "why": "Redebeitrag der interviewenden Person (43:15)"
+      },
+      {
+        "text": "(lacht) Vielleicht ist das ein Muster.",
+        "why": "Redebeitrag der interviewenden Person (44:59)"
+      }
+    ]
+  }
+}

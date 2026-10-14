@@ -1,0 +1,113 @@
+{
+  "title": "Fokusgruppe F2 – Klassenlager aus Elternsicht",
+  "kind": "interview",
+  "class": "reported",
+  "source_id": "fg-f2",
+  "prefix": "f2",
+  "input": "input.md",
+  "phases": [
+    "information",
+    "anmeldung",
+    "vorbereitung",
+    "lager",
+    "nachher"
+  ],
+  "persona": "eltern-mittelstufe",
+  "known_atoms": [],
+  "tests": "Unabhängiger Fall (2026-10-14): Transkript von einem Subagenten ohne Kenntnis von evidenz.md geschrieben, Gold von einem zweiten Subagenten ohne Prompt-Schablone festgelegt (nur Atom-Modell). Fokusgruppe mit vier Eltern und Moderation: Ins-Wort-Fallen, Zustimmung und Widerspruch, Bezüge auf früher Gesagtes, Aussagen über mehrere Redebeiträge. Prüft vor allem die Abdeckung; ein Atom darf mehrere Gold-Einträge abdecken (shared_atoms).",
+  "rules": {
+    "kinds": [
+      "quote",
+      "metric"
+    ],
+    "locator_required": true,
+    "pii_terms": [
+      "Odermatt",
+      "Hänni",
+      "Wyss",
+      "Andrea",
+      "Elias",
+      "Lorena",
+      "Nevio",
+      "Selina"
+    ],
+    "forbidden": [
+      {
+        "text": "Gut. Dann steigen wir ein. Wie",
+        "why": "Redebeitrag der interviewenden Person (03:52)"
+      },
+      {
+        "text": "Mhm. Darauf würde ich nachher gern",
+        "why": "Redebeitrag der interviewenden Person (09:11)"
+      },
+      {
+        "text": "Mhm. Marco, wie war das bei",
+        "why": "Redebeitrag der interviewenden Person (11:42)"
+      },
+      {
+        "text": "[lacht] Gut, wir kommen dahin. Jasmin,",
+        "why": "Redebeitrag der interviewenden Person (12:18)"
+      },
+      {
+        "text": "Mhm. Also da gab es unterschiedliche",
+        "why": "Redebeitrag der interviewenden Person (14:01)"
+      },
+      {
+        "text": "Mhm. [Pause] Gehen wir zu den",
+        "why": "Redebeitrag der interviewenden Person (15:23)"
+      },
+      {
+        "text": "Wie sind Sie überhaupt zur ganzen",
+        "why": "Redebeitrag der interviewenden Person (17:54)"
+      },
+      {
+        "text": "Mhm. Gab es den Brief auch",
+        "why": "Redebeitrag der interviewenden Person (19:41)"
+      },
+      {
+        "text": "Daniel, wie war das bei Ihnen",
+        "why": "Redebeitrag der interviewenden Person (20:26)"
+      },
+      {
+        "text": "Wenn ich kurz zusammenfasse, was ich",
+        "why": "Redebeitrag der interviewenden Person (21:59)"
+      },
+      {
+        "text": "Doch, ich glaube, ich verstehe, was",
+        "why": "Redebeitrag der interviewenden Person (22:46)"
+      },
+      {
+        "text": "Und die Höhe von dem Betrag",
+        "why": "Redebeitrag der interviewenden Person (24:57)"
+      },
+      {
+        "text": "Mhm. Also die Beträge sind von",
+        "why": "Redebeitrag der interviewenden Person (28:46)"
+      },
+      {
+        "text": "Kommen wir zur Lagerwoche selber. Wie",
+        "why": "Redebeitrag der interviewenden Person (29:53)"
+      },
+      {
+        "text": "Bis am Donnerstag? Sie wollten vorhin",
+        "why": "Redebeitrag der interviewenden Person (32:01)"
+      },
+      {
+        "text": "Mhm. Daniel, und während der Lagerwoche",
+        "why": "Redebeitrag der interviewenden Person (35:37)"
+      },
+      {
+        "text": "Gehen wir zum Ende vom Lager",
+        "why": "Redebeitrag der interviewenden Person (36:35)"
+      },
+      {
+        "text": "Mhm. Wenn ich das zusammenfasse für",
+        "why": "Redebeitrag der interviewenden Person (40:36)"
+      },
+      {
+        "text": "Gut. Vielen Dank, das war sehr",
+        "why": "Redebeitrag der interviewenden Person (44:48)"
+      }
+    ]
+  }
+}

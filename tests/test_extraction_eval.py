@@ -51,6 +51,9 @@ def test_cases_are_discovered():
         "interview-hort",
         "befragung",
         "beschwerde",
+        "interview-eltern",
+        "fokusgruppe",
+        "interview-dolmetsch",
     }
 
 

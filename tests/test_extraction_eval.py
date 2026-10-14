@@ -164,6 +164,23 @@ def test_shared_atoms_let_one_atom_cover_several_gold_entries():
     assert f"| interview-hort | 2 · {result.found_required} · {len(atoms) - 1} |" in table
 
 
+def test_assignment_does_not_depend_on_gold_order():
+    # Das Unterlagen-Atom nennt auch Telefon und eine Ticket-Nummer mit 12: Es passt
+    # damit auch auf «kanal-telefon». Vorher nahm sich der erste Gold-Eintrag dieses
+    # Atom, und «kategorie-unterlagen» ging leer aus, obwohl ein eigenes Telefon-Atom da war.
+    case, atoms = _case("anfragen")
+    telefon, unterlagen = atoms[0], atoms[1]
+    unterlagen = {**unterlagen, "text": unterlagen["text"] + " Kanäle: 3 Telefon (A-12)."}
+    rest = atoms[2:]
+    for order in ([unterlagen, telefon, *rest], [telefon, unterlagen, *rest]):
+        result = ev.score_case(case, order)
+        assert result.missing == [], result.missing
+        assert result.found_required == result.required
+    reversed_gold = copy.deepcopy(case)
+    reversed_gold.expected["atoms"].reverse()
+    assert ev.score_case(reversed_gold, [unterlagen, telefon, *rest]).missing == []
+
+
 def test_numbers_ignore_swiss_thousands_separator():
     assert 1236.0 in ev._numbers({"text": "Mahnung über 1'236 Franken"})
     assert 1236.0 in ev._numbers({"text": "Mahnung", "value": "1’236"})

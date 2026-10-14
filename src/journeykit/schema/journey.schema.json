@@ -299,7 +299,7 @@
         "action": { "type": "string", "description": "Was die Persona tut." },
         "channel": { "$ref": "#/$defs/channel" },
         "touchpoint": { "type": "string", "description": "System, Ort oder Dokument, mit dem interagiert wird." },
-        "counterpart": { "type": "string", "description": "Wer auf Verwaltungsseite beteiligt ist (Rolle)." },
+        "counterpart": { "type": "string", "description": "Wer der Persona im Schritt gegenübersteht (Rolle): die Verwaltung, eine Stelle in ihrem Auftrag oder Dritte wie ein Fachgeschäft. Wer anstelle der Persona handelt, gehört in performed_by." },
         "is_transition": { "type": "boolean", "default": false, "description": "Kanal- oder Zuständigkeitswechsel; dort entstehen überdurchschnittlich viele Reibungen." },
         "performed_by": { "$ref": "#/$defs/performed_by" },
         "thinking": { "type": "array", "items": { "$ref": "#/$defs/claim" } },

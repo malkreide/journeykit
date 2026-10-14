@@ -344,10 +344,13 @@ def rule_violations(case: Case, atoms: list[dict[str, Any]]) -> list[tuple[str, 
 def score_case(case: Case, atoms: list[dict[str, Any]]) -> CaseResult:
     gold = case.expected["atoms"]
     res = CaseResult(case.id, len(atoms), sum(1 for g in gold if g.get("required")), 0)
+    # shared_atoms: Ein Atom darf mehrere Gold-Einträge abdecken – für Gold, das lange
+    # Redebeiträge feiner zerlegt als die Extraktion; sonst zählte die Körnung als Lücke.
+    shared = case.expected.get("shared_atoms", False)
     used: set[int] = set()
     for g in gold:
         # unter den passenden Atomen das mit den meisten erfüllten Feldern – nicht einfach das erste
-        candidates = [i for i, a in enumerate(atoms) if i not in used and matches(g, a)]
+        candidates = [i for i, a in enumerate(atoms) if (shared or i not in used) and matches(g, a)]
         hit = max(
             candidates,
             key=lambda i: (sum(ok for _, ok, _, _ in field_checks(g, atoms[i])), -i),

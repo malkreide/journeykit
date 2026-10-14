@@ -1,0 +1,1605 @@
+{
+  "shared_atoms": true,
+  "atoms": [
+    {
+      "key": "frage-aufnahme-lehrerin",
+      "required": false,
+      "match": [
+        "ob die Lehrerin die Aufnahme hört"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "01:28"
+      ],
+      "emotion": "not_explicit",
+      "why": "Betrifft das Interview, nicht die Journey, deutet aber auf Sorge vor Folgen bei der Schule hin (passt zu «möchte sich nicht beklagen»); darf zählen, muss nicht."
+    },
+    {
+      "key": "ankunft-zentrum-zuzug",
+      "required": false,
+      "match": [
+        "letztes Jahr in die Schweiz gekommen",
+        "in einem Zentrum, ungefähr sechs Wochen",
+        "Ende Oktober oder schon November"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "03:10"
+      ],
+      "emotion": "none",
+      "why": "Ausgangslage der Familie (Zentrum etwa sechs Wochen, Zuzug unsicher datiert); Kontext für Persona und Zeitachse, kein eigener Schritt der Einschulung."
+    },
+    {
+      "key": "vorbildung-kinder",
+      "required": false,
+      "match": [
+        "in der ersten Klasse, auf Tigrinya",
+        "nicht die Buchstaben von hier",
+        "mehr gezeichnet und gesungen",
+        "war nirgends"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "03:10"
+      ],
+      "emotion": "none",
+      "why": "Schulische Vorgeschichte beider Kinder erklärt die spätere Einteilung und den DaZ-Bedarf; Kontext, nicht Pflicht."
+    },
+    {
+      "key": "kindergarten-im-herkunftsland",
+      "required": false,
+      "match": [
+        "mit sieben in die Schule",
+        "den muss man bezahlen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "03:10"
+      ],
+      "emotion": "none",
+      "why": "Erwartung aus dem Herkunftsland (Schule ab sieben, Kindergarten kostenpflichtig) als Kontext für das Verständnis des hiesigen Systems."
+    },
+    {
+      "key": "sozialarbeiterin-begleitet-anmeldung",
+      "required": true,
+      "match": [
+        "Geholfen hat die Sozialarbeiterin",
+        "auf die Gemeinde gegangen, an den Schalter",
+        "die Wohnung gezeigt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive",
+        "neutral"
+      ],
+      "locator": [
+        "06:05"
+      ],
+      "emotion": "none",
+      "why": "Die Anmeldung am Schalter macht eine handelnde Dritte (Sozialarbeiterin) mit der Familie; Schritt mit performed_by, Vorname im Zitat ist durch [Name] zu ersetzen."
+    },
+    {
+      "key": "schalter-die-schule-kommt",
+      "required": true,
+      "match": [
+        "Die Schule kommt",
+        "von der Schule kommt vorbei",
+        "auch nicht angerufen",
+        "Er wusste auch nicht, wo"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "06:05",
+        "07:33"
+      ],
+      "emotion": "not_explicit",
+      "why": "Missverständnis am Schalter: der Vater erwartet einen Hausbesuch, wartet passiv und ruft nicht an, weil er auch nicht weiss wo; zentrale Informationslücke beim Übergang Anmeldung–Schule."
+    },
+    {
+      "key": "wartezeit-bis-schulbrief",
+      "required": true,
+      "match": [
+        "gewartet, zwei oder drei Wochen"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "friction"
+      ],
+      "locator": [
+        "06:05"
+      ],
+      "emotion": "none",
+      "why": "Belegte Dauer zwischen Anmeldung und Schulbrief (zwei bis drei Wochen), als Spanne zu übernehmen."
+    },
+    {
+      "key": "schulbrief-unter-anderen-briefen",
+      "required": true,
+      "match": [
+        "ein Brief gekommen, auf Deutsch",
+        "so viele Briefe",
+        "im weissen Couvert mit Fenster",
+        "auf den Tisch gelegt, zu den anderen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "06:05"
+      ],
+      "emotion": "not_explicit",
+      "why": "Der deutschsprachige Schulbrief ist von anderen Behördenbriefen nicht zu unterscheiden und bleibt liegen; Ursache für den späteren Wunsch nach Kennzeichnung."
+    },
+    {
+      "key": "mann-aus-kirche-liest-brief",
+      "required": true,
+      "match": [
+        "der schon lange hier ist",
+        "ihr habt am Dienstag einen Termin",
+        "Am Sonntag nach der Kirche"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround",
+        "positive"
+      ],
+      "locator": [
+        "06:05"
+      ],
+      "emotion": "none",
+      "why": "Ein informeller Helfer aus der Kirchgemeinde erkennt den Brief und den Termin zwei Tage vorher; handelnder Dritter und Ausweichweg, ohne den der Termin verpasst worden wäre."
+    },
+    {
+      "key": "formular-sonntagabend",
+      "required": false,
+      "match": [
+        "am Sonntagabend zusammen ausgefüllt",
+        "zum Termin mitbringen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "friction"
+      ],
+      "locator": [
+        "06:05"
+      ],
+      "emotion": "not_explicit",
+      "why": "Schritt Formular ausfüllen, unter Zeitdruck bis spät am Vorabend; darf als eigener Schritt erfasst werden."
+    },
+    {
+      "key": "formular-impfungen-leer",
+      "required": false,
+      "match": [
+        "nichts hingeschrieben",
+        "Impfbüchlein bei der Sozialarbeiterin"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "06:05"
+      ],
+      "emotion": "none",
+      "why": "Formular bleibt unvollständig, weil die Dokumente bei einer Dritten liegen; konkrete, aber folgenarme Lücke."
+    },
+    {
+      "key": "erstgespraech-teilnehmende",
+      "required": false,
+      "match": [
+        "die Schulleiterin und die Sekretärin",
+        "Nicht Lehrerin. Sekretärin",
+        "nicht die Lehrerin",
+        "Die Kinder waren auch dabei"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "09:20",
+        "09:17",
+        "09:13"
+      ],
+      "emotion": "none",
+      "why": "Wer am Erstgespräch beteiligt war; der Vater korrigiert die Dolmetscherin selbst (Sekretärin, nicht Lehrerin), ein Atom mit «Lehrerin» als Teilnehmerin wäre falsch; Kinder und Frau stammen laut Dolmetscherin aus dem Gang, nicht aus dem Interview."
+    },
+    {
+      "key": "telefondolmetschen-haelfte-verstanden",
+      "required": true,
+      "match": [
+        "vielleicht die Hälfte verstanden",
+        "man hat schlecht gehört",
+        "zwei gleichzeitig geredet",
+        "mit Lautsprecher"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "09:20"
+      ],
+      "emotion": "none",
+      "why": "Kernbefund zum Kanal Telefondolmetschen im Erstgespräch: schlechte Akustik, Überlappungen, nur die Hälfte verstanden; Gegenstück zum Wunsch nach einer Dolmetscherin im Raum."
+    },
+    {
+      "key": "erstgespraech-nervoes",
+      "required": false,
+      "match": [
+        "die ganze Zeit nervös",
+        "unter dem Tisch herumgekrochen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "09:20"
+      ],
+      "emotion": "explicit_negative",
+      "why": "Ausdrücklich genannte Nervosität im Erstgespräch; stammt vom Vater (die Dolmetscherin war nicht dabei), steht aber im Zusammenhang mit dem, was er ihr vorher im Gang erzählt hat – darum erlaubt, nicht Pflicht."
+    },
+    {
+      "key": "einteilung-zweite-klasse-daz",
+      "required": true,
+      "match": [
+        "kommt in die zweite Klasse",
+        "bekommt dazu Deutschunterricht",
+        "in der nächsten Woche anfangen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "09:20"
+      ],
+      "emotion": "none",
+      "why": "Entscheid des Erstgesprächs für die Tochter (zweite Klasse, DaZ, Start nächste Woche); Ergebnis eines Schritts, Vorname im Zitat durch [Name] ersetzt."
+    },
+    {
+      "key": "einteilung-kindergarten-wald",
+      "required": true,
+      "match": [
+        "in den oben beim Wald",
+        "weil der in der Nähe voll ist",
+        "Sie haben gesagt, er ist voll"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "friction"
+      ],
+      "locator": [
+        "09:20",
+        "26:35"
+      ],
+      "emotion": "none",
+      "why": "Zuteilung des Sohns in den entfernten Kindergarten mit der Begründung «voll»; Ursache des grössten Problems (zwei Standorte) und Bezugspunkt für den späteren Widerspruch."
+    },
+    {
+      "key": "start-kindergarten-nach-weihnachten",
+      "required": false,
+      "match": [
+        "erst nach den Weihnachtsferien anfangen",
+        "in Ruhe anfangen",
+        "hat nach Neujahr angefangen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "09:20",
+        "23:50"
+      ],
+      "emotion": "none",
+      "why": "Verschobener Kindergartenstart nach Neujahr; Teil der Zeitachse, ohne Wertung des Vaters."
+    },
+    {
+      "key": "stapel-papiere",
+      "required": true,
+      "match": [
+        "einen Stapel Papiere bekommen",
+        "zehn Blätter, vielleicht mehr",
+        "viele mit viel Text",
+        "Ferienplan hat er erkannt"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "09:20",
+        "12:25"
+      ],
+      "emotion": "not_explicit",
+      "why": "Informationsflut am Ende des Erstgesprächs: rund zehn Blätter, nur der Ferienplan erkennbar, der Rest unverstanden; Grund, warum Fristen später verpasst werden."
+    },
+    {
+      "key": "sozialarbeiterin-erst-nach-zwei-wochen",
+      "required": true,
+      "match": [
+        "erst nach zwei Wochen oder so",
+        "so viele Familien hat",
+        "alles der Sozialarbeiterin gezeigt"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "12:25"
+      ],
+      "emotion": "none",
+      "why": "Abhängigkeit von einer überlasteten Dritten mit belegter Wartezeit (etwa zwei Wochen); direkte Ursache der verpassten Mittagstisch-Frist."
+    },
+    {
+      "key": "sozialarbeiterin-sortiert-papiere",
+      "required": false,
+      "match": [
+        "das meiste ist nur Information",
+        "wichtig sind der Mittagstisch und der Zahnarzt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "positive"
+      ],
+      "locator": [
+        "12:25"
+      ],
+      "emotion": "none",
+      "why": "Die Dritte übernimmt die Triage der Unterlagen; zeigt, was aus Sicht der Familie wichtig gewesen wäre."
+    },
+    {
+      "key": "mittagstisch-anmeldefrist-verpasst",
+      "required": true,
+      "match": [
+        "war das Datum schon vorbei",
+        "erst ab Februar in den Mittagstisch",
+        "bis zum Fünfzehnten"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "12:25"
+      ],
+      "emotion": "not_explicit",
+      "why": "Anmeldefrist (15. des Vormonats, vom Vater unsicher erinnert) verpasst, Mittagstisch erst einen Monat später; die Frist ist eine Frist, keine Dauer, und darf nicht als Dauer übernommen werden."
+    },
+    {
+      "key": "mittagstisch-selbst-holen",
+      "required": true,
+      "match": [
+        "jeden Mittag geholt und wieder gebracht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround"
+      ],
+      "locator": [
+        "12:25"
+      ],
+      "emotion": "none",
+      "why": "Ausweichweg als Folge der verpassten Frist: der Vater holt und bringt die Tochter jeden Mittag selbst."
+    },
+    {
+      "key": "mittagstisch-kosten",
+      "required": true,
+      "match": [
+        "neun Franken oder elf",
+        "Rechnung geht direkt an den Sozialdienst"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "12:25"
+      ],
+      "emotion": "none",
+      "why": "Einzige Kostenangabe (9 oder 11 Franken pro Mittag, unsicher), bezahlt vom Sozialdienst als Dritter; Unsicherheit muss erhalten bleiben."
+    },
+    {
+      "key": "zwei-standorte-groesstes-problem",
+      "required": true,
+      "match": [
+        "das grösste Problem",
+        "eigentlich bis heute",
+        "in die andere Richtung"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "14:25"
+      ],
+      "emotion": "not_explicit",
+      "why": "Vom Vater selbst als grösstes und bis heute andauerndes Problem bezeichnet: Schule und Kindergarten in entgegengesetzter Richtung; die Dolmetscherin spricht hier in der Ich-Form des Vaters."
+    },
+    {
+      "key": "unterschiedliche-zeiten",
+      "required": false,
+      "match": [
+        "die Schule hat andere Zeiten",
+        "am Mittwoch ist es wieder anders",
+        "Viertel nach acht bis zehn vor zwölf"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "14:25"
+      ],
+      "emotion": "none",
+      "why": "Verschiedene Blockzeiten verschärfen das Problem der zwei Standorte; Detail, das zählen darf."
+    },
+    {
+      "key": "vater-laeuft-hin-und-her",
+      "required": true,
+      "match": [
+        "den ganzen Morgen hin und her",
+        "Ich bin das Taxi",
+        "jeden Morgen Deutschkurs in der Stadt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "workaround"
+      ],
+      "locator": [
+        "14:25"
+      ],
+      "emotion": "not_explicit",
+      "why": "Konkrete Last: weil die Frau morgens im Kurs ist, ist der Vater den ganzen Morgen zu Fuss unterwegs («das Taxi, aber ohne Auto», mit Lachen, keine ausdrücklich genannte Emotion)."
+    },
+    {
+      "key": "integrationsprogramm-abgesagt",
+      "required": true,
+      "match": [
+        "ich musste absagen",
+        "wer bringt dann die Kinder",
+        "ein Programm angeboten"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "14:25"
+      ],
+      "emotion": "not_explicit",
+      "why": "Folge über die Schule hinaus: das Morgenprogramm mit Deutsch und Arbeit muss abgesagt werden, weil niemand die Kinder bringt."
+    },
+    {
+      "key": "abendkurs-als-ersatz",
+      "required": false,
+      "match": [
+        "einen Abendkurs, zweimal in der Woche"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround"
+      ],
+      "locator": [
+        "14:25"
+      ],
+      "emotion": "none",
+      "why": "Ausweichweg nach der Absage des Programms."
+    },
+    {
+      "key": "loesung-ausstehend",
+      "required": false,
+      "match": [
+        "man sucht eine Lösung",
+        "Bis jetzt gibt es keine"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "14:25"
+      ],
+      "emotion": "not_explicit",
+      "why": "Versprochene, aber ausgebliebene Lösung für das Standortproblem; darf zählen."
+    },
+    {
+      "key": "erster-schultag-samichlaus-angst",
+      "required": true,
+      "match": [
+        "grosse Angst, sie hat geweint",
+        "nie mehr in die Schule",
+        "einem langen weissen Bart"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "16:36"
+      ],
+      "emotion": "explicit_negative",
+      "why": "Ausdrücklich genannte grosse Angst der Tochter am ersten Schultag (unerklärter Samichlaus), vom Vater berichtet; die Emotion gehört dem Kind, nicht dem Vater."
+    },
+    {
+      "key": "lehrerin-troestet",
+      "required": false,
+      "match": [
+        "auf den Schoss genommen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "16:36"
+      ],
+      "emotion": "not_explicit",
+      "why": "Positive Reaktion der Lehrerin in der Angstsituation; darf als eigenes Atom erfasst werden."
+    },
+    {
+      "key": "daz-unerklaert-sorgen",
+      "required": true,
+      "match": [
+        "Er hat sich Sorgen gemacht",
+        "nicht gut genug",
+        "Oder weil sie schwarz ist",
+        "niemanden gefragt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "16:36"
+      ],
+      "emotion": "explicit_negative",
+      "why": "Unerklärter DaZ-Unterricht führt zu ausdrücklich genannten Sorgen bis zur Vermutung von Diskriminierung, ohne dass der Vater nachfragt."
+    },
+    {
+      "key": "daz-viermal-pro-woche",
+      "required": false,
+      "match": [
+        "viermal in der Woche",
+        "Mittwoch nicht"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "19:18",
+        "19:13"
+      ],
+      "emotion": "none",
+      "why": "Korrektur durch Nachfrage: DaZ viermal pro Woche, nicht «jeden Tag»; wer die Häufigkeit erfasst, muss den korrigierten Wert nehmen."
+    },
+    {
+      "key": "eintritt-erst-am-samichlaustag",
+      "required": true,
+      "match": [
+        "da ist er ganz sicher",
+        "der Tag mit dem Samichlaus",
+        "keinen Tag in der Schule"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "friction"
+      ],
+      "locator": [
+        "18:41"
+      ],
+      "emotion": "none",
+      "why": "Der Vater besteht darauf, dass der erste Schultag der Samichlaustag war; das widerspricht dem eingetragenen Eintrittsdatum, das nur die interviewende Person nennt (selbst keine Evidenz), und gehört als möglicher Widerspruch ins Modell."
+    },
+    {
+      "key": "daz-vom-kind-erklaert",
+      "required": true,
+      "match": [
+        "hat es ihm niemand erklärt",
+        "das ist die Deutschschule",
+        "Dann war er beruhigt",
+        "selber erklärt, nach ein paar Wochen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "workaround"
+      ],
+      "locator": [
+        "18:41",
+        "18:11"
+      ],
+      "emotion": "any",
+      "why": "Die Schule hat DaZ nie erklärt, die Tochter selbst wird zur Informationsquelle; die ausdrückliche Beruhigung darf als positive Emotion mitgeführt werden."
+    },
+    {
+      "key": "app-als-kanal",
+      "required": false,
+      "match": [
+        "geholfen, sie zu installieren",
+        "viele Nachrichten, fast jeden Tag",
+        "Handy. App."
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "friction"
+      ],
+      "locator": [
+        "20:10",
+        "19:35"
+      ],
+      "emotion": "none",
+      "why": "Kanal Schul-App, eingerichtet durch die Sozialarbeiterin, mit fast täglichen Nachrichten; Kontext für die Übersetzungsprobleme."
+    },
+    {
+      "key": "app-uebersetzung-ohne-tigrinya",
+      "required": true,
+      "match": [
+        "Tigrinya hat es dort nicht",
+        "einen Knopf zum Übersetzen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "20:10"
+      ],
+      "emotion": "none",
+      "why": "Die Übersetzungsfunktion der App deckt die Sprache der Familie nicht ab; konkrete Hürde im Kanal."
+    },
+    {
+      "key": "app-workaround-maschinenuebersetzung",
+      "required": true,
+      "match": [
+        "Er nimmt Englisch",
+        "in eine andere App",
+        "etwas ganz Komisches raus"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround"
+      ],
+      "locator": [
+        "20:10"
+      ],
+      "emotion": "not_explicit",
+      "why": "Ausweichwege über schwaches Englisch oder eine fremde Übersetzungs-App mit unzuverlässigem Ergebnis."
+    },
+    {
+      "key": "vogel-statt-finken",
+      "required": true,
+      "match": [
+        "einen Vogel mitbringen",
+        "wo man so einen Vogel kauft",
+        "für den Unterricht, für Biologie"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "20:10"
+      ],
+      "emotion": "not_explicit",
+      "why": "Fehlübersetzung «Finken» als Vogel: die Nachricht scheitert vollständig; die Erklärung der interviewenden Person ist keine Evidenz."
+    },
+    {
+      "key": "ohne-finken-geweint",
+      "required": true,
+      "match": [
+        "sie war in den Socken",
+        "weil alle anderen Finken haben",
+        "hat zu Hause geweint"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "21:57"
+      ],
+      "emotion": "not_explicit",
+      "why": "Folge der gescheiterten Nachricht: das Kind ist ohne Finken und weint; Emotion nur aus der Handlung abgeleitet, nicht ausdrücklich benannt."
+    },
+    {
+      "key": "nachbarin-brockenhaus",
+      "required": false,
+      "match": [
+        "mit der Nachbarin ins Brockenhaus"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "workaround"
+      ],
+      "locator": [
+        "21:57"
+      ],
+      "emotion": "none",
+      "why": "Weitere handelnde Dritte (Nachbarin) beim Beschaffen; darf zählen."
+    },
+    {
+      "key": "bedarf-materialliste",
+      "required": true,
+      "match": [
+        "eine Liste, was das Kind braucht",
+        "hätte er gern am Anfang gewusst",
+        "Es kam alles einzeln",
+        "erst dann, wenn es schon fehlt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need",
+        "friction"
+      ],
+      "locator": [
+        "21:57"
+      ],
+      "emotion": "none",
+      "why": "Ausdrücklich formuliertes Bedürfnis nach einer Materialliste zu Beginn, begründet damit, dass alles einzeln und zu spät kam."
+    },
+    {
+      "key": "eingewoehnung-drei-morgen",
+      "required": false,
+      "match": [
+        "am Morgen dabeibleiben, drei Morgen"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "23:50"
+      ],
+      "emotion": "not_explicit",
+      "why": "Eingewöhnung im Kindergarten mit belegter Dauer (drei Morgen), vom Vater als gut bewertet."
+    },
+    {
+      "key": "waldtag-unbekannt",
+      "required": true,
+      "match": [
+        "immer Waldtag",
+        "ganz nass und dreckig",
+        "mit normalen Hosen und Turnschuhen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown",
+        "friction"
+      ],
+      "locator": [
+        "23:50"
+      ],
+      "emotion": "not_explicit",
+      "why": "Fehlende Information zum wöchentlichen Waldtag führt dazu, dass das Kind nass und frierend heimkommt; dasselbe Muster wie bei den Finken."
+    },
+    {
+      "key": "kindergarten-zettel-mit-bildern",
+      "required": true,
+      "match": [
+        "einen Zettel gegeben, mit Bildern",
+        "verstanden, wegen den Bildern"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "23:50"
+      ],
+      "emotion": "not_explicit",
+      "why": "Bildbasierte Information der Kindergärtnerin wird verstanden; positives Gegenbeispiel zur Textinformation."
+    },
+    {
+      "key": "kindergarten-app-bilder-gefaellt",
+      "required": true,
+      "match": [
+        "Das gefällt ihm sehr",
+        "Sie schickt Fotos in die App",
+        "Bilder, was man mitbringen muss"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "23:50"
+      ],
+      "emotion": "explicit_positive",
+      "why": "Ausdrücklich positiv bewertete, dauerhafte Praxis der Kindergärtnerin mit Fotos und Bildern in der App (gestützt durch «Bilder gut» des Vaters um 22:45)."
+    },
+    {
+      "key": "schule-mehr-text",
+      "required": false,
+      "match": [
+        "ist es mehr Text"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "23:50"
+      ],
+      "emotion": "none",
+      "why": "Kontrast: die Schule informiert vor allem mit Text; darf als eigene Hürde erfasst werden."
+    },
+    {
+      "key": "kindergarten-tuer-zu",
+      "required": true,
+      "match": [
+        "die Tür war zu, niemand war da",
+        "Heute ist keine Schule",
+        "eine Viertelstunde gewartet"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown"
+      ],
+      "locator": [
+        "23:50"
+      ],
+      "emotion": "not_explicit",
+      "why": "Unangekündigter freier Tag, der Vater steht vor geschlossener Tür und weiss bis heute nicht warum; die Vermutung der interviewenden Person (Weiterbildungstag) ist keine Evidenz."
+    },
+    {
+      "key": "kindergartenweg-dauer",
+      "required": true,
+      "match": [
+        "zu Fuss, zwanzig Minuten",
+        "eher fünfundzwanzig, weil er langsam ist"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral",
+        "friction"
+      ],
+      "locator": [
+        "26:35"
+      ],
+      "emotion": "none",
+      "why": "Belegte Dauer des Kindergartenwegs (20 bis 25 Minuten zu Fuss, kein Velo)."
+    },
+    {
+      "key": "kindergartenweg-strasse",
+      "required": true,
+      "match": [
+        "aber kein Lichtsignal",
+        "mit viel Verkehr, auch Lastwagen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "26:35"
+      ],
+      "emotion": "not_explicit",
+      "why": "Gefährliche Strasse auf dem Weg als konkreter Grund, warum der Weg nicht dem Kind überlassen wird."
+    },
+    {
+      "key": "kind-nicht-allein",
+      "required": true,
+      "match": [
+        "das macht er nicht",
+        "Ein Kind mit fünf allein",
+        "Nein. Zu gefährlich",
+        "gut für die Selbstständigkeit"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "26:35",
+        "27:51"
+      ],
+      "emotion": "not_explicit",
+      "why": "Der Vater lehnt die Erwartung der Kindergärtnerin ab, das Kind allein gehen zu lassen; Konflikt zwischen Schulerwartung und Sicherheitseinschätzung, vom Vater auch selbst auf Deutsch bekräftigt."
+    },
+    {
+      "key": "kindergarten-naehe-maedchen",
+      "required": true,
+      "match": [
+        "ins gleiche Haus gezügelt",
+        "weil sie Deutsch kann",
+        "möchte sich nicht beklagen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "26:35"
+      ],
+      "emotion": "not_explicit",
+      "why": "Ein neu zugezogenes Mädchen erhält den Platz im nahen Kindergarten, was der Begründung «voll» widerspricht (contradicts zur Einteilung) und beim Vater den Verdacht ungleicher Behandlung weckt, den er nicht äussern will."
+    },
+    {
+      "key": "wechsel-nicht-beantragt",
+      "required": true,
+      "match": [
+        "das entscheidet die Schulleitung",
+        "Wie man die Schulleitung fragt",
+        "Er hat es dann nicht gemacht"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "breakdown"
+      ],
+      "locator": [
+        "26:35"
+      ],
+      "emotion": "not_explicit",
+      "why": "Der Wunsch nach Wechsel versandet, weil der Weg zur Schulleitung unbekannt ist; der Vater gibt auf."
+    },
+    {
+      "key": "elterngespraech-dolmetscherin-vor-ort",
+      "required": true,
+      "match": [
+        "er hat alles verstanden",
+        "mit mir als Dolmetscherin"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "29:31"
+      ],
+      "emotion": "not_explicit",
+      "why": "Gegenstück zum Telefondolmetschen: mit Dolmetscherin im Raum alles verstanden; gilt als Aussage des Vaters, ist aber von der beteiligten Dolmetscherin über ihren eigenen Einsatz wiedergegeben (ihre Vorbemerkung um 28:12 ist keine Evidenz)."
+    },
+    {
+      "key": "spd-abklaerung-vorgeschlagen",
+      "required": false,
+      "match": [
+        "sehr still und liest langsam",
+        "Schulpsychologischen Dienst abgeklärt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "29:31"
+      ],
+      "emotion": "none",
+      "why": "Auslöser des Teilwegs Schulpsychologischer Dienst; meist im Atom zur Angst mit enthalten."
+    },
+    {
+      "key": "spd-angst-psychologe",
+      "required": true,
+      "match": [
+        "krank im Kopf",
+        "eine Schule für Kranke",
+        "in dieser Nacht nicht geschlafen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "29:31"
+      ],
+      "emotion": "explicit_negative",
+      "why": "Ausdrücklich genannte grosse Angst vor einer Sonderschule wegen des Begriffs Psychologe, mit schlafloser Nacht; stärkste negative Emotion des Interviews."
+    },
+    {
+      "key": "spd-abklaerung-zweimal",
+      "required": false,
+      "match": [
+        "zweimal dort, mit einer Dolmetscherin"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "neutral"
+      ],
+      "locator": [
+        "29:31"
+      ],
+      "emotion": "none",
+      "why": "Durchführung der Abklärung mit Dolmetscherin; Schritt ohne Wertung."
+    },
+    {
+      "key": "spd-brief-helfer-in-ferien",
+      "required": true,
+      "match": [
+        "vier Seiten, auf Deutsch",
+        "war in den Ferien, die Sozialarbeiterin auch"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "breakdown"
+      ],
+      "locator": [
+        "29:31"
+      ],
+      "emotion": "not_explicit",
+      "why": "Das Ergebnis kommt als vierseitiger deutscher Brief, während beide informellen Helfer abwesend sind; zeigt die Abhängigkeit von Dritten."
+    },
+    {
+      "key": "spd-entwarnung-muendlich",
+      "required": true,
+      "match": [
+        "Das hat ihn sehr gefreut",
+        "sie braucht Zeit und Deutsch",
+        "mündlich, dass alles gut ist"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "29:31"
+      ],
+      "emotion": "explicit_positive",
+      "why": "Erst die mündliche Erklärung der Lehrerin nach den Ferien bringt Klarheit, ausdrücklich mit Freude verbunden."
+    },
+    {
+      "key": "spd-foerderung-unklar",
+      "required": true,
+      "match": [
+        "etwas von einer Förderung",
+        "jetzt noch etwas dazu bekommt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction"
+      ],
+      "locator": [
+        "29:31"
+      ],
+      "emotion": "not_explicit",
+      "why": "Bis heute offen, ob eine Förderung beschlossen ist; ungelöste Informationslücke aus dem schriftlichen Bericht."
+    },
+    {
+      "key": "spd-wartezeit-fast-vier-monate",
+      "required": true,
+      "match": [
+        "fast vier Monate",
+        "Ende Juni. Fast Ferien",
+        "kurz vor den Sommerferien"
+      ],
+      "kind": [
+        "quote",
+        "metric"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "30:51",
+        "30:47"
+      ],
+      "emotion": "not_explicit",
+      "why": "Belegte Wartezeit vom Gespräch im März bis zum Termin Ende Juni; der Vater korrigiert selbst, gültig ist fast vier Monate, die zuerst genannten drei Monate sind überholt."
+    },
+    {
+      "key": "dolmetscherin-eigene-erfahrung-psychologe",
+      "required": false,
+      "match": [
+        "nur für psychisch Kranke",
+        "viele Familien Angst",
+        "meine Erfahrung, nicht von ihm"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported",
+        "assumed"
+      ],
+      "signal": [
+        "friction",
+        "neutral"
+      ],
+      "locator": [
+        "30:51"
+      ],
+      "why": "Eigene Erklärung der Dolmetscherin, ausdrücklich nicht vom Vater: erklärt die Angst als Folge des Tigrinya-Begriffs; wertvoll als Ursache, aber nur zulässig, wenn sie als Aussage der Dolmetscherin (eigene Quelle oder Teilnehmende, Erfahrungswissen einer Mittlerin) gekennzeichnet und nicht dem Vater zugeschrieben wird – darum erlaubt, nicht Pflicht."
+    },
+    {
+      "key": "wunsch-dolmetscherin-im-raum",
+      "required": true,
+      "match": [
+        "die im Zimmer sitzt, nicht am Telefon"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "33:23"
+      ],
+      "emotion": "none",
+      "why": "Erster Wunsch des Vaters: Erstgespräch mit Dolmetscherin vor Ort statt am Telefon, direkt aus der Erfahrung im Erstgespräch."
+    },
+    {
+      "key": "wunsch-schulsystem-erklaeren",
+      "required": true,
+      "match": [
+        "wie die Schule hier funktioniert",
+        "was ein Waldtag ist",
+        "wer wer ist"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "33:23"
+      ],
+      "emotion": "none",
+      "why": "Bedürfnis nach einer Einführung in Schulsystem, DaZ, Waldtag und Rollen; bündelt mehrere erlebte Informationslücken."
+    },
+    {
+      "key": "wunsch-liste-mit-bildern",
+      "required": true,
+      "match": [
+        "eine Liste mit Bildern",
+        "was man kaufen muss"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "33:23"
+      ],
+      "emotion": "none",
+      "why": "Zweiter Wunsch: bebilderte Materialliste nach dem Vorbild der Kindergärtnerin; ergänzt den früheren Bedarf um die Bildform."
+    },
+    {
+      "key": "wunsch-kinder-nahe-beieinander",
+      "required": true,
+      "match": [
+        "beide Kinder am gleichen Ort",
+        "oder nahe beieinander",
+        "auch einen Kurs machen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "33:23"
+      ],
+      "emotion": "none",
+      "why": "Dritter Wunsch: Geschwister am selben Ort einteilen, damit der Vater morgens einen Kurs besuchen kann; Antwort auf das grösste Problem."
+    },
+    {
+      "key": "wunsch-brief-kennzeichnen",
+      "required": true,
+      "match": [
+        "eine Farbe oder ein Zeichen",
+        "liegt er bei den anderen Briefen"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "need"
+      ],
+      "locator": [
+        "33:23"
+      ],
+      "emotion": "none",
+      "why": "Wunsch nach sichtbarer Kennzeichnung wichtiger Schulbriefe, abgeleitet aus dem liegengebliebenen ersten Brief."
+    },
+    {
+      "key": "lob-lehrerin-geduldig",
+      "required": true,
+      "match": [
+        "sehr gut, sehr geduldig"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "33:23"
+      ],
+      "emotion": "not_explicit",
+      "why": "Ausdrücklich gewünschtes Lob für die Lehrerin; positive Bewertung einer Person, keine benannte Emotion."
+    },
+    {
+      "key": "mittagstisch-ernaehrung-klappt",
+      "required": true,
+      "match": [
+        "kein Schweinefleisch",
+        "aufs Formular geschrieben, und das klappt"
+      ],
+      "kind": [
+        "quote"
+      ],
+      "class": [
+        "reported"
+      ],
+      "signal": [
+        "positive"
+      ],
+      "locator": [
+        "33:23"
+      ],
+      "emotion": "not_explicit",
+      "why": "Positiver Befund zum Mittagstisch: die Angabe auf dem Formular wird zuverlässig umgesetzt."
+    }
+  ]
+}

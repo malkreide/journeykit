@@ -1,0 +1,219 @@
+[
+  {
+    "id": "anf-01",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Kategorie «Unterlagen»: 8 von 20 Anfragen (3.–27.8.2026), davon 3 per Telefon, 4 per E-Mail, 1 am Schalter. Gefragt wird, welche Unterlagen es braucht (auch für Kinder), ob eine Kopie reicht und was ein Heimatschein ist.",
+    "locator": "Spalte kategorie; A-01, A-03, A-06, A-09, A-12, A-14, A-16, A-19",
+    "value": 8,
+    "unit": "Anfragen",
+    "signal": "friction",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "unterlagen"
+    ]
+  },
+  {
+    "id": "anf-02",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Kategorie «Online-Formular»: 6 von 20 Anfragen (3.–27.8.2026), alle melden ein Scheitern des Formulars; 5 davon betreffen das Hochladen von Dokumenten (Abbruch, Handyfotos nicht akzeptiert, PDF verlangt), 2 wichen an den Schalter aus.",
+    "locator": "Spalte kategorie; A-02, A-05, A-07, A-11, A-15, A-18",
+    "value": 6,
+    "unit": "Anfragen",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "online-formular",
+      "upload"
+    ]
+  },
+  {
+    "id": "anf-03",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Kategorie «Frist»: 4 von 20 Anfragen (3.–27.8.2026), davon 2 zur Anmeldefrist (Fristbeginn, befürchtete Busse) und 2 zur Dauer der Bestätigung.",
+    "locator": "Spalte kategorie; A-04, A-08, A-13, A-17",
+    "value": 4,
+    "unit": "Anfragen",
+    "signal": "friction",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist"
+    ]
+  },
+  {
+    "id": "anf-04",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Kategorie «Anderes»: 2 von 20 Anfragen (3.–27.8.2026) ohne Bezug zur Anmeldung (Parkkarte, Abfallmarken).",
+    "locator": "Spalte kategorie; A-10, A-20",
+    "value": 2,
+    "unit": "Anfragen",
+    "signal": "neutral",
+    "tags": [
+      "ausserhalb"
+    ]
+  },
+  {
+    "id": "anf-05",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Kanal Telefon: 12 von 20 Anfragen (3.–27.8.2026); 10 davon betreffen die Anmeldung, darunter 4 zum Online-Formular.",
+    "locator": "Spalte kanal; A-01, A-02, A-04, A-06, A-07, A-09, A-10, A-11, A-13, A-15, A-17, A-20",
+    "value": 12,
+    "unit": "Anfragen",
+    "signal": "breakdown",
+    "channel_hint": "phone",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "kanalwechsel"
+    ]
+  },
+  {
+    "id": "anf-06",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Kanal E-Mail: 5 von 20 Anfragen (3.–27.8.2026); 4 davon zu Unterlagen.",
+    "locator": "Spalte kanal; A-03, A-08, A-12, A-16, A-19",
+    "value": 5,
+    "unit": "Anfragen",
+    "signal": "friction",
+    "channel_hint": "email",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "unterlagen"
+    ]
+  },
+  {
+    "id": "anf-07",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Kanal Schalter: 3 von 20 Anfragen (3.–27.8.2026); 2 davon nach gescheitertem Online-Formular, 1 mit unvollständigen Unterlagen (Mietvertrag fehlte).",
+    "locator": "Spalte kanal; A-05, A-14, A-18",
+    "value": 3,
+    "unit": "Anfragen",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "channel_hint": "counter",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "kanalwechsel",
+      "online-formular"
+    ]
+  },
+  {
+    "id": "anf-08",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Anruf: Upload bricht ab, Formular verloren.",
+    "locator": "A-02",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "channel_hint": "phone",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "online-formular",
+      "upload"
+    ]
+  },
+  {
+    "id": "anf-09",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Am Schalter: hat online angefangen, Upload ging nicht, kommt persönlich.",
+    "locator": "A-05",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "channel_hint": "counter",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "online-formular",
+      "upload",
+      "kanalwechsel"
+    ]
+  },
+  {
+    "id": "anf-10",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Anruf: Formular verlangt Heimatschein als PDF, die Person hat ihn nur auf Papier.",
+    "locator": "A-15",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "channel_hint": "phone",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "online-formular",
+      "heimatschein",
+      "dateiformat"
+    ]
+  },
+  {
+    "id": "anf-11",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "E-Mail: Liste der Unterlagen auf der Website nicht gefunden.",
+    "locator": "A-12",
+    "signal": "breakdown",
+    "phase_hint": "nachweise",
+    "channel_hint": "email",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "unterlagen",
+      "website"
+    ]
+  },
+  {
+    "id": "anf-12",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "E-Mail: befürchtet eine Busse wegen verspäteter Anmeldung.",
+    "locator": "A-08",
+    "signal": "friction",
+    "phase_hint": "vorbereitung",
+    "channel_hint": "email",
+    "persona_hint": "zugezogen",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "besorgt",
+      "explicit": true
+    },
+    "tags": [
+      "frist",
+      "busse"
+    ]
+  },
+  {
+    "id": "anf-13",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Anruf: Bestätigung nach drei Wochen noch nicht erhalten.",
+    "locator": "A-17",
+    "value": 3,
+    "unit": "Wochen",
+    "signal": "friction",
+    "phase_hint": "bestaetigung",
+    "channel_hint": "phone",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "bestaetigung",
+      "wartezeit"
+    ]
+  }
+]

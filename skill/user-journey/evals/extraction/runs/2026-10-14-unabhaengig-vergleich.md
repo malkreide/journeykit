@@ -26,6 +26,16 @@
 | interview-dolmetsch | 45/47 · 310/319 · 0 | 47/47 · 317/334 · 0 | 47/47 · 327/339 · 0 | 47/47 · 319/334 · 0 | 47/47 · 317/334 · 0 | 47/47 · 320/334 · 0 |
 | interview-eltern | 63/63 · 350/360 · 0 | 63/63 · 369/379 · 0 | 63/63 · 361/370 · 0 | 61/63 · 300/315 · 0 | 61/63 · 306/323 · 0 | 61/63 · 302/313 · 0 |
 
+## Körnung: geteilte Pflicht-Einträge · gefundene · Atome
+
+Nur Fälle, in denen ein Atom mehrere Gold-Einträge abdecken darf (`shared_atoms`): wie viele gefundene Pflicht-Einträge sich ein Atom mit einem anderen teilen.
+
+| Fall | 2026-10-14-unabhaengig-alt-1 | 2026-10-14-unabhaengig-alt-2 | 2026-10-14-unabhaengig-alt-3 | 2026-10-14-unabhaengig-aktuell-1 | 2026-10-14-unabhaengig-aktuell-2 | 2026-10-14-unabhaengig-aktuell-3 |
+|---|---|---|---|---|---|---|
+| fokusgruppe | 0 · 60 · 96 | 0 · 62 · 93 | 4 · 62 · 88 | 11 · 62 · 80 | 4 · 62 · 86 | 4 · 62 · 85 |
+| interview-dolmetsch | 6 · 45 · 63 | 14 · 47 · 49 | 10 · 47 · 55 | 18 · 47 · 47 | 18 · 47 · 47 | 18 · 47 · 47 |
+| interview-eltern | 26 · 63 · 70 | 20 · 63 · 80 | 12 · 63 · 83 | 42 · 61 · 41 | 40 · 61 · 43 | 37 · 61 · 47 |
+
 ## Pflicht-Atome, die nicht jeder Lauf ganz trifft
 
 ✓ gefunden, alle Felder richtig · – nicht gefunden · Feldname: gefunden, Feld falsch · · Fall nicht im Lauf

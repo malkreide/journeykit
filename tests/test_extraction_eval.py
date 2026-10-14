@@ -150,10 +150,18 @@ def test_shared_atoms_let_one_atom_cover_several_gold_entries():
     merged = {**atoms[2], "text": atoms[2]["text"] + " … " + atoms[3]["text"]}
     merged["locator"] = "[02:05–02:58]"
     rest = [a for i, a in enumerate(atoms) if i not in (2, 3)]
-    assert "schwiegermutter" in ev.score_case(case, [merged, *rest]).missing
+    unshared = ev.score_case(case, [merged, *rest])
+    assert "schwiegermutter" in unshared.missing
+    assert unshared.shared_required is None
     case.expected["shared_atoms"] = True
     result = ev.score_case(case, [merged, *rest])
     assert {"warteliste", "schwiegermutter"}.isdisjoint(result.missing)
+    # Körnung: die beiden Pflicht-Einträge teilen sich ein Atom, die übrigen nicht
+    assert result.shared_required == 2
+    assert ev.score_case(case, atoms).shared_required == 0
+    table = ev.compare_markdown({"lauf-1": [result]}, [case])
+    assert "## Körnung: geteilte Pflicht-Einträge" in table
+    assert f"| interview-hort | 2 · {result.found_required} · {len(atoms) - 1} |" in table
 
 
 def test_numbers_ignore_swiss_thousands_separator():

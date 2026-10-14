@@ -57,7 +57,10 @@ Grenzfälle:
 ## Extraktionsregeln je Quellentyp
 
 **Interview-Transkripte.** Durchgang pro Transkript. Ein Atom pro belegbarer
-Aussage, nicht pro Satz. Zitate wörtlich. Emotionen nur mit Beleg im Text.
+Aussage, nicht pro Satz. Ein kurzer Redebeitrag (bis drei Sätze) bleibt ein
+Atom, auch wenn er Ursache und Folge oder Problem und Ausweg nennt. Wechselt ein
+langer Redebeitrag das Thema oder den Schritt, wird jede Aussage ein eigenes Atom
+mit derselben Fundstelle. Zitate wörtlich. Emotionen nur mit Beleg im Text.
 Typisch 12–25 Atome pro 45-Minuten-Interview. Fragen der interviewenden Person
 sind keine Evidenz. Auf **Vermittlung** achten: Wer hat einen Schritt
 tatsächlich gemacht – die Person selbst, mit Hilfe (Nachbarin übersetzt) oder
@@ -123,7 +126,7 @@ Für einen Durchgang pro Quelle, mit der Datei im Kontext:
 ```
 Du extrahierst Evidenz-Atome aus der Quelle «{title}» (source_ref «{source_id}», {kind}, Klasse {class}).
 Regeln:
-- Ein Atom pro belegbarer Aussage, nicht pro Satz: Sätze desselben Redebeitrags, die zusammen eine Aussage machen, bleiben ein Atom. Dieselbe Aussage nie doppelt erfassen (nicht als Zitat und zusätzlich als Messwert).
+- Ein Atom pro belegbarer Aussage, nicht pro Satz: Sätze desselben Redebeitrags, die zusammen eine Aussage machen, bleiben ein Atom. Nur bei Interviews (auch Fokusgruppen): Ein kurzer Redebeitrag (bis drei Sätze) bleibt ein Atom, auch wenn er Ursache und Folge oder Problem und Ausweg nennt; wechselt ein langer Redebeitrag das Thema oder den Schritt, wird jede Aussage ein eigenes Atom mit derselben Fundstelle. Dieselbe Aussage nie doppelt erfassen (nicht als Zitat und zusätzlich als Messwert).
 - Zitate wörtlich, mit Fundstelle (Zeile/Zeitstempel/ID). Kürzen mit «…» ist erlaubt; Namen und andere Personendaten im Zitat durch «[Name]», «[Ort]» ersetzen.
 - Nennt ein Zitat eine Zahl oder Dauer, value und unit im selben Atom ergänzen.
 - emotion_hint nur, wenn die Emotion im Text steht; explicit true nur bei ausdrücklicher Nennung.

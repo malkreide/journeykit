@@ -240,6 +240,9 @@ class CaseResult:
     fields: list[tuple[str, str, bool, Any, Any]] = field(default_factory=list)
     violations: list[tuple[str, str, str]] = field(default_factory=list)
     unmatched: list[str] = field(default_factory=list)
+    # nur bei shared_atoms: gefundene Pflicht-Einträge, deren Atom auch einen anderen
+    # gefundenen Pflicht-Eintrag abdeckt – ein Mass für die Körnung
+    shared_required: int | None = None
 
     @property
     def recall(self) -> float:
@@ -348,6 +351,7 @@ def score_case(case: Case, atoms: list[dict[str, Any]]) -> CaseResult:
     # Redebeiträge feiner zerlegt als die Extraktion; sonst zählte die Körnung als Lücke.
     shared = case.expected.get("shared_atoms", False)
     used: set[int] = set()
+    required_hits: list[int] = []
     for g in gold:
         # unter den passenden Atomen das mit den meisten erfüllten Feldern – nicht einfach das erste
         candidates = [i for i, a in enumerate(atoms) if (shared or i not in used) and matches(g, a)]
@@ -363,8 +367,11 @@ def score_case(case: Case, atoms: list[dict[str, Any]]) -> CaseResult:
         used.add(hit)
         if g.get("required"):
             res.found_required += 1
+            required_hits.append(hit)
         res.fields += [(g["key"], *check) for check in field_checks(g, atoms[hit])]
     res.unmatched = [a.get("id", "?") for i, a in enumerate(atoms) if i not in used]
+    if shared:
+        res.shared_required = sum(1 for h in required_hits if required_hits.count(h) > 1)
     res.violations = rule_violations(case, atoms)
     return res
 
@@ -497,6 +504,23 @@ def compare_markdown(
                 else f"{r.found_required}/{r.required} · {sum(1 for f in r.fields if f[2])}/{len(r.fields)} · {len(r.violations)}"
             )
         lines.append(f"| {case.id} | " + " | ".join(cells) + " |")
+    shared_cases = [c for c in cases if c.expected.get("shared_atoms")]
+    if shared_cases:
+        lines += ["", "## Körnung: geteilte Pflicht-Einträge · gefundene · Atome", ""]
+        lines.append(
+            "Nur Fälle, in denen ein Atom mehrere Gold-Einträge abdecken darf (`shared_atoms`): "
+            "wie viele gefundene Pflicht-Einträge sich ein Atom mit einem anderen teilen."
+        )
+        lines += ["", "| Fall | " + " | ".join(names) + " |"]
+        lines.append("|---|" + "---|" * len(names))
+        for case in shared_cases:
+            cells = []
+            for name in names:
+                r = by_case[name].get(case.id)
+                cells.append(
+                    "·" if r is None else f"{r.shared_required} · {r.found_required} · {r.n_atoms}"
+                )
+            lines.append(f"| {case.id} | " + " | ".join(cells) + " |")
     rows = []
     for case in cases:
         for gold in case.expected["atoms"]:

@@ -1,0 +1,226 @@
+[
+  {
+    "id": "anf-01",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "8 von 20 Anfragen (Einwohnerdienste, 03.–27.08.2026) in der Kategorie Unterlagen: welche Unterlagen nötig sind, was ein Heimatschein ist, ob der Mietvertrag im Original oder als Kopie reicht; 4 per E-Mail, 3 per Telefon, 1 am Schalter.",
+    "locator": "input.csv, kategorie = Unterlagen (A-01, A-03, A-06, A-09, A-12, A-14, A-16, A-19)",
+    "value": 8,
+    "unit": "Anfragen",
+    "signal": "friction",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "unterlagen",
+      "heimatschein",
+      "mietvertrag"
+    ]
+  },
+  {
+    "id": "anf-02",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "6 von 20 Anfragen (03.–27.08.2026) in der Kategorie Online-Formular, alle per Telefon (4) oder am Schalter (2), also nach einem Problem online; 5 davon betreffen das Hochladen von Dokumenten (Upload bricht ab, Handyfotos nicht akzeptiert, PDF verlangt), 2 erledigten die Anmeldung danach am Schalter.",
+    "locator": "input.csv, kategorie = Online-Formular (A-02, A-05, A-07, A-11, A-15, A-18)",
+    "value": 6,
+    "unit": "Anfragen",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "online-formular",
+      "upload",
+      "kanalwechsel"
+    ]
+  },
+  {
+    "id": "anf-03",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "4 von 20 Anfragen (03.–27.08.2026) in der Kategorie Frist: Beginn der 14-Tage-Frist (ab Umzug oder Mietbeginn), Sorge vor einer Busse wegen verspäteter Anmeldung und 2 Fragen zur Dauer bis zur Bestätigung; 3 per Telefon, 1 per E-Mail.",
+    "locator": "input.csv, kategorie = Frist (A-04, A-08, A-13, A-17)",
+    "value": 4,
+    "unit": "Anfragen",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "tags": [
+      "frist",
+      "bestaetigung"
+    ]
+  },
+  {
+    "id": "anf-04",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "2 von 20 Anfragen (03.–27.08.2026) in der Kategorie Anderes ohne Bezug zur Anmeldung (Parkkarte für Anwohnende, Abfallmarken), beide per Telefon.",
+    "locator": "input.csv, kategorie = Anderes (A-10, A-20)",
+    "value": 2,
+    "unit": "Anfragen",
+    "signal": "neutral",
+    "channel_hint": "phone",
+    "tags": [
+      "ausserhalb-journey"
+    ]
+  },
+  {
+    "id": "anf-05",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "12 von 20 Anfragen (03.–27.08.2026) per Telefon: 4 zum Online-Formular, 3 zu Unterlagen, 3 zu Fristen, 2 zu anderen Themen.",
+    "locator": "input.csv, kanal = Telefon (A-01, A-02, A-04, A-06, A-07, A-09, A-10, A-11, A-13, A-15, A-17, A-20)",
+    "value": 12,
+    "unit": "Anfragen",
+    "signal": "breakdown",
+    "persona_hint": "zugezogen",
+    "channel_hint": "phone",
+    "tags": [
+      "telefon",
+      "kanalwechsel"
+    ]
+  },
+  {
+    "id": "anf-06",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "5 von 20 Anfragen (03.–27.08.2026) per E-Mail: 4 zu Unterlagen, 1 zu Fristen.",
+    "locator": "input.csv, kanal = E-Mail (A-03, A-08, A-12, A-16, A-19)",
+    "value": 5,
+    "unit": "Anfragen",
+    "signal": "friction",
+    "persona_hint": "zugezogen",
+    "channel_hint": "email",
+    "tags": [
+      "e-mail",
+      "unterlagen"
+    ]
+  },
+  {
+    "id": "anf-07",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "3 von 20 Anfragen (03.–27.08.2026) am Schalter: 2 nach gescheitertem Online-Formular, 1 mit unvollständigen Unterlagen (Mietvertrag fehlte).",
+    "locator": "input.csv, kanal = Schalter (A-05, A-14, A-18)",
+    "value": 3,
+    "unit": "Anfragen",
+    "signal": "breakdown",
+    "persona_hint": "zugezogen",
+    "channel_hint": "counter",
+    "tags": [
+      "schalter",
+      "kanalwechsel"
+    ]
+  },
+  {
+    "id": "anf-08",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Anfrage per E-Mail, Kategorie Unterlagen: Liste der Unterlagen auf der Website nicht gefunden.",
+    "locator": "input.csv, A-12",
+    "signal": "breakdown",
+    "phase_hint": "vorbereitung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "unterlagen",
+      "auffindbarkeit"
+    ]
+  },
+  {
+    "id": "anf-09",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Anruf, Kategorie Online-Formular: Upload bricht ab, Formular verloren.",
+    "locator": "input.csv, A-02",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "online-formular",
+      "upload"
+    ]
+  },
+  {
+    "id": "anf-10",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Anruf, Kategorie Online-Formular: Formular verlangt Heimatschein als PDF, die Person hat ihn nur auf Papier.",
+    "locator": "input.csv, A-15",
+    "signal": "breakdown",
+    "phase_hint": "nachweise",
+    "persona_hint": "zugezogen",
+    "channel_hint": "web",
+    "tags": [
+      "online-formular",
+      "heimatschein",
+      "medienbruch"
+    ]
+  },
+  {
+    "id": "anf-11",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Am Schalter, Kategorie Online-Formular: online gescheitert, Anmeldung am Schalter erledigt.",
+    "locator": "input.csv, A-18",
+    "signal": "breakdown",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "counter",
+    "tags": [
+      "online-formular",
+      "kanalwechsel"
+    ]
+  },
+  {
+    "id": "anf-12",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "observation",
+    "text": "Anfrage per E-Mail, Kategorie Frist: Busse wegen verspäteter Anmeldung befürchtet.",
+    "locator": "input.csv, A-08",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "email",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "besorgt",
+      "explicit": true
+    },
+    "tags": [
+      "frist",
+      "busse"
+    ]
+  },
+  {
+    "id": "anf-13",
+    "source_ref": "anfragen",
+    "class": "observed",
+    "kind": "metric",
+    "text": "Anruf, Kategorie Frist: Bestätigung nach drei Wochen noch nicht erhalten (Wartezeit ab Anmeldung, Einzelfall, mindestens 3 Wochen).",
+    "locator": "input.csv, A-17",
+    "value": 3,
+    "unit": "Wochen",
+    "signal": "friction",
+    "phase_hint": "bestaetigung",
+    "persona_hint": "zugezogen",
+    "channel_hint": "phone",
+    "tags": [
+      "bestaetigung",
+      "wartezeit"
+    ]
+  }
+]

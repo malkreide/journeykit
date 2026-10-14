@@ -1,0 +1,1004 @@
+[
+  {
+    "id": "d3-01",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Also, wir sind letztes Jahr in die Schweiz gekommen, im September. Zuerst waren wir in einem Zentrum, ungefähr sechs Wochen, ich weiss nicht mehr, wie der Ort heisst. Dann nach [Ort], mit meiner Frau und den zwei Kindern. … Wann genau, das weiss er nicht mehr, Ende Oktober oder schon November.",
+    "locator": "[03:10]",
+    "value": 6,
+    "unit": "Wochen",
+    "signal": "neutral",
+    "phase_hint": "ankunft",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "zuzug",
+      "dauer"
+    ]
+  },
+  {
+    "id": "d3-02",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Zur Schule: [Name] war vorher ein Jahr in der Schule, in der ersten Klasse, auf Tigrinya. Sie kann die Tigrinya-Buchstaben ein bisschen lesen, aber nicht die Buchstaben von hier. Im Zentrum ist sie ein paar Mal am Morgen in die Schule gegangen, aber da haben sie mehr gezeichnet und gesungen.",
+    "locator": "[03:10]",
+    "value": 1,
+    "unit": "Jahr",
+    "signal": "neutral",
+    "phase_hint": "ankunft",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "vorwissen",
+      "tochter"
+    ]
+  },
+  {
+    "id": "d3-03",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "[Name] war nirgends. Bei uns kommt man mit sieben in die Schule, einen Kindergarten gibt es schon, aber den muss man bezahlen, und viele gehen nicht.",
+    "locator": "[03:10]",
+    "signal": "neutral",
+    "phase_hint": "ankunft",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "vorwissen",
+      "sohn",
+      "kindergarten"
+    ]
+  },
+  {
+    "id": "d3-04",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Geholfen hat die Sozialarbeiterin, er sagt [Name] – den Nachnamen weiss ich nicht, sie ist vom Sozialdienst. Sie hat ihnen die Wohnung gezeigt und ist mit ihnen auf die Gemeinde gegangen, an den Schalter, für die Anmeldung.",
+    "locator": "[06:05]",
+    "signal": "neutral",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "counter",
+    "tags": [
+      "vermittlung",
+      "sozialdienst"
+    ]
+  },
+  {
+    "id": "d3-05",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Dort hat die Frau am Schalter gesagt, so hat er es verstanden: «Die Schule kommt.» Dann hat er gewartet, zwei oder drei Wochen.",
+    "locator": "[06:05]",
+    "value": 2,
+    "unit": "Wochen",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "counter",
+    "tags": [
+      "missverstaendnis",
+      "wartezeit"
+    ]
+  },
+  {
+    "id": "d3-06",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ja, genau, so hat er es gesagt. Er hat gedacht, jemand von der Schule kommt vorbei und schaut die Kinder an, oder holt sie ab. Darum hat er auch nicht angerufen. Er wusste auch nicht, wo.",
+    "locator": "[07:33]",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "counter",
+    "tags": [
+      "missverstaendnis",
+      "zustaendigkeit"
+    ]
+  },
+  {
+    "id": "d3-07",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Dann ist ein Brief gekommen, auf Deutsch. Aber am Anfang kommen so viele Briefe, von der Krankenkasse, von der Gemeinde, von der Bank, alle im weissen Couvert mit Fenster. Er hat ihn auf den Tisch gelegt, zu den anderen.",
+    "locator": "[06:05]",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "letter",
+    "tags": [
+      "sprache",
+      "brief"
+    ]
+  },
+  {
+    "id": "d3-08",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Am Sonntag nach der Kirche hat dann ein Mann aus der Kirche, der schon lange hier ist, die Briefe angeschaut und gesagt: Das ist von der Schule, ihr habt am Dienstag einen Termin.",
+    "locator": "[06:05]",
+    "signal": "workaround",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "letter",
+    "tags": [
+      "vermittlung",
+      "brief"
+    ]
+  },
+  {
+    "id": "d3-09",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und es war ein Formular dabei, das musste man zum Termin mitbringen. Das haben sie am Sonntagabend zusammen ausgefüllt, bis spät. Welche Sprache spricht das Kind, wie viele Jahre Schule, Impfungen, Allergien und so weiter.",
+    "locator": "[06:05]",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "paper_form",
+    "tags": [
+      "formular",
+      "vermittlung"
+    ]
+  },
+  {
+    "id": "d3-10",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bei den Impfungen haben sie nichts hingeschrieben, weil die Impfbüchlein bei der Sozialarbeiterin waren.",
+    "locator": "[06:05]",
+    "signal": "friction",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "paper_form",
+    "tags": [
+      "formular",
+      "unterlagen"
+    ]
+  },
+  {
+    "id": "d3-11",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Also die Schulleiterin und die Sekretärin, und eine Dolmetscherin am Telefon. Das Telefon lag auf dem Tisch, mit Lautsprecher. Die Frau am Telefon hat gut Tigrinya gesprochen, aber man hat schlecht gehört, und manchmal haben zwei gleichzeitig geredet, dann hat sie gesagt «bitte nochmals». Er hat vielleicht die Hälfte verstanden.",
+    "locator": "[09:20]",
+    "value": 50,
+    "unit": "%",
+    "signal": "friction",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "tags": [
+      "vermittlung",
+      "dolmetschen",
+      "aufnahmegespraech"
+    ]
+  },
+  {
+    "id": "d3-12",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Die Kinder waren auch dabei und seine Frau – das hat er mir vorher im Gang erzählt, jetzt hat er es nicht gesagt. Er war die ganze Zeit nervös, weil [Name] unter dem Tisch herumgekrochen ist.",
+    "locator": "[09:20]",
+    "signal": "friction",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "nervös",
+      "explicit": true
+    },
+    "tags": [
+      "aufnahmegespraech"
+    ]
+  },
+  {
+    "id": "d3-13",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Entschieden haben sie: [Name] kommt in die zweite Klasse, im grossen Schulhaus, und bekommt dazu Deutschunterricht. Sie soll in der nächsten Woche anfangen.",
+    "locator": "[09:20]",
+    "signal": "neutral",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "tags": [
+      "zuteilung",
+      "tochter"
+    ]
+  },
+  {
+    "id": "d3-14",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "[Name] kommt in den Kindergarten, aber nicht in den bei uns in der Nähe, sondern in den oben beim Wald, weil der in der Nähe voll ist.",
+    "locator": "[09:20]",
+    "signal": "friction",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "tags": [
+      "zuteilung",
+      "sohn",
+      "kindergarten"
+    ]
+  },
+  {
+    "id": "d3-15",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und [Name] soll erst nach den Weihnachtsferien anfangen, weil es bis Weihnachten nur noch zwei, drei Wochen sind, und im Januar kann er dann in Ruhe anfangen.",
+    "locator": "[09:20]",
+    "value": 2,
+    "unit": "Wochen",
+    "signal": "neutral",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "tags": [
+      "zuteilung",
+      "sohn",
+      "eintrittsdatum"
+    ]
+  },
+  {
+    "id": "d3-16",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Am Schluss hat er einen Stapel Papiere bekommen, er sagt, zehn Blätter, vielleicht mehr.",
+    "locator": "[09:20]",
+    "value": 10,
+    "unit": "Blätter",
+    "signal": "friction",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "paper_form",
+    "tags": [
+      "unterlagen",
+      "informationsmenge"
+    ]
+  },
+  {
+    "id": "d3-17",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Den Ferienplan hat er erkannt, wegen der Daten. Ein Blatt war für den Mittagstisch, eins vom Zahnarzt, und viele mit viel Text, er weiss nicht, was das war.",
+    "locator": "[12:25]",
+    "signal": "friction",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "paper_form",
+    "tags": [
+      "unterlagen",
+      "sprache"
+    ]
+  },
+  {
+    "id": "d3-18",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Er hat alles der Sozialarbeiterin gezeigt, aber sie hatte erst nach zwei Wochen oder so Zeit, weil sie so viele Familien hat. Sie hat gesagt, das meiste ist nur Information, wichtig sind der Mittagstisch und der Zahnarzt.",
+    "locator": "[12:25]",
+    "value": 2,
+    "unit": "Wochen",
+    "signal": "workaround",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "tags": [
+      "vermittlung",
+      "sozialdienst",
+      "wartezeit"
+    ]
+  },
+  {
+    "id": "d3-19",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Beim Mittagstisch stand auf dem Blatt, man muss sich bis zu einem Datum im Monat vorher anmelden, er glaubt, bis zum Fünfzehnten. Und als die Sozialarbeiterin es gelesen hat, war das Datum schon vorbei. Darum konnte [Name] erst ab Februar in den Mittagstisch, nicht schon im Januar.",
+    "locator": "[12:25]",
+    "signal": "breakdown",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "paper_form",
+    "tags": [
+      "mittagstisch",
+      "frist"
+    ]
+  },
+  {
+    "id": "d3-20",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Bis dahin hat er sie jeden Mittag geholt und wieder gebracht.",
+    "locator": "[12:25]",
+    "signal": "workaround",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "mittagstisch",
+      "betreuung"
+    ]
+  },
+  {
+    "id": "d3-21",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Was es kostet, weiss er nicht genau, neun Franken oder elf, die Rechnung geht direkt an den Sozialdienst.",
+    "locator": "[12:25]",
+    "value": 9,
+    "unit": "CHF",
+    "signal": "neutral",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "mittagstisch",
+      "kosten",
+      "sozialdienst"
+    ]
+  },
+  {
+    "id": "d3-22",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Das ist für mich das grösste Problem, nicht nur am Anfang, eigentlich bis heute. [Name] ist im grossen Schulhaus, [Name] im Kindergarten beim Wald, und das ist in die andere Richtung. Der Kindergarten geht am Morgen von Viertel nach acht bis zehn vor zwölf, die Schule hat andere Zeiten, und am Mittwoch ist es wieder anders. … Also laufe ich den ganzen Morgen hin und her. Ich bin das Taxi, aber ohne Auto.",
+    "locator": "[14:25]",
+    "signal": "friction",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "schulweg",
+      "zuteilung",
+      "stundenplan"
+    ]
+  },
+  {
+    "id": "d3-23",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Die Sozialarbeiterin hat mir am Anfang ein Programm angeboten, am Morgen, mit Deutsch und auch mit Arbeit, aber ich musste absagen, weil wer bringt dann die Kinder? Jetzt habe ich einen Abendkurs, zweimal in der Woche. Die Sozialarbeiterin hat gesagt, man sucht eine Lösung. Bis jetzt gibt es keine.",
+    "locator": "[14:25]",
+    "value": 2,
+    "unit": "Mal pro Woche",
+    "signal": "breakdown",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "schulweg",
+      "integration",
+      "sozialdienst"
+    ]
+  },
+  {
+    "id": "d3-24",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Er lacht, weil am ersten Tag ist ein Mann gekommen mit einem roten Mantel und einem langen weissen Bart, mit einem Sack, und hat Nüssli und Mandarinen verteilt. [Name] hatte grosse Angst, sie hat geweint, und die Lehrerin hat sie auf den Schoss genommen. Zu Hause hat sie gesagt, sie geht nie mehr in die Schule. Aber am nächsten Tag ist sie trotzdem gegangen.",
+    "locator": "[16:36]",
+    "signal": "friction",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "Angst",
+      "explicit": true
+    },
+    "tags": [
+      "erster-schultag",
+      "tochter",
+      "brauchtum"
+    ]
+  },
+  {
+    "id": "d3-25",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und in den ersten Wochen: [Name] geht jeden Tag eine Stunde aus der Klasse raus, zu einer anderen Lehrerin, in ein kleines Zimmer. Am Anfang hat er nicht verstanden, warum. Er hat gedacht, vielleicht ist sie nicht gut genug, oder sie darf nicht bei den anderen sein, weil sie neu ist. Oder weil sie schwarz ist. Er hat sich Sorgen gemacht, aber er hat niemanden gefragt.",
+    "locator": "[16:36]",
+    "value": 1,
+    "unit": "Stunde pro Tag",
+    "signal": "friction",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "besorgt",
+      "explicit": true
+    },
+    "tags": [
+      "daz",
+      "tochter",
+      "information"
+    ]
+  },
+  {
+    "id": "d3-26",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Zuerst zum Datum: Er sagt nein, der erste Tag war der Tag mit dem Samichlaus, da ist er ganz sicher. Vorher war sie keinen Tag in der Schule.",
+    "locator": "[18:41]",
+    "signal": "neutral",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "eintrittsdatum",
+      "tochter"
+    ]
+  },
+  {
+    "id": "d3-27",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und das Zimmer hat ihm [Name] selber erklärt, nach ein paar Wochen. Sie hat gesagt, das ist die Deutschschule, dort sind auch Kinder aus anderen Ländern, und man macht Spiele. Dann war er beruhigt. Von der Schule hat es ihm niemand erklärt.",
+    "locator": "[18:41]",
+    "signal": "friction",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "emotion_hint": {
+      "valence": 1,
+      "label": "beruhigt",
+      "explicit": true
+    },
+    "tags": [
+      "daz",
+      "vermittlung",
+      "information"
+    ]
+  },
+  {
+    "id": "d3-28",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Nicht am Mittwoch. Also viermal in der Woche.",
+    "locator": "[19:18]",
+    "value": 4,
+    "unit": "Mal pro Woche",
+    "signal": "neutral",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "daz",
+      "korrektur"
+    ]
+  },
+  {
+    "id": "d3-29",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Über eine App auf dem Handy, die Sozialarbeiterin hat ihm geholfen, sie zu installieren. Es kommen viele Nachrichten, fast jeden Tag.",
+    "locator": "[20:10]",
+    "signal": "neutral",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "app",
+    "tags": [
+      "vermittlung",
+      "schulkommunikation"
+    ]
+  },
+  {
+    "id": "d3-30",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "In der App gibt es einen Knopf zum Übersetzen, aber Tigrinya hat es dort nicht. Er nimmt Englisch, er kann ein bisschen Englisch, aber nicht gut. Oder er kopiert den Text in eine andere App, die kann Tigrinya, aber manchmal kommt etwas ganz Komisches raus.",
+    "locator": "[20:10]",
+    "signal": "workaround",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "app",
+    "tags": [
+      "uebersetzung",
+      "schulkommunikation"
+    ]
+  },
+  {
+    "id": "d3-31",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Einmal stand dort, [Name] muss einen Vogel mitbringen. Einen kleinen Vogel, fürs Schulzimmer. Er hat gedacht, vielleicht ist das für den Unterricht, für Biologie, und er wusste nicht, wo man so einen Vogel kauft.",
+    "locator": "[20:10]",
+    "signal": "friction",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "app",
+    "tags": [
+      "uebersetzung",
+      "missverstaendnis",
+      "material"
+    ]
+  },
+  {
+    "id": "d3-32",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Nein, die erste Zeit hatte sie keine, sie war in den Socken. Die Lehrerin hat dann nochmals geschrieben, und [Name] hat zu Hause geweint, weil alle anderen Finken haben und sie nicht.",
+    "locator": "[21:57]",
+    "signal": "friction",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "app",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "traurig",
+      "explicit": false
+    },
+    "tags": [
+      "material",
+      "tochter"
+    ]
+  },
+  {
+    "id": "d3-33",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Dann sind sie mit der Nachbarin ins Brockenhaus.",
+    "locator": "[21:57]",
+    "signal": "workaround",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "vermittlung",
+      "material"
+    ]
+  },
+  {
+    "id": "d3-34",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Er sagt, so etwas hätte er gern am Anfang gewusst: eine Liste, was das Kind braucht. Finken, Thek, Turnsack, was für ein Znüni, für den Kindergarten Regenhosen. Es kam alles einzeln, immer erst dann, wenn es schon fehlt.",
+    "locator": "[21:57]",
+    "signal": "need",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "material",
+      "information"
+    ]
+  },
+  {
+    "id": "d3-35",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "[Name] hat nach Neujahr angefangen. Die ersten Tage musste ich am Morgen dabeibleiben, drei Morgen, damit [Name] sich gewöhnt. Das war gut.",
+    "locator": "[23:50]",
+    "value": 3,
+    "unit": "Morgen",
+    "signal": "positive",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "tags": [
+      "kindergarten",
+      "sohn",
+      "eingewoehnung"
+    ]
+  },
+  {
+    "id": "d3-36",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber am Donnerstag ist immer Waldtag, und das wusste er nicht. [Name] kam mit normalen Hosen und Turnschuhen, es hat geregnet, und er ist ganz nass und dreckig nach Hause gekommen und hat gefroren.",
+    "locator": "[23:50]",
+    "signal": "friction",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "kindergarten",
+      "waldtag",
+      "information"
+    ]
+  },
+  {
+    "id": "d3-37",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Am nächsten Tag hat ihm die Kindergärtnerin einen Zettel gegeben, mit Bildern drauf: Stiefel, Regenhose, Mütze, Handschuhe. Das hat er verstanden, wegen den Bildern.",
+    "locator": "[23:50]",
+    "signal": "positive",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "tags": [
+      "kindergarten",
+      "bilder",
+      "material"
+    ]
+  },
+  {
+    "id": "d3-38",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Sie macht das immer so, auch jetzt noch: Sie schickt Fotos in die App, was die Kinder gemacht haben, und Bilder, was man mitbringen muss. Das gefällt ihm sehr. Bei der Schule von [Name] ist es mehr Text.",
+    "locator": "[23:50]",
+    "signal": "positive",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "app",
+    "emotion_hint": {
+      "valence": 1,
+      "label": "gefällt ihm",
+      "explicit": true
+    },
+    "tags": [
+      "kindergarten",
+      "bilder",
+      "schulkommunikation"
+    ]
+  },
+  {
+    "id": "d3-39",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und einmal, im Frühling, ist er am Morgen mit [Name] zum Kindergarten gekommen, und die Tür war zu, niemand war da. Er hat eine Viertelstunde gewartet, dann hat eine Frau, die vorbeigekommen ist, gesagt: Heute ist keine Schule. Warum, weiss er bis heute nicht.",
+    "locator": "[23:50]",
+    "value": 15,
+    "unit": "Minuten",
+    "signal": "friction",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "kindergarten",
+      "information",
+      "schulfrei"
+    ]
+  },
+  {
+    "id": "d3-40",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Er bringt ihn zu Fuss, zwanzig Minuten, mit [Name] eher fünfundzwanzig, weil er langsam ist. Ein Velo hat er nicht. Dazwischen ist die grosse Strasse, mit viel Verkehr, auch Lastwagen. Es hat einen Fussgängerstreifen, aber kein Lichtsignal.",
+    "locator": "[26:35]",
+    "value": 25,
+    "unit": "Minuten",
+    "signal": "friction",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "schulweg",
+      "kindergarten",
+      "sicherheit"
+    ]
+  },
+  {
+    "id": "d3-41",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Im Frühling hat die Kindergärtnerin gesagt, [Name] soll jetzt allein gehen oder mit den anderen Kindern, das ist gut für die Selbstständigkeit. Er sagt, das macht er nicht. Ein Kind mit fünf allein über diese Strasse, nein. Bei uns gehen die Kinder auch allein, aber nicht so klein, und es hat nicht so viele Autos.",
+    "locator": "[26:35]",
+    "signal": "friction",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "besorgt",
+      "explicit": false
+    },
+    "tags": [
+      "schulweg",
+      "sicherheit",
+      "erwartungen"
+    ]
+  },
+  {
+    "id": "d3-42",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Zum Kindergarten in der Nähe: Sie haben gesagt, er ist voll. Aber im Frühling ist ein Mädchen ins gleiche Haus gezügelt, auch neu, und sie geht in den Kindergarten in der Nähe. Er fragt sich, warum. Vielleicht, weil sie Deutsch kann und [Name] nicht. Aber er weiss es nicht, und er möchte sich nicht beklagen.",
+    "locator": "[26:35]",
+    "signal": "friction",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "zuteilung",
+      "kindergarten",
+      "transparenz"
+    ]
+  },
+  {
+    "id": "d3-43",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Er hat die Kindergärtnerin im Juni gefragt, ob [Name] wechseln kann, und sie hat gesagt, das entscheidet die Schulleitung. Wie man die Schulleitung fragt, weiss er nicht. Mit einem Brief? Er hat es dann nicht gemacht.",
+    "locator": "[26:35]",
+    "signal": "breakdown",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "tags": [
+      "zuteilung",
+      "zustaendigkeit",
+      "kindergarten"
+    ]
+  },
+  {
+    "id": "d3-44",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Im März war ein Gespräch mit der Lehrerin von [Name], mit mir als Dolmetscherin. Das war gut, er hat alles verstanden.",
+    "locator": "[29:31]",
+    "signal": "positive",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "tags": [
+      "vermittlung",
+      "dolmetschen",
+      "elterngespraech"
+    ]
+  },
+  {
+    "id": "d3-45",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber die Lehrerin hat gesagt, [Name] ist sehr still und liest langsam, und sie möchte, dass [Name] beim Schulpsychologischen Dienst abgeklärt wird. Und er hat gedacht, Psychologe ist für Leute, die krank im Kopf sind. Er hatte grosse Angst, dass man [Name] in eine andere Schule tut, eine Schule für Kranke. Er hat in dieser Nacht nicht geschlafen.",
+    "locator": "[29:31]",
+    "signal": "friction",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "Angst",
+      "explicit": true
+    },
+    "tags": [
+      "schulpsychologie",
+      "begriff",
+      "tochter"
+    ]
+  },
+  {
+    "id": "d3-46",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "[Name] war dann zweimal dort, mit einer Dolmetscherin, nicht mit mir.",
+    "locator": "[29:31]",
+    "value": 2,
+    "unit": "Termine",
+    "signal": "neutral",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "tags": [
+      "vermittlung",
+      "dolmetschen",
+      "schulpsychologie"
+    ]
+  },
+  {
+    "id": "d3-47",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Im Juli ist ein Brief gekommen, vier Seiten, auf Deutsch. Der Mann aus der Kirche war in den Ferien, die Sozialarbeiterin auch.",
+    "locator": "[29:31]",
+    "value": 4,
+    "unit": "Seiten",
+    "signal": "friction",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "letter",
+    "tags": [
+      "vermittlung",
+      "sprache",
+      "schulpsychologie"
+    ]
+  },
+  {
+    "id": "d3-48",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Nach den Sommerferien hat die Lehrerin ihm gesagt, mündlich, dass alles gut ist, [Name] ist nicht krank, sie braucht Zeit und Deutsch. Das hat ihn sehr gefreut.",
+    "locator": "[29:31]",
+    "signal": "positive",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "emotion_hint": {
+      "valence": 1,
+      "label": "gefreut",
+      "explicit": true
+    },
+    "tags": [
+      "schulpsychologie",
+      "tochter"
+    ]
+  },
+  {
+    "id": "d3-49",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Aber im Brief steht noch etwas von einer Förderung, und er weiss nicht, ob [Name] jetzt noch etwas dazu bekommt oder nicht. Er hat den Brief mitgebracht.",
+    "locator": "[29:31]",
+    "signal": "friction",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "letter",
+    "tags": [
+      "schulpsychologie",
+      "foerderung",
+      "information"
+    ]
+  },
+  {
+    "id": "d3-50",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "gewartet haben sie lange, das hat er am Anfang gesagt: Das Gespräch war im März, der Termin beim Schulpsychologen im Juni, also drei Monate. … Der Termin war Ende Juni, kurz vor den Sommerferien. Also fast vier Monate.",
+    "locator": "[29:31], korrigiert [30:47]–[30:51]",
+    "value": 4,
+    "unit": "Monate",
+    "signal": "friction",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "schulpsychologie",
+      "wartezeit",
+      "dauer",
+      "korrektur"
+    ]
+  },
+  {
+    "id": "d3-51",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Ich habe es im Gespräch im März versucht zu erklären, aber das Wort, das man auf Tigrinya für Psychologe braucht, das braucht man eigentlich nur für psychisch Kranke. Darum haben viele Familien Angst, wenn sie das hören. Das ist jetzt meine Erfahrung, nicht von ihm.",
+    "locator": "[30:51]",
+    "signal": "friction",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "emotion_hint": {
+      "valence": -1,
+      "label": "Angst",
+      "explicit": true
+    },
+    "tags": [
+      "dolmetscherin-perspektive",
+      "begriff",
+      "schulpsychologie"
+    ]
+  },
+  {
+    "id": "d3-52",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Erstens: am Anfang ein Gespräch mit einer Dolmetscherin, die im Zimmer sitzt, nicht am Telefon. Und dort alles erklären: wie die Schule hier funktioniert, was DaZ ist, was ein Waldtag ist, wer wer ist, Lehrerin, Schulleiterin, Sekretärin.",
+    "locator": "[33:23]",
+    "signal": "need",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "in_person",
+    "tags": [
+      "dolmetschen",
+      "aufnahmegespraech",
+      "information"
+    ]
+  },
+  {
+    "id": "d3-53",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Zweitens: eine Liste mit Bildern, was man kaufen muss, Finken, Turnsack, Regenhosen und so weiter, so wie die von der Kindergärtnerin.",
+    "locator": "[33:23]",
+    "signal": "need",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "material",
+      "bilder"
+    ]
+  },
+  {
+    "id": "d3-54",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Drittens: wenn möglich beide Kinder am gleichen Ort, oder nahe beieinander, dann könnte er am Morgen auch einen Kurs machen.",
+    "locator": "[33:23]",
+    "signal": "need",
+    "phase_hint": "einschulung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "zuteilung",
+      "schulweg",
+      "integration"
+    ]
+  },
+  {
+    "id": "d3-55",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und wenn ein Brief wichtig ist, soll oben etwas sein, eine Farbe oder ein Zeichen, damit man sieht: Das ist von der Schule, und das ist wichtig. Sonst liegt er bei den anderen Briefen.",
+    "locator": "[33:23]",
+    "signal": "need",
+    "phase_hint": "anmeldung",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "channel_hint": "letter",
+    "tags": [
+      "brief",
+      "kennzeichnung"
+    ]
+  },
+  {
+    "id": "d3-56",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und er wollte unbedingt noch sagen: Die Lehrerin von [Name] ist sehr gut, sehr geduldig.",
+    "locator": "[33:23]",
+    "signal": "positive",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "lehrperson",
+      "tochter"
+    ]
+  },
+  {
+    "id": "d3-57",
+    "source_ref": "int-d3",
+    "class": "reported",
+    "kind": "quote",
+    "text": "Und der Mittagstisch auch. Sie geben [Name] kein Schweinefleisch, das haben sie aufs Formular geschrieben, und das klappt.",
+    "locator": "[33:23]",
+    "signal": "positive",
+    "phase_hint": "alltag",
+    "persona_hint": "zugezogen-fremdsprachig",
+    "tags": [
+      "mittagstisch",
+      "ernaehrung"
+    ]
+  }
+]

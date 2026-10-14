@@ -143,16 +143,19 @@ def is_verbatim(quote: str, source: str) -> bool:
 
 
 def _numbers(atom: dict[str, Any]) -> set[float]:
+    """Zahlen aus value und text; das Schweizer Tausendertrennzeichen («1'236») zählt nicht."""
+
+    def found(text: str) -> set[float]:
+        text = re.sub(r"(?<=\d)['’](?=\d{3})", "", text)
+        return {float(x.replace(",", ".")) for x in re.findall(r"\d+(?:[.,]\d+)?", text)}
+
     out: set[float] = set()
     value = atom.get("value")
     if isinstance(value, (int, float)) and not isinstance(value, bool):
         out.add(float(value))
     elif isinstance(value, str):
-        out |= {float(x.replace(",", ".")) for x in re.findall(r"\d+(?:[.,]\d+)?", value)}
-    out |= {
-        float(x.replace(",", ".")) for x in re.findall(r"\d+(?:[.,]\d+)?", atom.get("text", ""))
-    }
-    return out
+        out |= found(value)
+    return out | found(atom.get("text", ""))
 
 
 def matches(gold: dict[str, Any], atom: dict[str, Any]) -> bool:

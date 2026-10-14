@@ -77,9 +77,7 @@
       "key": "mahnung-voll",
       "required": true,
       "match": [
-        "1'236",
-        "1236",
-        "vollen Beitrag"
+        "Mahnung"
       ],
       "kind": [
         "quote",
@@ -102,7 +100,10 @@
         "Franken",
         "Fr."
       ],
-      "why": "Betrag als Zahl (1236), das Schweizer Tausendertrennzeichen nicht übernehmen."
+      "why": "Betrag als Zahl (1236), das Schweizer Tausendertrennzeichen nicht übernehmen. Erkannt am Betrag, nicht am Wortlaut – ein metric-Atom darf umschreiben.",
+      "value_any": [
+        1236
+      ]
     },
     {
       "key": "mahngebuehr-unbekannt",

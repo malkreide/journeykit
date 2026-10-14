@@ -141,6 +141,11 @@ def test_verbatim_allows_elision_and_bracketed_replacements():
     assert not ev.is_verbatim("Meine Nachbarin hat mir die Unterlagen gezeigt.", source)
 
 
+def test_numbers_ignore_swiss_thousands_separator():
+    assert 1236.0 in ev._numbers({"text": "Mahnung über 1'236 Franken"})
+    assert 1236.0 in ev._numbers({"text": "Mahnung", "value": "1’236"})
+
+
 def test_candidate_parsing_tolerates_fences_and_wrapper():
     assert ev.parse_candidate('```json\n[{"id": "x-1"}]\n```') == [{"id": "x-1"}]
     assert ev.parse_candidate('{"atoms": [{"id": "x-1"}]}') == [{"id": "x-1"}]

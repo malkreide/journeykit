@@ -31,6 +31,13 @@ def test_case_records_count_as_user_source(minimal):
     assert "L011" not in codes(lint_journey(minimal, today=TODAY))
 
 
+def test_regulation_is_no_user_source(minimal):
+    # Ein Erlass sagt, was gelten soll, nicht was Nutzende erleben.
+    minimal["sources"][0]["kind"] = "regulation"
+    minimal["sources"][1]["kind"] = "regulation"
+    assert "L011" in codes(lint_journey(minimal, today=TODAY), WARN)
+
+
 def test_dangling_reference_is_error(minimal):
     minimal["phases"][0]["steps"][0]["thinking"][0]["evidence_refs"] = ["gibt-es-nicht"]
     findings = lint_journey(minimal, today=TODAY)

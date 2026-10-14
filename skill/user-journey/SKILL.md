@@ -104,8 +104,9 @@ Pro Datei oder Datensatz ein `sources`-Eintrag: `kind`, `default_class`
 (`observed` für Analytics, Ticket-/Anfragenexporte, Auswertungen der
 Geschäftskontrolle (`case_records`), Beobachtung; `reported`
 für Interviews, Befragungen, Tagebuchstudien, Beschwerden; `assumed` für
-Prozessdokumente, Workshops ohne Nutzende), `n`, `date`, `participants` als
-Rolle, `pii_status`, `location` als Pfad.
+Prozessdokumente (`internal_document`), Erlasse wie Reglemente, Tarif- und
+Gebührenordnungen (`regulation`), Workshops ohne Nutzende), `n`, `date`,
+`participants` als Rolle, `pii_status`, `location` als Pfad.
 
 Enthält eine Quelle Personendaten: vor der Extraktion anonymisieren (Namen,
 Adressen, Kontaktangaben, seltene Merkmale entfernen) und `pii_status:

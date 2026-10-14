@@ -152,8 +152,8 @@ Begründungen und Belege stehen in den Beispiel-READMEs.
 | Variante mit eingeschobener Phase (Warteliste für 47 %) | Musikschule H11 | Regel «pro Variante eine Datei» hätte 13 von 15 Schritten kopiert; Viewer zeigt die Dauer, als warteten alle | Regel in `diagnose.md` präzisiert: eingeschobene Phase bleibt in der Datei |
 | Begünstigte Person ≠ Persona (Kind und Eltern) | Musikschule H12 | `emotion_hint` kennt kein «wessen»; Gefühle des Kindes nur aus zweiter Hand | Regel im Skill und Review-Frage umgesetzt; kein Feld |
 | Genutzter ≠ vorgeschriebener Kanal | Musikschule H13 | Formvorschrift (Abmeldung schriftlich) nur im Atom; privater Messenger nicht von einem Behördenchat unterscheidbar | Muster im Skill und Review-Frage umgesetzt; Feld erst mit einem zweiten Beispiel |
-| Gegenüber ausserhalb der Verwaltung | Baubewilligung, Musikschule H14 | Beschreibung von `counterpart` («Verwaltungsseite») zu eng; bei 12 von 15 Übergängen verliert `is_transition` an Trennschärfe | Beschreibung von `counterpart` angepasst; Zeile «Breakdowns an Übergängen» im Audit offen |
-| Öffentliche Erlasse als Quelle | Musikschule | nur `internal_document`, im Viewer «Internes Dokument» | niedrige Priorität |
+| Gegenüber ausserhalb der Verwaltung | Baubewilligung, Musikschule H14 | Beschreibung von `counterpart` («Verwaltungsseite») zu eng; bei 12 von 15 Übergängen verliert `is_transition` an Trennschärfe | Beschreibung von `counterpart` angepasst; Zeile «Breakdowns an Übergängen» im Audit, mit dem Anteil der Übergänge an allen Schritten als Vergleich |
+| Öffentliche Erlasse als Quelle | Musikschule | nur `internal_document`, im Viewer «Internes Dokument» | umgesetzt: Quellenart `regulation` («Erlass»), keine Nutzerquelle |
 
 Was die Beispiele über die Lints sagen: Alle drei erreichen 0 Fehler und
 0 Warnungen ohne angepasste Schwellen. Die Regeln sind bereichsneutral, und
@@ -164,7 +164,13 @@ passen aber schlecht: Der Richtwert von 40–80 Atomen je Journey wird bei
 Material mit vielen strukturierten Quellen weit überschritten (85 und 140
 Atome), ohne dass das Material überladen wäre. Und L023 verlangt zu Recht jede
 Übergangsmarkierung; wo fast jeder Schritt ein Übergang ist, verliert die
-Markierung aber ihre Aussagekraft.
+Markierung aber ihre Aussagekraft. Die Zeile «Breakdowns an Übergängen» im
+Audit-Bericht nennt deshalb den Anteil der Übergänge an allen Schritten mit.
+Er liegt in allen drei Beispielen bei 75–80 %. In der Musikschule (12 von 15)
+lägen vier zufällig verteilte Breakdowns mit rund 40 % Wahrscheinlichkeit alle
+an einem Übergang; «4 von 4» belegt deshalb wenig. Im Kindergarteneintritt
+liegen nur 2 von 4 Breakdowns an einem Übergang. Ob Übergänge tatsächlich mehr
+Breakdowns tragen, kann erst die Evaluation an echtem Material zeigen.
 
 Für die Evaluation gegen echtes Material (unten, Roadmap 2) heisst das: neben
 `performed_by` und belegten Dauern gezielt prüfen, ob die Pipeline Kosten mit

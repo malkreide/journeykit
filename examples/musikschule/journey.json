@@ -1468,12 +1468,12 @@
     {
       "id": "tarife",
       "title": "Tarifordnung der Musikschule (Auszug, öffentlich)",
-      "kind": "internal_document",
+      "kind": "regulation",
       "default_class": "assumed",
       "date": "2025",
       "pii_status": "none",
       "location": "input/tarifordnung-auszug.md",
-      "notes": "Öffentlicher Erlass; als internal_document erfasst, weil das Schema keine Quellenart für Erlasse und Reglemente kennt. Sagt, was gelten soll, nicht was bezahlt wurde."
+      "notes": "Öffentlicher Erlass des Gemeinderats. Sagt, was gelten soll, nicht was bezahlt wurde."
     },
     {
       "id": "prozessdok",

@@ -447,7 +447,8 @@
         "title": { "type": "string" },
         "kind": {
           "type": "string",
-          "enum": ["interview", "survey", "diary_study", "observation", "ticket_export", "inquiry_log", "analytics", "case_records", "workshop", "internal_document", "form", "complaint", "other"]
+          "enum": ["interview", "survey", "diary_study", "observation", "ticket_export", "inquiry_log", "analytics", "case_records", "workshop", "internal_document", "regulation", "form", "complaint", "other"],
+          "description": "internal_document = Prozessbeschrieb, Soll-Ablauf, übernommene Map und andere Dokumente der Verwaltung; regulation = öffentlicher Erlass wie Gesetz, Verordnung, Reglement, Tarif- oder Gebührenordnung. Beide zählen nicht als Nutzerquelle (L011)."
         },
         "default_class": { "$ref": "#/$defs/evidence_class" },
         "date": { "type": "string", "description": "Erhebungsdatum oder Zeitraum." },

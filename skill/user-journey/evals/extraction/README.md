@@ -52,8 +52,8 @@ Eine ältere Schablone prüft man mit ihrer `evidenz.md`:
 Das Modell darf weder `expected.json` noch `reference.json` sehen. Die Läufe
 unten wurden so gemacht: je Fall ein frischer Subagent, der nur das Bundle lesen
 und nur seine Antwortdatei schreiben durfte. Für die Läufe vom 2026-10-14 ist
-das an den Werkzeugaufrufen der 48 Subagenten geprüft: je ein Read (das eigene
-Bundle) und ein Write (die eigene Antwort), sonst nichts.
+das an den Werkzeugaufrufen aller 99 Subagenten geprüft (48 + 18 + 33): je ein
+Read (das eigene Bundle) und ein Write (die eigene Antwort), sonst nichts.
 
 ## Was gemessen wird
 
@@ -123,11 +123,72 @@ die Regeln durchgesetzt, aber die Atome gröber gemacht. In langen Redebeiträge
 gehen dadurch einzelne Aussagen unter, und ein Atom mit mehreren Aussagen trägt
 nur ein `signal`. Das ist der nächste Kandidat für eine Schablonenänderung
 («in langen Redebeiträgen je Aussage ein Atom») – mit Messlauf vorher und nachher.
+Gemessen im Abschnitt «Messlauf Körnung» unten: verworfen.
 
 Nach den Läufen korrigiert, für alle Läufe gleich: Ausschnitte im Gold, die
 Schulhausnamen enthielten, sind um den Namen gekürzt wie zuvor die Personennamen;
 alle sechs Läufe hatten «Bachmatt» und «Lindenhof» ersetzt, wie es die Schablone
 für Orte verlangt. Gekürzte Ausschnitte behalten mindestens vier Wörter.
+
+## Messlauf Körnung (2026-10-14): verworfen
+
+### Kriterium, vorab festgelegt
+
+Festgelegt und gepusht vor dem ersten Lauf (Commit `f2dd14d`), hier unverändert.
+
+Änderung in `evidenz.md`, ein Hebel an zwei Stellen (Schablone und Abschnitt
+«Interview-Transkripte»): «Ein Atom pro belegbarer Aussage, nicht pro Satz **und
+nicht pro Redebeitrag**: … wechselt ein Redebeitrag das Thema oder den Schritt,
+wird jede Aussage ein eigenes Atom mit derselben Fundstelle.» Der Richtwert
+«Typisch 12–25 Atome pro 45-Minuten-Interview» bleibt unverändert, damit nur die
+neue Regel gemessen wird.
+
+**Vorher** sind die Läufe `2026-10-14-aktuell-1..3` (acht Fälle) und
+`2026-10-14-unabhaengig-aktuell-1..3` (drei Fälle) – gleiche Schablone, gleiche
+Prompts. **Nachher** sind je drei blinde Läufe über alle elf Fälle mit der
+geänderten Schablone.
+
+Die Änderung wird **übernommen**, wenn über die drei Läufe nachher alle drei
+Bedingungen gelten, sonst wird `evidenz.md` zurückgesetzt und die Läufe bleiben
+als Beleg:
+
+1. Unabhängige Fälle: Die gefundenen Pflicht-Einträge nehmen nicht ab (im Mittel
+   mindestens 170 von 172, wie vorher).
+2. Elterninterview: Im Mittel teilen sich weniger als 30 der gefundenen
+   Pflicht-Einträge ein Atom mit einem anderen (vorher 37–42 von 61).
+3. Die acht übrigen Fälle: in jedem Lauf 71/71 Pflicht-Atome und Feldtreue von
+   mindestens 99 %; Regelverstösse im Mittel höchstens 2 (vorher 0) – die Regel
+   darf nicht in Aufteilen umschlagen, wo die Fälle einen Redebeitrag als eine
+   Aussage meinen.
+
+### Ergebnis
+
+Je drei blinde Läufe über alle elf Fälle mit der geänderten Schablone
+(`runs/2026-10-14-koernung-1..3`, `runs/2026-10-14-unabhaengig-koernung-1..3`;
+die Prompts liegen jeweils in Lauf 1). Vollständige Vergleiche in
+[`runs/2026-10-14-koernung-vergleich.md`](runs/2026-10-14-koernung-vergleich.md) und
+[`runs/2026-10-14-unabhaengig-koernung-vergleich.md`](runs/2026-10-14-unabhaengig-koernung-vergleich.md).
+
+| Bedingung | vorher | nachher | erfüllt |
+|---|---|---|---|
+| 1. Unabhängige Fälle: gefundene Pflicht-Einträge | 170 von 172 in jedem Lauf | 172 von 172 in jedem Lauf | ja |
+| 2. Elterninterview: Pflicht-Einträge, die sich ein Atom teilen | 42, 40, 37 von 61 | 12, 6, 10 von 63 (Mittel 9,3) | ja |
+| 3. Acht übrige Fälle: Pflicht-Atome · Feldtreue · Regelverstösse | 71/71 · 100 % · 0 | 71/71 · 100 % · 6, 6, 4 (Mittel 5,3) | nein |
+
+Die dritte Bedingung ist verfehlt, die Änderung damit **verworfen**: `evidenz.md`
+steht wieder auf dem Stand vor `f2dd14d`. Die Läufe bleiben als Beleg.
+
+Was die Läufe zeigen:
+
+- **Auf langen Redebeiträgen wirkt die Regel wie gewollt.** Im Elterninterview finden alle drei Läufe alle 63 Pflicht-Einträge (vorher je 61), und nur noch 6–12 teilen sich ein Atom (vorher 37–42, alte Schablone 12–26). Die Feldtreue gegen das unabhängige Gold steigt von 96 auf 98 %, fast nur beim `signal`: 50 statt 111 Abweichungen über drei Läufe. Ein Atom mit einer Aussage trägt das Signal dieser Aussage statt eines für mehrere.
+- **Sie greift auch dort, wo sie nicht soll.** Im Fall `interview` teilt sie Redebeiträge aus zwei Sätzen, die der Fall als eine Aussage meint (3, 5 und 3 Verstösse) – etwa «Das hat mir die Vermieterin bei der Schlüsselübergabe gesagt.» als eigenes Atom, das ohne den folgenden Satz nichts mehr belegt. «Wechselt das Thema oder den Schritt» liest das Modell schon innerhalb von zwei Sätzen. Weil die Zeile der Schablone für alle Quellenarten gilt, liegen zudem die Befragung in zwei Läufen und die Beschwerde in einem über der Spanne ihres Falls (16 statt höchstens 15 bzw. 14 Atome).
+- **Die Zahl der Atome steigt stark:** Elterninterview 91–102 (vorher 41–47, alte Schablone 70–83), Fokusgruppe 115–116 (80–86), Dolmetsch-Interview 57–58 (47). Mehr Atome heissen mehr Prüfaufwand in der Synthese. Den Richtwert «12–25 Atome pro 45-Minuten-Interview» hält bei diesen Transkripten schon die aktuelle Schablone nicht ein.
+- **Nicht jeder Verstoss ist ein Fehler.** In `interview-hort` [03:40] trennen zwei Läufe «Den Arbeitsvertrag konnte sie nicht hochladen …» (`breakdown`) von «Sie hat ihn dann ausgedruckt und … abgegeben» (`workaround`) – zwei Signale, die ein Atom nicht beide tragen kann. Die Fallregel «ein Atom je Fundstelle» zählt das als Verstoss. Ob sie dort passt, ist eine Frage an den Testsatz; sie wird nicht nach dem Ergebnis entschieden.
+
+Nächster Kandidat, mit eigenem Kriterium vor dem Lauf: die Regel auf lange
+Redebeiträge in Interviews beschränken – kurze Redebeiträge, die eine Sache
+erzählen, ausdrücklich ausnehmen und die übrigen Quellenarten nicht berühren.
+Dieselben elf Fälle und dieselben drei Bedingungen taugen als Messlatte.
 
 ## Grenzen
 

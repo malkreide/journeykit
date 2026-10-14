@@ -352,6 +352,20 @@ def audit_markdown(journey: dict[str, Any], findings: list[Finding], lang: str =
             opps=len(idx.opportunities),
         )
     )
+    # Breakdowns an Übergängen, mit dem Anteil der Übergänge an allen Schritten als
+    # Vergleich: Ist fast jeder Schritt ein Übergang, sagt «alle an Übergängen» wenig.
+    breakdowns = idx.breakdowns()
+    if breakdowns:
+        transitions = {sid for sid, step in idx.steps.items() if step.get("is_transition")}
+        lines.append(
+            t(
+                "audit.transitions",
+                at=sum(1 for pp in breakdowns if idx.pain_point_step[pp["id"]] in transitions),
+                breakdowns=len(breakdowns),
+                transitions=len(transitions),
+                steps=idx.step_count(),
+            )
+        )
     # Ursachenketten (ADR-0008): Folgen mit bekannter Ursache, davon über Phasen hinweg
     caused = {pid: idx.root_causes(pid) for pid in idx.pain_points}
     chains = [pid for pid, causes in caused.items() if causes]

@@ -72,6 +72,11 @@ def test_publication_channel_and_case_records_kind(minimal):
     assert is_valid(minimal)
 
 
+def test_regulation_kind(minimal):
+    minimal["sources"][1]["kind"] = "regulation"
+    assert is_valid(minimal)
+
+
 def test_source_request_method(minimal):
     minimal["open_questions"] = [
         {"text": "Worauf beruht die Kurve?", "proposed_method": "source_request"}

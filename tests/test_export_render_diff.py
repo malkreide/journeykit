@@ -172,6 +172,25 @@ def test_audit_counts_chains_of_causes(minimal):
     assert "Chaînes de causes" in fr and "d'une phase à l'autre" in fr
 
 
+def test_audit_counts_breakdowns_at_transitions(minimal):
+    step = minimal["phases"][0]["steps"][0]
+    step["pain_points"][0]["type"] = "friction"
+    assert "an Übergängen" not in audit_markdown(minimal, lint_journey(minimal)), (
+        "ohne Breakdown keine Zeile"
+    )
+    step["pain_points"][0]["type"] = "breakdown"
+    md = audit_markdown(minimal, lint_journey(minimal))
+    assert "- Breakdowns an Übergängen: 0 von 1 · Übergänge: 0 von 1 Schritten" in md
+    step["is_transition"] = True
+    minimal["phases"][0]["steps"].append(
+        {"id": "step-2", "name": "Anrufen", "action": "Die Persona ruft an."}
+    )
+    md = audit_markdown(minimal, lint_journey(minimal))
+    assert "- Breakdowns an Übergängen: 1 von 1 · Übergänge: 1 von 2 Schritten" in md
+    fr = audit_markdown(minimal, lint_journey(minimal, lang="fr"), lang="fr")
+    assert "- Ruptures aux transitions\u00a0: 1 sur 1 · transitions\u00a0: 1 sur 2 étapes" in fr
+
+
 def test_quotes_from_user_sources_are_not_relayed(minimal):
     for atom in minimal["evidence"]:
         atom["class"] = "assumed"  # Klasse gesetzt, die Quelle bleibt das Interview

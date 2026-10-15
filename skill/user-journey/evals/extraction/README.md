@@ -43,7 +43,12 @@ python scripts/eval_extraction.py prompts -o /tmp/prompts --bundle
 python scripts/eval_extraction.py score /tmp/antworten -o bericht.md
 # Mehrere Läufe nebeneinander; Läufe «<name>-1», «<name>-2» … gelten als eine Schablone
 python scripts/eval_extraction.py compare runs/a-1 runs/a-2 runs/b-1 -o vergleich.md
+# Kurze Redebeiträge, deren Gold zwei unvereinbare Signale verlangt (Abschnitt «Ein Signal je Atom»)
+python scripts/eval_extraction.py signale
 ```
+
+Fälle ausserhalb des Testsatzes, etwa das lokale Material der Evaluation unter
+`/eval/`, wertet man mit `--cases <verzeichnis>` vor dem Unterbefehl.
 
 Eine ältere Schablone prüft man mit ihrer `evidenz.md`:
 `git show <commit>:skill/user-journey/references/evidenz.md > /tmp/alt.md` und
@@ -455,6 +460,52 @@ etwa 2,7 Atomen je Minute über der Grössenordnung im Satz (1,5–2,5). Der Wor
 bleibt wie festgelegt; die Zahlen nach jedem Durchgang nachzuziehen hiesse, einem
 Trend synthetischer Läufe hinterherzulaufen. Sie gehören an realem Material
 geprüft (Punkt 1 der offenen Punkte).
+
+## Ein Signal je Atom (2026-10-14): Entscheidungsregel vorab festgelegt
+
+Nach der engeren Körnungsregel bleibt ein kurzer Redebeitrag (bis drei Sätze) ein
+Atom, auch wenn er Problem und Ausweg nennt – ein Atom trägt aber nur ein
+`signal`. In `interview-hort` [03:40] (Upload gescheitert, auf Papier
+ausgewichen) lässt das Gold deshalb für ein Atom `breakdown` oder `workaround` zu.
+
+Ob das ein Problem ist, entscheidet dieser Testsatz nicht:
+
+- **Das `signal` liest kein Code** – weder Lints noch Viewer, Export oder
+  `model.py`. Es ist ein Hinweis für die Synthese. Verloren gehen kann dort der
+  Ausweg in einem Atom mit `breakdown` oder das Problem in einem mit
+  `workaround`. Das fängt ein Satz im Syntheseschritt von `SKILL.md` ab (bei
+  `pain_points`). Die Schablone in `evidenz.md` bleibt unverändert; ein Messlauf
+  ist dafür nicht nötig.
+- **Im synthetischen Gold ist der Fall selten.** `signale` zählt die kurzen
+  Redebeiträge, deren Pflicht-Einträge kein gemeinsames `signal` zulassen: 1 von
+  30 über die fünf Interviewfälle (`fokusgruppe` [23:03]: Kosten `neutral`,
+  fehlende Rückzahlung `friction`). `interview-hort` [03:40] zählt nicht, weil
+  das Gold dort beide Signale für ein Atom zulässt. 30 kurze Redebeiträge sind
+  wenig, und Autor, Gold und Extraktion sind dasselbe Modell.
+
+### Regel, festgelegt vor dem realen Material
+
+Gemessen am Gold, das Menschen für das reale Material der Evaluation erstellen
+(Punkt 1 der offenen Punkte; ein Eintrag je Aussage nach
+`unabhaengig/gold-anleitung.md`), gezählt mit `signale` über alle Interviews
+zusammen:
+
+1. **Weniger als 30 kurze Redebeiträge mit Pflicht-Einträgen:** keine
+   Entscheidung. Die Frage bleibt offen, bis mehr Material da ist.
+2. **Höchstens 10 % davon unvereinbar:** Die Frage ist geschlossen. Ein kurzer
+   Redebeitrag bleibt ein Atom; der Satz in `SKILL.md` bleibt die Absicherung.
+3. **Mehr als 10 %:** Kandidat für eine Schablonenänderung «Ein kurzer
+   Redebeitrag mit zwei Aussagen ohne gemeinsames Signal wird zwei Atome» – mit
+   eigenem Kriterium und Messlauf wie oben. Vorher die Fallregel «ein Atom je
+   Fundstelle» in `interview` und `interview-hort` anpassen, sonst zählt der
+   Messlauf die gewollte Aufteilung als Verstoss. Ein Feld `signals[]` im Schema statt der
+   Aufteilung nur mit ADR, und erst, wenn Code das Feld liest.
+
+Die Zahl hängt davon ab, wie das Gold aufteilt: Lässt ein Eintrag mehrere Signale
+zu, ist er mit keinem anderen unvereinbar. Die Sätze zählt `signale` mechanisch –
+Regieanweisungen in Klammern zählen nicht, Abkürzungen und Ordnungszahlen
+(«28. März») beenden keinen Satz. Erwartet wird das Format des Testsatzes,
+`[mm:ss] Sprecher: Text`, und ein Eintrag zählt bei seiner ersten Fundstelle.
 
 ## Grenzen
 

@@ -254,7 +254,8 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
 .bub .b:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .bub .b span { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; }
 .bub .ring { border: 1.5px solid var(--ink-3); }
-.bub .ring.gap { border: 1.5px dashed var(--gap); }
+.bub .ring.assumed { border: 1.5px dashed var(--assumed); }
+.bub .ring.none { border: 2px dotted var(--gap); }
 .bub .fill { background: var(--observed); }
 .bub .frac { display: block; font-size: 11px; color: var(--ink-2); margin-top: 1px; }
 .bub .na { color: var(--ink-3); }
@@ -392,7 +393,7 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "ovFromSources_one": "aus {n} Quelle",
    "ovFromSources_other": "aus {n} Quellen",
    "ovMatrix": "Belege nach Phase",
-   "ovMatrixLegend": "Ring = Zahl der Aussagen · gefüllte Fläche = Anteil mit Primärevidenz · gestrichelt = keine Aussage belegt · Bruch = belegt / alle",
+   "ovMatrixLegend": "Ring = Zahl der Aussagen · gefüllte Fläche = Anteil mit Primärevidenz · gestrichelt = nur Annahmen · gepunktet = ohne Beleg · Bruch = belegt / alle",
    "ovBacked": "{b} von {n} Aussagen mit Primärevidenz",
    "ovLinks": "Pain Points und ihr stärkster Beleg ({n})",
    "ovLinksIntro": "Beobachtet vor berichtet vor angenommen. Breakdowns zuerst, dann nach Schwere.",
@@ -607,7 +608,7 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "ovFromSources_one": "de {n} source",
    "ovFromSources_other": "de {n} sources",
    "ovMatrix": "Preuves par phase",
-   "ovMatrixLegend": "Anneau = nombre d'énoncés · surface pleine = part avec preuve primaire · pointillé = aucun énoncé étayé · fraction = étayés / tous",
+   "ovMatrixLegend": "Anneau = nombre d'énoncés · surface pleine = part avec preuve primaire · tirets = suppositions seulement · pointillé = sans preuve · fraction = étayés / tous",
    "ovBacked": "{b} énoncés sur {n} avec preuve primaire",
    "ovLinks": "Irritants et leur preuve la plus forte ({n})",
    "ovLinksIntro": "Observé avant rapporté avant supposé. Ruptures d'abord, puis par gravité.",
@@ -870,7 +871,8 @@ function renderOverview(idx) {
     + tile(s.total, t("atoms"), tn("ovFromSources", idx.src.size), evbar)
     + tile(idx.steps.length, t("ovSteps"), lbl("ovPhases") + j.phases.length + " · " + lbl("ovTransitions") + idx.steps.filter(e => e.step.is_transition).length)
     + '</div>';
-  // Kreismatrix Aussageart × Phase: Ring nach Zahl der Aussagen (Fläche), Füllung nach Anteil mit Primärevidenz
+  // Kreismatrix Aussageart × Phase: Ring nach Zahl der Aussagen (Fläche), Füllung nach Anteil mit Primärevidenz;
+  // ohne Primärevidenz wie in der Journey: gestrichelt = wenigstens angenommen, gepunktet = gar kein Beleg
   const dims = claimDims(), cells = dims.map(([k]) => j.phases.map(p => cl.filter(c => c.kind === k && c.e.phase === p)));
   const max = Math.max(1, ...cells.flat().map(cs => cs.length));
   h += '<div class="grid-2 ov-grid"><div class="panel"><h2>' + t("ovMatrix") + '</h2><div class="bub-wrap"><table class="bub"><thead><tr><th></th>' + j.phases.map(p => '<th>' + esc(p.name) + '</th>').join("") + '</tr></thead><tbody>';
@@ -878,7 +880,7 @@ function renderOverview(idx) {
     cells[di].forEach((cs, pi) => { if (!cs.length) { h += '<td><span class="na">·</span></td>'; return; }
       const b = cs.filter(c => idx.hasPrimary(c.refs)).length, d = Math.round(14 + 32 * Math.sqrt(cs.length / max)), f = Math.round(d * Math.sqrt(b / cs.length));
       const where = label + t("colon") + j.phases[pi].name, text = t("ovBacked", { b, n: cs.length });
-      h += '<td><button class="b" data-refs="' + esc([...new Set(cs.flatMap(c => c.refs))].join(",")) + '" data-title="' + esc(where) + '" data-text="' + esc(text) + '" aria-label="' + esc(where + " – " + text) + '"><span class="ring' + (b ? '' : ' gap') + '" style="width:' + d + 'px;height:' + d + 'px"></span>' + (f ? '<span class="fill" style="width:' + f + 'px;height:' + f + 'px"></span>' : '') + '</button><span class="frac">' + b + '/' + cs.length + '</span></td>'; });
+      h += '<td><button class="b" data-refs="' + esc([...new Set(cs.flatMap(c => c.refs))].join(",")) + '" data-title="' + esc(where) + '" data-text="' + esc(text) + '" aria-label="' + esc(where + " – " + text) + '"><span class="ring' + (b ? '' : cs.some(c => idx.classes(c.refs).assumed) ? ' assumed' : ' none') + '" style="width:' + d + 'px;height:' + d + 'px"></span>' + (f ? '<span class="fill" style="width:' + f + 'px;height:' + f + 'px"></span>' : '') + '</button><span class="frac">' + b + '/' + cs.length + '</span></td>'; });
     h += '</tr>'; });
   h += '</tbody></table></div><p class="ov-legend">' + t("ovMatrixLegend") + '</p></div>';
   // Pain Point ↳ stärkster Beleg; der Filter «Nur Primärevidenz» blendet wie in der Journey aus

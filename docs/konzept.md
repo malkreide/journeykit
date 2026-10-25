@@ -41,7 +41,7 @@ darauf. Daraus folgt:
 | 2 Evidenz-Atome | Kleinste belegbare Einheit: Zitat, Beobachtung, Messwert, Dokumentstelle, mit Fundstelle, Klasse, Signal, Emotion (nur explizit), Widerspruch | `evidence[]` im Schema; Extraktionsregeln und Prompt-Schablone im Skill |
 | 3 Journey-Modell | Persona, Szenario (Ist-Zustand oder Soll-Konzept, ADR-0006), Phasen (mit belegter Dauer in Kalendertagen), Schritte (inkl. handelnde Dritte, ADR-0005, und fällige Kosten, ADR-0007), Denken/Fühlen, Pain Points (Reibung/Breakdown, mit Ursache, ADR-0008), Edge Cases, Recovery, KPIs, Chancen, offene Fragen, Owner, Review | JSON Schema 2020-12 |
 | 4 Synthese-Engine | Clustern, Kurve nur aus Evidenz, Widersprüche und Lücken ausweisen, Chancen und Scores vorschlagen | Claude-Skill (Modi Synthese / Workshop / Audit) + Lints als Rückkopplung |
-| 5 Darstellung | Journey mit Kurve und Dauer je Phase (ein Massstab, damit Wartezeit nicht gleich kurz aussieht wie ein Termin), Prozess/Fehlerpfade, Evidenz-Heatmap, Chancenmatrix, Prüfung; Drilldown bis zum O-Ton; Filter «nur Primärevidenz»; Persona-Überlagerung | Single-File-Viewer |
+| 5 Darstellung | Übersicht zur Belastbarkeit (Anteile belegter Aussagen, Lücken, stärkster Beleg je Pain Point – keine Rangliste, keine Bewertung der Textqualität), Journey mit Kurve und Dauer je Phase (ein Massstab, damit Wartezeit nicht gleich kurz aussieht wie ein Termin), Prozess/Fehlerpfade, Evidenz-Heatmap, Chancenmatrix, Prüfung; Drilldown bis zum O-Ton; Filter «nur Primärevidenz»; Persona-Überlagerung | Single-File-Viewer |
 | 6 Betrieb | Owner, Review-Rhythmus, Status pro Pain Point und Chance, Versionen, Diff | Schema-Felder, Lints L030–L035, `journeykit diff` |
 
 ## Evidenzklassen als tragendes Prinzip

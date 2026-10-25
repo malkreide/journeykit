@@ -201,8 +201,8 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
 .src-pii { font-size: 11px; }
 .atom { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; background: var(--surface); }
 .atom .meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 4px; font-size: 11.5px; color: var(--ink-2); }
-.atom .cls { font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: 10.5px; padding: 1px 6px; border-radius: 4px; }
-.atom .cls.observed { background: var(--observed-soft); color: var(--observed); } .atom .cls.reported { background: var(--reported-soft); color: var(--reported); } .atom .cls.assumed { background: var(--assumed-soft); color: var(--assumed); }
+.atom .cls, .ov-link .cls { font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: 10.5px; padding: 1px 6px; border-radius: 4px; }
+.atom .cls.observed, .ov-link .cls.observed { background: var(--observed-soft); color: var(--observed); } .atom .cls.reported, .ov-link .cls.reported { background: var(--reported-soft); color: var(--reported); } .atom .cls.assumed, .ov-link .cls.assumed { background: var(--assumed-soft); color: var(--assumed); }
 .atom q { quotes: "«" "»"; font-style: italic; }
 .atom .txt { font-size: 13px; }
 .atom .loc { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
@@ -235,6 +235,43 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
 .finding .lvl.ERROR { background: var(--breakdown-soft); color: var(--breakdown); } .finding .lvl.WARN { background: var(--friction-soft); color: var(--friction); } .finding .lvl.INFO { background: var(--surface-2); color: var(--ink-2); }
 .finding .hint { color: var(--ink-2); font-size: 12.5px; margin-top: 2px; }
 .finding .path { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+
+/* Übersicht */
+.ov-head h2 { font-size: 17px; margin-bottom: 4px; }
+.ov-tiles { margin-top: 14px; }
+.ov-tiles .tile .sub { font-size: 11.5px; color: var(--ink-3); margin-top: 2px; }
+.ov-tiles .tile .evbar { width: 100%; margin-top: 8px; }
+.spark { display: flex; gap: 3px; align-items: flex-end; height: 24px; margin-top: 6px; }
+.spark i { flex: 1; min-height: 2px; border-radius: 2px 2px 0 0; background: var(--observed); }
+.spark i.zero { background: transparent; border-bottom: 2px dotted var(--gap); }
+.ov-grid { margin-top: 14px; }
+.ov-grid > .panel + .panel { margin-top: 0; }
+.bub-wrap { overflow-x: auto; }
+.bub th, .bub td { border-bottom: 0; text-align: center; vertical-align: middle; padding: 4px; }
+.bub thead th { font-size: 11.5px; font-weight: 600; color: var(--ink); min-width: 64px; }
+.bub th.rl { text-align: left; color: var(--ink-2); font-size: 12px; white-space: nowrap; }
+.bub .b { position: relative; display: block; width: 50px; height: 50px; margin: 0 auto; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 50%; }
+.bub .b:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.bub .b span { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; }
+.bub .ring { border: 1.5px solid var(--ink-3); }
+.bub .ring.gap { border: 1.5px dashed var(--gap); }
+.bub .fill { background: var(--observed); }
+.bub .frac { display: block; font-size: 11px; color: var(--ink-2); margin-top: 1px; }
+.bub .na { color: var(--ink-3); }
+.ov-legend { font-size: 12px; color: var(--ink-2); margin: 8px 0 0; }
+.ov-links { margin-top: 8px; }
+.ov-link { display: block; width: 100%; text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 8px 10px 8px 12px; margin-bottom: 8px; cursor: pointer; position: relative; }
+.ov-link::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 2px; background: var(--friction); }
+.ov-link.breakdown::before { background: var(--breakdown); }
+.ov-link:hover, .ov-link:focus-visible { border-color: var(--accent); outline: none; box-shadow: 0 0 0 2px var(--accent-soft); }
+.ov-link .where { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 11.5px; color: var(--ink-3); }
+.ov-link .stmt { font-size: 13px; font-weight: 600; margin: 4px 0; line-height: 1.35; }
+.ov-link .src { position: relative; padding-left: 16px; font-size: 12.5px; color: var(--ink-2); }
+.ov-link .src::before { content: "↳"; position: absolute; left: 0; color: var(--ink-3); }
+.ov-link .src .q { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-top: 3px; }
+.ov-link .src.none { font-style: italic; color: var(--ink-3); }
+.ov-link .more { font-size: 11.5px; color: var(--ink-3); margin-top: 3px; padding-left: 16px; }
+.ov-keys { font-size: 11.5px; color: var(--ink-3); }
 
 /* Drawer */
 .drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 100%); background: var(--surface); border-left: 1px solid var(--line); box-shadow: var(--shadow); transform: translateX(105%); transition: transform .22s ease; z-index: 40; display: flex; flex-direction: column; }
@@ -339,6 +376,30 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "tabEvidence": "Evidenz",
    "tabOpps": "Chancen",
    "tabAudit": "Prüfung",
+   "tabOverview": "Übersicht",
+   "pct": "{n}%",
+   "ovTitle": "Worauf beruht diese Journey?",
+   "ovIntro": "Die Zahlen zählen Aussagen und Belege im Modell. Sie zeigen, wo die Journey auf Nutzenden beruht und wo auf Innensicht – nicht, wie gut sie formuliert ist.",
+   "ovSteps": "Schritte",
+   "ovPhases": "Phasen",
+   "ovTransitions": "Übergänge",
+   "ovPhaseShare": "{p}: {b} von {n}",
+   "ovPhaseNone": "{p}: keine Erlebnis-Aussagen",
+   "ovWeak": "Aussagen ohne Primärevidenz",
+   "ovWeakSub": "{a} nur angenommen · {z} ohne Beleg",
+   "ovBreakdowns": "Breakdowns",
+   "ovFrictions": "Reibungen",
+   "ovFromSources_one": "aus {n} Quelle",
+   "ovFromSources_other": "aus {n} Quellen",
+   "ovMatrix": "Belege nach Phase",
+   "ovMatrixLegend": "Ring = Zahl der Aussagen · gefüllte Fläche = Anteil mit Primärevidenz · gestrichelt = keine Aussage belegt · Bruch = belegt / alle",
+   "ovBacked": "{b} von {n} Aussagen mit Primärevidenz",
+   "ovLinks": "Pain Points und ihr stärkster Beleg ({n})",
+   "ovLinksIntro": "Beobachtet vor berichtet vor angenommen. Breakdowns zuerst, dann nach Schwere.",
+   "ovKeys": "↑ ↓ blättern · Pos1 / Ende · Enter öffnet alle Belege",
+   "ovMore_one": "+{n} weiterer Beleg",
+   "ovMore_other": "+{n} weitere Belege",
+   "ovNoLinks": "Keine Pain Points – Happy Path oder Lücke?",
    "rowPhase": "Phase",
    "rowDuration": "Dauer",
    "rowDurationSub": "Kalendertage, ein Massstab für alle Phasen",
@@ -530,6 +591,30 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "tabEvidence": "Preuves",
    "tabOpps": "Opportunités",
    "tabAudit": "Contrôle",
+   "tabOverview": "Vue d'ensemble",
+   "pct": "{n} %",
+   "ovTitle": "Sur quoi repose ce parcours ?",
+   "ovIntro": "Les chiffres comptent les énoncés et les preuves du modèle. Ils montrent où le parcours repose sur les usagers et où sur la vue interne – pas la qualité de sa formulation.",
+   "ovSteps": "Étapes",
+   "ovPhases": "Phases",
+   "ovTransitions": "Transitions",
+   "ovPhaseShare": "{p} : {b} sur {n}",
+   "ovPhaseNone": "{p} : aucun énoncé d'expérience",
+   "ovWeak": "Énoncés sans preuve primaire",
+   "ovWeakSub": "{a} uniquement supposés · {z} sans preuve",
+   "ovBreakdowns": "Ruptures",
+   "ovFrictions": "Frictions",
+   "ovFromSources_one": "de {n} source",
+   "ovFromSources_other": "de {n} sources",
+   "ovMatrix": "Preuves par phase",
+   "ovMatrixLegend": "Anneau = nombre d'énoncés · surface pleine = part avec preuve primaire · pointillé = aucun énoncé étayé · fraction = étayés / tous",
+   "ovBacked": "{b} énoncés sur {n} avec preuve primaire",
+   "ovLinks": "Irritants et leur preuve la plus forte ({n})",
+   "ovLinksIntro": "Observé avant rapporté avant supposé. Ruptures d'abord, puis par gravité.",
+   "ovKeys": "↑ ↓ parcourir · Début / Fin · Entrée ouvre toutes les preuves",
+   "ovMore_one": "+{n} autre preuve",
+   "ovMore_other": "+{n} autres preuves",
+   "ovNoLinks": "Aucun irritant – parcours idéal ou lacune ?",
    "rowPhase": "Phase",
    "rowDuration": "Durée",
    "rowDurationSub": "Jours civils, une même échelle pour toutes les phases",
@@ -719,10 +804,14 @@ class Idx {
     return out;
   }
 }
+// Aussagearten in Heatmap und Übersicht
+const claimDims = () => [["step", t("step")], ["thinking", t("rowThinks")], ["feeling", t("rowFeels")], ["pain_point", t("rowPain")], ["edge_case", t("edgeCases")], ["recovery", t("recovery")]];
+const EXPERIENCE = ["thinking", "feeling", "pain_point"];
+function sevMarks(pp) { return pp.severity ? '<span class="sev" title="' + t("severity", { n: pp.severity }) + '">' + [1, 2, 3, 4, 5].map(i => '<i class="' + (i <= pp.severity ? 'on' : '') + '"></i>').join("") + '</span>' : ''; }
 function quadrant(o) { if (o.user_impact == null || o.effort == null) return null; const v = o.user_impact + (o.public_value ?? o.user_impact); const hv = v >= 6, le = o.effort <= 2; return hv && le ? "quick_win" : hv ? "big_bet" : le ? "fill_in" : "skip"; }
 
 // ---------------------------------------------------------------- Zustand
-const state = { j: 0, primOnly: false, tab: "journey" };
+const state = { j: 0, primOnly: false, tab: "overview" };
 let IDX;
 const journeys = DATA.journeys, findings = DATA.findings;
 // Beschriftung einer Datei: der Persona-Name. Tragen zwei Dateien denselben Namen
@@ -753,9 +842,56 @@ function renderHeader() {
     + '<span class="c-observed"><i class="dot fill"></i> ' + s.observed + ' ' + L.classesPl.observed + '</span><span class="c-reported"><i class="dot fill"></i> ' + s.reported + ' ' + L.classesPl.reported + '</span><span class="c-assumed"><i class="dot"></i> ' + s.assumed + ' ' + L.classesPl.assumed + '</span></span>';
   const sel = $("#personaSel");
   if (journeys.length > 1) { sel.hidden = false; sel.innerHTML = journeys.map((x, i) => '<option value="' + i + '"' + (i === state.j ? ' selected' : '') + '>' + esc(jLabel(x)) + '</option>').join(""); }
-  const tabs = [["journey", t("tabJourney")], ["process", t("tabProcess")], ["evidence", t("tabEvidence"), s.total], ["opps", t("tabOpps"), idx.opps.length], ["audit", t("tabAudit"), f.length]];
+  const tabs = [["overview", t("tabOverview")], ["journey", t("tabJourney")], ["process", t("tabProcess")], ["evidence", t("tabEvidence"), s.total], ["opps", t("tabOpps"), idx.opps.length], ["audit", t("tabAudit"), f.length]];
   $("#tabs").innerHTML = tabs.map(t => '<button data-tab="' + t[0] + '" class="' + (state.tab === t[0] ? "active" : "") + '">' + t[1] + (t[2] != null ? '<span class="n">' + t[2] + '</span>' : '') + '</button>').join("");
   $("#primToggle").classList.toggle("active", state.primOnly);
+}
+
+// ---------------------------------------------------------------- Layer 0: Übersicht
+// Kennzahlen zur Belastbarkeit, nicht zur Textqualität: wie viele Aussagen auf Nutzenden beruhen,
+// wo Belege fehlen und welcher Beleg hinter jedem Pain Point steht. Keine Rangliste, keine Summe über Personas.
+const CLASS_RANK = { observed: 0, reported: 1, assumed: 2 };
+function renderOverview(idx) {
+  const j = idx.j, cl = idx.claims(), s = idx.summary();
+  const exp = cl.filter(c => EXPERIENCE.includes(c.kind)), backed = exp.filter(c => idx.hasPrimary(c.refs)).length;
+  const weak = cl.filter(c => !idx.hasPrimary(c.refs)), none = weak.filter(c => !c.refs.length).length;
+  const pps = idx.steps.flatMap(e => (e.step.pain_points || []).map(pp => ({ pp, e }))), nb = pps.filter(x => x.pp.type === "breakdown").length;
+  const pctOf = (a, n) => t("pct", { n: n ? Math.round(a / n * 100) : 0 });
+  const tile = (v, l, sub, extra, color) => '<div class="tile"><div class="v"' + (color ? ' style="color:' + color + '"' : '') + '>' + v + '</div><div class="l">' + l + '</div>' + (sub ? '<div class="sub">' + sub + '</div>' : '') + (extra || '') + '</div>';
+  // Anteil belegter Erlebnis-Aussagen je Phase; eine Phase ohne solche Aussagen ist eine gepunktete Linie, keine Null-Säule
+  const bars = j.phases.map(p => { const pe = exp.filter(c => c.e.phase === p), pb = pe.filter(c => idx.hasPrimary(c.refs)).length; return pe.length ? { h: Math.round(pb / pe.length * 100), title: t("ovPhaseShare", { p: p.name, b: pb, n: pe.length }) } : { title: t("ovPhaseNone", { p: p.name }) }; });
+  const spark = '<div class="spark" role="img" aria-label="' + esc(bars.map(b => b.title).join("; ")) + '">' + bars.map(b => b.h != null ? '<i style="height:' + b.h + '%" title="' + esc(b.title) + '"></i>' : '<i class="zero" title="' + esc(b.title) + '"></i>').join("") + '</div>';
+  const pct = s.total ? [s.observed, s.reported, s.assumed].map(v => Math.round(v / s.total * 100)) : [0, 0, 0];
+  const evbar = '<span class="evbar" title="' + esc(t("evDots", { o: s.observed, r: s.reported, a: s.assumed })) + '"><span style="width:' + pct[0] + '%;background:var(--observed)"></span><span style="width:' + pct[1] + '%;background:var(--reported)"></span><span style="width:' + pct[2] + '%;background:var(--assumed)"></span></span>';
+  let h = '<div class="panel ov-head"><h2>' + t("ovTitle") + '</h2><p class="muted" style="margin:0">' + t("ovIntro") + '</p></div><div class="tiles ov-tiles">'
+    + tile(pctOf(backed, exp.length), t("experienceShare", { b: backed, n: exp.length }), "", spark)
+    + tile(weak.length, t("ovWeak"), esc(t("ovWeakSub", { a: weak.length - none, z: none })), "", "var(--assumed)")
+    + tile(nb, t("ovBreakdowns"), lbl("ovFrictions") + (pps.length - nb), "", "var(--breakdown)")
+    + tile(s.total, t("atoms"), tn("ovFromSources", idx.src.size), evbar)
+    + tile(idx.steps.length, t("ovSteps"), lbl("ovPhases") + j.phases.length + " · " + lbl("ovTransitions") + idx.steps.filter(e => e.step.is_transition).length)
+    + '</div>';
+  // Kreismatrix Aussageart × Phase: Ring nach Zahl der Aussagen (Fläche), Füllung nach Anteil mit Primärevidenz
+  const dims = claimDims(), cells = dims.map(([k]) => j.phases.map(p => cl.filter(c => c.kind === k && c.e.phase === p)));
+  const max = Math.max(1, ...cells.flat().map(cs => cs.length));
+  h += '<div class="grid-2 ov-grid"><div class="panel"><h2>' + t("ovMatrix") + '</h2><div class="bub-wrap"><table class="bub"><thead><tr><th></th>' + j.phases.map(p => '<th>' + esc(p.name) + '</th>').join("") + '</tr></thead><tbody>';
+  dims.forEach(([, label], di) => { h += '<tr><th class="rl">' + label + '</th>';
+    cells[di].forEach((cs, pi) => { if (!cs.length) { h += '<td><span class="na">·</span></td>'; return; }
+      const b = cs.filter(c => idx.hasPrimary(c.refs)).length, d = Math.round(14 + 32 * Math.sqrt(cs.length / max)), f = Math.round(d * Math.sqrt(b / cs.length));
+      const where = label + t("colon") + j.phases[pi].name, text = t("ovBacked", { b, n: cs.length });
+      h += '<td><button class="b" data-refs="' + esc([...new Set(cs.flatMap(c => c.refs))].join(",")) + '" data-title="' + esc(where) + '" data-text="' + esc(text) + '" aria-label="' + esc(where + " – " + text) + '"><span class="ring' + (b ? '' : ' gap') + '" style="width:' + d + 'px;height:' + d + 'px"></span>' + (f ? '<span class="fill" style="width:' + f + 'px;height:' + f + 'px"></span>' : '') + '</button><span class="frac">' + b + '/' + cs.length + '</span></td>'; });
+    h += '</tr>'; });
+  h += '</tbody></table></div><p class="ov-legend">' + t("ovMatrixLegend") + '</p></div>';
+  // Pain Point ↳ stärkster Beleg; der Filter «Nur Primärevidenz» blendet wie in der Journey aus
+  const shown = pps.filter(x => visible(idx, x.pp.evidence_refs)), hidden = pps.length - shown.length;
+  shown.sort((a, b) => (a.pp.type === "breakdown" ? 0 : 1) - (b.pp.type === "breakdown" ? 0 : 1) || (b.pp.severity || 0) - (a.pp.severity || 0) || a.e.gi - b.e.gi);
+  const best = refs => refs.map(r => idx.ev.get(r)).filter(Boolean).sort((a, b) => CLASS_RANK[a.class] - CLASS_RANK[b.class] || (a.kind === "quote" ? 0 : 1) - (b.kind === "quote" ? 0 : 1))[0];
+  h += '<div class="panel"><h2>' + t("ovLinks", { n: shown.length }) + '</h2><p class="muted" style="margin:0">' + t("ovLinksIntro") + '</p>' + (shown.length ? '<div class="ov-keys">' + t("ovKeys") + '</div>' : '') + '<div class="ov-links">';
+  shown.forEach(({ pp, e }) => { const refs = pp.evidence_refs || [], a = best(refs), src = a && idx.src.get(a.source_ref), more = refs.length - (a ? 1 : 0);
+    h += '<button class="ov-link ' + pp.type + '" data-refs="' + esc(refs.join(",")) + '" data-title="' + esc(pp.id) + '" data-text="' + esc(pp.text) + '"><div class="where"><span class="tag ' + pp.type + '">' + (pp.type === "breakdown" ? t("breakdown") : t("friction")) + '</span>' + sevMarks(pp) + '<span>' + esc(e.phase.name) + ' · ' + esc(e.step.name) + '</span></div><div class="stmt">' + esc(pp.text) + '</div>'
+      + (a ? '<div class="src"><span class="cls ' + a.class + '">' + L.classes[a.class] + '</span> ' + esc(src ? src.title : a.source_ref) + '<div class="q">' + (a.kind === "quote" ? t("quoted", { t: esc(a.text) }) : esc(a.text)) + '</div></div>' + (more > 0 ? '<div class="more">' + tn("ovMore", more) + '</div>' : '') : '<div class="src none">' + t("noEvidence") + '</div>') + '</button>'; });
+  if (!pps.length) h += '<p class="muted">' + t("ovNoLinks") + '</p>';
+  if (hidden) h += '<div class="hidden-note">' + tn("noPrimaryHidden", hidden) + '</div>';
+  return h + '</div></div></div>';
 }
 
 // ---------------------------------------------------------------- Layer 1: Journey
@@ -807,8 +943,8 @@ function renderJourney(idx) {
   h += '<div class="curve" style="grid-column: 2 / -1" id="curve"></div>';
   // Pain Points
   cells = ""; idx.steps.forEach(e => { const pps = e.step.pain_points || []; let c = "", hidden = 0; pps.forEach(pp => { if (!visible(idx, pp.evidence_refs)) { hidden++; return; }
-      const sev = pp.severity ? '<span class="sev" title="' + t("severity", { n: pp.severity }) + '">' + [1, 2, 3, 4, 5].map(i => '<i class="' + (i <= pp.severity ? 'on' : '') + '"></i>').join("") + '</span>' : '';
-      c += '<button class="claim pp ' + pp.type + ' ev-' + idx.evState(pp.evidence_refs) + '" data-refs="' + esc((pp.evidence_refs || []).join(",")) + '" data-title="' + esc(pp.id) + '" data-text="' + esc(pp.text) + '" data-pp="' + esc(pp.id) + '"><div class="pp-head"><span class="tag ' + pp.type + '">' + (pp.type === "breakdown" ? t("breakdown") : t("friction")) + '</span>' + sev + (pp.status ? '<span class="tag status">' + (L.ppStatus[pp.status] || pp.status) + '</span>' : '') + '</div>' + esc(pp.text) + evDots(idx, pp.evidence_refs) + (pp.workaround ? '<div class="wa">↪ ' + esc(pp.workaround) + '</div>' : '') + (pp.owner ? '<div class="wa">' + lbl("owner") + esc(pp.owner) + '</div>' : '') + consequenceNote(idx, pp) + '</button>' + causeLinks(idx, pp); });
+      const sev = sevMarks(pp);
+      c +='<button class="claim pp ' + pp.type + ' ev-' + idx.evState(pp.evidence_refs) + '" data-refs="' + esc((pp.evidence_refs || []).join(",")) + '" data-title="' + esc(pp.id) + '" data-text="' + esc(pp.text) + '" data-pp="' + esc(pp.id) + '"><div class="pp-head"><span class="tag ' + pp.type + '">' + (pp.type === "breakdown" ? t("breakdown") : t("friction")) + '</span>' + sev + (pp.status ? '<span class="tag status">' + (L.ppStatus[pp.status] || pp.status) + '</span>' : '') + '</div>' + esc(pp.text) + evDots(idx, pp.evidence_refs) + (pp.workaround ? '<div class="wa">↪ ' + esc(pp.workaround) + '</div>' : '') + (pp.owner ? '<div class="wa">' + lbl("owner") + esc(pp.owner) + '</div>' : '') + consequenceNote(idx, pp) + '</button>' + causeLinks(idx, pp); });
     if (hidden) c += '<div class="hidden-note">' + tn("noPrimaryHidden", hidden) + '</div>'; cells += '<div' + (e.si === e.phase.steps.length - 1 ? ' class="phase-end"' : '') + '>' + (c || '<span class="empty">–</span>') + '</div>'; });
   row(t("rowPain"), t("rowPainSub"), cells);
   // Edge Cases & Recovery
@@ -894,10 +1030,10 @@ function claimInline(idx, refs, title, text) { if (!refs || !refs.length) return
 
 // ---------------------------------------------------------------- Layer 3: Evidenz
 function renderEvidence(idx) {
-  const s = idx.summary(), cl = idx.claims(), exp = cl.filter(c => ["thinking", "feeling", "pain_point"].includes(c.kind)), backed = exp.filter(c => idx.hasPrimary(c.refs)).length;
+  const s = idx.summary(), cl = idx.claims(), exp = cl.filter(c => EXPERIENCE.includes(c.kind)), backed = exp.filter(c => idx.hasPrimary(c.refs)).length;
   let h = '<div class="tiles"><div class="tile"><div class="v">' + idx.src.size + '</div><div class="l">' + t("sources") + '</div></div><div class="tile"><div class="v">' + s.total + '</div><div class="l">' + t("atoms") + '</div></div><div class="tile"><div class="v c-observed">' + s.observed + '</div><div class="l">' + L.classesPl.observed + '</div></div><div class="tile"><div class="v c-reported">' + s.reported + '</div><div class="l">' + L.classesPl.reported + '</div></div><div class="tile"><div class="v c-assumed">' + s.assumed + '</div><div class="l">' + L.classesPl.assumed + '</div></div><div class="tile"><div class="v">' + (exp.length ? Math.round(backed / exp.length * 100) : 0) + '%</div><div class="l">' + t("experienceShare", { b: backed, n: exp.length }) + '</div></div></div>';
   // Heatmap
-  const dims = [["step", t("step")], ["thinking", t("rowThinks")], ["feeling", t("rowFeels")], ["pain_point", t("rowPain")], ["edge_case", t("edgeCases")], ["recovery", t("recovery")]];
+  const dims = claimDims();
   h += '<div class="panel" style="margin-top:14px"><h2>' + t("heatmap") + '</h2><p class="muted" style="margin:0 0 8px">' + t("heatIntro") + '</p><div class="heat"><table><thead><tr><th></th>' + idx.j.phases.map(p => '<th class="phase" colspan="' + p.steps.length + '">' + esc(p.name) + '</th>').join("") + '</tr><tr><th></th>' + idx.steps.map(e => '<th class="step">' + esc(e.step.name) + '</th>').join("") + '</tr></thead><tbody>';
   dims.forEach(([k, label]) => { h += '<tr><th>' + label + '</th>'; idx.steps.forEach(e => { const cs = cl.filter(c => c.kind === k && c.e === e); if (!cs.length) { h += '<td class="cell"><div class="hc na">·</div></td>'; return; } let prim = 0, ass = 0; const refs = []; cs.forEach(c => { const cc = idx.classes(c.refs); prim += cc.observed + cc.reported; ass += cc.assumed; refs.push(...c.refs); });
       const bg = prim === 0 ? "" : 'background: color-mix(in srgb, var(--observed) ' + Math.min(15 + prim * 18, 85) + '%, var(--surface));color:' + (prim >= 3 ? 'var(--accent-ink)' : 'var(--ink)');
@@ -968,7 +1104,8 @@ function closeDrawer() { $("#drawer").classList.remove("open"); $("#scrim").clas
 function render() {
   IDX = new Idx(journeys[state.j]); renderHeader();
   const m = $("#main");
-  m.innerHTML = '<section class="layer' + (state.tab === "journey" ? " active" : "") + '" data-l="journey">' + renderJourney(IDX) + '</section>'
+  m.innerHTML = '<section class="layer' + (state.tab === "overview" ? " active" : "") + '" data-l="overview">' + renderOverview(IDX) + '</section>'
+    + '<section class="layer' + (state.tab === "journey" ? " active" : "") + '" data-l="journey">' + renderJourney(IDX) + '</section>'
     + '<section class="layer' + (state.tab === "process" ? " active" : "") + '" data-l="process">' + renderProcess(IDX) + '</section>'
     + '<section class="layer' + (state.tab === "evidence" ? " active" : "") + '" data-l="evidence">' + renderEvidence(IDX) + '</section>'
     + '<section class="layer' + (state.tab === "opps" ? " active" : "") + '" data-l="opps">' + renderOpps(IDX) + '</section>'
@@ -987,6 +1124,12 @@ document.addEventListener("click", ev => {
   if (ev.target.closest("#dClose") || ev.target.closest("#scrim")) closeDrawer();
 });
 document.addEventListener("keydown", ev => { if (ev.key === "Escape") closeDrawer(); });
+// Übersicht: Pfeiltasten, Pos1 und Ende wandern durch die Pain Points; Enter öffnet die Belege (Button)
+document.addEventListener("keydown", ev => {
+  const cur = ev.target.closest?.(".ov-link"); if (!cur || !["ArrowDown", "ArrowUp", "Home", "End"].includes(ev.key)) return;
+  const all = [...cur.parentElement.querySelectorAll(".ov-link")], i = all.indexOf(cur);
+  ev.preventDefault(); ({ ArrowDown: all[i + 1], ArrowUp: all[i - 1], Home: all[0], End: all[all.length - 1] })[ev.key]?.focus();
+});
 $("#primOnly").addEventListener("change", ev => { state.primOnly = ev.target.checked; render(); });
 $("#personaSel").addEventListener("change", ev => { state.j = +ev.target.value; render(); });
 $("#themeBtn").addEventListener("click", () => { const r = document.documentElement, cur = r.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); r.dataset.theme = cur === "dark" ? "light" : "dark"; });

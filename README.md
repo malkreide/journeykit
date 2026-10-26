@@ -26,6 +26,8 @@ The vocabulary is translated for public administration, where nobody "converts" 
 
 ### Demo
 
+![Overview layer of the viewer: share of statements backed by primary evidence, bubble matrix of evidence per phase, pain points with their strongest evidence](docs/overview.png)
+
 ![Journey layer of the viewer: phases, actions, thoughts, evidence-backed emotional curve, pain points](docs/demo.png)
 
 Open `examples/kindergarteneintritt/journey.html` in a browser for the full interactive version.

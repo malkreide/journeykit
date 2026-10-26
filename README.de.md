@@ -26,6 +26,8 @@ Das Vokabular ist für die Verwaltung übersetzt, wo niemand «konvertiert» ode
 
 ### Demo
 
+![Übersicht des Viewers: Anteil belegter Aussagen, Kreismatrix der Belege je Phase, Pain Points mit ihrem stärksten Beleg](docs/overview.png)
+
 ![Journey-Layer des Viewers: Phasen, Handlungen, Gedanken, belegte Gefühlskurve, Pain Points](docs/demo.png)
 
 `examples/kindergarteneintritt/journey.html` im Browser öffnen für die vollständige interaktive Fassung.

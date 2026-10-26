@@ -54,7 +54,7 @@ ruff der aktiven Python-Umgebung (dort nach `requirements-lint.txt` installieren
 
 Viewer visuell prüfen: Playwright ist in vielen Umgebungen vorhanden
 (`python -c "from playwright.sync_api import sync_playwright"`); Screenshot
-aller fünf Tabs plus Drawer plus 390-px-Viewport, `pageerror` leer.
+aller sechs Tabs plus Drawer plus 390-px-Viewport, `pageerror` leer.
 
 ## Architektur in einem Absatz
 

@@ -1,7 +1,7 @@
-"""Exporte aus dem Journey-Modell: Story Map, Massnahmenliste, Audit-Report.
+"""Exporte aus dem Journey-Modell: Story Map, Massnahmenliste, Audit-Report, Evidenz-Heatmap.
 
-Alle Exporte sind Text (Markdown oder CSV), damit sie in Tickets, Notion,
-Wikis oder Protokolle wandern können - dort, wo Massnahmen tatsächlich leben.
+Alle Exporte sind Text (Markdown, CSV oder SVG), damit sie in Tickets, Notion,
+Wikis, Protokolle oder Berichte wandern können - dort, wo Massnahmen tatsächlich leben.
 Die Texte stehen je Sprache in ``export_texts.py`` (``lang`` = "de" oder "fr").
 """
 
@@ -9,9 +9,12 @@ from __future__ import annotations
 
 import csv
 import io
+from datetime import date
 from typing import Any
+from xml.sax.saxutils import escape, quoteattr
 
-from .export_texts import QUADRANT_LABELS, text
+from . import __version__
+from .export_texts import QUADRANT_LABELS, STATUS_LABELS, text
 from .lint import ERROR, INFO, PRIMARY_SOURCE_KINDS, WARN, Finding, summarize
 from .lint_messages import ANTIPATTERN_LABELS, check_language
 from .model import EVIDENCE_CLASSES, JourneyIndex, Verdict, priority_quadrant, propose_verdict
@@ -139,6 +142,246 @@ def actions_csv(journey: dict[str, Any]) -> str:
                     ]
                 )
     return buf.getvalue()
+
+
+# Aussagearten der Heatmap, in der Reihenfolge der Zeilen – dieselben wie im Viewer
+HEATMAP_KINDS = ("step", "thinking", "feeling", "pain_point", "edge_case", "recovery")
+
+
+def evidence_heatmap(journey: dict[str, Any]) -> list[dict[str, Any]]:
+    """Belege je Schritt und Aussageart, gezählt wie die Heatmap im Viewer.
+
+    Je Zelle: Zahl der Aussagen und der Referenzen je Evidenzklasse (jede Referenz
+    zählt, auch wenn zwei Aussagen dasselbe Atom nennen; unbekannte IDs zählen nicht,
+    L001 meldet sie). Eine Zeile pro Schritt und Art, auch ohne Aussage – das Raster
+    bleibt vollständig, damit eine Lücke als Lücke sichtbar ist.
+    """
+    idx = JourneyIndex.build(journey)
+    cells: dict[tuple[str, str], dict[str, int]] = {}
+    for claim in idx.claims():
+        if claim.kind not in HEATMAP_KINDS:
+            continue
+        cell = cells.setdefault(
+            (claim.step_id, claim.kind), dict.fromkeys(("n", *EVIDENCE_CLASSES), 0)
+        )
+        cell["n"] += 1
+        for ref in claim.evidence_refs:
+            atom = idx.evidence.get(ref)
+            if atom:
+                cell[atom["class"]] += 1
+    rows = []
+    for phase in journey["phases"]:
+        for step in phase["steps"]:
+            for kind in HEATMAP_KINDS:
+                c = cells.get((step["id"], kind), dict.fromkeys(("n", *EVIDENCE_CLASSES), 0))
+                rows.append(
+                    {
+                        "phase_id": phase["id"],
+                        "phase": phase["name"],
+                        "step_id": step["id"],
+                        "step": step["name"],
+                        "kind": kind,
+                        "statements": c["n"],
+                        "primary": c["observed"] + c["reported"],
+                        **{k: c[k] for k in EVIDENCE_CLASSES},
+                    }
+                )
+    return rows
+
+
+def heatmap_csv(journey: dict[str, Any]) -> str:
+    """Evidenz-Heatmap als Tabelle: eine Zeile pro Schritt und Aussageart, für Excel oder Pivot."""
+    buf = io.StringIO()
+    w = csv.writer(buf, delimiter=";", lineterminator="\n")
+    cols = [
+        "phase_id",
+        "phase",
+        "step_id",
+        "step",
+        "kind",
+        "statements",
+        "primary",
+        *EVIDENCE_CLASSES,
+    ]
+    w.writerow(cols[:6] + [f"evidence_{c}" for c in cols[6:]])
+    for row in evidence_heatmap(journey):
+        w.writerow([row[c] for c in cols])
+    return buf.getvalue()
+
+
+# Farben der hellen Viewer-Tokens: das Bild landet in Berichten und auf Papier
+_SVG = {
+    "bg": "#ffffff",
+    "ink": "#1d1c1a",
+    "ink2": "#5a5853",
+    "ink3": "#8a877f",
+    "phase": "#e3eaf4",
+    "observed": (31, 122, 140),
+    "gap": "#9c9a93",
+}
+_FONT = '"Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif'
+
+
+def _wrap(s: str, width: int, max_lines: int) -> list[str]:
+    """Zeilenumbruch nach Zeichenzahl; ein zu langes Wort wird mit «-» getrennt.
+
+    Auf Papier gibt es keinen Tooltip, deshalb trennen statt abschneiden
+    («Kreisschulbehör-» / «de»). Erst was über ``max_lines`` hinausgeht, endet mit «…».
+    """
+    lines: list[str] = []
+    for word in s.split():
+        while len(word) > width:
+            cut = min(width - 1, len(word) - 4)  # nicht «Informationsanla-» / «ss»
+            lines.append(word[:cut] + "-")
+            word = word[cut:]
+        if lines and not lines[-1].endswith("-") and len(lines[-1]) + 1 + len(word) <= width:
+            lines[-1] += " " + word
+        else:
+            lines.append(word)
+    if len(lines) > max_lines:
+        lines = lines[:max_lines]
+        lines[-1] = lines[-1][: width - 1].rstrip(" -") + "…"
+    return lines
+
+
+def _shade(primary: int) -> tuple[str, str]:
+    """Füllung und Schriftfarbe einer Zelle: wie ``color-mix`` im Viewer (15 % + 18 % je Beleg, höchstens 85 %)."""
+    share = min(15 + primary * 18, 85) / 100
+    fill = "#" + "".join(f"{round(c * share + 255 * (1 - share)):02x}" for c in _SVG["observed"])
+    return fill, "#ffffff" if primary >= 3 else _SVG["ink"]
+
+
+def heatmap_svg(journey: dict[str, Any], lang: str = "de", today: date | None = None) -> str:
+    """Evidenz-Heatmap als eigenständiges SVG: Schritte nach Phasen × Aussagearten.
+
+    Ohne Schriften oder Bilder von aussen, damit das Bild in geschlossenen Netzen,
+    in Word, PowerPoint und auf Papier gleich aussieht.
+    """
+    t = _texts(lang)
+    meta = journey["meta"]
+    rows = evidence_heatmap(journey)
+    steps = [s for p in journey["phases"] for s in p["steps"]]
+    pad, label_w, cell_w, cell_h, gap = 24, 130, 100, 46, 4
+    col = cell_w + gap
+    grid_x = pad + label_w
+    width = max(grid_x + len(steps) * col - gap + pad, 640)
+    out: list[str] = []
+    y = pad + 18
+    out.append(
+        f'<text x="{pad}" y="{y}" font-size="18" font-weight="600" fill="{_SVG["ink"]}">{escape(t("heatmap.title", title=meta["title"]))}</text>'
+    )
+    y += 22
+    sub = t(
+        "heatmap.subtitle",
+        persona=journey["persona"]["name"],
+        version=meta["version"],
+        status=STATUS_LABELS[lang].get(meta["status"], meta["status"]),
+    )
+    out.append(f'<text x="{pad}" y="{y}" font-size="12" fill="{_SVG["ink2"]}">{escape(sub)}</text>')
+    if meta.get("synthetic"):
+        y += 18
+        out.append(
+            f'<text x="{pad}" y="{y}" font-size="12" font-style="italic" fill="{_SVG["ink3"]}">{escape(t("heatmap.synthetic"))}</text>'
+        )
+    # Phasen über ihren Schritten
+    y += 18
+    i = 0
+    for phase in journey["phases"]:
+        span = len(phase["steps"])
+        if span:
+            x, w = grid_x + i * col, span * col - gap
+            name = _wrap(phase["name"], max(int(w / 6.5), 4), 1)[0]
+            out.append(
+                f'<g><title>{escape(phase["name"])}</title><rect x="{x}" y="{y}" width="{w}" height="24" rx="4" fill="{_SVG["phase"]}"/>'
+            )
+            out.append(
+                f'<text x="{x + w / 2}" y="{y + 16}" font-size="11.5" font-weight="600" text-anchor="middle" fill="{_SVG["ink"]}">{escape(name)}</text></g>'
+            )
+        i += span
+    # Schrittnamen, bis drei Zeilen
+    y += 24 + 14
+    for i, step in enumerate(steps):
+        cx = grid_x + i * col + cell_w / 2
+        tspans = "".join(
+            f'<tspan x="{cx}" dy="{0 if k == 0 else 13}">{escape(line)}</tspan>'
+            for k, line in enumerate(_wrap(step["name"], 18, 3))
+        )
+        out.append(
+            f'<text y="{y}" font-size="10" text-anchor="middle" fill="{_SVG["ink"]}"><title>{escape(step["name"])}</title>{tspans}</text>'
+        )
+    y += 3 * 13 + 6
+    # Raster: eine Zeile je Aussageart
+    by_cell = {(r["step_id"], r["kind"]): r for r in rows}
+    labels = {
+        "step": t("heatmap.kind_step"),
+        "thinking": t("heatmap.kind_thinking"),
+        "feeling": t("heatmap.kind_feeling"),
+        "pain_point": t("heatmap.kind_pain_point"),
+        "edge_case": t("heatmap.kind_edge_case"),
+        "recovery": t("heatmap.kind_recovery"),
+    }
+    for kind in HEATMAP_KINDS:
+        label = labels[kind]
+        out.append(
+            f'<text x="{pad}" y="{y + cell_h / 2 + 4}" font-size="12" font-weight="600" fill="{_SVG["ink2"]}">{escape(label)}</text>'
+        )
+        for i, step in enumerate(steps):
+            r = by_cell[(step["id"], kind)]
+            x, cx, cy = grid_x + i * col, grid_x + i * col + cell_w / 2, y + cell_h / 2
+            if not r["statements"]:
+                out.append(
+                    f'<text x="{cx}" y="{cy + 4}" font-size="13" text-anchor="middle" fill="{_SVG["ink3"]}">·</text>'
+                )
+                continue
+            tip = t(
+                "heatmap.cell",
+                kind=label,
+                step=step["name"],
+                primary=r["primary"],
+                assumed=r["assumed"],
+                n=r["statements"],
+            )
+            g = [f"<g><title>{escape(tip)}</title>"]
+            if r["primary"]:
+                fill, ink = _shade(r["primary"])
+                g.append(
+                    f'<rect x="{x}" y="{y}" width="{cell_w}" height="{cell_h}" rx="6" fill="{fill}"/>'
+                )
+            else:
+                ink = _SVG["gap"]
+                g.append(
+                    f'<rect x="{x + 0.5}" y="{y + 0.5}" width="{cell_w - 1}" height="{cell_h - 1}" rx="6" fill="none" stroke="{_SVG["gap"]}" stroke-dasharray="4 3"/>'
+                )
+            num_y = cy + (0 if r["assumed"] else 5)
+            g.append(
+                f'<text x="{cx}" y="{num_y}" font-size="13" font-weight="{600 if r["primary"] else 400}" text-anchor="middle" fill="{ink}">{r["primary"] or "–"}</text>'
+            )
+            if r["assumed"]:
+                g.append(
+                    f'<text x="{cx}" y="{cy + 15}" font-size="10" text-anchor="middle" fill="{ink}">{escape(t("heatmap.assumed_short", n=r["assumed"]))}</text>'
+                )
+            out.append("".join(g) + "</g>")
+        y += cell_h + gap
+    # Legende und Herkunft
+    y += 14
+    for line in _wrap(t("heatmap.legend"), max(int((width - 2 * pad) / 6), 40), 4):
+        out.append(
+            f'<text x="{pad}" y="{y}" font-size="11" fill="{_SVG["ink2"]}">{escape(line)}</text>'
+        )
+        y += 15
+    stamp = (today or date.today()).isoformat()
+    out.append(
+        f'<text x="{pad}" y="{y + 4}" font-size="10" fill="{_SVG["ink3"]}">{escape(t("heatmap.generated", generator=f"journeykit {__version__}", date=stamp))}</text>'
+    )
+    height = y + 4 + pad
+    title = t("heatmap.title", title=meta["title"])
+    head = (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" '
+        f'font-family={quoteattr(_FONT)} role="img" aria-label={quoteattr(title)}>'
+        f"<title>{escape(title)}</title>"
+        f'<rect width="{width}" height="{height}" fill="{_SVG["bg"]}"/>'
+    )
+    return '<?xml version="1.0" encoding="UTF-8"?>\n' + head + "\n" + "\n".join(out) + "\n</svg>\n"
 
 
 def opportunities_markdown(journey: dict[str, Any], lang: str = "de") -> str:

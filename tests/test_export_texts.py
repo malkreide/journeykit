@@ -18,10 +18,11 @@ from journeykit.cli import main
 from journeykit.diff import diff_journeys, diff_markdown
 from journeykit.export import (
     audit_markdown,
+    heatmap_svg,
     opportunities_markdown,
     story_map_markdown,
 )
-from journeykit.export_texts import QUADRANT_LABELS, TEXTS
+from journeykit.export_texts import QUADRANT_LABELS, STATUS_LABELS, TEXTS
 from journeykit.lint import ANTIPATTERNS, lint_journey
 from journeykit.lint_messages import ANTIPATTERN_LABELS, LANGUAGES
 
@@ -40,6 +41,7 @@ def _exports(journey: dict, previous: dict, lang: str) -> str:
             story_map_markdown(journey, lang=lang),
             opportunities_markdown(journey, lang=lang),
             audit_markdown(journey, findings, lang=lang),
+            heatmap_svg(journey, lang=lang),
             diff_markdown(diff_journeys(previous, journey), lang=lang),
         ]
     )
@@ -51,6 +53,7 @@ def test_same_keys_and_placeholders_as_german(lang):
     wrong = [k for k, v in TEXTS["de"].items() if _placeholders(v) != _placeholders(TEXTS[lang][k])]
     assert not wrong, wrong
     assert set(QUADRANT_LABELS["de"]) == set(QUADRANT_LABELS[lang])
+    assert set(STATUS_LABELS["de"]) == set(STATUS_LABELS[lang])
     assert set(ANTIPATTERN_LABELS[lang]) == set(ANTIPATTERNS)
 
 
@@ -120,3 +123,11 @@ def test_cli_diff_lang(tmp_path, minimal):
     assert "## Statut des irritants" in text and "open → resolved" in text
     assert main(["diff", str(old), str(new), "-o", str(out)]) == 1
     assert "## Pain-Point-Status" in out.read_text(encoding="utf-8")
+
+
+def test_status_labels_cover_the_schema():
+    from journeykit import load_schema
+
+    statuses = load_schema()["$defs"]["meta"]["properties"]["status"]["enum"]
+    for lang in LANGUAGES:
+        assert set(STATUS_LABELS[lang]) == set(statuses), lang

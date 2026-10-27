@@ -2,7 +2,9 @@
 
 Der Viewer (``viewer/viewer.html``) ist eine Single-File-App ohne externe
 Abhängigkeiten. Der Renderer ersetzt genau einen Platzhalter durch die Daten:
-eine Liste von Journeys (eine pro Persona) plus Lint-Befunde und Metadaten.
+eine Liste von Journeys (eine pro Persona) plus Lint-Befunde, Metadaten und die
+Exporte, die der Viewer zum Speichern anbietet (Evidenz-Heatmap als SVG und CSV) –
+erzeugt hier aus dem Modell, damit der Viewer sie nicht ein zweites Mal zeichnet.
 """
 
 from __future__ import annotations
@@ -13,6 +15,7 @@ from importlib import resources
 from typing import Any
 
 from . import __version__
+from .export import heatmap_csv, heatmap_svg
 from .lint import Finding, lint_journey
 
 PLACEHOLDER = "/*__JOURNEYKIT_DATA__*/null"
@@ -61,6 +64,15 @@ def render_html(
         "lang": ui_lang,
         "journeys": journeys,
         "findings": [[f.as_dict() for f in fs] for fs in findings],
+        "exports": [
+            {
+                # mit Version: Hypothese und validierte Fassung teilen oft dieselbe ID
+                "slug": f"{j['meta']['id']}-v{j['meta']['version']}",
+                "heatmap_svg": heatmap_svg(j, lang=ui_lang),
+                "heatmap_csv": heatmap_csv(j),
+            }
+            for j in journeys
+        ],
     }
     html = viewer_template()
     if PLACEHOLDER not in html:

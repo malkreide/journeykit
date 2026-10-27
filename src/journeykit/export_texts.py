@@ -1,10 +1,10 @@
-"""Texte der Exporte (Story Map, Chancenmatrix, Audit-Report) und des Diff-Reports, je Sprache.
+"""Texte der Exporte (Story Map, Chancenmatrix, Audit-Report, Evidenz-Heatmap) und des Diff-Reports, je Sprache.
 
 Wie ``lint_messages.py``: je Schlüssel ein Text mit Platzhaltern in ``{}``,
 in allen Sprachen dieselben Schlüssel und Platzhalter – ``tests/test_export_texts.py``
 prüft das. Inhalte der Journey (Namen, Zitate, Stories) und Enum-Werte
 (Status, Quellenart, Kartentyp) bleiben, wie sie sind; die Massnahmenliste
-(CSV) hat technische Spaltennamen und braucht keine Übersetzung.
+und die Heatmap als CSV haben technische Spaltennamen und brauchen keine Übersetzung.
 """
 
 from __future__ import annotations
@@ -22,6 +22,20 @@ _DE: dict[str, str] = {
     "storymap.no_opps": "_Keine Chancen abgeleitet._",
     "storymap.no_stories": "- _(noch keine Stories)_",
     "storymap.no_phase": "### Ohne Phasenbezug",
+    # Evidenz-Heatmap (SVG)
+    "heatmap.title": "Evidenz-Heatmap: {title}",
+    "heatmap.subtitle": "Persona: {persona} · Version {version} · Status {status}",
+    "heatmap.synthetic": "Synthetisches Beispiel: Quellen und Evidenz sind erfunden.",
+    "heatmap.kind_step": "Schritt",
+    "heatmap.kind_thinking": "Denkt",
+    "heatmap.kind_feeling": "Fühlt",
+    "heatmap.kind_pain_point": "Pain Points",
+    "heatmap.kind_edge_case": "Edge Cases",
+    "heatmap.kind_recovery": "Recovery",
+    "heatmap.assumed_short": "+{n} angen.",
+    "heatmap.cell": "{kind} – {step}: Primärbelege {primary} · angenommen {assumed} · Aussagen {n}",
+    "heatmap.legend": "Zahl = Primärbelege (beobachtet + berichtet), klein = angenommen. Gestrichelt = Aussage vorhanden, aber kein Beleg. · = keine Aussage. Wo die Map dünn ist, ist sie Innensicht.",
+    "heatmap.generated": "Erzeugt mit {generator} am {date} aus dem Modell der Journey.",
     # Chancenmatrix
     "opps.title": "# Chancen und Priorisierung: {title}",
     "opps.header": "| Quadrant | Chance | Impact | Public Value | Aufwand | Pain Points | Owner | Status |",
@@ -108,6 +122,20 @@ _FR: dict[str, str] = {
     "storymap.no_stories": "- _(pas encore de stories)_",
     "storymap.no_phase": "### Sans lien avec une phase",
     # Matrice des opportunités
+    # Carte de chaleur des preuves (SVG)
+    "heatmap.title": "Carte de chaleur des preuves : {title}",
+    "heatmap.subtitle": "Persona : {persona} · Version {version} · Statut {status}",
+    "heatmap.synthetic": "Exemple synthétique : les sources et les preuves sont inventées.",
+    "heatmap.kind_step": "Étape",
+    "heatmap.kind_thinking": "Pense",
+    "heatmap.kind_feeling": "Ressent",
+    "heatmap.kind_pain_point": "Irritants",
+    "heatmap.kind_edge_case": "Cas limites",
+    "heatmap.kind_recovery": "Rattrapage",
+    "heatmap.assumed_short": "+{n} supp.",
+    "heatmap.cell": "{kind} – {step} : preuves primaires {primary} · supposées {assumed} · énoncés {n}",
+    "heatmap.legend": "Chiffre = preuves primaires (observées + rapportées), petit = supposées. En pointillé = énoncé présent, mais sans preuve. · = aucun énoncé. Là où la carte est mince, elle reflète la vue interne.",
+    "heatmap.generated": "Généré avec {generator} le {date} à partir du modèle du parcours.",
     "opps.title": "# Opportunités et priorisation : {title}",
     "opps.header": "| Quadrant | Opportunité | Impact | Valeur publique | Effort | Irritants | Responsable | Statut |",
     "opps.legend": "Quadrants : gain rapide = valeur élevée, effort ≤ 2 · grand chantier = valeur élevée, effort ≥ 3 · en passant = faible valeur, faible effort · à différer = faible valeur, effort élevé.",
@@ -200,6 +228,24 @@ QUADRANT_LABELS: dict[str, dict[str, str]] = {
         "big_bet": "Grand chantier",
         "fill_in": "En passant",
         "skip": "À différer",
+    },
+}
+
+# Status der Journey (meta.status) – dieselben Begriffe wie im Viewer
+STATUS_LABELS: dict[str, dict[str, str]] = {
+    "de": {
+        "hypothesis": "Hypothese",
+        "draft": "Entwurf",
+        "validated": "Validiert",
+        "in_review": "In Review",
+        "archived": "Archiviert",
+    },
+    "fr": {
+        "hypothesis": "Hypothèse",
+        "draft": "Projet",
+        "validated": "Validé",
+        "in_review": "En révision",
+        "archived": "Archivé",
     },
 }
 

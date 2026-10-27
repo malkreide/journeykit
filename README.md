@@ -19,7 +19,7 @@ The vocabulary is translated for public administration, where nobody "converts" 
 - **Journey model** as JSON Schema (draft 2020-12) with evidence atoms, sources, PII status, owner and review cycle
 - **Methodological lints** for the five pitfalls — Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathy Vacuum / Overcomplexity, Micro-Level Disconnect — plus Blueprint smell, PII, KPI translation and evidence quality (L001–L103)
 - **Interactive viewer**: a self-contained HTML file with six layers — overview (share of experience statements backed by primary evidence, per phase as well; statements without primary evidence; evidence per statement type and phase as a bubble matrix; every pain point with its strongest evidence, keyboard-navigable), journey map with emotional curve, evidence-backed phase durations on a common scale, the costs due at each step and links from a pain point to its cause, process and failure paths, evidence heatmap and source register, impact/effort matrix with user stories, audit — evidence drill-down to the original quote on every cell, a "primary evidence only" filter, multi-persona overlay, light/dark, print, interface in German or French
-- **Exports**: Patton story map (Markdown), action list (CSV), opportunity matrix, audit report (diagnosis, proposed verdict, next steps, costs, findings)
+- **Exports**: Patton story map (Markdown), action list (CSV), opportunity matrix, audit report (diagnosis, proposed verdict, next steps, costs, findings), evidence heatmap as a self-contained SVG image for reports and slides or as CSV — also downloadable from the viewer's evidence layer
 - **Diff** between two versions of a journey — what did new evidence change?
 - **Claude skill** `user-journey` with three modes: *Synthesis* (raw material → journey), *Workshop* (hypothesis-first with research plan), *Audit* (review an existing journey)
 - **Worked examples**: kindergarten entry from the parents' perspective, built from a synthetic input mix (3 interviews, 30 inquiries, a survey, web analytics, an internal process document, workshop notes); a building permit for a heat pump (applicant and neighbour as two personas); and a music school enrolment (parents, waiting list, fee reduction, cancellation via the teacher). The last two test transferability to other domains and document where the model reaches its limits – costs, chains of causes, deadlines the persona must meet
@@ -65,6 +65,7 @@ journeykit render examples/kindergarteneintritt/journey.json \
 journeykit export examples/kindergarteneintritt/journey.json --format storymap
 journeykit export examples/kindergarteneintritt/journey.json --format actions -o massnahmen.csv
 journeykit export examples/kindergarteneintritt/journey.json --format audit
+journeykit export examples/kindergarteneintritt/journey.json --format heatmap-svg -o heatmap.svg
 
 # What did user evidence change compared to the workshop hypothesis?
 journeykit diff examples/kindergarteneintritt/workshop-hypothese.json \
@@ -81,7 +82,7 @@ journeykit new kita-anmeldung --title "Kita-Anmeldung" --persona "Eltern" --role
 | `journeykit validate FILE... [--lang de\|fr]` | JSON Schema validation (exit 2 on errors) |
 | `journeykit lint FILE... [--strict] [--quiet] [--format json] [--today DATE] [--lang de\|fr]` | Pitfall lints; `--strict` makes warnings fail. Messages in German or French (default: `meta.language` of the file) |
 | `journeykit render FILE... [-o OUT] [--title T] [--lang de\|fr]` | Self-contained interactive HTML; multiple files overlay personas. Interface and lint messages in German or French (default: `meta.language` of the first file); journey content stays as it is |
-| `journeykit export FILE --format storymap\|actions\|opportunities\|audit [-o OUT] [--lang de\|fr]` | Markdown / CSV exports; Markdown in German or French (default: `meta.language`), the CSV has technical column names |
+| `journeykit export FILE --format storymap\|actions\|opportunities\|audit\|heatmap-svg\|heatmap-csv [-o OUT] [--lang de\|fr]` | Markdown / CSV / SVG exports; Markdown and SVG in German or French (default: `meta.language`), the CSV files have technical column names |
 | `journeykit diff OLD NEW [-o OUT] [--lang de\|fr]` | Model changes between versions (exit 1 when there are changes); report in German or French (default: `meta.language` of the new version) |
 | `journeykit new ID --title --persona --role --goal [--lang de\|fr]` | Scaffold a valid journey in status `hypothesis`; `--lang` sets `meta.language` and the language of the placeholders |
 | `journeykit schema` | Print the JSON Schema |
@@ -123,7 +124,7 @@ journeykit/
 │   ├── lint.py                      # pitfall rules L001–L103
 │   ├── lint_messages.py             # messages and hints, German and French
 │   ├── render.py                    # injects data into the viewer
-│   ├── export.py                    # story map, actions CSV, opportunities, audit
+│   ├── export.py                    # story map, actions CSV, opportunities, audit, heatmap
 │   ├── export_texts.py              # export and diff texts, German and French
 │   ├── diff.py                      # version diff
 │   ├── cli.py                       # journeykit command

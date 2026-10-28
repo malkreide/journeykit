@@ -1,6 +1,6 @@
 # ADR-0009: Rückmeldungen zur Journey (Kommentarfunktion)
 
-Datum: 2026-10-28 · Status: vorgeschlagen
+Datum: 2026-10-28 · Status: angenommen (2026-10-28), Umsetzung von Stufe 1 mit der Evaluation
 
 ## Kontext
 
@@ -144,7 +144,7 @@ Nach den Konventionen in `CLAUDE.md`:
   in `export_texts.py` (de, fr). Keine neue Abhängigkeit.
 - **Viewer**: Knopf im Drawer, Formular, Liste im Tab «Prüfung», Download,
   Warnung beim Schliessen; alle Texte in `jk-i18n` (de, fr). Kein
-  `localStorage` in Stufe 1 (siehe «Nicht entschieden»). Weiterhin keine
+  `localStorage` in Stufe 1 (siehe «Entscheid»). Weiterhin keine
   Netzwerkanfrage; der bestehende Test auf externe Verweise deckt das ab.
 - **Lints**: keine neue Regel. Rückmeldungen sind kein Teil des Modells;
   Befunde über sie gehören in die Triage-Liste, nicht in `journeykit lint`.
@@ -157,27 +157,41 @@ Nach den Konventionen in `CLAUDE.md`:
 - **Tests**, **`docs/konzept.md`** (Schicht 5 und Roadmap), **beide READMEs**,
   **`CHANGELOG.md`**.
 
-## Nicht entschieden
+## Entscheid
 
-- **Entwürfe im Browser sichern** (`localStorage`). Schützt vor Verlust, wenn
-  der Browser abstürzt. Unter `file://` teilen sich aber je nach Browser alle
-  lokalen Dateien denselben Speicher, und auf geteilten Arbeitsplätzen liest
-  die nächste Person mit. Vorschlag: in Stufe 1 weglassen, nach der ersten
-  Review-Runde neu beurteilen.
-- **Name oder nur Rolle.** Für Rückfragen wäre ein Name praktisch. Vorschlag:
-  nur Rolle und Einheit; Rückfragen laufen über den Weg, auf dem die Datei
-  kam.
-- **Übernahme per Befehl.** Ein `journeykit review --apply`, das offene Fragen
-  direkt in die Journey schreibt, spart Arbeit, verwischt aber den bewussten
-  Entscheid. Vorschlag: erst prüfen, ob die JSON-Ausschnitte der
-  Triage-Liste genügen.
-- **Antworten auf Rückmeldungen** (Diskussionsfäden). Gehören eher zu einem
-  gemeinsamen Speicher (Option D, ADR-0004) als zu Dateien.
+Angenommen am 2026-10-28 wie vorgeschlagen (Option C, Stufe 1 und 2 wie
+beschrieben). Die vier Punkte, die der Vorschlag offen liess, sind nach den
+Empfehlungen entschieden:
+
+- **Keine Entwürfe im Browser** in Stufe 1. Rückmeldungen bleiben im
+  Speicher der Seite; die Warnung beim Schliessen schützt vor Verlust. Nach
+  der ersten Review-Runde wird neu beurteilt, ob Entwürfe verloren gingen.
+- **Nur Rolle und Einheit**, kein Name. Rückfragen laufen über den Weg, auf
+  dem die Datei kam.
+- **Kein `journeykit review --apply`.** Übernommen wird von Hand mit den
+  JSON-Ausschnitten der Triage-Liste und mit Changelog-Eintrag. Nach der
+  ersten Review-Runde wird geprüft, ob das genügt.
+- **Keine Diskussionsfäden** in Dateien. Sie gehören zu einem gemeinsamen
+  Speicher (Option D) und damit zu ADR-0004.
+
+**Zeitpunkt**: Stufe 1 wird zusammen mit der Evaluation umgesetzt
+(`docs/konzept.md`, Roadmap 2), nicht vorher. Die reale Ground-Truth-Journey
+geht ins Review und ist die erste Runde, in der die Rückmeldedatei benutzt
+wird. Stufe 2 folgt erst, wenn diese Runde gezeigt hat, dass Stufe 1 trägt.
+
+## Nach der ersten Review-Runde zu prüfen
+
+- Reichen die fünf Arten, oder fehlt eine (etwa «veraltet»)?
+- Wie viele Rückmeldungen stellen Innensicht gegen Nutzerevidenz, und führte
+  die Markierung in der Triage-Liste zu Erhebungen statt Korrekturen?
+- Gingen Rückmeldungen verloren, weil der Browser keine Entwürfe sichert?
+- Genügen die JSON-Ausschnitte, oder kostet die Übernahme so viel, dass ein
+  `--apply` mit Vorschau gerechtfertigt ist?
 
 ## Voraussetzung
 
-Keine technische. Inhaltlich sinnvoll ist, Stufe 1 mit der Evaluation
-(`docs/konzept.md`, Roadmap 2) zu erproben: Die reale Ground-Truth-Journey
+Keine technische. Stufe 1 wird mit der Evaluation (`docs/konzept.md`,
+Roadmap 2) umgesetzt und erprobt (siehe «Entscheid»): Die reale Ground-Truth-Journey
 geht ohnehin ins Review, und erst diese Runde zeigt, ob die fünf Arten
 reichen und wie viele Rückmeldungen Innensicht gegen Nutzerevidenz stellen.
 ADR-0004 (Variante B) bleibt unabhängig; kommt es, kann es dasselbe Format

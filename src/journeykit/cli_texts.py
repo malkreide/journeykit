@@ -22,6 +22,8 @@ _DE: dict[str, str] = {
     "schema_errors": "{path}: {n} Schema-Fehler",
     "valid": "✓ {path}: schema-valide",
     "invalid": "✗ {path}: {n} Schema-Fehler",
+    "compare_unmatched": "{path}: keine Journey mit der ID «{id}» zum Vergleichen",
+    "compare_other_id": "Hinweis: {path} hat die ID «{old}», die Journey «{new}» – verglichen wird trotzdem, über die IDs von Schritten und Pain Points.",
     # Hilfe
     "help.description": "Evidenzbasierte User Journeys: prüfen, rendern, exportieren.",
     "help.epilog": "Sprache der Ausgaben: --lang je Befehl, sonst meta.language der Journey; ohne Journey (Hilfe, schema, new) die Umgebungsvariable JOURNEYKIT_LANG (de oder fr), sonst de.",
@@ -33,6 +35,7 @@ _DE: dict[str, str] = {
     "help.lint_lang": "Sprache der Meldungen (Standard: meta.language der Journey, sonst de)",
     "help.render": "Interaktives HTML erzeugen (mehrere Dateien = Persona-Vergleich)",
     "help.render_lang": "Sprache der Oberfläche (Standard: meta.language der ersten Journey, sonst de)",
+    "help.render_compare": "Frühere Fassung zum Vergleichen (zugeordnet über meta.id; mehrfach möglich)",
     "help.export": "Story Map, Massnahmenliste, Chancenmatrix, Audit-Report, Evidenz-Heatmap (SVG oder CSV)",
     "help.export_lang": "Sprache der Texte (Standard: meta.language der Journey, sonst de; CSV ist sprachneutral)",
     "help.diff": "Modelländerungen zwischen zwei Versionen",
@@ -56,6 +59,8 @@ _FR: dict[str, str] = {
     "schema_errors": "{path} : {n} erreur(s) de schéma",
     "valid": "✓ {path} : conforme au schéma",
     "invalid": "✗ {path} : {n} erreur(s) de schéma",
+    "compare_unmatched": "{path} : aucun parcours avec l'ID « {id} » à comparer",
+    "compare_other_id": "Remarque : {path} a l'ID « {old} », le parcours « {new} » – la comparaison a lieu quand même, par les ID des étapes et des irritants.",
     # Aide
     "help.description": "Parcours usagers fondés sur des preuves : vérifier, afficher, exporter.",
     "help.epilog": "Langue des sorties : --lang par commande, sinon meta.language du parcours ; sans parcours (aide, schema, new), la variable d'environnement JOURNEYKIT_LANG (de ou fr), sinon de.",
@@ -67,6 +72,7 @@ _FR: dict[str, str] = {
     "help.lint_lang": "Langue des messages (par défaut : meta.language du parcours, sinon de)",
     "help.render": "Générer le HTML interactif (plusieurs fichiers = comparaison de personas)",
     "help.render_lang": "Langue de l'interface (par défaut : meta.language du premier parcours, sinon de)",
+    "help.render_compare": "Version antérieure à comparer (associée par meta.id ; plusieurs possibles)",
     "help.export": "Story map, liste des mesures, matrice des opportunités, rapport d'audit, carte de chaleur des preuves (SVG ou CSV)",
     "help.export_lang": "Langue des textes (par défaut : meta.language du parcours, sinon de ; le CSV est neutre)",
     "help.diff": "Modifications du modèle entre deux versions",

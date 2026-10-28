@@ -449,3 +449,65 @@ def test_cli_exports_heatmap(tmp_path, minimal):
     assert svg.read_text(encoding="utf-8").startswith("<?xml")
     assert main(["export", str(src), "--format", "heatmap-csv", "-o", str(csv_out)]) == 0
     assert csv_out.read_text(encoding="utf-8").startswith("phase_id;")
+
+
+def _payload(html: str) -> dict:
+    start = html.index("const DATA = ") + len("const DATA = ")
+    return json.JSONDecoder().raw_decode(html[start:].replace("<\\/", "</"))[0]
+
+
+def test_render_embeds_previous_version_with_diff(example_hypothesis, example_journey):
+    data = _payload(render_html([example_journey], previous=[example_hypothesis]))
+    prev = data["previous"][0]
+    assert prev["journey"]["meta"]["version"] == "0.1"
+    assert prev["diff"]["added_steps"] == ["alltag-finden", "nachfragen", "zuteilung-nachfragen"]
+    assert ["brief-erhalten", 1, -2] in prev["diff"]["feeling_changes"]
+    assert set(prev["counts"]) == {"ERROR", "WARN", "INFO"} and prev["counts"]["WARN"] > 0
+    # ohne Vorversion bleibt der Viewer wie bisher
+    assert "previous" not in _payload(render_html([example_journey]))
+    assert "previous" not in _payload(render_html([example_journey], previous=[None]))
+
+
+def test_render_previous_needs_one_entry_per_journey(example_journey, example_hypothesis):
+    import pytest
+
+    with pytest.raises(ValueError):
+        render_html([example_journey], previous=[example_hypothesis, None])
+
+
+def test_cli_render_compare_pairs_by_id(
+    tmp_path, capsys, example_journey, example_second_persona, example_hypothesis
+):
+    files = {}
+    for name, j in [
+        ("new", example_journey),
+        ("other", example_second_persona),
+        ("old", example_hypothesis),
+    ]:
+        files[name] = tmp_path / f"{name}.json"
+        files[name].write_text(json.dumps(j), encoding="utf-8")
+    out = tmp_path / "v.html"
+    args = [
+        "render",
+        str(files["other"]),
+        str(files["new"]),
+        "--compare",
+        str(files["old"]),
+        "-o",
+        str(out),
+    ]
+    assert main(args) == 0
+    previous = _payload(out.read_text(encoding="utf-8"))["previous"]
+    assert previous[0] is None and previous[1]["journey"]["meta"]["version"] == "0.1"
+    # eine einzelne Journey mit anderer ID: verglichen, aber mit Hinweis
+    other_id = copy.deepcopy(example_hypothesis)
+    other_id["meta"]["id"] = "etwas-anderes"
+    files["old"].write_text(json.dumps(other_id), encoding="utf-8")
+    assert main(["render", str(files["new"]), "--compare", str(files["old"]), "-o", str(out)]) == 0
+    assert "etwas-anderes" in capsys.readouterr().err
+    # mehrere Journeys und keine passende ID: Abbruch statt Raten
+    import pytest
+
+    with pytest.raises(SystemExit) as exit_info:
+        main(["render", str(files["new"]), str(files["other"]), "--compare", str(files["old"])])
+    assert exit_info.value.code == 2

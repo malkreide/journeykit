@@ -57,8 +57,9 @@ journeykit lint journey-berufstaetig.json    # 0 Fehler · 1 Warnung (Phase «An
 journeykit lint workshop-hypothese.json      # 0 Fehler · 3 Warnungen · L010 als INFO, weil status = hypothesis
 journeykit lint workshop-hypothese.json --today 2025-11-18   # ohne die L032-Warnung (Review-Termin überschritten)
 
-# Viewer: eine Journey oder Persona-Vergleich
+# Viewer: eine Journey oder Persona-Vergleich; --compare zeigt, was sich seit der Hypothese verändert hat
 journeykit render journey.json -o journey.html
+journeykit render journey.json journey-berufstaetig.json --compare workshop-hypothese.json -o journey.html
 journeykit render journey.json journey-berufstaetig.json -o vergleich.html --title "Kindergarteneintritt: zwei Personas"
 
 # Exporte

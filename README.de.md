@@ -18,7 +18,7 @@ Das Vokabular ist für die Verwaltung übersetzt, wo niemand «konvertiert» ode
 
 - **Journey-Modell** als JSON Schema (Draft 2020-12) mit Evidenz-Atomen, Quellenregister, Datenschutzstatus, Owner und Review-Rhythmus
 - **Methodische Lints** für die fünf Fallstricke – Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathie-Vakuum / Überkomplexität, Micro-Level Disconnect – plus Blueprint-Smell, Personendaten, KPI-Übersetzung und Evidenzqualität (L001–L103)
-- **Interaktiver Viewer**: eine eigenständige HTML-Datei mit sechs Layern – Übersicht (Anteil belegter Erlebnis-Aussagen, auch je Phase; Aussagen ohne Primärevidenz; Belege nach Aussageart und Phase als Kreismatrix; jeder Pain Point mit seinem stärksten Beleg, per Tastatur bedienbar), Journey Map mit emotionaler Kurve, belegter Dauer je Phase auf einem gemeinsamen Massstab, den Kosten, die je Schritt fällig werden, und Verweisen von einem Pain Point auf seine Ursache, Prozess- und Fehlerpfade, Evidenz-Heatmap und Quellenregister, Impact/Effort-Matrix mit User Stories, Prüfung – Evidenz-Drilldown bis zum O-Ton auf jeder Zelle, Filter «nur Primärevidenz», Persona-Überlagerung, hell/dunkel, Druck, Oberfläche deutsch oder französisch
+- **Interaktiver Viewer**: eine eigenständige HTML-Datei mit sechs Layern – Übersicht (Anteil belegter Erlebnis-Aussagen, auch je Phase; Aussagen ohne Primärevidenz; Belege nach Aussageart und Phase als Kreismatrix; jeder Pain Point mit seinem stärksten Beleg, per Tastatur bedienbar), Journey Map mit emotionaler Kurve, belegter Dauer je Phase auf einem gemeinsamen Massstab, den Kosten, die je Schritt fällig werden, und Verweisen von einem Pain Point auf seine Ursache, Prozess- und Fehlerpfade, Evidenz-Heatmap und Quellenregister, Impact/Effort-Matrix mit User Stories, Prüfung, dazu mit `--compare` der Vergleich mit einer früheren Fassung (Zahlen der Übersicht vorher → nachher, Belege je Phase, beide Gefühlskurven übereinander, jede Modelländerung mit Sprung in die Journey) – Evidenz-Drilldown bis zum O-Ton auf jeder Zelle, Filter «nur Primärevidenz», Persona-Überlagerung, hell/dunkel, Druck, Oberfläche deutsch oder französisch
 - **Exporte**: Story Map nach Patton (Markdown), Massnahmenliste (CSV), Chancenmatrix, Audit-Report (Diagnose, Urteilsvorschlag, nächste Schritte, Kosten, Befunde), Evidenz-Heatmap als eigenständiges SVG-Bild für Berichte und Präsentationen oder als CSV – auch direkt im Evidenz-Layer des Viewers zum Speichern
 - **Diff** zwischen zwei Versionen – was hat neue Evidenz verändert?
 - **Claude-Skill** `user-journey` mit drei Modi: *Synthese* (Rohmaterial → Journey), *Workshop* (Hypothesis-first mit Erhebungsplan), *Audit* (bestehende Journey prüfen)
@@ -57,9 +57,11 @@ journeykit validate examples/kindergarteneintritt/journey.json
 # Methodische Lints (ERROR / WARN / INFO)
 journeykit lint examples/kindergarteneintritt/journey.json
 
-# Interaktiven Viewer erzeugen (mehrere Dateien = Persona-Vergleich)
+# Interaktiven Viewer erzeugen (mehrere Dateien = Persona-Vergleich;
+# --compare nimmt eine frühere Fassung derselben Journey dazu, zugeordnet über meta.id)
 journeykit render examples/kindergarteneintritt/journey.json \
-                  examples/kindergarteneintritt/journey-berufstaetig.json -o journey.html
+                  examples/kindergarteneintritt/journey-berufstaetig.json \
+                  --compare examples/kindergarteneintritt/workshop-hypothese.json -o journey.html
 
 # Exporte
 journeykit export examples/kindergarteneintritt/journey.json --format storymap
@@ -81,7 +83,7 @@ journeykit new kita-anmeldung --title "Kita-Anmeldung" --persona "Eltern" --role
 |---|---|
 | `journeykit validate DATEI... [--lang de\|fr]` | JSON-Schema-Validierung (Exit 2 bei Fehlern) |
 | `journeykit lint DATEI... [--strict] [--quiet] [--format json] [--today DATUM] [--lang de\|fr]` | Fallstrick-Lints; `--strict` lässt Warnungen scheitern. Meldungen deutsch oder französisch (Standard: `meta.language` der Datei) |
-| `journeykit render DATEI... [-o OUT] [--title T] [--lang de\|fr]` | Eigenständiges interaktives HTML; mehrere Dateien überlagern Personas. Oberfläche und Lint-Meldungen deutsch oder französisch (Standard: `meta.language` der ersten Datei); Inhalte der Journey bleiben, wie sie sind |
+| `journeykit render DATEI... [--compare ALT]... [-o OUT] [--title T] [--lang de\|fr]` | Eigenständiges interaktives HTML; mehrere Dateien überlagern Personas, `--compare` nimmt eine frühere Fassung dazu (zugeordnet über `meta.id`) und zeigt den Tab «Vergleich» / «Comparaison». Oberfläche und Lint-Meldungen deutsch oder französisch (Standard: `meta.language` der ersten Datei); Inhalte der Journey bleiben, wie sie sind |
 | `journeykit export DATEI --format storymap\|actions\|opportunities\|audit\|heatmap-svg\|heatmap-csv [-o OUT] [--lang de\|fr]` | Markdown- / CSV- / SVG-Exporte; Markdown und SVG deutsch oder französisch (Standard: `meta.language`), die CSV-Dateien haben technische Spaltennamen |
 | `journeykit diff ALT NEU [-o OUT] [--lang de\|fr]` | Modelländerungen zwischen Versionen (Exit 1, wenn es Änderungen gibt); Report deutsch oder französisch (Standard: `meta.language` der neuen Version) |
 | `journeykit new ID --title --persona --role --goal [--lang de\|fr]` | Gerüst einer validen Journey im Status `hypothesis`; `--lang` setzt `meta.language` und die Sprache der Platzhalter |

@@ -128,10 +128,36 @@ def cmd_lint(args: argparse.Namespace) -> int:
     return worst
 
 
+def _pair_previous(journeys: list[dict], paths: list[str], lang: str, explicit: str | None):
+    """Vorversionen den Journeys zuordnen: über meta.id.
+
+    Bei nur einer Journey auch mit anderer ID (etwa nach einer Umbenennung), aber
+    nicht still – der Hinweis nennt beide IDs, denn ein Vergleich zweier fremder
+    Journeys ergibt einen Diff ohne Aussage.
+    """
+    previous: list[dict | None] = [None] * len(journeys)
+    ids = [j["meta"]["id"] for j in journeys]
+    for path in paths:
+        old = _load_valid(path, explicit)
+        old_id = old["meta"]["id"]
+        if old_id in ids:
+            previous[ids.index(old_id)] = old
+        elif len(journeys) == 1:
+            print(
+                _text(lang, "compare_other_id", path=path, old=old_id, new=ids[0]), file=sys.stderr
+            )
+            previous[0] = old
+        else:
+            print(_text(lang, "compare_unmatched", path=path, id=old_id), file=sys.stderr)
+            sys.exit(2)
+    return previous
+
+
 def cmd_render(args: argparse.Namespace) -> int:
     journeys = [_load_valid(p, args.lang) for p in args.files]
     lang = _lang(journeys[0], args.lang)
-    html = render_html(journeys, title=args.title, lang=lang)
+    previous = _pair_previous(journeys, args.compare or [], lang, args.lang)
+    html = render_html(journeys, title=args.title, lang=lang, previous=previous)
     out = args.output or (
         Path(args.files[0]).with_suffix(".html").name if len(args.files) == 1 else "journeys.html"
     )
@@ -281,6 +307,7 @@ def build_parser(lang: str = "de") -> argparse.ArgumentParser:
     s.add_argument("-o", "--output")
     s.add_argument("--title")
     s.add_argument("--lang", choices=LANGUAGES, help=h("render_lang"))
+    s.add_argument("--compare", action="append", metavar="OLD", help=h("render_compare"))
     s.set_defaults(func=cmd_render)
 
     s = sub.add_parser("export", help=h("export"))

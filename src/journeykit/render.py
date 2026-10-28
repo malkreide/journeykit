@@ -5,18 +5,22 @@ Abhängigkeiten. Der Renderer ersetzt genau einen Platzhalter durch die Daten:
 eine Liste von Journeys (eine pro Persona) plus Lint-Befunde, Metadaten und die
 Exporte, die der Viewer zum Speichern anbietet (Evidenz-Heatmap als SVG und CSV) –
 erzeugt hier aus dem Modell, damit der Viewer sie nicht ein zweites Mal zeichnet.
+Für den Versionsvergleich kommt je Journey die Vorversion dazu, mit dem Diff aus
+``diff.py`` und den Zahlen ihrer Prüfung.
 """
 
 from __future__ import annotations
 
 import json
+from dataclasses import asdict
 from datetime import date
 from importlib import resources
 from typing import Any
 
 from . import __version__
+from .diff import diff_journeys
 from .export import heatmap_csv, heatmap_svg
-from .lint import Finding, lint_journey
+from .lint import Finding, lint_journey, summarize
 
 PLACEHOLDER = "/*__JOURNEYKIT_DATA__*/null"
 # Sprachen der Viewer-Oberfläche (Block «jk-i18n» in viewer.html); die Lint-Meldungen
@@ -50,13 +54,20 @@ def render_html(
     findings: list[list[Finding]] | None = None,
     title: str | None = None,
     lang: str | None = None,
+    previous: list[dict[str, Any] | None] | None = None,
 ) -> str:
-    """HTML für eine oder mehrere Journeys (mehrere = Multi-Persona-Vergleich)."""
+    """HTML für eine oder mehrere Journeys (mehrere = Multi-Persona-Vergleich).
+
+    ``previous`` hält je Journey eine frühere Fassung derselben Journey oder ``None``;
+    der Viewer zeigt dann den Tab «Vergleich».
+    """
     if not journeys:
         raise ValueError("Mindestens eine Journey nötig.")
     ui_lang = ui_language(journeys, lang)
     if findings is None:
         findings = [lint_journey(j, lang=ui_lang) for j in journeys]
+    if previous is not None and len(previous) != len(journeys):
+        raise ValueError("previous braucht je Journey einen Eintrag (oder None).")
     payload = {
         "generator": f"journeykit {__version__}",
         "generated": date.today().isoformat(),
@@ -74,6 +85,17 @@ def render_html(
             for j in journeys
         ],
     }
+    if previous and any(previous):
+        payload["previous"] = [
+            None
+            if old is None
+            else {
+                "journey": old,
+                "diff": asdict(diff_journeys(old, new)),
+                "counts": summarize(lint_journey(old, lang=ui_lang)),
+            }
+            for old, new in zip(previous, journeys)
+        ]
     html = viewer_template()
     if PLACEHOLDER not in html:
         raise RuntimeError("Viewer-Template ohne Datenplatzhalter.")

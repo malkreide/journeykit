@@ -19,7 +19,7 @@ Das Vokabular ist für die Verwaltung übersetzt, wo niemand «konvertiert» ode
 - **Journey-Modell** als JSON Schema (Draft 2020-12) mit Evidenz-Atomen, Quellenregister, Datenschutzstatus, Owner und Review-Rhythmus
 - **Methodische Lints** für die fünf Fallstricke – Inside-Out Bias, Happy Path Bias, Static Map Trap, Empathie-Vakuum / Überkomplexität, Micro-Level Disconnect – plus Blueprint-Smell, Personendaten, KPI-Übersetzung und Evidenzqualität (L001–L103)
 - **Interaktiver Viewer**: eine eigenständige HTML-Datei mit sechs Layern – Übersicht (Anteil belegter Erlebnis-Aussagen, auch je Phase; Aussagen ohne Primärevidenz; Belege nach Aussageart und Phase als Kreismatrix; jeder Pain Point mit seinem stärksten Beleg, per Tastatur bedienbar), Journey Map mit emotionaler Kurve, belegter Dauer je Phase auf einem gemeinsamen Massstab, den Kosten, die je Schritt fällig werden, und Verweisen von einem Pain Point auf seine Ursache, Prozess- und Fehlerpfade, Evidenz-Heatmap und Quellenregister, Impact/Effort-Matrix mit User Stories, Prüfung – Evidenz-Drilldown bis zum O-Ton auf jeder Zelle, Filter «nur Primärevidenz», Persona-Überlagerung, hell/dunkel, Druck, Oberfläche deutsch oder französisch
-- **Exporte**: Story Map nach Patton (Markdown), Massnahmenliste (CSV), Chancenmatrix, Audit-Report (Diagnose, Urteilsvorschlag, nächste Schritte, Kosten, Befunde)
+- **Exporte**: Story Map nach Patton (Markdown), Massnahmenliste (CSV), Chancenmatrix, Audit-Report (Diagnose, Urteilsvorschlag, nächste Schritte, Kosten, Befunde), Evidenz-Heatmap als eigenständiges SVG-Bild für Berichte und Präsentationen oder als CSV – auch direkt im Evidenz-Layer des Viewers zum Speichern
 - **Diff** zwischen zwei Versionen – was hat neue Evidenz verändert?
 - **Claude-Skill** `user-journey` mit drei Modi: *Synthese* (Rohmaterial → Journey), *Workshop* (Hypothesis-first mit Erhebungsplan), *Audit* (bestehende Journey prüfen)
 - **Durchgerechnete Beispiele**: Kindergarteneintritt aus Elternsicht, aus einem synthetischen Inputmix (3 Interviews, 30 Anfragen, Befragung, Webanalytics, internes Prozessdokument, Workshop-Notizen); dazu eine Baubewilligung für eine Wärmepumpe (Bauherrschaft und Nachbarschaft als zwei Personas) und die Anmeldung an einer Musikschule (Eltern, Warteliste, Tarifermässigung, Abmeldung über die Lehrperson). Die beiden prüfen die Übertragbarkeit auf andere Bereiche und halten fest, wo das Modell an Grenzen stösst – Kosten, Ursachenketten, Fristen der Persona
@@ -65,6 +65,7 @@ journeykit render examples/kindergarteneintritt/journey.json \
 journeykit export examples/kindergarteneintritt/journey.json --format storymap
 journeykit export examples/kindergarteneintritt/journey.json --format actions -o massnahmen.csv
 journeykit export examples/kindergarteneintritt/journey.json --format audit
+journeykit export examples/kindergarteneintritt/journey.json --format heatmap-svg -o heatmap.svg
 
 # Was hat Nutzerevidenz gegenüber der Workshop-Hypothese verändert?
 journeykit diff examples/kindergarteneintritt/workshop-hypothese.json \
@@ -81,7 +82,7 @@ journeykit new kita-anmeldung --title "Kita-Anmeldung" --persona "Eltern" --role
 | `journeykit validate DATEI... [--lang de\|fr]` | JSON-Schema-Validierung (Exit 2 bei Fehlern) |
 | `journeykit lint DATEI... [--strict] [--quiet] [--format json] [--today DATUM] [--lang de\|fr]` | Fallstrick-Lints; `--strict` lässt Warnungen scheitern. Meldungen deutsch oder französisch (Standard: `meta.language` der Datei) |
 | `journeykit render DATEI... [-o OUT] [--title T] [--lang de\|fr]` | Eigenständiges interaktives HTML; mehrere Dateien überlagern Personas. Oberfläche und Lint-Meldungen deutsch oder französisch (Standard: `meta.language` der ersten Datei); Inhalte der Journey bleiben, wie sie sind |
-| `journeykit export DATEI --format storymap\|actions\|opportunities\|audit [-o OUT] [--lang de\|fr]` | Markdown- / CSV-Exporte; Markdown deutsch oder französisch (Standard: `meta.language`), das CSV hat technische Spaltennamen |
+| `journeykit export DATEI --format storymap\|actions\|opportunities\|audit\|heatmap-svg\|heatmap-csv [-o OUT] [--lang de\|fr]` | Markdown- / CSV- / SVG-Exporte; Markdown und SVG deutsch oder französisch (Standard: `meta.language`), die CSV-Dateien haben technische Spaltennamen |
 | `journeykit diff ALT NEU [-o OUT] [--lang de\|fr]` | Modelländerungen zwischen Versionen (Exit 1, wenn es Änderungen gibt); Report deutsch oder französisch (Standard: `meta.language` der neuen Version) |
 | `journeykit new ID --title --persona --role --goal [--lang de\|fr]` | Gerüst einer validen Journey im Status `hypothesis`; `--lang` setzt `meta.language` und die Sprache der Platzhalter |
 | `journeykit schema` | JSON Schema ausgeben |
@@ -123,7 +124,7 @@ journeykit/
 │   ├── lint.py                      # Fallstrick-Regeln L001–L103
 │   ├── lint_messages.py             # Meldungen und Hinweise, deutsch und französisch
 │   ├── render.py                    # injiziert Daten in den Viewer
-│   ├── export.py                    # Story Map, Massnahmen-CSV, Chancen, Audit
+│   ├── export.py                    # Story Map, Massnahmen-CSV, Chancen, Audit, Heatmap
 │   ├── export_texts.py              # Texte der Exporte und des Diffs, deutsch und französisch
 │   ├── diff.py                      # Versionsvergleich
 │   ├── cli.py                       # Befehl journeykit

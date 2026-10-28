@@ -16,7 +16,14 @@ from . import SCHEMA_VERSION, __version__, load_journey, load_schema
 from .cli_texts import env_language
 from .cli_texts import text as _text
 from .diff import diff_journeys, diff_markdown
-from .export import actions_csv, audit_markdown, opportunities_markdown, story_map_markdown
+from .export import (
+    actions_csv,
+    audit_markdown,
+    heatmap_csv,
+    heatmap_svg,
+    opportunities_markdown,
+    story_map_markdown,
+)
 from .lint import ERROR, INFO, WARN, lint_journey, summarize
 from .lint_messages import LANGUAGES, SUMMARY
 from .render import render_html
@@ -143,6 +150,10 @@ def cmd_export(args: argparse.Namespace) -> int:
         text = opportunities_markdown(journey, lang=lang)
     elif args.format == "audit":
         text = audit_markdown(journey, lint_journey(journey, lang=lang), lang=lang)
+    elif args.format == "heatmap-svg":
+        text = heatmap_svg(journey, lang=lang)
+    elif args.format == "heatmap-csv":
+        text = heatmap_csv(journey)
     else:  # pragma: no cover - argparse schützt
         raise SystemExit(f"unbekanntes Format {args.format}")
     _write(text, args.output, lang)
@@ -275,7 +286,9 @@ def build_parser(lang: str = "de") -> argparse.ArgumentParser:
     s = sub.add_parser("export", help=h("export"))
     s.add_argument("file")
     s.add_argument(
-        "--format", choices=["storymap", "actions", "opportunities", "audit"], required=True
+        "--format",
+        choices=["storymap", "actions", "opportunities", "audit", "heatmap-svg", "heatmap-csv"],
+        required=True,
     )
     s.add_argument("-o", "--output")
     s.add_argument("--lang", choices=LANGUAGES, help=h("export_lang"))

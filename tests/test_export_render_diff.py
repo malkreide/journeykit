@@ -2,12 +2,19 @@ from __future__ import annotations
 
 import copy
 import json
+import xml.etree.ElementTree as ET
+from datetime import date
 
 from journeykit.cli import main
 from journeykit.diff import diff_journeys, diff_markdown
 from journeykit.export import (
+    HEATMAP_KINDS,
+    _wrap,
     actions_csv,
     audit_markdown,
+    evidence_heatmap,
+    heatmap_csv,
+    heatmap_svg,
     opportunities_markdown,
     story_map_markdown,
 )
@@ -373,3 +380,72 @@ def test_cli_lint_prints_each_hint_once(tmp_path, capsys, example_journey):
     out = capsys.readouterr().out
     assert out.count("[INFO] L101") > 1
     assert out.count("Widersprüche gehören in die Journey") == 1
+
+
+def test_heatmap_counts_like_the_viewer(minimal):
+    step = minimal["phases"][0]["steps"][0]
+    step["edge_cases"] = [{"text": "Brief kommt nicht an", "evidence_refs": ["ev-4", "ev-x"]}]
+    cells = {r["kind"]: r for r in evidence_heatmap(minimal)}
+    assert list(cells) == list(HEATMAP_KINDS), "eine Zeile je Aussageart, auch ohne Aussage"
+    # jede Referenz zählt, auch wenn eine andere Aussage dasselbe Atom nennt
+    assert (cells["pain_point"]["statements"], cells["pain_point"]["primary"]) == (1, 2)
+    assert (cells["thinking"]["primary"], cells["feeling"]["primary"]) == (1, 1)
+    # angenommen zählt nicht als Primärbeleg, unbekannte IDs zählen gar nicht
+    assert (cells["edge_case"]["primary"], cells["edge_case"]["assumed"]) == (0, 1)
+    assert (cells["step"]["statements"], cells["step"]["primary"]) == (1, 0)
+
+
+def test_heatmap_csv_has_full_grid(example_journey):
+    rows = heatmap_csv(example_journey).splitlines()
+    n_steps = sum(len(p["steps"]) for p in example_journey["phases"])
+    assert len(rows) == n_steps * len(HEATMAP_KINDS) + 1
+    assert rows[0] == (
+        "phase_id;phase;step_id;step;kind;statements;"
+        "evidence_primary;evidence_observed;evidence_reported;evidence_assumed"
+    )
+
+
+def test_heatmap_svg_is_standalone_and_escapes(minimal):
+    minimal["phases"][0]["steps"][0]["name"] = "Brief <A> & B"
+    svg = heatmap_svg(minimal, today=date(2026, 1, 2))
+    root = ET.fromstring(svg.split("\n", 1)[1])  # ohne XML-Deklaration
+    assert root.tag == "{http://www.w3.org/2000/svg}svg"
+    assert "Brief &lt;A&gt; &amp; B" in svg
+    # keine Schriften, Bilder oder Links von aussen
+    assert "href" not in svg and svg.count("http") == 1
+    assert "Entwurf" in svg and "2026-01-02" in svg
+    fr = heatmap_svg(minimal, lang="fr")
+    assert "Projet" in fr and "Irritants" in fr and "angen." not in fr
+
+
+def test_heatmap_svg_marks_assumed_and_gaps(example_hypothesis):
+    svg = heatmap_svg(example_hypothesis)
+    assert "Hypothese" in svg and "Synthetisches Beispiel" in svg
+    assert 'stroke-dasharray="4 3"' in svg and "angen." in svg
+
+
+def test_wrap_hyphenates_instead_of_cutting():
+    assert _wrap("Bei der Kreisschulbehörde nachfragen", 18, 3) == [
+        "Bei der",
+        "Kreisschulbehörde",
+        "nachfragen",
+    ]
+    assert _wrap("Kindergartenstartwochenplanung", 18, 3) == ["Kindergartenstart-", "wochenplanung"]
+    assert _wrap("eins zwei drei vier fünf sechs sieben", 9, 2)[-1].endswith("…")
+
+
+def test_render_embeds_heatmap_exports(minimal, example_journey):
+    html = render_html([minimal, example_journey])
+    assert '"heatmap_svg"' in html and '"heatmap_csv"' in html
+    assert '"slug": "test-journey-v0.1"' in html
+    assert '"slug": "kindergarteneintritt-eltern-v1.0"' in html
+
+
+def test_cli_exports_heatmap(tmp_path, minimal):
+    src = tmp_path / "j.json"
+    src.write_text(json.dumps(minimal), encoding="utf-8")
+    svg, csv_out = tmp_path / "h.svg", tmp_path / "h.csv"
+    assert main(["export", str(src), "--format", "heatmap-svg", "-o", str(svg)]) == 0
+    assert svg.read_text(encoding="utf-8").startswith("<?xml")
+    assert main(["export", str(src), "--format", "heatmap-csv", "-o", str(csv_out)]) == 0
+    assert csv_out.read_text(encoding="utf-8").startswith("phase_id;")

@@ -189,7 +189,10 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
 .branch .arrow.wa .lab { color: var(--breakdown); }
 
 /* Evidenz-Layer */
-.heat { overflow-x: auto; }
+.heat, .scroll-x { overflow-x: auto; }
+.panel-h { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.panel-h h2 { margin: 0 !important; }
+.dl { display: flex; flex-wrap: wrap; gap: 6px; }
 .heat table { min-width: max-content; }
 .heat td.cell { text-align: center; padding: 0; }
 .heat .hc { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 64px; height: 44px; margin: 2px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid transparent; }
@@ -289,7 +292,7 @@ th { color: var(--ink-2); font-weight: 600; font-size: 12px; }
 
 footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
 @media print {
-  header.top { position: static; } nav.tabs, .controls, .drawer, .scrim { display: none !important; }
+  header.top { position: static; } nav.tabs, .controls, .drawer, .scrim, .dl { display: none !important; }
   section.layer { display: block !important; page-break-before: always; } section.layer:first-of-type { page-break-before: auto; }
   .map-wrap { overflow: visible; } body { font-size: 11px; }
 }
@@ -482,6 +485,10 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "experienceShare": "Erlebnis-Aussagen mit Primärevidenz ({b}/{n})",
    "step": "Schritt",
    "heatmap": "Evidenz-Heatmap",
+   "dlSvg": "Als SVG speichern",
+   "dlSvgTitle": "Heatmap als Bild für Berichte und Präsentationen",
+   "dlCsv": "Als CSV speichern",
+   "dlCsvTitle": "Zahlen je Schritt und Aussageart, für Excel",
    "heatIntro": "Zahl = Primärbelege (beobachtet + berichtet), klein = angenommen. Gestrichelt = Aussage vorhanden, aber kein Beleg. Wo die Map dünn ist, ist sie Innensicht.",
    "statements_one": "{n} Aussage",
    "statements_other": "{n} Aussagen",
@@ -697,6 +704,10 @@ footer { padding: 16px; color: var(--ink-3); font-size: 12px; }
    "experienceShare": "Énoncés d'expérience avec preuve primaire ({b}/{n})",
    "step": "Étape",
    "heatmap": "Carte de chaleur des preuves",
+   "dlSvg": "Enregistrer en SVG",
+   "dlSvgTitle": "Carte de chaleur comme image pour rapports et présentations",
+   "dlCsv": "Enregistrer en CSV",
+   "dlCsvTitle": "Chiffres par étape et type d'énoncé, pour Excel",
    "heatIntro": "Chiffre = preuves primaires (observées + rapportées), petit = supposées. En pointillé = énoncé présent, mais sans preuve. Là où la carte est mince, elle reflète la vue interne.",
    "statements_one": "{n} énoncé",
    "statements_other": "{n} énoncés",
@@ -1036,13 +1047,14 @@ function renderEvidence(idx) {
   let h = '<div class="tiles"><div class="tile"><div class="v">' + idx.src.size + '</div><div class="l">' + t("sources") + '</div></div><div class="tile"><div class="v">' + s.total + '</div><div class="l">' + t("atoms") + '</div></div><div class="tile"><div class="v c-observed">' + s.observed + '</div><div class="l">' + L.classesPl.observed + '</div></div><div class="tile"><div class="v c-reported">' + s.reported + '</div><div class="l">' + L.classesPl.reported + '</div></div><div class="tile"><div class="v c-assumed">' + s.assumed + '</div><div class="l">' + L.classesPl.assumed + '</div></div><div class="tile"><div class="v">' + (exp.length ? Math.round(backed / exp.length * 100) : 0) + '%</div><div class="l">' + t("experienceShare", { b: backed, n: exp.length }) + '</div></div></div>';
   // Heatmap
   const dims = claimDims();
-  h += '<div class="panel" style="margin-top:14px"><h2>' + t("heatmap") + '</h2><p class="muted" style="margin:0 0 8px">' + t("heatIntro") + '</p><div class="heat"><table><thead><tr><th></th>' + idx.j.phases.map(p => '<th class="phase" colspan="' + p.steps.length + '">' + esc(p.name) + '</th>').join("") + '</tr><tr><th></th>' + idx.steps.map(e => '<th class="step">' + esc(e.step.name) + '</th>').join("") + '</tr></thead><tbody>';
+  const x = DATA.exports?.[state.j];
+  h += '<div class="panel" style="margin-top:14px"><div class="panel-h"><h2>' + t("heatmap") + '</h2>' + (x ? '<span class="dl"><button class="btn" data-dl="svg" title="' + esc(t("dlSvgTitle")) + '">' + t("dlSvg") + '</button><button class="btn" data-dl="csv" title="' + esc(t("dlCsvTitle")) + '">' + t("dlCsv") + '</button></span>' : '') + '</div><p class="muted" style="margin:0 0 8px">' + t("heatIntro") + '</p><div class="heat"><table><thead><tr><th></th>' + idx.j.phases.map(p => '<th class="phase" colspan="' + p.steps.length + '">' + esc(p.name) + '</th>').join("") + '</tr><tr><th></th>' + idx.steps.map(e => '<th class="step">' + esc(e.step.name) + '</th>').join("") + '</tr></thead><tbody>';
   dims.forEach(([k, label]) => { h += '<tr><th>' + label + '</th>'; idx.steps.forEach(e => { const cs = cl.filter(c => c.kind === k && c.e === e); if (!cs.length) { h += '<td class="cell"><div class="hc na">·</div></td>'; return; } let prim = 0, ass = 0; const refs = []; cs.forEach(c => { const cc = idx.classes(c.refs); prim += cc.observed + cc.reported; ass += cc.assumed; refs.push(...c.refs); });
       const bg = prim === 0 ? "" : 'background: color-mix(in srgb, var(--observed) ' + Math.min(15 + prim * 18, 85) + '%, var(--surface));color:' + (prim >= 3 ? 'var(--accent-ink)' : 'var(--ink)');
       h += '<td class="cell"><div class="hc' + (prim === 0 ? ' gap' : '') + '" style="' + bg + '" data-refs="' + esc([...new Set(refs)].join(",")) + '" data-title="' + esc(label + t("colon") + e.step.name) + '" data-text="' + tn("statements", cs.length) + '">' + (prim || "–") + (ass ? '<small>' + t("assumedShort", { n: ass }) + '</small>' : '') + '</div></td>'; }); h += '</tr>'; });
   h += '</tbody></table></div></div>';
   // Quellen
-  h += '<div class="panel"><h2>' + t("sourceRegister") + '</h2><table><thead><tr>' + ["colId", "colSource", "colKind", "colClass", "colN", "colDate", "colPii", "colLocation"].map(k => '<th>' + t(k) + '</th>').join("") + '</tr></thead><tbody>' + [...idx.src.values()].map(x => '<tr><td class="mono">' + esc(x.id) + '</td><td>' + esc(x.title) + (x.participants ? '<br><small>' + esc(x.participants) + '</small>' : '') + '</td><td>' + (L.srcKinds[x.kind] || x.kind) + '</td><td class="c-' + x.default_class + '">' + L.classes[x.default_class] + '</td><td>' + (x.n ?? '–') + '</td><td>' + esc(x.date || '–') + '</td><td class="src-pii' + (x.pii_status === "contains_pii" ? ' c-breakdown' : '') + '">' + (L.pii[x.pii_status] || x.pii_status) + '</td><td class="mono">' + esc(x.location || '–') + '</td></tr>').join("") + '</tbody></table></div>';
+  h += '<div class="panel"><h2>' + t("sourceRegister") + '</h2><div class="scroll-x"><table><thead><tr>' + ["colId", "colSource", "colKind", "colClass", "colN", "colDate", "colPii", "colLocation"].map(k => '<th>' + t(k) + '</th>').join("") + '</tr></thead><tbody>' + [...idx.src.values()].map(x => '<tr><td class="mono">' + esc(x.id) + '</td><td>' + esc(x.title) + (x.participants ? '<br><small>' + esc(x.participants) + '</small>' : '') + '</td><td>' + (L.srcKinds[x.kind] || x.kind) + '</td><td class="c-' + x.default_class + '">' + L.classes[x.default_class] + '</td><td>' + (x.n ?? '–') + '</td><td>' + esc(x.date || '–') + '</td><td class="src-pii' + (x.pii_status === "contains_pii" ? ' c-breakdown' : '') + '">' + (L.pii[x.pii_status] || x.pii_status) + '</td><td class="mono">' + esc(x.location || '–') + '</td></tr>').join("") + '</tbody></table></div></div>';
   // Widersprüche & unbenutzt
   const contra = [...idx.ev.values()].filter(a => a.contradicts?.length), used = new Set(); cl.forEach(c => c.refs.forEach(r => used.add(r))); (idx.j.persona.evidence_refs || []).forEach(r => used.add(r)); (idx.j.scenario.evidence_refs || []).forEach(r => used.add(r)); idx.opps.forEach(o => (o.evidence_refs || []).forEach(r => used.add(r)));
   const unused = [...idx.ev.values()].filter(a => !used.has(a.id));
@@ -1100,6 +1112,14 @@ function openDrawer(title, text, refs) {
   $("#dBody").innerHTML = '<div class="claim-txt">' + esc(text) + '</div>' + v + atoms.map(a => a.missing ? '<div class="atom c-breakdown">' + esc(t("unknownRef", { id: a.id })) + '</div>' : atomHtml(idx, a)).join("");
   $("#drawer").classList.add("open"); $("#scrim").classList.add("open");
 }
+// Heatmap speichern: die Dateien erzeugt der Renderer aus dem Modell; hier nur der Download, ohne Netzwerk.
+// CSV mit BOM, damit Excel die Umlaute erkennt.
+function download(kind) {
+  const x = DATA.exports[state.j], csv = kind === "csv";
+  const blob = new Blob(csv ? ["\ufeff", x.heatmap_csv] : [x.heatmap_svg], { type: csv ? "text/csv;charset=utf-8" : "image/svg+xml;charset=utf-8" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = x.slug + "-heatmap." + kind;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
 function closeDrawer() { $("#drawer").classList.remove("open"); $("#scrim").classList.remove("open"); }
 
 // ---------------------------------------------------------------- Render
@@ -1120,6 +1140,7 @@ function showTab(t) { state.tab = t; document.querySelectorAll("section.layer").
 
 document.addEventListener("click", ev => {
   const tab = ev.target.closest("nav.tabs button"); if (tab) return showTab(tab.dataset.tab);
+  const dl = ev.target.closest("[data-dl]"); if (dl) return download(dl.dataset.dl);
   const cl = ev.target.closest("[data-refs]"); if (cl) return openDrawer(cl.dataset.title, cl.dataset.text, cl.dataset.refs);
   const go = ev.target.closest("[data-goto]"); if (go) { showTab("journey"); const el = document.getElementById(go.dataset.goto); el?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" }); if (el) { el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1500); } return; }
   const op = ev.target.closest(".matrix .opp"); if (op) { const card = $("#opp-" + op.dataset.opp); card?.scrollIntoView({ behavior: "smooth", block: "center" }); card.style.borderColor = "var(--accent)"; setTimeout(() => card.style.borderColor = "", 1500); return; }
